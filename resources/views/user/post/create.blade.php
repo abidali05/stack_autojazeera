@@ -675,7 +675,7 @@
 
                              <div class=" row d-flex flex-wrap ">
                                  <!-- Iterate over dynamic features -->
-                                 <option value="">Any</option>
+                                 {{-- <option value="">Any</option> --}}
                                  @foreach ($features->where('feature', 'Exterior') as $feature)
                                      @php
                                          $isChecked = old("Features.Exterior.{$feature->Sub_feature}") ? 'checked' : '';
@@ -1198,18 +1198,18 @@
      @endif
      <div class="modal fade" id="preview" tabindex="-1" aria-labelledby="previewLabel" aria-hidden="true">
          <div class="modal-dialog modal-lg">
-             <div class="modal-content">
-                 <div class="modal-header">
-                     <h5 class="modal-title" id="previewLabel">Preview Your Ad</h5>
-                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+             <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
+                 <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                     <h5 class="modal-title" id="previewLabel"><strong>Preview Your Ad</strong></h5>
+                     <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal" aria-label="Close"></button>
                  </div>
-                 <div class="modal-body">
+                 <div class="modal-body text-center" style="background-color: #F0F3F6; color: #FD5631;">
                      <div id="previewContent">
                          <!-- Preview content will be populated here via JavaScript -->
                      </div>
                  </div>
-                 <div class="modal-footer">
-                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                 <div class="modal-footer justify-content-center border-0 p-0 pb-3">
+                     <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;" data-bs-dismiss="modal">Close</button>
                      <!-- <button type="button" class="btn btn-primary" onclick="document.getElementById('adFormasas').submit();">Confirm & Submit</button> -->
                  </div>
              </div>
@@ -1219,17 +1219,16 @@
      <div class="modal fade" id="imageValidationModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
          <div class="modal-dialog ">
              <div class="modal-content " style="border-radius: 10px; overflow: hidden;">
-                 <div class="modal-header" style="background-color: #FD5631; color: white; border-bottom: none;">
-                     <h5 class="modal-title" id="modalTitle">Image Upload Error</h5>
-                     <button type="button" class="btn-close" style="background-color: white; color: #FD5631;"
+                 <div class="modal-header"style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                     <h5 class="modal-title" id="modalTitle"><strong> Image Upload Error</strong></h5>
+                     <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;"
                          data-bs-dismiss="modal" aria-label="Close"></button>
                  </div>
-                 <div class="modal-body text-center p-4">
+                 <div class="modal-body text-center " style="background-color: #F0F3F6; color: #FD5631;">
                      <p class="m-0" id="modalMessage">Please upload at least 5 and at most 30 images.</p>
                  </div>
-                 <div class="modal-footer justify-content-end border-0">
-                     <button type="button" class=""
-                         style="color:white; background-color:#FD5631;padding:5px 20px; border:none;border-radius:5px"
+                 <div class="modal-footer justify-content-center border-0 p-0 pb-3">
+                     <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
                          data-bs-dismiss="modal">OK</button>
                  </div>
              </div>
@@ -1239,17 +1238,16 @@
      <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
          <div class="modal-dialog">
              <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
-                 <div class="modal-header" style="background-color: #FD5631; color: white; border-bottom: none;">
-                     <h5 class="modal-title" id="alertModalLabel">Invalid File Size</h5>
-                     <button type="button" class="btn-close" style="background-color: white; color: #FD5631;"
+                 <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                     <h5 class="modal-title" id="alertModalLabel"><strong> Invalid File Size</strong></h5>
+                     <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;"
                          data-bs-dismiss="modal" aria-label="Close"></button>
                  </div>
-                 <div class="modal-body text-center" id="alertModalBody">
+                 <div class="modal-body text-center" id="alertModalBody" style="background-color: #F0F3F6; color: #FD5631;">
 
                  </div>
-                 <div class="modal-footer border-0 pt-0">
-                     <button type="button" class=""
-                         style="color:white; background-color:#FD5631;padding:5px 20px; border:none;border-radius:5px"
+                 <div class="modal-footer justify-content-center border-0 p-0 pb-3">
+                     <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
                          data-bs-dismiss="modal">Close</button>
                  </div>
              </div>

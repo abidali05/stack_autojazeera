@@ -443,14 +443,14 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
             <!-- Modal Header -->
-            <div class="modal-header" style="background-color: #FD5631; color: white; border-bottom: none;">
+            <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                 <h5 class="modal-title" id="dealer_register_successLabel"></h5>
-                        <button type="button" class="btn-close" style="background-color: white; color: #FD5631;"
+                        <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;"
                             data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             <!-- Modal Body -->
-                    <div class="modal-body text-center p-4">
+                    <div class="modal-body text-center " style="background-color: #F0F3F6; color: #FD5631;">
                
                 
                 <h6 class="" style="line-height: 1.6;">
@@ -461,9 +461,8 @@
             </div>
 
             <!-- Modal Footer -->
-            <div class="modal-footer justify-content-center border-0">
-                        <a href="#" class="btn btn-light px-4 py-2 "
-                            style="background-color: white; font-weight:600; color: #FD5631; border-radius: 5px;"
+            <div class="modal-footer justify-content-center border-0 p-0 pb-3">
+                        <a href="#" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
                             data-bs-dismiss="modal">close</a>
                 
             </div>
@@ -527,7 +526,7 @@
                     <input type="hidden" value="{{ Auth::user()->id }}" name="dealer">
                     <input type="hidden" name="latitude" id="latitude" value="{{ $post->latitude ?? '' }}">
                     <input type="hidden" name="longitude" id="longitude" value="{{ $post->longitude ?? '' }}">
-                    <div class="mb-3 p-3 rounded" style="background-color:#F0F3F6;">
+                    <div class="mb-3 p-3 rounded" style="    border: 1px solid #0000001F;">
 						<div style="display:flex; justify-content:space-between">
                         <h4 class="step-header">Basic Info</h4>
 						 @if($post->status == 0) <a   ><span class="badge text-bg-danger">Inactive</span></a> @elseif($post->status == '2')<a href="#"  ><span class="badge text-bg-danger" >Rejected</span></a>@else<a > <span class="badge text-bg-success">Active</span></a> @endif
@@ -603,7 +602,7 @@
                     </div>
 
                     <!-- Step 3: Currency & Price -->
-                    <div class="mb-3 p-3 rounded" style="background-color:#F0F3F6;">
+                    <div class="mb-3 p-3 rounded" style="    border: 1px solid #0000001F;">
                         <h3 class="step-header">Price</h3>
                         <div class="row align-items-center mb-3">
                             <div class="col-4">
@@ -641,7 +640,7 @@
                         </div> --}}
                     </div>
                     <!-- Step 4: Vehicle Information -->
-                    <div class="mb-3 p-3 rounded" style="background-color:#F0F3F6;">
+                    <div class="mb-3 p-3 rounded" style="    border: 1px solid #0000001F;">
                         <h4 class="step-header">Vehicle information</h4>
                         <input type="hidden" name="step4" value="step4">
                         <div class="row mb-3">
@@ -906,7 +905,7 @@
                     </div>
                     <!-- Step 5: Vehicle Features -->
 
-                    <div class="mb-3 p-3 rounded" style="background-color:#F0F3F6;">
+                    <div class="mb-3 p-3 rounded" style="    border: 1px solid #0000001F;">
                         <h4 class="step-header">Features<span class="text-danger" class="m-0 fs-5">*</span></h4>
 
                         <div class="feature-section">
@@ -1024,7 +1023,7 @@
                         @enderror
                     </div>
                     <!-- Step 6: Upload Photos / Videos -->
-                    <div class="mb-3 p-3 rounded" style="background-color:#F0F3F6;">
+                    <div class="mb-3 p-3 rounded" style="    border: 1px solid #0000001F;">
                         <h4 class="step-header">Photos / Video Upload</h4>
 
                         <p class="rounded p-3" style="background-color:#281F48; color: white; ">
@@ -1094,7 +1093,7 @@
                         <div id="previewContainer" class="mt-4 d-flex flex-wrap gap-3"></div>
                     </div>
 
-                    <div class="mb-3 p-3 rounded" style="background-color:#F0F3F6;">
+                    <div class="mb-3 p-3 rounded" style="    border: 1px solid #0000001F;">
 
                         <h4 class="step-header">Upload Documents <span
                                 style="color:#281F48; font-size:12px">(Optional)</span></h4>
@@ -1153,7 +1152,7 @@
 
                     </div>
                     <!-- Step 8: Location -->
-                    <div class="mb-3 p-3 rounded" style="background-color:#F0F3F6;">
+                    <div class="mb-3 p-3 rounded" style="    border: 1px solid #0000001F;">
                         <h4 class="mb-4 step-header">Location</h4>
 
                         <div class="row mb-3">
@@ -1289,7 +1288,7 @@
                     </div>
                     <!-- Step 9: Contacts -->
 
-                    <div class="mb-3 p-3" style="background-color:#F0F3F6;">
+                    <div class="mb-3 p-3" style="    border: 1px solid #0000001F;">
                         <h4 class="step-header">Contacts</h4>
                         <div class="row mb-3">
                             <div class="col-md-6">
@@ -1400,7 +1399,7 @@
 
             </div>
             <div class="col-lg-4">
-                <div class="wishlist-card">
+                <div class="wishlist-card" style="    border: 1px solid #0000001F; background-color:transparent !important">
                     <div class="img-bg-home">
 
                         <img src="{{ asset('posts/doc/' . $post->document[0]->doc_name) ?? 'https://placehold.co/600x400@2x.png' }}"
@@ -1557,19 +1556,18 @@
     <div class="modal fade" id="preview" tabindex="-1" aria-labelledby="previewLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content" style="border-radius: 10px; overflow: hidden">
-                <div class="modal-header" style="background-color: #FD5631; color: white; border-bottom: none;">
-                    <h5 class="modal-title" id="previewLabel">Preview Your Ad</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                    <h5 class="modal-title" id="previewLabel"><strong> Preview Your Ad</strong></h5>
+                    <button type="button"  class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body text-center">
+                <div class="modal-body text-center" style="background-color: #F0F3F6; color: #FD5631;">
                     <div id="previewContent">
                         <!-- Preview content will be populated here via JavaScript -->
                     </div>
                 </div>
-                <div class="modal-footer border-0">
+                <div class="modal-footer justify-content-center border-0 p-0 pb-3">
                     <button type="button"
-                        style="color:white; background-color:#FD5631;padding:5px 20px; border:none;border-radius:5px"
-                        class="" data-bs-dismiss="modal">Close</button>
+                       class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;" data-bs-dismiss="modal">Close</button>
                     <!-- <button type="button" class="btn btn-primary" onclick="document.getElementById('adForm').submit();">Confirm & Submit</button> -->
                 </div>
             </div>
@@ -1580,17 +1578,16 @@
         aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content" style="border-radius: 10px; overflow: hidden">
-            <div class="modal-header" style="background-color: #FD5631; color: white; border-bottom: none;">
-                <h5 class="modal-title" id="fileAlertModalLabel">File Upload Error</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                <h5 class="modal-title" id="fileAlertModalLabel"><strong> File Upload Error</strong></h5>
+                <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body text-center" id="fileAlertModalBody">
+            <div class="modal-body text-center" id="fileAlertModalBody" style="background-color: #F0F3F6; color: #FD5631;">
                 <!-- Alert message will be inserted here -->
             </div>
-            <div class="modal-footer border-0">
+            <div class="modal-footer justify-content-center border-0 p-0 pb-3">
                     <button type="button"
-                        style="color:white; background-color:#FD5631;padding:5px 20px; border:none;border-radius:5px"
-                        class="" data-bs-dismiss="modal">Close</button>
+                        class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -1600,17 +1597,16 @@
 <div class="modal fade" id="imageValidationModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content" style="border-radius: 10px; overflow: hidden">
-            <div class="modal-header" style="background-color: #FD5631; color: white; border-bottom: none;">
-                <h5 class="modal-title" id="modalTitle">Image Upload Error</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                <h5 class="modal-title" id="modalTitle"><strong> Image Upload Error</strong></h5>
+                <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body text-center">
+            <div class="modal-body text-center" style="background-color: #F0F3F6; color: #FD5631;">
                 <p id="modalMessage">Please upload at least 5 and at most 30 images.</p>
             </div>
-            <div class="modal-footer border-0">
+            <div class="modal-footer justify-content-center border-0 p-0 pb-3">
                     <button type="button"
-                        style="color:white; background-color:#FD5631;padding:5px 20px; border:none;border-radius:5px"
-                        class="" data-bs-dismiss="modal">OK</button>
+                        class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;" data-bs-dismiss="modal">OK</button>
             </div>
         </div>
     </div>

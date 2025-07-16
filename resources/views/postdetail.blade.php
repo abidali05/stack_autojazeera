@@ -152,7 +152,7 @@
             <a href="{{ url('/') }}" class="breadcrumb-item " style="color:#9691A4 !important">Home</a>
             <span class="breadcrumb-separator" style="color:#9691A4 !important">></span>
             <a href="{{ $post->condition == 'new' ? url('cars/new') : url('cars/used') }}" class="breadcrumb-item "
-                style="color:#9691A4 !important">{{ $post->condition }}</a>
+                style="color:#9691A4 !important">{{ $post->condition == 'new' ? 'New Car' : 'Used Car' }}</a>
             <span class="breadcrumb-separator" style="color:#281F48 !important">></span>
             <span class="breadcrumb-item active"
                 style="color:#281F48 !important"><strong>{{ $post->modelname }}</strong></span>
