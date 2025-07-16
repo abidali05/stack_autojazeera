@@ -1231,7 +1231,7 @@
                                     <span class="visually-hidden">Next</span>
                                 </button>
                             </div>
-                            @endif
+                            @endif 
                             <h2 class="my-3 twentyeight">Services Offered</h2>
                             <div class="row">
                                 @foreach ($shop->shop_services as $service)
@@ -2171,7 +2171,7 @@
                     <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <!-- Modal body -->
-                <div class="modal-body"  style="background-color: #F0F3F6; color: #FD5631;">
+                <div class="modal-body text-center"  style="background-color: transparent !important; color: #281F48;">
                     <p>{{ session('wishlistresponse') }}</p>
                 </div>
                 <!-- Modal footer -->

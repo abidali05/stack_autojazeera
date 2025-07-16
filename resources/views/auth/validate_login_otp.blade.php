@@ -39,7 +39,7 @@
             <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
 				<h5 class="modal-title" id="resendOtp_successLabel"><strong>OTP Code</strong></h5>
                 <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+            </div> 
 
             <!-- Modal Body -->
             <div class="modal-body text-center " style="background-color: #F0F3F6; color: #FD5631;" >

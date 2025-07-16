@@ -55,7 +55,27 @@
                     <div class="col-lg-12">
                         <div class="row gy-3">
                             @if (count($forms) < 1)
-                                <h3 class="text-center my-5 py-5" style="color:#281F48">You havent submitted any forms yet</h3>
+                                 <div class="col-md-12 mt-5">
+                                    <div class="row d-flex justify-content-center">
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <div class="p-3 col-12" style="border:1px solid #281F48;border-radius:9px;">
+                                                    <div class="row">
+                                                        <div class="col-3">
+                                                            <img src="{{ asset('web/images/noinputs.svg') }}" alt=""
+                                                                class="img-fluid" srcset="">
+                                                        </div>
+                                                        <div class="col-9 text-start align-items-center">
+                                                            <h1 class="pt-3 " style="color:#FD5631">Sorry</h1>
+                                                            <p class="m-0">You havent submitted any forms yet</p>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             @endif
                             @foreach ($forms as $form)
                                 <div class="col-lg-6">
@@ -90,9 +110,8 @@
 
 </a>
 
-                                                        <a href="#" class="nav-link" data-bs-toggle="modal"
-                                                            data-bs-target="#viewformModal{{ $form->id }}">Click to see
-                                                            info.</a>
+                                                        <a href="#" class="nav-link" data-bs-toggle="modal" style="text-decoration: underline;"
+                                                            data-bs-target="#viewformModal{{ $form->id }}"><strong>Click to see details</strong></a>
                                                     </div>
                    <a
                                                         @if (Request::is('superadmin/*')) href="{{ route('superadmin.cardetail', $form->post->id) }}" @else href="{{ route('cardetail', $form->post->id) }}" @endif>
@@ -153,28 +172,33 @@
                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body ps-4" style="background-color: #F0F3F6; color: #FD5631;" >
-                                                <span class="list-group-item"><strong>Full Name:</strong>
-                                                    {{ $form->fullname }}</span>
-                                                <span class="list-group-item"><strong>Email:</strong>
-                                                    {{ $form->email }}</span>
-                                                <span class="list-group-item"><strong>Phone Number:</strong>
-                                                    {{ $form->number }}</span>
-                                                {{-- <span class="list-group-item"><strong>Date of Birth:</strong>
-                                                    {{ $form->dob ?? 'N/A' }}</span>
-                                                <span class="list-group-item"><strong>Time:</strong>
-                                                    {{ $form->apointment_time ?? 'N/A' }}</span>
-                                                <span class="list-group-item"><strong>Preferred Contact Method:</strong>
-                                                    {{ $form->perefered_contact_method ?? 'N/A' }}</span> --}}
-                                                <span class="list-group-item"><strong>Message:</strong>
-                                                    {{ $form->comment ?? 'N/A' }}</span>
+                                           <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <p class="m-0 mb-1"><strong>Full Name:</strong></p>
+                                                        <p class="m-0 mb-1"><strong>Email:</strong></p>
+                                                        <p class="m-0 mb-1"><strong>Phone Number:</strong></p>
+                                                        <p class="m-0 mb-1"><strong>Message:</strong></p>
+                                                    </div>
+                                                      <div class="col-md-8">
+                                                        <p class="m-0 mb-1"> {{ $form->fullname }}</p>
+                                                        <p class="m-0 mb-1">{{ $form->email }}</p>
+                                                        <p class="m-0 mb-1">{{ $form->number }}</p>
+                                                        <p class="m-0 mb-1">  {{ $form->comment ?? 'N/A' }}</p>
+                                                      </div>
+                                                </div>
+                                         
                                                 @if ($form->friendFullname)
-                                                    <li class="list-group-item"><strong>Friend's Name:</strong>
+                                                    <li class="list-group-item d-flex justify-content-between"><strong>Friend's Name:</strong>
                                                         {{ $form->friendFullname }}</span>
                                                 @endif
                                                 @if ($form->friendemail)
-                                                    <li class="list-group-item"><strong>Friend's Email:</strong>
+                                                    <li class="list-group-item d-flex justify-content-between"><strong>Friend's Email:</strong>
                                                         {{ $form->friendemail }}</span>
                                                 @endif
+                                            </div>
+                                           </div>
                                             </div>
                                             <div class="modal-footer justify-content-center border-0 p-0 pb-3">
                                                 <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"

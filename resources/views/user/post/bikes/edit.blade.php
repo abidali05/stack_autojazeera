@@ -266,7 +266,7 @@
     <div class="container">
         <div class="row pb-md-5 pt-md-3">
             @if ($post->status == '2')
-                <div class="mb-3 p-3 rounded col-lg-8" style="background-color:#F0F3F6;">
+                <div class="mb-3 p-3 rounded col-lg-8" style="    border: 1px solid #0000001F;">
                     <div class="mb-3 ">
                         <label for="adTitle" class="form-label" style="color: red !important;">Rejection Reason</label>
                         <p class="p-2 rounded " style="    line-height: 1 !important;
@@ -310,7 +310,7 @@
                     <div class=" row mb-3  rounded" style="background-color:white;">
                         <div class="col-md-12">
                             <div class="row">
-								 <div class="mb-3 p-3 rounded" style="background-color:#F0F3F6;">
+								 <div class="mb-3 p-3 rounded" style="    border: 1px solid #0000001F;">
 						<div style="display:flex; justify-content:space-between">
                         <h4 class="step-header">Vehicle information</h4>
 						 @if($post->status == 0) <a   ><span class="badge text-bg-danger">Inactive</span></a> @elseif($post->status == '2')<a href="#"  ><span class="badge text-bg-danger" >Rejected</span></a>@else<a > <span class="badge text-bg-success">Active</span></a> @endif
@@ -637,7 +637,7 @@
                                     <div class="col-md-12">
                                         <label for="description" class="form-label" style="color:white">Description
                                             <span style="color:#FD5631">*</span></label>
-                                        <textarea class="form-control filter-style validate-field" id="description" name="description"
+                                        <textarea class="form-control filter-style validate-field" style="    line-height: 1 !important;" id="description" name="description"
                                             placeholder="Description" required rows="6">{{ $post->description ?? '' }}</textarea>
                                         <div id="description-error" class="orange" style="display: none;">Description
                                             is
@@ -735,21 +735,21 @@
                                 <div class="modal fade" id="confirmDeleteModal{{ $media->id }}" tabindex="-1"
                                     aria-labelledby="confirmDeleteModalLabel{{ $media->id }}" aria-hidden="true">
                                     <div class="modal-dialog text-white">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
+                                        <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
+                                            <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                                                 <h5 class="modal-title" id="confirmDeleteModalLabel{{ $media->id }}">
-                                                    Confirm Deletion</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    <strong> Confirm Deletion</strong></h5>
+                                                <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
-                                            <div class="modal-body">
+                                            <div class="modal-body text-center" style="background-color: #F0F3F6; color: #FD5631;">
                                                 Are you sure you want to delete this image?
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
+                                            <div class="modal-footer justify-content-center border-0 p-0 pb-3">
+                                                <button type="button" class="btn btn-light px-4 py-2 " style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;"
                                                     data-bs-dismiss="modal">Cancel</button>
                                                 <a href="{{ route('bike_ads.deletepostold_image', [$post->id, $media->id]) }}"
-                                                    class="btn btn-danger">Delete</a>
+                                                    class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;">Delete</a>
                                             </div>
                                         </div>
                                     </div>
@@ -1016,7 +1016,7 @@
        </div>
             </div>
             <div class="col-lg-4">
-                <div class="wishlist-card">
+                <div class="wishlist-card" style="border: 1px solid #0000001F; background-color:transparent !important">
                     <div class="img-bg-home">
 
                         <img src="{{ $post->media[0]->file_path }}" class="img-adj-card" id="preview_img_post_ad">
@@ -1036,7 +1036,7 @@
                             </div>
                         </div>
 
-                        <h4 id="vehiclename">{{ $post->makename . ' ' . $post->modelname }}</h4>
+                        <h4 id="vehiclename" style="    color: #281F48;">{{ $post->makename . ' ' . $post->modelname }}</h4>
                         <h5 style="color: #FD5631;"><b id="priceInputvalue">PKR {{ $post->price }}</b></h5>
                         <div class="d-flex justify-content-between align-items-center">
                             <h6 class="mb-0"> <i class="bi bi-geo-alt"></i>
@@ -1170,17 +1170,16 @@
     <div class="modal fade" id="imageValidationModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
         <div class="modal-dialog ">
             <div class="modal-content " style="border-radius: 10px; overflow: hidden;">
-                <div class="modal-header" style="background-color: #FD5631; color: white; border-bottom: none;">
-                    <h5 class="modal-title" id="modalTitle">Image Upload Error</h5>
-                    <button type="button" class="btn-close" style="background-color: white; color: #FD5631;"
+                <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                    <h5 class="modal-title" id="modalTitle"><strong> Image Upload Error</strong></h5>
+                    <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;"
                         data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body text-center p-4">
+                <div class="modal-body text-center " style="background-color: #F0F3F6; color: #FD5631;">
                     <p class="m-0" id="modalMessage">Please upload at least 5 and at most 30 images.</p>
                 </div>
-                <div class="modal-footer justify-content-end border-0">
-                    <button type="button" class=""
-                        style="color:white; background-color:#FD5631;padding:5px 20px; border:none;border-radius:5px"
+                <div class="modal-footer justify-content-center border-0 p-0 pb-3">
+                    <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
                         data-bs-dismiss="modal">OK</button>
                 </div>
             </div>
@@ -1190,17 +1189,16 @@
     <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
-                <div class="modal-header" style="background-color: #FD5631; color: white; border-bottom: none;">
-                    <h5 class="modal-title" id="alertModalLabel">Invalid File Size</h5>
-                    <button type="button" class="btn-close" style="background-color: white; color: #FD5631;"
+                <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                    <h5 class="modal-title" id="alertModalLabel"><strong> Invalid File Size</strong></h5>
+                    <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;"
                         data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body text-center" id="alertModalBody">
+                <div class="modal-body text-center" id="alertModalBody" style="background-color: #F0F3F6; color: #FD5631;">
 
                 </div>
-                <div class="modal-footer border-0 pt-0">
-                    <button type="button" class=""
-                        style="color:white; background-color:#FD5631;padding:5px 20px; border:none;border-radius:5px"
+                <div class="modal-footer justify-content-center border-0 p-0 pb-3">
+                    <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
                         data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -1213,17 +1211,17 @@
             aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
-                    <div class="modal-header" style="background-color: #FD5631; color: white; border-bottom: none;">
-                        <h5 class="modal-title" id="imgdeleteresponseLabel">Image Deletion</h5>
-                        <button type="button" class="btn-close" style="background-color: white; color: #FD5631;"
+                    <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                        <h5 class="modal-title" id="imgdeleteresponseLabel"> <strong> Image Deletion</strong></h5>
+                        <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" 
                             data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body text-center text-white" id="imgdeleteresponseBody">
+                    <div class="modal-body text-center " id="imgdeleteresponseBody"  style="background-color: #F0F3F6; color: #FD5631;" >
                         {{ session('imgdeleteresponse') }}
                     </div>
-                    <div class="modal-footer border-0 pt-0">
+                    <div class="modal-footer justify-content-center border-0 p-0 pb-3">
                         <button type="button"
-                            style="color:white; background-color:#FD5631;padding:5px 20px; border:none;border-radius:5px"
+                           class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
                             data-bs-dismiss="modal" onclick="location.reload();">Close</button>
                     </div>
                 </div>

@@ -168,7 +168,27 @@
             <div class="container">
  
     @if(count($priceAlerts) < 1)
-        <h3 class="py-5 mx-auto my-5 text-center" style="color: #281F48">No price alert found</h3>
+         <div class="col-md-12 mt-5">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="p-3 col-12" style="border:1px solid #281F48;border-radius:9px;">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <img src="{{ asset('web/images/noinputs.svg') }}" alt="" class="img-fluid"
+                                            srcset="">
+                                    </div>
+                                    <div class="col-9 text-start align-items-center">
+                                        <h1 class="pt-3 " style="color:#FD5631">Sorry</h1>
+                                        <p class="m-0">No price alert found</p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         @endif
         <div class="py-4 row gy-3">
             @foreach($priceAlerts as $priceAlert)
