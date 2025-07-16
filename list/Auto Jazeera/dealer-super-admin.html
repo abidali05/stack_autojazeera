@@ -1,0 +1,1084 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Auto Jazeera - Dealer Super Admin </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        .step-header {
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .step-content {
+            display: none;
+        }
+
+        .step-content.active {
+            display: block;
+        }
+
+        .char-counter {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #6c757d;
+        }
+
+        .step-header {
+            color: #FD5631;
+        }
+    </style>
+</head>
+
+<body style="background-color: #1F1B2D;">
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #1F1B2D;">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand" href="#">
+                <img src="images/logo.png" alt="Logo" class="img-fluid">
+            </a>
+
+            <!-- Navbar Toggler -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto align-items-center ">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Used Cars</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">New Cars</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal-3">
+                            <img src="images/bike.png" alt="Bikes Icon">
+                            <span> New & Used Bikes</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal-2">Sign in</a>
+                    </li>
+
+                </ul>
+                <div class="d-flex align-items-center justify-content-center">
+                    <!-- Post An Ad Button -->
+                    <a href="#" class="btn custom-btn-nav me-2" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">Post
+                        An Ad
+                    </a>
+
+                    <!-- Profile Dropdown -->
+                    <div class="dropdown">
+                        <img class="dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown"
+                            aria-expanded="false" src="images/Group 2911.png" alt="Bikes Icon" width="100px">
+                        <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                            <li><a class="dropdown-item" href="#">Sign In</a></li>
+                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- back header start -->
+    <div class="container">
+        <div class="row align-items-center mb-4">
+            <div class="col-auto">
+                <h2 class="sec mb-0 primary-color-custom">Post An Ad</h2>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row pb-md-5 pt-md-3">
+            <div class="col-lg-8">
+                <!-- Step 1: Select Dealer -->
+                <div id="step1" class="step-content active">
+                    <form id="dealerForm">
+                        <div class="mb-3 p-3" style="background-color:#282435;">
+                            <label for="dealerSelect" class="form-label">Select Dealer</label>
+                            <select class="form-select" id="dealerSelect" required>
+                                <option value="" disabled selected>Select Dealer</option>
+                                <option value="1">Dealer 1</option>
+                                <option value="2">Dealer 2</option>
+                                <option value="3">Dealer 3</option>
+                            </select>
+                        </div>
+
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="btn custom-btn-nav rounded px-5"
+                                onclick="nextStep(2)">Next</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- Step 2: Basic Info -->
+                <div id="step2" class="step-content">
+                    <form id="basicInfoForm">
+                        <div class="mb-3 p-3" style="background-color:#282435;">
+                            <h6 class="step-header">Basic Info</h6>
+                            <div class="mb-3">
+                                <label for="adTitle" class="form-label">Title</label>
+                                <input type="text" class="form-control" id="adTitle" maxlength="48"
+                                    placeholder="Enter Ad title e.g. Mercedes-Benz" required>
+                                <div class="char-counter" id="charCounter">48 characters left</div>
+                            </div>
+                            <div class="row align-items-center mb-3">
+                                <div class="col-lg-6">
+                                    <label for="vehicleCondition" class="form-label">Vehicle Condition</label>
+                                    <select class="form-select" id="vehicleCondition" required>
+                                        <option value="" disabled selected>Select</option>
+                                        <option value="new">New</option>
+                                        <option value="used">Used</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="assembly" class="form-label">Assembly</label>
+                                    <select class="form-select" id="assembly" required>
+                                        <option value="" disabled selected>Select</option>
+                                        <option value="local">Local</option>
+                                        <option value="imported">Imported</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Are you listing on Auto Jazeera as a part of a
+                                    company?</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="dealerType" id="registeredDealer"
+                                        value="registered" required>
+                                    <label class="form-check-label" for="registeredDealer">I am a registered
+                                        dealer</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="dealerType" id="privateDealer"
+                                        value="private" required>
+                                    <label class="form-check-label" for="privateDealer">I am a private
+                                        dealer</label>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-end">
+                                <button type="button" class="btn btn-secondary px-5 me-3"
+                                    onclick="previousStep(1)">Back</button>
+                                <button type="button" class="btn custom-btn-nav rounded px-5" onclick="nextStep(3)">
+                                    Next</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Step 3: Currency & Price -->
+                <div id="step3" class="step-content">
+                    <div class="mb-3 p-3" style="background-color:#282435;">
+                        <h6 class="step-header">Price</h6>
+                        <div class="row align-items-center mb-3">
+                            <div class="col-4">
+                                <label for="currencySelect" class="form-label">Currency</label>
+                                <select class="form-select" id="currencySelect" required>
+                                    <option value="PKR" selected>PKR</option>
+                                    <option value="USD">USD</option>
+                                    <option value="EUR">EUR</option>
+                                </select>
+                            </div>
+                            <div class="col-8">
+                                <label for="priceInput" class="form-label">Price</label>
+                                <input type="number" class="form-control" id="priceInput" placeholder="Enter price"
+                                    min="0" required>
+                            </div>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="negotiatedPrice">
+                            <label class="form-check-label" for="negotiatedPrice">Negotiated Price</label>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-secondary px-5 me-3"
+                            onclick="previousStep(2)">Back</button>
+                        <button type="button" class="btn custom-btn-nav rounded px-5" onclick="nextStep(4)">
+                            Next</button>
+                    </div>
+                </div>
+                <!-- Step 4: Vehicle Information -->
+                <div id="step4" class="step-content">
+                    <div class="mb-3 p-3" style="background-color:#282435;">
+                        <h6 class="step-header">Vehicle information</h6>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="make" class="form-label">Make</label>
+                                <select class="form-select" id="make" required>
+                                    <option value="" selected>Select</option>
+                                    <option value="Mercedes-Benz">Mercedes-Benz</option>
+                                    <option value="Mercedes-Benz">Mercedes-Benz</option>
+                                    <option value="Mercedes-Benz">Mercedes-Benz</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="model" class="form-label">Model</label>
+                                <select class="form-select" id="model" required>
+                                    <option value="" selected>Select</option>
+                                    <option value="E 400">E 400</option>
+                                    <option value="Mercedes-Benz">Mercedes-Benz</option>
+                                    <option value="Mercedes-Benz">Mercedes-Benz</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="year" class="form-label">Year</label>
+                                <select class="form-select" id="years" required>
+                                    <option value="" selected>Select</option>
+                                    <option value="2024">2024</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="mileage" class="form-label">Mileage (Km)</label>
+                                <input type="number" class="form-control" id="mileage" placeholder="e.g., 25000" min="0"
+                                    required>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="bodyType" class="form-label">Body Type</label>
+                                <select class="form-select" id="bodyType" required>
+                                    <option value="" selected>Select</option>
+                                    <option value="Convertible">Convertible</option>
+                                    <option value="Sedan">Sedan</option>
+                                    <option value="SUV">SUV</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="doorCount" class="form-label">Door Count</label>
+                                <select class="form-select" id="doorCount" required>
+                                    <option value="" selected>Select</option>
+                                    <option value="2">2</option>
+                                    <option value="4">4</option>
+                                    <option value="5+">5+</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="fuelType" class="form-label">Fuel Type</label>
+                                <select class="form-select" id="fuelType" required>
+                                    <option value="" selected>Select</option>
+                                    <option value="Gasoline">Gasoline</option>
+                                    <option value="Diesel">Diesel</option>
+                                    <option value="Electric">Electric</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="seatingCapacity" class="form-label">Seating Capacity</label>
+                                <select class="form-select" id="seatingCapacity" required>
+                                    <option value="" selected>Select</option>
+                                    <option value="2">2</option>
+                                    <option value="4">4</option>
+                                    <option value="5+">5+</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="engineCapacity" class="form-label">Engine Capacity</label>
+                                <select class="form-select" id="engineCapacity" required>
+                                    <option value="" selected>Select</option>
+                                    <option value="1.6L">1.6L</option>
+                                    <option value="2.0L">2.0L</option>
+                                    <option value="3.0L+">3.0L+</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="transmission" class="form-label">Transmission</label>
+                                <select class="form-select" id="transmission" required>
+                                    <option value="Automatic" selected>Automatic</option>
+                                    <option value="Manual">Manual</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="driveType" class="form-label">Drive Type</label>
+                                <select class="form-select" id="driveType" required>
+                                    <option value="Front Wheel Drive" selected>Front Wheel Drive</option>
+                                    <option value="Rear Wheel Drive">Rear Wheel Drive</option>
+                                    <option value="All Wheel Drive">All Wheel Drive</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="color" class="form-label">Exterior Color</label>
+                                <input type="text" class="form-control" id="color" placeholder="e.g., Aspen White"
+                                    required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="comments" class="form-label">Dealer Comments</label>
+                            <textarea class="form-control" id="comments" rows="4" maxlength="3000"
+                                placeholder="Describe your vehicle. These comments will be displayed on your ad."></textarea>
+                            <div class="char-counter" id="commentCharCount">3000 characters left</div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-secondary px-5 me-3"
+                            onclick="previousStep(3)">Back</button>
+                        <button type="button" class="btn custom-btn-nav rounded px-5" onclick="nextStep(5)">
+                            Next</button>
+                    </div>
+                </div>
+                <!-- Step 5: Vehicle Features -->
+                <div id="step5" class="step-content">
+                    <div class="mb-3 p-3" style="background-color:#282435;">
+                        <h6 class="step-header">Features</h6>
+
+                        <div class="feature-section">
+                            <h5>Exterior</h5>
+                            <div class="d-flex flex-wrap">
+                                <div class="form-check me-3">
+                                    <input type="checkbox" class="form-check-input" id="alloyWheels">
+                                    <label class="form-check-label" for="alloyWheels">Alloy wheels</label>
+                                </div>
+                                <div class="form-check me-3">
+                                    <input type="checkbox" class="form-check-input" id="panoramicRoof">
+                                    <label class="form-check-label" for="panoramicRoof">Panoramic roof</label>
+                                </div>
+                                <div class="form-check me-3">
+                                    <input type="checkbox" class="form-check-input" id="sunroofMoonroof">
+                                    <label class="form-check-label" for="sunroofMoonroof">Sunroof / moonroof</label>
+                                </div>
+                                <div class="form-check me-3">
+                                    <input type="checkbox" class="form-check-input" id="tintedGlass">
+                                    <label class="form-check-label" for="tintedGlass">Tinted glass</label>
+                                </div>
+                            </div>
+                            <a href="#" class="text-primary" onclick="showMore('exteriorFeatures')">Show more</a>
+                            <div id="exteriorFeatures" class="more-options d-none">
+                                <div class="form-check me-3">
+                                    <input type="checkbox" class="form-check-input" id="feature1">
+                                    <label class="form-check-label" for="feature1">Feature 1</label>
+                                </div>
+                                <div class="form-check me-3">
+                                    <input type="checkbox" class="form-check-input" id="feature2">
+                                    <label class="form-check-label" for="feature2">Feature 2</label>
+                                </div>
+                                <!-- Add more exterior features as needed -->
+                            </div>
+                        </div>
+
+                        <div class="feature-section mt-4">
+                            <h5>Interior</h5>
+                            <div class="d-flex flex-wrap">
+                                <div class="form-check me-3">
+                                    <input type="checkbox" class="form-check-input" id="multiZoneAC">
+                                    <label class="form-check-label" for="multiZoneAC">Multi-zone A/C</label>
+                                </div>
+                                <div class="form-check me-3">
+                                    <input type="checkbox" class="form-check-input" id="navigationSystem">
+                                    <label class="form-check-label" for="navigationSystem">Navigation system</label>
+                                </div>
+                                <div class="form-check me-3">
+                                    <input type="checkbox" class="form-check-input" id="intermittentWipers">
+                                    <label class="form-check-label" for="intermittentWipers">Intermittent wipers</label>
+                                </div>
+                                <div class="form-check me-3">
+                                    <input type="checkbox" class="form-check-input" id="heatedFrontSeats">
+                                    <label class="form-check-label" for="heatedFrontSeats">Heated front seats</label>
+                                </div>
+                                <div class="form-check me-3">
+                                    <input type="checkbox" class="form-check-input" id="leatherSeats">
+                                    <label class="form-check-label" for="leatherSeats">Leather seats</label>
+                                </div>
+                                <div class="form-check me-3">
+                                    <input type="checkbox" class="form-check-input" id="memorySeat">
+                                    <label class="form-check-label" for="memorySeat">Memory seat</label>
+                                </div>
+                            </div>
+                            <a href="#" class="text-primary" onclick="showMore('interiorFeatures')">Show more</a>
+                            <div id="interiorFeatures" class="more-options d-none">
+                                <div class="form-check me-3">
+                                    <input type="checkbox" class="form-check-input" id="interiorFeature1">
+                                    <label class="form-check-label" for="interiorFeature1">Interior Feature 1</label>
+                                </div>
+                                <div class="form-check me-3">
+                                    <input type="checkbox" class="form-check-input" id="interiorFeature2">
+                                    <label class="form-check-label" for="interiorFeature2">Interior Feature 2</label>
+                                </div>
+                                <!-- Add more interior features as needed -->
+                            </div>
+                        </div>
+
+                        <div class="feature-section mt-4">
+                            <h5>Safety</h5>
+                            <div class="d-flex flex-wrap">
+                                <div class="form-check me-3">
+                                    <input type="checkbox" class="form-check-input" id="airbagDriver">
+                                    <label class="form-check-label" for="airbagDriver">Airbag: driver</label>
+                                </div>
+                                <div class="form-check me-3">
+                                    <input type="checkbox" class="form-check-input" id="airbagPassenger">
+                                    <label class="form-check-label" for="airbagPassenger">Airbag: passenger</label>
+                                </div>
+                                <div class="form-check me-3">
+                                    <input type="checkbox" class="form-check-input" id="alarm">
+                                    <label class="form-check-label" for="alarm">Alarm</label>
+                                </div>
+                                <div class="form-check me-3">
+                                    <input type="checkbox" class="form-check-input" id="antilockBrakes">
+                                    <label class="form-check-label" for="antilockBrakes">Antilock brakes</label>
+                                </div>
+                                <div class="form-check me-3">
+                                    <input type="checkbox" class="form-check-input" id="stabilityControl">
+                                    <label class="form-check-label" for="stabilityControl">Stability control</label>
+                                </div>
+                                <div class="form-check me-3">
+                                    <input type="checkbox" class="form-check-input" id="fogLights">
+                                    <label class="form-check-label" for="fogLights">Fog lights</label>
+                                </div>
+                            </div>
+                            <a href="#" class="text-primary" onclick="showMore('safetyFeatures')">Show more</a>
+                            <div id="safetyFeatures" class="more-options d-none">
+                                <div class="form-check me-3">
+                                    <input type="checkbox" class="form-check-input" id="safetyFeature1">
+                                    <label class="form-check-label" for="safetyFeature1">Safety Feature 1</label>
+                                </div>
+                                <div class="form-check me-3">
+                                    <input type="checkbox" class="form-check-input" id="safetyFeature2">
+                                    <label class="form-check-label" for="safetyFeature2">Safety Feature 2</label>
+                                </div>
+                                <!-- Add more safety features as needed -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-secondary px-5 me-3"
+                            onclick="previousStep(4)">Back</button>
+                        <button type="button" class="btn custom-btn-nav rounded px-5" onclick="nextStep(6)">
+                            Next</button>
+                    </div>
+                </div>
+                <!-- Step 6: Upload Photos / Videos -->
+                <div id="step6" class="step-content">
+                    <h6 class="step-header">Photos / Video Upload</h6>
+
+                    <p class="rounded p-3" style="background-color:#483B34; color: #FDBC31; ">
+                        You can upload at least 5 photos. The maximum photo size is <strong>8 MB</strong>.
+                        Formats allowed: <strong>jpeg, jpg, png</strong>. Put the main picture first.The maximum video
+                        size is <strong>10 MB</strong>. Formats allowed: <strong>mp4, mov</strong>.
+                    </p>
+
+                    <div class="upload-area border border-dashed rounded p-4 text-center" ondrop="handleDrop(event)"
+                        ondragover="event.preventDefault()" ondragleave="event.preventDefault()">
+                        <i class="bi bi-cloud-arrow-up fs-1 primary-color-custom mb-3"></i>
+                        <p class="mb-2">Maximum 5 files (images) and 1 video allowed.</p>
+                        <input type="file" id="fileUpload" class="d-none" multiple
+                            accept=".jpg, .jpeg, .png, .mp4, .mov" onchange="handleFiles(this.files)">
+                        <button class="btn btn-primary mt-3" onclick="document.getElementById('fileUpload').click();">
+                            Select Files
+                        </button>
+                    </div>
+
+                    <div id="previewContainer" class="mt-4 d-flex flex-wrap gap-3"></div>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-secondary px-5 me-3"
+                            onclick="previousStep(5)">Back</button>
+                        <button type="button" class="btn custom-btn-nav rounded px-5" onclick="nextStep(7)">
+                            Next</button>
+                    </div>
+                </div>
+                <!-- Step 7: Upload Documents -->
+                <div id="step7" class="step-content">
+                    <h6 class="step-header">Upload Documents (Optional)</h6>
+                    <p class="rounded p-3" style="background-color:#483B34; color: #FDBC31; ">
+                        You can upload a maximum of <strong>1 auction sheet</strong> and <strong>1 brochure PDF
+                            file</strong>.
+                        The maximum file size is <strong>16 MB</strong>. Allowed format: <strong>PDF</strong>.
+                    </p>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="upload-area border border-dashed rounded p-4 text-center"
+                                onclick="document.getElementById('brochureUpload').click();">
+                                <i class="bi bi-file-earmark-pdf fs-1 text-danger mb-2"></i>
+                                <p class="mb-0">Click here to upload brochure</p>
+                                <small class="text-muted">(PDF only, max 16 MB)</small>
+                                <input type="file" id="brochureUpload" class="d-none" accept=".pdf"
+                                    onchange="handleDocumentUpload(this, 'brochurePreview')">
+                            </div>
+                            <div id="brochurePreview" class="mt-3 text-success"></div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="upload-area border border-dashed rounded p-4 text-center"
+                                onclick="document.getElementById('auctionSheetUpload').click();">
+                                <i class="bi bi-file-earmark-pdf fs-1 text-danger mb-2"></i>
+                                <p class="mb-0">Click here to upload auction sheet</p>
+                                <small class="text-muted">(PDF only, max 16 MB)</small>
+                                <input type="file" id="auctionSheetUpload" class="d-none" accept=".pdf"
+                                    onchange="handleDocumentUpload(this, 'auctionSheetPreview')">
+                            </div>
+                            <div id="auctionSheetPreview" class="mt-3 text-success"></div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-secondary px-5 me-3"
+                            onclick="previousStep(6)">Back</button>
+                        <button type="button" class="btn custom-btn-nav rounded px-5" onclick="nextStep(8)">
+                            Next</button>
+                    </div>
+                </div>
+                <!-- Step 8: Location -->
+                <div id="step8" class="step-content">
+                    <h3 class="mb-4">Location</h3>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="country" class="form-label">Country / Region</label>
+                            <select id="country" class="form-select">
+                                <option selected>Pakistan</option>
+                                <option>USA</option>
+                                <option>UK</option>
+                                <option>Canada</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="state" class="form-label">State</label>
+                            <select id="state" class="form-select">
+                                <option selected>Punjab</option>
+                                <option>Sindh</option>
+                                <option>Balochistan</option>
+                                <option>Khyber Pakhtunkhwa</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="city" class="form-label">City</label>
+                            <select id="city" class="form-select">
+                                <option selected>Islamabad</option>
+                                <option>Lahore</option>
+                                <option>Karachi</option>
+                                <option>Rawalpindi</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="area" class="form-label">Area</label>
+                            <input type="text" id="area" class="form-control" placeholder="45300">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="streetAddress" class="form-label">Street Address</label>
+                        <input type="text" id="streetAddress" class="form-control"
+                            placeholder="158 B scheme III Islamabad">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="map" class="form-label">Display on the map</label>
+                    </div>
+
+                    <div id="map" class="border rounded mb-3" style="height: 300px;"></div>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-secondary px-5 me-3"
+                            onclick="previousStep(7)">Back</button>
+                        <button type="button" class="btn custom-btn-nav rounded px-5" onclick="nextStep(9)">
+                            Next</button>
+                    </div>
+                </div>
+                <!-- Step 9: Contacts -->
+                <div id="step9" class="step-content">
+                    <form id="contactForm">
+                        <div class="mb-3 p-3" style="background-color:#282435;">
+                            <h6 class="step-header">Contacts</h6>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="firstName" class="form-label">First Name</label>
+                                    <input type="text" class="form-control" id="firstName" placeholder="Devon" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="secondName" class="form-label">Second Name</label>
+                                    <input type="text" class="form-control" id="secondName" placeholder="Devon"
+                                        required>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" placeholder="example@email.com"
+                                        required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="phoneNumber" class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-control" id="phoneNumber" placeholder="316-124-5786"
+                                        required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="website" class="form-label">Website</label>
+                                <input type="url" class="form-control" id="website" placeholder="www.website.com"
+                                    required>
+                            </div>
+
+                            <div id="socialMediaSection" class="collapse">
+                                <div class="mb-3">
+                                    <label for="facebook" class="form-label">Your Facebook Account</label>
+                                    <input type="url" class="form-control" id="facebook" placeholder="Facebook URL">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="linkedin" class="form-label">Your LinkedIn Account</label>
+                                    <input type="url" class="form-control" id="linkedin" placeholder="LinkedIn URL">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="twitter" class="form-label">Your Twitter Account</label>
+                                    <input type="url" class="form-control" id="twitter" placeholder="Twitter URL">
+                                </div>
+                            </div>
+
+                            <button type="button" class="btn btn-link text-white" data-bs-toggle="collapse"
+                                data-bs-target="#socialMediaSection" aria-expanded="false">
+                                Show More
+                            </button>
+                        </div>
+
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="btn btn-secondary px-5 me-3"
+                                onclick="previousStep(8)">Preview</button>
+                            <button type="submit" class="btn custom-btn-nav rounded px-5" onclick="nextStep(1)">Save and
+                                continue</button>
+                        </div>
+                    </form>
+                </div>
+
+
+                <!-- Include Google Maps API (use your own API key) -->
+                <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async
+                    defer></script>
+
+            </div>
+            <div class="col-lg-4"></div>
+        </div>
+    </div>
+
+    <!-- Super Admin Card End -->
+    <footer class=" py-4" style="background-color:#282435;">
+        <div class="container">
+            <div class="row">
+                <!-- Cars By Section -->
+                <div class="col-md-3 mb-3 pe-4">
+                    <img src="images/logo.png" alt="" srcset="">
+                    <p>Your Car, Your Way, with Our Trusted Car Dealers</p>
+                </div>
+
+                <div class="col-md-2 mb-3">
+                    <h6>Cars By Make</h6>
+                    <ul class="list-unstyled" style="color: #B4B3B8;">
+                        <li>Toyota</li>
+                        <li>Suzuki</li>
+                        <li>Honda</li>
+                        <li>BMW</li>
+                        <li>Hyundi</li>
+                        <li>KIA</li>
+                    </ul>
+                </div>
+
+                <div class="col-md-2 mb-3">
+                    <h6>Cars By Model</h6>
+                    <ul class="list-unstyled" style="color: #B4B3B8;">
+                        <li>Toyota</li>
+                        <li>Suzuki</li>
+                        <li>Honda</li>
+                        <li>BMW</li>
+                        <li>Hyundi</li>
+                        <li>KIA</li>
+                    </ul>
+                </div>
+
+                <div class="col-md-2 mb-3">
+                    <h6>Cars By Color</h6>
+                    <ul class="list-unstyled" style="color: #B4B3B8;">
+                        <li>White</li>
+                        <li>Black</li>
+                        <li>Silver</li>
+                        <li>Grey</li>
+                        <li>Blue</li>
+                        <li>Green</li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <h6>Cars By City</h6>
+                    <ul class="list-unstyled" style="color: #B4B3B8;">
+                        <li>Islamabad</li>
+                        <li>Rawalpindi</li>
+                        <li>Peshawar</li>
+                        <li>Karachi</li>
+                        <li>Quetta</li>
+                        <li>Multan</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <h6>Cars By Body Type</h6>
+                    <ul class="list-unstyled" style="color: #B4B3B8;">
+                        <li class="me-3">HatchBack</li>
+                        <li class="me-3">Sedan</li>
+                        <li class="me-3">SUV</li>
+                        <li class="me-3">Crossover</li>
+                        <li class="me-3">Van</li>
+                        <li>Mini Van</li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <h6>Auto Jazeera Marketplace</h6>
+                    <ul class="list-unstyled justify-content-end mb-0" style="color: #B4B3B8;">
+                        <li class="me-3"><a href="#" class="text-decoration-none" style="color: #B4B3B8;">About Us</a>
+                        </li>
+                        <li class="me-3"><a href="#" class="text-decoration-none" style="color: #B4B3B8;">FAQ</a></li>
+                        <li class="me-3"><a href="#" class="text-decoration-none" style="color: #B4B3B8;">Dealer Sign
+                                up</a></li>
+                        <li><a href="#" class="text-decoration-none" style="color: #B4B3B8;">Contact Us</a></li>
+                    </ul>
+                </div>
+                <!-- Newsletter -->
+                <div class="col-md-3 mb-3">
+                    <h6>Subscribe to our newsletter</h6>
+                    <p style="color: #B4B3B8;"></p>
+                    <form class="d-flex">
+                        <input type="email" class="form-control me-2" placeholder="Your email" aria-label="Your email">
+                        <button class="btn text-white" style="background-color: #FD5631 !important;" type="submit"><i
+                                class="bi bi-arrow-up-right"></i></button>
+                    </form>
+                </div>
+                <!-- Newsletter -->
+                <div class="col-md-3 mb-3">
+                    <img src="images/app.png" alt="" srcset="" class="img-fluid">
+                    <img src="images/google.png" alt="" srcset="" class="mt-2 img-fluid">
+                </div>
+            </div>
+
+
+
+            <hr class="bg-white">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">© All rights reserved. Made by Auto Jazeera</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-white text-decoration-none me-3">Terms of Use</a>
+                    <a href="#" class="text-white text-decoration-none">Privacy Policy</a>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col text-center">
+
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered  modal-xl">
+            <div class="modal-content">
+                <div class="modal-body p-5">
+                    <div class="row gx-5">
+                        <div class="col-lg-4">
+                            <div class="col-stlying">
+                                <img src="images/heart.png" alt="" srcset="" class="mb-2">
+                                <h4 class="text-white">My Wishlist</h4>
+                                <p class="text-white">This site is provided as a service to our visitors and may be
+                                    used
+                                    for
+                                    informational
+                                    purposes only.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="col-stlying">
+                                <img src="images/file-icon.png" alt="" srcset="" class="mb-2">
+                                <h4 class="text-white">My Submitted Forms</h4>
+                                <p class="text-white">This site is provided as a service to our visitors and may be
+                                    used
+                                    for informational purposes only.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="col-stlying">
+                                <img src="images/profile-icon.png" alt="" srcset="" class="mb-2">
+                                <h4 class="text-white">Personal Information</h4>
+                                <p class="text-white">This site is provided as a service to our visitors and may be
+                                    used
+                                    for informational purposes only.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 text-end mt-4">
+                            <a href="#" class="btn modal-btn"> Logout
+                            </a>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal-2 -->
+    <div class="modal fade" id="exampleModal-2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered  modal-xl">
+            <div class="modal-content">
+                <div class="modal-body p-5">
+                    <div class="row gy-3">
+                        <div class="col-lg-4">
+                            <div class="col-stlying">
+                                <img src="images/icon.png" alt="" srcset="" class="mb-2">
+                                <h4 class="text-white">Post an Ad</h4>
+                                <p class="text-white">This site is provided as a service to our visitors and may be
+                                    used
+                                    for informational purposes only.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="col-stlying">
+                                <img src="images/Mask group.png" alt="" srcset="" class="mb-2">
+                                <h4 class="text-white">Manage Ads</h4>
+                                <p class="text-white">This site is provided as a service to our visitors and may be
+                                    used
+                                    for informational purposes only.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="col-stlying">
+                                <img src="images/Mask group (1).png" alt="" srcset="" class="mb-2">
+                                <h4 class="text-white">Manage Subscription</h4>
+                                <p class="text-white">This site is provided as a service to our visitors and may be
+                                    used
+                                    for informational purposes only.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="col-stlying">
+                                <img src="images/Mask group (2).png" alt="" srcset="" class="mb-2">
+                                <h4 class="text-white">View Leads</h4>
+                                <p class="text-white">This site is provided as a service to our visitors and may be
+                                    used
+                                    for informational purposes only.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="col-stlying">
+                                <img src="images/double-profile.png" alt="" srcset="" class="mb-2">
+                                <h4 class="text-white">Manage Users</h4>
+                                <p class="text-white">This site is provided as a service to our visitors and may be
+                                    used
+                                    for informational purposes only.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="col-stlying">
+                                <img src="images/profile-icon.png" alt="" srcset="" class="mb-2">
+                                <h4 class="text-white">Personal Information</h4>
+                                <p class="text-white">This site is provided as a service to our visitors and may be
+                                    used
+                                    for informational purposes only.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="col-stlying">
+                                <img src="images/profile-icon.png" alt="" srcset="" class="mb-2">
+                                <h4 class="text-white">My Wishlist</h4>
+                                <p class="text-white">This site is provided as a service to our visitors and may be
+                                    used
+                                    for informational purposes only.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="col-stlying">
+                                <img src="images/file-icon.png" alt="" srcset="" class="mb-2">
+                                <h4 class="text-white">My Submitted Forms</h4>
+                                <p class="text-white">This site is provided as a service to our visitors and may be
+                                    used
+                                    for informational purposes only.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="col-stlying">
+                                <img src="images/lock.png" alt="" srcset="" class="mb-2">
+                                <h4 class="text-white">Login & Security</h4>
+                                <p class="text-white">This site is provided as a service to our visitors and may be
+                                    used
+                                    for informational purposes only.</p>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-12 text-end mt-4">
+                            <a href="#" class="btn modal-btn"> Logout
+                            </a>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal-3 -->
+    <div class="modal fade" id="exampleModal-3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered  modal-xl">
+            <div class="modal-content">
+                <div class="modal-body p-5">
+                    <div class="row gy-3">
+                        <div class="col-lg-4">
+                            <div class="col-stlying">
+                                <img src="images/icon.png" alt="" srcset="" class="mb-2">
+                                <h4 class="text-white">Create/Manage Dealer</h4>
+                                <p class="text-white">This site is provided as a service to our visitors and may be
+                                    used
+                                    for informational purposes only.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="col-stlying">
+                                <img src="images/Mask group.png" alt="" srcset="" class="mb-2">
+                                <h4 class="text-white">Manage Dealer Ads</h4>
+                                <p class="text-white">This site is provided as a service to our visitors and may be
+                                    used
+                                    for informational purposes only.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="col-stlying">
+                                <img src="images/Mask group (1).png" alt="" srcset="" class="mb-2">
+                                <h4 class="text-white">Manage Dealer Subscription</h4>
+                                <p class="text-white">This site is provided as a service to our visitors and may be
+                                    used
+                                    for informational purposes only.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="col-stlying">
+                                <img src="images/profile-icon.png" alt="" srcset="" class="mb-2">
+                                <h4 class="text-white">Create/Manage Dealer Users</h4>
+                                <p class="text-white">This site is provided as a service to our visitors and may be
+                                    used
+                                    for informational purposes only.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="col-stlying">
+                                <img src="images/file-icon.png" alt="" srcset="" class="mb-2">
+                                <h4 class="text-white">My Submitted Forms</h4>
+                                <p class="text-white">This site is provided as a service to our visitors and may be
+                                    used
+                                    for informational purposes only.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="col-stlying">
+                                <img src="images/lock.png" alt="" srcset="" class="mb-2">
+                                <h4 class="text-white">Login & Security</h4>
+                                <p class="text-white">This site is provided as a service to our visitors and may be
+                                    used
+                                    for informational purposes only.</p>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-12 text-end mt-4">
+                            <a href="#" class="btn modal-btn"> Logout
+                            </a>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Step Navigation -->
+    <script>
+        function showStep(step) {
+            document.querySelectorAll('.step-content').forEach((content) => {
+                content.classList.remove('active');
+            });
+            document.getElementById(`step${step}`).classList.add('active');
+        }
+
+        function nextStep(step) {
+            showStep(step);
+        }
+
+        function previousStep(step) {
+            showStep(step);
+        }
+        function showMore(featureId) {
+            const moreOptions = document.getElementById(featureId);
+            moreOptions.classList.toggle('d-none');
+        }
+        function handleFiles(files) {
+            const previewContainer = document.getElementById('previewContainer');
+            previewContainer.innerHTML = ''; // Clear previous previews
+
+            Array.from(files).forEach((file, index) => {
+                if (index < 5 && file.size <= 8 * 1024 * 1024) { // Image limit
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.className = 'img-thumbnail';
+                        img.style.width = '150px';
+                        previewContainer.appendChild(img);
+                    };
+                    reader.readAsDataURL(file);
+                } else if (file.size <= 10 * 1024 * 1024 && /\.(mp4|mov)$/i.test(file.name)) { // Video limit
+                    const video = document.createElement('video');
+                    video.src = URL.createObjectURL(file);
+                    video.controls = true;
+                    video.style.width = '150px';
+                    previewContainer.appendChild(video);
+                } else {
+                    alert('Invalid file or size exceeds limit!');
+                }
+            });
+        }
+
+        function handleDrop(event) {
+            event.preventDefault();
+            const files = event.dataTransfer.files;
+            handleFiles(files);
+        }
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

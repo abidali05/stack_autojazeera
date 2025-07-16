@@ -1,0 +1,40 @@
+<div class="container mt-5">
+    <div class="row">
+        <!-- Left Side Progress Bar -->
+        <div class="col-md-3">
+            <ul class="stepper-progress">
+                <li id="step1-progress" class="active">Basic Info</li>
+                <li id="step2-progress">Price</li>
+                <li id="step3-progress">Vehicle Information</li>
+                <li id="step4-progress">Features</li>
+                <li id="step5-progress">Photos / Video</li>
+                <li id="step6-progress">Location</li>
+                <li id="step7-progress">Contacts</li>
+            </ul>
+        </div>
+
+        <!-- Right Side Forms -->
+        <div class="col-md-9">
+            <div class="step-content active" id="step1">
+                <h5>Step 1: Basic Info</h5>
+                <input type="text" placeholder="Enter Ad Title" class="form-control mb-3" />
+                <button class="btn btn-primary" onclick="nextStep(1, 2)">Next</button>
+            </div>
+
+            <div class="step-content" id="step2">
+                <h5>Step 2: Price</h5>
+                <div class="d-flex">
+                    <select class="form-select me-2">
+                        <option>PKR</option>
+                        <option>USD</option>
+                    </select>
+                    <input type="number" placeholder="Enter price" class="form-control" />
+                </div>
+                <button class="btn btn-secondary mt-3" onclick="previousStep(2, 1)">Back</button>
+                <button class="btn btn-primary mt-3" onclick="nextStep(2, 3)">Next</button>
+            </div>
+
+            <!-- Add more steps as needed following the same structure -->
+        </div>
+    </div>
+</div>
