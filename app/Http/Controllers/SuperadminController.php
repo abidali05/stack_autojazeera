@@ -20,22 +20,22 @@ class SuperadminController extends Controller
 
     public function showLoginForm()
     {
-      
+
         return view('superadmin.auth.login');
     }
 
     public function login(LoginRequest $request)
     {
-		//dd($request->all());
-      
+        //dd($request->all());
+
         // $validator = Validator::make($request->all(), [
         //     'email' => 'required|email',
         //     'password' => 'required',
-         
-           
-            
+
+
+
         // ]);
- 
+
         $credentials = $request->only('email', 'password');
 
         if (Auth::guard('superadmin')->attempt($credentials)) {
@@ -48,12 +48,10 @@ class SuperadminController extends Controller
 
         return back()->withErrors(['email' => 'Invalid credentials.']);
     }
+
     public function dashboard()
     {
- 
-    
         return view('superadmin.dashboard');
-        
     }
 
     public function logout()
@@ -61,11 +59,12 @@ class SuperadminController extends Controller
         Auth::guard('superadmin')->logout();
         return redirect('/superadmin/login');
     }
+    
     public function addpost()
     {
         return view('post.add_post');
     }
-	   public function admin_change_password(Request $request)
+    public function admin_change_password(Request $request)
     {
         $validator = Validator::make($request->all(), [
             // 'dealer' => 'required|max:255',
@@ -94,4 +93,3 @@ class SuperadminController extends Controller
         return back()->with('success', 'Password updated successfully.');
     }
 }
-

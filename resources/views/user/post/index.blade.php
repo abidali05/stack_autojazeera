@@ -89,6 +89,13 @@
             background-color: #281F48;
 
         }
+
+        .ads-column-search {
+            width: 100px;
+            font-size: 12px;
+        }
+
+        /* For inline search version */
     </style>
     <div class="container mt-3">
         <div class="row">
@@ -251,16 +258,20 @@
                         aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
-                                <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                                <div class="modal-header"
+                                    style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                                     <h5 class="modal-title" id="errorModalLabel"><strong> Error</strong></h5>
-                                    <button type="button" class="btn-close " style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
+                                    <button type="button" class="btn-close "
+                                        style="background-color: #D9D9D9 !important; color: #FD5631;"
+                                        data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body text-center" style="background-color: #F0F3F6; color: #FD5631;">
                                     <p style="color: #281F48; margin: 0;">{{ session('error') }}</p>
                                 </div>
                                 <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                                    <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-light px-4 py-2 "
+                                        style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                                        data-bs-dismiss="modal">Close</button>
                                 </div>
                             </div>
                         </div>
@@ -292,7 +303,7 @@
         </div>
         <div class="container table-responsive">
             <div class="row ">
-                <table class="table table-striped transparent-table align-middle datatable">
+                <table class="table table-striped transparent-table align-middle ads-datatable">
                     <thead>
                         <tr>
                             <th>Sr#</th>
@@ -304,15 +315,10 @@
                             <th>Year</th>
                             <th>Comment</th>
                             <th>Status</th>
-
                         </tr>
                     </thead>
                     <tbody>
                         <!-- Repeat this block for each row -->
-
-
-
-
                         @foreach ($posts as $i => $post)
                             <tr>
                                 <td>{{ $i + 1 }}</td>
@@ -325,8 +331,6 @@
                                         data-bs-toggle="modal" data-bs-target="#deleteModal">
                                         <i class="bi bi-trash"></i>
                                     </a>
-
-
                                 </td>
                                 <?php
                                 $main = $post->document->first();
@@ -353,7 +357,7 @@
                                 </td>
                                 <td>
                                     @if ($post->status == 0)
-                                        <a><span class="badge text-bg-danger">Inactive</span></a>
+                                        <a><span class="badge text-bg-danger">In Review</span></a>
                                     @elseif($post->status == '2')
                                         <a href="#"><span class="badge text-bg-danger" data-bs-toggle="modal"
                                             data-bs-target="#statusModal{{ $post->id }}">Rejected</span></a>@else<a>
@@ -367,11 +371,13 @@
                                 <div class="modal-dialog  modal-dialog-centered">
                                     <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
                                         <div class="modal-header "
-                                           style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
-                                            <h5 class="modal-title" id="statusModalLabel{{ $post->id }}"><strong>Ad Status</strong>
+                                            style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                                            <h5 class="modal-title" id="statusModalLabel{{ $post->id }}"><strong>Ad
+                                                    Status</strong>
                                             </h5>
-                                            <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
+                                            <button type="button" class="btn-close"
+                                                style="background-color: #D9D9D9 !important; color: #FD5631;"
+                                                data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body" style="background-color: #F0F3F6; color: #FD5631;">
 
@@ -398,7 +404,8 @@
                                             @endif
                                         </div>
                                         <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                                            <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                                            <button type="button" class="btn btn-light px-4 py-2 "
+                                                style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
                                                 data-bs-dismiss="modal">Cancel</button>
 
                                         </div>
@@ -414,7 +421,6 @@
             </div>
         </div>
         <div class="container">
-
             <div class="row align-items-center ">
                 <div class="col-md-4 "> <span class="pt-md-3 pagination_count"
                         style="font-size: 18px; color: #281F48; font-weight:700;">
@@ -597,7 +603,6 @@
                             <th>Year</th>
                             <th>Comment</th>
                             <th>Status</th>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -613,12 +618,9 @@
                                         data-bs-toggle="modal" data-bs-target="#deleteModal">
                                         <i class="bi bi-trash"></i>
                                     </a>
-
-
                                 </td>
                                 <?php
                                 $main = $post->document->first();
-                                
                                 ?>
                                 <td> <a
                                         @if (Request::is('superadmin/*')) href="{{ route('superadmin.cardetail', $post->id) }}" @else href="{{ route('cardetail', $post->id) }}" @endif>
@@ -658,11 +660,13 @@
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
                                         <div class="modal-header"
-                                           style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
-                                            <h5 class="modal-title" id="statusModalLabel{{ $post->id }}"><strong> Ad Status</strong>
+                                            style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                                            <h5 class="modal-title" id="statusModalLabel{{ $post->id }}"><strong> Ad
+                                                    Status</strong>
                                             </h5>
-                                            <button type="button" class="btn-close " style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
+                                            <button type="button" class="btn-close "
+                                                style="background-color: #D9D9D9 !important; color: #FD5631;"
+                                                data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body" style="background-color: #F0F3F6; color: #FD5631;">
 
@@ -689,7 +693,8 @@
                                             @endif
                                         </div>
                                         <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                                            <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                                            <button type="button" class="btn btn-light px-4 py-2 "
+                                                style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
                                                 data-bs-dismiss="modal">Cancel</button>
 
                                         </div>
@@ -715,6 +720,63 @@
             localStorage.removeItem('storedImages');
             console.log("Cleared storedImages from localStorage.");
         }
+        $(document).ready(function() {
+            $('.ads-datatable').each(function() {
+                var table = $(this).DataTable({
+                    paging: false,
+                    lengthChange: false,
+                    searching: true,
+                    info: false,
+                    ordering: true,
+                    language: {
+                        search: "Search: "
+                    }
+                });
+
+                // Add search row
+                $(this).find('thead').append('<tr class="search-row"></tr>');
+
+                $(this).find('thead th').each(function(index) {
+                    var title = $(this).text().trim();
+                    var searchHtml = '';
+
+                    // Custom search for Featured column (Yes/No dropdown)
+                    if (title === 'Featured') {
+                        searchHtml = `
+                    <select class="ads-column-search">
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                `;
+                    }
+                    // Custom search for Year column (numeric input)
+                    else if (title === 'Year') {
+                        searchHtml = `
+                    <input type="number" 
+                           placeholder="Search Year" 
+                           class="ads-column-search" 
+                           min="1900" 
+                           max="${new Date().getFullYear() + 1}">
+                `;
+                    }
+                    // Regular text search for Make and Model
+                    else if (['Make', 'Model'].includes(title)) {
+                        searchHtml =
+                            `<input type="text" placeholder="Search ${title}" class="ads-column-search"/>`;
+                    }
+
+                    $(this).closest('thead').find('.search-row').append(
+                        '<th>' + searchHtml + '</th>'
+                    );
+                });
+
+                // Apply search functionality
+                $(this).find('.search-row select, .search-row input').on('keyup change', function() {
+                    var columnIndex = $(this).closest('th').index();
+                    table.column(columnIndex).search(this.value).draw();
+                });
+            });
+        });
     </script>
 
 @endsection

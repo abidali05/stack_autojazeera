@@ -34,7 +34,6 @@ class ServiceChatController extends Controller
             if($user && $user->shop_pkg && ($user->shop_pkg->metadata->chat_allowed == '1' || $user->shop_pkg->metadata->chat_allowed == 1)){
                 
                 return view('user.chats.service_chat', compact('user'));
-                
             }
         }
         

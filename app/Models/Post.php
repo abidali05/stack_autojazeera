@@ -21,7 +21,7 @@ class Post extends Model
     {
         if (isset($this->make)) {
             $make = MakeCompany::find($this->make);
-            return $make->name;
+             return $make ? $make->name : null;
         } else {
             return null;
         }

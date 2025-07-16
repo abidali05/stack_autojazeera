@@ -497,28 +497,34 @@ class ShopController extends Controller
     }
 
 
-    public function get_quotes()   // received quotes
+    public function get_quotes(Request $request)
     {
-
         $user = Auth::user();
-        if ($user->role == '3') {
-            $userId = $user->dealer_id;
-        } else {
-            $userId = $user->id;
-        }
-        // check if shop exists or not 
+        $userId = $user->role == '3' ? $user->dealer_id : $user->id;
+
         $shop = Shops::where('dealer_id', $userId)->first();
+
         if (!$shop) {
-            if ($user->role == '3') {
-                return redirect()->route('dashboard')->with('error', 'Your admin has not created a shop yet.');
-            } else {
-                return redirect()->route('dashboard')->with('error', 'You have not created a shop yet. Please create a shop first.');
+            $message = $user->role == '3'
+                ? 'Your admin has not created a shop yet.'
+                : 'You have not created a shop yet. Please create a shop first.';
+
+            if ($request->ajax()) {
+                return response()->json(['status' => 'error', 'message' => $message]);
             }
+
+            return redirect()->route('dashboard')->with('error', $message);
+        }
+
+        if ($request->ajax()) {
+            $html = view('user.quotes.partials.table', [
+                'bookings' => Bookings::with(['shop', 'make_r', 'model_r', 'bodytype_r', 'user'])->where('shop_id', $shop->id)->paginate(25)
+            ])->render();
+
+            return response()->json(['status' => 'success', 'html' => $html]);
         }
 
         $bookings = Bookings::with(['shop', 'make_r', 'model_r', 'bodytype_r', 'user'])->where('shop_id', $shop->id)->paginate(25);
-
-
         return view('user.quotes.index', compact('bookings'));
     }
 

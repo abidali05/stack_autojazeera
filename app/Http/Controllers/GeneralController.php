@@ -61,32 +61,33 @@ class GeneralController extends Controller
 
         return response()->json($cities);
     }
+
     public function get_model($modelId, Request $request)
-{
-    $path = $request->query('path', '');
-    $sql = "SELECT model_companies.id, model_companies.name, COUNT(DISTINCT posts.id) as count
+    {
+        $path = $request->query('path', '');
+        $sql = "SELECT model_companies.id, model_companies.name, COUNT(DISTINCT posts.id) as count
         FROM model_companies
         LEFT JOIN posts ON model_companies.id = posts.model
         WHERE model_companies.make_id = ? 
         AND posts.status = 1
         AND posts.deleted_at IS NULL";
-    
-    $params = [$modelId];
 
-    if (str_contains($path, 'cars/used')) {
-        $sql .= " AND posts.condition = ?";
-        $params[] = 'used';
-    } elseif (str_contains($path, 'cars/new')) {
-        $sql .= " AND posts.condition = ?";
-        $params[] = 'new';
+        $params = [$modelId];
+
+        if (str_contains($path, 'cars/used')) {
+            $sql .= " AND posts.condition = ?";
+            $params[] = 'used';
+        } elseif (str_contains($path, 'cars/new')) {
+            $sql .= " AND posts.condition = ?";
+            $params[] = 'new';
+        }
+
+        $sql .= " GROUP BY model_companies.id, model_companies.name";
+
+        $models = DB::select($sql, $params);
+
+        return response()->json($models);
     }
-
-    $sql .= " GROUP BY model_companies.id, model_companies.name";
-
-    $models = DB::select($sql, $params);
-
-    return response()->json($models);
-}
 
 
     public function get_cities($provinceId, Request $request)
@@ -168,23 +169,24 @@ class GeneralController extends Controller
     }
 
 
-    public function newsletterSubmit(Request $request) {
-        if(!$request->email || $request->email == null || $request->email == '') {
+    public function newsletterSubmit(Request $request)
+    {
+        if (!$request->email || $request->email == null || $request->email == '') {
             return response()->json(['status' => 'error', 'message' => 'Please enter a valid email address.']);
         }
         // check if email already exists
         $check = NewsLetter::where('email', $request->email)->first();
-        if($check) {
+        if ($check) {
             return response()->json(['status' => 'error', 'message' => 'You are already subscribed to our newsletter.']);
         }
         $newsletter = new NewsLetter();
         $newsletter->email = $request->email;
         $newsletter->save();
         return response()->json(['status' => 'success', 'message' => 'Thank you for subscribing to our newsletter!']);
-
     }
 
-    public function all_newsletters(){
+    public function all_newsletters()
+    {
         $newsletters = NewsLetter::paginate(25);
         return view('superadmin.newsletters.index', compact('newsletters'));
     }

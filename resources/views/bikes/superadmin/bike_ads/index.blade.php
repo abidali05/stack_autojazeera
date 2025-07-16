@@ -103,6 +103,11 @@
             background-color: #281F48;
 
         }
+
+        .bike-column-search {
+            width: 100px;
+            font-size: 12px;
+        }
     </style>
     {{-- tabs navigaition  --}}
     <div class="container mt-3">
@@ -285,7 +290,7 @@
             </div>
             <div class="container table-responsive">
                 <div class="row">
-                    <table class="table table-striped transparent-table align-middle datatable">
+                    <table class="table table-striped transparent-table align-middle ads-datatable">
                         <thead>
                             <tr>
                                 <th>Sr#</th>
@@ -602,4 +607,45 @@
         </div>
         {{-- tab end  --}}
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $('.ads-datatable').each(function() {
+                var table = $(this).DataTable({
+                    paging: false,
+                    lengthChange: false,
+                    searching: true,
+                    info: false,
+                    ordering: true,
+                    language: {
+                        search: "Search: "
+                    }
+                });
+
+                // Add search row
+                $(this).find('thead').append('<tr class="search-row"></tr>');
+
+                $(this).find('thead th').each(function(index) {
+                    var title = $(this).text().trim();
+                    var searchHtml = '';
+
+                    // Only create inputs for specific columns
+                    if (['Make', 'Model', 'Year'].includes(title)) {
+                        searchHtml = '<input type="text" placeholder="Search ' + title +
+                            '" class="bike-column-search"/>';
+                    }
+
+                    $(this).closest('thead').find('.search-row').append(
+                        '<th>' + searchHtml + '</th>'
+                    );
+                });
+
+                // Apply search functionality
+                $(this).find('.search-row input').on('keyup change', function() {
+                    var columnIndex = $(this).closest('th').index();
+                    table.column(columnIndex).search(this.value).draw();
+                });
+            });
+        });
+    </script>
 @endsection

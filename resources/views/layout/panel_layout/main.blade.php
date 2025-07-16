@@ -286,9 +286,11 @@
         height: auto;
         /* Maintain aspect ratio */
     }
-html{
-    height: 100%;
-}
+
+    html {
+        height: 100%;
+    }
+
     #brochurePreview2 img {
         max-width: 50px;
         /* Set the maximum width */
@@ -492,7 +494,7 @@ html{
     }
 </style>
 
-<body style="background-color: #FBFBFB !important;min-height: 100%;width:100%;" >
+<body style="background-color: #FBFBFB !important;min-height: 100%;width:100%;">
     @include('layout.firebase')
     @include('layout.panel_layout.sidebar')
     @if (Request::is('superadmin/*'))
@@ -502,17 +504,18 @@ html{
     @endif
     <!-- Header -->
 
-    <!-- Banner -->  
+    <!-- Banner -->
     <?php
-  
+    
     use App\Models\User;
     
     $provinces = \App\Models\Province::all();
     $users = User::where('role', 1)->get();
     
     ?>
- <!-- Main Container -->
-  <div id="main-container" style="height: 100vh;z-index:999; display:flex; flex-direction:column; justify-content: space-between;">
+    <!-- Main Container -->
+    <div id="main-container"
+        style="height: 100vh;z-index:999; display:flex; flex-direction:column; justify-content: space-between;">
         <!-- Navbar -->
         <nav class="navbar thispos navbar-expand-lg bg-light">
             <div class="container-fluid">
@@ -525,61 +528,56 @@ html{
 
                 <div class="collapse navbar-collapse text-center" id="navbarNav">
                     <div class="ms-auto">
-                        <a href="{{url('/faqs')}}" class="faqsanker" target="_blank">FAQs</a>
-                        <a href="{{url('/contact-us')}}" class="ms-2 faqsanker" target="_blank">Contact us</a>
-                        <a class="nesd ms-2" href="{{url('/')}}" target="_blank">Website</a>
+                        <a href="{{ url('/faqs') }}" class="faqsanker" target="_blank">FAQs</a>
+                        <a href="{{ url('/contact-us') }}" class="ms-2 faqsanker" target="_blank">Contact us</a>
+                        <a class="nesd ms-2" href="{{ url('/') }}" target="_blank">Website</a>
                     </div>
-                   @auth
-                 <div class="d-flex align-items-center ms-3">
-    <img src="{{ Auth::user()->image ? asset('web/profile/' . Auth::user()->image) : asset('web/images/avatar.png') }}"
-         class="rounded-circle me-2"
-         alt="User"
-         width="40"
-         height="40">
+                    @auth
+                        <div class="d-flex align-items-center ms-3">
+                            <img src="{{ Auth::user()->image ? asset('web/profile/' . Auth::user()->image) : asset('web/images/avatar.png') }}"
+                                class="rounded-circle me-2" alt="User" width="40" height="40">
 
-    <div>
-        <h6 class="menu pb-0 mb-1">{{ Auth::user()->name }}</h6>
+                            <div>
+                                <h6 class="menu pb-0 mb-1">{{ Auth::user()->name }}</h6>
 
-        <div class="dropdown">
-            <span class="badge dropdown-toggle 
-                {{ Auth::user()->role == '0' ? 'bg-danger' : (Auth::user()->role == '1' ? 'bg-primary' : (Auth::user()->role == '2' ? 'bg-secondary' : 'bg-success')) }}"
-                role="button"
-                id="badgeDropdown"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                style="cursor: pointer;">
-                @if (Auth::user()->role == '0')
-                    User
-                @elseif (Auth::user()->role == '1')
-                    Dealer
-                @elseif (Auth::user()->role == '2')
-                    Dealer User
-                @else
-                    Service User
-                @endif
-            </span>
+                                <div class="dropdown">
+                                    <span
+                                        class="badge dropdown-toggle 
+                                            {{ Auth::user()->role == '0' ? 'bg-danger' : (Auth::user()->role == '1' ? 'bg-primary' : (Auth::user()->role == '2' ? 'bg-secondary' : 'bg-success')) }}"
+                                        role="button" id="badgeDropdown" data-bs-toggle="dropdown" aria-expanded="false"
+                                        style="cursor: pointer;">
+                                        @if (Auth::user()->role == '0')
+                                            User
+                                        @elseif (Auth::user()->role == '1')
+                                            Dealer
+                                        @elseif (Auth::user()->role == '2')
+                                            Dealer User
+                                        @else
+                                            Service User
+                                        @endif
+                                    </span>
 
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="badgeDropdown">
-                <li>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="dropdown-item">Logout</button>
-                    </form>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="badgeDropdown">
+                                        <li>
+                                            <form method="POST" action="{{ route('logout') }}">
+                                                @csrf
+                                                <button type="submit" class="dropdown-item">Logout</button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
 
-                   @endauth
+                    @endauth
 
-                  
+
                 </div>
             </div>
         </nav>
-            @yield('content') 
-       
-     </div>
+        @yield('content')
+
+    </div>
 
 
 
@@ -597,15 +595,53 @@ html{
         <i class="bi bi-arrow-down"></i>
     </button>
 
+    <div class="modal fade" id="notificationModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="border-radius: 10px;">
+                <div class="modal-header bg-warning text-dark">
+                    <h5 class="modal-title">Notice</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-danger fw-semibold">
+                    <!-- message goes here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+    <script>
+        $(document).on('click', '#serviceQuotesBtn', function(e) {
+            e.preventDefault();
 
+            $.ajax({
+                url: "/service-quotes",
+                method: "GET",
+                success: function(response) {
+                    if (response.status === 'error') {
+                        $('#notificationModal .modal-body').text(response.message);
+                        $('#notificationModal').modal('show');
+                    } else if (response.status === 'success') {
+                        // Redirect or inject content
+                        window.location.href = "{{ url('service-quotes') }}";
+                    }
+                },
+                error: function() {
+                    alert("Something went wrong.");
+                }
+            });
+        });
+    </script>
     <script>
         const goToTopButton = document.getElementById('goToTop');
         const goToBottomButton = document.getElementById('goToBottom');
@@ -1090,31 +1126,41 @@ html{
             const files = event.dataTransfer.files;
             handleFiles(files);
         }
+
         document.getElementById('province').addEventListener('change', function() {
-            var provinceId = this.value;
+            const provinceId = this.value;
+            const citySelect = document.getElementById('city');
 
-            var citySelect = document.getElementById('city');
-
-            // Clear the current city options
-            citySelect.innerHTML = '<option value="" selected>Any</option>';
+            // Clear the city options
+            citySelect.innerHTML = '<option value="" disabled selected>Any</option>';
 
             // Fetch cities based on selected province
             if (provinceId) {
                 fetch(`/getCities/${provinceId}`)
                     .then(response => response.json())
                     .then(data => {
+                        let autoSelectCityId = null;
+
                         data.forEach(city => {
-                            var option = document.createElement('option');
+                            const option = document.createElement('option');
                             option.value = city.id;
                             option.textContent = city.name;
                             citySelect.appendChild(option);
 
+                            // Auto-select Islamabad city if province is Islamabad
+                            if (provinceId == '5' && city.id == 85) {
+                                autoSelectCityId = city.id;
+                            }
                         });
 
+                        if (autoSelectCityId) {
+                            citySelect.value = autoSelectCityId;
+                        }
                     })
                     .catch(error => console.error('Error fetching cities:', error));
             }
         });
+
         document.getElementById('makecompanydata').addEventListener('change', function() {
             var makeId = this.value;
             //alert(makeId);
@@ -1734,49 +1780,63 @@ html{
 
 
     <script>
-    const toggleSidebar = document.getElementById('toggleSidebar');
-    const sidebar = document.getElementById('sidebar');
-    const mainContainer = document.getElementById('main-container');
-    const sidebarLogoImg = document.querySelector('#sidebarLogo img');
+        const toggleSidebar = document.getElementById('toggleSidebar');
+        const sidebar = document.getElementById('sidebar');
+        const mainContainer = document.getElementById('main-container');
+        const sidebarLogoImg = document.querySelector('#sidebarLogo img');
 
-    toggleSidebar.addEventListener('click', () => {
-        sidebar.classList.toggle('closed');
-        mainContainer.classList.toggle('sidebar-closed');
+        toggleSidebar.addEventListener('click', () => {
+            sidebar.classList.toggle('closed');
+            mainContainer.classList.toggle('sidebar-closed');
 
-        if (sidebar.classList.contains('closed')) {
-            sidebarLogoImg.style.display = 'none';
-        } else {
-            sidebarLogoImg.style.display = 'block'; // or 'flex' depending on design
-        }
-    });
-
-    // Ensure correct logo visibility on page load
-    window.addEventListener('DOMContentLoaded', () => {
-        if (sidebar.classList.contains('closed')) {
-            sidebarLogoImg.style.display = 'none';
-        }
-    });
-
-    // Highlight active sidebar and navbar links
-    const navbarLinks = document.querySelectorAll('.navbar-nav .nav-link');
-    const sidebarLinks = document.querySelectorAll('#sidebar a');
-
-    const currentPath = window.location.pathname.split('/').pop().split('#')[0];
-
-    const setActiveClass = (links) => {
-        links.forEach(link => {
-            const linkPath = link.getAttribute('href').split('/').pop().split('#')[0];
-            if (linkPath === currentPath) {
-                link.classList.add('active');
+            if (sidebar.classList.contains('closed')) {
+                sidebarLogoImg.style.display = 'none';
             } else {
-                link.classList.remove('active');
+                sidebarLogoImg.style.display = 'block'; // or 'flex' depending on design
             }
         });
-    };
 
-    // setActiveClass(navbarLinks);
-    // setActiveClass(sidebarLinks);
-</script>
+        // Ensure correct logo visibility on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            if (sidebar.classList.contains('closed')) {
+                sidebarLogoImg.style.display = 'none';
+            }
+        });
+
+        // Highlight active sidebar and navbar links
+        const navbarLinks = document.querySelectorAll('.navbar-nav .nav-link');
+        const sidebarLinks = document.querySelectorAll('#sidebar a');
+
+        const currentPath = window.location.pathname.split('/').pop().split('#')[0];
+
+        const setActiveClass = (links) => {
+            links.forEach(link => {
+                const linkPath = link.getAttribute('href').split('/').pop().split('#')[0];
+                if (linkPath === currentPath) {
+                    link.classList.add('active')
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        };
+
+        // setActiveClass(navbarLinks);
+        // setActiveClass(sidebarLinks);
+    </script>
+
+    <script>
+        function allowOnlyLetters(input) {
+            input.value = input.value.replace(/[^a-zA-Z\s]/g, '');
+        }
+
+        document.getElementById('firstName').addEventListener('input', function() {
+            allowOnlyLetters(this);
+        });
+
+        document.getElementById('secondName').addEventListener('input', function() {
+            allowOnlyLetters(this);
+        });
+    </script>
 </body>
 
 </html>

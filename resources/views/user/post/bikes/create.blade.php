@@ -796,54 +796,7 @@
                                 <div id="streetAddress-error" class="orange" style="display: none;">Street address is
                                     required.</div>
                             </div>
-
-
-                            <script
-                                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHTfGE9bbvleasezO-T-j1u5UVm6aTnl0&libraries=places&callback=initAutocomplete"
-                                async defer></script>
-
-                            <script>
-                                let selectedPlace = false;
-
-                                function initAutocomplete() {
-                                    const input = document.getElementById("streetAddress");
-                                    const latitudeInput = document.getElementById("latitude");
-                                    const longitudeInput = document.getElementById("longitude");
-
-                                    const autocomplete = new google.maps.places.Autocomplete(input, {
-                                        fields: ["formatted_address", "geometry"],
-                                    });
-
-                                    autocomplete.addListener("place_changed", () => {
-                                        const place = autocomplete.getPlace();
-                                        if (place.geometry) {
-                                            selectedPlace = true;
-                                            input.value = place.formatted_address;
-                                            latitudeInput.value = place.geometry.location.lat();
-                                            longitudeInput.value = place.geometry.location.lng();
-                                        } else {
-                                            selectedPlace = false;
-                                        }
-                                    });
-
-                                    input.addEventListener("blur", () => {
-                                        if (!selectedPlace) {
-                                            input.value = "";
-                                            latitudeInput.value = "";
-                                            longitudeInput.value = "";
-                                        }
-                                    });
-
-                                    input.addEventListener("input", () => {
-                                        selectedPlace = false;
-                                    });
-                                }
-
-                                window.initAutocomplete = initAutocomplete;
-                            </script>
                         </div>
-
-
                     </div>
                     <!-- Step 9: Contacts -->
 
@@ -892,7 +845,7 @@
                                         style="color:#FD5631">*</span></label>
                                 <input type="tel" class="form-control formcontrol" name="number" id="phoneNumber"
                                     placeholder="Enter phone number" value="{{ old('number') }}" required>
-                            
+
                                 @error('number')
                                     <div class="alert ">{{ $message }}</div>
                                 @enderror
@@ -1469,7 +1422,49 @@
         </div>
     </div>
 
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_maps.key') }}&libraries=places&callback=initAutocomplete"
+        async defer></script>
 
+    <script>
+        let selectedPlace = false;
+
+        function initAutocomplete() {
+            const input = document.getElementById("streetAddress");
+            const latitudeInput = document.getElementById("latitude");
+            const longitudeInput = document.getElementById("longitude");
+
+            const autocomplete = new google.maps.places.Autocomplete(input, {
+                fields: ["formatted_address", "geometry"],
+            });
+
+            autocomplete.addListener("place_changed", () => {
+                const place = autocomplete.getPlace();
+                if (place.geometry) {
+                    selectedPlace = true;
+                    input.value = place.formatted_address;
+                    latitudeInput.value = place.geometry.location.lat();
+                    longitudeInput.value = place.geometry.location.lng();
+                } else {
+                    selectedPlace = false;
+                }
+            });
+
+            input.addEventListener("blur", () => {
+                if (!selectedPlace) {
+                    input.value = "";
+                    latitudeInput.value = "";
+                    longitudeInput.value = "";
+                }
+            });
+
+            input.addEventListener("input", () => {
+                selectedPlace = false;
+            });
+        }
+
+        window.initAutocomplete = initAutocomplete;
+    </script>
     <script src="{{ asset('web/bikes/js/create.js') }}"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -1493,17 +1488,12 @@
             }
         });
     </script>
-
-
-
-
-
-
     <script>
+        const GOOGLE_MAPS_API_KEY = "{{ config('services.google_maps.key') }}";
         async function getAddressFromCoordinates(lat, lng, callback) {
             try {
                 const response = await fetch(
-                    `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyBHTfGE9bbvleasezO-T-j1u5UVm6aTnl0`
+                    `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${GOOGLE_MAPS_API_KEY}`
                 );
                 const data = await response.json();
 

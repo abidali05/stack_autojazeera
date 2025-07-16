@@ -102,6 +102,11 @@
             background-color: #281F48;
 
         }
+
+        .ads-column-search {
+            width: 100px;
+            font-size: 12px;
+        }
     </style>
     {{-- tabs navigaition  --}}
     <div class="container mt-3">
@@ -421,7 +426,7 @@
             </div>
             <div class="container table-responsive">
                 <div class="row">
-                    <table class="table table-striped transparent-table align-middle datatable">
+                    <table class="table table-striped transparent-table align-middle ads-datatable">
                         <thead>
                             <tr>
                                 <th>Sr#</th>
@@ -843,12 +848,10 @@
                                 <th>Featured</th>
                                 <th>Dealer Name</th>
                                 <th>Dealer Email</th>
-
                                 <th>Make</th>
                                 <th>Model</th>
                                 <th>Year</th>
                                 <th>Comment</th>
-
                                 <th>Created On </th>
                                 <th>Updated On</th>
                                 <th>Deleted On </th>
@@ -869,10 +872,7 @@
                                             data-bs-target="#bikedeleteModal{{ $post->id }}">
                                             <i class="bi bi-trash"></i>
                                         </a>
-
-
                                     </td>
-
 
                                     <td> <a href="{{ url('bike-details', $post->id) }}">
                                             @if (isset($main->doc_name))
@@ -902,7 +902,6 @@
                                     </td>
                                     <td> {{ @$post->dealer->name }}</td>
                                     <td> {{ @$post->dealer->email }}</td>
-
                                     <td>{{ $post->makename }}</td>
                                     <td>{{ $post->modelname }}</td>
                                     <td>{{ $post->year }}</td>
@@ -1002,10 +1001,6 @@
                                                                 id="deleted_id" value="{{ $post->id }}" required>
                                                         </div>
                                                 </div>
-
-
-
-
                                             </div>
                                             <div class="modal-footer border-0">
                                                 <button type="button" class="btn btn-light"
@@ -1019,9 +1014,6 @@
 
                                 </form>
                             @endforeach
-
-
-
                         </tbody>
                     </table>
                 </div>
@@ -1145,8 +1137,6 @@
         </div>
         {{-- tab end  --}}
     </div>
-
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('select[id^="postStatus"], select[id^="bikepostStatus"]').forEach(function(
@@ -1171,6 +1161,45 @@
                     reasonField.removeAttribute('required');
                 }
             }
+        });
+
+        $(document).ready(function() {
+            $('.ads-datatable').each(function() {
+                var table = $(this).DataTable({
+                    paging: false,
+                    lengthChange: false,
+                    searching: true,
+                    info: false,
+                    ordering: true,
+                    language: {
+                        search: "Search: "
+                    }
+                });
+
+                // Add search row
+                $(this).find('thead').append('<tr class="search-row"></tr>');
+
+                $(this).find('thead th').each(function(index) {
+                    var title = $(this).text().trim();
+                    var searchHtml = '';
+
+                    // Only create inputs for specific columns
+                    if (['Make', 'Model', 'Year'].includes(title)) {
+                        searchHtml = '<input type="text" placeholder="Search ' + title +
+                            '" class="ads-column-search"/>';
+                    }
+
+                    $(this).closest('thead').find('.search-row').append(
+                        '<th>' + searchHtml + '</th>'
+                    );
+                });
+
+                // Apply search functionality
+                $(this).find('.search-row input').on('keyup change', function() {
+                    var columnIndex = $(this).closest('th').index();
+                    table.column(columnIndex).search(this.value).draw();
+                });
+            });
         });
     </script>
 @endsection
