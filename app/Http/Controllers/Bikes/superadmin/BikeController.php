@@ -380,8 +380,8 @@ class BikeController extends Controller
 
 
             Stripe::setApiKey(config('services.stripe.secret'));
-              $user = User::find($post->dealer_id);
-              $dealerId = $user->role == 2 ? $user->dealer_id : $user->id;
+            $user = User::find($post->dealer_id);
+            $dealerId = $user->role == 2 ? $user->dealer_id : $user->id;
             $customer = $this->getOrCreateCustomer($user);
 
             $invoices = Invoice::all([

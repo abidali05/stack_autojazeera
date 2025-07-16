@@ -27,13 +27,13 @@
     </style>
     </head>
 
-@php
-    $totalcarads = App\Models\Post::count();
-    $totalbikeads = App\Models\Bike\BikePost::count();
-    $totalusers = App\Models\User::count();
-    $totalshops = App\Models\Shops::count();
+    @php
+        $totalcarads = App\Models\Post::count();
+        $totalbikeads = App\Models\Bike\BikePost::count();
+        $totalusers = App\Models\User::count();
+        $totalshops = App\Models\Shops::count();
 
-@endphp
+    @endphp
 
     <div class="container mt-5">
         <div class="row">
@@ -47,9 +47,9 @@
                             </div>
                             <div class="col-12 text-end">
                                 <p class="m-0 sixteen">Total Car Ads</p>
-                                <p class="eighteens">{{$totalcarads}}</p>
+                                <p class="eighteens">{{ $totalcarads }}</p>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -64,9 +64,9 @@
                             </div>
                             <div class="col-12 text-end">
                                 <p class="m-0 sixteen">Total Bike Ads</p>
-                                <p class="eighteens">{{$totalbikeads}}</p>
+                                <p class="eighteens">{{ $totalbikeads }}</p>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -77,14 +77,14 @@
                         <div class="row p-3" style="position: relative;">
                             <div class="col-3 p-2 text-center "
                                 style="position: absolute; background-color: red; border-radius:5px ;top: -20px;">
-								<i class="bi bi-people-fill fs-3"  style="color: white;"></i>
-                               
+                                <i class="bi bi-people-fill fs-3" style="color: white;"></i>
+
                             </div>
                             <div class="col-12 text-end">
                                 <p class="m-0 sixteen">Total Users</p>
-                                <p class="eighteens">{{$totalusers}}</p>
+                                <p class="eighteens">{{ $totalusers }}</p>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -95,21 +95,21 @@
                         <div class="row p-3" style="position: relative;">
                             <div class="col-3 p-2 text-center "
                                 style="position: absolute; background-color: red; border-radius:5px ;top: -20px;">
-                           
-<i class="bi bi-shop fs-3" style=" color: white;"></i>
+
+                                <i class="bi bi-shop fs-3" style=" color: white;"></i>
                             </div>
                             <div class="col-12 text-end">
                                 <p class="m-0 sixteen">Total Shops</p>
-                                <p class="eighteens">{{$totalshops}}</p>
+                                <p class="eighteens">{{ $totalshops }}</p>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
             </div>
-     
-      
-     
+
+
+
         </div>
     </div>
 @endsection

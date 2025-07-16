@@ -4,76 +4,80 @@
      <style>
          .form-control {
              color: #281F48 !important;
-         }.preview-item img, .preview-item video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+         }
 
-/* Preview Container */
-#previewContainer {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  padding: 10px;
-  border: 2px dashed #ccc;
-  border-radius: 8px;
-  min-height: 120px;
-  background-color: #f9f9f9;
-}
+         .preview-item img,
+         .preview-item video {
+             width: 100%;
+             height: 100%;
+             object-fit: cover;
+         }
 
-/* Each image block */
-.preview-item {
-  position: relative;
-  width: 100px;
-  height: 100px;
-  border: 2px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
-  transition: transform 0.2s ease-in-out;
-  cursor: move;
-  background-color: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
+         /* Preview Container */
+         #previewContainer {
+             display: flex;
+             flex-wrap: wrap;
+             gap: 12px;
+             padding: 10px;
+             border: 2px dashed #ccc;
+             border-radius: 8px;
+             min-height: 120px;
+             background-color: #f9f9f9;
+         }
 
-/* Drag effect */
-.preview-item.dragging {
-  opacity: 0.5;
-  transform: scale(0.95);
-}
+         /* Each image block */
+         .preview-item {
+             position: relative;
+             width: 100px;
+             height: 100px;
+             border: 2px solid #ddd;
+             border-radius: 8px;
+             overflow: hidden;
+             transition: transform 0.2s ease-in-out;
+             cursor: move;
+             background-color: white;
+             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+         }
 
-/* Image styling */
-.preview-item img.draggable-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  pointer-events: none; /* So drag starts from wrapper, not image */
-}
+         /* Drag effect */
+         .preview-item.dragging {
+             opacity: 0.5;
+             transform: scale(0.95);
+         }
 
-/* Close (remove) button */
-.preview-item button {
-  position: absolute;
-  top: 12px;
-  right: 10px;
-  width: 22px;
-  height: 22px;
-  background-color: #FD5631;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 1;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
+         /* Image styling */
+         .preview-item img.draggable-img {
+             width: 100%;
+             height: 100%;
+             object-fit: cover;
+             pointer-events: none;
+             /* So drag starts from wrapper, not image */
+         }
 
-.preview-item button:hover {
-  background-color: #e24724;
-}
+         /* Close (remove) button */
+         .preview-item button {
+             position: absolute;
+             top: 12px;
+             right: 10px;
+             width: 22px;
+             height: 22px;
+             background-color: #FD5631;
+             color: white;
+             border: none;
+             border-radius: 50%;
+             font-size: 14px;
+             font-weight: bold;
+             line-height: 1;
+             padding: 0;
+             display: flex;
+             justify-content: center;
+             align-items: center;
+             cursor: pointer;
+         }
+
+         .preview-item button:hover {
+             background-color: #e24724;
+         }
 
          /* Hide the default radio button */
          .registeredDealer {
@@ -255,7 +259,7 @@
      <!-- back header start -->
      <div class="container mt-5">
          <div class="row align-items-center mb-4">
-         
+
              <div class="col-md-12">
                  <h2 class="sec mb-0 primary-color-custom">Post An Ad</h2>
              </div>
@@ -295,7 +299,8 @@
                          </div>
                          <div class="row align-items-center mb-3">
                              <div class="col-lg-6">
-                                 <label for="vehicleCondition" class="form-label" style="color:white">Vehicle Condition<span class="m-0 fs-5" style="color:#FD5631">*</span></label>
+                                 <label for="vehicleCondition" class="form-label" style="color:white">Vehicle Condition<span
+                                         class="m-0 fs-5" style="color:#FD5631">*</span></label>
                                  <select class="form-select vehicleCondition  validate-field" id="vehicleCondition"
                                      name="condition" required>
                                      <option value="">Any</option>
@@ -362,18 +367,18 @@
                                  <input type="hidden" name="currency" id="currencySelect" value="PKR">
                                  <p class="mb-0">PKR</p>
                                  <!-- <select class="form-select" id="currencySelect" disabled>
-                                                                                                        <option value="PKR" selected>PKR</option>
-                                                                                                        <option value="USD">USD</option>
-                                                                                                        <option value="EUR">EUR</option>
-                                                                                                    </select> -->
+                                                                                                                            <option value="PKR" selected>PKR</option>
+                                                                                                                            <option value="USD">USD</option>
+                                                                                                                            <option value="EUR">EUR</option>
+                                                                                                                        </select> -->
 
                                  @error('currency')
                                      <div class="alert ">{{ $message }}</div>
                                  @enderror
                              </div>
                              <div class="col-8">
-                                 <label for="priceInput" class="form-label">Price <span
-                                         style="color:#FD5631" class="m-0 fs-5">*</span></label>
+                                 <label for="priceInput" class="form-label">Price <span style="color:#FD5631"
+                                         class="m-0 fs-5">*</span></label>
                                  <input type="number" class="form-control formcontrol validate-field" name="price"
                                      id="priceInput" placeholder="Enter price" min="0"
                                      value="{{ old('price') ?? '' }}" style="color:#281F48 !important" required>
@@ -756,27 +761,23 @@
                          @enderror
                      </div>
                      <!-- Step 6: Upload Photos / Videos -->
-                  <div class="upload-area border border-dashed rounded p-4 text-center"
-     id="customDropzone"
-     ondrop="handleDrop(event)"
-     ondragover="event.preventDefault()"
-     ondragleave="event.preventDefault()"
-     style="cursor: pointer;">
-  <i class="bi bi-cloud-arrow-up fs-1 primary-color-custom mb-3"></i>
-  <p class="mb-2">Maximum 30 files (images or videos)</p>
+                     <div class="upload-area border border-dashed rounded p-4 text-center" id="customDropzone"
+                         ondrop="handleDrop(event)" ondragover="event.preventDefault()"
+                         ondragleave="event.preventDefault()" style="cursor: pointer;">
+                         <i class="bi bi-cloud-arrow-up fs-1 primary-color-custom mb-3"></i>
+                         <p class="mb-2">Maximum 30 files (images or videos)</p>
 
-  <input type="file" id="fileUpload" class="d-none" name="filedata[]" multiple
-         accept=".jpg, .jpeg, .png, .mp4, .mov"
-         onchange="handleImgUpload(this.files)">
+                         <input type="file" id="fileUpload" class="d-none" name="filedata[]" multiple
+                             accept=".jpg, .jpeg, .png, .mp4, .mov" onchange="handleImgUpload(this.files)">
 
-  <a class="btn mt-3" style="background-color:#281F48; color:white"
-     onclick="document.getElementById('fileUpload').click();">
-    Select Files
-  </a>
-</div>
+                         <a class="btn mt-3" style="background-color:#281F48; color:white"
+                             onclick="document.getElementById('fileUpload').click();">
+                             Select Files
+                         </a>
+                     </div>
 
-<div id="previewContainer" class="mt-4 d-flex flex-wrap gap-3"></div>
-<div id="uploadError" class="text-danger mt-2"></div>
+                     <div id="previewContainer" class="mt-4 d-flex flex-wrap gap-3"></div>
+                     <div id="uploadError" class="text-danger mt-2"></div>
 
 
                      <div class="mb-3 p-3 rounded borderallpost">
@@ -915,56 +916,11 @@
                              </label>
                              <input type="text" id="streetAddress" name="street_address"
                                  class="form-control formcontrol validate-field" style="color:#281F48 !important"
-                                 placeholder="Enter Address" autocomplete="off" required value="{{ old('street_address') }}"  />
+                                 placeholder="Enter Address" autocomplete="off" required
+                                 value="{{ old('street_address') }}" />
                              <div id="streetAddress-error" class="orange" style="display: none;">Street address is
                                  required.</div>
                          </div>
-
-
-                         <script
-                             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHTfGE9bbvleasezO-T-j1u5UVm6aTnl0&libraries=places&callback=initAutocomplete"
-                             async defer></script>
-
-                         <script>
-                             let selectedPlace = false;
-
-                             function initAutocomplete() {
-                                 const input = document.getElementById("streetAddress");
-                                 const latitudeInput = document.getElementById("latitude");
-                                 const longitudeInput = document.getElementById("longitude");
-
-                                 const autocomplete = new google.maps.places.Autocomplete(input, {
-                                     fields: ["formatted_address", "geometry"],
-                                 });
-
-                                 autocomplete.addListener("place_changed", () => {
-                                     const place = autocomplete.getPlace();
-                                     if (place.geometry) {
-                                         selectedPlace = true;
-                                         input.value = place.formatted_address;
-                                         latitudeInput.value = place.geometry.location.lat();
-                                         longitudeInput.value = place.geometry.location.lng();
-                                     } else {
-                                         selectedPlace = false;
-                                     }
-                                 });
-
-                                 input.addEventListener("blur", () => {
-                                     if (!selectedPlace) {
-                                         input.value = "";
-                                         latitudeInput.value = "";
-                                         longitudeInput.value = "";
-                                     }
-                                 });
-
-                                 input.addEventListener("input", () => {
-                                     selectedPlace = false;
-                                 });
-                             }
-
-                             window.initAutocomplete = initAutocomplete;
-                         </script>
-
 
                          <div class="mb-3 d-none">
                              <label for="map" class="form-label">Display on the map <span
@@ -973,7 +929,7 @@
 
                          <div id="map" class="border rounded mb-3 d-none" style="height: 300px;">
                              <!-- <input type="text" id="location" name="location" class="form-control"
-                                                                                        placeholder=""> -->
+                                                                                                            placeholder=""> -->
                          </div>
                      </div>
                      <!-- Step 9: Contacts -->
@@ -986,8 +942,7 @@
                                          style="color:#FD5631" class="m-0 fs-5">*</span></label>
                                  <input type="text" class="form-control formcontrol validate-field"
                                      style="color:#281F48 !important" name="firstName" id="firstName"
-                                     placeholder="Enter First name"
-                                     value="{{ old('firstName') }}"required>
+                                     placeholder="Enter First name" value="{{ old('firstName') }}"required>
                                  <div id="firstName-error" class="orange" style="display: none;">First Name is required.
                                  </div>
                                  @error('firstName')
@@ -999,7 +954,7 @@
                                          style="color:#FD5631" class="m-0 fs-5">*</span></label>
                                  <input type="text" class="form-control formcontrol validate-field"
                                      style="color:#281F48 !important" name="secondName" id="secondName"
-                                     placeholder="Enter last name" required value="{{old('secondName') }}">
+                                     placeholder="Enter last name" required value="{{ old('secondName') }}">
                                  <div id="secondName-error" class="orange" style="display: none;">Second Name is
                                      required.</div>
 
@@ -1026,7 +981,7 @@
                                  <input type="tel" class="form-control formcontrol" name="number" id="phoneNumber"
                                      placeholder="Enter phone number" style="color:#281F48 !important"
                                      value="{{ old('number') ?? '' }}" required>
-                                
+
                                  @error('number')
                                      <div class="alert ">{{ $message }}</div>
                                  @enderror
@@ -1043,33 +998,33 @@
                              </div>
                          </div>
                          <!-- <div id="socialMediaSection" class="collapse">
-                                                                                                <div class="mb-3">
-                                                                                                    <label for="facebook" name="facebook" class="form-label">Your Facebook Account *</label>
-                                                                                                    <input type="url" class="form-control" name="facebookUrl" id="facebook" placeholder="Enter Facebook URL">
-                                                                                                    @error('facebookUrl')
+                                                                                                                    <div class="mb-3">
+                                                                                                                        <label for="facebook" name="facebook" class="form-label">Your Facebook Account *</label>
+                                                                                                                        <input type="url" class="form-control" name="facebookUrl" id="facebook" placeholder="Enter Facebook URL">
+                                                                                                                        @error('facebookUrl')
         <div class="alert ">{{ $message }}</div>
     @enderror
-                                                                                                </div>
-                                                                                                <div class="mb-3">
-                                                                                                    <label for="linkedin" class="form-label">Your LinkedIn Account *</label>
-                                                                                                    <input type="url" name="linkedin" class="form-control" id="linkedin" placeholder="Eneter LinkedIn URL">
-                                                                                                    @error('linkedin')
+                                                                                                                    </div>
+                                                                                                                    <div class="mb-3">
+                                                                                                                        <label for="linkedin" class="form-label">Your LinkedIn Account *</label>
+                                                                                                                        <input type="url" name="linkedin" class="form-control" id="linkedin" placeholder="Eneter LinkedIn URL">
+                                                                                                                        @error('linkedin')
         <div class="alert ">{{ $message }}</div>
     @enderror
-                                                                                                </div>
-                                                                                                <div class="mb-3">
-                                                                                                    <label for="twitter" class="form-label">Your Twitter Account *</label>
-                                                                                                    <input type="url" name="twitter" class="form-control" id="twitter" placeholder="Twitter URL">
-                                                                                                    @error('twitter')
+                                                                                                                    </div>
+                                                                                                                    <div class="mb-3">
+                                                                                                                        <label for="twitter" class="form-label">Your Twitter Account *</label>
+                                                                                                                        <input type="url" name="twitter" class="form-control" id="twitter" placeholder="Twitter URL">
+                                                                                                                        @error('twitter')
         <div class="alert ">{{ $message }}</div>
     @enderror
-                                                                                                </div>
-                                                                                            </div>
+                                                                                                                    </div>
+                                                                                                                </div>
 
-                                                                                            <button type="button" class="btn btn-link text-white" data-bs-toggle="collapse"
-                                                                                                data-bs-target="#socialMediaSection" aria-expanded="false">
-                                                                                                Show More
-                                                                                            </button> -->
+                                                                                                                <button type="button" class="btn btn-link text-white" data-bs-toggle="collapse"
+                                                                                                                    data-bs-target="#socialMediaSection" aria-expanded="false">
+                                                                                                                    Show More
+                                                                                                                </button> -->
                      </div>
 
                      <div class="mb-3" style="display:flex;justify-content:end">
@@ -1085,9 +1040,6 @@
                          </div>
                      </div>
                  </form>
-                 <!-- Include Google Maps API (use your own API key) -->
-                 <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
-
              </div>
              <div class="col-lg-4">
                  <div class="">
@@ -1307,6 +1259,50 @@
      <!-- jQuery Validation plugin -->
      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/additional-methods.min.js"></script>
+
+     <script
+         src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_maps.key') }}&libraries=places&callback=initAutocomplete"
+         async defer></script>
+
+     <script>
+         let selectedPlace = false;
+
+         function initAutocomplete() {
+             const input = document.getElementById("streetAddress");
+             const latitudeInput = document.getElementById("latitude");
+             const longitudeInput = document.getElementById("longitude");
+
+             const autocomplete = new google.maps.places.Autocomplete(input, {
+                 fields: ["formatted_address", "geometry"],
+             });
+
+             autocomplete.addListener("place_changed", () => {
+                 const place = autocomplete.getPlace();
+                 if (place.geometry) {
+                     selectedPlace = true;
+                     input.value = place.formatted_address;
+                     latitudeInput.value = place.geometry.location.lat();
+                     longitudeInput.value = place.geometry.location.lng();
+                 } else {
+                     selectedPlace = false;
+                 }
+             });
+
+             input.addEventListener("blur", () => {
+                 if (!selectedPlace) {
+                     input.value = "";
+                     latitudeInput.value = "";
+                     longitudeInput.value = "";
+                 }
+             });
+
+             input.addEventListener("input", () => {
+                 selectedPlace = false;
+             });
+         }
+
+         window.initAutocomplete = initAutocomplete;
+     </script>
 
      <script>
          $(document).ready(function() {
@@ -1733,18 +1729,18 @@
          $('#makecompanydata').change(function(e) {
              e.preventDefault();
              var makecompanydatavalue = $(this).find('option:selected').text();
-			
+
              $('#makecompanydatavalue').text(makecompanydatavalue);
-			  $('#vehiclename').text(makecompanydatavalue);
+             $('#vehiclename').text(makecompanydatavalue);
          });
          // handling model 
          $('#model').change(function(e) {
              e.preventDefault();
              //alert('e');
              var modelvalue = $(this).find('option:selected').text();
-			 
+
              $('#modelvalue').text(modelvalue);
-			 modelvalue = $('#makecompanydatavalue').text()  + ' ' + modelvalue;
+             modelvalue = $('#makecompanydatavalue').text() + ' ' + modelvalue;
              $('#vehiclename').text(modelvalue);
          });
          // handling year 
@@ -1894,138 +1890,142 @@
 
 
 
-let fileArray = [];
-const maxFiles = 30;
-const maxSize = 8 * 1024 * 1024; // 8MB
-const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'video/mp4', 'video/quicktime'];
-let draggedItem = null;
+         let fileArray = [];
+         const maxFiles = 30;
+         const maxSize = 8 * 1024 * 1024; // 8MB
+         const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'video/mp4', 'video/quicktime'];
+         let draggedItem = null;
 
-function handleImgUpload(files) {
-  const previewContainer = document.getElementById('previewContainer');
-  const errorDiv = document.getElementById('uploadError');
-  errorDiv.textContent = '';
+         function handleImgUpload(files) {
+             const previewContainer = document.getElementById('previewContainer');
+             const errorDiv = document.getElementById('uploadError');
+             errorDiv.textContent = '';
 
-  let newFiles = Array.from(files).filter(file => {
-    return !fileArray.some(f => f.name === file.name && f.size === file.size);
-  });
+             let newFiles = Array.from(files).filter(file => {
+                 return !fileArray.some(f => f.name === file.name && f.size === file.size);
+             });
 
-  if (fileArray.length + newFiles.length > maxFiles) {
-    errorDiv.textContent = `You can upload a maximum of ${maxFiles} files.`;
-    return;
-  }
+             if (fileArray.length + newFiles.length > maxFiles) {
+                 errorDiv.textContent = `You can upload a maximum of ${maxFiles} files.`;
+                 return;
+             }
 
-  newFiles.forEach(file => {
-    if (!allowedTypes.includes(file.type)) {
-      errorDiv.textContent = `File "${file.name}" is not an allowed format.`;
-      return;
-    }
+             newFiles.forEach(file => {
+                 if (!allowedTypes.includes(file.type)) {
+                     errorDiv.textContent = `File "${file.name}" is not an allowed format.`;
+                     return;
+                 }
 
-    if (file.size > maxSize) {
-      errorDiv.textContent = `File "${file.name}" exceeds 8MB size limit.`;
-      return;
-    }
+                 if (file.size > maxSize) {
+                     errorDiv.textContent = `File "${file.name}" exceeds 8MB size limit.`;
+                     return;
+                 }
 
-    fileArray.push(file);
-    createPreview(file);
-  });
+                 fileArray.push(file);
+                 createPreview(file);
+             });
 
-  updateFileInput();
-}
+             updateFileInput();
+         }
 
-function createPreview(file) {
-  const previewContainer = document.getElementById('previewContainer');
+         function createPreview(file) {
+             const previewContainer = document.getElementById('previewContainer');
 
-  const wrapper = document.createElement('div');
-  wrapper.className = 'preview-item';
-  wrapper.setAttribute('data-filename', file.name);
-  wrapper.setAttribute('data-filesize', file.size);
-  wrapper.setAttribute('draggable', true);
+             const wrapper = document.createElement('div');
+             wrapper.className = 'preview-item';
+             wrapper.setAttribute('data-filename', file.name);
+             wrapper.setAttribute('data-filesize', file.size);
+             wrapper.setAttribute('draggable', true);
 
-  // Drag behavior
-  wrapper.addEventListener('dragstart', (e) => {
-    draggedItem = wrapper;
-    wrapper.style.opacity = '0.5';
-  });
+             // Drag behavior
+             wrapper.addEventListener('dragstart', (e) => {
+                 draggedItem = wrapper;
+                 wrapper.style.opacity = '0.5';
+             });
 
-  wrapper.addEventListener('dragend', (e) => {
-    draggedItem = null;
-    wrapper.style.opacity = '1';
-  });
+             wrapper.addEventListener('dragend', (e) => {
+                 draggedItem = null;
+                 wrapper.style.opacity = '1';
+             });
 
-  wrapper.addEventListener('dragover', (e) => {
-    e.preventDefault();
-  });
+             wrapper.addEventListener('dragover', (e) => {
+                 e.preventDefault();
+             });
 
-  wrapper.addEventListener('drop', (e) => {
-    e.preventDefault();
-    if (draggedItem && draggedItem !== wrapper) {
-      const container = document.getElementById('previewContainer');
-      container.insertBefore(draggedItem, wrapper);
-      reorderFileArray();
-    }
-  });
+             wrapper.addEventListener('drop', (e) => {
+                 e.preventDefault();
+                 if (draggedItem && draggedItem !== wrapper) {
+                     const container = document.getElementById('previewContainer');
+                     container.insertBefore(draggedItem, wrapper);
+                     reorderFileArray();
+                 }
+             });
 
-  let preview;
-  if (file.type.startsWith('image/')) {
-    const img = document.createElement('img');
-    const reader = new FileReader();
-    reader.onload = e => { img.src = e.target.result; };
-    reader.readAsDataURL(file);
-    preview = img;
-  } else {
-    const video = document.createElement('video');
-    video.controls = true;
-    const reader = new FileReader();
-    reader.onload = e => { video.src = e.target.result; };
-    reader.readAsDataURL(file);
-    preview = video;
-  }
+             let preview;
+             if (file.type.startsWith('image/')) {
+                 const img = document.createElement('img');
+                 const reader = new FileReader();
+                 reader.onload = e => {
+                     img.src = e.target.result;
+                 };
+                 reader.readAsDataURL(file);
+                 preview = img;
+             } else {
+                 const video = document.createElement('video');
+                 video.controls = true;
+                 const reader = new FileReader();
+                 reader.onload = e => {
+                     video.src = e.target.result;
+                 };
+                 reader.readAsDataURL(file);
+                 preview = video;
+             }
 
-  const removeBtn = document.createElement('button');
-  removeBtn.innerHTML = '×';
-  removeBtn.type = 'button';
-  removeBtn.className = 'btn btn-sm btn-danger  rounded-circle';
-  removeBtn.style.transform = 'translate(50%, -50%)';
-  removeBtn.onclick = () => {
-    wrapper.remove();
-    fileArray = fileArray.filter(f => !(f.name === file.name && f.size === file.size));
-    updateFileInput();
-  };
+             const removeBtn = document.createElement('button');
+             removeBtn.innerHTML = '×';
+             removeBtn.type = 'button';
+             removeBtn.className = 'btn btn-sm btn-danger  rounded-circle';
+             removeBtn.style.transform = 'translate(50%, -50%)';
+             removeBtn.onclick = () => {
+                 wrapper.remove();
+                 fileArray = fileArray.filter(f => !(f.name === file.name && f.size === file.size));
+                 updateFileInput();
+             };
 
-  wrapper.appendChild(preview);
-  wrapper.appendChild(removeBtn);
-  previewContainer.appendChild(wrapper);
-}
+             wrapper.appendChild(preview);
+             wrapper.appendChild(removeBtn);
+             previewContainer.appendChild(wrapper);
+         }
 
-function handleDrop(event) {
-  event.preventDefault();
-  if (event.dataTransfer.files.length) {
-    handleImgUpload(event.dataTransfer.files);
-  }
-}
+         function handleDrop(event) {
+             event.preventDefault();
+             if (event.dataTransfer.files.length) {
+                 handleImgUpload(event.dataTransfer.files);
+             }
+         }
 
-function updateFileInput() {
-  const fileInput = document.getElementById('fileUpload');
-  const dt = new DataTransfer();
-  fileArray.forEach(file => dt.items.add(file));
-  fileInput.files = dt.files;
-}
+         function updateFileInput() {
+             const fileInput = document.getElementById('fileUpload');
+             const dt = new DataTransfer();
+             fileArray.forEach(file => dt.items.add(file));
+             fileInput.files = dt.files;
+         }
 
-function reorderFileArray() {
-  const container = document.getElementById('previewContainer');
-  const orderedWrappers = container.querySelectorAll('[data-filename]');
-  const newOrder = [];
+         function reorderFileArray() {
+             const container = document.getElementById('previewContainer');
+             const orderedWrappers = container.querySelectorAll('[data-filename]');
+             const newOrder = [];
 
-  orderedWrappers.forEach(wrapper => {
-    const name = wrapper.getAttribute('data-filename');
-    const size = parseInt(wrapper.getAttribute('data-filesize'));
-    const file = fileArray.find(f => f.name === name && f.size === size);
-    if (file) newOrder.push(file);
-  });
+             orderedWrappers.forEach(wrapper => {
+                 const name = wrapper.getAttribute('data-filename');
+                 const size = parseInt(wrapper.getAttribute('data-filesize'));
+                 const file = fileArray.find(f => f.name === name && f.size === size);
+                 if (file) newOrder.push(file);
+             });
 
-  fileArray = newOrder;
-  updateFileInput();
-}
+             fileArray = newOrder;
+             updateFileInput();
+         }
 
 
          // Function to update the file input with current fileArray
@@ -2081,10 +2081,6 @@ function reorderFileArray() {
          });
      </script>
 
-
-
-
-
      <script>
          document.addEventListener("DOMContentLoaded", function() {
              if (navigator.geolocation) {
@@ -2108,16 +2104,12 @@ function reorderFileArray() {
          });
      </script>
 
-
-
-
-
-
      <script>
+         const GOOGLE_MAPS_API_KEY = "{{ config('services.google_maps.key') }}";
          async function getAddressFromCoordinates(lat, lng, callback) {
              try {
                  const response = await fetch(
-                     `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyBHTfGE9bbvleasezO-T-j1u5UVm6aTnl0`
+                     `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${GOOGLE_MAPS_API_KEY}`
                  );
                  const data = await response.json();
 
@@ -2134,14 +2126,5 @@ function reorderFileArray() {
              }
          }
      </script>
-
-
-
-
-
-
-
-
-
 
  @endsection

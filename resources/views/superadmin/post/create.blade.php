@@ -450,8 +450,9 @@
         }
     </style>
 
-  <!-- back header start -->
-<div id="ajaxLoader" style="
+    <!-- back header start -->
+    <div id="ajaxLoader"
+        style="
     display: none;
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -460,14 +461,16 @@
     z-index: 9999;
     animation: fadeIn 0.3s ease-out;
 ">
-    <div style="
+        <div
+            style="
         position: absolute;
         top: 50%; left: 50%;
         transform: translate(-50%, -50%);
         text-align: center;
     ">
-        <!-- Spinner -->
-        <div style="
+            <!-- Spinner -->
+            <div
+                style="
             width: 60px;
             height: 60px;
             border: 4px solid #F40000;
@@ -475,21 +478,25 @@
             border-radius: 50%;
             animation: spin 1s linear infinite;
             margin: 0 auto 20px;
-        "></div>
-        
-        <!-- Loading Text -->
-        <div style="
+        ">
+            </div>
+
+            <!-- Loading Text -->
+            <div
+                style="
             color: #e2e8f0;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             font-size: 16px;
             font-weight: 500;
             letter-spacing: 0.5px;
             opacity: 0.9;
-        ">Loading...</div>
-        
-        <!-- Progress Dots -->
-        <div style="margin-top: 15px;">
-            <span style="
+        ">
+                Loading...</div>
+
+            <!-- Progress Dots -->
+            <div style="margin-top: 15px;">
+                <span
+                    style="
                 display: inline-block;
                 width: 8px;
                 height: 8px;
@@ -498,7 +505,8 @@
                 margin: 0 4px;
                 animation: pulse 1.5s ease-in-out infinite;
             "></span>
-            <span style="
+                <span
+                    style="
                 display: inline-block;
                 width: 8px;
                 height: 8px;
@@ -507,7 +515,8 @@
                 margin: 0 4px;
                 animation: pulse 1.5s ease-in-out 0.3s infinite;
             "></span>
-            <span style="
+                <span
+                    style="
                 display: inline-block;
                 width: 8px;
                 height: 8px;
@@ -516,26 +525,45 @@
                 margin: 0 4px;
                 animation: pulse 1.5s ease-in-out 0.6s infinite;
             "></span>
+            </div>
         </div>
     </div>
-</div>
 
-<style>
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
+    <style>
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
 
-@keyframes pulse {
-    0%, 100% { opacity: 0.4; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.2); }
-}
+            100% {
+                transform: rotate(360deg);
+            }
+        }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-</style>
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.4;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
     <div class="container mt-3">
         <div class="row align-items-center mb-4">
 
@@ -590,7 +618,7 @@
                                 </option>
                             @endforeach
                         </select>
-                        <div id="dealerSelect-error" class="orange" ></div> 
+                        <div id="dealerSelect-error" class="orange"></div>
                         @error('dealer')
                             <div class="alert ">{{ $message }}</div>
                         @enderror
@@ -678,10 +706,10 @@
                                 <input type="hidden" name="currency" id="currencySelect" value="PKR">
                                 <p class="mb-0">PKR</p>
                                 <!-- <select class="form-select" id="currencySelect" disabled>
-                                                                                        <option value="PKR" selected>PKR</option>
-                                                                                        <option value="USD">USD</option>
-                                                                                        <option value="EUR">EUR</option>
-                                                                                    </select> -->
+                                                                                            <option value="PKR" selected>PKR</option>
+                                                                                            <option value="USD">USD</option>
+                                                                                            <option value="EUR">EUR</option>
+                                                                                        </select> -->
                                 @error('currency')
                                     <div class="alert ">{{ $message }}</div>
                                 @enderror
@@ -1237,51 +1265,6 @@
                                 required.</div> --}}
                         </div>
 
-
-                        <script
-                            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHTfGE9bbvleasezO-T-j1u5UVm6aTnl0&libraries=places&callback=initAutocomplete"
-                            async defer></script>
-
-                        <script>
-                            let selectedPlace = false;
-
-                            function initAutocomplete() {
-                                const input = document.getElementById("streetAddress");
-                                const latitudeInput = document.getElementById("latitude");
-                                const longitudeInput = document.getElementById("longitude");
-
-                                const autocomplete = new google.maps.places.Autocomplete(input, {
-                                    fields: ["formatted_address", "geometry"],
-                                });
-
-                                autocomplete.addListener("place_changed", () => {
-                                    const place = autocomplete.getPlace();
-                                    if (place.geometry) {
-                                        selectedPlace = true;
-                                        input.value = place.formatted_address;
-                                        latitudeInput.value = place.geometry.location.lat();
-                                        longitudeInput.value = place.geometry.location.lng();
-                                    } else {
-                                        selectedPlace = false;
-                                    }
-                                });
-
-                                input.addEventListener("blur", () => {
-                                    if (!selectedPlace) {
-                                        input.value = "";
-                                        latitudeInput.value = "";
-                                        longitudeInput.value = "";
-                                    }
-                                });
-
-                                input.addEventListener("input", () => {
-                                    selectedPlace = false;
-                                });
-                            }
-
-                            window.initAutocomplete = initAutocomplete;
-                        </script>
-
                         <div class="mb-3 d-none">
                             <label for="map" class="form-label">Display on the map <span
                                     style="color:#FD5631">*</span></label>
@@ -1289,7 +1272,7 @@
 
                         <div id="map" class="border rounded mb-3 d-none" style="height: 300px;">
                             <!-- <input type="text" id="location" name="location" class="form-control"
-                                                                        placeholder=""> -->
+                                                                            placeholder=""> -->
                         </div>
                     </div>
                     <!-- Step 9: Contacts -->
@@ -1355,33 +1338,33 @@
                             </div> --}}
                         </div>
                         <!-- <div id="socialMediaSection" class="collapse">
-                                                                                <div class="mb-3">
-                                                                                    <label for="facebook" name="facebook" class="form-label">Your Facebook Account *</label>
-                                                                                    <input type="url" class="form-control" name="facebookUrl" id="facebook" placeholder="Enter Facebook URL">
-                                                                                    @error('facebookUrl')
+                                                                                    <div class="mb-3">
+                                                                                        <label for="facebook" name="facebook" class="form-label">Your Facebook Account *</label>
+                                                                                        <input type="url" class="form-control" name="facebookUrl" id="facebook" placeholder="Enter Facebook URL">
+                                                                                        @error('facebookUrl')
         <div class="alert ">{{ $message }}</div>
     @enderror
-                                                                                </div>
-                                                                                <div class="mb-3">
-                                                                                    <label for="linkedin" class="form-label">Your LinkedIn Account *</label>
-                                                                                    <input type="url" name="linkedin" class="form-control" id="linkedin" placeholder="Eneter LinkedIn URL">
-                                                                                    @error('linkedin')
+                                                                                    </div>
+                                                                                    <div class="mb-3">
+                                                                                        <label for="linkedin" class="form-label">Your LinkedIn Account *</label>
+                                                                                        <input type="url" name="linkedin" class="form-control" id="linkedin" placeholder="Eneter LinkedIn URL">
+                                                                                        @error('linkedin')
         <div class="alert ">{{ $message }}</div>
     @enderror
-                                                                                </div>
-                                                                                <div class="mb-3">
-                                                                                    <label for="twitter" class="form-label">Your Twitter Account *</label>
-                                                                                    <input type="url" name="twitter" class="form-control" id="twitter" placeholder="Twitter URL">
-                                                                                    @error('twitter')
+                                                                                    </div>
+                                                                                    <div class="mb-3">
+                                                                                        <label for="twitter" class="form-label">Your Twitter Account *</label>
+                                                                                        <input type="url" name="twitter" class="form-control" id="twitter" placeholder="Twitter URL">
+                                                                                        @error('twitter')
         <div class="alert ">{{ $message }}</div>
     @enderror
+                                                                                    </div>
                                                                                 </div>
-                                                                            </div>
 
-                                                                            <button type="button" class="btn btn-link text-white" data-bs-toggle="collapse"
-                                                                                data-bs-target="#socialMediaSection" aria-expanded="false">
-                                                                                Show More
-                                                                            </button> -->
+                                                                                <button type="button" class="btn btn-link text-white" data-bs-toggle="collapse"
+                                                                                    data-bs-target="#socialMediaSection" aria-expanded="false">
+                                                                                    Show More
+                                                                                </button> -->
                     </div>
 
                     <div style="display:flex;justify-content:end">
@@ -1457,7 +1440,7 @@
                                 <span><strong>Manufacturing Year</strong></span>
                                 <span id="manufacturing_year_value">-----</span>
                             </div>
-                         
+
                             <div class="col-md-12 d-flex justify-content-between">
                                 <span><strong>Make</strong></span>
                                 <span id="makecompanydatavalue">-----</span>
@@ -1613,7 +1596,49 @@
         </div>
     </div>
 
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_maps.key') }}&libraries=places&callback=initAutocomplete"
+        async defer></script>
 
+    <script>
+        let selectedPlace = false;
+
+        function initAutocomplete() {
+            const input = document.getElementById("streetAddress");
+            const latitudeInput = document.getElementById("latitude");
+            const longitudeInput = document.getElementById("longitude");
+
+            const autocomplete = new google.maps.places.Autocomplete(input, {
+                fields: ["formatted_address", "geometry"],
+            });
+
+            autocomplete.addListener("place_changed", () => {
+                const place = autocomplete.getPlace();
+                if (place.geometry) {
+                    selectedPlace = true;
+                    input.value = place.formatted_address;
+                    latitudeInput.value = place.geometry.location.lat();
+                    longitudeInput.value = place.geometry.location.lng();
+                } else {
+                    selectedPlace = false;
+                }
+            });
+
+            input.addEventListener("blur", () => {
+                if (!selectedPlace) {
+                    input.value = "";
+                    latitudeInput.value = "";
+                    longitudeInput.value = "";
+                }
+            });
+
+            input.addEventListener("input", () => {
+                selectedPlace = false;
+            });
+        }
+
+        window.initAutocomplete = initAutocomplete;
+    </script>
     <!-- JavaScript for Step Navigation -->
     <script>
         let firstImageSet = false;
@@ -2077,14 +2102,14 @@
             e.preventDefault();
             var makecompanydatavalue = $(this).find('option:selected').text();
             $('#makecompanydatavalue').text(makecompanydatavalue);
-			 $('#vehiclename').text(makecompanydatavalue);
+            $('#vehiclename').text(makecompanydatavalue);
         });
         // handling model 
         $('#model').change(function(e) {
             e.preventDefault();
             var modelvalue = $(this).find('option:selected').text();
             $('#modelvalue').text(modelvalue);
-            $('#vehiclename').text($('#makecompanydatavalue').text()+' '+modelvalue);
+            $('#vehiclename').text($('#makecompanydatavalue').text() + ' ' + modelvalue);
         });
         // handling year 
         $('#years').change(function(e) {
@@ -2682,16 +2707,12 @@
         });
     </script>
 
-
-
-
-
-
     <script>
+        const GOOGLE_MAPS_API_KEY = "{{ config('services.google_maps.key') }}";
         async function getAddressFromCoordinates(lat, lng, callback) {
             try {
                 const response = await fetch(
-                    `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyBHTfGE9bbvleasezO-T-j1u5UVm6aTnl0`
+                    `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${GOOGLE_MAPS_API_KEY}`
                 );
                 const data = await response.json();
 
@@ -2710,35 +2731,36 @@
     </script>
 
 
-<script>
-    $('#dealerSelect').change(function() {
-        var dealerId = $(this).val();
-        if (dealerId) {
-			   $('#ajaxLoader').css('display','block');
-            $.ajax({
-                url: '/superadmin/check-dealer-posting-status',
-                type: 'POST',
-                data: { dealer_id: dealerId },
-                dataType: 'json',
-                success: function(data) {
-					  $('#ajaxLoader').fadeOut();
-                    if(data.success){
- $('#dealerSelect-error').text('');
-                    }
-                    else{
-                        $('#dealerSelect-error').text(data.message);
-                        $('#form_submit_btn_fake').prop('disabled', true);
-                    }
+    <script>
+        $('#dealerSelect').change(function() {
+            var dealerId = $(this).val();
+            if (dealerId) {
+                $('#ajaxLoader').css('display', 'block');
+                $.ajax({
+                    url: '/superadmin/check-dealer-posting-status',
+                    type: 'POST',
+                    data: {
+                        dealer_id: dealerId
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        $('#ajaxLoader').fadeOut();
+                        if (data.success) {
+                            $('#dealerSelect-error').text('');
+                        } else {
+                            $('#dealerSelect-error').text(data.message);
+                            $('#form_submit_btn_fake').prop('disabled', true);
+                        }
 
-                },
-                error: function(xhr, status, error) {
-					$('#ajaxLoader').fadeOut();
-                    console.error('Error fetching dealer info:', error);
-                }
-            });
-        } 
-    });
-</script>
+                    },
+                    error: function(xhr, status, error) {
+                        $('#ajaxLoader').fadeOut();
+                        console.error('Error fetching dealer info:', error);
+                    }
+                });
+            }
+        });
+    </script>
 
 
 

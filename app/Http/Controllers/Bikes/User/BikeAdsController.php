@@ -40,8 +40,6 @@ class BikeAdsController extends Controller
     public function index(Request $request)
     {
         if ($request->search) {
-
-
             $query = BikePost::query();
 
             $search = $request->search;
@@ -75,15 +73,18 @@ class BikeAdsController extends Controller
             $posts = $query->with(['features', 'location', 'contacts', 'media', 'dealer'])->get();
         } elseif ($request->post_id) {
             $user = Auth::user();
-            if ($user->role == 2) {
-                $posts = BikePost::with(['features', 'location', 'contacts', 'media', 'dealer'])->where(['id' => $request->post_id, 'dealer_id' => $user->dealer_id, 'employee_id' => $user->id])->paginate(25);
+            // if ($user->role == 2) {
+            //     $posts = BikePost::with(['features', 'location', 'contacts', 'media', 'dealer'])->where(['id' => $request->post_id, 'dealer_id' => $user->dealer_id, 'employee_id' => $user->id])->paginate(25);
+                        if ($user->role == 2) {
+                $posts = BikePost::with(['features', 'location', 'contacts', 'media', 'dealer'])->where(['id' => $request->post_id, 'dealer_id' => $user->dealer_id])->paginate(25);
             } else {
                 $posts = BikePost::with(['features', 'location', 'contacts', 'media', 'dealer'])->where(['id' => $request->post_id, 'dealer_id' => $user->id])->paginate(25);
             }
         } else {
             $user = Auth::user();
             if ($user->role == 2) {
-                $posts = BikePost::with(['features', 'location', 'contacts', 'media', 'dealer'])->where(['dealer_id' => $user->dealer_id, 'employee_id' => $user->id])->paginate(25);
+                // $posts = BikePost::with(['features', 'location', 'contacts', 'media', 'dealer'])->where(['dealer_id' => $user->dealer_id, 'employee_id' => $user->id])->paginate(25);
+                                $posts = BikePost::with(['features', 'location', 'contacts', 'media', 'dealer'])->where(['dealer_id' => $user->dealer_id])->paginate(25);
             } else {
                 $posts = BikePost::with(['features', 'location', 'contacts', 'media', 'dealer'])->where(['dealer_id' => $user->id])->paginate(25);
             }

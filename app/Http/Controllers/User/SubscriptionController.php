@@ -134,7 +134,6 @@ class SubscriptionController extends Controller
         $plans['private_seller_plans'] = $privateSellers;
         $plans['service_plans'] = $services;
 
-        // dd($plans);
         $provinces = Province::all();
         return view('user.subscription.index', compact('plans', 'provinces'));
     }

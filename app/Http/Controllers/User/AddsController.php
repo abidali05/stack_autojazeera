@@ -45,8 +45,6 @@ class AddsController extends Controller
     public function index(Request $request)
     {
         if ($request->search) {
-
-
             $query = Post::query();
 
             $search = $request->search;
@@ -96,16 +94,18 @@ class AddsController extends Controller
             $user = Auth::user();
             // dd($user);
             if ($user->role == 2) {
-                $posts = Post::with(['feature', 'document' => function ($q) {
+                // $posts = Post::with(['feature', 'document' => function ($q) {
+                //     $q->orderBy('position', 'asc');
+                // }, 'location', 'contact'])->orderby('id', 'desc')->where(['dealer_id' => $user->dealer_id, 'employee_id' => $user->id])->paginate(25);
+                                $posts = Post::with(['feature', 'document' => function ($q) {
                     $q->orderBy('position', 'asc');
-                }, 'location', 'contact'])->orderby('id', 'desc')->where(['dealer_id' => $user->dealer_id, 'employee_id' => $user->id])->paginate(25);
+                }, 'location', 'contact'])->orderby('id', 'desc')->where(['dealer_id' => $user->dealer_id])->paginate(25);
             } else {
                 $posts = Post::with(['feature', 'document' => function ($q) {
                     $q->orderBy('position', 'asc');
                 }, 'location', 'contact'])->orderby('id', 'desc')->where('dealer_id', Auth::user()->id)->paginate(25);
             }
         }
-        //dd($posts);
         return view('user.post.index', compact('posts'));
     }
 

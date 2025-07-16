@@ -363,12 +363,19 @@
                 </span>
             </a>
             @if (!Auth::user()->shop_package)
-                <a class="nav-link {{ Request::is('service-quotes') ? 'active' : '' }}"
+                {{-- <a class="nav-link {{ Request::is('service-quotes') ? 'active' : '' }}"
                     href="{{ url('service-quotes') }}">
                     <span class="d-flex align-items-center">
                         <img src="{{ asset('web/images/submitedfrms.svg') }}"
                             style="height:20px !important ; width:20px !important; " class="me-2"
                             alt="...">Service
+                    </span>
+                </a> --}}
+                 <a href="javascript:void(0);" id="serviceQuotesBtn" class="nav-link">
+                    <span class="d-flex align-items-center">
+                        <img src="{{ asset('web/images/submitedfrms.svg') }}" class="me-2"
+                            style="height:20px; width:20px;" alt="...">
+                        Service
                     </span>
                 </a>
             @endif

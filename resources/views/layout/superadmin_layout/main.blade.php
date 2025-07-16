@@ -22,58 +22,312 @@
     <link rel="icon" href="{{ asset('web/images/Jazeera App logo.png') }}" type="image/x-icon" sizes="512x512">
 
     <style>
-        .subscription-card { background-color: #2e2b45; border: 1px solid #6c6783; border-radius: 10px; padding: 20px; color: #fff; }
-        .card-header i { margin-right: 8px; color: #fd5631; font-size: 18px; }
-        .card-body { margin-bottom: 15px; }
-        .plan-name { font-size: 22px; color: #fd5631; margin: 0; }
-        .plan-name .price { font-weight: bold; }
-        .plan-name .duration { font-size: 14px; color: #a09fb5; }
-        .next-billing { font-size: 12px; color: #a09fb5; margin-top: 8px; }
-        .card-footer { display: flex; gap: 10px; justify-content: space-between; align-items: center; }
-        .change-plan { background-color: #fd5631; color: #fff; transition: background-color 0.3s; }
-        .change-plan:hover { background-color: #e65028; }
-        .cancel-plan { background-color: #2e2b45; color: #fff; border: 1px solid #6c6783; transition: background-color 0.3s, border-color 0.3s; }
-        .cancel-plan:hover { background-color: #393656; border-color: #fd5631; }
-        .credit-card { background-color: #2e2b45; border: 1px solid #6c6783; border-radius: 10px; width: 300px; padding: 20px; margin-bottom: 20px; position: relative; }
-        .card-logo { font-size: 24px; font-weight: bold; color: #fff; }
-        .card-actions i { font-size: 18px; margin-left: 10px; cursor: pointer; }
-        .edit-icon { color: #fd5631; }
-        .delete-icon { color: #e74c3c; }
-        .card-number { font-size: 20px; letter-spacing: 3px; margin-bottom: 15px; }
-        .last-digits { font-weight: bold; }
-        .card-details { display: flex; justify-content: space-between; font-size: 14px; }
-        .card-details span { font-size: 12px; color: #a09fb5; }
-        .card-holder p, .card-expiry p { margin: 0; font-size: 14px; font-weight: bold; }
-        .add-card-btn { background-color: #fd5631; color: #fff; border: none; border-radius: 10px; padding: 10px 20px; font-size: 16px; cursor: pointer; transition: background-color 0.3s; }
-        .add-card-btn i { font-size: 18px; }
-        .add-card-btn:hover { background-color: #e65028; }
-        tbody, td, tfoot, th, thead, tr { border: none !important; }
-        .modal-content { background-color: #1F1B2D !important; }
-        .col-form-label { font-family: Maven Pro; font-size: 17.6px; font-weight: 400; line-height: 20.68px; text-align: left; color: #281F48; }
-        th, td { vertical-align: middle; white-space: nowrap; }
-        .color-box { width: 30px; height: 30px; border-radius: 8px; border: 2px solid #333; }
-        .btn-close { --bs-btn-close-color: #000; --bs-btn-close-bg: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e); --bs-btn-close-opacity: 0.5; --bs-btn-close-hover-opacity: 0.75; --bs-btn-close-focus-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); --bs-btn-close-focus-opacity: 1; --bs-btn-close-disabled-opacity: 0.25; --bs-btn-close-white-filter: invert(1) grayscale(100%) brightness(200%); box-sizing: content-box; width: 1em; height: 1em; padding: .25em .25em; color: var(--bs-btn-close-color); background: #ffffff var(--bs-btn-close-bg) center / 1em auto no-repeat !important; border: 0; border-radius: .375rem; opacity: 1 !important; }
-        a { text-decoration: none; }
-        .step-header { font-weight: bold; margin-bottom: 20px; color: #FD5631; }
-        .step-content { display: none; }
-        .step-content.active { display: block; }
-        .char-counter { text-align: right; font-size: 0.85rem; color: #6c757d; }
-        .carousel-control-next-icon { background-image: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e); }
-        #goToTop, #goToBottom { position: fixed; right: 20px; padding: 10px 15px; font-size: 20px; background-color: #F40000 !important; color: white; border: none; border-radius: 50%; cursor: pointer; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); z-index: 1000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
-        #goToTop { bottom: 80px; }
-        #goToBottom { bottom: 20px; }
-        #goToTop.show, #goToBottom.show { opacity: 1; visibility: visible; }
-        #goToTop:hover, #goToBottom:hover { background-color: #F40000 !important; }
-        .alert { padding: 0.75rem 1.25rem; border-radius: 0.25rem; margin-bottom: 1rem; }
-        .alert-success { background-color: #d4edda; border: 1px solid #c3e6cb; color: #155724; } /* Green text for success */
-        .alert-danger { background-color: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; } /* Darker red text for danger */
-        .alert-dismissible .btn-close { background-color: #fff; }
+        .subscription-card {
+            background-color: #2e2b45;
+            border: 1px solid #6c6783;
+            border-radius: 10px;
+            padding: 20px;
+            color: #fff;
+        }
+
+        .card-header i {
+            margin-right: 8px;
+            color: #fd5631;
+            font-size: 18px;
+        }
+
+        .card-body {
+            margin-bottom: 15px;
+        }
+
+        .plan-name {
+            font-size: 22px;
+            color: #fd5631;
+            margin: 0;
+        }
+
+        .plan-name .price {
+            font-weight: bold;
+        }
+
+        .plan-name .duration {
+            font-size: 14px;
+            color: #a09fb5;
+        }
+
+        .next-billing {
+            font-size: 12px;
+            color: #a09fb5;
+            margin-top: 8px;
+        }
+
+        .card-footer {
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .change-plan {
+            background-color: #fd5631;
+            color: #fff;
+            transition: background-color 0.3s;
+        }
+
+        .change-plan:hover {
+            background-color: #e65028;
+        }
+
+        .cancel-plan {
+            background-color: #2e2b45;
+            color: #fff;
+            border: 1px solid #6c6783;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .cancel-plan:hover {
+            background-color: #393656;
+            border-color: #fd5631;
+        }
+
+        .credit-card {
+            background-color: #2e2b45;
+            border: 1px solid #6c6783;
+            border-radius: 10px;
+            width: 300px;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .card-logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .card-actions i {
+            font-size: 18px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        .edit-icon {
+            color: #fd5631;
+        }
+
+        .delete-icon {
+            color: #e74c3c;
+        }
+
+        .card-number {
+            font-size: 20px;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+        }
+
+        .last-digits {
+            font-weight: bold;
+        }
+
+        .card-details {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+
+        .card-details span {
+            font-size: 12px;
+            color: #a09fb5;
+        }
+
+        .card-holder p,
+        .card-expiry p {
+            margin: 0;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .add-card-btn {
+            background-color: #fd5631;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .add-card-btn i {
+            font-size: 18px;
+        }
+
+        .add-card-btn:hover {
+            background-color: #e65028;
+        }
+
+        tbody,
+        td,
+        tfoot,
+        th,
+        thead,
+        tr {
+            border: none !important;
+        }
+
+        .modal-content {
+            background-color: #1F1B2D !important;
+        }
+
+        .col-form-label {
+            font-family: Maven Pro;
+            font-size: 17.6px;
+            font-weight: 400;
+            line-height: 20.68px;
+            text-align: left;
+            color: #281F48;
+        }
+
+        th,
+        td {
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+
+        .color-box {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            border: 2px solid #333;
+        }
+
+        .btn-close {
+            --bs-btn-close-color: #000;
+            --bs-btn-close-bg: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e);
+            --bs-btn-close-opacity: 0.5;
+            --bs-btn-close-hover-opacity: 0.75;
+            --bs-btn-close-focus-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+            --bs-btn-close-focus-opacity: 1;
+            --bs-btn-close-disabled-opacity: 0.25;
+            --bs-btn-close-white-filter: invert(1) grayscale(100%) brightness(200%);
+            box-sizing: content-box;
+            width: 1em;
+            height: 1em;
+            padding: .25em .25em;
+            color: var(--bs-btn-close-color);
+            background: #ffffff var(--bs-btn-close-bg) center / 1em auto no-repeat !important;
+            border: 0;
+            border-radius: .375rem;
+            opacity: 1 !important;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .step-header {
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #FD5631;
+        }
+
+        .step-content {
+            display: none;
+        }
+
+        .step-content.active {
+            display: block;
+        }
+
+        .char-counter {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #6c757d;
+        }
+
+        .carousel-control-next-icon {
+            background-image: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e);
+        }
+
+        #goToTop,
+        #goToBottom {
+            position: fixed;
+            right: 20px;
+            padding: 10px 15px;
+            font-size: 20px;
+            background-color: #F40000 !important;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        #goToTop {
+            bottom: 80px;
+        }
+
+        #goToBottom {
+            bottom: 20px;
+        }
+
+        #goToTop.show,
+        #goToBottom.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #goToTop:hover,
+        #goToBottom:hover {
+            background-color: #F40000 !important;
+        }
+
+        .alert {
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
+        /* Green text for success */
+        .alert-danger {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+
+        /* Darker red text for danger */
+        .alert-dismissible .btn-close {
+            background-color: #fff;
+        }
     </style>
 
     <style>
-        .select2-container--default .select2-selection--single { padding: 10px 20px; border: 1px solid #ddd; border-radius: 5px; height: 40px; }
-        .select2-container--default .select2-search--dropdown .select2-search__field { padding: 10px 20px; font-size: 14px; }
-        .select2-container--default .select2-results__option { padding: 10px 20px; }
+        .select2-container--default .select2-selection--single {
+            padding: 10px 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            height: 40px;
+        }
+
+        .select2-container--default .select2-search--dropdown .select2-search__field {
+            padding: 10px 20px;
+            font-size: 14px;
+        }
+
+        .select2-container--default .select2-results__option {
+            padding: 10px 20px;
+        }
     </style>
 </head>
 
@@ -162,12 +416,12 @@
 
     <script>
         setTimeout(() => {
-        const alert = document.querySelector('.alert');
-        if (alert) {
-            alert.classList.remove('show');
-            alert.classList.add('hide');
-        }
-    }, 3000);
+            const alert = document.querySelector('.alert');
+            if (alert) {
+                alert.classList.remove('show');
+                alert.classList.add('hide');
+            }
+        }, 3000);
 
         const goToTopButton = document.getElementById('goToTop');
         const goToBottomButton = document.getElementById('goToBottom');
@@ -652,31 +906,68 @@
             const files = event.dataTransfer.files;
             handleFiles(files);
         }
+
         document.getElementById('province').addEventListener('change', function() {
-            var provinceId = this.value;
+            const provinceId = this.value;
+            const citySelect = document.getElementById('city');
 
-            var citySelect = document.getElementById('city');
-
-            // Clear the current city options
-            citySelect.innerHTML = '<option value="" selected>Any</option>';
+            // Clear the city options
+            citySelect.innerHTML = '<option value="" disabled selected>Any</option>';
 
             // Fetch cities based on selected province
             if (provinceId) {
                 fetch(`/getCities/${provinceId}`)
                     .then(response => response.json())
                     .then(data => {
+                        let autoSelectCityId = null;
+
                         data.forEach(city => {
-                            var option = document.createElement('option');
+                            const option = document.createElement('option');
                             option.value = city.id;
                             option.textContent = city.name;
                             citySelect.appendChild(option);
 
+                            // Auto-select Islamabad city if province is Islamabad
+                            if (provinceId == '5' && city.id == 85) {
+                                autoSelectCityId = city.id;
+                            }
                         });
 
+                        if (autoSelectCityId) {
+                            citySelect.value = autoSelectCityId;
+                        }
                     })
                     .catch(error => console.error('Error fetching cities:', error));
             }
         });
+
+        // document.getElementById('province').addEventListener('change', function() {
+        //     var provinceId = this.value;
+
+        //     var citySelect = document.getElementById('city');
+
+        //     // Clear the current city options
+        //     citySelect.innerHTML = '<option value="" selected>Any</option>';
+
+        //     // Fetch cities based on selected province
+        //     if (provinceId) {
+        //         fetch(`/getCities/${provinceId}`)
+        //             .then(response => response.json())
+        //             .then(data => {
+        //                 data.forEach(city => {
+        //                     var option = document.createElement('option');
+        //                     option.value = city.id;
+        //                     option.textContent = city.name;
+        //                     citySelect.appendChild(option);
+
+        //                 });
+
+        //             })
+        //             .catch(error => console.error('Error fetching cities:', error));
+        //     }
+        // });
+
+
         document.getElementById('makecompanydata').addEventListener('change', function() {
             var makeId = this.value;
             //alert(makeId);
@@ -1340,6 +1631,19 @@
 
         // setActiveClass(navbarLinks);
         // setActiveClass(sidebarLinks);
+    </script>
+    <script>
+        function allowOnlyLetters(input) {
+            input.value = input.value.replace(/[^a-zA-Z\s]/g, '');
+        }
+
+        document.getElementById('firstName').addEventListener('input', function() {
+            allowOnlyLetters(this);
+        });
+
+        document.getElementById('secondName').addEventListener('input', function() {
+            allowOnlyLetters(this);
+        });
     </script>
 </body>
 

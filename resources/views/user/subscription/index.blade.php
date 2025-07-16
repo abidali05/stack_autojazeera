@@ -297,7 +297,7 @@
                                                     {{ $ads_plan->name }}</p>
                                                 <p class="headsured keep-color" style="font-size:28px !important">
                                                     @if ($ads_plan->price)
-                                                        Rs {{ $ads_plan->price }} <span
+                                                        Rs {{ number_format($ads_plan->price) }} <span
                                                             class="{{ $ads_plan->metadata->is_recomended == '1' ? 'textclas' : 'textclrbluee' }}">/month</span>
                                                     @else
                                                         Free Forever
@@ -367,7 +367,7 @@
                                                     {{ $ads_plan->name }}</p>
                                                 <p class="headsured keep-color" style="font-size:28px !important">
                                                     @if ($ads_plan->price)
-                                                        Rs {{ $ads_plan->price }} <span
+                                                        Rs {{ number_format($ads_plan->price) }} <span
                                                             class="{{ $ads_plan->metadata->is_recomended == '1' ? 'textclas' : 'textclrbluee' }}">/month</span>
                                                     @else
                                                         Free Forever
@@ -432,7 +432,7 @@
                                                     {{ $plan->name }}</p>
                                                 <p class="headsured keep-color" style="font-size:28px !important">
                                                     @if ($plan->price)
-                                                        Rs {{ $plan->price }} <span
+                                                        Rs {{ number_format($plan->price) }} <span
                                                             class="{{ $plan->metadata->is_recomended == '1' ? 'textclas' : 'textclrbluee' }}">/month</span>
                                                     @else
                                                         Free Forever
