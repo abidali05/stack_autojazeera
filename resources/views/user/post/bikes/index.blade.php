@@ -613,7 +613,7 @@
                 `;
                     }
                     // Regular text search for Make and Model
-                    else if (['Make', 'Model'].includes(title)) {
+                    else if (['Dealer Name','Make', 'Model'].includes(title)) {
                         searchHtml =
                             `<input type="text" placeholder="Search ${title}" class="bike-column-search"/>`;
                     }

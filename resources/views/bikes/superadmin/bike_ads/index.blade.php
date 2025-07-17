@@ -630,7 +630,7 @@
                     var searchHtml = '';
 
                     // Only create inputs for specific columns
-                    if (['Make', 'Model', 'Year'].includes(title)) {
+                    if (['Dealer Name','Make', 'Model', 'Year'].includes(title)) {
                         searchHtml = '<input type="text" placeholder="Search ' + title +
                             '" class="bike-column-search"/>';
                     }

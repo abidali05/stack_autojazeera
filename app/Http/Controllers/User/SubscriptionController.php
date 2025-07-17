@@ -350,7 +350,7 @@ class SubscriptionController extends Controller
         $fcm_tokens = [$user->fcm_token];
         if (!empty($fcm_tokens)) {
 
-          //  SendFcmNotification::sendPriceAlertNotification($fcm_tokens, ['title' => 'Plan Cancelled', 'body' => 'You have successfully cancelled your plan']);
+            //  SendFcmNotification::sendPriceAlertNotification($fcm_tokens, ['title' => 'Plan Cancelled', 'body' => 'You have successfully cancelled your plan']);
 
 
 
@@ -407,10 +407,10 @@ class SubscriptionController extends Controller
         $body = view('emails.cancel_subscription');
         sendMail($user->name, $user->email, 'Auto Jazeera', 'Plan Cancelled Successfully', $body);
 
-         $fcm_tokens = [$user->fcm_token];
-         if (!empty($fcm_tokens)) {
+        $fcm_tokens = [$user->fcm_token];
+        if (!empty($fcm_tokens)) {
 
-         //   SendFcmNotification::sendPriceAlertNotification($fcm_tokens, ['title' => 'Plan Cancelled', 'body' => 'You have successfully cancelled your plan']);
+            //   SendFcmNotification::sendPriceAlertNotification($fcm_tokens, ['title' => 'Plan Cancelled', 'body' => 'You have successfully cancelled your plan']);
 
 
 

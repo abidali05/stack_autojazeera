@@ -28,7 +28,6 @@ use App\Http\Controllers\Bikes\User\BikeController;
 use App\Http\Controllers\User\ShopReviewController;
 use App\Http\Controllers\ForgetPasswordControllerWeb;
 use App\Http\Controllers\User\SubscriptionController;
-use App\Http\Controllers\Api\ForgetPasswordController;
 use App\Http\Controllers\Bikes\User\BikeAdsController;
 use App\Http\Controllers\Bikes\User\WishlistController;
 use App\Http\Controllers\superadmin\AdsPlansController;
@@ -45,8 +44,6 @@ use App\Http\Controllers\superadmin\SuperadminAddsController;
 use App\Http\Controllers\superadmin\SuperadminMakeController;
 use App\Http\Controllers\superadmin\SuperadminUserController;
 use App\Http\Controllers\superadmin\SuperadminColorController;
-use App\Http\Controllers\superadmin\SuperadminModelController;
-
 
 use App\Http\Controllers\Bikes\superadmin\BikeModelsController;
 use App\Http\Controllers\superadmin\SuperadminDealerController;
@@ -178,12 +175,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/chat/{id}', [ChatController::class, 'showChatPage'])->name('chat.show');
 
     Route::post('/send-message', [ChatController::class, 'sendMessasge'])->name('sendMessage');
-
-
-
-
-
-
 
     // =============================================================User Shop Module=========================================================
 

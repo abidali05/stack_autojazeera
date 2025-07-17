@@ -315,14 +315,14 @@
                         History
                     </span>
                 </a>
-                <a class="nav-link {{ Request::is('service-subscription-history') ? 'active' : '' }}"
+                {{-- <a class="nav-link {{ Request::is('service-subscription-history') ? 'active' : '' }}"
                     href="{{ url('subscription-history') }}">
                     <span class="d-flex align-items-center">
                         <img src="{{ asset('web/images/subhistory.svg') }}"
                             style="height:20px !important ; width:20px !important;" class="me-2" alt="...">
                         History
                     </span>
-                </a>
+                </a> --}}
             </div>
         @endif
 
