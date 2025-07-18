@@ -39,6 +39,7 @@ class BikeAdsController extends Controller
 {
     public function index(Request $request)
     {
+        
         if ($request->search) {
             $query = BikePost::query();
 
