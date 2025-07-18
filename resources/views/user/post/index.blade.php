@@ -90,11 +90,24 @@
 
         }
 
-        .ads-column-search {
-            width: 100px;
-            font-size: 12px;
-        }
-
+   .ads-column-search {
+    width: 90px;
+    font-size: 10px;
+    border: 1px solid #D9D9D9;
+    border-radius: 2px;
+    padding: 2px;
+}
+.table>:not(caption)>*>* {
+    padding: 0rem .5rem;
+    color: var(--bs-table-color-state, var(--bs-table-color-type, var(--bs-table-color)));
+    background-color: var(--bs-table-bg);
+    border-bottom-width: var(--bs-border-width);
+    box-shadow: inset 0 0 0 9999px var(--bs-table-bg-state, var(--bs-table-bg-type, var(--bs-table-accent-bg)));
+}
+table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
+   padding: 0px 10px 5px 10px; 
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
         /* For inline search version */
     </style>
     <div class="container mt-3">

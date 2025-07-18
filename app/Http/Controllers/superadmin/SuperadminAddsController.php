@@ -62,6 +62,7 @@ class SuperadminAddsController extends Controller
      */
     public function index(Request $request)
     {
+        
         $users = User::where('role', 1)->get();
         if ($request->car_search) {
 
