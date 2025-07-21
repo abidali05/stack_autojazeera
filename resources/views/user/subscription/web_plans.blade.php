@@ -101,10 +101,8 @@
         }
 
         .topclas {
-            top: -20px;
-            right: 0px;
-            position: absolute;
-            color: white !important;
+          
+            color: black !important;
             background-color: #271F41;
             border-radius: 12px;
         }
@@ -116,7 +114,7 @@
             border-radius: 10px;
             padding: 5px;
             color: white;
-            right: 0px;
+            right: 95px;
         }
 
         .textclas {
@@ -232,7 +230,7 @@
                 <div class="col-11 rounded-5" style="background-color: #E6F1FE;">
 
                     <div class="row" id="private_seller_packages">
-                        <div class="col-12 p-3" style="position: relative">
+                        <div class="col-12 p-3" >
                             <p class="m-0 twentysix">Private Seller Plans</p>
                             <div class="row ">
                                 @foreach ($plans['private_seller_plans'] as $ads_plan)
@@ -354,14 +352,14 @@
             <div class="row d-flex justify-content-center py-5">
                 <div class="col-11 rounded-5" style="background-color: #E6F1FE;">
                     <div class="row">
-                        <div class="col-12 p-3 " style="position: relative">
+                        <div class="col-12 p-3 " >
                             <p class="m-0 twentysix">Service Plans</p>
                             <div class="row">
                                 @foreach ($plans['service_plans'] as $plan)
                                     <div class="col-md-3 col-12 p-3 {{ $plan->metadata->is_recomended == '1' ? 'topclas' : '' }}"
                                         id="card1-1">
                                         <div class="row">
-                                            <div class="col-12 ">
+                                           <div class="col-12 d-flex flex-column " style="height: 640px">
                                                 <p
                                                     class="m-0 premiumbadge  {{ $plan->metadata->is_recomended == '1' ? '' : 'd-none' }}">
                                                     Recommended</p>
@@ -387,17 +385,17 @@
                                                         </div>
                                                     </div>
                                                 @endforeach
-
-
+</div>
+    <div class="mt-auto">
                                                 <button id="btn1-1" class="btnsub" style="background-color: #F40000;"
                                                     onclick="window.location='/login'">
                                                     Choose plan
                                                 </button>
-                                            </div>
+                                            </div> 
                                         </div>
                                     </div>
                                 @endforeach
-
+</div>
                             </div>
                         </div>
                     </div>
