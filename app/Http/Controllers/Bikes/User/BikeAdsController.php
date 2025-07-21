@@ -691,6 +691,7 @@ $dealer = User::find($dealerId);
         $post->delete();
         return redirect()->route('bike_ads.index')->with('success', 'Bike ad deleted successfully.');
     }
+    
     public function bikedetail($id)
     {
         $post = BikePost::with(['features', 'location', 'contacts', 'media', 'dealer'])->where('id', $id)->first();

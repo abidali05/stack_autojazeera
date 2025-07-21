@@ -6,48 +6,53 @@
             font-family: 'Maven Pro', sans-serif !important;
         }
 
- #toast-container > .toast {
-    color: white !important;
-	 background-color:green;
-}
+        #toast-container>.toast {
+            color: white !important;
+            background-color: green;
+        }
 
         .ddd {
             background-color: #F0F3F6;
         }
 
-  
 
-           .carousel-control-prev,
-    .carousel-control-next {
-        width: 40px;
-        /* Adjust size */
-        height: 40px;
-        background-color: #281F48 !important;
-        /* Dark background */
-        border-radius: 50%;
-        /* Circular shape */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 1;
-        /* Full visibility */
-        position: absolute;
-        top: 50%;
-        /* Center vertically */
-        transform: translateY(-50%);
-        /* Adjust vertical alignment */
-        z-index: 10;
-    }
-		.carousel-control-next-icon, .carousel-control-prev-icon {
-    background-color: #281F48 !important;
-    border-radius: 50%;
-}
-  .carousel-control-prev {
-    left: -20px !important;
-}
-.carousel-control-next {
-    right: -20px !important;
-}
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 40px;
+            /* Adjust size */
+            height: 40px;
+            background-color: #281F48 !important;
+            /* Dark background */
+            border-radius: 50%;
+            /* Circular shape */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            /* Full visibility */
+            position: absolute;
+            top: 50%;
+            /* Center vertically */
+            transform: translateY(-50%);
+            /* Adjust vertical alignment */
+            z-index: 10;
+        }
+
+        .carousel-control-next-icon,
+        .carousel-control-prev-icon {
+            background-color: #281F48 !important;
+            border-radius: 50%;
+        }
+
+        .carousel-control-prev {
+            left: -20px !important;
+        }
+
+        .carousel-control-next {
+            right: -20px !important;
+        }
+
         .toggle-switch {
             position: relative;
             display: inline-block;
@@ -198,17 +203,17 @@
         .height {
             height: 400px !important;
         }
-        
-    .featureicn {
-   
-        background: #BF0000;
-        color: white;
-        font-size: 12px;
-        font-weight: 500;
-        border-radius: 5px;
-        padding: 5px 10px;
-        margin-left: 10px
-    }
+
+        .featureicn {
+
+            background: #BF0000;
+            color: white;
+            font-size: 12px;
+            font-weight: 500;
+            border-radius: 5px;
+            padding: 5px 10px;
+            margin-left: 10px
+        }
     </style>
     <div class="container  pt-4">
         <div class="breadcrumb-nav mb-3 " style="color: #281F48;">
@@ -311,8 +316,8 @@
                                             style="width: 4%; left: 10px; top: 50%; transform: translateY(-50%); position: absolute;">
                                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                         </button>
-                                        <button class="carousel-control-next" type="button"
-                                            data-bs-target="#imageCarousel" data-bs-slide="next"
+                                        <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel"
+                                            data-bs-slide="next"
                                             style="width: 4%; right: 10px; top: 50%; transform: translateY(-50%); position: absolute;">
                                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                         </button>
@@ -355,14 +360,16 @@
                         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg modal-dialog-centered">
                             <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
-                                <div class="modal-header " style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
-                                    <h2 class="modal-title"><strong>Book an Appointment</strong>  </h2>
+                                <div class="modal-header "
+                                    style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                                    <h2 class="modal-title"><strong>Book an Appointment</strong> </h2>
                                     <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
-                                    <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
+                                    <button type="button" class="btn-close"
+                                        style="background-color: #D9D9D9 !important; color: #FD5631;"
+                                        data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <div class="modal-body "  style="background-color: #F0F3F6; color: #FD5631;">
-                                  
+                                <div class="modal-body " style="background-color: #F0F3F6; color: #FD5631;">
+
                                     <form id="book_bike_appointment_form" method="post"
                                         action="{{ route('bike_ads.book_appointment') }}">
                                         @csrf
@@ -562,12 +569,11 @@
                     <div class="col-8 d-flex align-items-center">
                         <button class="btn custom-btn-3 text-capitalize"
                             style="background-color: {{ $post->condition == 'used' ? '#0EB617 !important;' : '#4581F9 !important;' }}#4581F9 !important; color:white;">{{ $post->condition }}</button>
-                                @if ($post->is_featured == 1)
-                                                        <span class="featureicn">
-                                                            <img src="{{ asset('web/bikes/images/Star 7.svg') }}"
-                                                                class="img-fluid">
-                                                            Featured</span>
-                                                    @endif
+                        @if ($post->is_featured == 1)
+                            <span class="featureicn">
+                                <img src="{{ asset('web/bikes/images/Star 7.svg') }}" class="img-fluid">
+                                Featured</span>
+                        @endif
                     </div>
                     @php
                         $price_alert = App\Models\Bike\BikePriceAlert::where([
@@ -667,25 +673,24 @@
                                     <i class="bi bi-whatsapp me-1"></i> WhatsApp
                                 </a>
                                 <!-- Share Button -->
-                                <button class="btn custom-btn-nav me-1 py-2"
-                                    onclick="shareLink()">
+                                <button class="btn custom-btn-nav me-1 py-2" onclick="shareLink()">
                                     <i class="bi bi-share me-1"></i> Share
                                 </button>
                                 <!-- SMS Button -->
                                 @auth
-								<button onclick="createOrOpenChat({{ $post->id }}, {{ $post->dealer_id }})"
-                                    class="btn custom-btn-nav py-2 {{ $post->dealer->number ? '' : 'd-none' }}">
-                                    <i class="bi bi-chat-dots me-1"></i> Chat
-                                </button>
-								@endauth
-								
-								@guest
-								<a href="{{url('login')}}" 
-                                    class="btn custom-btn-nav py-2 {{ $post->dealer->number ? '' : 'd-none' }}">
-                                    <i class="bi bi-chat-dots me-1"></i> Chat
-                                </a>
-								
-								@endguest
+                                    <button onclick="createOrOpenChat({{ $post->id }}, {{ $post->dealer_id }})"
+                                        class="btn custom-btn-nav py-2 {{ $post->dealer->number ? '' : 'd-none' }}">
+                                        <i class="bi bi-chat-dots me-1"></i> Chat
+                                    </button>
+                                @endauth
+
+                                @guest
+                                    <a href="{{ url('login') }}"
+                                        class="btn custom-btn-nav py-2 {{ $post->dealer->number ? '' : 'd-none' }}">
+                                        <i class="bi bi-chat-dots me-1"></i> Chat
+                                    </a>
+
+                                @endguest
                             </div>
 
                         </div>
@@ -733,8 +738,8 @@
                             <div class="mb-3">
                                 <label for="phoneNfv" class="form-label"
                                     style="color:#281F48 !important"><strong>Message</strong></label>
-                                <textarea class="form-control formcontrol" style="    line-height: 1.2 !important;" id="message" name="message" rows="4" placeholder=""
-                                    maxlength="1000" required></textarea>
+                                <textarea class="form-control formcontrol" style="    line-height: 1.2 !important;" id="message" name="message"
+                                    rows="4" placeholder="" maxlength="1000" required></textarea>
                             </div>
                             <button type="submit" class="btn custom-btn-nav rounded px-5">Send
                                 Message</button>
@@ -868,17 +873,20 @@
                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
-                        <div class="modal-header"  style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                        <div class="modal-header"
+                            style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                             <h5 class="modal-title" id="wishlistresponseLabel"><strong> Wishlist </strong></h5>
-                            <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;"
-                                data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close"
+                                style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                         </div>
-                        <div class="modal-body text-center "  style="background-color: #F0F3F6; color: #FD5631;"  id="wishlistresponseBody">
+                        <div class="modal-body text-center " style="background-color: #F0F3F6; color: #FD5631;"
+                            id="wishlistresponseBody">
                             <p style="color:#281F48"> {{ session('wishlistresponse') }}</p>
                         </div>
                         <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                            <button type="button"
-                               class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                            <button type="button" class="btn btn-light px-4 py-2 "
+                                style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
                                 data-bs-dismiss="modal" onclick="location.reload();">Close</button>
                         </div>
                     </div>
@@ -904,18 +912,22 @@
                 aria-labelledby="request_more_info_responseLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
-                        <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
-                            <h5 class="modal-title" id="request_more_info_responseLabel"> <strong> Request More Information Response</strong>
+                        <div class="modal-header"
+                            style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                            <h5 class="modal-title" id="request_more_info_responseLabel"> <strong> Request More
+                                    Information Response</strong>
                             </h5>
-                            <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;"
-                                data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close"
+                                style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                         </div>
-                        <div class="modal-body text-center " id="request_more_info_responseBody"  style="background-color: #F0F3F6; color: #FD5631;">
+                        <div class="modal-body text-center " id="request_more_info_responseBody"
+                            style="background-color: #F0F3F6; color: #FD5631;">
                             <p style="color: #281F48"> {{ session('request_more_info_response') }}</p>
                         </div>
                         <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                            <button type="button"
-                                class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                            <button type="button" class="btn btn-light px-4 py-2 "
+                                style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
                                 data-bs-dismiss="modal" onclick="location.reload();">Close</button>
                         </div>
                     </div>
@@ -941,18 +953,22 @@
                 aria-labelledby="book_appointment_responseLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
-                        <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
-                            <h5 class="modal-title" id="book_appointment_responseLabel"><strong> Request More Information Response</strong>
+                        <div class="modal-header"
+                            style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                            <h5 class="modal-title" id="book_appointment_responseLabel"><strong> Request More Information
+                                    Response</strong>
                             </h5>
-                            <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;"
-                                data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close"
+                                style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                         </div>
-                        <div class="modal-body text-center " id="book_appointment_responseBody" style="background-color: #F0F3F6; color: #FD5631;">
+                        <div class="modal-body text-center " id="book_appointment_responseBody"
+                            style="background-color: #F0F3F6; color: #FD5631;">
                             <p style="color: #281F48"> {{ session('book_appointment_response') }}</p>
                         </div>
                         <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                            <button type="button"
-                                class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                            <button type="button" class="btn btn-light px-4 py-2 "
+                                style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
                                 data-bs-dismiss="modal" onclick="location.reload();">Close</button>
                         </div>
                     </div>
@@ -1092,19 +1108,19 @@
             }
         }
     </script>
-		
-		<script>
-function shareLink() {
-    if (navigator.share) {
-        navigator.share({
-            title: document.title,
-            text: 'Check this out!',
-            url: window.location.href
-        }).catch((error) => console.log('Error sharing', error));
-    } else {
-        navigator.clipboard.writeText(window.location.href);
-        alert('Link copied!');
-    }
-}
-</script>
+
+    <script>
+        function shareLink() {
+            if (navigator.share) {
+                navigator.share({
+                    title: document.title,
+                    text: 'Check this out!',
+                    url: window.location.href
+                }).catch((error) => console.log('Error sharing', error));
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                alert('Link copied!');
+            }
+        }
+    </script>
 @endsection

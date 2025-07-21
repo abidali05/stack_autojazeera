@@ -12,7 +12,6 @@ class WishlistController extends Controller
     
     public function add_to_wishlist($postid)
     {
-
         $wishlist = BikeWishlist::where('post_id', $postid)->where('user_id', Auth::id())->first();
         if (!$wishlist) {
             $wishlist = new BikeWishlist();

@@ -42,6 +42,7 @@ use App\Http\Controllers\Bikes\superadmin\BikeMakeController;
 use App\Http\Controllers\Bikes\User\BikePricealertController;
 use App\Http\Controllers\superadmin\SuperadminAddsController;
 use App\Http\Controllers\superadmin\SuperadminMakeController;
+use App\Http\Controllers\superadmin\SuperadminModelController;
 use App\Http\Controllers\superadmin\SuperadminUserController;
 use App\Http\Controllers\superadmin\SuperadminColorController;
 
@@ -201,6 +202,7 @@ Route::middleware('auth')->group(function () {
     Route::post('create-service-chat', [ServiceChatController::class, 'createChat'])->name('service.chat.create');
     Route::get('service-chats', [ServiceChatController::class, 'index'])->name('service.chat.index');
 });
+
 Route::get('/getBikeModels/{modelId}', [BikeController::class, 'get_model'])->name('getBikeModels');
 
 Route::post('/search', [SuperadminAddsController::class, 'carlist'])->name('search');
@@ -254,6 +256,7 @@ Route::group(['prefix' => 'superadmin', 'as' => 'superadmin.'], function () {
         Route::resource('feature', SuperadminFeatureController::class);
         Route::resource('color', SuperadminColorController::class);
         Route::resource('make', SuperadminMakeController::class);
+        Route::resource('model', SuperadminModelController::class);
         Route::get('make-export', [SuperadminMakeController::class, 'export'])->name('make-export');
         Route::post('make-import', [SuperadminMakeController::class, 'import'])->name('make-import');
         Route::resource('bodytype', SuperadminBodyTypeController::class);
