@@ -267,14 +267,14 @@
                         <div class="modal fade" id="previewmodal{{ $review->id }}" data-bs-backdrop="static"
                             data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
                             aria-hidden="true">
-                            <div class="modal-dialog  modal-xl">
-                                <div class="modal-content">
-                                    <div class="modal-header" style="border:none !important">
+                            <div class="modal-dialog  modal-xl modal-dialog-centered">
+                                <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
+                                    <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                                         <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body" style="background-color: #F0F3F6; color: #FD5631;">
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-12 col-md-12 col-lg-12">
@@ -304,14 +304,14 @@
 
 
                          <div class="modal fade" id="deleteServiceCategoryModal{{ $review->id }}" tabindex="-1" aria-labelledby="addDealerModalLabel" aria-hidden="true">
-                            <div class="modal-dialog ">
-                                <div class="modal-content" style="background-color:#F0F3F6 !important; color:#281F48 !important;">
-                                    <div class="modal-header border-0">
-                                        <h5 class="modal-title" id="editDealerModalLabel">Delete</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
+                                    <div class="modal-header border-0" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                                        <h5 class="modal-title" id="editDealerModalLabel"><strong>Delete </strong></h5>
+                                        <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                 
-                                    <div class="modal-body" >
+                                    <div class="modal-body text-center" style="background-color: #F0F3F6; color: #FD5631;">
                                      <h4 style="color:#281F48 !important;">Are you sure to delete this review? </h4>
                                             <div class="row mb-3">
                                                 <form action="{{ route('superadmin.delete_shop_review', $review->id) }}" method="post">
@@ -327,9 +327,9 @@
                                      
                                    
                                     </div>
-                                    <div class="modal-footer border-0">
-                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                                        <button type="submit" class="btn  custom-btn-nav rounded">Delete</button>
+                                    <div class="modal-footer justify-content-center border-0 p-0 pb-3">
+                                        <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-light px-4 py-2 " style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Delete</button>
                                     </div>
                                     </form>
                                 </div>
@@ -448,19 +448,19 @@
 
         <div class="modal fade" id="shopresponse" tabindex="-1" aria-labelledby="shopresponseLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
+                <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
                     <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="shopresponseLabel">Shops</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                        <h5 class="modal-title" id="shopresponseLabel"><strong> Shops</strong></h5>
+                        <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <!-- Modal body -->
-                    <div class="modal-body">
+                    <div class="modal-body" style="background-color: #F0F3F6; color: #FD5631;">
                         <p>{{ session('shopresponse') }}</p>
                     </div>
                     <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <div class="modal-footer justify-content-center border-0 p-0 pb-3">
+                        <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>

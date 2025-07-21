@@ -276,14 +276,14 @@
                         <div class="modal fade" id="previewmodal{{ $shop->id }}" data-bs-backdrop="static"
                             data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
                             aria-hidden="true">
-                            <div class="modal-dialog  modal-xl">
-                                <div class="modal-content">
-                                    <div class="modal-header" style="border:none !important">
+                            <div class="modal-dialog modal-dialog-centered modal-xl">
+                                <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
+                                    <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                                         <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body" style="background-color: #F0F3F6; color: #FD5631;">
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-12 col-md-12 col-lg-12">
@@ -467,20 +467,20 @@
                         <div class="modal fade" id="statusModal{{ $shop->id }}" data-bs-backdrop="static"
                             data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
                             aria-hidden="true">
-                            <div class="modal-dialog  ">
-                                <div class="modal-content">
-                                    <div class="modal-header" style="border:none !important">
+                            <div class="modal-dialog  modal-dialog-centered ">
+                                <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
+                                    <div class="modal-header"  style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                                         <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body" style="background-color: #F0F3F6; color: #FD5631;">
                                         <form action="{{ route('superadmin.update_shop_status') }}" method="POST">
                                             @csrf
                                             <input type="hidden" name="id" value="{{ $shop->id }}">
                                             <div class="mb-3">
                                                 <label for="status{{ $shop->id }}" class="form-label">Status</label>
-                                                <select class="form-select" name="status"
+                                                <select class="form-select" name="status" style="background-color:white ; color:#281F48"
                                                     id="status{{ $shop->id }}">
                                                     <option value="1" {{ $shop->status == '1' ? 'selected' : '' }}>
                                                         Approved</option>
@@ -500,10 +500,10 @@
                                                     placeholder="Enter reason for rejection" {{ $shop->status != '2' ? 'disabled' : '' }}>{{ $shop->rejection_reason }}</textarea>
                                             </div>
 
-                                            <div class="mb-3 text-end">
-                                                <button type="button" class="btn btn-secondary"
+                                            <div class="modal-footer justify-content-center border-0 p-0 pb-3">
+                                                <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
                                                     data-bs-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                                <button type="submit" class="btn btn-light px-4 py-2 " style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Save changes</button>
                                             </div>
                                         </form>
 
@@ -543,19 +543,19 @@
         <div class="modal fade" id="shopresponse" tabindex="-1" aria-labelledby="shopresponseLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
+                <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
                     <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="shopresponseLabel">Shops</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                        <h5 class="modal-title" id="shopresponseLabel"><strong> Shops</strong></h5>
+                        <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <!-- Modal body -->
-                    <div class="modal-body">
+                    <div class="modal-body" style="background-color: #F0F3F6; color: #FD5631;">
                         <p>{{ session('shopresponse') }}</p>
                     </div>
                     <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <div class="modal-footer justify-content-center border-0 p-0 pb-3">
+                        <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>

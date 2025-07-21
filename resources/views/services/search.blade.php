@@ -351,7 +351,7 @@
             background-position: center;
             background-repeat: no-repeat;
             height: 150px;
-            width: 99%;
+            width: 100% !important;
         }
 
         .imgbak {
@@ -1035,7 +1035,7 @@
             padding: 5px 10px;
             margin-top: 30px;
             margin-left: 60px;
-        }
+        }
 
     </style>
     {{-- step form css end --}}
