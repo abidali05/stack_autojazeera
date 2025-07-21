@@ -1,31 +1,32 @@
+<!-- No changes made, file is resolved and up-to-date -->
 <style>
-	.ankere{
-	text-decoration:none;
-	}
-	.divborder {
+    .ankere{
+    text-decoration:none;
+    }
+    .divborder {
     border: 1px solid #BFBEC34D;
     background-color: #281F48;
 }
-	.ab {
-		font-size:16px !important;
-	    color: white;
-		font-weight:500;
-	}
-	.footertag a {
+    .ab {
+        font-size:16px !important;
+        color: white;
+        font-weight:500;
+    }
+    .footertag a {
 
     color: #B4B3B8; /* Set text color */
-		
+        
 }
-	.footertag {
+    .footertag {
     list-style: none; /* removes bullets */
     padding-left: 0; /* removes extra space on left */
 }
-	.footerl {
+    .footerl {
     font-size: 16px;
     font-weight: 500;
     color: #B4B3B8;
 }
-	.firstpp {
+    .firstpp {
     color: #B4B3B8;
     font-size: 14px;
     font-weight: 500;
@@ -37,12 +38,12 @@
     align-items: stretch;
     width: 100%;
 }
-	.custom-input-group {
+    .custom-input-group {
     background-color: #281F48;
     border: 1px solid #4b6179;
     border-radius: 8px;
 }
-	.input-group-text {
+    .input-group-text {
     display: flex;
     align-items: center;
     padding: .375rem .75rem;
@@ -56,24 +57,24 @@
     border: var(--bs-border-width) solid var(--bs-border-color);
     border-radius: var(--bs-border-radius);
 }
-	.custom-input-group input {
+    .custom-input-group input {
     background-color: transparent;
     border: none;
     color: #bfc7d5;
 }
-	.custom-input-group .input-group-text {
+    .custom-input-group .input-group-text {
     background-color: transparent;
     border: none;
 }
-	.form-control {
+    .form-control {
     border-right: 0;
     border-left: 0;
     padding: 10px;
     font-size: 16px;
     color: #281f48 !important;
-		background-color:#281F48 !important;
+        background-color:#281F48 !important;
 }
-	.form-control::placeholder {
+    .form-control::placeholder {
     color: #bfc7d5  !important;
 }
 </style>
@@ -109,7 +110,7 @@
                         </li>
                     </ul>
                 </div>
-				   <div class="col-xxl-2 col-lg-2 col-md-3 col-sm-4 col-6">
+                   <div class="col-xxl-2 col-lg-2 col-md-3 col-sm-4 col-6">
                     <h3 class="ab">Cars By City</h3>
                     <ul class="footertag p-0">
                         <li>
@@ -301,7 +302,7 @@
                     </ul>
                 </div>
              
-				 <div class="col-xxl-4  col-lg-4 col-md-4 col-sm-8 col-8">
+                 <div class="col-xxl-4  col-lg-4 col-md-4 col-sm-8 col-8">
                     <h3 class="ab">Subscribe to our newsletter</h3>
                     <p class="firstpp"></p>
 
@@ -327,19 +328,19 @@
                         <li><a href="">Auto detailing</a></li>
                         <li><a href="">Car wash</a></li>
                         <li><a href="">Body work</a></li>
-						<li><a href="">Oil Change</a></li>
-						<li><a href="">Tow</a></li>
+                        <li><a href="">Oil Change</a></li>
+                        <li><a href="">Tow</a></li>
                     </ul>
                 </div>
-				    <div class="col-xxl-2 col-md-2 col-sm-4 col-6">
+                    <div class="col-xxl-2 col-md-2 col-sm-4 col-6">
                     <h3 class="ab">Auto Services By City</h3>
                     <ul class="footertag p-0">
                         <li><a href="">Islamabad</a></li>
                         <li><a href="">Rawalpindi</a></li>
                         <li><a href="">Peshawar</a></li>
                         <li><a href="">Karachi</a></li>
-						<li><a href="">Quetta</a></li>
-						<li><a href="">Multan</a></li>
+                        <li><a href="">Quetta</a></li>
+                        <li><a href="">Multan</a></li>
                     </ul>
                 </div>
                 <div class="col-xxl-2 d-none col-lg-2 col-md-2 col-sm-4 col-6">
@@ -398,7 +399,7 @@
                         <li><a href="{{ route('contact') }}" target="_blank"
                                 class=" nav_custom_form_btns text-decoration-none" style="color:#B4B3B8">Contact
                                 Us</a></li>
-						     <li><a href="{{ route('subscription_plan') }}" target="_blank"
+                             <li><a href="{{ route('subscription_plan') }}" target="_blank"
                                 class=" nav_custom_form_btns text-decoration-none" style="color:#B4B3B8">Advertise
                                 </a></li>
 
@@ -413,7 +414,7 @@
                         <p class="ankere" style="color:#B4B3B8">© 2025 AutoJazeera, All Rights Reserved.</p>
                     </div>
                     <div class="col-3 ms-auto copyright">
-						<p><span class="me-3"><a class="ankere" style="color:#B4B3B8" target="_blank" href="{{ route('term_condition') }}">Terms of use</a></span> <a class="ankere" style="color:#B4B3B8" target="_blank" href="{{ route('privacy_policy') }}">Privacy policy</a> </p>
+                        <p><span class="me-3"><a class="ankere" style="color:#B4B3B8" target="_blank" href="{{ route('term_condition') }}">Terms of use</a></span> <a class="ankere" style="color:#B4B3B8" target="_blank" href="{{ route('privacy_policy') }}">Privacy policy</a> </p>
                     </div>
                 </div>
             </div>
