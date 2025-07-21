@@ -615,7 +615,7 @@
                                             $formattedMileage = $mileage;
                                         }
                                     @endphp
-                                    {{ $formattedMileage }} miles
+                                    {{ $formattedMileage }} KM
                                 </p>
                             </div>
                             <div class="col-auto">
