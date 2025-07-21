@@ -197,7 +197,7 @@
                         <tr>
 
                             <td>
-                                <a class=" me-2" title="Edit" data-bs-toggle="modal"
+                                <a class=" me-2" style="text-decoration: none;" title="Edit" data-bs-toggle="modal"
                                     data-bs-target="#editDealeuserrModal{{ $user->id }}">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>

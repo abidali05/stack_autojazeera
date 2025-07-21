@@ -755,104 +755,87 @@
                         </span></div>
                     <div class="col-4">
                 
-                            <nav class="d-flex justify-content-end align-items-center">
-                                <!-- Page Info -->
+                       <nav class="d-flex justify-content-end align-items-center">
+    <ul class="pagination" style="display: flex; list-style: none; gap: 5px; padding: 0; margin: 0; justify-content: center;">
 
+        {{-- Previous Page --}}
+        @if ($models->onFirstPage())
+            <li style="display: inline-block;">
+                <span style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; opacity: 0.5;">&laquo;</span>
+            </li>
+        @else
+            @if (request()->isMethod('post'))
+                <li style="display: inline-block;">
+                    <form method="POST" action="{{ url()->current() }}">
+                        @csrf
+                        <input type="hidden" name="page" value="{{ $models->currentPage() - 1 }}">
+                        <button type="submit" style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&laquo;</button>
+                    </form>
+                </li>
+            @else
+                <li style="display: inline-block;">
+                    <a href="{{ $models->previousPageUrl() }}" style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; text-decoration: none;">&laquo;</a>
+                </li>
+            @endif
+        @endif
 
-                                <!-- Pagination -->
-                                <ul class="pagination"
-                                    style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
+        {{-- Page Links --}}
+        @foreach ($models->links()->elements as $element)
+            @if (is_string($element))
+                <li style="display: inline-block;">
+                    <span style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000;">{{ $element }}</span>
+                </li>
+            @endif
 
-                                    {{-- Previous Page Button --}}
-                                    @if ($bikebodytypes->onFirstPage())
-                                        <li style="display: inline-block;">
-                                            <span
-                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</span>
-                                        </li>
-                                    @else
-                                        @if (request()->isMethod('post'))
-                                            <li style="display: inline-block;">
-                                                <form method="POST" action="{{ url()->current() }}">
-                                                    @csrf
-                                                    <input type="hidden" name="page"
-                                                        value="{{ $bikebodytypes->currentPage() - 1 }}">
-                                                    <button type="submit"
-                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&laquo;</button>
-                                                </form>
-                                            </li>
-                                        @else
-                                            <li style="display: inline-block;">
-                                                <a href="{{ $bikebodytypes->previousPageUrl() }}"
-                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</a>
-                                            </li>
-                                        @endif
-                                    @endif
+            @if (is_array($element))
+                @foreach ($element as $page => $url)
+                    @if ($page == $models->currentPage())
+                        <li style="display: inline-block;">
+                            <span style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #281F48; color: #fff;">{{ $page }}</span>
+                        </li>
+                    @else
+                        @if (request()->isMethod('post'))
+                            <li style="display: inline-block;">
+                                <form method="POST" action="{{ url()->current() }}">
+                                    @csrf
+                                    <input type="hidden" name="page" value="{{ $page }}">
+                                    <button type="submit" style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">{{ $page }}</button>
+                                </form>
+                            </li>
+                        @else
+                            <li style="display: inline-block;">
+                                <a href="{{ $url }}" style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; text-decoration: none;">{{ $page }}</a>
+                            </li>
+                        @endif
+                    @endif
+                @endforeach
+            @endif
+        @endforeach
 
-                                    {{-- Pagination Links --}}
-                                    @foreach ($bikebodytypes->links()->elements as $element)
-                                        @if (is_string($element))
-                                            <li style="display: inline-block;">
-                                                <span
-                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $element }}</span>
-                                            </li>
-                                        @endif
+        {{-- Next Page --}}
+        @if ($models->hasMorePages())
+            @if (request()->isMethod('post'))
+                <li style="display: inline-block;">
+                    <form method="POST" action="{{ url()->current() }}">
+                        @csrf
+                        <input type="hidden" name="page" value="{{ $models->currentPage() + 1 }}">
+                        <button type="submit" style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&raquo;</button>
+                    </form>
+                </li>
+            @else
+                <li style="display: inline-block;">
+                    <a href="{{ $models->nextPageUrl() }}" style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; text-decoration: none;">&raquo;</a>
+                </li>
+            @endif
+        @else
+            <li style="display: inline-block;">
+                <span style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; opacity: 0.5;">&raquo;</span>
+            </li>
+        @endif
 
-                                        @if (is_array($element))
-                                            @foreach ($element as $page => $url)
-                                                @if ($page == $bikebodytypes->currentPage())
-                                                    <li style="display: inline-block;">
-                                                        <span
-                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #281F48; color: #fff;">{{ $page }}</span>
-                                                    </li>
-                                                @else
-                                                    @if (request()->isMethod('post'))
-                                                        <li style="display: inline-block;">
-                                                            <form method="POST" action="{{ url()->current() }}">
-                                                                @csrf
-                                                                <input type="hidden" name="page"
-                                                                    value="{{ $page }}">
-                                                                <button type="submit"
-                                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">{{ $page }}</button>
-                                                            </form>
-                                                        </li>
-                                                    @else
-                                                        <li style="display: inline-block;">
-                                                            <a href="{{ $url }}"
-                                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $page }}</a>
-                                                        </li>
-                                                    @endif
-                                                @endif
-                                            @endforeach
-                                        @endif
-                                    @endforeach
+    </ul>
+</nav>
 
-                                    {{-- Next Page Button --}}
-                                    @if ($bikebodytypes->hasMorePages())
-                                        @if (request()->isMethod('post'))
-                                            <li style="display: inline-block;">
-                                                <form method="POST" action="{{ url()->current() }}">
-                                                    @csrf
-                                                    <input type="hidden" name="page"
-                                                        value="{{ $bikebodytypes->currentPage() + 1 }}">
-                                                    <button type="submit"
-                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&raquo;</button>
-                                                </form>
-                                            </li>
-                                        @else
-                                            <li style="display: inline-block;">
-                                                <a href="{{ $bikebodytypes->nextPageUrl() }}"
-                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</a>
-                                            </li>
-                                        @endif
-                                    @else
-                                        <li style="display: inline-block;">
-                                            <span
-                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</span>
-                                        </li>
-                                    @endif
-                                </ul>
-
-                            </nav>
                    
                     </div>
                 </div>
