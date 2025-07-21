@@ -1,6 +1,17 @@
 @extends('layout.panel_layout.main')
 @section('content')
     <style>
+div.dt-container .dt-length, div.dt-container .dt-search, div.dt-container .dt-info, div.dt-container .dt-processing, div.dt-container .dt-paging {
+    color: inherit;
+    display: flex
+;
+    justify-content: end;
+    padding: 5px 0px;
+    font-size: 14px;
+    font-weight: 600;
+    align-items: center;
+}
+
         .form-select {
             max-width: 100%;
         }
@@ -736,11 +747,10 @@
                 var table = $(this).DataTable({
                     paging: true,
                     pageLength: 25,
-                    lengthChange: true,
-                    info: true,
+                    lengthChange: false,
                     searching: true,
                     ordering: true,
-                    scrollX: true,
+                    scrollX: false,
                     order: [
                         [0, 'asc']
                     ],
@@ -749,15 +759,11 @@
                     },
                     dom: '<"top"f i lp>rt<"bottom"i lp><"clear">'
                 });
-
-
                 // Add search row
                 $(this).find('thead').append('<tr class="search-row"></tr>');
-
                 $(this).find('thead th').each(function(index) {
                     var title = $(this).text().trim();
                     var searchHtml = '';
-
                     // Custom search for Featured column (Yes/No dropdown)
                     if (title === 'Featured') {
                         searchHtml = `

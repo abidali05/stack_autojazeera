@@ -156,6 +156,7 @@
 			<div class="row">
                 <div class="col-md-3 p-3">
                     <div class="row">
+                        <a href="{{url('whishlist')}}">
                         <div class="col-md-12  rounded" style="background-color: white">
 
                             <div class="row">
@@ -172,10 +173,12 @@
                                 </div>
                             </div>
                         </div>
+                        </a>
                     </div>
                 </div>
                 <div class="col-md-3 p-3">
                     <div class="row">
+                        <a href="{{url('bike/wishlist')}}">
                         <div class="col-md-12  rounded" style="background-color: white">
 
                             <div class="row">
@@ -192,10 +195,12 @@
                                 </div>
                             </div>
                         </div>
+                        </a>
                     </div>
                 </div>
                 <div class="col-md-3 p-3">
                     <div class="row">
+                        <a href="{{url('shops/wishlist')}}">
                         <div class="col-md-12  rounded" style="background-color: white">
 
                             <div class="row">
@@ -212,10 +217,12 @@
                                 </div>
                             </div>
                         </div>
+                        </a>
                     </div>
                 </div>
                 <div class="col-md-3 p-3">
                     <div class="row">
+                        <a href="{{url('price-alert')}}">
                         <div class="col-md-12  rounded" style="background-color: white">
 
                             <div class="row">
@@ -232,10 +239,12 @@
                                 </div>
                             </div>
                         </div>
+                        </a>
                     </div>
                 </div>
                 <div class="col-md-3 p-3">
                     <div class="row">
+                        <a href="{{url('bike/price-alert')}}">
                         <div class="col-md-12  rounded" style="background-color: white">
 
                             <div class="row">
@@ -252,10 +261,12 @@
                                 </div>
                             </div>
                         </div>
+                        </a>
                     </div>
                 </div>
                 <div class="col-md-3 p-3">
                     <div class="row">
+                        <a href="{{url('submitted-forms')}}">
                         <div class="col-md-12  rounded" style="background-color: white">
 
                             <div class="row">
@@ -272,10 +283,12 @@
                                 </div>
                             </div>
                         </div>
+                        </a>
                     </div>
                 </div>
                 <div class="col-md-3 p-3">
                     <div class="row">
+                        <a href="{{url('submitted-bike-leads')}}">
                         <div class="col-md-12  rounded" style="background-color: white">
 
                             <div class="row">
@@ -292,10 +305,12 @@
                                 </div>
                             </div>
                         </div>
+                        </a>
                     </div>
                 </div>
                 <div class="col-md-3 p-3">
                     <div class="row">
+                        <a href="{{url('submitted-service-quotes')}}">
                         <div class="col-md-12  rounded" style="background-color: white">
 
                             <div class="row">
@@ -312,6 +327,7 @@
                                 </div>
                             </div>
                         </div>
+                        </a>
                     </div>
                 </div>
                 @if (Auth::user()->shop_package && $shop)
@@ -496,6 +512,7 @@
 			<div class="row">
                 <div class="col-md-3 p-3">
                     <div class="row">
+                        <a href="{{url('ads')}}">
                         <div class="col-md-12  rounded" style="background-color: white">
 
                             <div class="row">
@@ -511,11 +528,12 @@
                             <p class="m-0 text-end  eighteens1 pe-2" style="font:size:20px !important;"><strong>{{ $totalcarads }}</strong></p>
                                 </div>
                             </div>
-                        </div>
+                        </div></a>
                     </div>
                 </div>
                 <div class="col-md-3 p-3">
                     <div class="row">
+                        <a href="{{url('bike/ads')}}">
                         <div class="col-md-12  rounded" style="background-color: white">
 
                             <div class="row">
@@ -531,11 +549,12 @@
                                <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $totalbikeads }}</strong></p>
                                 </div>
                             </div>
-                        </div>
+                        </div></a>
                     </div>
                 </div>
                 <div class="col-md-3 p-3">
                     <div class="row">
+                        <a href="{{url('lead')}}">
                         <div class="col-md-12 p-1 rounded" style="background-color: white">
 
                             <div class="row">
@@ -551,11 +570,12 @@
                                             <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $carleads }}</strong></p>
                                 </div>
                             </div>
-                        </div>
+                        </div></a>
                     </div>
                 </div>
                 <div class="col-md-3 p-3">
                     <div class="row">
+                        <a href="{{url('leads/bikes')}}">
                         <div class="col-md-12 p-1 rounded" style="background-color: white">
 
                             <div class="row">
@@ -572,11 +592,13 @@
                                 </div>
                             </div>
                         </div>
+                        </a>
                     </div>
                 </div>
                 @if (Auth::user()->shop_package && $shop)
                     <div class="col-md-3 p-3">
                         <div class="row">
+                            <a href="{{url('service-quotes')}}">
                             <div class="col-md-12  rounded" style="background-color: white">
 
                                 <div class="row">
@@ -593,11 +615,13 @@
                                     </div>
                                 </div>
                             </div>
+                            </a>
                         </div>
                     </div>
                 @endif
                 <div class="col-md-3 p-3">
                     <div class="row">
+                               <a href="{{url('whishlist')}}">
                         <div class="col-md-12  rounded" style="background-color: white">
 
                             <div class="row">
@@ -614,10 +638,12 @@
                                 </div>
                             </div>
                         </div>
+                               </a>
                     </div>
                 </div>
                 <div class="col-md-3 p-3">
                     <div class="row">
+                                <a href="{{url('bike/wishlist')}}">
                         <div class="col-md-12  rounded" style="background-color: white">
 
                             <div class="row">
@@ -634,10 +660,12 @@
                                 </div>
                             </div>
                         </div>
+                                </a>
                     </div>
                 </div>
                 <div class="col-md-3 p-3">
                     <div class="row">
+                          <a href="{{url('shops/wishlist')}}">
                         <div class="col-md-12 p-1 rounded" style="background-color: white">
 
                             <div class="row">
@@ -654,10 +682,12 @@
                                 </div>
                             </div>
                         </div>
+                    </a>
                     </div>
                 </div>
                 <div class="col-md-3 p-3">
                     <div class="row">
+                         <a href="{{url('price-alert')}}">
                         <div class="col-md-12  rounded" style="background-color: white">
 
                             <div class="row">
@@ -674,10 +704,12 @@
                                 </div>
                             </div>
                         </div>
+                         </a>
                     </div>
                 </div>
                 <div class="col-md-3 p-3">
                     <div class="row">
+                           <a href="{{url('bike/price-alert')}}">
                         <div class="col-md-12  rounded" style="background-color: white">
 
                             <div class="row">
@@ -694,10 +726,12 @@
                                 </div>
                             </div>
                         </div>
+                           </a>
                     </div>
                 </div>
                 <div class="col-md-3 p-3">
                     <div class="row">
+                            <a href="{{url('submitted-forms')}}">
                         <div class="col-md-12  rounded" style="background-color: white">
 
                             <div class="row">
@@ -714,10 +748,12 @@
                                 </div>
                             </div>
                         </div>
+                            </a>
                     </div>
                 </div>
                 <div class="col-md-3 p-3">
                     <div class="row">
+                          <a href="{{url('submitted-bike-leads')}}">
                         <div class="col-md-12  rounded" style="background-color: white">
 
                             <div class="row">
@@ -734,10 +770,12 @@
                                 </div>
                             </div>
                         </div>
+                          </a>
                     </div>
                 </div>
                 <div class="col-md-3 p-3">
                     <div class="row">
+                            <a href="{{url('submitted-service-quotes')}}">
                         <div class="col-md-12 p-1 rounded" style="background-color: white">
 
                             <div class="row">
@@ -754,6 +792,7 @@
                                 </div>
                             </div>
                         </div>
+                    </a>
                     </div>
                 </div>
 
@@ -949,7 +988,7 @@
                 @endphp
 
                 <div class="col-md-3 p-3 {{ in_array('view_leads', $userPermissions) ? '' : 'd-none' }}">
-                    <div class="row">
+                    <div class="row">    <a href="{{url('lead')}}">
                         <div class="col-md-12  rounded" style="background-color: white">
 
                             <div class="row">
@@ -966,10 +1005,12 @@
                                 </div>
                             </div>
                         </div>
+                        </a>
                     </div>
                 </div>
                 <div class="col-md-3 p-3 {{ in_array('view_leads', $userPermissions) ? '' : 'd-none' }}">
                     <div class="row">
+                           <a href="{{url('leads/bikes')}}">
                         <div class="col-md-12  rounded" style="background-color: white">
 
                             <div class="row">
@@ -986,10 +1027,12 @@
                                 </div>
                             </div>
                         </div>
+                           </a>
                     </div>
                 </div>
                 <div class="col-md-3 p-3 {{ in_array('manage_ads', $userPermissions) ? '' : 'd-none' }}">
                     <div class="row">
+                         <a href="{{url('ads')}}">
                         <div class="col-md-12  rounded" style="background-color: white">
 
                             <div class="row">
@@ -1006,10 +1049,12 @@
                                 </div>
                             </div>
                         </div>
+                    </a>
                     </div>
                 </div>
                 <div class="col-md-3 p-3 {{ in_array('manage_ads', $userPermissions) ? '' : 'd-none' }}">
                     <div class="row">
+                           <a href="{{url('bike/ads')}}">
                         <div class="col-md-12  rounded" style="background-color: white">
 
                             <div class="row">
@@ -1026,6 +1071,7 @@
                                 </div>
                             </div>
                         </div>
+                           </a>
                     </div>
                 </div>
 
@@ -1175,6 +1221,7 @@ $service_leads = null;
 
                 <div class="col-md-3 p-3">
                     <div class="row">
+                         <a href="{{url('service-quotes')}}">
                         <div class="col-md-12  rounded" style="background-color: white">
 
                             <div class="row">
@@ -1191,6 +1238,7 @@ $service_leads = null;
                                 </div>
                             </div>
                         </div>
+                         </a>
                     </div>
                 </div>
 

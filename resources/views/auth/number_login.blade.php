@@ -22,8 +22,8 @@
     <div class="row g-0">
         <!-- Left Column -->
         <div class="col-md-6 border-end">
-            <h2 class="ps-lg-5 ps-3">Hey there!</h2>
-            <h2 class="ps-lg-5 ps-3">Welcome back.</h2>
+            <h2 class="ps-lg-5 ps-3" style="color:#281F48 !important">Hey there!</h2>
+            <h2 class="ps-lg-5 ps-3" style="color:#281F48 !important">Welcome back.</h2>
             <img src="{{ asset('web/images/sign-in.png') }}" alt="Placeholder Image" class="mt-3 img-fluid">
             <p class="mt-4 ps-5">Do you have an account? <a href="{{route('register')}}" class="" style="color: #FD5631">Sign up here</a></p>
         </div>
@@ -51,7 +51,7 @@
                 <div class="mb-3">
                     <label for="phone" class="form-label">Phone No</label>
                     <input type="tel" class="form-control" id="phone-number" name="phoneNumber" placeholder="+92 300 0000000"  required>
-					<small class="" id="phone-error" style="display:none;color:#FD5631">Invalid format! Use +92 3XX XXXXXXX.</small>
+					
                 </div>
                 <button type="submit" onclick="sendOTP()" class="btn custom-btn fw-bold rounded w-100 mt-3">Get OTP</button>
             </form>
