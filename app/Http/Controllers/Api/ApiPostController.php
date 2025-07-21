@@ -51,7 +51,7 @@ class ApiPostController extends Controller
 {
     public function store(Request $request)
     {
-        // Log::info($request->all());
+        Log::info($request->all());
         //dd($request->all());
         $validationRules = [];
 
@@ -181,8 +181,14 @@ class ApiPostController extends Controller
         ]);
 
         $user = User::find($request->dealer_id);
+        // $userId = $request->dealer_id;
 
         $userId = $user->role == 2 ? $user->dealer_id : $user->id;
+
+        $dealer = User::find($userId);
+
+        Log::info($userId);
+        // $userId = $request->dealer_id;
         // $subscription = AdsSubscriptions::where('user_id', $userId)->orderBy('id', 'desc')->first();
 
         // // dd($subscription);
@@ -190,7 +196,7 @@ class ApiPostController extends Controller
 
         // Check valid Stripe subscription
         Stripe::setApiKey(config('services.stripe.secret'));
-        $customer = $this->getOrCreateCustomer($user);
+        $customer = $this->getOrCreateCustomer($dealer);
 
         $invoices = Invoice::all([
             'customer' => $customer->id,
@@ -710,9 +716,12 @@ class ApiPostController extends Controller
         if ($user->role == 2) {
             $id = $user->id;
             $dealer_id = $user->dealer_id;
+            // $posts = Post::with(['feature' => function ($query) {
+            //     $query->with('mainfeature')->get();
+            // }, 'document', 'location', 'location.province', 'location.city', 'contact', 'document', 'dealer'])->orderby('id', 'desc')->where('dealer_id', $dealer_id)->where('employee_id', $id)->get();
             $posts = Post::with(['feature' => function ($query) {
                 $query->with('mainfeature')->get();
-            }, 'document', 'location', 'location.province', 'location.city', 'contact', 'document', 'dealer'])->orderby('id', 'desc')->where('dealer_id', $dealer_id)->where('employee_id', $id)->get();
+            }, 'document', 'location', 'location.province', 'location.city', 'contact', 'document', 'dealer'])->orderby('id', 'desc')->where('dealer_id', $dealer_id)->get();
         } else {
             $id = $user->id;
             $posts = Post::with(['feature' => function ($query) {
@@ -1090,9 +1099,6 @@ class ApiPostController extends Controller
         ], 200);
     }
 
-
-
-
     public function similar_cars(Request $request)
     {
         Log::info($request->all());
@@ -1158,41 +1164,47 @@ class ApiPostController extends Controller
     }
 
 
-    public function delete_post()
+    public function delete_post(Request $request)
     {
-        if (!auth('sanctum')->check()) {
-            return response()->json([
-                'status' => 401,
-                'message' => 'You are not authorized to access this route'
-            ], 401);
-        }
+        // if (!auth('sanctum')->check()) {
+        //     return response()->json([
+        //         'status' => 401,
+        //         'message' => 'You are not authorized to access this route'
+        //     ], 401);
+        // }
 
         $user = auth('sanctum')->user();
 
-        $post_id = request()->id;
-        $post = Post::find($post_id);
+        if($user) {
+            $post_id = $request->id;
+            $post = Post::find($post_id);
+    
+            if (!$post) {
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Post not found'
+                ]);
+            }
+    
+            // if ($post->dealer_id !== $user->id) {
+            //     return response()->json([
+            //         'status' => 422,
+            //         'message' => 'You are not authorized to delete this post'
+            //     ]);
+            // }
+    
+            $post->delete();
 
-        if (!$post) {
             return response()->json([
                 'status' => 200,
-                'message' => 'Post not found'
+                'message' => 'Post deleted successfully'
             ]);
-        }
-
-        if ($post->dealer_id !== $user->id) {
+        } else {
             return response()->json([
-                'status' => 422,
-                'message' => 'You are not authorized to delete this post'
-            ]);
+                'status' => 501,
+                'message' => 'Something went wrong!',
+                ]);
         }
-
-        $post->delete();
-
-        return response()->json([
-            'status' => 200,
-            'message' => 'Post deleted successfully'
-        ]);
-        // dd($user);
     }
 
     public function update_post(Request $request)

@@ -98,7 +98,7 @@ Route::middleware('refresh.token')->group(function () {
     Route::post('dealer-contact', [ApiPostController::class, 'dealer_contact']);
     Route::get('my-ads', [ApiPostController::class, 'my_ads']);
     Route::post('find-cars', [ApiPostController::class, 'find_cars']);
-    Route::post('similar-ads', [ApiPostController::class, 'similar_cars']);
+    Route::post('similar-ads', [ApiPostController::class, 'simidelete_postlar_cars']);
     Route::post('delete-post', [ApiPostController::class, 'delete_post']);
     Route::post('update-post', [ApiPostController::class, 'update_post']);
     Route::post('price-alert', [ApiPostController::class, 'price_alert']);
@@ -108,12 +108,6 @@ Route::middleware('refresh.token')->group(function () {
     Route::post('submited-form', [ApiPostController::class, 'delete_submited_form']);
     // Route::get('get-dealer-post',[ApiPostController::class, 'get_dealer_post']);
     Route::get('get-car-details/{id}', [ApiPostController::class, 'getcardetails']);
-
-
-
-
-
-
 
     // ============================================================bike module===========================================================
 

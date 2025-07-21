@@ -201,7 +201,7 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
     <div class="container my-2">
 
         <div class="row align-items-center ">
-            <div class="col-md-4 "> <span class="pt-md-3 pagination_count"
+            {{-- <div class="col-md-4 "> <span class="pt-md-3 pagination_count"
                     style="font-size: 18px; color: #281F48; font-weight:700;">
                     {{ ($posts->currentPage() - 1) * $posts->perPage() + 1 }}
                     - {{ min($posts->currentPage() * $posts->perPage(), $posts->total()) }}
@@ -299,7 +299,7 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
                         @endif
                     </ul>
                 </nav>
-            </div>
+            </div> --}}
         </div>
     </div>
     <div class="container table-responsive">
@@ -479,7 +479,7 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
             </table>
         </div>
     </div>
-    <div class="container my-2">
+    {{-- <div class="container my-2">
 
         <div class="row align-items-center ">
             <div class="col-md-4 "> <span class="pt-md-3 pagination_count"
@@ -586,7 +586,7 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
 
 
         </div>
-    </div>
+    </div> --}}
 
     <script>
         if (window.location.pathname === '/ads') {
@@ -597,14 +597,20 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
         $(document).ready(function() {
             $('.ads-datatable').each(function() {
                 var table = $(this).DataTable({
-                    paging: false,
-                    lengthChange: false,
+                    paging: true,
+                    pageLength: 25,
+                    lengthChange: true,
+                    info: true,
                     searching: true,
-                    info: false,
                     ordering: true,
+                    scrollX: true,
+                    order: [
+                        [0, 'asc']
+                    ],
                     language: {
                         search: "Search: "
-                    }
+                    },
+                    dom: '<"top"f i lp>rt<"bottom"i lp><"clear">'
                 });
 
                 // Add search row

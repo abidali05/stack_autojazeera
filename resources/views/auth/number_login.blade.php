@@ -1,4 +1,4 @@
-@extends('layout.panel_layout.main')
+@extends('layout.website_layout.main')
 @Section('content')
 <style>
 .form-control {
@@ -81,10 +81,4 @@ $(document).ready(function () {
     });
 });
 </script>
-
-
-
-
-
-
 @endsection
