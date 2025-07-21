@@ -60,8 +60,6 @@ class SubmittedFormController extends Controller
         }
         $sub = SubmittedForm::with('post', 'user')->where(['user_id' => $request->user_id, 'post_id' => $request->post_id, 'requesttype' => $request->type])->get();
         if ($sub->isEmpty()) {
-
-
             $sub = new SubmittedForm();
             $sub->fullname = $request->fullname;
             $sub->email = $request->email;
@@ -102,11 +100,7 @@ class SubmittedFormController extends Controller
 
             $fcm_tokens = [$user->fcm_token];
             if ($fcm_tokens) {
-
                 SendFcmNotification::sendPriceAlertNotification($fcm_tokens, ['title' => 'New Sales Lead', 'body' => 'New Sales Lead for ' . $post->makeName . ' ' . $post->modelname]);
-
-
-
                 Notifications::create([
                     'user_id' => $user->id,
                     'title' => 'New Sales Lead',

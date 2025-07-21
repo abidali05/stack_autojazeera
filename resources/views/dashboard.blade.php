@@ -142,7 +142,7 @@
                                     <p class="m-0 neweig">Service</p>
                                     @if (Auth::user()->shop_package)
                                         <p class="m-0 neweig1">{{ Auth::user()->shop_pkg->name }}</p>
-                                        <p class="m-0 neweig12">Exp: {{ $service_sub->end_date }}</p>
+                                        <p class="m-0 neweig12">Exp: {{ $service_sub->end_date ?? '' }}</p>
                                     @else
                                         <p class="m-0 neweig1">No plan subscribed yet.</p>
                                         {{-- <p class="m-0 neweig12">Exp: April, 18 2026</p> --}}
