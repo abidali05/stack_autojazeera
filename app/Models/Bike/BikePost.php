@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Database\Eloquent\Builder;
+
 class BikePost extends Model
 {
     use HasFactory;
@@ -19,11 +20,11 @@ class BikePost extends Model
 
     protected $dates = ['deleted_at'];
 
-    protected $appends = ['colorname','makename','modelname','bodytypename','shareableLink','distance'];
-        protected $casts = [
-            'previous_price' => 'int',
-            'precentage_diff' => 'int',
-        ];
+    protected $appends = ['colorname', 'makename', 'modelname', 'bodytypename', 'shareableLink', 'distance'];
+    protected $casts = [
+        'previous_price' => 'int',
+        'precentage_diff' => 'int',
+    ];
 
     public function features()
     {
@@ -89,52 +90,54 @@ class BikePost extends Model
     }
 
     public function getshareableLinkAttribute()
-    {    
-        return url('bike-details/'.$this->id);
+    {
+        return url('bike-details/' . $this->id);
     }
 
     public function getDistanceAttribute()
     {
         if (!request()->is('api/*')) return null;
         // return env('GOOGLE_MAP_API'); exit;
-    
+
         $userLat = request()->header('latitude');
         $userLng = request()->header('longitude');
-    
+
         if (!$userLat || !$userLng || !$this->latitude || !$this->longitude) {
             return null;
         }
-    
+
         $response = Http::get("https://maps.googleapis.com/maps/api/distancematrix/json", [
             'origins' => "{$userLat},{$userLng}",
             'destinations' => "{$this->latitude},{$this->longitude}",
             'key' => 'AIzaSyBHTfGE9bbvleasezO-T-j1u5UVm6aTnl0',
             'units' => 'metric',
         ]);
-    
+
         $data = $response->json();
         // return $data;    
-    
+
         if ($data['status'] !== 'OK') return null;
-    
+
         $element = $data['rows'][0]['elements'][0];
-    
+
         return $element['status'] === 'OK'
             ? $element['distance']['value'] // value is in meters
             : null;
     }
 
-     protected static function booted()
+    protected static function booted()
     {
         static::addGlobalScope('featureFirst', function (Builder $builder) {
             $builder->orderByDesc('is_featured');
         });
     }
-	
-	
-	public static function getFuelTypeCounts()
+
+
+    public static function getFuelTypeCounts()
     {
-        $query = self::where('status', 1)->whereNull('bikes_posts.deleted_at');
+        $query = self::withoutGlobalScopes()  // <== to ignore any default ORDER BY
+            ->where('status', 1)
+            ->whereNull('bikes_posts.deleted_at');
 
         $path = request()->path();
         if (str_contains($path, 'bikes/used')) {
@@ -148,5 +151,4 @@ class BikePost extends Model
             ->pluck('count', 'fuel_type')
             ->toArray();
     }
-    
 }

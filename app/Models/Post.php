@@ -129,40 +129,45 @@ class Post extends Model
         return $dealer->userType;
     }
 
-    public static function getFuelTypeCounts()
-    {
-        $query = self::where('status', 1)->whereNull('posts.deleted_at');
+public static function getFuelTypeCounts()
+{
+    $query = self::where('status', 1)
+        ->whereNull('posts.deleted_at');
 
-        $path = request()->path();
-        if (str_contains($path, 'cars/used')) {
-            $query->where('posts.condition', 'used');
-        } elseif (str_contains($path, 'cars/new')) {
-            $query->where('posts.condition', 'new');
-        }
-
-        return $query->selectRaw('fuel, COUNT(*) as count')
-            ->groupBy('fuel')
-            ->pluck('count', 'fuel')
-            ->toArray();
+    $path = request()->path();
+    if (str_contains($path, 'cars/used')) {
+        $query->where('posts.condition', 'used');
+    } elseif (str_contains($path, 'cars/new')) {
+        $query->where('posts.condition', 'new');
     }
 
-    public static function getTransmissionCounts()
-    {
-        $query = self::where('status', 1)
-            ->whereNull('posts.deleted_at'); // Exclude soft-deleted records
+    return $query->selectRaw('fuel, MAX(feature_ad) as feature_ad, COUNT(*) as count')
+        ->groupBy('fuel')
+        ->orderByDesc('feature_ad') // This now works because we SELECT it
+        ->pluck('count', 'fuel')
+        ->toArray();
+}
 
-        $path = request()->path();
-        if (str_contains($path, 'cars/used')) {
-            $query->where('posts.condition', 'used');
-        } elseif (str_contains($path, 'cars/new')) {
-            $query->where('posts.condition', 'new');
-        }
 
-        return $query->selectRaw('transmission, COUNT(*) as count')
-            ->groupBy('transmission')
-            ->pluck('count', 'transmission')
-            ->toArray();
+public static function getTransmissionCounts()
+{
+    $query = self::where('status', 1)
+        ->whereNull('posts.deleted_at');
+
+    $path = request()->path();
+    if (str_contains($path, 'cars/used')) {
+        $query->where('posts.condition', 'used');
+    } elseif (str_contains($path, 'cars/new')) {
+        $query->where('posts.condition', 'new');
     }
+
+    return $query->selectRaw('transmission, MAX(feature_ad) as feature_ad, COUNT(*) as count')
+        ->groupBy('transmission')
+        ->orderByDesc('feature_ad') // now it's valid since we selected it
+        ->pluck('count', 'transmission')
+        ->toArray();
+}
+
 
     public function getDistanceAttribute()
     {

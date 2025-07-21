@@ -16,8 +16,8 @@ class OTPController extends Controller
 
     public function __construct()
     {
-        $accountSid = 'ACf7b88a5f46cf4a5f8215d0018c55f355';
-        $authToken = '342711440a4f95845b398ebad6f9f7a1';
+        $accountSid = env('TWILIO_ACCOUNT_SID');
+    $authToken = env('TWILIO_AUTH_TOKEN');
 
         // Validate the credentials
         if (!$accountSid || !$authToken) {

@@ -121,7 +121,7 @@
                         {{ session('warning') }}
                     </div>
                 @endif
-				    <div class="col-md-6 p-3">
+                <div class="col-md-6 p-3">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="row rounded p-4" style="background: linear-gradient(to right, #1e1e60, #990033);">
@@ -153,22 +153,23 @@
                     </div>
                 </div>
             </div>
-			<div class="row">
+            <div class="row">
                 <div class="col-md-3 p-3">
                     <div class="row">
                         <div class="col-md-12  rounded" style="background-color: white">
 
                             <div class="row">
                                 <div class="col-md-12 d-flex justify-content-center">
-                                    <img src="{{ asset('web/images/car_wishlist.svg') }}" style="height:90px;" class="img-fluid ">
+                                    <img src="{{ asset('web/images/car_wishlist.svg') }}" style="height:90px;"
+                                        class="img-fluid ">
                                 </div>
                                 <div class="col-md-8 my-3">
 
-                               
+
                                     <p class="m-0 sixteen2 ps-2"> Car Wishlist</p>
                                 </div>
                                 <div class="col-md-4 my-3">
-                              <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $carwishlist }}</strong></p>
+                                    <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $carwishlist }}</strong></p>
                                 </div>
                             </div>
                         </div>
@@ -180,15 +181,16 @@
 
                             <div class="row">
                                 <div class="col-md-12 d-flex justify-content-center">
-                                    <img src="{{ asset('web/images/bike_wishlist.svg') }}" style="height:90px;" class="img-fluid ">
+                                    <img src="{{ asset('web/images/bike_wishlist.svg') }}" style="height:90px;"
+                                        class="img-fluid ">
                                 </div>
                                 <div class="col-md-8 my-3">
 
-                               
+
                                     <p class="m-0 sixteen2 ps-2"> Bike Wishlist</p>
                                 </div>
                                 <div class="col-md-4 my-3">
-                     <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $bikewishlist }}</strong></p>
+                                    <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $bikewishlist }}</strong></p>
                                 </div>
                             </div>
                         </div>
@@ -200,15 +202,16 @@
 
                             <div class="row">
                                 <div class="col-md-12 d-flex justify-content-center">
-                                    <img src="{{ asset('web/images/shop_wishlist.svg') }}" style="height:90px;" class="img-fluid ">
+                                    <img src="{{ asset('web/images/shop_wishlist.svg') }}" style="height:90px;"
+                                        class="img-fluid ">
                                 </div>
                                 <div class="col-md-8 my-3">
 
-                           
+
                                     <p class="m-0 sixteen2 ps-2">Shop Wishlist</p>
                                 </div>
                                 <div class="col-md-4 my-3">
-                          <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $shopwishlist }}</strong></p>
+                                    <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $shopwishlist }}</strong></p>
                                 </div>
                             </div>
                         </div>
@@ -220,15 +223,16 @@
 
                             <div class="row">
                                 <div class="col-md-12 d-flex justify-content-center">
-                                    <img src="{{ asset('web/images/car_price_alert.svg') }}" style="height:90px;" class="img-fluid ">
+                                    <img src="{{ asset('web/images/car_price_alert.svg') }}" style="height:90px;"
+                                        class="img-fluid ">
                                 </div>
                                 <div class="col-md-8 my-3">
 
-                          
+
                                     <p class="m-0 sixteen2 ps-2"> Car price alert</p>
                                 </div>
                                 <div class="col-md-4 my-3">
-                                      <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $carpricealert }}</strong></p>
+                                    <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $carpricealert }}</strong></p>
                                 </div>
                             </div>
                         </div>
@@ -240,15 +244,16 @@
 
                             <div class="row">
                                 <div class="col-md-12 d-flex justify-content-center">
-                                    <img src="{{ asset('web/images/bike_price_alert.svg') }}" style="height:90px;" class="img-fluid ">
+                                    <img src="{{ asset('web/images/bike_price_alert.svg') }}" style="height:90px;"
+                                        class="img-fluid ">
                                 </div>
                                 <div class="col-md-8 my-3">
 
-                          
+
                                     <p class="m-0 sixteen2 ps-2"> Bike price alert</p>
                                 </div>
                                 <div class="col-md-4 my-3">
-                                     <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $bikepricealert }}</strong></p>
+                                    <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $bikepricealert }}</strong></p>
                                 </div>
                             </div>
                         </div>
@@ -260,15 +265,17 @@
 
                             <div class="row">
                                 <div class="col-md-12 d-flex justify-content-center">
-                                    <img src="{{ asset('web/images/submitted_car_leads.svg') }}" style="height:90px;" class="img-fluid ">
+                                    <img src="{{ asset('web/images/submitted_car_leads.svg') }}" style="height:90px;"
+                                        class="img-fluid ">
                                 </div>
                                 <div class="col-md-8 my-3">
 
-                
+
                                     <p class="m-0 sixteen2 ps-2">Submitted Car leads </p>
                                 </div>
                                 <div class="col-md-4 my-3">
-                                     <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $submitted_car_leads }}</strong></p>
+                                    <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $submitted_car_leads }}</strong>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -276,19 +283,22 @@
                 </div>
                 <div class="col-md-3 p-3">
                     <div class="row">
+                     
                         <div class="col-md-12  rounded" style="background-color: white">
 
                             <div class="row">
                                 <div class="col-md-12 d-flex justify-content-center">
-                                    <img src="{{ asset('web/images/submitted_bike_leads.svg') }}" style="height:90px;" class="img-fluid ">
+                                    <img src="{{ asset('web/images/submitted_bike_leads.svg') }}" style="height:90px;"
+                                        class="img-fluid ">
                                 </div>
                                 <div class="col-md-8 my-3">
 
-                         
+
                                     <p class="m-0 sixteen2 ps-2">Submitted Bike leads</p>
                                 </div>
                                 <div class="col-md-4 my-3">
-                                     <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $submitted_bike_leads }}</strong></p>
+                                    <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $submitted_bike_leads }}</strong>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -300,15 +310,17 @@
 
                             <div class="row">
                                 <div class="col-md-12 d-flex justify-content-center">
-                                    <img src="{{ asset('web/images/submitted_services_leads.svg') }}" style="height:90px;" class="img-fluid ">
+                                    <img src="{{ asset('web/images/submitted_services_leads.svg') }}"
+                                        style="height:90px;" class="img-fluid ">
                                 </div>
                                 <div class="col-md-8 my-3">
 
-                       
+
                                     <p class="m-0 sixteen2 ps-2">Submitted Service leads</p>
                                 </div>
                                 <div class="col-md-4 my-3">
-                                       <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $submitted_service_leads }}</strong></p>
+                                    <p class="m-0 text-end eighteens1 pe-2">
+                                        <strong>{{ $submitted_service_leads }}</strong></p>
                                 </div>
                             </div>
                         </div>
@@ -321,15 +333,17 @@
 
                                 <div class="row">
                                     <div class="col-md-12 d-flex justify-content-center">
-                                        <img src="{{ asset('web/images/submitted_services_leads.svg') }}" style="height:90px;" class="img-fluid ">
+                                        <img src="{{ asset('web/images/submitted_services_leads.svg') }}"
+                                            style="height:90px;" class="img-fluid ">
                                     </div>
                                     <div class="col-md-8 my-3">
 
-                                   
+
                                         <p class="m-0 sixteen2 ps-2"> Service lead</p>
                                     </div>
                                     <div class="col-md-4 my-3">
-                                      <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $service_lead_counts }}</strong></p>
+                                        <p class="m-0 text-end eighteens1 pe-2">
+                                            <strong>{{ $service_lead_counts }}</strong></p>
                                     </div>
                                 </div>
                             </div>
@@ -371,7 +385,8 @@
                                             @foreach ($service_leads as $lead)
                                                 <tr>
                                                     <td>{{ $lead->type ?? '' }}</td>
-                                                    <td>{{ $lead->make_r->name ?? '' . ' ' . $lead->model_r->name ??'' }}</td>
+                                                    <td>{{ $lead->make_r->name ?? ('' . ' ' . $lead->model_r->name ?? '') }}
+                                                    </td>
                                                     <td>{{ $lead->user->number ?? '' }}</td>
                                                     <td>{{ $lead->user->email ?? '' }}</td>
 
@@ -381,8 +396,8 @@
                                     </table>
                                 </div>
                                 {{-- @if (count($service_leads) > 3) --}}
-                                    <a href="{{ url('service-quotes') }}" style="color: #F40000" class="fw-bold">Show
-                                        more</a>
+                                <a href="{{ url('service-quotes') }}" style="color: #F40000" class="fw-bold">Show
+                                    more</a>
                                 {{-- @endif --}}
                             </div>
 
@@ -462,7 +477,7 @@
                     }
 
                 @endphp
-				      <div class="col-md-6 p-3">
+                <div class="col-md-6 p-3">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="row rounded p-4" style="background: linear-gradient(to right, #1e1e60, #990033);">
@@ -492,66 +507,76 @@
                         </div>
                     </div>
                 </div>
-			</div>
-			<div class="row">
+            </div>
+            <div class="row">
                 <div class="col-md-3 p-3">
                     <div class="row">
-                        <div class="col-md-12  rounded" style="background-color: white">
+                        <a href="{{ url('ads') }}">
+                            <div class="col-md-12  rounded" style="background-color: white">
 
-                            <div class="row">
-                                <div class="col-md-12 d-flex justify-content-center">
-                                    <img src="{{ asset('web/images/car.svg') }}" style="height:90px;" class="img-fluid ">
-                                </div>
-                                <div class="col-md-8 my-3">
+                                <div class="row">
+                                    <div class="col-md-12 d-flex justify-content-center">
+                                        <img src="{{ asset('web/images/car.svg') }}" style="height:90px;"
+                                            class="img-fluid ">
+                                    </div>
+                                    <div class="col-md-8 my-3">
 
-                           
-                                    <p class="m-0 sixteen2 ps-2">Total Car ads</p>
-                                </div>
-                                <div class="col-md-4 my-3">
-                            <p class="m-0 text-end  eighteens1 pe-2" style="font:size:20px !important;"><strong>{{ $totalcarads }}</strong></p>
+
+                                        <p class="m-0 sixteen2 ps-2">Total Car ads</p>
+                                    </div>
+                                    <div class="col-md-4 my-3">
+                                        <p class="m-0 text-end  eighteens1 pe-2" style="font:size:20px !important;">
+                                            <strong>{{ $totalcarads }}</strong></p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
                 <div class="col-md-3 p-3">
                     <div class="row">
-                        <div class="col-md-12  rounded" style="background-color: white">
+                        <a href="{{ url('bike/ads') }}">
+                            <div class="col-md-12  rounded" style="background-color: white">
 
-                            <div class="row">
-                                <div class="col-md-12 d-flex justify-content-center">
-                                    <img src="{{ asset('web/images/bike.svg') }}" style="height:90px;" class="img-fluid ">
-                                </div>
-                                <div class="col-md-8 my-3">
+                                <div class="row">
+                                    <div class="col-md-12 d-flex justify-content-center">
+                                        <img src="{{ asset('web/images/bike.svg') }}" style="height:90px;"
+                                            class="img-fluid ">
+                                    </div>
+                                    <div class="col-md-8 my-3">
 
-                                
-                                    <p class="m-0 sixteen2 ps-2"> Total Bike ads</p>
-                                </div>
-                                <div class="col-md-4 my-3">
-                               <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $totalbikeads }}</strong></p>
+
+                                        <p class="m-0 sixteen2 ps-2"> Total Bike ads</p>
+                                    </div>
+                                    <div class="col-md-4 my-3">
+                                        <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $totalbikeads }}</strong></p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+</a>
                     </div>
                 </div>
                 <div class="col-md-3 p-3">
                     <div class="row">
+                        <a href="{{url('lead')}}">
                         <div class="col-md-12 p-1 rounded" style="background-color: white">
 
                             <div class="row">
                                 <div class="col-md-12 d-flex justify-content-center">
-                                    <img src="{{ asset('web/images/submitted_car_leads.svg') }}" style="height:90px;" class="img-fluid ">
+                                    <img src="{{ asset('web/images/submitted_car_leads.svg') }}" style="height:90px;"
+                                        class="img-fluid ">
                                 </div>
                                 <div class="col-md-8 my-3">
 
-                        
+
                                     <p class="m-0 sixteen2 ps-2"> Car Leads</p>
                                 </div>
                                 <div class="col-md-4 my-3">
-                                            <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $carleads }}</strong></p>
+                                    <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $carleads }}</strong></p>
                                 </div>
                             </div>
                         </div>
+                    </a>
                     </div>
                 </div>
                 <div class="col-md-3 p-3">
@@ -560,15 +585,16 @@
 
                             <div class="row">
                                 <div class="col-md-12 d-flex justify-content-center">
-                                    <img src="{{ asset('web/images/submitted_bike_leads.svg') }}" style="height:90px;" class="img-fluid ">
+                                    <img src="{{ asset('web/images/submitted_bike_leads.svg') }}" style="height:90px;"
+                                        class="img-fluid ">
                                 </div>
                                 <div class="col-md-8 my-3">
 
-                         
+
                                     <p class="m-0 sixteen2 ps-2"> Bike Leads</p>
                                 </div>
                                 <div class="col-md-4 my-3">
-                                <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $bikeleads }}</strong></p>
+                                    <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $bikeleads }}</strong></p>
                                 </div>
                             </div>
                         </div>
@@ -581,15 +607,17 @@
 
                                 <div class="row">
                                     <div class="col-md-12 d-flex justify-content-center">
-                                        <img src="{{ asset('web/images/submitted_services_leads.svg') }}" style="height:90px;" class="img-fluid ">
+                                        <img src="{{ asset('web/images/submitted_services_leads.svg') }}"
+                                            style="height:90px;" class="img-fluid ">
                                     </div>
                                     <div class="col-md-8 my-3">
 
-      
+
                                         <p class="m-0 sixteen2 ps-2"> Service Leads</p>
                                     </div>
                                     <div class="col-md-4 my-3">
-                                                <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $service_lead_counts }}</strong></p>
+                                        <p class="m-0 text-end eighteens1 pe-2">
+                                            <strong>{{ $service_lead_counts }}</strong></p>
                                     </div>
                                 </div>
                             </div>
@@ -602,15 +630,16 @@
 
                             <div class="row">
                                 <div class="col-md-12 d-flex justify-content-center">
-                                    <img src="{{ asset('web/images/car_wishlist.svg') }}" style="height:90px;" class="img-fluid ">
+                                    <img src="{{ asset('web/images/car_wishlist.svg') }}" style="height:90px;"
+                                        class="img-fluid ">
                                 </div>
                                 <div class="col-md-8 my-3">
 
-                     
+
                                     <p class="m-0 sixteen2 ps-2"> Car Wishlist</p>
                                 </div>
                                 <div class="col-md-4 my-3">
-                                 <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $carwishlist }}</strong></p>
+                                    <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $carwishlist }}</strong></p>
                                 </div>
                             </div>
                         </div>
@@ -622,15 +651,16 @@
 
                             <div class="row">
                                 <div class="col-md-12 d-flex justify-content-center">
-                                    <img src="{{ asset('web/images/bike_wishlist.svg') }}" style="height:90px;" class="img-fluid ">
+                                    <img src="{{ asset('web/images/bike_wishlist.svg') }}" style="height:90px;"
+                                        class="img-fluid ">
                                 </div>
                                 <div class="col-md-8 my-3">
 
-                               
+
                                     <p class="m-0 sixteen2 ps-2"> Bike Wishlist</p>
                                 </div>
                                 <div class="col-md-4 my-3">
-                          <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $bikewishlist }}</strong></p>
+                                    <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $bikewishlist }}</strong></p>
                                 </div>
                             </div>
                         </div>
@@ -642,15 +672,16 @@
 
                             <div class="row">
                                 <div class="col-md-12 d-flex justify-content-center">
-                                    <img src="{{ asset('web/images/shop_wishlist.svg') }}" style="height:90px;" class="img-fluid ">
+                                    <img src="{{ asset('web/images/shop_wishlist.svg') }}" style="height:90px;"
+                                        class="img-fluid ">
                                 </div>
                                 <div class="col-md-8 my-3">
 
-                              
+
                                     <p class="m-0 sixteen2 ps-2">Shop Wishlist</p>
                                 </div>
                                 <div class="col-md-4 my-3">
-                                   <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $shopwishlist }}</strong></p>
+                                    <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $shopwishlist }}</strong></p>
                                 </div>
                             </div>
                         </div>
@@ -662,15 +693,16 @@
 
                             <div class="row">
                                 <div class="col-md-12 d-flex justify-content-center">
-                                    <img src="{{ asset('web/images/car_price_alert.svg') }}" style="height:90px;" class="img-fluid ">
+                                    <img src="{{ asset('web/images/car_price_alert.svg') }}" style="height:90px;"
+                                        class="img-fluid ">
                                 </div>
                                 <div class="col-md-8 my-3">
 
-     
+
                                     <p class="m-0 sixteen2 ps-2"> Car price alert</p>
                                 </div>
                                 <div class="col-md-4 my-3">
-                                                       <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $carpricealert }}</strong></p>
+                                    <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $carpricealert }}</strong></p>
                                 </div>
                             </div>
                         </div>
@@ -682,15 +714,16 @@
 
                             <div class="row">
                                 <div class="col-md-12 d-flex justify-content-center">
-                                    <img src="{{ asset('web/images/bike_price_alert.svg') }}" style="height:90px;" class="img-fluid ">
+                                    <img src="{{ asset('web/images/bike_price_alert.svg') }}" style="height:90px;"
+                                        class="img-fluid ">
                                 </div>
                                 <div class="col-md-8 my-3">
 
-                           
+
                                     <p class="m-0 sixteen2 ps-2"> Bike price alert</p>
                                 </div>
                                 <div class="col-md-4 my-3">
-                   <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $bikepricealert }}</strong></p>
+                                    <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $bikepricealert }}</strong></p>
                                 </div>
                             </div>
                         </div>
@@ -702,15 +735,17 @@
 
                             <div class="row">
                                 <div class="col-md-12 d-flex justify-content-center">
-                                    <img src="{{ asset('web/images/submitted_car_leads.svg') }}" style="height:90px;" class="img-fluid ">
+                                    <img src="{{ asset('web/images/submitted_car_leads.svg') }}" style="height:90px;"
+                                        class="img-fluid ">
                                 </div>
                                 <div class="col-md-8 my-3">
 
-                                 
+
                                     <p class="m-0 sixteen2 ps-2">Submitted Car leads </p>
                                 </div>
                                 <div class="col-md-4 my-3">
-                         <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $submitted_car_leads }}</strong></p>
+                                    <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $submitted_car_leads }}</strong>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -722,15 +757,17 @@
 
                             <div class="row">
                                 <div class="col-md-12 d-flex justify-content-center">
-                                    <img src="{{ asset('web/images/submitted_bike_leads.svg') }}" style="height:90px;" class="img-fluid ">
+                                    <img src="{{ asset('web/images/submitted_bike_leads.svg') }}" style="height:90px;"
+                                        class="img-fluid ">
                                 </div>
                                 <div class="col-md-8 my-3">
 
-                            
+
                                     <p class="m-0 sixteen2 ps-2">Submitted Bike leads</p>
                                 </div>
                                 <div class="col-md-4 my-3">
-                              <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $submitted_bike_leads }}</strong></p>
+                                    <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $submitted_bike_leads }}</strong>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -742,15 +779,17 @@
 
                             <div class="row">
                                 <div class="col-md-12 d-flex justify-content-center">
-                                    <img src="{{ asset('web/images/submitted_services_leads.svg') }}" style="height:90px;" class="img-fluid ">
+                                    <img src="{{ asset('web/images/submitted_services_leads.svg') }}"
+                                        style="height:90px;" class="img-fluid ">
                                 </div>
                                 <div class="col-md-8 my-3">
 
-                              
+
                                     <p class="m-0 sixteen2 ps-2">Submitted Service leads</p>
                                 </div>
                                 <div class="col-md-4 my-3">
-                                  <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $submitted_service_leads }}</strong></p>
+                                    <p class="m-0 text-end eighteens1 pe-2">
+                                        <strong>{{ $submitted_service_leads }}</strong></p>
                                 </div>
                             </div>
                         </div>
@@ -791,7 +830,8 @@
                                         @foreach ($carleadss as $lead)
                                             <tr>
                                                 <td>{{ $lead->requesttype ?? '' }}</td>
-                                                <td>{{ $lead->post->makename ?? '' . ' ' . $lead->post->modelname ?? '' }}</td>
+                                                <td>{{ $lead->post->makename ?? ('' . ' ' . $lead->post->modelname ?? '') }}
+                                                </td>
                                                 <td>{{ $lead->user->number ?? '' }}</td>
                                                 <td>{{ $lead->user->email ?? '' }}</td>
 
@@ -801,8 +841,8 @@
                                 </table>
                             </div>
                             {{-- @if (count($carleadss) > 3) --}}
-                                <a href="{{ url('lead') }}" style="color: #F40000" class="fw-bold">Show
-                                    more</a>
+                            <a href="{{ url('lead') }}" style="color: #F40000" class="fw-bold">Show
+                                more</a>
                             {{-- @endif --}}
                         </div>
 
@@ -836,7 +876,8 @@
                                         @foreach ($bikeleadss as $lead)
                                             <tr>
                                                 <td>{{ $lead->requesttype ?? '' }}</td>
-                                                <td>{{ $lead->post->makename ?? '' . ' ' . $lead->post->modelname ?? '' }}</td>
+                                                <td>{{ $lead->post->makename ?? ('' . ' ' . $lead->post->modelname ?? '') }}
+                                                </td>
                                                 <td>{{ $lead->user->number ?? '' }}</td>
                                                 <td>{{ $lead->user->email ?? '' }}</td>
 
@@ -846,8 +887,8 @@
                                 </table>
                             </div>
                             {{-- @if (count($bikeleadss) > 3) --}}
-                                <a href="{{ url('leads/bikes') }}" style="color: #F40000" class="fw-bold">Show
-                                    more</a>
+                            <a href="{{ url('leads/bikes') }}" style="color: #F40000" class="fw-bold">Show
+                                more</a>
                             {{-- @endif --}}
                         </div>
 
@@ -882,7 +923,8 @@
                                             @foreach ($service_leads as $lead)
                                                 <tr>
                                                     <td>{{ $lead->type ?? '' }}</td>
-                                                    <td>{{ $lead->make_r->name ?? '' . ' ' . $lead->model_r->name ??'' }}</td>
+                                                    <td>{{ $lead->make_r->name ?? ('' . ' ' . $lead->model_r->name ?? '') }}
+                                                    </td>
                                                     <td>{{ $lead->user->number ?? '' }}</td>
                                                     <td>{{ $lead->user->email ?? '' }}</td>
 
@@ -892,8 +934,8 @@
                                     </table>
                                 </div>
                                 {{-- @if (count($service_leads) > 3) --}}
-                                    <a href="{{ url('service-quotes') }}" style="color: #F40000" class="fw-bold">Show
-                                        more</a>
+                                <a href="{{ url('service-quotes') }}" style="color: #F40000" class="fw-bold">Show
+                                    more</a>
                                 {{-- @endif --}}
                             </div>
 
@@ -950,22 +992,25 @@
 
                 <div class="col-md-3 p-3 {{ in_array('view_leads', $userPermissions) ? '' : 'd-none' }}">
                     <div class="row">
+                          <a href="{{url('lead')}}">
                         <div class="col-md-12  rounded" style="background-color: white">
 
                             <div class="row">
                                 <div class="col-md-12 d-flex justify-content-center">
-                                    <img src="{{ asset('web/images/submitted_car_leads.svg') }}" style="height:90px;" class="img-fluid ">
+                                    <img src="{{ asset('web/images/submitted_car_leads.svg') }}" style="height:90px;"
+                                        class="img-fluid ">
                                 </div>
                                 <div class="col-md-8 my-3">
 
-                           
+
                                     <p class="m-0 sixteen2 ps-2">Total Car leads</p>
                                 </div>
                                 <div class="col-md-4 my-3">
-                                  <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $carleads }}</strong></p>
+                                    <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $carleads }}</strong></p>
                                 </div>
                             </div>
                         </div>
+                    </a>
                     </div>
                 </div>
                 <div class="col-md-3 p-3 {{ in_array('view_leads', $userPermissions) ? '' : 'd-none' }}">
@@ -974,15 +1019,16 @@
 
                             <div class="row">
                                 <div class="col-md-12 d-flex justify-content-center">
-                                    <img src="{{ asset('web/images/submitted_bike_leads.svg') }}" style="height:90px;" class="img-fluid ">
+                                    <img src="{{ asset('web/images/submitted_bike_leads.svg') }}" style="height:90px;"
+                                        class="img-fluid ">
                                 </div>
                                 <div class="col-md-8 my-3">
 
-                               
+
                                     <p class="m-0 sixteen2 ps-2">Total Bike leads</p>
                                 </div>
                                 <div class="col-md-4 my-3">
-                                   <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $bikeleads }}</strong></p>
+                                    <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $bikeleads }}</strong></p>
                                 </div>
                             </div>
                         </div>
@@ -990,42 +1036,48 @@
                 </div>
                 <div class="col-md-3 p-3 {{ in_array('manage_ads', $userPermissions) ? '' : 'd-none' }}">
                     <div class="row">
-                        <div class="col-md-12  rounded" style="background-color: white">
+                        <a href="{{ url('ads') }}">
+                            <div class="col-md-12  rounded" style="background-color: white">
 
-                            <div class="row">
-                                <div class="col-md-12 d-flex justify-content-center">
-                                    <img src="{{ asset('web/images/car.svg') }}" style="height:90px;" class="img-fluid ">
-                                </div>
-                                <div class="col-md-8 my-3">
+                                <div class="row">
+                                    <div class="col-md-12 d-flex justify-content-center">
+                                        <img src="{{ asset('web/images/car.svg') }}" style="height:90px;"
+                                            class="img-fluid ">
+                                    </div>
+                                    <div class="col-md-8 my-3">
 
-                                  
-                                    <p class="m-0 sixteen2 ps-2">Total Car ads</p>
-                                </div>
-                                <div class="col-md-4 my-3">
-                        <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $totalcarads }}</strong></p>
+
+                                        <p class="m-0 sixteen2 ps-2">Total Car ads</p>
+                                    </div>
+                                    <div class="col-md-4 my-3">
+                                        <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $totalcarads }}</strong></p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
                 <div class="col-md-3 p-3 {{ in_array('manage_ads', $userPermissions) ? '' : 'd-none' }}">
                     <div class="row">
+                          <a href="{{ url('bike/ads') }}">
                         <div class="col-md-12  rounded" style="background-color: white">
 
                             <div class="row">
                                 <div class="col-md-12 d-flex justify-content-center">
-                                    <img src="{{ asset('web/images/bike.svg') }}" style="height:90px;" class="img-fluid ">
+                                    <img src="{{ asset('web/images/bike.svg') }}" style="height:90px;"
+                                        class="img-fluid ">
                                 </div>
                                 <div class="col-md-8 my-3">
 
-                            
+
                                     <p class="m-0 sixteen2 ps-2">Total Bike ads</p>
                                 </div>
                                 <div class="col-md-4 my-3">
-                             <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $totalbikeads }}</strong></p>
+                                    <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $totalbikeads }}</strong></p>
                                 </div>
                             </div>
                         </div>
+                    </a>
                     </div>
                 </div>
 
@@ -1065,7 +1117,8 @@
                                         @foreach ($carleadss as $lead)
                                             <tr>
                                                 <td>{{ $lead->requesttype ?? '' }}</td>
-                                                <td>{{ $lead->post->makename ?? '' . ' ' . $lead->post->modelname ?? '' }}</td>
+                                                <td>{{ $lead->post->makename ?? ('' . ' ' . $lead->post->modelname ?? '') }}
+                                                </td>
                                                 <td>{{ $lead->user->number ?? '' }}</td>
                                                 <td>{{ $lead->user->email ?? '' }}</td>
 
@@ -1075,8 +1128,8 @@
                                 </table>
                             </div>
                             {{-- @if (count($carleadss) > 3) --}}
-                                <a href="{{ url('lead') }}" style="color: #F40000" class="fw-bold">Show
-                                    more</a>
+                            <a href="{{ url('lead') }}" style="color: #F40000" class="fw-bold">Show
+                                more</a>
                             {{-- @endif --}}
                         </div>
 
@@ -1110,7 +1163,8 @@
                                         @foreach ($bikeleadss as $lead)
                                             <tr>
                                                 <td>{{ $lead->requesttype ?? '' }}</td>
-                                                <td>{{ $lead->post->makename ?? '' . ' ' . $lead->post->modelname ?? '' }}</td>
+                                                <td>{{ $lead->post->makename ?? ('' . ' ' . $lead->post->modelname ?? '') }}
+                                                </td>
                                                 <td>{{ $lead->user->number ?? '' }}</td>
                                                 <td>{{ $lead->user->email ?? '' }}</td>
 
@@ -1120,8 +1174,8 @@
                                 </table>
                             </div>
                             {{-- @if (count($bikeleadss) > 3) --}}
-                                <a href="{{ url('leads/bikes') }}" style="color: #F40000" class="fw-bold">Show
-                                    more</a>
+                            <a href="{{ url('leads/bikes') }}" style="color: #F40000" class="fw-bold">Show
+                                more</a>
                             {{-- @endif --}}
                         </div>
 
@@ -1151,7 +1205,7 @@
                     ->get();
             } else {
                 $service_lead_counts = 0;
-$service_leads = null;
+                $service_leads = null;
             }
         @endphp
         <div class="container">
@@ -1171,7 +1225,7 @@ $service_leads = null;
                         {{ session('warning') }}
                     </div>
                 @endif
-               
+
 
                 <div class="col-md-3 p-3">
                     <div class="row">
@@ -1179,15 +1233,17 @@ $service_leads = null;
 
                             <div class="row">
                                 <div class="col-md-12 d-flex justify-content-center">
-                                    <img src="{{ asset('web/images/submitted_services_leads.svg') }}" style="height:90px;" class="img-fluid ">
+                                    <img src="{{ asset('web/images/submitted_services_leads.svg') }}"
+                                        style="height:90px;" class="img-fluid ">
                                 </div>
                                 <div class="col-md-8">
 
-                          
+
                                     <p class="m-0 sixteen2 ps-2">Total Service leads</p>
                                 </div>
                                 <div class="col-md-4">
-                                          <p class="m-0 text-end eighteens1 pe-2"><strong>{{$service_lead_counts}}</strong></p>
+                                    <p class="m-0 text-end eighteens1 pe-2"><strong>{{ $service_lead_counts }}</strong>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -1202,8 +1258,8 @@ $service_leads = null;
 
             </div>
         </div>
-	@if($service_leads)
-           <div class="container">
+        @if ($service_leads)
+            <div class="container">
                 <div class="row">
 
                     <div class="col-md-12 p-3">
@@ -1213,7 +1269,7 @@ $service_leads = null;
                                     <p class="fw-bold">Services Leads</p>
                                     <p class="fw-bold">{{ $service_lead_counts }}</p>
                                 </div>
-	
+
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered">
                                         <thead class="">
@@ -1234,7 +1290,8 @@ $service_leads = null;
                                             @foreach ($service_leads as $lead)
                                                 <tr>
                                                     <td>{{ $lead->type ?? '' }}</td>
-                                                    <td>{{ $lead->make_r->name ?? '' . ' ' . $lead->model_r->name ??'' }}</td>
+                                                    <td>{{ $lead->make_r->name ?? ('' . ' ' . $lead->model_r->name ?? '') }}
+                                                    </td>
                                                     <td>{{ $lead->user->number ?? '' }}</td>
                                                     <td>{{ $lead->user->email ?? '' }}</td>
 
@@ -1244,8 +1301,8 @@ $service_leads = null;
                                     </table>
                                 </div>
                                 {{-- @if (count($service_leads) > 3) --}}
-                                    <a href="{{ url('service-quotes') }}" style="color: #F40000" class="fw-bold">Show
-                                        more</a>
+                                <a href="{{ url('service-quotes') }}" style="color: #F40000" class="fw-bold">Show
+                                    more</a>
                                 {{-- @endif --}}
                             </div>
 
