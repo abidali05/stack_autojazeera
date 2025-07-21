@@ -1,1 +1,0 @@
-<h2>Subscription Status changed by Administration </h2>

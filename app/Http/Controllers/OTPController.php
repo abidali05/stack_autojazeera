@@ -38,24 +38,28 @@ class OTPController extends Controller
     {
         // Validate phone number
         $request->validate([
-            'phoneNumber' => 'required|numeric',
+            'phoneNumber' => 'required',
         ]);
 
-        $phoneNumber = $request->input('phoneNumber');
-        $user = User::where('number', $phoneNumber)->first();
-		
+        $phoneNumber = str_replace(' ', '', $request->input('phoneNumber'));
+
+        // Remove spaces and '+' from the input number
+        $number = str_replace(['+', ' '], '', $phoneNumber);
+
+        $user = User::whereRaw("REPLACE(number, '+', '') LIKE ?", ['%' . $number])->first();
+
         if (!$user) {
-			$user = User::create([
-				'name' => 'test',
-				'password' => '12345678',
-            'number' => $phoneNumber,
-            'status' => 'active', // Set default status
-        ]);
-			//dd('e');
-           // return redirect()->route('number_login')->with('error', 'No user found with this number, please register first');
-           // exit;
+            $user = User::create([
+                'name' => 'test',
+                'password' => '12345678',
+                'number' => $phoneNumber,
+                'status' => 'active', // Set default status
+            ]);
+            //dd('e');
+            // return redirect()->route('number_login')->with('error', 'No user found with this number, please register first');
+            // exit;
         }
-        if($user->status == 'inactive'){
+        if ($user->status == 'inactive') {
             return redirect()->route('number_login')->with('error', 'Your account is not active, please contact to admin');
             exit;
         }
@@ -124,12 +128,12 @@ class OTPController extends Controller
             // }
 
 
-			if (!$user->email || !$user->is_email_verified) {
-            return redirect()->route('emailNumber.verification', ['user_id' => $user->id]);
-        } else {
-				$user->is_email_verified = true;
-				$user->save();
-			}
+            if (!$user->email || !$user->is_email_verified) {
+                return redirect()->route('emailNumber.verification', ['user_id' => $user->id]);
+            } else {
+                $user->is_email_verified = true;
+                $user->save();
+            }
 
             Auth::login($user);
             return redirect('/dashboard');
@@ -139,17 +143,17 @@ class OTPController extends Controller
 
         // return response()->json(['error' => 'Invalid or expired OTP.'], 400);
     }
-	
-	public function sendOtpNumber(Request $request)
+
+    public function sendOtpNumber(Request $request)
     {
-		
+
         // Validate phone number and OTP
         $request->validate([
             'user_id' => 'required|exists:users,id',
-			 'phoneNumber' => 'required|string|unique:users,number',
+            'phoneNumber' => 'required|string|unique:users,number',
             //'phoneNumber' => 'required|string|min:13|max:13|regex:/^\+?[0-9]{13}$/',
         ]);
-		//dd($request->all());
+        //dd($request->all());
         $user = User::findOrFail($request->user_id);
         $phoneNumber = $request->phoneNumber;
 
@@ -169,7 +173,7 @@ class OTPController extends Controller
         try {
             // Fake SMS sending for now
             // $this->sendSms($phoneNumber, "Your OTP is: $otp");
-			$data = $this->twilio->messages->create($phoneNumber, [
+            $data = $this->twilio->messages->create($phoneNumber, [
                 'from' => '+13655361575',
                 'body' => "Your OTP is : $otp"
             ]);
@@ -180,8 +184,8 @@ class OTPController extends Controller
         }
         // return response()->json(['error' => 'Invalid or expired OTP.'], 400);
     }
-	
-	public function verifyOtpNumber(Request $request)
+
+    public function verifyOtpNumber(Request $request)
     {
         $request->validate([
             'user_id' => 'required|exists:users,id',
@@ -202,66 +206,65 @@ class OTPController extends Controller
 
         return redirect('/dashboard')->with('success', 'Phone Verified & Logged In!');
     }
-	
-	 public function sendOtpEmail(Request $request)
+
+    public function sendOtpEmail(Request $request)
     {
-		// dd($request->all());
+        // dd($request->all());
         $request->validate([
             'user_id' => 'required|exists:users,id',
-			'email' => 'required|email|unique:users,email,' . $request->user_id,
+            'email' => 'required|email|unique:users,email,' . $request->user_id,
         ]);
 
         $user = User::findOrFail($request->user_id);
-		//dd($user);
-         if (!$user->email) {
-				$user->email = $request->email;
-				$user->save();
-			} elseif ($user->email !== $request->email) {
-				return redirect()->route('emailNumber.verification', ['user_id' => $user->id])
-					->with('error', 'This email is already in use by another user.');
-			}
+        //dd($user);
+        if (!$user->email) {
+            $user->email = $request->email;
+            $user->save();
+        } elseif ($user->email !== $request->email) {
+            return redirect()->route('emailNumber.verification', ['user_id' => $user->id])
+                ->with('error', 'This email is already in use by another user.');
+        }
 
         // Generate a 6-digit OTP
         $otp = mt_rand(100000, 999999);
 
-		 $user->otp = $otp;
-		 $user->save();
+        $user->otp = $otp;
+        $user->save();
 
         // Save OTP in the database
-       
-$body = view('emails.login_otp',compact('otp'));
-            sendMail($user->name, $request->email, 'Auto Jazeera', $otp.' is your secure sign in code', $body);
+
+        $body = view('emails.login_otp', compact('otp'));
+        sendMail($user->name, $request->email, 'Auto Jazeera', $otp . ' is your secure sign in code', $body);
         // Send OTP via Email
 
         return redirect()->route('emailNumber.verification', ['user_id' => $user->id])
             ->with('otp_sent', 'OTP sent successfully. Please check your email.');
     }
-	
-	public function verifyOtpEmail(Request $request)
-{
-		//dd($request->all());
-    $request->validate([
-        'user_id' => 'required|exists:users,id',
-        'otp' => 'required|string|size:6',
-    ]);
 
-    $user = User::find($request->user_id);
-		//dd($user->otp);
-    if ($user->otp != $request->otp) {
-		//dd('here');
-        return redirect()->route('emailNumber.verification', ['user_id' => $request->user_id])
-            ->with('error', 'Invalid OTP. Please try again.');
+    public function verifyOtpEmail(Request $request)
+    {
+        //dd($request->all());
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'otp' => 'required|string|size:6',
+        ]);
+
+        $user = User::find($request->user_id);
+        //dd($user->otp);
+        if ($user->otp != $request->otp) {
+            //dd('here');
+            return redirect()->route('emailNumber.verification', ['user_id' => $request->user_id])
+                ->with('error', 'Invalid OTP. Please try again.');
+        }
+
+        // OTP is correct, update email verification status
+        $user->is_email_verified = true;
+        $user->otp = null; // Clear OTP after successful verification
+        $user->save();
+
+        // Authenticate user
+        Auth::login($user);
+
+        return redirect('/dashboard')->with('success', 'Email verified successfully! You are now logged in.');
     }
-
-    // OTP is correct, update email verification status
-    $user->is_email_verified = true;
-    $user->otp = null; // Clear OTP after successful verification
-    $user->save();
-
-    // Authenticate user
-    Auth::login($user);
-
-    return redirect('/dashboard')->with('success', 'Email verified successfully! You are now logged in.');
-}
-
 }

@@ -77,17 +77,17 @@ class BikeAdsController extends Controller
             // if ($user->role == 2) {
             //     $posts = BikePost::with(['features', 'location', 'contacts', 'media', 'dealer'])->where(['id' => $request->post_id, 'dealer_id' => $user->dealer_id, 'employee_id' => $user->id])->paginate(25);
                         if ($user->role == 2) {
-                $posts = BikePost::with(['features', 'location', 'contacts', 'media', 'dealer'])->where(['id' => $request->post_id, 'dealer_id' => $user->dealer_id])->paginate(25);
+                $posts = BikePost::with(['features', 'location', 'contacts', 'media', 'dealer'])->where(['id' => $request->post_id, 'dealer_id' => $user->dealer_id])->get();
             } else {
-                $posts = BikePost::with(['features', 'location', 'contacts', 'media', 'dealer'])->where(['id' => $request->post_id, 'dealer_id' => $user->id])->paginate(25);
+                $posts = BikePost::with(['features', 'location', 'contacts', 'media', 'dealer'])->where(['id' => $request->post_id, 'dealer_id' => $user->id])->get();
             }
         } else {
             $user = Auth::user();
             if ($user->role == 2) {
-                // $posts = BikePost::with(['features', 'location', 'contacts', 'media', 'dealer'])->where(['dealer_id' => $user->dealer_id, 'employee_id' => $user->id])->paginate(25);
-                                $posts = BikePost::with(['features', 'location', 'contacts', 'media', 'dealer'])->where(['dealer_id' => $user->dealer_id])->paginate(25);
+                // $posts = BikePost::with(['features', 'location', 'contacts', 'media', 'dealer'])->where(['dealer_id' => $user->dealer_id, 'employee_id' => $user->id])->get();
+                                $posts = BikePost::with(['features', 'location', 'contacts', 'media', 'dealer'])->where(['dealer_id' => $user->dealer_id])->get();
             } else {
-                $posts = BikePost::with(['features', 'location', 'contacts', 'media', 'dealer'])->where(['dealer_id' => $user->id])->paginate(25);
+                $posts = BikePost::with(['features', 'location', 'contacts', 'media', 'dealer'])->where(['dealer_id' => $user->id])->get();
             }
         }
         return view('user.post.bikes.index', compact('posts'));
@@ -288,7 +288,7 @@ class BikeAdsController extends Controller
 
             $user = Auth::user();
             $dealerId = $user->role == 2 ? $user->dealer_id : $user->id;
-
+$dealer = User::find($dealerId);
             if ($user->role == 2) {
                 $post->employee_id = $user->id;
                 $post->dealer_id = $user->dealer_id;
@@ -301,7 +301,7 @@ class BikeAdsController extends Controller
 
             // Check valid Stripe subscription
             Stripe::setApiKey(config('services.stripe.secret'));
-            $customer = $this->getOrCreateCustomer($user);
+            $customer = $this->getOrCreateCustomer($dealer);
 
             $invoices = Invoice::all([
                 'customer' => $customer->id,

@@ -42,7 +42,8 @@ class BikePostController extends Controller
         $user = auth('sanctum')->user();
         if ($user->role == '2') {
             $id = $user->dealer_id;
-            $bikes = BikePost::with(['features', 'location', 'contacts', 'media', 'dealer'])->where('dealer_id', $id)->where('employee_id', $user->id)->get();
+            // $bikes = BikePost::with(['features', 'location', 'contacts', 'media', 'dealer'])->where('dealer_id', $id)->where('employee_id', $user->id)->get();
+            $bikes = BikePost::with(['features', 'location', 'contacts', 'media', 'dealer'])->where('dealer_id', $id)->get();
         } else {
             $id = $user->id;
             $bikes = BikePost::with(['features', 'location', 'contacts', 'media', 'dealer'])->where('dealer_id', $id)->get();
@@ -1275,9 +1276,9 @@ class BikePostController extends Controller
         if (!$post) {
             return response()->json(['status' => 404, 'message' => "Post not found"]);
         }
-        if ($post->dealer_id != $user->id) {
-            return response()->json(['status' => 422, 'message' => "You are not authorized to delete this post"]);
-        }
+        // if ($post->dealer_id != $user->id) {
+        //     return response()->json(['status' => 422, 'message' => "You are not authorized to delete this post"]);
+        // }
         $post->delete();
         return response()->json(['status' => 200, 'message' => "Post deleted successfully"]);
     }
