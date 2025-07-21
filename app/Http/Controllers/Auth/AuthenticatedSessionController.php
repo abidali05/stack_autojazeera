@@ -23,7 +23,6 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-
         return view('auth.login');
     }
 
@@ -48,23 +47,23 @@ class AuthenticatedSessionController extends Controller
 
             //$body = view('emails.login_otp',compact('otp'));
             //Mail::to($check->email)->send(new LoginOtp($otp));
-			try {
-                    Mail::to($check->email)->send(new LoginOtp($otp));
+            try {
+                Mail::to($check->email)->send(new LoginOtp($otp));
 
-                    $email = $request->email;
-            session(['email' => $email]);
-            return redirect()->route('verify_login_otp')->with('resendOtp', 'OTP has been sent to your email');
-                } catch (\Exception $e) {
-                    return response()->json([
-                        "message" => 'Failed to send OTP',
-                        'status' => 500,
-                        'error' => $e->getMessage()
-                    ], 500);
-              }
+                $email = $request->email;
+                session(['email' => $email]);
+                return redirect()->route('verify_login_otp')->with('resendOtp', 'OTP has been sent to your email');
+            } catch (\Exception $e) {
+                return response()->json([
+                    "message" => 'Failed to send OTP',
+                    'status' => 500,
+                    'error' => $e->getMessage()
+                ], 500);
+            }
             //sendMail($check->name, $check->email, 'Auto Jazeera', $otp.' is your secure sign in code', $body);
 
             // return redirect()->back()->with('warning','OTP has been sent to your email');
-            
+
 
             // dd(session()->all());
             // return view('auth.validate_login_otp');      
@@ -83,7 +82,6 @@ class AuthenticatedSessionController extends Controller
 
     public function viewLoginOtp(Request $request)
     {
-        //dd('e');
         if (session()->has('email')) {
             return view('auth.validate_login_otp');
         } else {
@@ -93,13 +91,10 @@ class AuthenticatedSessionController extends Controller
 
     public function verifyLoginOtp(Request $request)
     {
-
-        //dd('b');
-
         $request->validate([
-
             'otp' => 'required'
         ]);
+
         $otp = implode('', $request->input('otp'));
         $otp = (int) $otp;
 
@@ -121,7 +116,7 @@ class AuthenticatedSessionController extends Controller
 
             return redirect()->intended(RouteServiceProvider::HOME);
         } else {
-            return redirect()->back()->with('warning', 'Invalid OTP');
+            return redirect()->route('verify_login_otp')->with('resendOtp', 'OTP is Invalid');
         }
     }
     public function create_number()

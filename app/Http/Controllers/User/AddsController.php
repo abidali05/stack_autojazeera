@@ -83,11 +83,11 @@ class AddsController extends Controller
             if ($user->role == 2) {
                 $posts = Post::with(['feature', 'document' => function ($q) {
                     $q->orderBy('position', 'asc');
-                }, 'location', 'contact'])->orderby('id', 'desc')->where(['id' => $request->post_id, 'dealer_id' => $user->dealer_id, 'employee_id' => $user->id])->paginate(25);
+                }, 'location', 'contact'])->orderby('id', 'desc')->where(['id' => $request->post_id, 'dealer_id' => $user->dealer_id, 'employee_id' => $user->id])->get();
             } else {
                 $posts = Post::with(['feature', 'document' => function ($q) {
                     $q->orderBy('position', 'asc');
-                }, 'location', 'contact'])->orderby('id', 'desc')->where(['id' => $request->post_id, 'dealer_id' => Auth::user()->id])->paginate(25);
+                }, 'location', 'contact'])->orderby('id', 'desc')->where(['id' => $request->post_id, 'dealer_id' => Auth::user()->id])->get();
             }
             // $posts = Post::with('feature', 'document', 'location', 'contact')->orderby('id', 'desc')->where(['id' => $request->post_id, 'dealer_id' => Auth::user()->id])->get();
         } else {
@@ -96,14 +96,14 @@ class AddsController extends Controller
             if ($user->role == 2) {
                 // $posts = Post::with(['feature', 'document' => function ($q) {
                 //     $q->orderBy('position', 'asc');
-                // }, 'location', 'contact'])->orderby('id', 'desc')->where(['dealer_id' => $user->dealer_id, 'employee_id' => $user->id])->paginate(25);
+                // }, 'location', 'contact'])->orderby('id', 'desc')->where(['dealer_id' => $user->dealer_id, 'employee_id' => $user->id])->get();
                                 $posts = Post::with(['feature', 'document' => function ($q) {
                     $q->orderBy('position', 'asc');
-                }, 'location', 'contact'])->orderby('id', 'desc')->where(['dealer_id' => $user->dealer_id])->paginate(25);
+                }, 'location', 'contact'])->orderby('id', 'desc')->where(['dealer_id' => $user->dealer_id])->get();
             } else {
                 $posts = Post::with(['feature', 'document' => function ($q) {
                     $q->orderBy('position', 'asc');
-                }, 'location', 'contact'])->orderby('id', 'desc')->where('dealer_id', Auth::user()->id)->paginate(25);
+                }, 'location', 'contact'])->orderby('id', 'desc')->where('dealer_id', Auth::user()->id)->get();
             }
         }
         return view('user.post.index', compact('posts'));
@@ -267,8 +267,6 @@ class AddsController extends Controller
 
         $post = new Post;
 
-        // Step-based data handling
-
         // if ($request->step >= 4) {
         $post->fill([
             // 'dealer_id' => $request->dealer,
@@ -300,7 +298,7 @@ class AddsController extends Controller
             'latitude' => $request->latitude,
             'longitude' => $request->longitude,
         ]);
-        // }
+
         $user = User::find($request->dealer);
         $dealerId = $user->role == 2 ? $user->dealer_id : $user->id;
 
@@ -308,7 +306,6 @@ class AddsController extends Controller
             $post->employee_id = $user->id;
             $post->dealer_id = $user->dealer_id;
         } else {
-
             $user->save();
             $post->employee_id = null;
             $post->dealer_id = $user->id;

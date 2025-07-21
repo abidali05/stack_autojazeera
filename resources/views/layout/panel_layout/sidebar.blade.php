@@ -1082,7 +1082,7 @@
             </a>
 
             <!-- Shop Users -->
-            @if (Auth::user()->shop_package != null && Auth::user()->shop_pkg->metadata->users_allowed == '1')
+            @if (Auth::user()->shop_package != null && Auth::user()->shop_pkg->metadata?->users_allowed == '1')
                 <a class="nav-link {{ request()->is('service/users') ? 'active' : '' }}"
                     href="{{ url('service/users') }}">
                     <span class="d-flex align-items-center">

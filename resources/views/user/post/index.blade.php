@@ -1,6 +1,5 @@
 @extends('layout.panel_layout.main')
 @section('content')
-
     <style>
         .form-select {
             max-width: 100%;
@@ -90,24 +89,28 @@
 
         }
 
-   .ads-column-search {
-    width: 90px;
-    font-size: 10px;
-    border: 1px solid #D9D9D9;
-    border-radius: 2px;
-    padding: 2px;
-}
-.table>:not(caption)>*>* {
-    padding: 0rem .5rem;
-    color: var(--bs-table-color-state, var(--bs-table-color-type, var(--bs-table-color)));
-    background-color: var(--bs-table-bg);
-    border-bottom-width: var(--bs-border-width);
-    box-shadow: inset 0 0 0 9999px var(--bs-table-bg-state, var(--bs-table-bg-type, var(--bs-table-accent-bg)));
-}
-table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
-   padding: 0px 10px 5px 10px; 
-    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-}
+        .ads-column-search {
+            width: 90px;
+            font-size: 10px;
+            border: 1px solid #D9D9D9;
+            border-radius: 2px;
+            padding: 2px;
+        }
+
+        .table>:not(caption)>*>* {
+            padding: 0rem .5rem;
+            color: var(--bs-table-color-state, var(--bs-table-color-type, var(--bs-table-color)));
+            background-color: var(--bs-table-bg);
+            border-bottom-width: var(--bs-border-width);
+            box-shadow: inset 0 0 0 9999px var(--bs-table-bg-state, var(--bs-table-bg-type, var(--bs-table-accent-bg)));
+        }
+
+        table.dataTable>thead>tr>th,
+        table.dataTable>thead>tr>td {
+            padding: 0px 10px 5px 10px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+        }
+
         /* For inline search version */
     </style>
     <div class="container mt-3">
@@ -140,7 +143,7 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
     <div class="container my-2">
 
         <div class="row align-items-center ">
-            <div class="col-md-4 "> <span class="pt-md-3 pagination_count"
+            {{-- <div class="col-md-4 "> <span class="pt-md-3 pagination_count"
                     style="font-size: 18px; color: #281F48; font-weight:700;">
                     {{ ($posts->currentPage() - 1) * $posts->perPage() + 1 }}
                     - {{ min($posts->currentPage() * $posts->perPage(), $posts->total()) }}
@@ -240,9 +243,7 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
 
                 </nav>
 
-            </div>
-
-
+            </div> --}}
         </div>
     </div>
     <div class="tab-content " id="myTabContent">
@@ -351,8 +352,8 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
                                 ?>
                                 <td>
                                     @if (isset($main->doc_name))
-                                        <img src="{{ url('posts/doc/' . $main->doc_name) }}" class="rounded"
-                                            alt="..." width="50" height="50">
+                                        <img src="{{ url('posts/doc/' . $main->doc_name) }}" class="rounded" alt="..."
+                                            width="50" height="50">
                                     @else
                                         no image
                                     @endif
@@ -433,7 +434,7 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
                 </table>
             </div>
         </div>
-        <div class="container">
+        {{-- <div class="container">
             <div class="row align-items-center ">
                 <div class="col-md-4 "> <span class="pt-md-3 pagination_count"
                         style="font-size: 18px; color: #281F48; font-weight:700;">
@@ -444,10 +445,6 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
                 <div class="col-md-8">
 
                     <nav class="d-flex justify-content-end align-items-center">
-                        <!-- Page Info -->
-
-
-                        <!-- Pagination -->
                         <ul class="pagination"
                             style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
                             @if ($posts->onFirstPage())
@@ -542,7 +539,7 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
 
 
             </div>
-        </div>
+        </div> --}}
         @if (isset($post))
             <form action="{{ route('ads.destroy', $post->id) }}" method="post">
                 @include('superadmin.modal.delete')
@@ -716,7 +713,7 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
                             </div>
                         @endforeach
 
-                        {{ $posts->links('pagination::bootstrap-5') }}
+                        {{-- {{ $posts->links('pagination::bootstrap-5') }} --}}
 
                     </tbody>
                 </table>
@@ -733,18 +730,26 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
             localStorage.removeItem('storedImages');
             console.log("Cleared storedImages from localStorage.");
         }
+
         $(document).ready(function() {
             $('.ads-datatable').each(function() {
                 var table = $(this).DataTable({
-                    paging: false,
-                    lengthChange: false,
+                    paging: true,
+                    pageLength: 25,
+                    lengthChange: true,
+                    info: true,
                     searching: true,
-                    info: false,
                     ordering: true,
+                    scrollX: true,
+                    order: [
+                        [0, 'asc']
+                    ],
                     language: {
                         search: "Search: "
-                    }
+                    },
+                    dom: '<"top"f i lp>rt<"bottom"i lp><"clear">'
                 });
+
 
                 // Add search row
                 $(this).find('thead').append('<tr class="search-row"></tr>');
@@ -791,5 +796,4 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
             });
         });
     </script>
-
 @endsection
