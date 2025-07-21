@@ -77,7 +77,7 @@
     color: #bfc7d5  !important;
 }
 </style>
-<div class="container-fluid divborder" style="border: none !important;position: static;">
+<div class="container-fluid divborder" style="border: none !important;position: static; border-radius: 0px !important;">
     <div class="row justify-content-center footercontainer p-4">
         <div class="col-md-10">
             <div class="row">

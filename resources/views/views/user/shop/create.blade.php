@@ -318,7 +318,7 @@
             background-position: center;
             background-repeat: no-repeat;
             height: 150px;
-            width: 99%;
+            width: 100% !important;
         }
 
         .input-group {

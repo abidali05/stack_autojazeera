@@ -40,18 +40,14 @@
 				<h5 class="modal-title" id="resendOtp_successLabel"><strong>OTP Code</strong></h5>
                 <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal" aria-label="Close"></button>
             </div> 
-
             <!-- Modal Body -->
             <div class="modal-body text-center " style="background-color: #F0F3F6; color: #FD5631;" >
                 <i class="bi bi-patch-check-fill fs-1"></i>
                 
                 <h6 class=" mt-3" style="line-height: 1.6;">
                     {{session('resendOtp')}}
-                
-                    
                 </h6>
             </div>
-
             <!-- Modal Footer -->
             <div class="modal-footer justify-content-center border-0 p-0 pb-3">
                 <a href="#" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;" data-bs-dismiss="modal">close</a>

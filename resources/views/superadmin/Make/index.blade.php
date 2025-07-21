@@ -257,12 +257,12 @@
                             Add Make Name
                         </button>
                         <a href="{{ route('superadmin.make-export') }}">
-                            <button type="submit" class="btn btn-outline-success rounded ms-2">
+                            <button type="submit" class="btn btn-light px-4 py-2 " style="background-color: white; font-weight:400; color: #281F48; border-radius: 5px; border:1px solid #281F48">
                                 <i class="bi bi-file-earmark-excel"></i> Export Excel
                             </button>
                         </a>
                         <!-- Import Button (triggers modal) -->
-                        <button type="button" class="btn btn-outline-primary rounded ms-2" data-bs-toggle="modal"
+                        <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:400; color: white; border-radius: 5px;" data-bs-toggle="modal"
                             data-bs-target="#importExcelModal">
                             <i class="bi bi-upload"></i> Import Excel
                         </button>

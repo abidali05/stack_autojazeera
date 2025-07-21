@@ -6,8 +6,14 @@
             background-image: url("{{ asset('web/services/images/backimgrola.svg') }}");
         }
 
-        .bakgimg {
+      
+  .bakgimg3211 {
             background-image: url("{{ asset('web/services/images/Frame\ 1618873199.svg') }}");
+            background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 150px;
+    width: 100%;
         }
 
         .imgbak {
@@ -150,37 +156,38 @@
                 font-weight: 700;
             }
         }
-		
-		        .step-content {
+
+        .step-content {
             display: none;
         }
 
         .step-content.active {
             display: block;
         }
-		
-		.select2-container--default .select2-selection--single {
+
+        .select2-container--default .select2-selection--single {
             border-radius: 0px !important;
             border: 0px !important;
             height: 44px;
             padding: 6px 12px;
         }
+
         .select2-container--default .select2-selection--single .select2-selection__arrow {
             height: 36px;
         }
+
         .select2-container--default .select2-selection--single .select2-selection__rendered {
             line-height: 24px;
         }
-		
-		.select2 select2-container select2-container--default {
-		border-left: 2px solid black;
-		}
-		
+
+        .select2 select2-container select2-container--default {
+            border-left: 2px solid black;
+        }
     </style>
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-12 col-lg-12 bakgimg">
+            <div class="col-12 col-md-12 col-lg-12 bakgimg3211">
                 <div class="row d-flex justify-content-center">
                     <div class="col-10 col-md-9 pt-5">
                         <div class="input-group">
@@ -190,8 +197,9 @@
                                     style="border-radius:5px 0px 0px 5px !important; border:0px !important"
                                     placeholder="Search By Shop Name" aria-label="Search" name="search" />
                                 <div class="bbrder py-3"></div>
-                                <select class="form-select select2-city-search" style="border-radius:0px !important ;border:0px !important"
-                                    aria-label="Select City" name="city">
+                                <select class="form-select select2-city-search"
+                                    style="border-radius:0px !important ;border:0px !important" aria-label="Select City"
+                                    name="city">
                                     <option value="" selected>Select City</option>
                                     @foreach ($cities as $city)
                                         <option value="{{ $city->id }}">{{ $city->name }}</option>
@@ -205,6 +213,7 @@
                         </div>
                     </div>
                 </div>
+                
             </div>
         </div>
     </div>
@@ -318,13 +327,12 @@
                         <a href="{{ url('cars/new') }}" class="text-decoration-none text-dark">
                             <div class="row">
                                 <div class="col-md-12">
-<img src="{{ asset('web/services/images/Frame 25 (3).svg') }}"
-     class="img-fluid w-100"
-     alt="..." />
-                           
+                                    <img src="{{ asset('web/services/images/Frame 25 (3).svg') }}"
+                                        class="img-fluid w-100" alt="..." />
+
                                 </div>
-								    <div class="col-md-12">
-                               
+                                <div class="col-md-12">
+
                                     <p class="text-center sixteen">New Cars</p>
                                 </div>
                             </div>
@@ -335,8 +343,8 @@
                         <a href="{{ url('cars/used') }}" class="text-decoration-none text-dark">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <img src="{{ asset('web/services/images/Frame 25 (44).svg') }}" class="img-fluid  w-100"
-                                        alt="Used Cars" />
+                                    <img src="{{ asset('web/services/images/Frame 25 (44).svg') }}"
+                                        class="img-fluid  w-100" alt="Used Cars" />
                                     <p class="text-center sixteen">Used Cars</p>
                                 </div>
                             </div>
@@ -347,8 +355,8 @@
                         <a href="{{ url('bikes/new') }}" class="text-decoration-none text-dark">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <img src="{{ asset('web/services/images/Frame 25 (4).svg') }}" class="img-fluid  w-100"
-                                        alt="New Bikes" />
+                                    <img src="{{ asset('web/services/images/Frame 25 (4).svg') }}"
+                                        class="img-fluid  w-100" alt="New Bikes" />
                                     <p class="text-center sixteen">New Bikes</p>
                                 </div>
                             </div>
@@ -359,8 +367,8 @@
                         <a href="{{ url('bikes/used') }}" class="text-decoration-none text-dark">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <img src="{{ asset('web/services/images/Frame 25 (5).svg') }}" class="img-fluid  w-100"
-                                        alt="Used Bikes" />
+                                    <img src="{{ asset('web/services/images/Frame 25 (5).svg') }}"
+                                        class="img-fluid  w-100" alt="Used Bikes" />
                                     <p class="text-center sixteen">Used Bikes</p>
                                 </div>
                             </div>
@@ -408,28 +416,29 @@
                             all</a></span></p>
 
                 <div class="row">
-              
-                    <div id="topRatedCarousel" style="min-height:400px !important" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-      @if (count($top_rated_services) == 0)
-                          <div class="col-md-12 mt-5 pt-5">
-		 <div class="row d-flex justify-content-center my-3">
-		       <div class="p-3 col-8" style="border:1px solid #281F48;border-radius:9px;">
-                    <div class="row d-flex align-items-center">
-                        <div class="col-3">
-                            <img src="{{ asset('web/images/noinputs.svg') }}" alt="" class="img-fluid"
-                                srcset="">
-                        </div>
-                        <div class="col-9 text-start">
-                          
-                            <p class="m-0">No top rated services found </p>
 
-                        </div>
-                    </div>
-                </div>
-		 </div>
-</div>
-                    @endif
+                    <div id="topRatedCarousel" style="min-height:400px !important" class="carousel slide"
+                        data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            @if (count($top_rated_services) == 0)
+                                <div class="col-md-12 mt-5 pt-5">
+                                    <div class="row d-flex justify-content-center my-3">
+                                        <div class="p-3 col-8" style="border:1px solid #281F48;border-radius:9px;">
+                                            <div class="row d-flex align-items-center">
+                                                <div class="col-3">
+                                                    <img src="{{ asset('web/images/noinputs.svg') }}" alt=""
+                                                        class="img-fluid" srcset="">
+                                                </div>
+                                                <div class="col-9 text-start">
+
+                                                    <p class="m-0">No top rated services found </p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                             @foreach ($top_rated_services->chunk(3) as $chunkIndex => $serviceChunk)
                                 <div class="carousel-item {{ $chunkIndex == 0 ? 'active' : '' }}">
                                     <div class="row">
@@ -439,7 +448,8 @@
                                                 <a href="{{ route('shopdetail', $service->id) }}"
                                                     class="text-decoration-none text-dark">
                                                     <div class="wishlist-card ddd rounded-4">
-                                                        <div class="img-bg-home-2 " style="height: 200px;position: relative">
+                                                        <div class="img-bg-home-2 "
+                                                            style="height: 200px;position: relative">
                                                             <img src="{{ $service->logo }}" style="height: 100%;"
                                                                 class=" w-100" />
                                                             <span class="featureicn">
@@ -929,29 +939,30 @@
                     href="{{ route('services.featured') }}">View
                     all</a></span></p>
         <div class="row">
-        
-            <div id="serviceCarousel" style="min-height:400px !important" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-    @if (count($featured_services) == 0)
-                     <div class="col-md-12 mt-5 pt-5">
-		 <div class="row d-flex justify-content-center my-3">
-		       <div class="p-3 col-8" style="border:1px solid #281F48;border-radius:9px;">
-                    <div class="row d-flex align-items-center">
-                        <div class="col-3">
-                            <img src="{{ asset('web/images/noinputs.svg') }}" alt="" class="img-fluid"
-                                srcset="">
-                        </div>
-                        <div class="col-9 text-start">
-                     
-                            <p class="m-0">No recent featured
-                services found </p>
 
+            <div id="serviceCarousel" style="min-height:400px !important" class="carousel slide"
+                data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    @if (count($featured_services) == 0)
+                        <div class="col-md-12 mt-5 pt-5">
+                            <div class="row d-flex justify-content-center my-3">
+                                <div class="p-3 col-8" style="border:1px solid #281F48;border-radius:9px;">
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-3">
+                                            <img src="{{ asset('web/images/noinputs.svg') }}" alt=""
+                                                class="img-fluid" srcset="">
+                                        </div>
+                                        <div class="col-9 text-start">
+
+                                            <p class="m-0">No recent featured
+                                                services found </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-		 </div>
-</div>
-            @endif
+                    @endif
                     @foreach ($featured_services->chunk(3) as $chunkIndex => $serviceChunk)
                         <div class="carousel-item {{ $chunkIndex == 0 ? 'active' : '' }}">
                             <div class="row">
@@ -1725,7 +1736,7 @@
                                 showStep(currentStep);
                                 alert(
                                     "An error occurred while submitting your request. Please try again."
-                                    );
+                                );
                             })
                             .finally(() => {
                                 submitBtn.disabled = false;
@@ -1834,8 +1845,8 @@
                 this.innerHTML = 'View all';
             }
         });
-		
-		        document.addEventListener("DOMContentLoaded", function() {
+
+        document.addEventListener("DOMContentLoaded", function() {
             $('.select2-city-search').select2({
                 placeholder: "Select City",
                 allowClear: true

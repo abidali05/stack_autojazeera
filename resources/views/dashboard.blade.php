@@ -536,12 +536,7 @@
                 </div>
                 <div class="col-md-3 p-3">
                     <div class="row">
-<<<<<<< HEAD
-                        <a href="{{url('lead')}}">
-                        <div class="col-md-12  rounded" style="background-color: white">
-=======
                         <div class="col-md-12 p-1 rounded" style="background-color: white">
->>>>>>> bb780b611c3f05cb2c97e9b0227057ca5d37979a
 
                             <div class="row">
                                 <div class="col-md-12 d-flex justify-content-center">
@@ -561,12 +556,7 @@
                 </div>
                 <div class="col-md-3 p-3">
                     <div class="row">
-<<<<<<< HEAD
-                        <a href="{{url('leads/bikes')}}">
-                        <div class="col-md-12  rounded" style="background-color: white">
-=======
                         <div class="col-md-12 p-1 rounded" style="background-color: white">
->>>>>>> bb780b611c3f05cb2c97e9b0227057ca5d37979a
 
                             <div class="row">
                                 <div class="col-md-12 d-flex justify-content-center">
@@ -648,12 +638,7 @@
                 </div>
                 <div class="col-md-3 p-3">
                     <div class="row">
-<<<<<<< HEAD
-                           <a href="{{url('shops/wishlist')}}">
-                        <div class="col-md-12  rounded" style="background-color: white">
-=======
                         <div class="col-md-12 p-1 rounded" style="background-color: white">
->>>>>>> bb780b611c3f05cb2c97e9b0227057ca5d37979a
 
                             <div class="row">
                                 <div class="col-md-12 d-flex justify-content-center">
@@ -753,12 +738,7 @@
                 </div>
                 <div class="col-md-3 p-3">
                     <div class="row">
-<<<<<<< HEAD
-                               <a href="{{url('submitted-service-quotes')}}">
-                        <div class="col-md-12  rounded" style="background-color: white">
-=======
                         <div class="col-md-12 p-1 rounded" style="background-color: white">
->>>>>>> bb780b611c3f05cb2c97e9b0227057ca5d37979a
 
                             <div class="row">
                                 <div class="col-md-12 d-flex justify-content-center">
@@ -874,7 +854,7 @@
                     </div>
                 </div>
                 @if (Auth::user()->shop_package && $shop)
-                    <div class="col-md-4 p-2">
+                    <div class="col-md-4 p-3">
                         <div class="row">
                             <div class="col-md-12 shadow p-3 mb-4 bg-white rounded">
                                 <div class="d-flex justify-content-between">

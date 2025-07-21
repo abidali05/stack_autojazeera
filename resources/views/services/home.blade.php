@@ -9,7 +9,15 @@
         .bakgimg {
             background-image: url("{{ asset('web/services/images/Frame\ 1618873199.svg') }}");
         }
-
+    
+  .bakgimg3211 {
+            background-image: url("{{ asset('web/services/images/Frame\ 1618873199.svg') }}");
+            background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 150px;
+    width: 100%;
+        }
         .imgbak {
             background-image: url("{{ asset('web/services/images/Frame\ 1171275423.svg') }}");
         }
@@ -180,7 +188,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-12 col-lg-12 bakgimg">
+            <div class="col-12 col-md-12 col-lg-12 bakgimg3211">
                 <div class="row d-flex justify-content-center">
                     <div class="col-10 col-md-9 pt-5">
                         <div class="input-group">
@@ -372,7 +380,7 @@
             <div class="col-md-12 d-flex justify-content-between">
                 <p class="twentyeight">Looking for auto services today?</p>
                 <span class="sixteen">
-                    <a href="javascript:void(0)" id="toggleServices" class=" text-danger"><strong>View all</strong></a>
+                    <a href="javascript:void(0)" id="toggleServices" class=" text-danger">View all</a>
                 </span>
             </div>
 

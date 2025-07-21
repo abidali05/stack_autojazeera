@@ -120,12 +120,12 @@
                 <div class="modal fade" id="edit-personal-superadmin" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-lg">
-                        <div class="modal-content">
-                            <div class="border-0 modal-header" style="background-color:#F0F3F6">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
+                            <div class="border-0 modal-header"  style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                                <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
-                            <div class="px-5 modal-body" style="background-color:#F0F3F6">
+                            <div class="px-5 modal-body" style="background-color: #F0F3F6; color: #FD5631;">
                                 <h4 class="mb-4 sec primary-color-custom">Edit Personal Info</h4>
                                 <form method="post" action="{{ route('superadmin.update_profile') }}" enctype="multipart/form-data">
                                     @csrf
@@ -145,7 +145,7 @@
                                     </div>
                                     <div class="mb-2">
                                         <label for="f-name" class="form-label">Full Name</label>
-                                        <div class="input-group">
+                                        <div class="input-group" style="padding: 0px !important; border-radius:5px !important ">
                                             <input type="text" class="form-control formcontrol" name="name"
                                                 id="f-name" placeholder="" value="{{ $user->name }}" required>
                                         </div>
@@ -153,7 +153,7 @@
 
                                     <div class="mb-2">
                                         <label for="email" class="form-label">Email</label>
-                                        <div class="input-group">
+                                        <div class="input-group" style="padding: 0px !important; border-radius:5px !important ">
                                             <input type="email" class="form-control formcontrol" name="email"
                                                 id="email" value="{{ $user->email }}" disabled>
                                         </div>
@@ -177,11 +177,10 @@
                             </span>
                     </div>
 
-                                    <div class="d-flex justify-content-end">
-                                        <button type="submit" class="px-5 mt-3 rounded btn custom-btn-nav">Save
+                                    <div class="modal-footer justify-content-center border-0 p-0 pb-3">
+                                        <button type="submit" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;">Save
                                             changes</button>
-                                        <button type="button" class="px-5 mt-3 ms-3"
-                                            style="color:#281F48; background-color:white ;border:1px solid #281F48;padding:5px 20px ; border-radius:5px"
+                                        <button type="button" class="btn btn-light px-4 py-2 " style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;"
                                             data-bs-dismiss="modal">Close</button>
                                     </div>
 										

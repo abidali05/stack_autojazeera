@@ -3,12 +3,10 @@
 
 @section('content')
 
-<div class="container mt-5">
+<div class="container mt-3">
     <!-- Header Section -->
     <div class="d-flex align-items-center mb-3">
-        <a href="{{ route('dashboard') }}" class="text-white me-3">
-            <img src="{{ asset('web/images/icon.svg') }}" alt="back-arrow" width="50px" height="35px">
-        </a>
+   
         <h2 class="sec mb-0 primary-color-custom">Service Quotes</h2>
     </div>
 

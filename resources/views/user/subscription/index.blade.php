@@ -242,21 +242,22 @@
             </div>
         </div>
         <div class="container">
-            <div class="row mt-5  ">
-                <div class="col-12">
+            <div class="row mt-5 d-flex justify-content-center">
+                <div class="col-11">
                     <div class="row shadowss">
                         <div class="col-md-12 colorback p-3">
                             <p class="m-0" style="color: white">Advertisement Plans </p>
                         </div>
                         <div class="col-md-12 p-3 borderdiv">
-                            <p class="m-0 mb-3">Just One Simple Monthly Fee: No Ad Expiry, No Additional Payments for Featured
+                            <p class="m-0 mb-2" style="font-size: 14px">Just One Simple Monthly Fee: No Ad Expiry, No Additional Payments for Featured
                                 Ads. </br>
                                 💰 One Flat Monthly Fee — All-Inclusive</br>
                                 📈 Better ROI, Guaranteed - Get longer visibility, more inquiries, and higher turnover — without
                                 breaking the bank.</br>
 
-                                <span><strong>Choose the Plan That Suits You and Start Posting Today!</strong></span>
+                           
                             </p>
+                                 <span class="pt-5" style="font-size: 16px ; color:black"><strong>Choose the Plan That Suits You and Start Posting Today!</strong></span><br>
                             <span class="mt-5"
                                 style="background-color: #F40000; color:white; font-size:22px ;font-weight:600;border-radius:5px; padding:5px">
                                 First month free with any paid plan</span>

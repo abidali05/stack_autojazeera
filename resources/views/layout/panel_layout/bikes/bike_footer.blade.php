@@ -3,7 +3,7 @@
         text-decoration: none;
     }
 </style>
-<div class="container-fluid divborder" style="border: none !important;">
+<div class="container-fluid divborder" style="border: none !important; border-radius: 0px !important;">
     <div class="row justify-content-center footercontainer p-4">
         <div class="col-md-11">
             <div class="row">
