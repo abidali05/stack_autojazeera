@@ -515,7 +515,7 @@
     ?>
     <!-- Main Container -->
     <div id="main-container"
-        style="height: 100vh;z-index:999; display:flex; flex-direction:column; justify-content: space-between;">
+        style="height: 100vh;z-index:999;  flex-direction:column; justify-content: space-between;">
         <!-- Navbar -->
         <nav class="navbar thispos navbar-expand-lg bg-light">
             <div class="container-fluid">

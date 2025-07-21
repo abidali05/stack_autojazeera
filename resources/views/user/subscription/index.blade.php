@@ -137,9 +137,9 @@
                             <p class="pt-5" style="font-size: 64px ; font-weight: 600; color: white;">Join US Today!
                             </p>
 
-                            <div class="text-end mb-2">
+                         {{--   <div class="text-end mb-2">
                                 <a href="{{ route('subscription_history') }}" class="text-white mb-2">Subscription History</a>
-                            </div>
+                            </div>  --}}
                             @if (Auth::user()->packagename)
                                 <div class="col-md-12 rounded-2 backcur p-3">
                                     <div class="row">

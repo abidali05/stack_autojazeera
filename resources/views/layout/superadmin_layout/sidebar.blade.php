@@ -310,14 +310,14 @@
      <div class="collapse ps-3" id="System">
 
          <!-- Car with Submenu -->
-         <a class="nav-link d-flex align-items-center" href="{{ url('superadmin/color') }}">
+         <a class="nav-link d-flex align-items-center" style="font-size:12px" href="{{ url('superadmin/color') }}">
              <img src="{{ asset('web/images/colornew.svg') }}" style="height: 20px; width: 20px" class="me-2"
                  alt="...">Color
          </a>
 
 
          <!-- Bike with Submenu -->
-         <a class="nav-link d-flex align-items-center" data-bs-toggle="collapse" href="#bikeSubmenu" role="button">
+         <a class="nav-link d-flex align-items-center" style="font-size:12px" data-bs-toggle="collapse" href="#bikeSubmenu" role="button">
              <img src="{{ asset('web/images/newfeature.svg') }}" style="height: 20px; width: 20px" class="me-2"
                  alt="...">Features
          </a>
@@ -327,7 +327,7 @@
                      src="{{ asset('web/images/Vector (2).svg') }}" style="height: 20px; width: 20px" class=""
                      alt="..."><span class="text-secondary">Bikes</span></a>
          </div>
-		   <a class="nav-link d-flex align-items-center" data-bs-toggle="collapse" href="#bodytype" role="button">
+		   <a class="nav-link d-flex align-items-center" style="font-size:12px" data-bs-toggle="collapse" href="#bodytype" role="button">
              <img src="{{ asset('web/bikes/images/hahah.svg') }}" style="height: 20px; width: 20px" class="me-2"
                  alt="...">Body type
          </a>
@@ -339,7 +339,7 @@
          </div>
 
          <!-- Truck with Submenu -->
-         <a class="nav-link d-flex align-items-center" data-bs-toggle="collapse" href="#truckSubmenu"
+         <a class="nav-link d-flex align-items-center" style="font-size:12px" data-bs-toggle="collapse" href="#truckSubmenu"
              role="button">
              <img src="{{ asset('web/images/truck.svg') }}" style="height: 20px; width: 20px" class="me-2"
                  alt="...">Model
@@ -353,7 +353,7 @@
          </div>
 
          <!-- Bus with Submenu -->
-         <a class="nav-link d-flex align-items-center" data-bs-toggle="collapse" href="#busSubmenu" role="button">
+         <a class="nav-link d-flex align-items-center" style="font-size:12px" data-bs-toggle="collapse" href="#busSubmenu" role="button">
              <img src="{{ asset('web/images/bus.svg') }}" style="height: 20px; width: 20px" class="me-2"
                  alt="...">Make
          </a>
