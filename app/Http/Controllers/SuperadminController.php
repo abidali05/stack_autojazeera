@@ -27,6 +27,7 @@ class SuperadminController extends Controller
     public function login(LoginRequest $request)
     {
         // dd($request->all());
+        
 
         // $validator = Validator::make($request->all(), [
         //     'email' => 'required|email',
