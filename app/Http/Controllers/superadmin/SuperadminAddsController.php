@@ -62,7 +62,7 @@ class SuperadminAddsController extends Controller
      */
     public function index(Request $request)
     {
-        
+
         $users = User::where('role', 1)->get();
         if ($request->car_search) {
 
@@ -1009,9 +1009,9 @@ class SuperadminAddsController extends Controller
         }
         return view('carlisting', compact('users', 'makes', 'models', 'posts', 'colors', 'provinces', 'cities',  'features', 'bodytypes'));
     }
+
     public function cardetail($id)
     {
-
         $post = Post::withTrashed()->with('feature', 'dealer', 'location')->find($id);
         $posts = Post::where('make', $post->make)
             ->where('id', '!=', $post->id) // Exclude the current post
@@ -1028,6 +1028,7 @@ class SuperadminAddsController extends Controller
             return view('postdetail', compact('post', 'posts', 'makes', 'models'));
         }
     }
+    
     public function preview($id)
     {
 
@@ -1039,10 +1040,9 @@ class SuperadminAddsController extends Controller
         $models = ModelCompany::where('status', 1)->get();
         return view('user.post.preview', compact('post', 'posts', 'makes', 'models'));
     }
+    
     public function add_to_wishlist($postid, $dealerid)
     {
-
-
         $wishlist = Whishlist::where('post_id', $postid)->where('user_id', $dealerid)->first();
         // dd($wishlist);
         if (!$wishlist) {
@@ -1057,7 +1057,7 @@ class SuperadminAddsController extends Controller
             //   $notificationInstance = new SendFcmNotification();
             //   $notificationInstance->sendAddWishlistNotification($tokens, ["title"=>'Wishlist Notification', "body"=> 'Added to wishlist successfully']);
             //  }
-            return redirect()->back()->with('warning', 'Whishlist item add  ');
+            return redirect()->back()->with('wishlistresponse', 'Whishlist item add  ');
         } else {
             $wishlist->delete();
             $user = Auth::user();
@@ -1066,13 +1066,12 @@ class SuperadminAddsController extends Controller
             //   $notificationInstance = new SendFcmNotification();
             //   $notificationInstance->sendAddWishlistNotification($tokens, ["title"=>'Wishlist Notification', "body"=> 'Wishlist item removed successfully']);
             //  }
-            return redirect()->back()->with('warning', 'Whishlist item removed  ');
+            return redirect()->back()->with('wishlistresponse', 'Whishlist item removed  ');
         }
     }
+
     public function add_price_alert($postid, $dealerid)
     {
-
-
         $price_alert = PriceAlert::where(['post_id' => $postid, 'user_id' => $dealerid])->first();
         // dd($price_alert);
         if (!$price_alert) {
@@ -1350,7 +1349,6 @@ class SuperadminAddsController extends Controller
         if (!$hasValidAdSubscription || !$plan) {
             DB::rollBack();
             return response()->json(['success' => false, 'message' => 'Dealer subscription is invalid or expired.']);
-
         }
 
         $posted_ads = Post::where('dealer_id', $dealerId)->count();

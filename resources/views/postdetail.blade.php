@@ -48,7 +48,6 @@
                 line-height: 20px;
                 font-size: 14px !important;
             }
-            
         </style>
 
         <div class="modal fade" id="pricealertmodal" tabindex="-1" aria-labelledby="pricealertmodalLabel" aria-hidden="true">
@@ -113,12 +112,15 @@
             /* Adjust vertical alignment */
             z-index: 10;
         }
-   .carousel-control-prev {
-    left: -20px !important;
-}
-.carousel-control-next {
-    right: -20px !important;
-}
+
+        .carousel-control-prev {
+            left: -20px !important;
+        }
+
+        .carousel-control-next {
+            right: -20px !important;
+        }
+
         .carousel-control-next-icon,
         .carousel-control-prev-icon {
             background-color: #281F48 !important;
@@ -446,56 +448,56 @@
                                 </div>
                             @endforeach
                             <!-- <div class="col-md-4 feature-item">
-                                                                <i class="bi bi-shield-shaded"></i> Air Bags
-                                                            </div> -->
+                                                                    <i class="bi bi-shield-shaded"></i> Air Bags
+                                                                </div> -->
                             <!-- <div class="col-md-4 feature-item">
-                                                                <i class="bi bi-radio"></i> AM / FM Radio
-                                                            </div>
-                                                            <div class="col-md-4 feature-item">
-                                                                <i class="bi bi-cassette-fill"></i> Cassette Player
-                                                            </div>
-                                                            <div class="col-md-4 feature-item">
-                                                                <i class="bi bi-thermometer-half"></i> Cool Box
-                                                            </div>
-                                                            <div class="col-md-4 feature-item">
-                                                                <i class="bi bi-speedometer2"></i> Cruise Control
-                                                            </div>
-                                                            <div class="col-md-4 feature-item">
-                                                                <i class="bi bi-disc"></i> DVD Player
-                                                            </div>
-                                                            <div class="col-md-4 feature-item">
-                                                                <i class="bi bi-speaker"></i> Front Speaker
-                                                            </div> -->
+                                                                    <i class="bi bi-radio"></i> AM / FM Radio
+                                                                </div>
+                                                                <div class="col-md-4 feature-item">
+                                                                    <i class="bi bi-cassette-fill"></i> Cassette Player
+                                                                </div>
+                                                                <div class="col-md-4 feature-item">
+                                                                    <i class="bi bi-thermometer-half"></i> Cool Box
+                                                                </div>
+                                                                <div class="col-md-4 feature-item">
+                                                                    <i class="bi bi-speedometer2"></i> Cruise Control
+                                                                </div>
+                                                                <div class="col-md-4 feature-item">
+                                                                    <i class="bi bi-disc"></i> DVD Player
+                                                                </div>
+                                                                <div class="col-md-4 feature-item">
+                                                                    <i class="bi bi-speaker"></i> Front Speaker
+                                                                </div> -->
                             <!-- <div class="col-md-4 feature-item">
-                                                                <i class="bi bi-camera-video"></i> Front Camera
-                                                            </div>
-                                                            <div class="col-md-4 feature-item">
-                                                                <i class="bi bi-key"></i> Keyless Entry
-                                                            </div>
-                                                            <div class="col-md-4 feature-item">
-                                                                <i class="bi bi-shield"></i> Immobilizer Key
-                                                            </div>
-                                                            <div class="col-md-4 feature-item">
-                                                                <i class="bi bi-map"></i> Navigation System
-                                                            </div>
-                                                            <div class="col-md-4 feature-item">
-                                                                <i class="bi bi-mirror"></i> Power Mirror
-                                                            </div>
-                                                            <div class="col-md-4 feature-item">
-                                                                <i class="bi bi-steering-wheel"></i> Power Steering
-                                                            </div>
-                                                            <div class="col-md-4 feature-item">
-                                                                <i class="bi bi-lock"></i> Power Lock
-                                                            </div>
-                                                            <div class="col-md-4 feature-item">
-                                                                <i class="bi bi-thermometer-sun"></i> Heated Seats
-                                                            </div>
-                                                            <div class="col-md-4 feature-item">
-                                                                <i class="bi bi-cloud"></i> Climate Control
-                                                            </div>
-                                                            <div class="col-md-4 feature-item">
-                                                                <i class="bi bi-rim"></i> Alloy Rim
-                                                            </div> -->
+                                                                    <i class="bi bi-camera-video"></i> Front Camera
+                                                                </div>
+                                                                <div class="col-md-4 feature-item">
+                                                                    <i class="bi bi-key"></i> Keyless Entry
+                                                                </div>
+                                                                <div class="col-md-4 feature-item">
+                                                                    <i class="bi bi-shield"></i> Immobilizer Key
+                                                                </div>
+                                                                <div class="col-md-4 feature-item">
+                                                                    <i class="bi bi-map"></i> Navigation System
+                                                                </div>
+                                                                <div class="col-md-4 feature-item">
+                                                                    <i class="bi bi-mirror"></i> Power Mirror
+                                                                </div>
+                                                                <div class="col-md-4 feature-item">
+                                                                    <i class="bi bi-steering-wheel"></i> Power Steering
+                                                                </div>
+                                                                <div class="col-md-4 feature-item">
+                                                                    <i class="bi bi-lock"></i> Power Lock
+                                                                </div>
+                                                                <div class="col-md-4 feature-item">
+                                                                    <i class="bi bi-thermometer-sun"></i> Heated Seats
+                                                                </div>
+                                                                <div class="col-md-4 feature-item">
+                                                                    <i class="bi bi-cloud"></i> Climate Control
+                                                                </div>
+                                                                <div class="col-md-4 feature-item">
+                                                                    <i class="bi bi-rim"></i> Alloy Rim
+                                                                </div> -->
                         </div>
                     </div>
                     <!-- Seller's Description Section -->
@@ -522,7 +524,7 @@
                             @endif
 
                             <!-- <button class="btn custom-btn-3 p-3">Download Brochure</button>
-                                                            <button class="btn custom-btn-3 p-3">Download Auction Sheet</button> -->
+                                                                <button class="btn custom-btn-3 p-3">Download Auction Sheet</button> -->
                         </div>
                     </div>
                     <!-- Information Section -->
@@ -699,19 +701,19 @@
                                     data-url="{{ route('cardetail', ['id' => $post->id]) }}" onclick="shareLink()">
                                     <i class="bi bi-share me-1"></i> Share
                                 </button>
-								@auth
-                                <button class="btn custom-btn-3 "
-                                    onclick="createOrOpenChat({{ $post->id }}, {{ $post->dealer_id }})">
-                                    <i class="bi bi-chat me-1"></i> Chat
-                                </button>
-								@endauth
-								
-								
-								@guest
-                                <a href="{{url('login')}}" class="btn custom-btn-3 ">
-                                    <i class="bi bi-chat me-1"></i> Chat
-                                </a>
-								@endguest
+                                @auth
+                                    <button class="btn custom-btn-3 "
+                                        onclick="createOrOpenChat({{ $post->id }}, {{ $post->dealer_id }})">
+                                        <i class="bi bi-chat me-1"></i> Chat
+                                    </button>
+                                @endauth
+
+
+                                @guest
+                                    <a href="{{ url('login') }}" class="btn custom-btn-3 ">
+                                        <i class="bi bi-chat me-1"></i> Chat
+                                    </a>
+                                @endguest
 
 
                             </div>
@@ -758,7 +760,8 @@
                                 @endif
                                 <div class="col-md-12 mb-3">
                                     <label for="email" class="form-label">Email*</label>
-                                    <input type="email" name="email" class="form-control" value="{{ Auth::user()->email }}" readonly id="email">
+                                    <input type="email" name="email" class="form-control"
+                                        value="{{ Auth::user()->email ?? '' }}" id="email">
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <label for="phoneNo" class="form-label">Phone Number</label>
@@ -942,6 +945,41 @@
             </div>
         </div>
     </div>
+
+    @if (session('wishlistresponse'))
+        <div class="modal fade" id="wishlistresponse" tabindex="-1" aria-labelledby="wishlistresponseLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
+                    <div class="modal-header"
+                        style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                        <h5 class="modal-title" id="wishlistresponseLabel"><strong> Wishlist </strong></h5>
+                        <button type="button" class="btn-close"
+                            style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center " style="background-color: #F0F3F6; color: #FD5631;"
+                        id="wishlistresponseBody">
+                        <p style="color:#281F48"> {{ session('wishlistresponse') }}</p>
+                    </div>
+                    <div class="modal-footer justify-content-center border-0 p-0 pb-3">
+                        <button type="button" class="btn btn-light px-4 py-2 "
+                            style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                            data-bs-dismiss="modal" onclick="location.reload();">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    @if (session('wishlistresponse'))
+        <script>
+            window.addEventListener('DOMContentLoaded', () => {
+                let modal = new bootstrap.Modal(document.getElementById('wishlistresponse'));
+                modal.show();
+            });
+        </script>
+    @endif
     <script>
         $(document).ready(function() {
             $("#informationform").submit(function(e) {
@@ -1190,19 +1228,19 @@
             }
         }
     </script>
-		
-		<script>
-function shareLink() {
-    if (navigator.share) {
-        navigator.share({
-            title: document.title,
-            text: 'Check this out!',
-            url: window.location.href
-        }).catch((error) => console.log('Error sharing', error));
-    } else {
-        navigator.clipboard.writeText(window.location.href);
-        alert('Link copied!');
-    }
-}
-</script>
+
+    <script>
+        function shareLink() {
+            if (navigator.share) {
+                navigator.share({
+                    title: document.title,
+                    text: 'Check this out!',
+                    url: window.location.href
+                }).catch((error) => console.log('Error sharing', error));
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                alert('Link copied!');
+            }
+        }
+    </script>
 @endsection
