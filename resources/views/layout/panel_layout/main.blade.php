@@ -275,7 +275,14 @@
         height: auto;
         /* Maintain aspect ratio */
     }
-
+.buttontoddle {
+    font-size: 14px !important ;
+    background-color: #281f4825 !important;
+    padding: 8px 12px !important;
+ 
+    border-radius: 5px !important;
+    border: none !important;
+}
     #brochurePreview1 img {
         max-width: 50px;
         /* Set the maximum width */

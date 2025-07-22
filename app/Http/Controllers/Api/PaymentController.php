@@ -318,7 +318,7 @@ class PaymentController extends Controller
 
                 return response()->json([
                     'status' => 200,
-                    'message' => "Thanks for subscribing! You have successfully subscribed " . $product->name,
+                    'message' => "You have successfully subscribed " . $product->name,
                     'data' => $user
                 ]);
             }

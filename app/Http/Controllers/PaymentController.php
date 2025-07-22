@@ -182,7 +182,7 @@ class PaymentController extends Controller
                     }
                 }
                 Mail::to($user->email)->send(new \App\Mail\SubscriptionBuy($product));
-                return back()->with('paymentresponse', 'Thanks for subscribing! You have successfully subscribed ' . $product->name);
+                return back()->with('paymentresponse', 'You have successfully subscribed ' . $product->name);
             }
         } catch (\Exception $e) {
             Log::error('Stripe Payment Error: ' . $e->getMessage());

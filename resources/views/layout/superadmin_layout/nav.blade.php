@@ -1,4 +1,14 @@
  <!-- Main Container -->
+ <style>
+    .buttontoddle {
+    font-size: 14px !important ;
+    background-color: #281f4825 !important;
+    padding: 8px 12px !important;
+ 
+    border-radius: 5px !important;
+    border: none !important;
+}
+ </style>
  <div id="main-container">
      <!-- Navbar -->
      <nav class="navbar navbar-expand-lg bg-light">

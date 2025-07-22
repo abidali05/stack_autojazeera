@@ -293,7 +293,7 @@
      </div> --}}
 
      <a href="{{ url('superadmin/user') }}" class="d-flex align-items-baseline">
-         <span class="icon"><img src="{{ asset('web/images/Mask group.svg') }}" class="" alt="..."></span>
+         <span class="icon"><img src="{{ asset('web/images/manageemployee.svg') }}" class="" alt="..."></span>
          <span class="text">Manage Users</span>
      </a>
 
@@ -301,7 +301,7 @@
      <a class="nav-link d-flex align-items-center" data-bs-toggle="collapse" href="#System" role="button"
          aria-expanded="false" aria-controls="System">
          <span class="text-nowrap">
-             <img src="{{ asset('web/images/Mask group.svg') }}" class="img-fluid " alt="...">
+             <img src="{{ asset('web/images/manage_system_icon.svg') }}" class="img-fluid " alt="...">
              <span>Manage System</span>
          </span>
      </a>
@@ -372,7 +372,7 @@
          <span class="text">Shops</span>
      </a>
      <a href="{{ url('superadmin/shop-reviews') }}" class="d-flex align-items-baseline">
-         <span class="icon"><img src="{{ asset('web/images/Shop.svg') }}" class="" alt="..."></span>
+         <span class="icon"><img src="{{ asset('web/images/reviews_icon.svg') }}" class="" alt="..."></span>
          <span class="text">Reviews</span>
      </a>
      <a class="nav-link d-flex  align-items-center" data-bs-toggle="collapse" href="#Subscription" role="button"
@@ -405,14 +405,14 @@
 
      <div class="collapse ps-3" id="Services">
          <a class="nav-link" href="{{ url('superadmin/service-categories') }}"> <span
-                 class="d-flex align-items-center"><img src="{{  asset('web/images/car1.svg') }}"
+                 class="d-flex align-items-center"><img src="{{  asset('web/images/manage_service_icon.svg') }}"
                      style="height: 20px; width: 20px" class="me-2" alt="...">Services
                  type</span></a>
          <a class="nav-link" href="{{ url('superadmin/services') }}"> <span class="d-flex align-items-center"><img
-                     src="{{ asset('web/images/Vector (2).svg') }}" style="height: 20px; width: 20px" class="me-2"
+                     src="{{ asset('web/images/services_icon.svg') }}" style="height: 20px; width: 20px" class="me-2"
                      alt="...">Services</span></a>
          <a class="nav-link" href="{{ url('superadmin/amenities') }}"> <span class="d-flex align-items-center"><img
-                     src="{{ asset('web/images/Autoservices.svg') }}" style="height: 20px; width: 20px"
+                     src="{{ asset('web/images/amenities_icon.svg') }}" style="height: 20px; width: 20px"
                      class="me-2" alt="...">Amenities</span></a>
 
      </div>
