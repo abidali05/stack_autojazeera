@@ -791,17 +791,17 @@
                     <span class="d-flex align-items-center">
                         <img src="{{ asset('web/images/subhistory.svg') }}"
                             style="height:20px !important ; width:20px !important; " class="me-2" alt="...">
-                        History
+                       Ad History
                     </span>
                 </a>
-                {{-- <a class="nav-link {{ request()->is('service-subscription-history') ? 'active' : '' }}"
+              {{-- <a class="nav-link {{ request()->is('service-subscription-history') ? 'active' : '' }}"
                     href="{{ url('service-subscription-history') }}">
                     <span class="d-flex align-items-center">
                         <img src="{{ asset('web/images/subhistory.svg') }}"
                             style="height:20px !important ; width:20px !important; " class="me-2" alt="...">
                         History
                     </span>
-                </a> --}}
+                </a>  --}}
             </div>
 
             <!-- Leads Submenu -->
@@ -1038,7 +1038,7 @@
                     <span class="d-flex align-items-center">
                         <img src="{{ asset('web/images/subhistory.svg') }}"
                             style="height:20px !important ; width:20px !important; " class="me-2" alt="...">
-                        History
+                       Service History
                     </span>
                 </a>
             </div>
