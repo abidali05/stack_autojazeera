@@ -487,7 +487,7 @@ class SubscriptionController extends Controller
 
         //    return redirect()->route('personal_info')->with('register_success', 'Your account has been successfully upgraded to the free plan. Please fill your profile information to start posting ads.');
 
-        return back()->with('paymentresponse', 'Thanks for subscribing! You have successfully subscribed ' . $product->name);
+        return back()->with('paymentresponse', 'You have successfully subscribed ' . $product->name);
     }
 
 

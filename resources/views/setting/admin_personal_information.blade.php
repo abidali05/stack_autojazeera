@@ -24,6 +24,7 @@
 		.colorback {
 		background-color:#F0F3F6;	
 		}
+        
     </style>
     <div class="container py-3 py-lg-3">
 		      <div class="row align-items-center mb-2">
@@ -34,33 +35,46 @@
                 </div>
 
         <div class="row">
-            @if (session('success'))
-                <div class="alert alert-warning alert-dismissible fade show" role="alert"
-                    style="background-color:#FD5631; color:white !important">
-                    {{ session('success') }}
-                    <button type="button" class="p-0 m-0 mt-3 btn-close me-2" style="height:30px; width:30px;"
-                        data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
-            @if (session('register_success'))
-                <div class="alert alert-warning alert-dismissible fade show" role="alert"
-                    style="background-color:#FD5631; color:white !important">
-                    {{ session('register_success') }}
-                    <button type="button" class="p-0 m-0 mt-3 btn-close me-2" style="height:30px; width:30px;"
-                        data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
-            @if (session('register_error'))
-                <div class="alert alert-warning alert-dismissible fade show" role="alert"
-                    style="background-color:#FD5631; color:white !important">
-                    {{ session('register_error') }}
-                    <button type="button" class="p-0 m-0 mt-3 btn-close me-2" style="height:30px; width:30px;"
-                        data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
-            @if (session('error'))
-                <div class="text-center text-white alert alert-danger">{{ session('error') }}</div>
-            @endif
+          <!-- Modal Template -->
+<div class="modal fade" id="sessionModal" tabindex="-1" aria-labelledby="sessionModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content"  style="border-radius: 10px; overflow: hidden;">
+      <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+        <h5 class="modal-title" id="sessionModalLabel"><strong> Status</strong></h5>
+        <button type="button" class="btn-close"
+                            style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center" style="background-color: #F0F3F6; color: #FD5631;">
+        <!-- Message content will go here -->
+        <p id="sessionMessageContent"></p>
+      </div>
+       <div class="modal-footer justify-content-center border-0 p-0 pb-3">
+                        <a href="#" class="btn btn-light px-4 py-2 "
+                            style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                            data-bs-dismiss="modal">close</a>
+
+                    </div>
+    </div>
+  </div>
+</div>
+@php
+    $message = '';
+    if(session('success')) $message = session('success');
+    elseif(session('register_success')) $message = session('register_success');
+    elseif(session('register_error')) $message = session('register_error');
+    elseif(session('error')) $message = session('error');
+@endphp
+
+@if($message)
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const modal = new bootstrap.Modal(document.getElementById('sessionModal'));
+            document.getElementById('sessionMessageContent').textContent = @json($message);
+            modal.show();
+        });
+    </script>
+@endif
+
             <div class="col-md-4 ">
                 <div class="profile-card colorback">
                     <div class="d-flex">

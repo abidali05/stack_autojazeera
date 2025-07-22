@@ -328,6 +328,14 @@
         .select2-container--default .select2-results__option {
             padding: 10px 20px;
         }
+        .buttontoddle {
+    font-size: 14px !important ;
+    background-color: #281f4825 !important;
+    padding: 8px 12px !important;
+ 
+    border-radius: 5px !important;
+    border: none !important;
+}
     </style>
 </head>
 
