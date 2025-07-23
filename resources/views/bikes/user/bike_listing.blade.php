@@ -1,4 +1,3 @@
-
 @extends('layout.website_layout.bikes.bike_main')
 @section('content')
     <style>
@@ -402,40 +401,45 @@
             box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .25);
         }
 
-    .select2-container--default .select2-selection--single {
-    background-color: #F0F3F6 !important;
-    border: 1px solid #F0F3F6;
-		
-    border-radius: 4px;
-}
-		.select2-container--default .select2-selection--single {
-    background-color: #fff;
-     border: none !important; 
-    border-radius: 4px;
-}
-		.select2-container--default .select2-selection--single {
-    background-color: #fff;
-    border: 1px solid #F0F3F6;
-    border-radius: 4px;
-    height: 40px !important;
-}
-.select2-container--default .select2-selection--single .select2-selection__arrow b {
-    border-color: #888 transparent transparent transparent;
-    border-style: solid;
-    border-width: 5px 4px 0 4px;
-    height: 0;
-    left: 50%;
-    margin-left: -4px;
-    margin-top: -2px;
-    position: absolute;
-    top: 50%;
-    width: 0;
-    display: none !important;
-}
-		.select2-container--default .select2-selection--single .select2-selection__rendered {
-    color: #444;
-    line-height: 41px !important;
-}
+        .select2-container--default .select2-selection--single {
+            background-color: #F0F3F6 !important;
+            border: 1px solid #F0F3F6;
+
+            border-radius: 4px;
+        }
+
+        .select2-container--default .select2-selection--single {
+            background-color: #fff;
+            border: none !important;
+            border-radius: 4px;
+        }
+
+        .select2-container--default .select2-selection--single {
+            background-color: #fff;
+            border: 1px solid #F0F3F6;
+            border-radius: 4px;
+            height: 40px !important;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__arrow b {
+            border-color: #888 transparent transparent transparent;
+            border-style: solid;
+            border-width: 5px 4px 0 4px;
+            height: 0;
+            left: 50%;
+            margin-left: -4px;
+            margin-top: -2px;
+            position: absolute;
+            top: 50%;
+            width: 0;
+            display: none !important;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: #444;
+            line-height: 41px !important;
+        }
+
         .divheight {
             overflow-y: auto;
             height: 200px;
@@ -450,16 +454,14 @@
         }
 
         label.form-label {
-
             font-size: 17.6px;
             font-weight: 500;
             line-height: 20.68px;
             text-align: left;
             color: #281F48;
         }
-		
     </style>
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 
     <div class="container mt-5">
@@ -471,7 +473,7 @@
 
                     <div class="search-container mb-3">
                         <button type="submit"
-                            style="color:#281F48;font-weight:700 !important ;    font-family: inherit; border:1px solid #281F48; padding:5px; border-radius:5px"
+                            style="color:#281F48;font-weight:700 !important; font-family: inherit; border:1px solid #281F48; padding:5px; border-radius:5px"
                             onclick="window.location.reload()">Clear
                             Filters</button>
                         </form>
@@ -481,18 +483,19 @@
                         <div class="my-3" style="display: flex; gap: 10px; align-items: center ;">
                             <div class="{{ request()->name == 'new' ? 'd-none' : '' }}">
                                 <input type="checkbox" class="filter-checkbox condition_filter" name="condition"
-                                    data-filter="condition" value="used" id="usedCars_check" {{ request()->name == 'used' ? 'checked' : '' }}>
+                                    data-filter="condition" value="used" id="usedCars_check"
+                                    {{ request()->name == 'used' ? 'checked' : '' }}>
                                 <label for="usedCars" style="font-size:16px ;color: #281F48;">Used Bikes</label>
                             </div>
                             <div class="{{ request()->name == 'used' ? 'd-none' : '' }}">
                                 <input type="checkbox" class="filter-checkbox condition_filter" name="condition"
-                                    data-filter="condition" value="new" id="newCars_check" {{ request()->name == 'new' ? 'checked' : '' }}>
+                                    data-filter="condition" value="new" id="newCars_check"
+                                    {{ request()->name == 'new' ? 'checked' : '' }}>
                                 <label for="newCars" style="font-size:16px ; color: #281F48;">New Bikes</label>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Year Filter -->
                     <!-- Year Filter -->
                     <div class="my-2">
                         <label class="form-label  m-0"><strong>Year</strong></label>
@@ -529,10 +532,6 @@
                                 </div>
                                 <i class="bi bi-dash" style="color: #BFBEC3;position: absolute;top: 35% ;right: 47%;  "></i>
                             </div>
-
-
-
-
                         </div>
                         <div class="select-wrapper">
                             <select class="form-select select-search select2 assembly-filter filter-style assembly_filter"
@@ -560,15 +559,11 @@
                             </select> <i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
                         </div>
                         <div class="select-wrapper mt-2">
-                            <select id="model_filter" class="form-select select2 select-search mb-2 make-filter filter-style"
-                                name="Model">
+                            <select id="model_filter"
+                                class="form-select select2 select-search mb-2 make-filter filter-style" name="Model">
                                 <option value="">Select Make First</option>
                             </select> <i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
                         </div>
-
-
-
-
                     </div>
                     <!-- Province & City Filters -->
                     <div class="my-2">
@@ -579,8 +574,8 @@
                                 <option value="" disabled selected>Province</option>
                                 @foreach ($provinces as $province)
                                     <option value="{{ $province->id }}"
-                                        {{ request()->province == $province->id ? 'selected' : '' }}>{{ $province->name }} ({{$province->bike_count}})
-
+                                        {{ request()->province == $province->id ? 'selected' : '' }}>{{ $province->name }}
+                                        ({{ $province->bike_count }})
                                     </option>
                                 @endforeach
                             </select>
@@ -599,12 +594,10 @@
                             <i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
                         </div>
                     </div>
-			 @php
-                            $fuelCounts = \App\Models\Bike\BikePost::getFuelTypeCounts();
-                           
-                        @endphp
+                    @php
+                        $fuelCounts = \App\Models\Bike\BikePost::getFuelTypeCounts();
 
-                        
+                    @endphp
 
                     <div class="my-2">
                         <label class="form-label mb-3 mt-2 citylabel "><strong>Fuel Type</strong></label>
@@ -612,15 +605,12 @@
                             <select class="form-select select2 select-search assembly-filter filter-style assembly_filter"
                                 style="width:100% !important" id="fuel_type">
                                 <option value="" disabled selected>Fuel Type</option>
-								@foreach (['Diesel', 'Electric', 'Gasoline', 'Hybrid', 'LPG', 'CNG', 'Petrol'] as $fuelType)
-                           <option value="{{ $fuelType }}" {{ request()->fuel_type == $fuelType ? 'selected' : '' }}>
-                                    {{ $fuelType }}({{ $fuelCounts[$fuelType] ?? 0 }})</option>
-                                    
-                                
-                        @endforeach
-								
-								
-                               
+                                @foreach (['Diesel', 'Electric', 'Gasoline', 'Hybrid', 'LPG', 'CNG', 'Petrol'] as $fuelType)
+                                    <option value="{{ $fuelType }}"
+                                        {{ request()->fuel_type == $fuelType ? 'selected' : '' }}>
+                                        {{ $fuelType }}({{ $fuelCounts[$fuelType] ?? 0 }})</option>
+                                @endforeach
+
                             </select>
                             <i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
                         </div>
@@ -632,10 +622,10 @@
                             <div id="rangeProgress" class="range-progress"></div>
 
                             <!-- Sliders -->
-                            <input type="range" id="priceMin" min="0" max="500000" value="{{request()->min ?? '0'}}"
-                                class="range-slider">
-                            <input type="range" id="priceMax" min="0" max="500000" value="{{request()->max ?? '500000'}}"
-                                class="range-slider ">
+                            <input type="range" id="priceMin" min="0" max="500000"
+                                value="{{ request()->min ?? '0' }}" class="range-slider">
+                            <input type="range" id="priceMax" min="0" max="500000"
+                                value="{{ request()->max ?? '500000' }}" class="range-slider ">
                         </div>
 
                         <div class="range-inputs">
@@ -644,9 +634,6 @@
                             <input type="" id="maxPrice" class="price-input m-0  price_class" value="500000">
                         </div>
                     </div>
-
-
-
 
                     <!-- Engine Capacity, Mileage, and Price Range Filters -->
                     <div class="my-3">
@@ -730,23 +717,52 @@
                                 @foreach ($bodytypes as $body_type)
                                     <option value="{{ $body_type->id }}"
                                         {{ request()->type == 'bodytype' && request()->id == $body_type->id ? 'selected' : '' }}>
-                                        {{ $body_type->name }} ({{$body_type->count}})</option>
+                                        {{ $body_type->name }} ({{ $body_type->count }})</option>
                                 @endforeach
                             </select> <i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
                         </div>
                     </div>
 
-                    <div class="my-3 ">
+                    {{-- <div class="my-3 ">
                         <label class="form-label  mb-2 mt-1"><strong>Color</strong></label>
                         <div class="select-wrapper my-2">
-                            <select class="form-select select2 engine-capacity-filter select-search filter-style" id="color">
+                            <select class="form-select select2 engine-capacity-filter select-search filter-style"
+                                id="color">
                                 <option value="">Select Color</option>
                                 @foreach ($colors as $color)
-                                    <option value="{{ $color->id }}">{{ $color->name }} ({{$color->bike_count}})</option>
+                                    <option value="{{ $color->id }}">{{ $color->name }} ({{ $color->bike_count }})
+                                    </option>
                                 @endforeach
                             </select>
                             <i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
                         </div>
+                    </div> --}}
+                    <div class="my-3 ">
+                        <label class="form-label mb-3 mt-2"><strong>Exterior Color</strong></label>
+                        {{-- <div>
+                            <select class="form-select color-filter filter-style" name="exteriorColor" id="" >
+                                    <option value="" selected>Any</option>
+                                        @foreach ($colors as $color)
+                                    <option value="{{$color->id}}" {{request()->exterior_color == $color->id?"selected":""}}><span style="background-color:{{$color->name}}" class=" p-0 m-0 px-4 me-3"></span>{{$color->name}} ({{$color->count}})</option>
+                                        @endforeach   
+                                    </select>
+                        </div> --}}
+                        <div class="col-12 divheight">
+                            @foreach ($colors as $color)
+                                <div class="my-2">
+                                    <input name="exteriorColor[]" type="checkbox"
+                                        class="filter-checkbox me-2 color-filter" value="{{ $color->id }}"
+                                        id="color-filter{{ $color->id }}">
+                                    <label for="color-filter{{ $color->id }}" style="font-size:16px; color: #281F48;">
+                                        <span style="background-color:{{ $color->color_id }}"
+                                            class=" p-0 m-0 px-4 me-3"></span>{{ $color->name }}
+                                        ({{ $color->bike_count }})
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
+
+                        <!-- Add other colors similarly -->
                     </div>
                     <div class="my-3 ">
                         <label class="form-label mb-3"><strong>Ad Type</strong></label>
@@ -817,118 +833,118 @@
                             </div>
                         </div>
                     </div>
-                   
+
+                    <div id="loadingSpinner" class="loading-overlay d-none">
+                        <div class="loader"></div>
+                    </div>
                     <div class="my-2 px-5" id="bike-listings">
-                               <div id="loadingSpinner" class="loading-overlay d-none">
-    <div class="loader"></div>
-</div>
                         <div class="row">
                             @if (count($posts) > 0)
-                            <div class="col-md-6">
-                                <span class="pt-md-3 pagination_count"
-                                    style="font-size: 18px; color: #FD5631; font-weight:700 ">
-                                    Showing {{ ($posts->currentPage() - 1) * $posts->perPage() + 1 }}
-                                    to {{ min($posts->currentPage() * $posts->perPage(), $posts->total()) }}
-                                    of {{ $posts->total() }} Results
-                                </span>
-                            </div>
+                                <div class="col-md-6">
+                                    <span class="pt-md-3 pagination_count"
+                                        style="font-size: 18px; color: #FD5631; font-weight:700 ">
+                                        Showing {{ ($posts->currentPage() - 1) * $posts->perPage() + 1 }}
+                                        to {{ min($posts->currentPage() * $posts->perPage(), $posts->total()) }}
+                                        of {{ $posts->total() }} Results
+                                    </span>
+                                </div>
                             @endif
                             <div class="col-md-6">
                                 {{-- @if ($posts->hasPages()) --}}
-                                 @if (count($posts) > 0)
-                                <nav class="d-flex justify-content-end align-items-center">
-                                    <!-- Page Info -->
+                                @if (count($posts) > 0)
+                                    <nav class="d-flex justify-content-end align-items-center">
+                                        <!-- Page Info -->
 
 
-                                    <!-- Pagination -->
-                                    <ul class="pagination"
-                                        style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
-                                        @if ($posts->onFirstPage())
-                                            <li style="display: inline-block;">
-                                                <span
-                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #444; color: #fff;">&laquo;</span>
-                                            </li>
-                                        @else
-                                            @if (request()->isMethod('post'))
-                                                <li style="display: inline-block;">
-                                                    <form method="POST" action="{{ url()->current() }}">
-                                                        @csrf
-                                                        <input type="hidden" name="page"
-                                                            value="{{ $posts->currentPage() - 1 }}">
-                                                        <button type="submit"
-                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #444; color: #fff; border: none;">&laquo;</button>
-                                                    </form>
-                                                </li>
-                                            @else
-                                                <li style="display: inline-block;">
-                                                    <a href="{{ $posts->previousPageUrl() }}"
-                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #444; color: #fff;">&laquo;</a>
-                                                </li>
-                                            @endif
-                                        @endif
-
-                                        @foreach ($posts->links()->elements as $element)
-                                            @if (is_string($element))
+                                        <!-- Pagination -->
+                                        <ul class="pagination"
+                                            style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
+                                            @if ($posts->onFirstPage())
                                                 <li style="display: inline-block;">
                                                     <span
-                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #444; color: #fff;">{{ $element }}</span>
-                                                </li>
-                                            @endif
-
-                                            @if (is_array($element))
-                                                @foreach ($element as $page => $url)
-                                                    @if ($page == $posts->currentPage())
-                                                        <li style="display: inline-block;">
-                                                            <span
-                                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #f56; color: #fff;">{{ $page }}</span>
-                                                        </li>
-                                                    @else
-                                                        @if (request()->isMethod('post'))
-                                                            <li style="display: inline-block;">
-                                                                <form method="POST" action="{{ url()->current() }}">
-                                                                    @csrf
-                                                                    <input type="hidden" name="page"
-                                                                        value="{{ $page }}">
-                                                                    <button type="submit"
-                                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #444; color: #fff; border: none;">{{ $page }}</button>
-                                                                </form>
-                                                            </li>
-                                                        @else
-                                                            <li style="display: inline-block;">
-                                                                <a href="{{ $url }}"
-                                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #444; color: #fff;">{{ $page }}</a>
-                                                            </li>
-                                                        @endif
-                                                    @endif
-                                                @endforeach
-                                            @endif
-                                        @endforeach
-
-                                        @if ($posts->hasMorePages())
-                                            @if (request()->isMethod('post'))
-                                                <li style="display: inline-block;">
-                                                    <form method="POST" action="{{ url()->current() }}">
-                                                        @csrf
-                                                        <input type="hidden" name="page"
-                                                            value="{{ $posts->currentPage() + 1 }}">
-                                                        <button type="submit"
-                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #444; color: #fff; border: none;">&raquo;</button>
-                                                    </form>
+                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #444; color: #fff;">&laquo;</span>
                                                 </li>
                                             @else
+                                                @if (request()->isMethod('post'))
+                                                    <li style="display: inline-block;">
+                                                        <form method="POST" action="{{ url()->current() }}">
+                                                            @csrf
+                                                            <input type="hidden" name="page"
+                                                                value="{{ $posts->currentPage() - 1 }}">
+                                                            <button type="submit"
+                                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #444; color: #fff; border: none;">&laquo;</button>
+                                                        </form>
+                                                    </li>
+                                                @else
+                                                    <li style="display: inline-block;">
+                                                        <a href="{{ $posts->previousPageUrl() }}"
+                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #444; color: #fff;">&laquo;</a>
+                                                    </li>
+                                                @endif
+                                            @endif
+
+                                            @foreach ($posts->links()->elements as $element)
+                                                @if (is_string($element))
+                                                    <li style="display: inline-block;">
+                                                        <span
+                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #444; color: #fff;">{{ $element }}</span>
+                                                    </li>
+                                                @endif
+
+                                                @if (is_array($element))
+                                                    @foreach ($element as $page => $url)
+                                                        @if ($page == $posts->currentPage())
+                                                            <li style="display: inline-block;">
+                                                                <span
+                                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #f56; color: #fff;">{{ $page }}</span>
+                                                            </li>
+                                                        @else
+                                                            @if (request()->isMethod('post'))
+                                                                <li style="display: inline-block;">
+                                                                    <form method="POST" action="{{ url()->current() }}">
+                                                                        @csrf
+                                                                        <input type="hidden" name="page"
+                                                                            value="{{ $page }}">
+                                                                        <button type="submit"
+                                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #444; color: #fff; border: none;">{{ $page }}</button>
+                                                                    </form>
+                                                                </li>
+                                                            @else
+                                                                <li style="display: inline-block;">
+                                                                    <a href="{{ $url }}"
+                                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #444; color: #fff;">{{ $page }}</a>
+                                                                </li>
+                                                            @endif
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                            @endforeach
+
+                                            @if ($posts->hasMorePages())
+                                                @if (request()->isMethod('post'))
+                                                    <li style="display: inline-block;">
+                                                        <form method="POST" action="{{ url()->current() }}">
+                                                            @csrf
+                                                            <input type="hidden" name="page"
+                                                                value="{{ $posts->currentPage() + 1 }}">
+                                                            <button type="submit"
+                                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #444; color: #fff; border: none;">&raquo;</button>
+                                                        </form>
+                                                    </li>
+                                                @else
+                                                    <li style="display: inline-block;">
+                                                        <a href="{{ $posts->nextPageUrl() }}"
+                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #444; color: #fff;">&raquo;</a>
+                                                    </li>
+                                                @endif
+                                            @else
                                                 <li style="display: inline-block;">
-                                                    <a href="{{ $posts->nextPageUrl() }}"
-                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #444; color: #fff;">&raquo;</a>
+                                                    <span
+                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #444; color: #fff;">&raquo;</span>
                                                 </li>
                                             @endif
-                                        @else
-                                            <li style="display: inline-block;">
-                                                <span
-                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #444; color: #fff;">&raquo;</span>
-                                            </li>
-                                        @endif
-                                    </ul>
-                                </nav>
+                                        </ul>
+                                    </nav>
                                 @endif
                             </div>
 
@@ -950,16 +966,17 @@
                                             <div class="pe-lg-3 px-lg-0 pb-lg-0  p-3">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <h6>{{ $post->year }}</h6>
-                                                <div>  @if ($post->is_featured == 1)
-                                                <span class="px-3 py-2 rounded text-capitalize"
-                                                    style="background-color:#BF0000; font-size:12px; "><img
-                                                        src="{{ asset('web/images/star-icon.svg') }}"
-                                                        class="mb-1 me-2 img-fluid">{{ 'featured' }}</span>
-                                            @endif
-                                    
-                                                    <span class="rounded px-3 text-capitalize py-2"
-                                                        style=" font-size:12px;background-color:{{ $post->condition == 'used' ? '#0EB617;' : '#4581F9;' }}">{{ $post->condition }}</span>
-                                                </div>      
+                                                    <div>
+                                                        @if ($post->is_featured == 1)
+                                                            <span class="px-3 py-2 rounded text-capitalize"
+                                                                style="background-color:#BF0000; font-size:12px; "><img
+                                                                    src="{{ asset('web/images/star-icon.svg') }}"
+                                                                    class="mb-1 me-2 img-fluid">{{ 'featured' }}</span>
+                                                        @endif
+
+                                                        <span class="rounded px-3 text-capitalize py-2"
+                                                            style=" font-size:12px;background-color:{{ $post->condition == 'used' ? '#0EB617;' : '#4581F9;' }}">{{ $post->condition }}</span>
+                                                    </div>
                                                 </div>
                                                 <h4>{{ $post->makename . ' ' . $post->modelname }}</h4>
                                                 <h5 style="color: #281F48;"><b>PKR
@@ -1004,142 +1021,138 @@
                                         </div>
                                     </div>
                                 </a>
-
-
-
                             </div>
                         @endforeach
                         <div class="row">
-                             @if (count($posts) > 0)
-                            <div class="col-md-6">
-                                <span class=" pagination_count" style="font-size: 18px; color: #FD5631; font-weight:700 ">
-                                    Showing {{ ($posts->currentPage() - 1) * $posts->perPage() + 1 }}
-                                    to {{ min($posts->currentPage() * $posts->perPage(), $posts->total()) }}
-                                    of {{ $posts->total() }} Results
-                                </span>
-                            </div>
+                            @if (count($posts) > 0)
+                                <div class="col-md-6">
+                                    <span class=" pagination_count"
+                                        style="font-size: 18px; color: #FD5631; font-weight:700 ">
+                                        Showing {{ ($posts->currentPage() - 1) * $posts->perPage() + 1 }}
+                                        to {{ min($posts->currentPage() * $posts->perPage(), $posts->total()) }}
+                                        of {{ $posts->total() }} Results
+                                    </span>
+                                </div>
                             @endif
                             <div class="col-md-6">
                                 {{-- @if ($posts->hasPages()) --}}
-                                 @if (count($posts) > 0)
-                                <nav class="d-flex justify-content-end align-items-center">
-                                    <!-- Page Info -->
+                                @if (count($posts) > 0)
+                                    <nav class="d-flex justify-content-end align-items-center">
+                                        <!-- Page Info -->
 
 
-                                    <!-- Pagination -->
-                                    <ul class="pagination"
-                                        style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
-                                        @if ($posts->onFirstPage())
-                                            <li style="display: inline-block;">
-                                                <span
-                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #444; color: #fff;">&laquo;</span>
-                                            </li>
-                                        @else
-                                            @if (request()->isMethod('post'))
-                                                <li style="display: inline-block;">
-                                                    <form method="POST" action="{{ url()->current() }}">
-                                                        @csrf
-                                                        <input type="hidden" name="page"
-                                                            value="{{ $posts->currentPage() - 1 }}">
-                                                        <button type="submit"
-                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #444; color: #fff; border: none;">&laquo;</button>
-                                                    </form>
-                                                </li>
-                                            @else
-                                                <li style="display: inline-block;">
-                                                    <a href="{{ $posts->previousPageUrl() }}"
-                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #444; color: #fff;">&laquo;</a>
-                                                </li>
-                                            @endif
-                                        @endif
-
-                                        @foreach ($posts->links()->elements as $element)
-                                            @if (is_string($element))
+                                        <!-- Pagination -->
+                                        <ul class="pagination"
+                                            style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
+                                            @if ($posts->onFirstPage())
                                                 <li style="display: inline-block;">
                                                     <span
-                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #444; color: #fff;">{{ $element }}</span>
-                                                </li>
-                                            @endif
-
-                                            @if (is_array($element))
-                                                @foreach ($element as $page => $url)
-                                                    @if ($page == $posts->currentPage())
-                                                        <li style="display: inline-block;">
-                                                            <span
-                                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #f56; color: #fff;">{{ $page }}</span>
-                                                        </li>
-                                                    @else
-                                                        @if (request()->isMethod('post'))
-                                                            <li style="display: inline-block;">
-                                                                <form method="POST" action="{{ url()->current() }}">
-                                                                    @csrf
-                                                                    <input type="hidden" name="page"
-                                                                        value="{{ $page }}">
-                                                                    <button type="submit"
-                                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #444; color: #fff; border: none;">{{ $page }}</button>
-                                                                </form>
-                                                            </li>
-                                                        @else
-                                                            <li style="display: inline-block;">
-                                                                <a href="{{ $url }}"
-                                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #444; color: #fff;">{{ $page }}</a>
-                                                            </li>
-                                                        @endif
-                                                    @endif
-                                                @endforeach
-                                            @endif
-                                        @endforeach
-
-                                        @if ($posts->hasMorePages())
-                                            @if (request()->isMethod('post'))
-                                                <li style="display: inline-block;">
-                                                    <form method="POST" action="{{ url()->current() }}">
-                                                        @csrf
-                                                        <input type="hidden" name="page"
-                                                            value="{{ $posts->currentPage() + 1 }}">
-                                                        <button type="submit"
-                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #444; color: #fff; border: none;">&raquo;</button>
-                                                    </form>
+                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #444; color: #fff;">&laquo;</span>
                                                 </li>
                                             @else
+                                                @if (request()->isMethod('post'))
+                                                    <li style="display: inline-block;">
+                                                        <form method="POST" action="{{ url()->current() }}">
+                                                            @csrf
+                                                            <input type="hidden" name="page"
+                                                                value="{{ $posts->currentPage() - 1 }}">
+                                                            <button type="submit"
+                                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #444; color: #fff; border: none;">&laquo;</button>
+                                                        </form>
+                                                    </li>
+                                                @else
+                                                    <li style="display: inline-block;">
+                                                        <a href="{{ $posts->previousPageUrl() }}"
+                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #444; color: #fff;">&laquo;</a>
+                                                    </li>
+                                                @endif
+                                            @endif
+
+                                            @foreach ($posts->links()->elements as $element)
+                                                @if (is_string($element))
+                                                    <li style="display: inline-block;">
+                                                        <span
+                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #444; color: #fff;">{{ $element }}</span>
+                                                    </li>
+                                                @endif
+
+                                                @if (is_array($element))
+                                                    @foreach ($element as $page => $url)
+                                                        @if ($page == $posts->currentPage())
+                                                            <li style="display: inline-block;">
+                                                                <span
+                                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #f56; color: #fff;">{{ $page }}</span>
+                                                            </li>
+                                                        @else
+                                                            @if (request()->isMethod('post'))
+                                                                <li style="display: inline-block;">
+                                                                    <form method="POST" action="{{ url()->current() }}">
+                                                                        @csrf
+                                                                        <input type="hidden" name="page"
+                                                                            value="{{ $page }}">
+                                                                        <button type="submit"
+                                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #444; color: #fff; border: none;">{{ $page }}</button>
+                                                                    </form>
+                                                                </li>
+                                                            @else
+                                                                <li style="display: inline-block;">
+                                                                    <a href="{{ $url }}"
+                                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #444; color: #fff;">{{ $page }}</a>
+                                                                </li>
+                                                            @endif
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                            @endforeach
+
+                                            @if ($posts->hasMorePages())
+                                                @if (request()->isMethod('post'))
+                                                    <li style="display: inline-block;">
+                                                        <form method="POST" action="{{ url()->current() }}">
+                                                            @csrf
+                                                            <input type="hidden" name="page"
+                                                                value="{{ $posts->currentPage() + 1 }}">
+                                                            <button type="submit"
+                                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #444; color: #fff; border: none;">&raquo;</button>
+                                                        </form>
+                                                    </li>
+                                                @else
+                                                    <li style="display: inline-block;">
+                                                        <a href="{{ $posts->nextPageUrl() }}"
+                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #444; color: #fff;">&raquo;</a>
+                                                    </li>
+                                                @endif
+                                            @else
                                                 <li style="display: inline-block;">
-                                                    <a href="{{ $posts->nextPageUrl() }}"
-                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #444; color: #fff;">&raquo;</a>
+                                                    <span
+                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #444; color: #fff;">&raquo;</span>
                                                 </li>
                                             @endif
-                                        @else
-                                            <li style="display: inline-block;">
-                                                <span
-                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #444; color: #fff;">&raquo;</span>
-                                            </li>
-                                        @endif
-                                    </ul>
-                                </nav>
+                                        </ul>
+                                    </nav>
                                 @endif
 
                             </div>
                         </div>
                     </div>
-
-
                 </div>
-
             </div>
         </div>
     </div>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script>
-  $(document).ready(function() {
-    $('.select2').select2();
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2();
             $('#province').change();
             $('#make_filter').change();
-             fetchFilteredBikes();
-  });
-</script>
+            fetchFilteredBikes();
+        });
+    </script>
 
-    <script>  
+    <script>
         document.addEventListener("DOMContentLoaded", function() {
-           
             const priceMin = document.getElementById("priceMin");
             const priceMax = document.getElementById("priceMax");
             const minPrice = document.getElementById("minPrice");
@@ -1193,107 +1206,110 @@
             });
 
             updateInputs();
-            
+
         });
-                
     </script>
 
     <script>
-        $('#make_filter').on('change', function () {
-        const makeId = $(this).val();
-			//alert(makeId);
-        const modelSelect = $('#model_filter');
-         var selectedModelId = "{{ request()->model }}";
-        modelSelect.empty().append('<option value="">Select Model</option>');
+        $('#make_filter').on('change', function() {
+            const makeId = $(this).val();
+            //alert(makeId);
+            const modelSelect = $('#model_filter');
+            var selectedModelId = "{{ request()->model }}";
+            modelSelect.empty().append('<option value="">Select Model</option>');
 
-        if (makeId) {
-            $.get('/getBikeModels/' + makeId, function (data) {
-                data.forEach(model => {
-                    modelSelect.append(`<option value="${model.id}" ${model.id == selectedModelId ? 'selected' : ''}>${model.name + '('+ model.count +')'}</option>`);
+            if (makeId) {
+                $.get('/getBikeModels/' + makeId, function(data) {
+                    data.forEach(model => {
+                        modelSelect.append(
+                            `<option value="${model.id}" ${model.id == selectedModelId ? 'selected' : ''}>${model.name + '('+ model.count +')'}</option>`
+                        );
+                    });
+                    modelSelect.trigger('change.select2');
                 });
-                modelSelect.trigger('change.select2');
-            });
-        }
-    });
+            }
+        });
     </script>
 
     <script>
-		
-		$('#province').on('change', function () {
-        const provinceId = $(this).val();
-        const citySelect = $('#city');
-          var selectedCityId = "{{ request()->city }}";
-        citySelect.empty().append('<option value="">Select City</option>');
+        $('#province').on('change', function() {
+            const provinceId = $(this).val();
+            const citySelect = $('#city');
+            var selectedCityId = "{{ request()->city }}";
+            citySelect.empty().append('<option value="">Select City</option>');
 
-        if (provinceId) {
-            $.get('/getCities/' + provinceId, function (data) {
-                data.forEach(city => {
-                    citySelect.append(`<option value="${city.id}" ${city.id == selectedCityId ? 'selected' : ''} >${city.name + '('+ city.bike_count +')' }</option>`);
+            if (provinceId) {
+                $.get('/getCities/' + provinceId, function(data) {
+                    data.forEach(city => {
+                        citySelect.append(
+                            `<option value="${city.id}" ${city.id == selectedCityId ? 'selected' : ''} >${city.name + '('+ city.bike_count +')' }</option>`
+                        );
+                    });
+                    citySelect.trigger('change.select2');
                 });
-                citySelect.trigger('change.select2');
-            });
-        }
-    });
-		
-		
-      
+            }
+        });
     </script>
 
     {{-- filters code start --}}
     <script>
-  function fetchFilteredBikes(page = 1) {
-    const data = {
-        condition: [],
-        make: $('#make_filter').val(),
-        model: $('#model_filter').val(),
-        min_price: $('#priceMin').val(),
-        max_price: $('#priceMax').val(),
-        fuel_capacity: $('#engine_capacity_filter').val(),
-        year_from: $('#from-year-filter').val(),
-        year_to: $('#to-year-filter').val(),
-        mileage_from: $('#mileage_from').val(),
-        mileage_to: $('#mileage_to').val(),
-        body_type: $('#seating_capacity_filter').val(),
-        sort_by: $('#sortbyorder').val(),
-        assembly: $('#assembly').val(),
-        province: $('#province').val(),
-        city: $('#city').val(),
-        fuel_type: $('#fuel_type').val(),
-        color: $('#color').val(),
-        is_featured: $('#is_featured').is(':checked') ? 'on' : 'off',
-        userType: $('input[name="userType"]:checked').map(function() {
-            return this.value;
-        }).get(),
-        page: page,
-        _token: "{{ csrf_token() }}"
-    };
+        function fetchFilteredBikes(page = 1) {
+            let exteriorColor = $('.color-filter:checked').map(function() {
+                return this.value;
+            }).get();
+            const data = {
+                condition: [],
+                make: $('#make_filter').val(),
+                model: $('#model_filter').val(),
+                min_price: $('#priceMin').val(),
+                max_price: $('#priceMax').val(),
+                fuel_capacity: $('#engine_capacity_filter').val(),
+                year_from: $('#from-year-filter').val(),
+                year_to: $('#to-year-filter').val(),
+                mileage_from: $('#mileage_from').val(),
+                mileage_to: $('#mileage_to').val(),
+                body_type: $('#seating_capacity_filter').val(),
+                sort_by: $('#sortbyorder').val(),
+                assembly: $('#assembly').val(),
+                province: $('#province').val(),
+                city: $('#city').val(),
+                fuel_type: $('#fuel_type').val(),
+                color: exteriorColor,
 
-    // Add selected conditions
-    $('.condition_filter:checked').each(function() {
-        data.condition.push($(this).val());
-    });
+                is_featured: $('#is_featured').is(':checked') ? 'on' : 'off',
+                userType: $('input[name="userType"]:checked').map(function() {
+                    return this.value;
+                }).get(),
+                page: page,
+                _token: "{{ csrf_token() }}"
+            };
 
-    // ✅ Show loader before request
-    $("#loadingSpinner").removeClass("d-none");
+            // Add selected conditions
+            $('.condition_filter:checked').each(function() {
+                data.condition.push($(this).val());
+            });
 
-    $.ajax({
-        url: "{{ route('bikes.filter') }}",
-        method: "POST",
-        data: data,
-        success: function(response) {
-            $('#bike-listings').html(response.html);
-            $('#postscount').text('(' + response.count + ')');
-            loadGoogleMaps(initDistance);
-        },
-        error: function(xhr) {
-            console.error("Error:", xhr.responseText);
-        },
-        complete: function() {
-            // ✅ Always hide loader after request finishes
-            $("#loadingSpinner").addClass("d-none");
+            // ✅ Show loader before request
+            $("#loadingSpinner").removeClass("d-none");
+
+            $.ajax({
+                url: "{{ route('bikes.filter') }}",
+                method: "POST",
+                data: data,
+                success: function(response) {
+                    $('#bike-listings').html(response.html);
+                    $('#postscount').text('(' + response.count + ')');
+                    loadGoogleMaps(initDistance);
+                },
+                error: function(xhr) {
+                    console.error("Error:", xhr.responseText);
+                },
+                complete: function() {
+                    // ✅ Always hide loader after request finishes
+                    $("#loadingSpinner").addClass("d-none");
+                }
+            });
         }
-    });
-}
 
         // Trigger filters
         $(document).on('change',
@@ -1307,7 +1323,7 @@
             e.preventDefault();
             const page = $(this).data('page');
             if (page) {
-                
+
                 fetchFilteredBikes(page);
             }
         });

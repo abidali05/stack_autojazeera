@@ -913,9 +913,8 @@ class SuperadminAddsController extends Controller
         //          });
         //      }])
         //      ->get();
-
-
         // }
+        
         $posts = Post::with(['bodytype1', 'make1'])->where('status', 1)->orderBy('feature_ad', 'DESC')->orderBy('created_at', 'DESC')->latest()->take(12)->get();
         $featured_new_posts = Post::with(['bodytype1', 'make1'])->where('status', 1)->where('feature_ad', '1')->where('condition', 'new')->orderBy('created_at', 'DESC')->latest()->take(12)->get();
 
@@ -923,10 +922,11 @@ class SuperadminAddsController extends Controller
 
         return view('welcome', compact('users', 'makes', 'models', 'posts', 'colors', 'provinces', 'cities',  'features', 'bodytypes', 'featured_new_posts', 'featured_used_posts'));
     }
+
+
     public function carlist(Request $request)
     {
         $page = $request->input('page', 1);
-        // dd($request->all());
         $users = User::where('role', 1)->get();
         $makes = MakeCompany::where('status', 1)->get();
         $models = ModelCompany::where('status', 1)->get();
@@ -948,13 +948,10 @@ class SuperadminAddsController extends Controller
                 return $query->where('make', $request->make);
             })
             ->when($request->filled('province_'), function ($query) use ($request) {
-                // Filter by province
                 $locations = Location::where('province', $request->province_)->pluck('post_id');
-                // dd($locations);
                 $query->whereIn('id', $locations);
             })
             ->when($request->filled('city'), function ($query) use ($request) {
-                // Filter by city
                 $cities = is_array($request->city) ? $request->city : [$request->city];
                 $locations = Location::whereIn('city', $cities)->pluck('post_id');
                 $query->whereIn('id', $locations);
@@ -969,14 +966,14 @@ class SuperadminAddsController extends Controller
             ->paginate(25, ['*'], 'page', $page); // Adjust as needed
         foreach ($posts as $post) {
             $dealer = User::find($post->dealer_id);
-            //dd($dealer);
 
             $post->user_type = $dealer->userType;
-            //dd($post->user_type);
         }
 
         return view('carlisting', compact('users', 'makes', 'models', 'posts', 'colors', 'provinces', 'cities',  'features', 'bodytypes'));
     }
+
+
     public function check_price_range(Request $request)
     {
         //dd($request->all());

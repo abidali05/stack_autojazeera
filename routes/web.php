@@ -45,7 +45,6 @@ use App\Http\Controllers\superadmin\SuperadminMakeController;
 use App\Http\Controllers\superadmin\SuperadminModelController;
 use App\Http\Controllers\superadmin\SuperadminUserController;
 use App\Http\Controllers\superadmin\SuperadminColorController;
-
 use App\Http\Controllers\Bikes\superadmin\BikeModelsController;
 use App\Http\Controllers\superadmin\SuperadminDealerController;
 use App\Http\Controllers\superadmin\SuperadminFeatureController;
@@ -213,16 +212,12 @@ Route::get('car-detail/{id}', [SuperadminAddsController::class, 'cardetail'])->n
 Route::get('contact-us', [GeneralController::class, 'contact'])->name('contact');
 Route::post('contact-us', [GeneralController::class, 'contactUs'])->name('contactUs');
 
-
-
 Route::get('bike-details/{id}', [BikeAdsController::class, 'bikedetail'])->name('bikedetail');
 Route::post('bikes/search', [BikeController::class, 'search'])->name('bikes.search');
 Route::post('/bikes/filter', [BikeController::class, 'filter'])->name('bikes.filter');
 Route::get('bikes/{name}', [BikeController::class, 'new_used_bikes'])->name('new_used_bikes');
 Route::get('/search-bikes/{id}/{type}', [BikeController::class, 'search_data'])->name('search_bikedata');
 Route::post('/check-bike-price-range', [BikeController::class, 'check_price_range'])->name('check-bike-price-range');
-
-
 
 require __DIR__ . '/auth.php';
 
@@ -357,9 +352,6 @@ Route::get('/about-us', [GeneralController::class, 'aboutus'])->name('aboutus');
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
-
-
-
 Route::get('/checkotp', function () {
     return view('otpcheck');
 });
@@ -457,9 +449,6 @@ Route::get('/weekly-posts', function () {
 
 Route::get('services/featured', [AutoservicesServicesController::class, 'allFeaturedServices'])->name('services.featured');
 Route::get('services/top-rated', [AutoservicesServicesController::class, 'allTopRatedServices'])->name('services.toprated');
-
-
-
 
 Route::get('/send-test-email', function () {
     $testEmail = 'stackbuffersislamabad@gmail.com'; // Change to your email

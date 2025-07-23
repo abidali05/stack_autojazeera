@@ -77,7 +77,6 @@ class BikeController extends Controller
 
     public function search(Request $request)
     {
-        // dd($request->all());
         $makes = BikeMake::where('status', 1)->get();
         $models = BikeModels::where('status', 1)->get();
         $colors = Color::all();
@@ -106,8 +105,6 @@ class BikeController extends Controller
             ->orderByDesc('is_featured')
             ->orderByDesc('created_at')
             ->paginate(25);
-
-        // dd($posts);
 
         return view('bikes.user.bike_listing', compact(
             'posts',
@@ -216,7 +213,7 @@ class BikeController extends Controller
             ->when($request->fuel_capacity, fn($q) => $q->where('fuel_capacity', $request->fuel_capacity))
             ->when($request->mileage_from || $request->mileage_to, fn($q) => $q->whereBetween('mileage', [(int)$request->mileage_from, (int)$request->mileage_to]))
             ->when($request->body_type, fn($q) => $q->where('body_type', $request->body_type))
-            ->when($request->color, fn($q) => $q->where('color', $request->color))
+            ->when($request->color, fn($q) => $q->whereIn('color', $request->color))
             ->when($request->is_featured == 'on', fn($q) => $q->where('is_featured', true))
             // ->when($request->userType, fn($q) => $q->whereIn('user_type', $request->userType))
             ->when($request->fuel_type, fn($q) => $q->where('fuel_type', $request->fuel_type))
@@ -280,10 +277,10 @@ class BikeController extends Controller
     }
     public function advertise()
     {
-        if(!Auth::check()){
+        if (!Auth::check()) {
             return redirect('subscription-plans');
         }
-        if(Auth::user()->package == Null){
+        if (Auth::user()->package == Null) {
             return redirect('subscription')->with('error', 'Please upgrade your plan to post an ad.');
         }
         return view('advertise');

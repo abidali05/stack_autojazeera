@@ -52,9 +52,6 @@ class LeadController extends Controller
   }
 
 
-
-
-
   public function bikeleads(Request $request)
   {
     $user = Auth::user();
@@ -71,8 +68,8 @@ class LeadController extends Controller
     // Get paginated forms
     $posts = $baseQuery->paginate(25);
 
-    
-      // dd($posts);
+
+    // dd($posts);
 
 
 

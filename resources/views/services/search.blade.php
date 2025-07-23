@@ -2135,7 +2135,7 @@
                                                             <div class="row">
                                                                 <!-- Use class instead of ID for reCAPTCHA -->
                                                                 <div class="g-recaptcha recaptcha-container"
-                                                                    data-sitekey="6Ld-aDMrAAAAANY_bODNkw-CVxYZ3-uZDz8RNxF6">
+                                                                    data-sitekey="{{ env('RECAPTCHA_KEY') }}">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -2426,9 +2426,11 @@
 
     {{-- step form logic start  --}}
     <!-- Include this in your HTML head or before closing body -->
+    {{-- <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script> --}}
+
+    <div class="g-recaptcha recaptcha-container" data-sitekey="{{ env('RECAPTCHA_KEY') }}"></div>
 
     <script>
         // $("#loadingSpinner").removeClass("d-none");
@@ -2462,7 +2464,7 @@
                 // Render new reCAPTCHA widget
                 try {
                     const widgetId = grecaptcha.render(container, {
-                        'sitekey': '6Ld-aDMrAAAAANY_bODNkw-CVxYZ3-uZDz8RNxF6',
+                        'sitekey': '{{ env('RECAPTCHA_KEY') }}',
                         'callback': function(response) {
                             console.log(`reCAPTCHA verified for shop ${shopId}:`, response);
                         },

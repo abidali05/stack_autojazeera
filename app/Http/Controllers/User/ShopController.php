@@ -403,6 +403,7 @@ class ShopController extends Controller
         if (Auth::user()->role == '3') {
             return response()->json(['success' => false, 'message' => 'You are not authorized to submit a quote.']);
         }
+
         $validator = Validator::make($request->all(), [
             'vehicle_type' => 'required',
             'body_type' => 'required',
@@ -424,8 +425,8 @@ class ShopController extends Controller
 
         // reCAPTCHA Verification
         $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-            // 'secret' => '6Ld-aDMrAAAAAKWtw8TU4lXNBRMTChLo_OFhPJ3N',
             'secret' => env('RECAPTCHA_SECRET'),
+            // 'secret' => env('RECAPTCHA_SECRET'),
             'response' => $request->input('g-recaptcha-response'),
             'remoteip' => $request->ip(),
         ]);
@@ -491,6 +492,7 @@ class ShopController extends Controller
             DB::commit();
             return response()->json(['success' => true, 'message' => 'Quote Submitted Successfully']);
         } catch (\Exception $e) {
+            dd($e);
             DB::rollBack();
             Log::error('Quote submission failed: ' . $e->getMessage());
             return response()->json(['success' => false, 'message' => 'Something went wrong. Please try again.']);
