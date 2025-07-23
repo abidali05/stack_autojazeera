@@ -424,7 +424,8 @@ class ShopController extends Controller
 
         // reCAPTCHA Verification
         $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-            'secret' => '6Ld-aDMrAAAAAKWtw8TU4lXNBRMTChLo_OFhPJ3N',
+            // 'secret' => '6Ld-aDMrAAAAAKWtw8TU4lXNBRMTChLo_OFhPJ3N',
+            'secret' => env('RECAPTCHA_SECRET'),
             'response' => $request->input('g-recaptcha-response'),
             'remoteip' => $request->ip(),
         ]);
