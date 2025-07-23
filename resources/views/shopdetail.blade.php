@@ -1986,7 +1986,7 @@
                                             <div class="col-9 p-3 rounded-3" style="background-color: #F9F9F9;">
                                                 <div class="row">
                                                     <div class="g-recaptcha"
-                                                        data-sitekey="6Ld-aDMrAAAAANY_bODNkw-CVxYZ3-uZDz8RNxF6"></div>
+                                                        data-sitekey="{{ env('RECAPTCHA_KEY') }}"></div>
                                                 </div>
                                             </div>
                                         </div>

@@ -606,7 +606,13 @@
         $(document).ready(function() {
             // Initialize Select2
             $('.select-search').select2({
-                placeholder: "Search here ...",
+                placeholder: "Make",
+                allowClear: true,
+                minimumResultsForSearch: 0
+            });
+
+            $('.select-search-class').select2({
+                placeholder: "Select Model",
                 allowClear: true,
                 minimumResultsForSearch: 0
             });

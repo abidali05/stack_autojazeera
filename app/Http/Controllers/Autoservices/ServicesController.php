@@ -69,9 +69,6 @@ class ServicesController extends Controller
         return view('services.search', compact('shops', 'service_categories', 'amenities', 'provinces'));
     }
 
-
-
-
     public function filter(Request $request)
     {
         $categories = $request->input('category', []);

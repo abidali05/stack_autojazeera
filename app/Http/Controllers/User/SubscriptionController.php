@@ -774,11 +774,6 @@ class SubscriptionController extends Controller
         $plans['car_dealer_plans'] = $carDealers;
         $plans['private_seller_plans'] = $privateSellers;
         $plans['service_plans'] = $services;
-
-        // dd($plans);
-
-
-
         // $ads_plans = AdsSubscriptionPlans::with('features')->where('status', '1')->get();
         // $service_plans = ServiceSubscriptionPlans::with('features')->where('status', '1')->get();
         $provinces = Province::all();
@@ -872,7 +867,7 @@ class SubscriptionController extends Controller
                     }
                 }
             }
-
+            
             return view('dashboard', compact('service_sub', 'ads_sub'));
         }
 

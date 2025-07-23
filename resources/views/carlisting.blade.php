@@ -1,5 +1,3 @@
-
-
 @extends('layout.website_layout.main')
 @section('content')
     <style>
@@ -212,6 +210,14 @@
         .search-container input:focus {
             border-bottom-color: #fff;
             /* Change border color on focus */
+        }
+
+        label.form-label {
+            font-size: 17.6px;
+            font-weight: 500;
+            line-height: 20.68px;
+            text-align: left;
+            color: #281F48;
         }
     </style>
     <style>
@@ -496,8 +502,6 @@
                     <h6 class="form-label m-0" style="color:#FD5631"><strong>Condition</strong></h6>
                 </div>
                 <div class="">
-
-
                     <div class="my-3" style="display: flex; gap: 10px; align-items: center ;">
                         <div class="{{ request()->name == 'new' ? 'd-none' : '' }}">
                             <input type="checkbox" class="filter-checkbox condition_filter" name="condition"
@@ -563,19 +567,16 @@
                             </div>
                             <i class="bi bi-dash dash" style=" "></i>
                         </div>
-
-
-
-
                     </div>
                 </div>
+
                 <!-- Make & Model Filters -->
                 <div class="my-2">
-                    <label class="form-label mb-4"><strong>Make</strong></label>
+                    <label class="form-label"><strong>Make & Model</strong></label>
                     <div class="select-wrapper mt-2">
                         <select id="make_filter" class="form-select select-search mb-2 make-filter filter-style"
                             style="width:100% !important" name="make">
-                            <option value="" selected>Any make</option>
+                            <option value="">Make</option>
                             @foreach ($makes as $make)
                                 <option value="{{ $make->id }}"
                                     {{ request()->make == $make->id || request()->segment(2) == $make->id ? 'selected' : '' }}>
@@ -585,24 +586,23 @@
                         </select> <i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
                     </div>
 
-                    <div class="select-wrapper mt-3">
+                    {{-- <div class="select-wrapper mt-3">
                         <label class="form-label modellabel d-none"> Model</label>
                         <div id="model_filter_wrapper"
-                            style="max-height: 200px !important ;     overflow-y: scroll;
+                            style="max-height: 200px !important; overflow-y: scroll;
                                         scrollbar-color: #FD5631 #1F1B2D;
                                         scrollbar-width: thin;">
                         </div>
+                    </div> --}}
+
+                    <div class="select-wrapper mt-2">
+                        <select class="form-select model-filter select-search-class filter-style"
+                            style="width:100% !important" name="model" id="model_filter">
+                            <option value="" selected>Any model</option>
+                        </select><i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
                     </div>
-
-                    <!--  <div class="select-wrapper mt-3">
-                                                                <select class="form-select model-filter select-search filter-style"
-                                                                    style="width:100% !important" name="model" id="model_filter">
-                                                                    <option value="" selected>Any model</option>
-
-                                                                </select><i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
-                                                            </div> -->
-
                 </div>
+
                 <!-- Province & City Filters -->
                 <div class="my-2">
                     <label class="form-label mb-3"><strong>Province</strong></label>
@@ -621,17 +621,17 @@
                     </div>
                 </div>
                 <!--     <div class="my-3">
-                                                            <label class="form-label mb-3">City</label>
-                                                            <div class="select-wrapper">
-                                                                <select class="form-select select-search filter-style" style="width:100% !important"
-                                                                    id="city_filter">
-                                                                    <option value="" disabled selected>Select City</option>
-                                                                    {{-- @foreach ($cities as $city)
+                                                                            <label class="form-label mb-3">City</label>
+                                                                            <div class="select-wrapper">
+                                                                                <select class="form-select select-search filter-style" style="width:100% !important"
+                                                                                    id="city_filter">
+                                                                                    <option value="" disabled selected>Select City</option>
+                                                                                    {{-- @foreach ($cities as $city)
                                         <option value="{{ $city->id }}">{{ $city->name }} ({{ $city->count }})</option>
                                     @endforeach --}}
-                                                                </select><i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
-                                                            </div>
-                                                        </div> -->
+                                                                                </select><i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
+                                                                            </div>
+                                                                        </div> -->
 
                 <div class="my-2">
                     <label class="form-label mb-3 citylabel d-none"><strong>City</strong></label>
@@ -847,16 +847,6 @@
                 
                         <!-- Add other body types similarly -->
                     </div> --}}
-
-
-
-
-
-
-
-
-
-
                 <!-- Exterior Color Filter -->
                 <div class="my-3 ">
                     <label class="form-label mb-3 mt-2"><strong>Exterior Color</strong></label>
@@ -883,16 +873,10 @@
                                 </label>
                             </div>
                         @endforeach
-
-
-
                     </div>
 
                     <!-- Add other colors similarly -->
                 </div>
-
-
-
 
                 <!-- Ad Type Filter -->
                 <div class="my-3 ">
@@ -1069,59 +1053,84 @@
             }
         });
 
-        // to get models based on selected make
-        $('#make_filter').change(function(e) {
-            var selectedModelId = "{{ request()->model }}";
-            var makeId = this.value;
-            var modelWrapper = document.getElementById('model_filter_wrapper');
-            var modelLabel = $('.model-label'); // Target the label
+        $('#make_filter').on('change', function() {
+            const makeId = $(this).val();
+            const urlPath = encodeURIComponent(window.location.pathname);
+            const modelSelect = $('#model_filter');
+            const selectedModelId = "{{ request()->model }}"; // This works if inside a Blade view
+            modelSelect.empty().append('<option value="">Select Model</option>');
 
-            // Clear the current model options
-            modelWrapper.innerHTML = '';
-            modelLabel.addClass('d-none'); // Hide label initially
-            var urlPath = encodeURIComponent(window.location.pathname);
-            // console.log(urlPath);
-            // Fetch models based on selected make
             if (makeId) {
-                fetch(`/getmodel/${makeId}?path=${urlPath}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        //console.log(data);
-                        if (data.length > 0) {
-                            modelLabel.removeClass('d-none'); // Show label if models exist
-                        }
-
-                        data.forEach(model => {
-                            var div = document.createElement('div');
-                            div.classList.add('form-check', 'my-2');
-
-                            var checkbox = document.createElement('input');
-                            checkbox.type = 'checkbox';
-                            checkbox.classList.add('filter-checkbox',
-                                'model-filter'); // Apply custom checkbox styling
-                            checkbox.id = 'model_' + model.id;
-                            checkbox.value = model.id;
-                            checkbox.name = 'model[]';
-                            if (selectedModelId == model.id) {
-                                checkbox.checked = true;
-                            }
-                            var label = document.createElement('label');
-                            label.classList.add('form-check-label', 'ms-3');
-                            label.htmlFor = 'model_' + model.id;
-                            label.textContent = model.name + ' (' + (model.count || 0) + ')';
-
-                            div.appendChild(checkbox);
-                            div.appendChild(label);
-                            $('.modellabel').removeClass('d-none');
-                            modelWrapper.appendChild(div);
-                        });
-                        fetchFilteredResults();
-                    })
-                    .catch(error => console.error('Error fetching models:', error));
-            } else {
-                $('.modellabel').addClass('d-none');
+                $.get('/getmodel/' + makeId, {
+                    path: urlPath
+                }, function(data) {
+                    // Remove return; if you want it to populate!
+                    data.forEach(model => {
+                        modelSelect.append(
+                            `<option value="${model.id}" ${model.id == selectedModelId ? 'selected' : ''}>
+                        ${model.name} (${model.count})
+                    </option>`
+                        );
+                    });
+                    modelSelect.trigger('change.select2'); // Update select2
+                });
             }
         });
+
+
+        // to get models based on selected make
+        // $('#make_filter').change(function(e) {
+        //     var selectedModelId = "{{ request()->model }}";
+        //     var makeId = this.value;
+        //     var modelWrapper = document.getElementById('model_filter_wrapper');
+        //     var modelLabel = $('.model-label'); // Target the label
+
+        //     // Clear the current model options
+        //     modelWrapper.innerHTML = '';
+        //     modelLabel.addClass('d-none'); // Hide label initially
+        //     var urlPath = encodeURIComponent(window.location.pathname);
+        //     // console.log(urlPath);
+        //     // Fetch models based on selected make
+        //     if (makeId) {
+        //         fetch(`/getmodel/${makeId}?path=${urlPath}`)
+        //             .then(response => response.json())
+        //             .then(data => {
+        //                 //console.log(data);
+        //                 if (data.length > 0) {
+        //                     modelLabel.removeClass('d-none'); // Show label if models exist
+        //                 }
+
+        //                 data.forEach(model => {
+        //                     var div = document.createElement('div');
+        //                     div.classList.add('form-check', 'my-2');
+
+        //                     var checkbox = document.createElement('input');
+        //                     checkbox.type = 'checkbox';
+        //                     checkbox.classList.add('filter-checkbox',
+        //                         'model-filter'); // Apply custom checkbox styling
+        //                     checkbox.id = 'model_' + model.id;
+        //                     checkbox.value = model.id;
+        //                     checkbox.name = 'model[]';
+        //                     if (selectedModelId == model.id) {
+        //                         checkbox.checked = true;
+        //                     }
+        //                     var label = document.createElement('label');
+        //                     label.classList.add('form-check-label', 'ms-3');
+        //                     label.htmlFor = 'model_' + model.id;
+        //                     label.textContent = model.name + ' (' + (model.count || 0) + ')';
+
+        //                     div.appendChild(checkbox);
+        //                     div.appendChild(label);
+        //                     $('.modellabel').removeClass('d-none');
+        //                     modelWrapper.appendChild(div);
+        //                 });
+        //                 fetchFilteredResults();
+        //             })
+        //             .catch(error => console.error('Error fetching models:', error));
+        //     } else {
+        //         $('.modellabel').addClass('d-none');
+        //     }
+        // });
     </script>
 
     {{-- filters script  --}}
@@ -1330,9 +1339,9 @@
 
             $(document).on('change',
                 '.form-select, .price_class, .filter-checkbox, .transmission_filter, \
-                                        #engine_capacity_filter, #from-year-filter, #to-year-filter, \
-                                        #mileage_from, #mileage_to, #sortbyorder, .door_count_filter, .assembly_filter, \
-                                        #featureAd_filter, input[name="userType"], input[name="model"], input[name="city"]',
+                                                        #engine_capacity_filter, #from-year-filter, #to-year-filter, \
+                                                        #mileage_from, #mileage_to, #sortbyorder, .door_count_filter, .assembly_filter, \
+                                                        #featureAd_filter, input[name="userType"], input[name="model"], input[name="city"]',
                 function() {
                     fetchFilteredResults();
                 });
