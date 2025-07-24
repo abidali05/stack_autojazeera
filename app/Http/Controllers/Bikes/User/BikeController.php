@@ -32,7 +32,6 @@ class BikeController extends Controller
     // to view the bike home page 
     public function index()
     {
-
         $makes = BikeMake::where('status', 1)->get();
         $models = BikeModels::where('status', 1)->get();
         $colors = Color::all();
@@ -40,7 +39,6 @@ class BikeController extends Controller
         $bodytypes = BikeBodyTypes::where('status', 1)->get();
         $cities = City::all();
         $features = BikeMainFeatures::where('status', 1)->get();
-
 
         $featured_new_posts = BikePost::with(['features', 'location', 'contacts', 'media', 'dealer'])->where('status', 1)->where('is_featured', '1')->where('condition', 'new')->orderBy('created_at', 'DESC')->latest()->take(12)->get();
 
@@ -84,6 +82,15 @@ class BikeController extends Controller
         $bodytypes = BikeBodyTypes::where('status', 1)->get();
         $cities = City::all();
         $features = BikeMainFeatures::where('status', 1)->get();
+
+        // Preprocess request data to convert "1e" to null
+        $bodyType = $request->input('body_type') === '1e' ? null : $request->input('body_type');
+        $model = $request->input('model') === '1e' ? null : $request->input('model');
+        $make = $request->input('make') === '1e' ? null : $request->input('make');
+        $exteriorColor = $request->input('exterior_color') === '1e' ? null : $request->input('exterior_color');
+        $condition = $request->input('condition') === '1e' ? null : $request->input('condition');
+        $province = $request->filled('province') && $request->input('province') === '1e' ? null : $request->input('province');
+        $city = $request->filled('city') && $request->input('city') === '1e' ? null : $request->input('city');
 
         $posts = BikePost::where('status', 1)
             ->when($request->body_type, fn($q) => $q->where('body_type', $request->body_type))

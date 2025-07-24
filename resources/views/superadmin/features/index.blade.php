@@ -105,12 +105,12 @@
     </style>
     {{-- tabs navigaition  --}}
     <div class="container mt-3">
-		    <div class="row align-items-center">
-                 
-                    <div class="col-md-12">
-                        <h2 class="sec mb-0 primary-color-custom">Manage Car Feature</h2>
-                    </div>
-                </div>
+        <div class="row align-items-center">
+
+            <div class="col-md-12">
+                <h2 class="sec mb-0 primary-color-custom">Manage Car Feature</h2>
+            </div>
+        </div>
         <div class="row d-none">
             <div class="col-md-12 text-center row">
 
@@ -132,9 +132,9 @@
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
             {{-- tab start  --}}
             <div class="container mt-2">
-            
+
                 <div class="row align-items-center mb-4">
-                {{--    <div class="col-md-4 mb-md-0 mb-2">
+                    {{--    <div class="col-md-4 mb-md-0 mb-2">
                         <div class="input-group" style="width:100%">
                             <form id="dealerForm" action="" method="get" style="width:100%">
                                 <select class="form-select  select-search formselect" style="width:100%" name="feature_id"
@@ -149,7 +149,7 @@
                             </form> 
                         </div>
                     </div> --}}
-                  {{--  <div class="col-md-12">
+                    {{--  <div class="col-md-12">
                         @if ($features->hasPages())
                             <nav class="d-flex justify-content-end align-items-center">
                                 <!-- Page Info -->
@@ -246,7 +246,7 @@
                             </nav>
                         @endif
                     </div>  --}}
-                {{--    <div class="col-4"> <span class=" pagination_count"
+                    {{--    <div class="col-4"> <span class=" pagination_count"
                             style="font-size: 18px; color: #281F48; font-weight:700;">
                             {{ ($features->currentPage() - 1) * $features->perPage() + 1 }}
                             - {{ min($features->currentPage() * $features->perPage(), $features->total()) }}
@@ -254,14 +254,14 @@
                         </span></div> --}}
                     <div class="col-md-12 text-end">
                         <button class="btn custom-btn-nav rounded" data-bs-toggle="modal" data-bs-target="#featureModal">
-                      Add New
-                                Feature
+                            Add New
+                            Feature
                         </button>
                     </div>
                 </div>
             </div>
-			       <div class="container">
-                <div class="row d-flex justify-content-between">
+            <div class="container">
+                {{-- <div class="row d-flex justify-content-between">
                     <div class="col-4"> <span class=" pagination_count"
                             style="font-size: 18px; color: #281F48; font-weight:700;">
                             {{ ($features->currentPage() - 1) * $features->perPage() + 1 }}
@@ -269,108 +269,108 @@
                             of {{ $features->total() }} Results
                         </span></div>
                     <div class="col-4">
-                   
-                            <nav class="d-flex justify-content-end align-items-center">
-                                <!-- Page Info -->
+
+                        <nav class="d-flex justify-content-end align-items-center">
+                            <!-- Page Info -->
 
 
-                                <!-- Pagination -->
-                                <ul class="pagination"
-                                    style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
-                                    @if ($features->onFirstPage())
+                            <!-- Pagination -->
+                            <ul class="pagination"
+                                style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
+                                @if ($features->onFirstPage())
+                                    <li style="display: inline-block;">
+                                        <span
+                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</span>
+                                    </li>
+                                @else
+                                    @if (request()->isMethod('post'))
                                         <li style="display: inline-block;">
-                                            <span
-                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</span>
+                                            <form method="POST" action="{{ url()->current() }}">
+                                                @csrf
+                                                <input type="hidden" name="page"
+                                                    value="{{ $features->currentPage() - 1 }}">
+                                                <button type="submit"
+                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&laquo;</button>
+                                            </form>
                                         </li>
                                     @else
-                                        @if (request()->isMethod('post'))
-                                            <li style="display: inline-block;">
-                                                <form method="POST" action="{{ url()->current() }}">
-                                                    @csrf
-                                                    <input type="hidden" name="page"
-                                                        value="{{ $features->currentPage() - 1 }}">
-                                                    <button type="submit"
-                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&laquo;</button>
-                                                </form>
-                                            </li>
-                                        @else
-                                            <li style="display: inline-block;">
-                                                <a href="{{ $features->previousPageUrl() }}"
-                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</a>
-                                            </li>
-                                        @endif
+                                        <li style="display: inline-block;">
+                                            <a href="{{ $features->previousPageUrl() }}"
+                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</a>
+                                        </li>
+                                    @endif
+                                @endif
+
+                                @foreach ($features->links()->elements as $element)
+                                    @if (is_string($element))
+                                        <li style="display: inline-block;">
+                                            <span
+                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $element }}</span>
+                                        </li>
                                     @endif
 
-                                    @foreach ($features->links()->elements as $element)
-                                        @if (is_string($element))
-                                            <li style="display: inline-block;">
-                                                <span
-                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $element }}</span>
-                                            </li>
-                                        @endif
-
-                                        @if (is_array($element))
-                                            @foreach ($element as $page => $url)
-                                                @if ($page == $features->currentPage())
+                                    @if (is_array($element))
+                                        @foreach ($element as $page => $url)
+                                            @if ($page == $features->currentPage())
+                                                <li style="display: inline-block;">
+                                                    <span
+                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #281F48; color: #fff;">{{ $page }}</span>
+                                                </li>
+                                            @else
+                                                @if (request()->isMethod('post'))
                                                     <li style="display: inline-block;">
-                                                        <span
-                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #281F48; color: #fff;">{{ $page }}</span>
+                                                        <form method="POST" action="{{ url()->current() }}">
+                                                            @csrf
+                                                            <input type="hidden" name="page"
+                                                                value="{{ $page }}">
+                                                            <button type="submit"
+                                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">{{ $page }}</button>
+                                                        </form>
                                                     </li>
                                                 @else
-                                                    @if (request()->isMethod('post'))
-                                                        <li style="display: inline-block;">
-                                                            <form method="POST" action="{{ url()->current() }}">
-                                                                @csrf
-                                                                <input type="hidden" name="page"
-                                                                    value="{{ $page }}">
-                                                                <button type="submit"
-                                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">{{ $page }}</button>
-                                                            </form>
-                                                        </li>
-                                                    @else
-                                                        <li style="display: inline-block;">
-                                                            <a href="{{ $url }}"
-                                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $page }}</a>
-                                                        </li>
-                                                    @endif
+                                                    <li style="display: inline-block;">
+                                                        <a href="{{ $url }}"
+                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $page }}</a>
+                                                    </li>
                                                 @endif
-                                            @endforeach
-                                        @endif
-                                    @endforeach
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                @endforeach
 
-                                    @if ($features->hasMorePages())
-                                        @if (request()->isMethod('post'))
-                                            <li style="display: inline-block;">
-                                                <form method="POST" action="{{ url()->current() }}">
-                                                    @csrf
-                                                    <input type="hidden" name="page"
-                                                        value="{{ $features->currentPage() + 1 }}">
-                                                    <button type="submit"
-                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&raquo;</button>
-                                                </form>
-                                            </li>
-                                        @else
-                                            <li style="display: inline-block;">
-                                                <a href="{{ $features->nextPageUrl() }}"
-                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</a>
-                                            </li>
-                                        @endif
+                                @if ($features->hasMorePages())
+                                    @if (request()->isMethod('post'))
+                                        <li style="display: inline-block;">
+                                            <form method="POST" action="{{ url()->current() }}">
+                                                @csrf
+                                                <input type="hidden" name="page"
+                                                    value="{{ $features->currentPage() + 1 }}">
+                                                <button type="submit"
+                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&raquo;</button>
+                                            </form>
+                                        </li>
                                     @else
                                         <li style="display: inline-block;">
-                                            <span
-                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</span>
+                                            <a href="{{ $features->nextPageUrl() }}"
+                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</a>
                                         </li>
                                     @endif
-                                </ul>
+                                @else
+                                    <li style="display: inline-block;">
+                                        <span
+                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</span>
+                                    </li>
+                                @endif
+                            </ul>
 
-                            </nav>
-                     
+                        </nav>
+
                     </div>
-                </div>
+                </div> --}}
             </div>
             <div class="container table-responsive ">
                 <div class="row">
-                    <table class="table table-striped transparent-table align-middle datatable">
+                    <table class="table table-striped transparent-table align-middle feature-datatable">
                         <thead>
                             <tr>
                                 <th>Sr#</th>
@@ -391,8 +391,8 @@
                                             data-bs-toggle="modal" data-bs-target="#editfeatureModal{{ $feature->id }}">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
-                                        <a class="primary-color-custom cancel" data-id="{{ $feature->id }}"
-                                            title="Delete" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                        <a class="primary-color-custom cancel" data-id="{{ $feature->id }}" title="Delete"
+                                            data-bs-toggle="modal" data-bs-target="#deleteModal">
                                             <i class="bi bi-trash"></i>
                                         </a>
                                     </td>
@@ -401,8 +401,8 @@
                                         <td><img src="{{ asset('posts/features/' . $feature->icon) }}" alt=""
                                                 srcset="" width="30" height="30"></td>
                                     @else
-                                        <td><img src="{{ asset('web/images/Icon-form.png') }}" alt=""
-                                                srcset="" width="30" height="30"></td>
+                                        <td><img src="{{ asset('web/images/Icon-form.png') }}" alt="" srcset=""
+                                                width="30" height="30"></td>
                                     @endif
                                     <td>{{ $feature->feature }}</td>
                                     <td>{{ $feature->Sub_feature }}</td>
@@ -417,15 +417,12 @@
                                 </tr>
                                 @include('superadmin.modal.editfeature')
                             @endforeach
-
-
                         </tbody>
                     </table>
                 </div>
-
-
             </div>
-            <div class="container mb-2">
+
+            {{-- <div class="container mb-2">
                 <div class="row d-flex justify-content-between">
                     <div class="col-4"> <span class=" pagination_count"
                             style="font-size: 18px; color: #281F48; font-weight:700;">
@@ -434,105 +431,102 @@
                             of {{ $features->total() }} Results
                         </span></div>
                     <div class="col-4">
-                   
-                            <nav class="d-flex justify-content-end align-items-center">
-                                <!-- Page Info -->
 
-
-                                <!-- Pagination -->
-                                <ul class="pagination"
-                                    style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
-                                    @if ($features->onFirstPage())
+                        <nav class="d-flex justify-content-end align-items-center">
+                            <!-- Pagination -->
+                            <ul class="pagination"
+                                style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
+                                @if ($features->onFirstPage())
+                                    <li style="display: inline-block;">
+                                        <span
+                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</span>
+                                    </li>
+                                @else
+                                    @if (request()->isMethod('post'))
                                         <li style="display: inline-block;">
-                                            <span
-                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</span>
+                                            <form method="POST" action="{{ url()->current() }}">
+                                                @csrf
+                                                <input type="hidden" name="page"
+                                                    value="{{ $features->currentPage() - 1 }}">
+                                                <button type="submit"
+                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&laquo;</button>
+                                            </form>
                                         </li>
                                     @else
-                                        @if (request()->isMethod('post'))
-                                            <li style="display: inline-block;">
-                                                <form method="POST" action="{{ url()->current() }}">
-                                                    @csrf
-                                                    <input type="hidden" name="page"
-                                                        value="{{ $features->currentPage() - 1 }}">
-                                                    <button type="submit"
-                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&laquo;</button>
-                                                </form>
-                                            </li>
-                                        @else
-                                            <li style="display: inline-block;">
-                                                <a href="{{ $features->previousPageUrl() }}"
-                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</a>
-                                            </li>
-                                        @endif
+                                        <li style="display: inline-block;">
+                                            <a href="{{ $features->previousPageUrl() }}"
+                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</a>
+                                        </li>
+                                    @endif
+                                @endif
+
+                                @foreach ($features->links()->elements as $element)
+                                    @if (is_string($element))
+                                        <li style="display: inline-block;">
+                                            <span
+                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $element }}</span>
+                                        </li>
                                     @endif
 
-                                    @foreach ($features->links()->elements as $element)
-                                        @if (is_string($element))
-                                            <li style="display: inline-block;">
-                                                <span
-                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $element }}</span>
-                                            </li>
-                                        @endif
-
-                                        @if (is_array($element))
-                                            @foreach ($element as $page => $url)
-                                                @if ($page == $features->currentPage())
+                                    @if (is_array($element))
+                                        @foreach ($element as $page => $url)
+                                            @if ($page == $features->currentPage())
+                                                <li style="display: inline-block;">
+                                                    <span
+                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #281F48; color: #fff;">{{ $page }}</span>
+                                                </li>
+                                            @else
+                                                @if (request()->isMethod('post'))
                                                     <li style="display: inline-block;">
-                                                        <span
-                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #281F48; color: #fff;">{{ $page }}</span>
+                                                        <form method="POST" action="{{ url()->current() }}">
+                                                            @csrf
+                                                            <input type="hidden" name="page"
+                                                                value="{{ $page }}">
+                                                            <button type="submit"
+                                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">{{ $page }}</button>
+                                                        </form>
                                                     </li>
                                                 @else
-                                                    @if (request()->isMethod('post'))
-                                                        <li style="display: inline-block;">
-                                                            <form method="POST" action="{{ url()->current() }}">
-                                                                @csrf
-                                                                <input type="hidden" name="page"
-                                                                    value="{{ $page }}">
-                                                                <button type="submit"
-                                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">{{ $page }}</button>
-                                                            </form>
-                                                        </li>
-                                                    @else
-                                                        <li style="display: inline-block;">
-                                                            <a href="{{ $url }}"
-                                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $page }}</a>
-                                                        </li>
-                                                    @endif
+                                                    <li style="display: inline-block;">
+                                                        <a href="{{ $url }}"
+                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $page }}</a>
+                                                    </li>
                                                 @endif
-                                            @endforeach
-                                        @endif
-                                    @endforeach
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                @endforeach
 
-                                    @if ($features->hasMorePages())
-                                        @if (request()->isMethod('post'))
-                                            <li style="display: inline-block;">
-                                                <form method="POST" action="{{ url()->current() }}">
-                                                    @csrf
-                                                    <input type="hidden" name="page"
-                                                        value="{{ $features->currentPage() + 1 }}">
-                                                    <button type="submit"
-                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&raquo;</button>
-                                                </form>
-                                            </li>
-                                        @else
-                                            <li style="display: inline-block;">
-                                                <a href="{{ $features->nextPageUrl() }}"
-                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</a>
-                                            </li>
-                                        @endif
+                                @if ($features->hasMorePages())
+                                    @if (request()->isMethod('post'))
+                                        <li style="display: inline-block;">
+                                            <form method="POST" action="{{ url()->current() }}">
+                                                @csrf
+                                                <input type="hidden" name="page"
+                                                    value="{{ $features->currentPage() + 1 }}">
+                                                <button type="submit"
+                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&raquo;</button>
+                                            </form>
+                                        </li>
                                     @else
                                         <li style="display: inline-block;">
-                                            <span
-                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</span>
+                                            <a href="{{ $features->nextPageUrl() }}"
+                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</a>
                                         </li>
                                     @endif
-                                </ul>
+                                @else
+                                    <li style="display: inline-block;">
+                                        <span
+                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</span>
+                                    </li>
+                                @endif
+                            </ul>
 
-                            </nav>
-                     
+                        </nav>
+
                     </div>
                 </div>
-            </div>
+            </div> --}}
             @include('superadmin.modal.addfeature')
             @if (isset($feature))
                 <form action="{{ route('superadmin.feature.destroy', $feature->id) }}" method="post">
@@ -544,7 +538,7 @@
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             {{-- tab start  --}}
             <div class="container mt-5">
-           
+
                 <div class="row align-items-center mb-4">
                     <div class="col-md-4 mb-md-0 mb-2">
                         <div class="input-group" style="width:100%">
@@ -552,7 +546,7 @@
                                 <select class="form-select  select-search formselect" style="width:100%"
                                     name="bikefeature_id" style="color:black !important" aria-label="Search Dealer"
                                     aria-describedby="search-addon">
-                                    <option >Select Feature type</option>
+                                    <option>Select Feature type</option>
                                     <option value="0">All</option>
                                     @foreach ($bikefeatures as $key => $feature)
                                         <option value="{{ $feature->id }}">{{ $feature->category }}</option>
@@ -561,12 +555,9 @@
                             </form>
                         </div>
                     </div>
-                    <div class="col-md-8">
+                    {{-- <div class="col-md-8">
                         @if ($bikefeatures->hasPages())
                             <nav class="d-flex justify-content-end align-items-center">
-                                <!-- Page Info -->
-
-
                                 <!-- Pagination -->
                                 <ul class="pagination"
                                     style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
@@ -663,7 +654,7 @@
                             {{ ($bikefeatures->currentPage() - 1) * $bikefeatures->perPage() + 1 }}
                             - {{ min($bikefeatures->currentPage() * $bikefeatures->perPage(), $bikefeatures->total()) }}
                             of {{ $bikefeatures->total() }} Results
-                        </span></div>
+                        </span></div> --}}
                     <div class="col-md-8 text-end">
                         <button class="btn custom-btn-nav rounded" data-bs-toggle="modal"
                             data-bs-target="#addbikefeatureModal">
@@ -673,9 +664,9 @@
                     </div>
                 </div>
             </div>
-            <div class="container table-responsive ">
+            <div class="container table-responsive">
                 <div class="row">
-                    <table class="table table-striped transparent-table align-middle datatable">
+                    <table class="table table-striped transparent-table align-middle feature-datatable">
                         <thead>
                             <tr>
                                 <th>Sr#</th>
@@ -698,7 +689,8 @@
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
                                         <a class="primary-color-custom cancel" data-id="{{ $feature->id }}"
-                                            title="Delete" data-bs-toggle="modal" data-bs-target="#deletebikefeatureModal{{ $feature->id }}">
+                                            title="Delete" data-bs-toggle="modal"
+                                            data-bs-target="#deletebikefeatureModal{{ $feature->id }}">
                                             <i class="bi bi-trash"></i>
                                         </a>
                                     </td>
@@ -725,16 +717,20 @@
                                 <div class="modal fade" id="editbikefeatureModal{{ $feature->id }}" tabindex="-1"
                                     aria-labelledby="featureModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content "  style="border-radius: 10px; overflow: hidden;">
+                                        <div class="modal-content " style="border-radius: 10px; overflow: hidden;">
                                             <form id="featureForm" method="post"
                                                 action="{{ route('superadmin.bike-features.update', $feature->id) }}"
                                                 enctype="multipart/form-data">
-                                                <div class="modal-header  border-0 " style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
-                                                    <h5 class="modal-title" id="featureModalLabel"> <strong>Edit Feature</strong></h5>
-                                                    <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
+                                                <div class="modal-header  border-0 "
+                                                    style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                                                    <h5 class="modal-title" id="featureModalLabel"> <strong>Edit
+                                                            Feature</strong></h5>
+                                                    <button type="button" class="btn-close"
+                                                        style="background-color: #D9D9D9 !important; color: #FD5631;"
+                                                        data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
-                                                <div class="modal-body " style="background-color: #F0F3F6; color: #FD5631;">
+                                                <div class="modal-body "
+                                                    style="background-color: #F0F3F6; color: #FD5631;">
 
                                                     @csrf
                                                     @method('PUT')
@@ -804,10 +800,11 @@
                                                 </div>
 
                                                 <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                                                    <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                                                    <button type="button" class="btn btn-light px-4 py-2 "
+                                                        style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
                                                         data-bs-dismiss="modal">Cancel</button>
-                                                    <button type="submit"
-                                                        class="btn btn-light px-4 py-2 " style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Save</button>
+                                                    <button type="submit" class="btn btn-light px-4 py-2 "
+                                                        style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Save</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -816,39 +813,42 @@
 
 
                                 {{-- delete bike feature modal --}}
-                              
+
                                 <div class="modal fade" id="deletebikefeatureModal{{ $feature->id }}" tabindex="-1"
                                     aria-labelledby="addDealerModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content"
-                                           style="border-radius: 10px; overflow: hidden;">
-                                            <div class="modal-header border-0" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
-                                                <h5 class="modal-title" id="editDealerModalLabel"> <strong> Delete</strong></h5>
-                                                <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
+                                        <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
+                                            <div class="modal-header border-0"
+                                                style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                                                <h5 class="modal-title" id="editDealerModalLabel"> <strong>
+                                                        Delete</strong></h5>
+                                                <button type="button" class="btn-close"
+                                                    style="background-color: #D9D9D9 !important; color: #FD5631;"
+                                                    data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
 
-                                            <div class="modal-body text-center" style="background-color: #F0F3F6; color: #FD5631;">
+                                            <div class="modal-body text-center"
+                                                style="background-color: #F0F3F6; color: #FD5631;">
                                                 <h4 style="color:#281F48 !important;">Are you sure to delete this record?
                                                 </h4>
                                                 <div class="row mb-3">
-                                                    <form action="{{ url('superadmin/bike-features/destroy') }}" method="post">
+                                                    <form action="{{ url('superadmin/bike-features/destroy') }}"
+                                                        method="post">
                                                         @method('DELETE')
                                                         @csrf
-                                                    <div class="col-sm-8">
-                                                        <input type="hidden" class="form-control" name="deleted_id"
-                                                            id="deleted_id" value="{{ $feature->id }}" required>
-                                                    </div>
+                                                        <div class="col-sm-8">
+                                                            <input type="hidden" class="form-control" name="deleted_id"
+                                                                id="deleted_id" value="{{ $feature->id }}" required>
+                                                        </div>
                                                 </div>
-
-
-
 
                                             </div>
                                             <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                                                <button type="button"  class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                                                <button type="button" class="btn btn-light px-4 py-2 "
+                                                    style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
                                                     data-bs-dismiss="modal">Cancel</button>
-                                                <button type="submit"  class="btn btn-light px-4 py-2 " style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Delete</button>
+                                                <button type="submit" class="btn btn-light px-4 py-2 "
+                                                    style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Delete</button>
                                             </div>
                                             </form>
                                         </div>
@@ -856,15 +856,12 @@
                                 </div>
                             @endforeach
 
-
                         </tbody>
                     </table>
                 </div>
-
-
             </div>
             <div class="container">
-                <div class="row d-flex justify-content-between">
+                {{-- <div class="row d-flex justify-content-between">
                     <div class="col-4"> <span class=" pagination_count"
                             style="font-size: 18px; color: #281F48; font-weight:700;">
                             {{ ($bikefeatures->currentPage() - 1) * $bikefeatures->perPage() + 1 }}
@@ -969,7 +966,7 @@
                             </nav>
                         @endif
                     </div>
-                </div>
+                </div> --}}
             </div>
             @include('superadmin.modal.addfeature')
             @if (isset($feature))
@@ -985,11 +982,14 @@
 
         <div class="modal fade" id="addbikefeatureModal" tabindex="-1" aria-labelledby="addbikefeatureModalLabel"
             aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" >
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
-                    <div class="modal-header border-0 " style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                    <div class="modal-header border-0 "
+                        style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                         <h5 class="modal-title" id="addbikefeatureModalLabel"> <strong>Add Bike Feature</strong></h5>
-                        <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close"
+                            style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body " style="background-color: #F0F3F6; color: #FD5631;">
                         <form id="featureForm" method="post" action="{{ route('superadmin.bike-features.store') }}"
@@ -1040,11 +1040,36 @@
                     </div>
 
                     <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                        <button type="button"  class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit"  class="btn btn-light px-4 py-2 " style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Save</button>
+                        <button type="button" class="btn btn-light px-4 py-2 "
+                            style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                            data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-light px-4 py-2 "
+                            style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Save</button>
                     </div>
                     </form>
                 </div>
             </div>
         </div>
+
+        <script>
+            $(document).ready(function() {
+                $('.feature-datatable').each(function() {
+                    var table = $(this).DataTable({
+                        paging: true,
+                        pageLength: 25,
+                        lengthChange: false,
+                        searching: true,
+                        ordering: true,
+                        scrollX: false,
+                        order: [
+                            [0, 'asc']
+                        ],
+                        language: {
+                            search: "Search: "
+                        },
+                        dom: '<"top"f i lp>rt<"bottom"i lp><"clear">'
+                    });
+                });
+            });
+        </script>
     @endsection

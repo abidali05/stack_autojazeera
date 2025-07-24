@@ -106,18 +106,18 @@
     {{-- tabs navigaition  --}}
     <div class="container mt-5">
         <div class="row align-items-center mb-4">
-           
-                    <div class="col-md-12">
-                        <h2 class="sec mb-0 primary-color-custom">Manage Body Type</h2>
-                    </div>
-			          <div class="col-md-12 text-end">
 
-                        <button class="btn custom-btn-nav rounded text-white" data-bs-toggle="modal" data-bs-target="#featureModal">
-                            <span> <i class="bi bi-plus fs-5 p-0 m-0 text-white"></i></span> <span class="pb-3 text-white"> Add Body
-                                Type</span>
-                        </button>
-                    </div>
-                </div>
+            <div class="col-md-12">
+                <h2 class="sec mb-0 primary-color-custom">Manage Body Type</h2>
+            </div>
+            <div class="col-md-12 text-end">
+
+                <button class="btn custom-btn-nav rounded text-white" data-bs-toggle="modal" data-bs-target="#featureModal">
+                    <span> <i class="bi bi-plus fs-5 p-0 m-0 text-white"></i></span> <span class="pb-3 text-white"> Add Body
+                        Type</span>
+                </button>
+            </div>
+        </div>
         <div class="row d-none">
             <div class="col-md-12 text-center row">
 
@@ -139,24 +139,9 @@
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
             {{-- tab start  --}}
             <div class="container mt-5">
-            
-                <div class="row align-items-center mb-4">
-                  {{--  <div class="col-md-4 mb-md-0 mb-2">
-                        <div class="input-group" style="width:100%">
-                            <form id="dealerForm" action="" method="get" style="width:100%">
-                                <select class="form-select  select-search formselect"
-                                    style="width:100%; background-color:#1F1B2D" name="bodytype_id"
-                                    style="color:black !important" aria-label="Search Dealer"
-                                    aria-describedby="search-addon">
-                                    <option selected>Select body type</option>
-                                    <option value="0">All</option>
-                                    @foreach ($bodytypes as $key => $type)
-                                        <option value="{{ $type->id }}">{{ $type->name }}</option>
-                                    @endforeach
-                                </select>
-                            </form>
-                        </div>
-                    </div> --}}
+
+                {{-- <div class="row align-items-center mb-4">
+                  
 					          <div class="col-4"> <span class="pt-md-3 pagination_count"
                                 style="font-size: 18px; color: #281F48; font-weight:700;">
                                 {{ ($bodytypes->currentPage() - 1) * $bodytypes->perPage() + 1 }}
@@ -166,14 +151,9 @@
                     <div class="col-8">
                  
                             <nav class="d-flex justify-content-end align-items-center">
-                                <!-- Page Info -->
-
-
-                                <!-- Pagination -->
                                 <ul class="pagination"
                                     style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
 
-                                    {{-- Previous Page Button --}}
                                     @if ($bodytypes->onFirstPage())
                                         <li style="display: inline-block;">
                                             <span
@@ -198,7 +178,6 @@
                                         @endif
                                     @endif
 
-                                    {{-- Pagination Links --}}
                                     @foreach ($bodytypes->links()->elements as $element)
                                         @if (is_string($element))
                                             <li style="display: inline-block;">
@@ -236,7 +215,6 @@
                                         @endif
                                     @endforeach
 
-                                    {{-- Next Page Button --}}
                                     @if ($bodytypes->hasMorePages())
                                         @if (request()->isMethod('post'))
                                             <li style="display: inline-block;">
@@ -261,17 +239,13 @@
                                         </li>
                                     @endif
                                 </ul>
-
                             </nav>
-              
                     </div>
-               
-          
-                </div>
+                </div> --}}
             </div>
-            <div class="container table-responsive ">
+            <div class="container table-responsive">
                 <div class="row">
-                    <table class="table table-striped transparent-table align-middle datatable">
+                    <table class="table table-striped transparent-table align-middle bodytype-datatable">
                         <thead>
                             <tr>
                                 <th>Sr#</th>
@@ -287,13 +261,12 @@
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td>
-                                        <a class=" me-2" title="Edit" data-bs-toggle="modal"
-                                            style="text-decoration:none"
+                                        <a class=" me-2" title="Edit" data-bs-toggle="modal" style="text-decoration:none"
                                             data-bs-target="#editbodytypeModal{{ $type->id }}">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
-                                        <a class="primary-color-custom cancel" data-id="{{ $type->id }}"
-                                            title="Delete" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                        <a class="primary-color-custom cancel" data-id="{{ $type->id }}" title="Delete"
+                                            data-bs-toggle="modal" data-bs-target="#deleteModal">
                                             <i class="bi bi-trash"></i>
                                         </a>
                                     </td>
@@ -312,17 +285,11 @@
                                     @include('superadmin.modal.editbodytype')
                                 </tr>
                             @endforeach
-                            <!-- Repeat this block for each row -->
-
-
-
                         </tbody>
                     </table>
                 </div>
-
-
             </div>
-            <div class="container my-2">
+            {{-- <div class="container my-2">
                 <div class="row d-flex justify-content-between">
                     <div class="col-4"> <span class="pt-md-3 pagination_count"
                             style="font-size: 18px; color: #281F48; font-weight:700;">
@@ -333,14 +300,9 @@
                     <div class="col-4">
                       
                             <nav class="d-flex justify-content-end align-items-center">
-                                <!-- Page Info -->
-
-
-                                <!-- Pagination -->
                                 <ul class="pagination"
                                     style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
 
-                                    {{-- Previous Page Button --}}
                                     @if ($bodytypes->onFirstPage())
                                         <li style="display: inline-block;">
                                             <span
@@ -365,7 +327,6 @@
                                         @endif
                                     @endif
 
-                                    {{-- Pagination Links --}}
                                     @foreach ($bodytypes->links()->elements as $element)
                                         @if (is_string($element))
                                             <li style="display: inline-block;">
@@ -403,7 +364,6 @@
                                         @endif
                                     @endforeach
 
-                                    {{-- Next Page Button --}}
                                     @if ($bodytypes->hasMorePages())
                                         @if (request()->isMethod('post'))
                                             <li style="display: inline-block;">
@@ -433,7 +393,7 @@
                     
                     </div>
                 </div>
-            </div>
+            </div> --}}
             @include('superadmin.modal.addbodytype')
 
             @if (isset($type))
@@ -446,7 +406,7 @@
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             {{-- tab start  --}}
             <div class="container mt-5">
-        
+
                 <div class="row align-items-center mb-4">
                     <div class="col-md-4 mb-md-0 mb-2">
                         <div class="input-group" style="width:100%">
@@ -464,17 +424,12 @@
                             </form>
                         </div>
                     </div>
-                    <div class="col-4">
+                    {{-- <div class="col-4">
                         @if ($bikebodytypes->hasPages())
                             <nav class="d-flex justify-content-end align-items-center">
-                                <!-- Page Info -->
-
-
-                                <!-- Pagination -->
                                 <ul class="pagination"
                                     style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
 
-                                    {{-- Previous Page Button --}}
                                     @if ($bikebodytypes->onFirstPage())
                                         <li style="display: inline-block;">
                                             <span
@@ -498,8 +453,6 @@
                                             </li>
                                         @endif
                                     @endif
-
-                                    {{-- Pagination Links --}}
                                     @foreach ($bikebodytypes->links()->elements as $element)
                                         @if (is_string($element))
                                             <li style="display: inline-block;">
@@ -537,7 +490,6 @@
                                         @endif
                                     @endforeach
 
-                                    {{-- Next Page Button --}}
                                     @if ($bikebodytypes->hasMorePages())
                                         @if (request()->isMethod('post'))
                                             <li style="display: inline-block;">
@@ -565,8 +517,8 @@
 
                             </nav>
                         @endif
-                    </div>
-                    <div class="container mt-2">
+                    </div> --}}
+                    {{-- <div class="container mt-2">
                         <div class="col-4"> <span class="pt-md-3 pagination_count"
                                 style="font-size: 18px; color: #281F48; font-weight:700;">
                                 {{ ($bikebodytypes->currentPage() - 1) * $bikebodytypes->perPage() + 1 }}
@@ -574,7 +526,7 @@
                                 {{ min($bikebodytypes->currentPage() * $bikebodytypes->perPage(), $bikebodytypes->total()) }}
                                 of {{ $bikebodytypes->total() }} Results
                             </span></div>
-                    </div>
+                    </div> --}}
                     <div class="col-md-12 text-end">
 
                         <button class="btn custom-btn-nav rounded" data-bs-toggle="modal"
@@ -587,7 +539,7 @@
             </div>
             <div class="container table-responsive ">
                 <div class="row">
-                    <table class="table table-striped transparent-table align-middle datatable">
+                    <table class="table table-striped transparent-table align-middle bodytype-datatable">
                         <thead>
                             <tr>
                                 <th>Sr#</th>
@@ -603,8 +555,7 @@
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td>
-                                        <a class=" me-2" title="Edit" data-bs-toggle="modal"
-                                            style="text-decoration:none"
+                                        <a class=" me-2" title="Edit" data-bs-toggle="modal" style="text-decoration:none"
                                             data-bs-target="#editBikebodytypeModal{{ $type->id }}">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
@@ -693,7 +644,6 @@
                                 </div>
 
 
-
                                 {{-- delete bike body type modal --}}
 
                                 <div class="modal fade" id="deletebikebodytypeModal{{ $type->id }}" tabindex="-1"
@@ -712,12 +662,13 @@
                                                 </h4>
                                                 <div class="row mb-3">
                                                     <form
-                                                        action="{{ route('superadmin.bike-bodytype.destroy', $type->id) }}" method="POST">
+                                                        action="{{ route('superadmin.bike-bodytype.destroy', $type->id) }}"
+                                                        method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <div class="col-sm-8">
                                                             <input type="hidden" class="form-control" name="deleted_id"
-                                                                id="deleted_id" name="{{$type->id}}" required>
+                                                                id="deleted_id" name="{{ $type->id }}" required>
                                                         </div>
                                                 </div>
 
@@ -743,10 +694,9 @@
                     </table>
                 </div>
 
-
             </div>
             <div class="container my-2">
-                <div class="row d-flex justify-content-between">
+                {{-- <div class="row d-flex justify-content-between">
                     <div class="col-4"> <span class="pt-md-3 pagination_count"
                             style="font-size: 18px; color: #281F48; font-weight:700;">
                             {{ ($bikebodytypes->currentPage() - 1) * $bikebodytypes->perPage() + 1 }}
@@ -754,91 +704,101 @@
                             of {{ $bikebodytypes->total() }} Results
                         </span></div>
                     <div class="col-4">
-                
-                       <nav class="d-flex justify-content-end align-items-center">
-    <ul class="pagination" style="display: flex; list-style: none; gap: 5px; padding: 0; margin: 0; justify-content: center;">
 
-        {{-- Previous Page --}}
-        @if ($models->onFirstPage())
-            <li style="display: inline-block;">
-                <span style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; opacity: 0.5;">&laquo;</span>
-            </li>
-        @else
-            @if (request()->isMethod('post'))
-                <li style="display: inline-block;">
-                    <form method="POST" action="{{ url()->current() }}">
-                        @csrf
-                        <input type="hidden" name="page" value="{{ $models->currentPage() - 1 }}">
-                        <button type="submit" style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&laquo;</button>
-                    </form>
-                </li>
-            @else
-                <li style="display: inline-block;">
-                    <a href="{{ $models->previousPageUrl() }}" style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; text-decoration: none;">&laquo;</a>
-                </li>
-            @endif
-        @endif
+                        <nav class="d-flex justify-content-end align-items-center">
+                            <ul class="pagination"
+                                style="display: flex; list-style: none; gap: 5px; padding: 0; margin: 0; justify-content: center;">
 
-        {{-- Page Links --}}
-        @foreach ($models->links()->elements as $element)
-            @if (is_string($element))
-                <li style="display: inline-block;">
-                    <span style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000;">{{ $element }}</span>
-                </li>
-            @endif
+                                @if ($models->onFirstPage())
+                                    <li style="display: inline-block;">
+                                        <span
+                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; opacity: 0.5;">&laquo;</span>
+                                    </li>
+                                @else
+                                    @if (request()->isMethod('post'))
+                                        <li style="display: inline-block;">
+                                            <form method="POST" action="{{ url()->current() }}">
+                                                @csrf
+                                                <input type="hidden" name="page"
+                                                    value="{{ $models->currentPage() - 1 }}">
+                                                <button type="submit"
+                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&laquo;</button>
+                                            </form>
+                                        </li>
+                                    @else
+                                        <li style="display: inline-block;">
+                                            <a href="{{ $models->previousPageUrl() }}"
+                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; text-decoration: none;">&laquo;</a>
+                                        </li>
+                                    @endif
+                                @endif
 
-            @if (is_array($element))
-                @foreach ($element as $page => $url)
-                    @if ($page == $models->currentPage())
-                        <li style="display: inline-block;">
-                            <span style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #281F48; color: #fff;">{{ $page }}</span>
-                        </li>
-                    @else
-                        @if (request()->isMethod('post'))
-                            <li style="display: inline-block;">
-                                <form method="POST" action="{{ url()->current() }}">
-                                    @csrf
-                                    <input type="hidden" name="page" value="{{ $page }}">
-                                    <button type="submit" style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">{{ $page }}</button>
-                                </form>
-                            </li>
-                        @else
-                            <li style="display: inline-block;">
-                                <a href="{{ $url }}" style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; text-decoration: none;">{{ $page }}</a>
-                            </li>
-                        @endif
-                    @endif
-                @endforeach
-            @endif
-        @endforeach
+                                @foreach ($models->links()->elements as $element)
+                                    @if (is_string($element))
+                                        <li style="display: inline-block;">
+                                            <span
+                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000;">{{ $element }}</span>
+                                        </li>
+                                    @endif
 
-        {{-- Next Page --}}
-        @if ($models->hasMorePages())
-            @if (request()->isMethod('post'))
-                <li style="display: inline-block;">
-                    <form method="POST" action="{{ url()->current() }}">
-                        @csrf
-                        <input type="hidden" name="page" value="{{ $models->currentPage() + 1 }}">
-                        <button type="submit" style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&raquo;</button>
-                    </form>
-                </li>
-            @else
-                <li style="display: inline-block;">
-                    <a href="{{ $models->nextPageUrl() }}" style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; text-decoration: none;">&raquo;</a>
-                </li>
-            @endif
-        @else
-            <li style="display: inline-block;">
-                <span style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; opacity: 0.5;">&raquo;</span>
-            </li>
-        @endif
+                                    @if (is_array($element))
+                                        @foreach ($element as $page => $url)
+                                            @if ($page == $models->currentPage())
+                                                <li style="display: inline-block;">
+                                                    <span
+                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #281F48; color: #fff;">{{ $page }}</span>
+                                                </li>
+                                            @else
+                                                @if (request()->isMethod('post'))
+                                                    <li style="display: inline-block;">
+                                                        <form method="POST" action="{{ url()->current() }}">
+                                                            @csrf
+                                                            <input type="hidden" name="page"
+                                                                value="{{ $page }}">
+                                                            <button type="submit"
+                                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">{{ $page }}</button>
+                                                        </form>
+                                                    </li>
+                                                @else
+                                                    <li style="display: inline-block;">
+                                                        <a href="{{ $url }}"
+                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; text-decoration: none;">{{ $page }}</a>
+                                                    </li>
+                                                @endif
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                @endforeach
 
-    </ul>
-</nav>
+                                @if ($models->hasMorePages())
+                                    @if (request()->isMethod('post'))
+                                        <li style="display: inline-block;">
+                                            <form method="POST" action="{{ url()->current() }}">
+                                                @csrf
+                                                <input type="hidden" name="page"
+                                                    value="{{ $models->currentPage() + 1 }}">
+                                                <button type="submit"
+                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&raquo;</button>
+                                            </form>
+                                        </li>
+                                    @else
+                                        <li style="display: inline-block;">
+                                            <a href="{{ $models->nextPageUrl() }}"
+                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; text-decoration: none;">&raquo;</a>
+                                        </li>
+                                    @endif
+                                @else
+                                    <li style="display: inline-block;">
+                                        <span
+                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; opacity: 0.5;">&raquo;</span>
+                                    </li>
+                                @endif
 
-                   
+                            </ul>
+                        </nav>
+
                     </div>
-                </div>
+                </div> --}}
             </div>
             @include('superadmin.modal.addbodytype')
 
@@ -908,4 +868,26 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $('.bodytype-datatable').each(function() {
+                var table = $(this).DataTable({
+                    paging: true,
+                    pageLength: 25,
+                    lengthChange: false,
+                    searching: true,
+                    ordering: true,
+                    scrollX: false,
+                    order: [
+                        [0, 'asc']
+                    ],
+                    language: {
+                        search: "Search: "
+                    },
+                    dom: '<"top"f i lp>rt<"bottom"i lp><"clear">'
+                });
+            });
+        });
+    </script>
 @endsection

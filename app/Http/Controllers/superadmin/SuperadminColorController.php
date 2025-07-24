@@ -15,10 +15,10 @@ class SuperadminColorController extends Controller
     {
         if($request->color_id)
         {
-            $colors = Color::orderby('id', 'desc')->where('id',$request->color_id)->paginate(25);
+            $colors = Color::orderby('id', 'desc')->where('id',$request->color_id)->get();
         }
         else{
-            $colors = Color::orderby('id', 'desc')->paginate(25);
+            $colors = Color::orderby('id', 'desc')->get();
         }
        
         return view('superadmin.colors.index', compact('colors'));

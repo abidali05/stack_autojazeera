@@ -21,18 +21,18 @@ class SuperadminMakeController extends Controller
     {
         if($request->make_id)
         {
-          $makes = MakeCompany::orderby('id', 'desc')->where('id',$request->make_id)->paginate(25);
+          $makes = MakeCompany::orderby('id', 'desc')->where('id',$request->make_id)->get();
         }
         else{
-        $makes = MakeCompany::orderby('id', 'desc')->paginate(25);
+        $makes = MakeCompany::orderby('id', 'desc')->get();
         }
         
         if($request->bikemake_id)
         {
-          $bikemakes = BikeMake::orderby('id', 'desc')->where('id',$request->bikemake_id)->paginate(25);
+          $bikemakes = BikeMake::orderby('id', 'desc')->where('id',$request->bikemake_id)->get();
         }
         else{
-        $bikemakes = BikeMake::orderby('id', 'desc')->paginate(25);
+        $bikemakes = BikeMake::orderby('id', 'desc')->get();
         }
         return view('superadmin.Make.index', compact('makes','bikemakes'));
     }

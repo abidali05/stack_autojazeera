@@ -91,12 +91,10 @@
                         type="button" role="tab" style="color: #281F48" aria-controls="new-cars"
                         aria-selected="false">New Cars ({{ $Newforms->count() }})</button>
                 </li>
-            
+
                 <li class="nav-item d-none" role="presentation">
                     <a href="{{ route('lead.index') }}" class="nav-link">Reset</a>
                 </li>
-
-              
             </ul>
             <div class="col-md-2 text-end">
                 @if (request()->search)
@@ -106,126 +104,122 @@
                     <a href="{{ route('forms.export') }}" class=" exportbtn">Export</a>
                 @endif
             </div>
-
         </div>
-
-       
 
         <!-- Tab Content Section -->
         <div class="tab-content" id="carTabsContent">
-			
+
             <!-- All Cars Tab -->
             <div class="tab-pane fade show active" id="all-cars" role="tabpanel" aria-labelledby="all-cars-tab">
-				 <div class="container my-2">
+                {{-- <div class="container my-2">
 
-        <div class="row align-items-center ">
-      <div class="col-md-4 "> <span class="pt-md-3 pagination_count"
-                    style="font-size: 18px; color: #281F48; font-weight:700;">
-                    {{ ($forms->currentPage() - 1) * $forms->perPage() + 1 }}
-                    - {{ min($forms->currentPage() * $forms->perPage(), $forms->total()) }}
-                    of {{ $forms->total() }} Results
-                </span></div>
-            <div class="col-md-8">
-              
-                    <nav class="d-flex justify-content-end align-items-center">
-                        <!-- Page Info -->
+                    <div class="row align-items-center ">
+                        <div class="col-md-4 "> <span class="pt-md-3 pagination_count"
+                                style="font-size: 18px; color: #281F48; font-weight:700;">
+                                {{ ($forms->currentPage() - 1) * $forms->perPage() + 1 }}
+                                - {{ min($forms->currentPage() * $forms->perPage(), $forms->total()) }}
+                                of {{ $forms->total() }} Results
+                            </span></div>
+                        <div class="col-md-8">
 
-
-                        <!-- Pagination -->
-                        <ul class="pagination"
-                            style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
-                            @if ($forms->onFirstPage())
-                                <li style="display: inline-block;">
-                                    <span
-                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</span>
-                                </li>
-                            @else
-                                @if (request()->isMethod('post'))
-                                    <li style="display: inline-block;">
-                                        <form method="POST" action="{{ url()->current() }}">
-                                            @csrf
-                                            <input type="hidden" name="page" value="{{ $forms->currentPage() - 1 }}">
-                                            <button type="submit"
-                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&laquo;</button>
-                                        </form>
-                                    </li>
-                                @else
-                                    <li style="display: inline-block;">
-                                        <a href="{{ $forms->previousPageUrl() }}"
-                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</a>
-                                    </li>
-                                @endif
-                            @endif
-
-                            @foreach ($forms->links()->elements as $element)
-                                @if (is_string($element))
-                                    <li style="display: inline-block;">
-                                        <span
-                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $element }}</span>
-                                    </li>
-                                @endif
-
-                                @if (is_array($element))
-                                    @foreach ($element as $page => $url)
-                                        @if ($page == $forms->currentPage())
+                            <nav class="d-flex justify-content-end align-items-center">
+                                <ul class="pagination"
+                                    style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
+                                    @if ($forms->onFirstPage())
+                                        <li style="display: inline-block;">
+                                            <span
+                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</span>
+                                        </li>
+                                    @else
+                                        @if (request()->isMethod('post'))
                                             <li style="display: inline-block;">
-                                                <span
-                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #281F48; color: #fff;">{{ $page }}</span>
+                                                <form method="POST" action="{{ url()->current() }}">
+                                                    @csrf
+                                                    <input type="hidden" name="page"
+                                                        value="{{ $forms->currentPage() - 1 }}">
+                                                    <button type="submit"
+                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&laquo;</button>
+                                                </form>
                                             </li>
                                         @else
-                                            @if (request()->isMethod('post'))
-                                                <li style="display: inline-block;">
-                                                    <form method="POST" action="{{ url()->current() }}">
-                                                        @csrf
-                                                        <input type="hidden" name="page" value="{{ $page }}">
-                                                        <button type="submit"
-                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">{{ $page }}</button>
-                                                    </form>
-                                                </li>
-                                            @else
-                                                <li style="display: inline-block;">
-                                                    <a href="{{ $url }}"
-                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $page }}</a>
-                                                </li>
-                                            @endif
+                                            <li style="display: inline-block;">
+                                                <a href="{{ $forms->previousPageUrl() }}"
+                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</a>
+                                            </li>
+                                        @endif
+                                    @endif
+
+                                    @foreach ($forms->links()->elements as $element)
+                                        @if (is_string($element))
+                                            <li style="display: inline-block;">
+                                                <span
+                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $element }}</span>
+                                            </li>
+                                        @endif
+
+                                        @if (is_array($element))
+                                            @foreach ($element as $page => $url)
+                                                @if ($page == $forms->currentPage())
+                                                    <li style="display: inline-block;">
+                                                        <span
+                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #281F48; color: #fff;">{{ $page }}</span>
+                                                    </li>
+                                                @else
+                                                    @if (request()->isMethod('post'))
+                                                        <li style="display: inline-block;">
+                                                            <form method="POST" action="{{ url()->current() }}">
+                                                                @csrf
+                                                                <input type="hidden" name="page"
+                                                                    value="{{ $page }}">
+                                                                <button type="submit"
+                                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">{{ $page }}</button>
+                                                            </form>
+                                                        </li>
+                                                    @else
+                                                        <li style="display: inline-block;">
+                                                            <a href="{{ $url }}"
+                                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $page }}</a>
+                                                        </li>
+                                                    @endif
+                                                @endif
+                                            @endforeach
                                         @endif
                                     @endforeach
-                                @endif
-                            @endforeach
 
-                            @if ($forms->hasMorePages())
-                                @if (request()->isMethod('post'))
-                                    <li style="display: inline-block;">
-                                        <form method="POST" action="{{ url()->current() }}">
-                                            @csrf
-                                            <input type="hidden" name="page" value="{{ $forms->currentPage() + 1 }}">
-                                            <button type="submit"
-                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&raquo;</button>
-                                        </form>
-                                    </li>
-                                @else
-                                    <li style="display: inline-block;">
-                                        <a href="{{ $forms->nextPageUrl() }}"
-                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</a>
-                                    </li>
-                                @endif
-                            @else
-                                <li style="display: inline-block;">
-                                    <span
-                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</span>
-                                </li>
-                            @endif
-                        </ul>
+                                    @if ($forms->hasMorePages())
+                                        @if (request()->isMethod('post'))
+                                            <li style="display: inline-block;">
+                                                <form method="POST" action="{{ url()->current() }}">
+                                                    @csrf
+                                                    <input type="hidden" name="page"
+                                                        value="{{ $forms->currentPage() + 1 }}">
+                                                    <button type="submit"
+                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&raquo;</button>
+                                                </form>
+                                            </li>
+                                        @else
+                                            <li style="display: inline-block;">
+                                                <a href="{{ $forms->nextPageUrl() }}"
+                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</a>
+                                            </li>
+                                        @endif
+                                    @else
+                                        <li style="display: inline-block;">
+                                            <span
+                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</span>
+                                        </li>
+                                    @endif
+                                </ul>
 
-                    </nav>
-               
-            </div>
-      
+                            </nav>
 
-        </div>
-    </div>
+                        </div>
+
+
+                    </div>
+                </div> --}}
                 <div class="table-section table-responsive">
-                    <table class="table table-striped transparent-table align-middle datatable1">
+                    <table class="table table-striped transparent-table align-middle datatable">
                         <thead>
                             <tr>
                                 <!-- <th>Action</th>-->
@@ -257,16 +251,19 @@
                                     </td>
                                 </tr>
 
-                                <div class="modal fade modal-lg" id="view_comment_modal{{ $form->id }}" tabindex="-1"
-                                    aria-labelledby="viewCommentLabel{{ $form->id }}" aria-hidden="true">
+                                <div class="modal fade modal-lg" id="view_comment_modal{{ $form->id }}"
+                                    tabindex="-1" aria-labelledby="viewCommentLabel{{ $form->id }}"
+                                    aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content"
-                                           style="border-radius: 10px; overflow: hidden;">
-                                            <div class="border-0 modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
-                                                <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
+                                        <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
+                                            <div class="border-0 modal-header"
+                                                style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                                                <button type="button" class="btn-close"
+                                                    style="background-color: #D9D9D9 !important; color: #FD5631;"
+                                                    data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <div class="modal-body p-3" style="background-color: #F0F3F6; color: #FD5631;">
+                                            <div class="modal-body p-3"
+                                                style="background-color: #F0F3F6; color: #FD5631;">
                                                 <form>
                                                     <div class="row mb-3">
                                                         <div class="col-12 text-center"
@@ -359,234 +356,232 @@
                                 </div>
                             @endforeach
 
- 
+
                         </tbody>
                     </table>
-					                        <div class="container">
+                    {{-- <div class="container">
 
-        <div class="row align-items-center ">
-      <div class="col-md-4 "> <span class="pt-md-3 pagination_count"
-                    style="font-size: 18px; color: #281F48; font-weight:700;">
-                    {{ ($forms->currentPage() - 1) * $forms->perPage() + 1 }}
-                    - {{ min($forms->currentPage() * $forms->perPage(), $forms->total()) }}
-                    of {{ $forms->total() }} Results
-                </span></div>
-            <div class="col-md-8">
-              
-                    <nav class="d-flex justify-content-end align-items-center">
-                        <!-- Page Info -->
+                        <div class="row align-items-center ">
+                            <div class="col-md-4 "> <span class="pt-md-3 pagination_count"
+                                    style="font-size: 18px; color: #281F48; font-weight:700;">
+                                    {{ ($forms->currentPage() - 1) * $forms->perPage() + 1 }}
+                                    - {{ min($forms->currentPage() * $forms->perPage(), $forms->total()) }}
+                                    of {{ $forms->total() }} Results
+                                </span></div>
+                            <div class="col-md-8">
 
-
-                        <!-- Pagination -->
-                        <ul class="pagination"
-                            style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
-                            @if ($forms->onFirstPage())
-                                <li style="display: inline-block;">
-                                    <span
-                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</span>
-                                </li>
-                            @else
-                                @if (request()->isMethod('post'))
-                                    <li style="display: inline-block;">
-                                        <form method="POST" action="{{ url()->current() }}">
-                                            @csrf
-                                            <input type="hidden" name="page" value="{{ $forms->currentPage() - 1 }}">
-                                            <button type="submit"
-                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&laquo;</button>
-                                        </form>
-                                    </li>
-                                @else
-                                    <li style="display: inline-block;">
-                                        <a href="{{ $forms->previousPageUrl() }}"
-                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</a>
-                                    </li>
-                                @endif
-                            @endif
-
-                            @foreach ($forms->links()->elements as $element)
-                                @if (is_string($element))
-                                    <li style="display: inline-block;">
-                                        <span
-                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $element }}</span>
-                                    </li>
-                                @endif
-
-                                @if (is_array($element))
-                                    @foreach ($element as $page => $url)
-                                        @if ($page == $forms->currentPage())
+                                <nav class="d-flex justify-content-end align-items-center">
+                                    <ul class="pagination"
+                                        style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
+                                        @if ($forms->onFirstPage())
                                             <li style="display: inline-block;">
                                                 <span
-                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #281F48; color: #fff;">{{ $page }}</span>
+                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</span>
                                             </li>
                                         @else
                                             @if (request()->isMethod('post'))
                                                 <li style="display: inline-block;">
                                                     <form method="POST" action="{{ url()->current() }}">
                                                         @csrf
-                                                        <input type="hidden" name="page" value="{{ $page }}">
+                                                        <input type="hidden" name="page"
+                                                            value="{{ $forms->currentPage() - 1 }}">
                                                         <button type="submit"
-                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">{{ $page }}</button>
+                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&laquo;</button>
                                                     </form>
                                                 </li>
                                             @else
                                                 <li style="display: inline-block;">
-                                                    <a href="{{ $url }}"
-                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $page }}</a>
+                                                    <a href="{{ $forms->previousPageUrl() }}"
+                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</a>
                                                 </li>
                                             @endif
                                         @endif
-                                    @endforeach
-                                @endif
-                            @endforeach
 
-                            @if ($forms->hasMorePages())
-                                @if (request()->isMethod('post'))
-                                    <li style="display: inline-block;">
-                                        <form method="POST" action="{{ url()->current() }}">
-                                            @csrf
-                                            <input type="hidden" name="page" value="{{ $forms->currentPage() + 1 }}">
-                                            <button type="submit"
-                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&raquo;</button>
-                                        </form>
-                                    </li>
-                                @else
-                                    <li style="display: inline-block;">
-                                        <a href="{{ $forms->nextPageUrl() }}"
-                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</a>
-                                    </li>
-                                @endif
-                            @else
-                                <li style="display: inline-block;">
-                                    <span
-                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</span>
-                                </li>
-                            @endif
-                        </ul>
+                                        @foreach ($forms->links()->elements as $element)
+                                            @if (is_string($element))
+                                                <li style="display: inline-block;">
+                                                    <span
+                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $element }}</span>
+                                                </li>
+                                            @endif
 
-                    </nav>
-               
-            </div>
-      
+                                            @if (is_array($element))
+                                                @foreach ($element as $page => $url)
+                                                    @if ($page == $forms->currentPage())
+                                                        <li style="display: inline-block;">
+                                                            <span
+                                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #281F48; color: #fff;">{{ $page }}</span>
+                                                        </li>
+                                                    @else
+                                                        @if (request()->isMethod('post'))
+                                                            <li style="display: inline-block;">
+                                                                <form method="POST" action="{{ url()->current() }}">
+                                                                    @csrf
+                                                                    <input type="hidden" name="page"
+                                                                        value="{{ $page }}">
+                                                                    <button type="submit"
+                                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">{{ $page }}</button>
+                                                                </form>
+                                                            </li>
+                                                        @else
+                                                            <li style="display: inline-block;">
+                                                                <a href="{{ $url }}"
+                                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $page }}</a>
+                                                            </li>
+                                                        @endif
+                                                    @endif
+                                                @endforeach
+                                            @endif
+                                        @endforeach
 
-        </div>
-    </div>
+                                        @if ($forms->hasMorePages())
+                                            @if (request()->isMethod('post'))
+                                                <li style="display: inline-block;">
+                                                    <form method="POST" action="{{ url()->current() }}">
+                                                        @csrf
+                                                        <input type="hidden" name="page"
+                                                            value="{{ $forms->currentPage() + 1 }}">
+                                                        <button type="submit"
+                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&raquo;</button>
+                                                    </form>
+                                                </li>
+                                            @else
+                                                <li style="display: inline-block;">
+                                                    <a href="{{ $forms->nextPageUrl() }}"
+                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</a>
+                                                </li>
+                                            @endif
+                                        @else
+                                            <li style="display: inline-block;">
+                                                <span
+                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</span>
+                                            </li>
+                                        @endif
+                                    </ul>
+
+                                </nav>
+
+                            </div>
+
+
+                        </div>
+                    </div> --}}
 
                 </div>
             </div>
 
             <!-- New Cars Tab -->
             <div class="tab-pane fade" id="new-cars" role="tabpanel" aria-labelledby="new-cars-tab ">
-				                        <div class="container my-2">
+                {{-- <div class="container my-2">
 
-        <div class="row align-items-center ">
-      <div class="col-md-4 "> <span class="pt-md-3 pagination_count"
-                    style="font-size: 18px; color: #281F48; font-weight:700;">
-                    {{ ($forms->currentPage() - 1) * $forms->perPage() + 1 }}
-                    - {{ min($forms->currentPage() * $forms->perPage(), $forms->total()) }}
-                    of {{ $forms->total() }} Results
-                </span></div>
-            <div class="col-md-8">
-              
-                    <nav class="d-flex justify-content-end align-items-center">
-                        <!-- Page Info -->
+                    <div class="row align-items-center ">
+                        <div class="col-md-4 "> <span class="pt-md-3 pagination_count"
+                                style="font-size: 18px; color: #281F48; font-weight:700;">
+                                {{ ($forms->currentPage() - 1) * $forms->perPage() + 1 }}
+                                - {{ min($forms->currentPage() * $forms->perPage(), $forms->total()) }}
+                                of {{ $forms->total() }} Results
+                            </span></div>
+                        <div class="col-md-8">
 
-
-                        <!-- Pagination -->
-                        <ul class="pagination"
-                            style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
-                            @if ($Newforms->onFirstPage())
-                                <li style="display: inline-block;">
-                                    <span
-                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</span>
-                                </li>
-                            @else
-                                @if (request()->isMethod('post'))
-                                    <li style="display: inline-block;">
-                                        <form method="POST" action="{{ url()->current() }}">
-                                            @csrf
-                                            <input type="hidden" name="page" value="{{ $Newforms->currentPage() - 1 }}">
-                                            <button type="submit"
-                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&laquo;</button>
-                                        </form>
-                                    </li>
-                                @else
-                                    <li style="display: inline-block;">
-                                        <a href="{{ $Newforms->previousPageUrl() }}"
-                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</a>
-                                    </li>
-                                @endif
-                            @endif
-
-                            @foreach ($Newforms->links()->elements as $element)
-                                @if (is_string($element))
-                                    <li style="display: inline-block;">
-                                        <span
-                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $element }}</span>
-                                    </li>
-                                @endif
-
-                                @if (is_array($element))
-                                    @foreach ($element as $page => $url)
-                                        @if ($page == $Newforms->currentPage())
+                            <nav class="d-flex justify-content-end align-items-center">
+                                <ul class="pagination"
+                                    style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
+                                    @if ($Newforms->onFirstPage())
+                                        <li style="display: inline-block;">
+                                            <span
+                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</span>
+                                        </li>
+                                    @else
+                                        @if (request()->isMethod('post'))
                                             <li style="display: inline-block;">
-                                                <span
-                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #281F48; color: #fff;">{{ $page }}</span>
+                                                <form method="POST" action="{{ url()->current() }}">
+                                                    @csrf
+                                                    <input type="hidden" name="page"
+                                                        value="{{ $Newforms->currentPage() - 1 }}">
+                                                    <button type="submit"
+                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&laquo;</button>
+                                                </form>
                                             </li>
                                         @else
-                                            @if (request()->isMethod('post'))
-                                                <li style="display: inline-block;">
-                                                    <form method="POST" action="{{ url()->current() }}">
-                                                        @csrf
-                                                        <input type="hidden" name="page" value="{{ $page }}">
-                                                        <button type="submit"
-                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">{{ $page }}</button>
-                                                    </form>
-                                                </li>
-                                            @else
-                                                <li style="display: inline-block;">
-                                                    <a href="{{ $url }}"
-                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $page }}</a>
-                                                </li>
-                                            @endif
+                                            <li style="display: inline-block;">
+                                                <a href="{{ $Newforms->previousPageUrl() }}"
+                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</a>
+                                            </li>
+                                        @endif
+                                    @endif
+
+                                    @foreach ($Newforms->links()->elements as $element)
+                                        @if (is_string($element))
+                                            <li style="display: inline-block;">
+                                                <span
+                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $element }}</span>
+                                            </li>
+                                        @endif
+
+                                        @if (is_array($element))
+                                            @foreach ($element as $page => $url)
+                                                @if ($page == $Newforms->currentPage())
+                                                    <li style="display: inline-block;">
+                                                        <span
+                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #281F48; color: #fff;">{{ $page }}</span>
+                                                    </li>
+                                                @else
+                                                    @if (request()->isMethod('post'))
+                                                        <li style="display: inline-block;">
+                                                            <form method="POST" action="{{ url()->current() }}">
+                                                                @csrf
+                                                                <input type="hidden" name="page"
+                                                                    value="{{ $page }}">
+                                                                <button type="submit"
+                                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">{{ $page }}</button>
+                                                            </form>
+                                                        </li>
+                                                    @else
+                                                        <li style="display: inline-block;">
+                                                            <a href="{{ $url }}"
+                                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $page }}</a>
+                                                        </li>
+                                                    @endif
+                                                @endif
+                                            @endforeach
                                         @endif
                                     @endforeach
-                                @endif
-                            @endforeach
 
-                            @if ($Newforms->hasMorePages())
-                                @if (request()->isMethod('post'))
-                                    <li style="display: inline-block;">
-                                        <form method="POST" action="{{ url()->current() }}">
-                                            @csrf
-                                            <input type="hidden" name="page" value="{{ $Newforms->currentPage() + 1 }}">
-                                            <button type="submit"
-                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&raquo;</button>
-                                        </form>
-                                    </li>
-                                @else
-                                    <li style="display: inline-block;">
-                                        <a href="{{ $Newforms->nextPageUrl() }}"
-                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</a>
-                                    </li>
-                                @endif
-                            @else
-                                <li style="display: inline-block;">
-                                    <span
-                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</span>
-                                </li>
-                            @endif
-                        </ul>
+                                    @if ($Newforms->hasMorePages())
+                                        @if (request()->isMethod('post'))
+                                            <li style="display: inline-block;">
+                                                <form method="POST" action="{{ url()->current() }}">
+                                                    @csrf
+                                                    <input type="hidden" name="page"
+                                                        value="{{ $Newforms->currentPage() + 1 }}">
+                                                    <button type="submit"
+                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&raquo;</button>
+                                                </form>
+                                            </li>
+                                        @else
+                                            <li style="display: inline-block;">
+                                                <a href="{{ $Newforms->nextPageUrl() }}"
+                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</a>
+                                            </li>
+                                        @endif
+                                    @else
+                                        <li style="display: inline-block;">
+                                            <span
+                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</span>
+                                        </li>
+                                    @endif
+                                </ul>
 
-                    </nav>
-               
-            </div>
-      
+                            </nav>
 
-        </div>
-    </div>
+                        </div>
+
+
+                    </div>
+                </div> --}}
 
                 <div class="table-section">
-                    <table class="table table-striped transparent-table align-middle datatable1">
+                    <table class="table table-striped transparent-table align-middle datatable">
                         <thead>
                             <tr>
                                 <!-- <th>Action</th>-->
@@ -626,15 +621,15 @@
                                     tabindex="-1" aria-labelledby="viewCommentLabel{{ $form->id }}"
                                     aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content"
-                                         style="border-radius: 10px; overflow: hidden;">
-                                            <div class="modal-header border-0" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
-                                                <h5 class="modal-title" 
-                                                    id="viewCommentLabel{{ $form->id }}">
+                                        <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
+                                            <div class="modal-header border-0"
+                                                style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                                                <h5 class="modal-title" id="viewCommentLabel{{ $form->id }}">
                                                     <strong>Book an Appointment</strong>
                                                 </h5>
-                                                <button type="button" data-bs-dismiss="modal"
-                                                    aria-label="Close" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;"></button>
+                                                <button type="button" data-bs-dismiss="modal" aria-label="Close"
+                                                    class="btn-close"
+                                                    style="background-color: #D9D9D9 !important; color: #FD5631;"></button>
                                             </div>
                                             <div class="modal-body" style="background-color: #F0F3F6; color: #FD5631;">
                                                 <form>
@@ -699,8 +694,8 @@
                                                     <div class="mb-3">
                                                         <label for="message{{ $form->id }}"
                                                             class="form-label">Message</label>
-                                                        <textarea class="form-control" id="message{{ $form->id }}" rows="4" placeholder="Enter your message here"
-                                                            readonly>{{ $form->comment }}</textarea>
+                                                        <textarea class="form-control" id="message{{ $form->id }}" rows="4"
+                                                            placeholder="Enter your message here" readonly>{{ $form->comment }}</textarea>
                                                     </div>
                                                 </form>
                                             </div>
@@ -710,233 +705,222 @@
                                 </div>
                             @endforeach
                             <!-- Repeat rows as needed -->
-               
+
                         </tbody>
                     </table>
-					                        <div class="container">
+                    {{-- <div class="container">
 
-        <div class="row align-items-center ">
-      <div class="col-md-4 "> <span class="pt-md-3 pagination_count"
-                    style="font-size: 18px; color: #281F48; font-weight:700;">
-                    {{ ($Newforms->currentPage() - 1) * $Newforms->perPage() + 1 }}
-                    - {{ min($Newforms->currentPage() * $Newforms->perPage(), $Newforms->total()) }}
-                    of {{ $Newforms->total() }} Results
-                </span></div>
-            <div class="col-md-8">
-              
-                    <nav class="d-flex justify-content-end align-items-center">
-                        <!-- Page Info -->
+                        <div class="row align-items-center ">
+                            <div class="col-md-4 "> <span class="pt-md-3 pagination_count"
+                                    style="font-size: 18px; color: #281F48; font-weight:700;">
+                                    {{ ($Newforms->currentPage() - 1) * $Newforms->perPage() + 1 }}
+                                    - {{ min($Newforms->currentPage() * $Newforms->perPage(), $Newforms->total()) }}
+                                    of {{ $Newforms->total() }} Results
+                                </span></div>
+                            <div class="col-md-8">
 
-
-                        <!-- Pagination -->
-                        <ul class="pagination"
-                            style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
-                            @if ($Newforms->onFirstPage())
-                                <li style="display: inline-block;">
-                                    <span
-                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</span>
-                                </li>
-                            @else
-                                @if (request()->isMethod('post'))
-                                    <li style="display: inline-block;">
-                                        <form method="POST" action="{{ url()->current() }}">
-                                            @csrf
-                                            <input type="hidden" name="page" value="{{ $Newforms->currentPage() - 1 }}">
-                                            <button type="submit"
-                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&laquo;</button>
-                                        </form>
-                                    </li>
-                                @else
-                                    <li style="display: inline-block;">
-                                        <a href="{{ $Newforms->previousPageUrl() }}"
-                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</a>
-                                    </li>
-                                @endif
-                            @endif
-
-                            @foreach ($Newforms->links()->elements as $element)
-                                @if (is_string($element))
-                                    <li style="display: inline-block;">
-                                        <span
-                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $element }}</span>
-                                    </li>
-                                @endif
-
-                                @if (is_array($element))
-                                    @foreach ($element as $page => $url)
-                                        @if ($page == $Newforms->currentPage())
+                                <nav class="d-flex justify-content-end align-items-center">
+                                    <ul class="pagination"
+                                        style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
+                                        @if ($Newforms->onFirstPage())
                                             <li style="display: inline-block;">
                                                 <span
-                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #281F48; color: #fff;">{{ $page }}</span>
+                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</span>
                                             </li>
                                         @else
                                             @if (request()->isMethod('post'))
                                                 <li style="display: inline-block;">
                                                     <form method="POST" action="{{ url()->current() }}">
                                                         @csrf
-                                                        <input type="hidden" name="page" value="{{ $page }}">
+                                                        <input type="hidden" name="page"
+                                                            value="{{ $Newforms->currentPage() - 1 }}">
                                                         <button type="submit"
-                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">{{ $page }}</button>
+                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&laquo;</button>
                                                     </form>
                                                 </li>
                                             @else
                                                 <li style="display: inline-block;">
-                                                    <a href="{{ $url }}"
-                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $page }}</a>
+                                                    <a href="{{ $Newforms->previousPageUrl() }}"
+                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</a>
                                                 </li>
                                             @endif
                                         @endif
-                                    @endforeach
-                                @endif
-                            @endforeach
 
-                            @if ($Newforms->hasMorePages())
-                                @if (request()->isMethod('post'))
-                                    <li style="display: inline-block;">
-                                        <form method="POST" action="{{ url()->current() }}">
-                                            @csrf
-                                            <input type="hidden" name="page" value="{{ $Newforms->currentPage() + 1 }}">
-                                            <button type="submit"
-                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&raquo;</button>
-                                        </form>
-                                    </li>
-                                @else
-                                    <li style="display: inline-block;">
-                                        <a href="{{ $Newforms->nextPageUrl() }}"
-                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</a>
-                                    </li>
-                                @endif
-                            @else
-                                <li style="display: inline-block;">
-                                    <span
-                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</span>
-                                </li>
-                            @endif
-                        </ul>
+                                        @foreach ($Newforms->links()->elements as $element)
+                                            @if (is_string($element))
+                                                <li style="display: inline-block;">
+                                                    <span
+                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $element }}</span>
+                                                </li>
+                                            @endif
 
-                    </nav>
-               
-            </div>
-      
+                                            @if (is_array($element))
+                                                @foreach ($element as $page => $url)
+                                                    @if ($page == $Newforms->currentPage())
+                                                        <li style="display: inline-block;">
+                                                            <span
+                                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #281F48; color: #fff;">{{ $page }}</span>
+                                                        </li>
+                                                    @else
+                                                        @if (request()->isMethod('post'))
+                                                            <li style="display: inline-block;">
+                                                                <form method="POST" action="{{ url()->current() }}">
+                                                                    @csrf
+                                                                    <input type="hidden" name="page"
+                                                                        value="{{ $page }}">
+                                                                    <button type="submit"
+                                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">{{ $page }}</button>
+                                                                </form>
+                                                            </li>
+                                                        @else
+                                                            <li style="display: inline-block;">
+                                                                <a href="{{ $url }}"
+                                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $page }}</a>
+                                                            </li>
+                                                        @endif
+                                                    @endif
+                                                @endforeach
+                                            @endif
+                                        @endforeach
 
-        </div>
-    </div>
+                                        @if ($Newforms->hasMorePages())
+                                            @if (request()->isMethod('post'))
+                                                <li style="display: inline-block;">
+                                                    <form method="POST" action="{{ url()->current() }}">
+                                                        @csrf
+                                                        <input type="hidden" name="page"
+                                                            value="{{ $Newforms->currentPage() + 1 }}">
+                                                        <button type="submit"
+                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&raquo;</button>
+                                                    </form>
+                                                </li>
+                                            @else
+                                                <li style="display: inline-block;">
+                                                    <a href="{{ $Newforms->nextPageUrl() }}"
+                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</a>
+                                                </li>
+                                            @endif
+                                        @else
+                                            <li style="display: inline-block;">
+                                                <span
+                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</span>
+                                            </li>
+                                        @endif
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div> --}}
 
                 </div>
             </div>
             <!-- Used Cars Tab -->
             <div class="tab-pane fade" id="used-cars" role="tabpanel" aria-labelledby="used-cars-tab ">
-				
-    <div class="container my-2">
 
-        <div class="row align-items-center ">
-      <div class="col-md-4 "> <span class="pt-md-3 pagination_count"
-                    style="font-size: 18px; color: #281F48; font-weight:700;">
-                    {{ ($Usedforms->currentPage() - 1) * $Usedforms->perPage() + 1 }}
-                    - {{ min($Usedforms->currentPage() * $Usedforms->perPage(), $Usedforms->total()) }}
-                    of {{ $Usedforms->total() }} Results
-                </span></div>
-            <div class="col-md-8">
-              
-                    <nav class="d-flex justify-content-end align-items-center">
-                        <!-- Page Info -->
+                <div class="container my-2">
+                    {{-- <div class="row align-items-center ">
+                        <div class="col-md-4 "> <span class="pt-md-3 pagination_count"
+                                style="font-size: 18px; color: #281F48; font-weight:700;">
+                                {{ ($Usedforms->currentPage() - 1) * $Usedforms->perPage() + 1 }}
+                                - {{ min($Usedforms->currentPage() * $Usedforms->perPage(), $Usedforms->total()) }}
+                                of {{ $Usedforms->total() }} Results
+                            </span></div>
+                        <div class="col-md-8">
 
-
-                        <!-- Pagination -->
-                        <ul class="pagination"
-                            style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
-                            @if ($Usedforms->onFirstPage())
-                                <li style="display: inline-block;">
-                                    <span
-                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</span>
-                                </li>
-                            @else
-                                @if (request()->isMethod('post'))
-                                    <li style="display: inline-block;">
-                                        <form method="POST" action="{{ url()->current() }}">
-                                            @csrf
-                                            <input type="hidden" name="page" value="{{ $Usedforms->currentPage() - 1 }}">
-                                            <button type="submit"
-                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&laquo;</button>
-                                        </form>
-                                    </li>
-                                @else
-                                    <li style="display: inline-block;">
-                                        <a href="{{ $Usedforms->previousPageUrl() }}"
-                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</a>
-                                    </li>
-                                @endif
-                            @endif
-
-                            @foreach ($Usedforms->links()->elements as $element)
-                                @if (is_string($element))
-                                    <li style="display: inline-block;">
-                                        <span
-                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $element }}</span>
-                                    </li>
-                                @endif
-
-                                @if (is_array($element))
-                                    @foreach ($element as $page => $url)
-                                        @if ($page == $Usedforms->currentPage())
+                            <nav class="d-flex justify-content-end align-items-center">
+                                <ul class="pagination"
+                                    style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
+                                    @if ($Usedforms->onFirstPage())
+                                        <li style="display: inline-block;">
+                                            <span
+                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</span>
+                                        </li>
+                                    @else
+                                        @if (request()->isMethod('post'))
                                             <li style="display: inline-block;">
-                                                <span
-                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #281F48; color: #fff;">{{ $page }}</span>
+                                                <form method="POST" action="{{ url()->current() }}">
+                                                    @csrf
+                                                    <input type="hidden" name="page"
+                                                        value="{{ $Usedforms->currentPage() - 1 }}">
+                                                    <button type="submit"
+                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&laquo;</button>
+                                                </form>
                                             </li>
                                         @else
-                                            @if (request()->isMethod('post'))
-                                                <li style="display: inline-block;">
-                                                    <form method="POST" action="{{ url()->current() }}">
-                                                        @csrf
-                                                        <input type="hidden" name="page" value="{{ $page }}">
-                                                        <button type="submit"
-                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">{{ $page }}</button>
-                                                    </form>
-                                                </li>
-                                            @else
-                                                <li style="display: inline-block;">
-                                                    <a href="{{ $url }}"
-                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $page }}</a>
-                                                </li>
-                                            @endif
+                                            <li style="display: inline-block;">
+                                                <a href="{{ $Usedforms->previousPageUrl() }}"
+                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</a>
+                                            </li>
+                                        @endif
+                                    @endif
+
+                                    @foreach ($Usedforms->links()->elements as $element)
+                                        @if (is_string($element))
+                                            <li style="display: inline-block;">
+                                                <span
+                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $element }}</span>
+                                            </li>
+                                        @endif
+
+                                        @if (is_array($element))
+                                            @foreach ($element as $page => $url)
+                                                @if ($page == $Usedforms->currentPage())
+                                                    <li style="display: inline-block;">
+                                                        <span
+                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #281F48; color: #fff;">{{ $page }}</span>
+                                                    </li>
+                                                @else
+                                                    @if (request()->isMethod('post'))
+                                                        <li style="display: inline-block;">
+                                                            <form method="POST" action="{{ url()->current() }}">
+                                                                @csrf
+                                                                <input type="hidden" name="page"
+                                                                    value="{{ $page }}">
+                                                                <button type="submit"
+                                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">{{ $page }}</button>
+                                                            </form>
+                                                        </li>
+                                                    @else
+                                                        <li style="display: inline-block;">
+                                                            <a href="{{ $url }}"
+                                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $page }}</a>
+                                                        </li>
+                                                    @endif
+                                                @endif
+                                            @endforeach
                                         @endif
                                     @endforeach
-                                @endif
-                            @endforeach
 
-                            @if ($Usedforms->hasMorePages())
-                                @if (request()->isMethod('post'))
-                                    <li style="display: inline-block;">
-                                        <form method="POST" action="{{ url()->current() }}">
-                                            @csrf
-                                            <input type="hidden" name="page" value="{{ $Usedforms->currentPage() + 1 }}">
-                                            <button type="submit"
-                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&raquo;</button>
-                                        </form>
-                                    </li>
-                                @else
-                                    <li style="display: inline-block;">
-                                        <a href="{{ $Usedforms->nextPageUrl() }}"
-                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</a>
-                                    </li>
-                                @endif
-                            @else
-                                <li style="display: inline-block;">
-                                    <span
-                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</span>
-                                </li>
-                            @endif
-                        </ul>
-
-                    </nav>
-               
-            </div>
-      
-
-        </div>
-    </div>
+                                    @if ($Usedforms->hasMorePages())
+                                        @if (request()->isMethod('post'))
+                                            <li style="display: inline-block;">
+                                                <form method="POST" action="{{ url()->current() }}">
+                                                    @csrf
+                                                    <input type="hidden" name="page"
+                                                        value="{{ $Usedforms->currentPage() + 1 }}">
+                                                    <button type="submit"
+                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&raquo;</button>
+                                                </form>
+                                            </li>
+                                        @else
+                                            <li style="display: inline-block;">
+                                                <a href="{{ $Usedforms->nextPageUrl() }}"
+                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</a>
+                                            </li>
+                                        @endif
+                                    @else
+                                        <li style="display: inline-block;">
+                                            <span
+                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</span>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </nav>
+                        </div>
+                    </div> --}}
+                </div>
                 <div class="table-section">
-                    <table class="table table-striped transparent-table align-middle datatable1">
+                    <table class="table table-striped transparent-table align-middle datatable">
                         <thead>
                             <tr>
                                 <!-- <th>Action</th>-->
@@ -976,17 +960,17 @@
                                     tabindex="-1" aria-labelledby="viewCommentLabel{{ $form->id }}"
                                     aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content"
-                                           style="border-radius: 10px; overflow: hidden;">
-                                            <div class="modal-header border-0" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
-                                                <h5 class="modal-title" 
-                                                    id="viewCommentLabel{{ $form->id }}">
-                                                   <strong>  Book an Appointment</strong>
+                                        <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
+                                            <div class="modal-header border-0"
+                                                style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                                                <h5 class="modal-title" id="viewCommentLabel{{ $form->id }}">
+                                                    <strong> Book an Appointment</strong>
                                                 </h5>
-                                                <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
-                                                    aria-label="Close" ></button>
+                                                <button type="button" class="btn-close"
+                                                    style="background-color: #D9D9D9 !important; color: #FD5631;"
+                                                    data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <div class="modal-body"  style="background-color: #F0F3F6; color: #FD5631;">
+                                            <div class="modal-body" style="background-color: #F0F3F6; color: #FD5631;">
                                                 <form>
                                                     <div class="row mb-3">
                                                         <div class="col-md-6">
@@ -1049,8 +1033,8 @@
                                                     <div class="mb-3">
                                                         <label for="message{{ $form->id }}"
                                                             class="form-label">Message</label>
-                                                        <textarea class="form-control" id="message{{ $form->id }}" rows="4" placeholder="Enter your message here"
-                                                            readonly>{{ $form->comment }}</textarea>
+                                                        <textarea class="form-control" id="message{{ $form->id }}" rows="4"
+                                                            placeholder="Enter your message here" readonly>{{ $form->comment }}</textarea>
                                                     </div>
                                                 </form>
                                             </div>
@@ -1060,122 +1044,114 @@
                                 </div>
                             @endforeach
                             <!-- Repeat rows as needed -->
-                          
+
                         </tbody>
                     </table>
-					
-    <div class="container">
 
-        <div class="row align-items-center ">
-      <div class="col-md-4 "> <span class="pt-md-3 pagination_count"
-                    style="font-size: 18px; color: #281F48; font-weight:700;">
-                    {{ ($Usedforms->currentPage() - 1) * $Usedforms->perPage() + 1 }}
-                    - {{ min($Usedforms->currentPage() * $Usedforms->perPage(), $Usedforms->total()) }}
-                    of {{ $Usedforms->total() }} Results
-                </span></div>
-            <div class="col-md-8">
-              
-                    <nav class="d-flex justify-content-end align-items-center">
-                        <!-- Page Info -->
+                    {{-- <div class="container">
 
-
-                        <!-- Pagination -->
-                        <ul class="pagination"
-                            style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
-                            @if ($Usedforms->onFirstPage())
-                                <li style="display: inline-block;">
-                                    <span
-                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</span>
-                                </li>
-                            @else
-                                @if (request()->isMethod('post'))
-                                    <li style="display: inline-block;">
-                                        <form method="POST" action="{{ url()->current() }}">
-                                            @csrf
-                                            <input type="hidden" name="page" value="{{ $Usedforms->currentPage() - 1 }}">
-                                            <button type="submit"
-                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&laquo;</button>
-                                        </form>
-                                    </li>
-                                @else
-                                    <li style="display: inline-block;">
-                                        <a href="{{ $Usedforms->previousPageUrl() }}"
-                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</a>
-                                    </li>
-                                @endif
-                            @endif
-
-                            @foreach ($Usedforms->links()->elements as $element)
-                                @if (is_string($element))
-                                    <li style="display: inline-block;">
-                                        <span
-                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $element }}</span>
-                                    </li>
-                                @endif
-
-                                @if (is_array($element))
-                                    @foreach ($element as $page => $url)
-                                        @if ($page == $Usedforms->currentPage())
+                        <div class="row align-items-center ">
+                            <div class="col-md-4 "> <span class="pt-md-3 pagination_count"
+                                    style="font-size: 18px; color: #281F48; font-weight:700;">
+                                    {{ ($Usedforms->currentPage() - 1) * $Usedforms->perPage() + 1 }}
+                                    - {{ min($Usedforms->currentPage() * $Usedforms->perPage(), $Usedforms->total()) }}
+                                    of {{ $Usedforms->total() }} Results
+                                </span></div>
+                            <div class="col-md-8">
+                                <nav class="d-flex justify-content-end align-items-center">
+                                    <ul class="pagination"
+                                        style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
+                                        @if ($Usedforms->onFirstPage())
                                             <li style="display: inline-block;">
                                                 <span
-                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #281F48; color: #fff;">{{ $page }}</span>
+                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</span>
                                             </li>
                                         @else
                                             @if (request()->isMethod('post'))
                                                 <li style="display: inline-block;">
                                                     <form method="POST" action="{{ url()->current() }}">
                                                         @csrf
-                                                        <input type="hidden" name="page" value="{{ $page }}">
+                                                        <input type="hidden" name="page"
+                                                            value="{{ $Usedforms->currentPage() - 1 }}">
                                                         <button type="submit"
-                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">{{ $page }}</button>
+                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&laquo;</button>
                                                     </form>
                                                 </li>
                                             @else
                                                 <li style="display: inline-block;">
-                                                    <a href="{{ $url }}"
-                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $page }}</a>
+                                                    <a href="{{ $Usedforms->previousPageUrl() }}"
+                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</a>
                                                 </li>
                                             @endif
                                         @endif
-                                    @endforeach
-                                @endif
-                            @endforeach
 
-                            @if ($Usedforms->hasMorePages())
-                                @if (request()->isMethod('post'))
-                                    <li style="display: inline-block;">
-                                        <form method="POST" action="{{ url()->current() }}">
-                                            @csrf
-                                            <input type="hidden" name="page" value="{{ $Usedforms->currentPage() + 1 }}">
-                                            <button type="submit"
-                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&raquo;</button>
-                                        </form>
-                                    </li>
-                                @else
-                                    <li style="display: inline-block;">
-                                        <a href="{{ $Usedforms->nextPageUrl() }}"
-                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</a>
-                                    </li>
-                                @endif
-                            @else
-                                <li style="display: inline-block;">
-                                    <span
-                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</span>
-                                </li>
-                            @endif
-                        </ul>
+                                        @foreach ($Usedforms->links()->elements as $element)
+                                            @if (is_string($element))
+                                                <li style="display: inline-block;">
+                                                    <span
+                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $element }}</span>
+                                                </li>
+                                            @endif
 
-                    </nav>
-               
-            </div>
-      
+                                            @if (is_array($element))
+                                                @foreach ($element as $page => $url)
+                                                    @if ($page == $Usedforms->currentPage())
+                                                        <li style="display: inline-block;">
+                                                            <span
+                                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #281F48; color: #fff;">{{ $page }}</span>
+                                                        </li>
+                                                    @else
+                                                        @if (request()->isMethod('post'))
+                                                            <li style="display: inline-block;">
+                                                                <form method="POST" action="{{ url()->current() }}">
+                                                                    @csrf
+                                                                    <input type="hidden" name="page"
+                                                                        value="{{ $page }}">
+                                                                    <button type="submit"
+                                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">{{ $page }}</button>
+                                                                </form>
+                                                            </li>
+                                                        @else
+                                                            <li style="display: inline-block;">
+                                                                <a href="{{ $url }}"
+                                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $page }}</a>
+                                                            </li>
+                                                        @endif
+                                                    @endif
+                                                @endforeach
+                                            @endif
+                                        @endforeach
 
-        </div>
-    </div>
+                                        @if ($Usedforms->hasMorePages())
+                                            @if (request()->isMethod('post'))
+                                                <li style="display: inline-block;">
+                                                    <form method="POST" action="{{ url()->current() }}">
+                                                        @csrf
+                                                        <input type="hidden" name="page"
+                                                            value="{{ $Usedforms->currentPage() + 1 }}">
+                                                        <button type="submit"
+                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&raquo;</button>
+                                                    </form>
+                                                </li>
+                                            @else
+                                                <li style="display: inline-block;">
+                                                    <a href="{{ $Usedforms->nextPageUrl() }}"
+                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</a>
+                                                </li>
+                                            @endif
+                                        @else
+                                            <li style="display: inline-block;">
+                                                <span
+                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</span>
+                                            </li>
+                                        @endif
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div> --}}
                 </div>
             </div>
-
-           
         </div>
     </div>
 

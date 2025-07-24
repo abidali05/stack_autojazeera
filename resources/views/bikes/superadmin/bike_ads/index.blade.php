@@ -195,7 +195,7 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
                 </div>
             </div>
             <div class="container py-3">
-                <div class="row d-flex justify-content-between">
+                {{-- <div class="row d-flex justify-content-between">
                     <div class="col-md-4"> <span class="pt-md-3 pagination_count"
                             style="font-size: 18px; color: #281F48; font-weight:700;">
                             {{ ($bike_posts->currentPage() - 1) * $bike_posts->perPage() + 1 }}
@@ -300,7 +300,7 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
                         </nav>
 
                     </div>
-                </div>
+                </div> --}}
             </div>
             <div class="container table-responsive">
                 <div class="row">
@@ -495,17 +495,13 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
                                     }
                                 </script>
                             @endforeach
-
-
-
                         </tbody>
                     </table>
                 </div>
-
-
             </div>
+            
             <div class="container py-3">
-                <div class="row d-flex justify-content-between">
+                {{-- <div class="row d-flex justify-content-between">
                     <div class="col-md-4"> <span class="pt-md-3 pagination_count"
                             style="font-size: 18px; color: #281F48; font-weight:700;">
                             {{ ($bike_posts->currentPage() - 1) * $bike_posts->perPage() + 1 }}
@@ -610,7 +606,7 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
                         </nav>
 
                     </div>
-                </div>
+                </div> --}}
             </div>
             @if (isset($bike_post))
                 <form action="{{ route('superadmin.ads.destroy', $bike_post->id) }}" method="post">
@@ -626,14 +622,19 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
         $(document).ready(function() {
             $('.ads-datatable').each(function() {
                 var table = $(this).DataTable({
-                    paging: false,
+                    paging: true,
+                    pageLength: 25,
                     lengthChange: false,
                     searching: true,
-                    info: false,
                     ordering: true,
+                    scrollX: false,
+                    order: [
+                        [0, 'asc']
+                    ],
                     language: {
                         search: "Search: "
-                    }
+                    },
+                    dom: '<"top"f i lp>rt<"bottom"i lp><"clear">'
                 });
 
                 // Add search row

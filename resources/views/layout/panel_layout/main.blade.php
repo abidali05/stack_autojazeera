@@ -275,14 +275,16 @@
         height: auto;
         /* Maintain aspect ratio */
     }
-.buttontoddle {
-    font-size: 14px !important ;
-    background-color: #281f4825 !important;
-    padding: 8px 12px !important;
- 
-    border-radius: 5px !important;
-    border: none !important;
-}
+
+    .buttontoddle {
+        font-size: 14px !important;
+        background-color: #281f4825 !important;
+        padding: 8px 12px !important;
+
+        border-radius: 5px !important;
+        border: none !important;
+    }
+
     #brochurePreview1 img {
         max-width: 50px;
         /* Set the maximum width */
@@ -521,8 +523,7 @@
     
     ?>
     <!-- Main Container -->
-    <div id="main-container"
-        style="height: 100vh;z-index:999;  flex-direction:column; justify-content: space-between;">
+    <div id="main-container" style="height: 100vh;z-index:999;  flex-direction:column; justify-content: space-between;">
         <!-- Navbar -->
         <nav class="navbar thispos navbar-expand-lg bg-light">
             <div class="container-fluid">
@@ -1359,16 +1360,24 @@
                 previewElement.textContent = 'No file uploaded.';
             }
         }
+
         $(document).ready(function() {
-            $('.datatable').DataTable({
-                paging: false, // Disable pagination
-                lengthChange: false, // Hide page length dropdown
-                searching: true, // Enable the search bar
-                info: false, // Hide table information
-                ordering: true, // Disable column ordering (optional, can be removed if sorting is needed)
-                language: {
-                    search: "Search: " // Customize the search bar label
-                }
+            $('.datatable').each(function() {
+                var table = $(this).DataTable({
+                    paging: true,
+                    pageLength: 25,
+                    lengthChange: false,
+                    searching: true,
+                    ordering: true,
+                    scrollX: false,
+                    order: [
+                        [0, 'asc']
+                    ],
+                    language: {
+                        search: "Search: "
+                    },
+                    dom: '<"top"f i lp>rt<"bottom"i lp><"clear">'
+                });
             });
         });
     </script>

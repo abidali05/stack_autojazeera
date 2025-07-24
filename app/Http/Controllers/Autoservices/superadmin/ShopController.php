@@ -16,7 +16,7 @@ class ShopController extends Controller
 {
     public function index()
     {
-        $shops = Shops::with(['shop_amenities', 'shop_timings', 'shop_services', 'shop_images', 'dealer'])->paginate(25);
+        $shops = Shops::with(['shop_amenities', 'shop_timings', 'shop_services', 'shop_images', 'dealer'])->get();
         return view('superadmin.autoservices.shops.index', compact('shops'));
     }
 
@@ -40,7 +40,7 @@ class ShopController extends Controller
 
     public function shop_reviews()
     {
-        $reviews = ShopReview::with(['shop', 'review_images'])->paginate(25);
+        $reviews = ShopReview::with(['shop', 'review_images'])->get();
         return view('superadmin.autoservices.shops.all_reviews', compact('reviews'));
     }
 

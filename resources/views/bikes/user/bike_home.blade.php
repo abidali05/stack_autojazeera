@@ -15,9 +15,11 @@
 
         background-color: #D90600 !important;
     }
-.select2-container--default .select2-selection--single {
-  width: 160px !important;
-}
+
+    .select2-container--default .select2-selection--single {
+        width: 160px !important;
+    }
+
     .carousel-control-prev,
     .carousel-control-next {
         width: 40px;
@@ -538,6 +540,7 @@
                             <select id="condition" name="condition" class="form-select select2"
                                 style="width:160px; color:black;">
                                 <option value="" selected>Condition</option>
+                                <option value="">Any</option>
                                 <option value="new">New Bikes</option>
                                 <option value="used">Used Bikes</option>
                             </select>
@@ -548,6 +551,7 @@
                             <select id="bodyType" name="body_type" class="form-select body-type-select2"
                                 style="width:140px; color:black;">
                                 <option value="" selected>Body Type</option>
+                                <option value="1e">Any</option>
                                 @foreach ($bodytypes as $bodytype)
                                     <option value="{{ $bodytype->id }}">{{ $bodytype->name }}</option>
                                 @endforeach
@@ -559,6 +563,7 @@
                             <select id="bikemake" name="make" class="form-select make-select2"
                                 style="width:150px; color:black;">
                                 <option value="">Make</option>
+                                <option value="1e">Any</option>
                                 @foreach ($makes as $make)
                                     <option value="{{ $make->id }}">{{ $make->name }}</option>
                                 @endforeach
@@ -570,6 +575,7 @@
                             <select class="form-select model-select2" name="model" id="bikemodel"
                                 style="width:150px; color:black;">
                                 <option value="" selected>Model</option>
+                                <option value="1e">Any</option>
                             </select>
                         </div>
 
@@ -578,6 +584,7 @@
                             <select id="province" name="province" class="form-select provience-select2"
                                 style="width:150px; color:black;">
                                 <option value="">Province</option>
+                                <option value="1e">Any</option>
                                 @foreach ($provinces as $province)
                                     <option value="{{ $province->id }}">{{ $province->name }}</option>
                                 @endforeach
@@ -589,6 +596,7 @@
                             <select id="city" name="city" class="form-select city-select2"
                                 style="width:150px; color:black;">
                                 <option value="" selected>City</option>
+                                <option value="1e">Any</option>
                             </select>
                         </div>
 
@@ -607,47 +615,51 @@
         <div class="row">
             <div class="col-12 mt-3">
                 <div class="row">
-           <div class="col-md-3 col-6 p-3" data-aos="fade-down">
-    <a href="{{ url('cars/new') }}" class="text-decoration-none text-dark">
-        <div class="row" style="cursor: pointer">
-            <div class="col-12">
-                <img src="{{ asset('web/bikes/images/Frame 25 (30).svg') }}" class="img-fluid" alt="New Cars">
-                <p class="mt-2 text-center eighteenorange">New Cars</p>
-            </div>
-        </div>
-    </a>
-</div>
+                    <div class="col-md-3 col-6 p-3" data-aos="fade-down">
+                        <a href="{{ url('cars/new') }}" class="text-decoration-none text-dark">
+                            <div class="row" style="cursor: pointer">
+                                <div class="col-12">
+                                    <img src="{{ asset('web/bikes/images/Frame 25 (30).svg') }}" class="img-fluid"
+                                        alt="New Cars">
+                                    <p class="mt-2 text-center eighteenorange">New Cars</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
 
-            <div class="col-md-3 col-6 p-3" data-aos="fade-right">
-    <a href="{{ url('cars/used') }}" class="text-decoration-none text-dark">
-        <div class="row" style="cursor: pointer">
-            <div class="col-12">
-                <img src="{{ asset('web/bikes/images/Frame 25 (1).svg') }}" class="img-fluid" alt="Used Cars">
-                <p class="mt-2 text-center eighteenorange">Used Cars</p>
-            </div>
-        </div>
-    </a>
-</div>
+                    <div class="col-md-3 col-6 p-3" data-aos="fade-right">
+                        <a href="{{ url('cars/used') }}" class="text-decoration-none text-dark">
+                            <div class="row" style="cursor: pointer">
+                                <div class="col-12">
+                                    <img src="{{ asset('web/bikes/images/Frame 25 (1).svg') }}" class="img-fluid"
+                                        alt="Used Cars">
+                                    <p class="mt-2 text-center eighteenorange">Used Cars</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
 
                     <div class="col-md-3 col-6 p-3" data-aos="fade-down">
                         <a href="{{ url('bikes/new') }}" style="cursor: pointer">
-                        <div class="row">
-                            <div class="col-12">
-                                <img src="{{ asset('web/bikes/images/Frame 25 (2).svg') }}" class="img-fluid"
-                                    alt="...">
-                                <p class="mt-2 text-center eighteenorange">New Bikes</p>
+                            <div class="row">
+                                <div class="col-12">
+                                    <img src="{{ asset('web/bikes/images/Frame 25 (2).svg') }}" class="img-fluid"
+                                        alt="...">
+                                    <p class="mt-2 text-center eighteenorange">New Bikes</p>
+                                </div>
                             </div>
-							</div></a>
+                        </a>
                     </div>
                     <div class="col-md-3 col-6 p-3" data-aos="fade-right">
-                      <a href="{{ url('bikes/used') }}" style="cursor: pointer">
-                        <div class="row">
-                            <div class="col-12">
-                                <img src="{{ asset('web/bikes/images/Frame 25 (3).svg') }}" class="img-fluid"
-                                    alt="...">
-                                <p class="mt-2 text-center  eighteenorange">Used Bikes</p>
+                        <a href="{{ url('bikes/used') }}" style="cursor: pointer">
+                            <div class="row">
+                                <div class="col-12">
+                                    <img src="{{ asset('web/bikes/images/Frame 25 (3).svg') }}" class="img-fluid"
+                                        alt="...">
+                                    <p class="mt-2 text-center  eighteenorange">Used Bikes</p>
+                                </div>
                             </div>
-						  </div></a>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -772,28 +784,29 @@
                         style="font-size: 18px; font-weight: 500; text-decoration: none; color: #281F48;">View all</a>
                 </span>
             </div>
-		
-            <div id="featuredPostsCarousel" style="min-height:500px !important" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-						    @if (count($featured_new_posts) == 0)
-                     <div class="col-md-12 mt-5 pt-5">
-		 <div class="row d-flex justify-content-center my-3 mt-5">
-		       <div class="p-3 col-8" style="border:1px solid #281F48;border-radius:9px;">
-                    <div class="row d-flex align-items-center">
-                        <div class="col-3">
-                            <img src="{{ asset('web/images/noinputs.svg') }}" alt="" class="img-fluid"
-                                srcset="">
-                        </div>
-                        <div class="col-9 text-start">
-                     
-                            <p class="m-0">No recent featured new bikes found </p>
 
+            <div id="featuredPostsCarousel" style="min-height:500px !important" class="carousel slide"
+                data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    @if (count($featured_new_posts) == 0)
+                        <div class="col-md-12 mt-5 pt-5">
+                            <div class="row d-flex justify-content-center my-3 mt-5">
+                                <div class="p-3 col-8" style="border:1px solid #281F48;border-radius:9px;">
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-3">
+                                            <img src="{{ asset('web/images/noinputs.svg') }}" alt=""
+                                                class="img-fluid" srcset="">
+                                        </div>
+                                        <div class="col-9 text-start">
+
+                                            <p class="m-0">No recent featured new bikes found </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-		 </div>
-</div>
-            @endif
+                    @endif
                     @foreach ($featured_new_posts->chunk(3) as $key => $chunk)
                         <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
                             <div class="row">
@@ -891,28 +904,29 @@
                     </span>
                 </div>
 
-                <div id="featuredCarsCarousel" style="min-height:500px !important" class="carousel slide" data-bs-ride="carousel">
+                <div id="featuredCarsCarousel" style="min-height:500px !important" class="carousel slide"
+                    data-bs-ride="carousel">
                     <div class="carousel-inner">
-						    @if (count($featured_used_posts) == 0)
-                     <div class="col-md-12 mt-5 pt-5" >
-		 <div class="row d-flex justify-content-center my-3 mt-5">
-		       <div class="p-3 col-8" style="border:1px solid #281F48;border-radius:9px;">
-                    <div class="row d-flex align-items-center">
-                        <div class="col-3">
-                            <img src="{{ asset('web/images/noinputs.svg') }}" alt="" class="img-fluid"
-                                srcset="">
-                        </div>
-                        <div class="col-9 text-start">
-                     
-                            <p class="m-0">No recent featured
-                 used bikes found</p>
+                        @if (count($featured_used_posts) == 0)
+                            <div class="col-md-12 mt-5 pt-5">
+                                <div class="row d-flex justify-content-center my-3 mt-5">
+                                    <div class="p-3 col-8" style="border:1px solid #281F48;border-radius:9px;">
+                                        <div class="row d-flex align-items-center">
+                                            <div class="col-3">
+                                                <img src="{{ asset('web/images/noinputs.svg') }}" alt=""
+                                                    class="img-fluid" srcset="">
+                                            </div>
+                                            <div class="col-9 text-start">
 
-                        </div>
-                    </div>
-                </div>
-		 </div>
-</div>
-            @endif
+                                                <p class="m-0">No recent featured
+                                                    used bikes found</p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                         @foreach ($featured_used_posts->chunk(3) as $chunkIndex => $postChunk)
                             <div class="carousel-item {{ $chunkIndex == 0 ? 'active' : '' }}">
                                 <div class="row">
@@ -1091,7 +1105,7 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         // $('.select2').select2({
         //     minimumResultsForSearch: Infinity,
         //     dropdownAutoWidth: true,
@@ -1129,7 +1143,7 @@
         });
 
         // Province → City
-        $('#province').on('change', function () {
+        $('#province').on('change', function() {
             const provinceId = $(this).val();
             const citySelect = $('#city');
 
@@ -1139,13 +1153,15 @@
                 $.ajax({
                     url: '/getCities/' + provinceId,
                     type: 'GET',
-                    success: function (data) {
-                        data.forEach(function (city) {
-                            citySelect.append(`<option value="${city.id}">${city.name}</option>`);
+                    success: function(data) {
+                        data.forEach(function(city) {
+                            citySelect.append(
+                                `<option value="${city.id}">${city.name}</option>`
+                                );
                         });
                         citySelect.trigger('change.select2');
                     },
-                    error: function () {
+                    error: function() {
                         console.error('Error fetching cities');
                     }
                 });
@@ -1153,7 +1169,7 @@
         });
 
         // Bike Make → Model
-        $('#bikemake').on('change', function () {
+        $('#bikemake').on('change', function() {
             const makeId = $(this).val();
             const modelSelect = $('#bikemodel');
 
@@ -1166,13 +1182,15 @@
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
-                    success: function (data) {
-                        data.forEach(function (model) {
-                            modelSelect.append(`<option value="${model.id}">${model.name}</option>`);
+                    success: function(data) {
+                        data.forEach(function(model) {
+                            modelSelect.append(
+                                `<option value="${model.id}">${model.name}</option>`
+                                );
                         });
                         modelSelect.trigger('change.select2');
                     },
-                    error: function () {
+                    error: function() {
                         console.error('Error fetching models');
                     }
                 });
@@ -1180,14 +1198,14 @@
         });
 
         // Hover message for City if Province not selected
-        $('#city').parent().on('mouseenter', function () {
+        $('#city').parent().on('mouseenter', function() {
             const provinceVal = $('#province').val();
             const display = $('#city').next('.select2-container').find('.select2-selection__rendered');
             if (!provinceVal) {
                 display.data('original', display.text());
                 display.text('Select Province First');
             }
-        }).on('mouseleave', function () {
+        }).on('mouseleave', function() {
             const display = $('#city').next('.select2-container').find('.select2-selection__rendered');
             const original = display.data('original');
             if (original) {
@@ -1196,15 +1214,17 @@
         });
 
         // Hover message for Model if Make not selected
-        $('#bikemodel').parent().on('mouseenter', function () {
+        $('#bikemodel').parent().on('mouseenter', function() {
             const makeVal = $('#bikemake').val();
-            const display = $('#bikemodel').next('.select2-container').find('.select2-selection__rendered');
+            const display = $('#bikemodel').next('.select2-container').find(
+                '.select2-selection__rendered');
             if (!makeVal) {
                 display.data('original', display.text());
                 display.text('Select Make First');
             }
-        }).on('mouseleave', function () {
-            const display = $('#bikemodel').next('.select2-container').find('.select2-selection__rendered');
+        }).on('mouseleave', function() {
+            const display = $('#bikemodel').next('.select2-container').find(
+                '.select2-selection__rendered');
             const original = display.data('original');
             if (original) {
                 display.text(original);

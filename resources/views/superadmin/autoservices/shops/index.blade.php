@@ -107,7 +107,7 @@
     {{-- tabs navigaition  --}}
     <div class="container mt-3">
         <div class="row align-items-center mb-2">
-       
+
             <div class="col-md-12">
                 <h2 class="sec mb-0 primary-color-custom">Manage Shops</h2>
             </div>
@@ -118,13 +118,13 @@
 
     <div class="container my-2">
         <div class="row d-flex justify-content-between">
-            <div class="col-md-4"> <span class="pt-md-3 pagination_count"
+            {{-- <div class="col-md-4"> <span class="pt-md-3 pagination_count"
                     style="font-size: 18px; color: #281F48; font-weight:700;">
                     {{ ($shops->currentPage() - 1) * $shops->perPage() + 1 }}
                     - {{ min($shops->currentPage() * $shops->perPage(), $shops->total()) }}
                     of {{ $shops->total() }} Results
-                </span></div>
-            <div class="col-md-4">
+                </span></div> --}}
+            {{-- <div class="col-md-4">
              
                     <nav class="d-flex justify-content-end align-items-center">
                         <!-- Page Info -->
@@ -221,7 +221,7 @@
 
                     </nav>
              
-            </div>
+            </div> --}}
         </div>
     </div>
     <div class="container table-responsive ">
@@ -238,13 +238,10 @@
                     </tr>
                 </thead>
                 <tbody>
-
-
                     @foreach ($shops as $key => $shop)
                         <tr>
                             <td>{{ $key + 1 }}</td>
                             <td>
-
                                 <a class="primary-color-custom cancel" data-id="{{ $shop->id }}" title="View"
                                     data-bs-toggle="modal" data-bs-target="#previewmodal{{ $shop->id }}">
                                     <i class="bi bi-eye"></i>
@@ -258,8 +255,7 @@
                                 @elseif ($shop->status == '2')
                                     <span class="badge rounded-pill bg-danger" data-bs-toggle="modal"
                                         data-bs-target="#statusModal{{ $shop->id }}">Rejected</span>
-								
-								@else
+                                @else
                                     <span class="badge rounded-pill bg-danger" data-bs-toggle="modal"
                                         data-bs-target="#statusModal{{ $shop->id }}">Inactive</span>
                                 @endif
@@ -278,10 +274,12 @@
                             aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered modal-xl">
                                 <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
-                                    <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                                    <div class="modal-header"
+                                        style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                                         <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
-                                        <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
+                                        <button type="button" class="btn-close"
+                                            style="background-color: #D9D9D9 !important; color: #FD5631;"
+                                            data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body" style="background-color: #F0F3F6; color: #FD5631;">
                                         <div class="container">
@@ -333,7 +331,8 @@
                                                         <div class="col-md-12 col-12 p-3">
                                                             <div class="row">
                                                                 <div class="col-12">
-                                                                    <h2 class="mt-5 mb-3 twentyeight" style="color:#281F48;">Services Offered</h2>
+                                                                    <h2 class="mt-5 mb-3 twentyeight"
+                                                                        style="color:#281F48;">Services Offered</h2>
                                                                     <div class="row" id="preview-services-container">
                                                                         @foreach ($shop->shop_services->chunk(ceil($shop->shop_services->count() / 3)) as $chunk)
                                                                             <div class="col-md-4 col-6">
@@ -377,7 +376,8 @@
                                                         <div class="col-md-12 col-lg-12 col-12">
                                                             <div class="row">
                                                                 <div class="col-md-6 col-12 px-4">
-                                                                    <h2 class="twentyeight" style="color:#281F48;">Hours</h2>
+                                                                    <h2 class="twentyeight" style="color:#281F48;">Hours
+                                                                    </h2>
                                                                     <div class="row">
                                                                         <div class="col-4"
                                                                             style="font-weight: 600;color: #000000;">
@@ -396,8 +396,9 @@
                                                                                 <p id="preview-{{ strtolower($day) }}-hours"
                                                                                     class="sixteen text-end">
                                                                                     @if ($timing)
-                                                                                        {{ date('h:i A', strtotime($timing->start_time)) }} -
-                                                            {{ date('h:i A', strtotime($timing->end_time)) }}
+                                                                                        {{ date('h:i A', strtotime($timing->start_time)) }}
+                                                                                        -
+                                                                                        {{ date('h:i A', strtotime($timing->end_time)) }}
                                                                                     @else
                                                                                         Closed
                                                                                     @endif
@@ -408,7 +409,8 @@
                                                                 </div>
                                                                 <div class="col-md-6 col-12" style="color: #000000;">
                                                                     <div class="row">
-                                                                        <h2 class="twentyeight" style="color:#281F48;">Amenities</h2>
+                                                                        <h2 class="twentyeight" style="color:#281F48;">
+                                                                            Amenities</h2>
                                                                         <div class="row"
                                                                             id="preview-amenities-container">
                                                                             @foreach ($shop->shop_amenities->chunk(ceil($shop->shop_amenities->count() / 2)) as $chunk)
@@ -469,10 +471,12 @@
                             aria-hidden="true">
                             <div class="modal-dialog  modal-dialog-centered ">
                                 <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
-                                    <div class="modal-header"  style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                                    <div class="modal-header"
+                                        style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                                         <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
-                                        <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
+                                        <button type="button" class="btn-close"
+                                            style="background-color: #D9D9D9 !important; color: #FD5631;"
+                                            data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body" style="background-color: #F0F3F6; color: #FD5631;">
                                         <form action="{{ route('superadmin.update_shop_status') }}" method="POST">
@@ -480,7 +484,8 @@
                                             <input type="hidden" name="id" value="{{ $shop->id }}">
                                             <div class="mb-3">
                                                 <label for="status{{ $shop->id }}" class="form-label">Status</label>
-                                                <select class="form-select" name="status" style="background-color:white ; color:#281F48"
+                                                <select class="form-select" name="status"
+                                                    style="background-color:white ; color:#281F48"
                                                     id="status{{ $shop->id }}">
                                                     <option value="1" {{ $shop->status == '1' ? 'selected' : '' }}>
                                                         Approved</option>
@@ -496,14 +501,18 @@
                                                     class="form-label">Rejection
                                                     Reason</label>
                                                 <textarea class="form-control" style="    line-height: 1 !important;
-" name="rejection_reason" id="rejectionReason{{ $shop->id }}"
-                                                    placeholder="Enter reason for rejection" {{ $shop->status != '2' ? 'disabled' : '' }}>{{ $shop->rejection_reason }}</textarea>
+" name="rejection_reason"
+                                                    id="rejectionReason{{ $shop->id }}" placeholder="Enter reason for rejection"
+                                                    {{ $shop->status != '2' ? 'disabled' : '' }}>{{ $shop->rejection_reason }}</textarea>
                                             </div>
 
                                             <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                                                <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                                                <button type="button" class="btn btn-light px-4 py-2 "
+                                                    style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
                                                     data-bs-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-light px-4 py-2 " style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Save changes</button>
+                                                <button type="submit" class="btn btn-light px-4 py-2 "
+                                                    style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Save
+                                                    changes</button>
                                             </div>
                                         </form>
 
@@ -525,29 +534,21 @@
                             </div>
                         </div>
                     @endforeach
-
-
-
-
                 </tbody>
             </table>
         </div>
-
-
-
-
-
         {{-- success modal start --}}
-
-
         <div class="modal fade" id="shopresponse" tabindex="-1" aria-labelledby="shopresponseLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
                     <!-- Modal Header -->
-                    <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                    <div class="modal-header"
+                        style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                         <h5 class="modal-title" id="shopresponseLabel"><strong> Shops</strong></h5>
-                        <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close"
+                            style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <!-- Modal body -->
                     <div class="modal-body" style="background-color: #F0F3F6; color: #FD5631;">
@@ -555,7 +556,9 @@
                     </div>
                     <!-- Modal footer -->
                     <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                        <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-light px-4 py-2 "
+                            style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                            data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
@@ -574,7 +577,7 @@
 
     </div>
 
-    <div class="container my-2">
+    {{-- <div class="container my-2">
         <div class="row d-flex justify-content-between">
             <div class="col-md-4"> <span class="pt-md-3 pagination_count"
                     style="font-size: 18px; color: #281F48; font-weight:700;">
@@ -583,111 +586,98 @@
                     of {{ $shops->total() }} Results
                 </span></div>
             <div class="col-md-4">
-             
-                    <nav class="d-flex justify-content-end align-items-center">
-                        <!-- Page Info -->
 
-
-                        <!-- Pagination -->
-                        <ul class="pagination"
-                            style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
-                            @if ($shops->onFirstPage())
+                <nav class="d-flex justify-content-end align-items-center">
+                    <ul class="pagination"
+                        style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
+                        @if ($shops->onFirstPage())
+                            <li style="display: inline-block;">
+                                <span
+                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</span>
+                            </li>
+                        @else
+                            @if (request()->isMethod('post'))
                                 <li style="display: inline-block;">
-                                    <span
-                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</span>
+                                    <form method="POST" action="{{ url()->current() }}">
+                                        @csrf
+                                        <input type="hidden" name="page" value="{{ $shops->currentPage() - 1 }}">
+                                        <button type="submit"
+                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&laquo;</button>
+                                    </form>
                                 </li>
                             @else
-                                @if (request()->isMethod('post'))
-                                    <li style="display: inline-block;">
-                                        <form method="POST" action="{{ url()->current() }}">
-                                            @csrf
-                                            <input type="hidden" name="page"
-                                                value="{{ $shops->currentPage() - 1 }}">
-                                            <button type="submit"
-                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&laquo;</button>
-                                        </form>
-                                    </li>
-                                @else
-                                    <li style="display: inline-block;">
-                                        <a href="{{ $shops->previousPageUrl() }}"
-                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</a>
-                                    </li>
-                                @endif
+                                <li style="display: inline-block;">
+                                    <a href="{{ $shops->previousPageUrl() }}"
+                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</a>
+                                </li>
+                            @endif
+                        @endif
+
+                        @foreach ($shops->links()->elements as $element)
+                            @if (is_string($element))
+                                <li style="display: inline-block;">
+                                    <span
+                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $element }}</span>
+                                </li>
                             @endif
 
-                            @foreach ($shops->links()->elements as $element)
-                                @if (is_string($element))
-                                    <li style="display: inline-block;">
-                                        <span
-                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $element }}</span>
-                                    </li>
-                                @endif
-
-                                @if (is_array($element))
-                                    @foreach ($element as $page => $url)
-                                        @if ($page == $shops->currentPage())
+                            @if (is_array($element))
+                                @foreach ($element as $page => $url)
+                                    @if ($page == $shops->currentPage())
+                                        <li style="display: inline-block;">
+                                            <span
+                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #281F48; color: #fff;">{{ $page }}</span>
+                                        </li>
+                                    @else
+                                        @if (request()->isMethod('post'))
                                             <li style="display: inline-block;">
-                                                <span
-                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #281F48; color: #fff;">{{ $page }}</span>
+                                                <form method="POST" action="{{ url()->current() }}">
+                                                    @csrf
+                                                    <input type="hidden" name="page" value="{{ $page }}">
+                                                    <button type="submit"
+                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">{{ $page }}</button>
+                                                </form>
                                             </li>
                                         @else
-                                            @if (request()->isMethod('post'))
-                                                <li style="display: inline-block;">
-                                                    <form method="POST" action="{{ url()->current() }}">
-                                                        @csrf
-                                                        <input type="hidden" name="page"
-                                                            value="{{ $page }}">
-                                                        <button type="submit"
-                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">{{ $page }}</button>
-                                                    </form>
-                                                </li>
-                                            @else
-                                                <li style="display: inline-block;">
-                                                    <a href="{{ $url }}"
-                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $page }}</a>
-                                                </li>
-                                            @endif
+                                            <li style="display: inline-block;">
+                                                <a href="{{ $url }}"
+                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $page }}</a>
+                                            </li>
                                         @endif
-                                    @endforeach
-                                @endif
-                            @endforeach
+                                    @endif
+                                @endforeach
+                            @endif
+                        @endforeach
 
-                            @if ($shops->hasMorePages())
-                                @if (request()->isMethod('post'))
-                                    <li style="display: inline-block;">
-                                        <form method="POST" action="{{ url()->current() }}">
-                                            @csrf
-                                            <input type="hidden" name="page"
-                                                value="{{ $shops->currentPage() + 1 }}">
-                                            <button type="submit"
-                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&raquo;</button>
-                                        </form>
-                                    </li>
-                                @else
-                                    <li style="display: inline-block;">
-                                        <a href="{{ $shops->nextPageUrl() }}"
-                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</a>
-                                    </li>
-                                @endif
+                        @if ($shops->hasMorePages())
+                            @if (request()->isMethod('post'))
+                                <li style="display: inline-block;">
+                                    <form method="POST" action="{{ url()->current() }}">
+                                        @csrf
+                                        <input type="hidden" name="page" value="{{ $shops->currentPage() + 1 }}">
+                                        <button type="submit"
+                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&raquo;</button>
+                                    </form>
+                                </li>
                             @else
                                 <li style="display: inline-block;">
-                                    <span
-                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</span>
+                                    <a href="{{ $shops->nextPageUrl() }}"
+                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</a>
                                 </li>
                             @endif
-                        </ul>
+                        @else
+                            <li style="display: inline-block;">
+                                <span
+                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</span>
+                            </li>
+                        @endif
+                    </ul>
 
-                    </nav>
-             
+                </nav>
+
             </div>
         </div>
-    </div>
-
-
-
-
-
-
+    </div> --}}
 
     <script>
         function handleServiceCategoryIconUpload(input, previewElementId) {

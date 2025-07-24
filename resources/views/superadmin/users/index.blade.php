@@ -220,10 +220,11 @@
                                                 </div>
 
                                                 <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                                                    <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                                                    <button type="button" class="btn btn-light px-4 py-2 "
+                                                        style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
                                                         data-bs-dismiss="modal">Cancel</button>
-                                                    <button type="submit"
-                                                        class="btn btn-light px-4 py-2 " style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Update</button>
+                                                    <button type="submit" class="btn btn-light px-4 py-2 "
+                                                        style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Update</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -242,20 +243,27 @@
                                                 <input type="hidden" name="deleted_id" value="{{ $user->id }}">
 
                                                 @method('DELETE')
-                                                <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
-                                                    <h5 class="modal-title" id="deleteModalLabel{{ $user->id }}"><strong>Confirm Deletion</strong>
-                                                         </h5>
-                                                    <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;"
+                                                <div class="modal-header"
+                                                    style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                                                    <h5 class="modal-title" id="deleteModalLabel{{ $user->id }}">
+                                                        <strong>Confirm Deletion</strong>
+                                                    </h5>
+                                                    <button type="button" class="btn-close"
+                                                        style="background-color: #D9D9D9 !important; color: #FD5631;"
                                                         data-bs-dismiss="modal"></button>
                                                 </div>
-                                                <div class="modal-body text-center" style="background-color: #F0F3F6; color: #FD5631;">
+                                                <div class="modal-body text-center"
+                                                    style="background-color: #F0F3F6; color: #FD5631;">
                                                     Are you sure you want to delete user
                                                     <strong>{{ $user->name }}</strong>?
                                                 </div>
                                                 <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                                                    <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                                                    <button type="button" class="btn btn-light px-4 py-2 "
+                                                        style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
                                                         data-bs-dismiss="modal">Cancel</button>
-                                                    <button type="submit" class="btn btn-light px-4 py-2 " style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Yes, Delete</button>
+                                                    <button type="submit" class="btn btn-light px-4 py-2 "
+                                                        style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Yes,
+                                                        Delete</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -319,7 +327,8 @@
                                                 enctype="multipart/form-data">
                                                 @csrf
                                                 @method('PUT')
-                                                <div class="modal-body" style="background-color: #F0F3F6; color: #FD5631;">
+                                                <div class="modal-body"
+                                                    style="background-color: #F0F3F6; color: #FD5631;">
                                                     <div class="mb-4 row">
                                                         <div class="col-6 mb-3">
                                                             <h3 style="color: #281F48; font-weight: 600;">Edit User</h3>
@@ -431,10 +440,11 @@
                                                 </div>
 
                                                 <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                                                    <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                                                    <button type="button" class="btn btn-light px-4 py-2 "
+                                                        style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
                                                         data-bs-dismiss="modal">Cancel</button>
-                                                    <button type="submit"
-                                                        class="btn btn-light px-4 py-2 " style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Update</button>
+                                                    <button type="submit" class="btn btn-light px-4 py-2 "
+                                                        style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Update</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -452,20 +462,27 @@
 
                                                 @csrf
                                                 @method('DELETE')
-                                                <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                                                <div class="modal-header"
+                                                    style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                                                     <h5 class="modal-title" id="deleteModalLabel{{ $user->id }}">
-                                                         <strong>Confirm Deletion</strong></h5>
-                                                    <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;"
+                                                        <strong>Confirm Deletion</strong>
+                                                    </h5>
+                                                    <button type="button" class="btn-close"
+                                                        style="background-color: #D9D9D9 !important; color: #FD5631;"
                                                         data-bs-dismiss="modal"></button>
                                                 </div>
-                                                <div class="modal-body text-center" style="background-color: #F0F3F6; color: #FD5631;">
+                                                <div class="modal-body text-center"
+                                                    style="background-color: #F0F3F6; color: #FD5631;">
                                                     Are you sure you want to delete user
                                                     <strong>{{ $user->name }}</strong>?
                                                 </div>
                                                 <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                                                    <button type="button"  class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                                                    <button type="button" class="btn btn-light px-4 py-2 "
+                                                        style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
                                                         data-bs-dismiss="modal">Cancel</button>
-                                                    <button type="submit"  class="btn btn-light px-4 py-2 " style="background-color:white; font-weight:600; color: #281F48; border-radius: 5px;">Yes, Delete</button>
+                                                    <button type="submit" class="btn btn-light px-4 py-2 "
+                                                        style="background-color:white; font-weight:600; color: #281F48; border-radius: 5px;">Yes,
+                                                        Delete</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -524,13 +541,14 @@
                                 <div class="modal fade" id="editUsererModal{{ $user->id }}" tabindex="-1"
                                     aria-labelledby="editUsererModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg modal-dialog-centered">
-                                        <div class="modal-content"  style="border-radius: 10px; overflow: hidden;">
+                                        <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
                                             <form method="post"
                                                 action="{{ route('superadmin.user.update', $user->id) }}"
                                                 enctype="multipart/form-data">
                                                 @csrf
                                                 @method('PUT')
-                                                <div class="modal-body"  style="background-color: #F0F3F6; color: #FD5631;" >
+                                                <div class="modal-body"
+                                                    style="background-color: #F0F3F6; color: #FD5631;">
                                                     <div class="mb-4 row">
                                                         <div class="col-6 mb-3">
                                                             <h3 style="color: #281F48; font-weight: 600;">Edit User</h3>
@@ -642,10 +660,11 @@
                                                 </div>
 
                                                 <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                                                    <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                                                    <button type="button" class="btn btn-light px-4 py-2 "
+                                                        style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
                                                         data-bs-dismiss="modal">Cancel</button>
-                                                    <button type="submit"
-                                                       class="btn btn-light px-4 py-2 " style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Update</button>
+                                                    <button type="submit" class="btn btn-light px-4 py-2 "
+                                                        style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Update</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -662,20 +681,27 @@
                                                 <input type="hidden" name="deleted_id" value="{{ $user->id }}">
                                                 @csrf
                                                 @method('DELETE')
-                                                <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                                                <div class="modal-header"
+                                                    style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                                                     <h5 class="modal-title" id="deleteModalLabel{{ $user->id }}">
-                                                         <strong>Confirm Deletion</strong></h5>
-                                                    <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;"
+                                                        <strong>Confirm Deletion</strong>
+                                                    </h5>
+                                                    <button type="button" class="btn-close"
+                                                        style="background-color: #D9D9D9 !important; color: #FD5631;"
                                                         data-bs-dismiss="modal"></button>
                                                 </div>
-                                                <div class="modal-body text-center" style="background-color: #F0F3F6; color: #FD5631;" >
+                                                <div class="modal-body text-center"
+                                                    style="background-color: #F0F3F6; color: #FD5631;">
                                                     Are you sure you want to delete user
                                                     <strong>{{ $user->name }}</strong>?
                                                 </div>
                                                 <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                                                    <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                                                    <button type="button" class="btn btn-light px-4 py-2 "
+                                                        style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
                                                         data-bs-dismiss="modal">Cancel</button>
-                                                    <button type="submit" class="btn btn-light px-4 py-2 " style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Yes, Delete</button>
+                                                    <button type="submit" class="btn btn-light px-4 py-2 "
+                                                        style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Yes,
+                                                        Delete</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -696,14 +722,25 @@
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
     <script>
         const initializeTables = () => {
+             $(document).ready(function() {
             $('.datatable12').each(function() {
-                if (!$.fn.DataTable.isDataTable(this)) {
-                    $(this).DataTable({
-                        pageLength: 25,
-                        lengthChange: false
-                    });
-                }
+                var table = $(this).DataTable({
+                    paging: true,
+                    pageLength: 25,
+                    lengthChange: false,
+                    searching: true,
+                    ordering: true,
+                    scrollX: false,
+                    order: [
+                        [0, 'asc']
+                    ],
+                    language: {
+                        search: "Search: "
+                    },
+                    dom: '<"top"f i lp>rt<"bottom"i lp><"clear">'
+                });
             });
+        });
         };
 
         document.addEventListener('DOMContentLoaded', initializeTables);

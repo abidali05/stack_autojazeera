@@ -117,16 +117,10 @@
 
 
     <div class="container">
-
-        <div class="row align-items-center ">
-
+        {{-- <div class="row align-items-center ">
             <div class="col-md-8 d-none">
                 @if ($reviews->hasPages())
                     <nav class="d-flex justify-content-end align-items-center">
-                        <!-- Page Info -->
-
-
-                        <!-- Pagination -->
                         <ul class="pagination"
                             style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
                             @if ($reviews->onFirstPage())
@@ -211,7 +205,6 @@
                                 </li>
                             @endif
                         </ul>
-
                     </nav>
                 @endif
             </div>
@@ -222,9 +215,9 @@
                     of {{ $reviews->total() }} Results
                 </span></div>
 
-        </div>
+        </div> --}}
     </div>
-    <div class="container table-responsive ">
+    <div class="container table-responsive">
         <div class="row">
             <table class="table table-striped transparent-table align-middle datatable">
                 <thead>
@@ -238,15 +231,12 @@
                     </tr>
                 </thead>
                 <tbody>
-
-
                     @foreach ($reviews as $key => $review)
                         <tr>
                             <td>{{ $key + 1 }}</td>
                             <td>{{ $review->shop->name }}</td>
                             <td>{{ $review->user->name }}</td>
                             <td>
-
                                 <a class="primary-color-custom cancel" data-id="{{ $review->id }}" title="View"
                                     data-bs-toggle="modal" data-bs-target="#previewmodal{{ $review->id }}">
                                     <i class="bi bi-eye"></i>
@@ -254,25 +244,23 @@
                             </td>
                             <td>{{ $review->rating }}</td>
                             <td>
-
                                 <a class="primary-color-custom cancel" data-id="{{ $review->id }}" title="View"
                                     data-bs-toggle="modal" data-bs-target="#deleteServiceCategoryModal{{ $review->id }}">
                                     <i class="bi bi-trash"></i>
                                 </a>
                             </td>
-
                         </tr>
-
-
                         <div class="modal fade" id="previewmodal{{ $review->id }}" data-bs-backdrop="static"
                             data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
                             aria-hidden="true">
                             <div class="modal-dialog  modal-xl modal-dialog-centered">
                                 <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
-                                    <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                                    <div class="modal-header"
+                                        style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                                         <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
-                                        <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
+                                        <button type="button" class="btn-close"
+                                            style="background-color: #D9D9D9 !important; color: #FD5631;"
+                                            data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body" style="background-color: #F0F3F6; color: #FD5631;">
                                         <div class="container">
@@ -290,46 +278,45 @@
                                                             {{ $review->comment }}
                                                         </div>
                                                     </div>
-
-
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
-
-
-
-                         <div class="modal fade" id="deleteServiceCategoryModal{{ $review->id }}" tabindex="-1" aria-labelledby="addDealerModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="deleteServiceCategoryModal{{ $review->id }}" tabindex="-1"
+                            aria-labelledby="addDealerModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
-                                    <div class="modal-header border-0" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                                    <div class="modal-header border-0"
+                                        style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                                         <h5 class="modal-title" id="editDealerModalLabel"><strong>Delete </strong></h5>
-                                        <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <button type="button" class="btn-close"
+                                            style="background-color: #D9D9D9 !important; color: #FD5631;"
+                                            data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                
-                                    <div class="modal-body text-center" style="background-color: #F0F3F6; color: #FD5631;">
-                                     <h4 style="color:#281F48 !important;">Are you sure to delete this review? </h4>
-                                            <div class="row mb-3">
-                                                <form action="{{ route('superadmin.delete_shop_review', $review->id) }}" method="post">
-                                                 @method('DELETE')
-                                                 @csrf
+
+                                    <div class="modal-body text-center"
+                                        style="background-color: #F0F3F6; color: #FD5631;">
+                                        <h4 style="color:#281F48 !important;">Are you sure to delete this review? </h4>
+                                        <div class="row mb-3">
+                                            <form action="{{ route('superadmin.delete_shop_review', $review->id) }}"
+                                                method="post">
+                                                @method('DELETE')
+                                                @csrf
                                                 <div class="col-sm-8">
                                                     <input type="hidden" class="form-control" name="deleted_id"
-                                                         value="{{ $review->id }}" required>
+                                                        value="{{ $review->id }}" required>
                                                 </div>
-                                            </div>
-                                    
-                                         
-                                     
-                                   
+                                        </div>
                                     </div>
                                     <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                                        <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;" data-bs-dismiss="modal">Cancel</button>
-                                        <button type="submit" class="btn btn-light px-4 py-2 " style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Delete</button>
+                                        <button type="button" class="btn btn-light px-4 py-2 "
+                                            style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                                            data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-light px-4 py-2 "
+                                            style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Delete</button>
                                     </div>
                                     </form>
                                 </div>
@@ -337,122 +324,115 @@
                         </div>
                     @endforeach
 
-   @if ($reviews->hasPages())
-                    <nav class="d-flex justify-content-end align-items-center">
-                        <!-- Page Info -->
-
-
-                        <!-- Pagination -->
-                        <ul class="pagination"
-                            style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
-                            @if ($reviews->onFirstPage())
-                                <li style="display: inline-block;">
-                                    <span
-                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</span>
-                                </li>
-                            @else
-                                @if (request()->isMethod('post'))
-                                    <li style="display: inline-block;">
-                                        <form method="POST" action="{{ url()->current() }}">
-                                            @csrf
-                                            <input type="hidden" name="page"
-                                                value="{{ $reviews->currentPage() - 1 }}">
-                                            <button type="submit"
-                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&laquo;</button>
-                                        </form>
-                                    </li>
-                                @else
-                                    <li style="display: inline-block;">
-                                        <a href="{{ $reviews->previousPageUrl() }}"
-                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</a>
-                                    </li>
-                                @endif
-                            @endif
-
-                            @foreach ($reviews->links()->elements as $element)
-                                @if (is_string($element))
+                    {{-- @if ($reviews->hasPages())
+                        <nav class="d-flex justify-content-end align-items-center">
+                            <ul class="pagination"
+                                style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
+                                @if ($reviews->onFirstPage())
                                     <li style="display: inline-block;">
                                         <span
-                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $element }}</span>
-                                    </li>
-                                @endif
-
-                                @if (is_array($element))
-                                    @foreach ($element as $page => $url)
-                                        @if ($page == $reviews->currentPage())
-                                            <li style="display: inline-block;">
-                                                <span
-                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #281F48; color: #fff;">{{ $page }}</span>
-                                            </li>
-                                        @else
-                                            @if (request()->isMethod('post'))
-                                                <li style="display: inline-block;">
-                                                    <form method="POST" action="{{ url()->current() }}">
-                                                        @csrf
-                                                        <input type="hidden" name="page"
-                                                            value="{{ $page }}">
-                                                        <button type="submit"
-                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">{{ $page }}</button>
-                                                    </form>
-                                                </li>
-                                            @else
-                                                <li style="display: inline-block;">
-                                                    <a href="{{ $url }}"
-                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $page }}</a>
-                                                </li>
-                                            @endif
-                                        @endif
-                                    @endforeach
-                                @endif
-                            @endforeach
-
-                            @if ($reviews->hasMorePages())
-                                @if (request()->isMethod('post'))
-                                    <li style="display: inline-block;">
-                                        <form method="POST" action="{{ url()->current() }}">
-                                            @csrf
-                                            <input type="hidden" name="page"
-                                                value="{{ $reviews->currentPage() + 1 }}">
-                                            <button type="submit"
-                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&raquo;</button>
-                                        </form>
+                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</span>
                                     </li>
                                 @else
+                                    @if (request()->isMethod('post'))
+                                        <li style="display: inline-block;">
+                                            <form method="POST" action="{{ url()->current() }}">
+                                                @csrf
+                                                <input type="hidden" name="page"
+                                                    value="{{ $reviews->currentPage() - 1 }}">
+                                                <button type="submit"
+                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&laquo;</button>
+                                            </form>
+                                        </li>
+                                    @else
+                                        <li style="display: inline-block;">
+                                            <a href="{{ $reviews->previousPageUrl() }}"
+                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</a>
+                                        </li>
+                                    @endif
+                                @endif
+
+                                @foreach ($reviews->links()->elements as $element)
+                                    @if (is_string($element))
+                                        <li style="display: inline-block;">
+                                            <span
+                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $element }}</span>
+                                        </li>
+                                    @endif
+
+                                    @if (is_array($element))
+                                        @foreach ($element as $page => $url)
+                                            @if ($page == $reviews->currentPage())
+                                                <li style="display: inline-block;">
+                                                    <span
+                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #281F48; color: #fff;">{{ $page }}</span>
+                                                </li>
+                                            @else
+                                                @if (request()->isMethod('post'))
+                                                    <li style="display: inline-block;">
+                                                        <form method="POST" action="{{ url()->current() }}">
+                                                            @csrf
+                                                            <input type="hidden" name="page"
+                                                                value="{{ $page }}">
+                                                            <button type="submit"
+                                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">{{ $page }}</button>
+                                                        </form>
+                                                    </li>
+                                                @else
+                                                    <li style="display: inline-block;">
+                                                        <a href="{{ $url }}"
+                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $page }}</a>
+                                                    </li>
+                                                @endif
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                @endforeach
+
+                                @if ($reviews->hasMorePages())
+                                    @if (request()->isMethod('post'))
+                                        <li style="display: inline-block;">
+                                            <form method="POST" action="{{ url()->current() }}">
+                                                @csrf
+                                                <input type="hidden" name="page"
+                                                    value="{{ $reviews->currentPage() + 1 }}">
+                                                <button type="submit"
+                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&raquo;</button>
+                                            </form>
+                                        </li>
+                                    @else
+                                        <li style="display: inline-block;">
+                                            <a href="{{ $reviews->nextPageUrl() }}"
+                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</a>
+                                        </li>
+                                    @endif
+                                @else
                                     <li style="display: inline-block;">
-                                        <a href="{{ $reviews->nextPageUrl() }}"
-                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</a>
+                                        <span
+                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</span>
                                     </li>
                                 @endif
-                            @else
-                                <li style="display: inline-block;">
-                                    <span
-                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</span>
-                                </li>
-                            @endif
-                        </ul>
+                            </ul>
 
-                    </nav>
-                @endif
-
-
+                        </nav>
+                    @endif --}}
                 </tbody>
             </table>
         </div>
-
-
-
-
-
         {{-- success modal start --}}
 
 
-        <div class="modal fade" id="shopresponse" tabindex="-1" aria-labelledby="shopresponseLabel" aria-hidden="true">
+        <div class="modal fade" id="shopresponse" tabindex="-1" aria-labelledby="shopresponseLabel"
+            aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
                     <!-- Modal Header -->
-                    <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                    <div class="modal-header"
+                        style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                         <h5 class="modal-title" id="shopresponseLabel"><strong> Shops</strong></h5>
-                        <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close"
+                            style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <!-- Modal body -->
                     <div class="modal-body" style="background-color: #F0F3F6; color: #FD5631;">
@@ -460,7 +440,9 @@
                     </div>
                     <!-- Modal footer -->
                     <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                        <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-light px-4 py-2 "
+                            style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                            data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
@@ -476,10 +458,9 @@
                 });
             </script>
         @endif
-
     </div>
 
-    <div class="container my-2">
+    {{-- <div class="container my-2">
         <div class="row d-flex justify-content-between">
             <div class="col-md-4"> <span class="pt-md-3 pagination_count"
                     style="font-size: 18px; color: #281F48; font-weight:700;">
@@ -490,10 +471,6 @@
             <div class="col-md-4">
                 @if ($reviews->hasPages())
                     <nav class="d-flex justify-content-end align-items-center">
-                        <!-- Page Info -->
-
-
-                        <!-- Pagination -->
                         <ul class="pagination"
                             style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
                             @if ($reviews->onFirstPage())
@@ -586,13 +563,7 @@
                 @endif
             </div>
         </div>
-    </div>
-
-
-
-
-
-
+    </div> --}}
 
     <script>
         function handleServiceCategoryIconUpload(input, previewElementId) {

@@ -15,16 +15,16 @@ class SuperadminBodyTypeController extends Controller
     public function index(Request $request)
     {
         if ($request->bodytype_id) {
-            $bodytypes = BodyType::orderby('id', 'desc')->where('id', $request->bodytype_id)->paginate(25);
+            $bodytypes = BodyType::orderby('id', 'desc')->where('id', $request->bodytype_id)->get();
         } else {
-            $bodytypes = BodyType::orderby('id', 'desc')->paginate(25);
+            $bodytypes = BodyType::orderby('id', 'desc')->get();
         }
         
         
         if ($request->bikebodytype_id) {
-            $bikebodytypes = BikeBodyTypes::orderby('id', 'desc')->where('id', $request->bikebodytype_id)->paginate(25);
+            $bikebodytypes = BikeBodyTypes::orderby('id', 'desc')->where('id', $request->bikebodytype_id)->get();
         } else {
-            $bikebodytypes = BikeBodyTypes::orderby('id', 'desc')->paginate(25);
+            $bikebodytypes = BikeBodyTypes::orderby('id', 'desc')->get();
         }
 
         return view('superadmin.bodytype.index', compact('bodytypes','bikebodytypes'));

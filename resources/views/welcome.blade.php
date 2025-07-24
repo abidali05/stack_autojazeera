@@ -534,6 +534,7 @@
                             <select id="condition" name="condition" style="width:160px !important;"
                                 class="form-select select2">
                                 <option value="">Condition</option>
+                                <option value="">Any</option>
                                 <option value="new">New Cars</option>
                                 <option value="used">Used Cars</option>
                             </select>
@@ -544,6 +545,7 @@
                             <select id="bodyType" name="bodytype" style="width:140px !important;"
                                 class="form-select body-type-select2">
                                 <option value="">Body Type</option>
+                                <option value="1e">Any</option>
                                 @foreach ($bodytypes as $bodytype)
                                     <option value="{{ $bodytype->id }}">{{ $bodytype->name }}</option>
                                 @endforeach
@@ -555,6 +557,7 @@
                             <select id="makecompanydata" name="make" style="width:150px !important;"
                                 class="form-select make-select2">
                                 <option value="">Make</option>
+                                <option value="1e">Any</option>
                                 @foreach ($makes as $make)
                                     <option value="{{ $make->id }}">{{ $make->name }}</option>
                                 @endforeach
@@ -566,6 +569,7 @@
                             <select id="model" name="model" style="width:150px !important;"
                                 class="form-select model-select2">
                                 <option value="">Model</option>
+                                <option value="1e">Any</option>
                             </select>
                         </div>
 
@@ -574,6 +578,7 @@
                             <select id="province" name="province" style="width:150px !important;"
                                 class="form-select province-select2">
                                 <option value="">Province</option>
+                                <option value="1e">Any</option>
                                 @foreach ($provinces as $province)
                                     <option value="{{ $province->id }}">{{ $province->name }}</option>
                                 @endforeach
@@ -585,6 +590,7 @@
                             <select id="city" name="city" style="width:150px !important;"
                                 class="form-select city-select2">
                                 <option value="">City</option>
+                                <option value="1e">Any</option>
                             </select>
                         </div>
 

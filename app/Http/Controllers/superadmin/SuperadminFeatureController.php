@@ -17,18 +17,18 @@ class SuperadminFeatureController extends Controller
     {
         if($request->feature_id)
         {
-            $features=MainFeature::where('id',$request->feature_id)->paginate(25);
+            $features=MainFeature::where('id',$request->feature_id)->get();
         }
         else{
-            $features=MainFeature::orderby('id','desc')->paginate(25);
+            $features=MainFeature::orderby('id','desc')->get();
         }
 
         if($request->bikefeature_id)
         {
-            $bikefeatures=BikeMainFeatures::where('id',$request->bikefeature_id)->paginate(25);
+            $bikefeatures=BikeMainFeatures::where('id',$request->bikefeature_id)->get();
         }
         else{
-            $bikefeatures=BikeMainFeatures::orderby('id','desc')->paginate(25);
+            $bikefeatures=BikeMainFeatures::orderby('id','desc')->get();
         }
      
         return view('superadmin.features.index',compact('features','bikefeatures'));

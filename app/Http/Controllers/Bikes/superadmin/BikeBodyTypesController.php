@@ -12,9 +12,9 @@ class BikeBodyTypesController extends Controller
     public function index(Request $request)
     {
         if ($request->bodytype_id) {
-            $bodytypes = BikeBodyTypes::orderby('id', 'desc')->where('id', $request->bodytype_id)->paginate(25);
+            $bodytypes = BikeBodyTypes::orderby('id', 'desc')->where('id', $request->bodytype_id)->get();
         } else {
-            $bodytypes = BikeBodyTypes::orderby('id', 'desc')->paginate(25);
+            $bodytypes = BikeBodyTypes::orderby('id', 'desc')->get();
         }
 
         return view('bikes.superadmin.bodytype.index', compact('bodytypes'));

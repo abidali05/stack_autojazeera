@@ -65,8 +65,6 @@ class SuperadminAddsController extends Controller
 
         $users = User::where('role', 1)->get();
         if ($request->car_search) {
-
-
             $query = Post::withTrashed()->orderBy('feature_ad', 'DESC')->orderBy('created_at', 'DESC')->query();
 
             $car_search = $request->car_search;
@@ -99,15 +97,15 @@ class SuperadminAddsController extends Controller
             // Include relationships if necessary
             $posts = $query->with(['document' => function ($q) {
                 $q->orderBy('position', 'asc');
-            }])->paginate(25);
+            }])->get();
         } elseif ($request->car_post_id) {
             $posts = Post::withTrashed()->with(['feature', 'document' => function ($q) {
                 $q->orderBy('position', 'asc');
-            }, 'location', 'contact'])->orderby('id', 'desc')->where('dealer_id', $request->car_post_id)->paginate(25);
+            }, 'location', 'contact'])->orderby('id', 'desc')->where('dealer_id', $request->car_post_id)->get();
         } else {
             $posts = Post::withTrashed()->with(['feature', 'document' => function ($q) {
                 $q->orderBy('position', 'asc');
-            }, 'location', 'contact'])->orderby('id', 'desc')->paginate(25);
+            }, 'location', 'contact'])->orderby('id', 'desc')->get();
         }
         $bike_posts = BikePost::orderBy('id', 'desc')
             ->with(['features', 'location', 'contacts', 'media', 'dealer']);
@@ -134,7 +132,7 @@ class SuperadminAddsController extends Controller
         }
 
 
-        $bike_posts = $bike_posts->paginate(25);
+        $bike_posts = $bike_posts->get();
 
         return view('superadmin.post.adds', compact('posts', 'users', 'bike_posts'));
     }
@@ -914,7 +912,7 @@ class SuperadminAddsController extends Controller
         //      }])
         //      ->get();
         // }
-        
+
         $posts = Post::with(['bodytype1', 'make1'])->where('status', 1)->orderBy('feature_ad', 'DESC')->orderBy('created_at', 'DESC')->latest()->take(12)->get();
         $featured_new_posts = Post::with(['bodytype1', 'make1'])->where('status', 1)->where('feature_ad', '1')->where('condition', 'new')->orderBy('created_at', 'DESC')->latest()->take(12)->get();
 
@@ -926,7 +924,15 @@ class SuperadminAddsController extends Controller
 
     public function carlist(Request $request)
     {
+        // dd($request->all());
         $page = $request->input('page', 1);
+        $condition = $request->input('condition') === '1e' ? null : $request->input('condition');
+        $bodytype = $request->input('bodytype') === '1e' ? null : $request->input('bodytype');
+        $make = $request->input('make') === '1e' ? null : $request->input('make');
+        $model = $request->input('model') === '1e' ? null : $request->input('model');
+        $province = $request->input('province') === '1e' ? null : $request->input('province');
+        $city = $request->input('city') === '1e' ? null : $request->input('city');
+// dd($request->all(), $condition, $bodytype, $make, $model, $province, $city);
         $users = User::where('role', 1)->get();
         $makes = MakeCompany::where('status', 1)->get();
         $models = ModelCompany::where('status', 1)->get();
@@ -1025,7 +1031,7 @@ class SuperadminAddsController extends Controller
             return view('postdetail', compact('post', 'posts', 'makes', 'models'));
         }
     }
-    
+
     public function preview($id)
     {
 
@@ -1037,7 +1043,7 @@ class SuperadminAddsController extends Controller
         $models = ModelCompany::where('status', 1)->get();
         return view('user.post.preview', compact('post', 'posts', 'makes', 'models'));
     }
-    
+
     public function add_to_wishlist($postid, $dealerid)
     {
         $wishlist = Whishlist::where('post_id', $postid)->where('user_id', $dealerid)->first();

@@ -103,24 +103,27 @@
 
         }
 
-      .ads-column-search {
-    width: 90px;
-    font-size: 10px;
-    border: 1px solid #D9D9D9;
-    border-radius: 2px;
-    padding: 2px;
-}
-.table>:not(caption)>*>* {
-    padding: 0rem .5rem;
-    color: var(--bs-table-color-state, var(--bs-table-color-type, var(--bs-table-color)));
-    background-color: var(--bs-table-bg);
-    border-bottom-width: var(--bs-border-width);
-    box-shadow: inset 0 0 0 9999px var(--bs-table-bg-state, var(--bs-table-bg-type, var(--bs-table-accent-bg)));
-}
-table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
-   padding: 0px 10px 5px 10px; 
-    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-}
+        .ads-column-search {
+            width: 90px;
+            font-size: 10px;
+            border: 1px solid #D9D9D9;
+            border-radius: 2px;
+            padding: 2px;
+        }
+
+        .table>:not(caption)>*>* {
+            padding: 0rem .5rem;
+            color: var(--bs-table-color-state, var(--bs-table-color-type, var(--bs-table-color)));
+            background-color: var(--bs-table-bg);
+            border-bottom-width: var(--bs-border-width);
+            box-shadow: inset 0 0 0 9999px var(--bs-table-bg-state, var(--bs-table-bg-type, var(--bs-table-accent-bg)));
+        }
+
+        table.dataTable>thead>tr>th,
+        table.dataTable>thead>tr>td {
+            padding: 0px 10px 5px 10px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+        }
     </style>
     {{-- tabs navigaition  --}}
     <div class="container mt-3">
@@ -151,8 +154,6 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
             {{-- tab start  --}}
             <div class="container ">
-
-
                 <div class="row align-items-center mb-2">
                     {{--  <div class="col-md-4 mb-md-0 mb-2">
                         <div class="input-group" style="width: 100%;">
@@ -276,7 +277,7 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
 
                         </div>
                     </div>
-                    {{--   <div class="col-md-4"> <span class="pt-md-3 pagination_count"
+                    {{-- <div class="col-md-4"> <span class="pt-md-3 pagination_count"
                             style="font-size: 18px; color: #281F48; font-weight:700;">
                             {{ ($posts->currentPage() - 1) * $posts->perPage() + 1 }}
                             - {{ min($posts->currentPage() * $posts->perPage(), $posts->total()) }}
@@ -331,7 +332,7 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
                 </div>
             </div>
             <div class="container py-3">
-                <div class="row d-flex justify-content-between">
+                {{-- <div class="row d-flex justify-content-between">
                     <div class="col-md-4"> <span class="pt-md-3 pagination_count"
                             style="font-size: 18px; color: #281F48; font-weight:700;">
                             {{ ($posts->currentPage() - 1) * $posts->perPage() + 1 }}
@@ -436,7 +437,7 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
                             </nav>
                         @endif
                     </div>
-                </div>
+                </div> --}}
             </div>
             <div class="container table-responsive">
                 <div class="row">
@@ -461,7 +462,6 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Repeat this block for each row -->
                             @foreach ($posts as $key => $post)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
@@ -470,9 +470,8 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
                                             title="Edit" style="text-decoration:none;">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
-                                        <a href="#" class="primary-color-custom cancel"
-                                            data-id="{{ $post->id }}" title="Delete" data-bs-toggle="modal"
-                                            data-bs-target="#deleteModal">
+                                        <a href="#" class="primary-color-custom cancel" data-id="{{ $post->id }}"
+                                            title="Delete" data-bs-toggle="modal" data-bs-target="#deleteModal">
                                             <i class="bi bi-trash"></i>
                                         </a>
                                     </td>
@@ -524,20 +523,21 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
                                     <td class="text-center">
                                         {{ $post->updated_at ? $post->updated_at->format('d M Y') : 'N/A' }}
                                     </td>
-
-
                                 </tr>
 
                                 <div class="modal fade" id="statusModal{{ $post->id }}" tabindex="-1"
                                     aria-labelledby="statusModalLabel{{ $post->id }}" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
-                                            <div class="modal-header border-0"  style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
-                                                <h5 class="modal-title" id="statusModalLabel{{ $post->id }}"><strong>Update  Post
-                                                    Status</strong>
+                                            <div class="modal-header border-0"
+                                                style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                                                <h5 class="modal-title" id="statusModalLabel{{ $post->id }}">
+                                                    <strong>Update Post
+                                                        Status</strong>
                                                 </h5>
-                                                <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
+                                                <button type="button" class="btn-close"
+                                                    style="background-color: #D9D9D9 !important; color: #FD5631;"
+                                                    data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body" style="background-color: #F0F3F6; color: #FD5631;">
                                                 <form method="post"
@@ -550,7 +550,8 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
                                                         <label for="postStatus{{ $post->id }}"
                                                             class="form-label">Select
                                                             Status*</label>
-                                                        <select class="form-select" name="status" style="background-color:white;color:#281F48"
+                                                        <select class="form-select" name="status"
+                                                            style="background-color:white;color:#281F48"
                                                             id="postStatus{{ $post->id }}" required
                                                             onchange="toggleRejectionReason({{ $post->id }})">
                                                             <option value="0"
@@ -574,25 +575,23 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
                                                     </div>
                                             </div>
                                             <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                                                <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                                                <button type="button" class="btn btn-light px-4 py-2 "
+                                                    style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
                                                     data-bs-dismiss="modal">Cancel</button>
-                                                <button type="submit" class="btn btn-light px-4 py-2 " style="background-color:white; font-weight:600; color: #281F48; border-radius: 5px;">Update</button>
+                                                <button type="submit" class="btn btn-light px-4 py-2 "
+                                                    style="background-color:white; font-weight:600; color: #281F48; border-radius: 5px;">Update</button>
                                                 </form>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
-
-
-
                         </tbody>
                     </table>
                 </div>
-
-
             </div>
-            <div class="container py-3">
+
+            {{-- <div class="container py-3">
                 <div class="row d-flex justify-content-between">
                     <div class="col-md-4"> <span class="pt-md-3 pagination_count"
                             style="font-size: 18px; color: #281F48; font-weight:700;">
@@ -699,21 +698,20 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
                         @endif
                     </div>
                 </div>
-            </div>
+            </div> --}}
+
             @if (isset($post))
                 <form action="{{ route('superadmin.ads.destroy', $post->id) }}" method="post">
                     @method('DELETE')
                     @include('superadmin.modal.delete')
                 </form>
             @endif
-
         </div>
+
         {{-- tab end  --}}
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             {{-- tab start  --}}
             <div class="container mt-3">
-
-
                 <div class="row align-items-center mb-3">
                     <div class="col-md-4 mb-md-0 mb-2">
                         <div class="input-group" style="width: 100%;">
@@ -730,13 +728,9 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
                             </form>
                         </div>
                     </div>
-                    <div class="col-md-8">
+                    {{-- <div class="col-md-8">
                         @if ($bike_posts->hasPages())
                             <nav class="d-flex justify-content-end align-items-center">
-                                <!-- Page Info -->
-
-
-                                <!-- Pagination -->
                                 <ul class="pagination"
                                     style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
                                     @if ($bike_posts->onFirstPage())
@@ -827,22 +821,21 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
 
                             </nav>
                         @endif
-                    </div>
+                    </div> --}}
                     <div class="col-md-3 mb-md-0 mb-2  d-none ">
                         <div class="input-group">
                             <form action="" method="get">
                                 <input class="form-control form-lg  me-2 mysearch rounded" type="search"
                                     name="bike_search" placeholder="Search" aria-label="Search">
                             </form>
-
                         </div>
                     </div>
-                    <div class="col-md-4"> <span class="pt-md-3 pagination_count"
+                    {{-- <div class="col-md-4"> <span class="pt-md-3 pagination_count"
                             style="font-size: 18px; color: #281F48; font-weight:700;">
                             {{ ($bike_posts->currentPage() - 1) * $bike_posts->perPage() + 1 }}
                             - {{ min($bike_posts->currentPage() * $bike_posts->perPage(), $bike_posts->total()) }}
                             of {{ $bike_posts->total() }} Results
-                        </span></div>
+                        </span></div> --}}
                     <div class="col-md-8 text-end">
                         <a href="{{ route('superadmin.ads.create') }}" class="btn custom-btn-nav rounded">
                             <span> <i class="bi bi-plus fs-5 p-0 m-0 "></i></span> <span class="pb-3"> Post an Ad</span>
@@ -938,15 +931,18 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
                                 <div class="modal fade" id="statusModal{{ $post->id }}" tabindex="-1"
                                     aria-labelledby="statusModalLabel{{ $post->id }}" aria-hidden="true">
                                     <div class="modal-dialog  modal-dialog-centered">
-                                        <div class="modal-content"  style="border-radius: 10px; overflow: hidden;">
-                                            <div class="modal-header border-0" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
-                                                <h5 class="modal-title" id="statusModalLabel{{ $post->id }}"><strong>Update Post
-                                                    Status</strong>
-                                                    </h5>
-                                                <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
+                                        <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
+                                            <div class="modal-header border-0"
+                                                style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                                                <h5 class="modal-title" id="statusModalLabel{{ $post->id }}">
+                                                    <strong>Update Post
+                                                        Status</strong>
+                                                </h5>
+                                                <button type="button" class="btn-close"
+                                                    style="background-color: #D9D9D9 !important; color: #FD5631;"
+                                                    data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <div class="modal-body"  style="background-color: #F0F3F6; color: #FD5631;" >
+                                            <div class="modal-body" style="background-color: #F0F3F6; color: #FD5631;">
                                                 <form method="post"
                                                     action="{{ route('superadmin.change_posts_status') }}"
                                                     enctype="multipart/form-data">
@@ -981,9 +977,11 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
                                                     </div>
                                             </div>
                                             <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                                                <button type="button" class="btn btn-light px-4 py-2 " style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;"
+                                                <button type="button" class="btn btn-light px-4 py-2 "
+                                                    style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;"
                                                     data-bs-dismiss="modal">Cancel</button>
-                                                <button type="submit" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;">Update</button>
+                                                <button type="submit" class="btn btn-light px-4 py-2 "
+                                                    style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;">Update</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -993,13 +991,15 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
 
                                 <div class="modal fade" id="bikedeleteModal{{ $post->id }}" tabindex="-1"
                                     aria-labelledby="addDealerModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog " >
-                                        <div class="modal-content"
-                                         style="border-radius: 10px; overflow: hidden;">
-                                            <div class="modal-header border-0" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
-                                                <h5 class="modal-title" id="editDealerModalLabel"><strong>Delete </strong></h5>
-                                                <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
+                                    <div class="modal-dialog ">
+                                        <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
+                                            <div class="modal-header border-0"
+                                                style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                                                <h5 class="modal-title" id="editDealerModalLabel"><strong>Delete </strong>
+                                                </h5>
+                                                <button type="button" class="btn-close"
+                                                    style="background-color: #D9D9D9 !important; color: #FD5631;"
+                                                    data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
 
                                             <div class="modal-body" style="background-color: #F0F3F6; color: #FD5631;">
@@ -1017,9 +1017,11 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
                                                 </div>
                                             </div>
                                             <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                                                <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                                                <button type="button" class="btn btn-light px-4 py-2 "
+                                                    style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
                                                     data-bs-dismiss="modal">Cancel</button>
-                                                <button type="submit" class="btn btn-light px-4 py-2 " style="background-color:white; font-weight:600; color: #281F48; border-radius: 5px;">Delete</button>
+                                                <button type="submit" class="btn btn-light px-4 py-2 "
+                                                    style="background-color:white; font-weight:600; color: #281F48; border-radius: 5px;">Delete</button>
                                             </div>
                                             </form>
                                         </div>
@@ -1031,11 +1033,9 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
                         </tbody>
                     </table>
                 </div>
-
-
             </div>
             <div class="container py-3">
-                <div class="row d-flex justify-content-between">
+                {{-- <div class="row d-flex justify-content-between">
                     <div class="col-md-4"> <span class="pt-md-3 pagination_count"
                             style="font-size: 18px; color: #281F48; font-weight:700;">
                             {{ ($bike_posts->currentPage() - 1) * $bike_posts->perPage() + 1 }}
@@ -1045,10 +1045,6 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
                     <div class="col-md-4">
                         @if ($bike_posts->hasPages())
                             <nav class="d-flex justify-content-end align-items-center">
-                                <!-- Page Info -->
-
-
-                                <!-- Pagination -->
                                 <ul class="pagination"
                                     style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
                                     @if ($bike_posts->onFirstPage())
@@ -1140,7 +1136,7 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
                             </nav>
                         @endif
                     </div>
-                </div>
+                </div> --}}
             </div>
             @if (isset($bike_post))
                 <form action="{{ route('superadmin.ads.destroy', $bike_post->id) }}" method="post">
@@ -1180,14 +1176,19 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
         $(document).ready(function() {
             $('.ads-datatable').each(function() {
                 var table = $(this).DataTable({
-                    paging: false,
+                    paging: true,
+                    pageLength: 25,
                     lengthChange: false,
                     searching: true,
-                    info: false,
                     ordering: true,
+                    scrollX: false,
+                    order: [
+                        [0, 'asc']
+                    ],
                     language: {
                         search: "Search: "
-                    }
+                    },
+                    dom: '<"top"f i lp>rt<"bottom"i lp><"clear">'
                 });
 
                 // Add search row
@@ -1198,7 +1199,7 @@ table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
                     var searchHtml = '';
 
                     // Only create inputs for specific columns
-                    if (['Dealer Name','Make', 'Model', 'Year'].includes(title)) {
+                    if (['Dealer Name', 'Make', 'Model', 'Year'].includes(title)) {
                         searchHtml = '<input type="text" placeholder="Search ' + title +
                             '" class="ads-column-search"/>';
                     }

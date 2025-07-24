@@ -1,16 +1,19 @@
 @extends('layout.panel_layout.main')
 @section('content')
     <style>
-div.dt-container .dt-length, div.dt-container .dt-search, div.dt-container .dt-info, div.dt-container .dt-processing, div.dt-container .dt-paging {
-    color: inherit;
-    display: flex
-;
-    justify-content: end;
-    padding: 5px 0px;
-    font-size: 14px;
-    font-weight: 600;
-    align-items: center;
-}
+        div.dt-container .dt-length,
+        div.dt-container .dt-search,
+        div.dt-container .dt-info,
+        div.dt-container .dt-processing,
+        div.dt-container .dt-paging {
+            color: inherit;
+            display: flex;
+            justify-content: end;
+            padding: 5px 0px;
+            font-size: 14px;
+            font-weight: 600;
+            align-items: center;
+        }
 
         .form-select {
             max-width: 100%;
@@ -759,15 +762,18 @@ div.dt-container .dt-length, div.dt-container .dt-search, div.dt-container .dt-i
                     },
                     dom: '<"top"f i lp>rt<"bottom"i lp><"clear">'
                 });
+
                 // Add search row
                 $(this).find('thead').append('<tr class="search-row"></tr>');
                 $(this).find('thead th').each(function(index) {
                     var title = $(this).text().trim();
                     var searchHtml = '';
-                    // Custom search for Featured column (Yes/No dropdown)
+
+                    // Custom search for Featured column (Yes/No dropdown with Select2)
                     if (title === 'Featured') {
                         searchHtml = `
-                    <select class="ads-column-search">
+                    <select class="ads-column-search select2">
+                        <option value="">Any</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
                     </select>
@@ -789,15 +795,28 @@ div.dt-container .dt-length, div.dt-container .dt-search, div.dt-container .dt-i
                             `<input type="text" placeholder="Search ${title}" class="ads-column-search"/>`;
                     }
 
-                    $(this).closest('thead').find('.search-row').append(
-                        '<th>' + searchHtml + '</th>'
-                    );
+                    $(this).closest('thead').find('.search-row').append('<th>' + searchHtml +
+                        '</th>');
+                });
+
+                // Initialize Select2 for the Featured column dropdown
+                $(this).find('.search-row .select2').select2({
+                    minimumResultsForSearch: -1, // Disable the search box in the dropdown
+                    width: '90px', // Match the width of ads-column-search
+                    dropdownParent: $(this).closest(
+                        '.dataTables_wrapper') // Ensure dropdown appears correctly within DataTable
                 });
 
                 // Apply search functionality
-                $(this).find('.search-row select, .search-row input').on('keyup change', function() {
+                $(this).find('.search-row input').on('keyup', function() {
                     var columnIndex = $(this).closest('th').index();
                     table.column(columnIndex).search(this.value).draw();
+                });
+
+                $(this).find('.search-row .select2').on('change', function() {
+                    var columnIndex = $(this).closest('th').index();
+                    var value = $(this).val() || ''; // Use empty string for "All" option
+                    table.column(columnIndex).search(value).draw();
                 });
             });
         });
