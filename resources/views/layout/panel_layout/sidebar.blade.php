@@ -15,8 +15,8 @@
         box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
         overflow-x: hidden;
         overflow-y: scroll;
-		   scrollbar-color: #281F48 #f8f9fa; /* For Firefox */
- scrollbar-width: 1px;
+
+
     }
 
     #sidebar.closed {
@@ -24,12 +24,12 @@
     }
 
     #sidebar::-webkit-scrollbar {
-        width: 2px;
+        width: 6px;
         /* Width of the scrollbar */
     }
 
     #sidebar::-webkit-scrollbar-track {
-        background: #281F48;
+        background: #F4F4F4;
         /* Background of the scrollbar track */
     }
 
