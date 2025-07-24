@@ -36,17 +36,17 @@ class LeadController extends Controller
       ->whereHas('post', function ($query) {
         $query->where('condition', 'used');
       })
-      ->paginate(25);
+      ->get();
 
     // Retrieve New Forms
     $Newforms = (clone $baseQuery)
       ->whereHas('post', function ($query) {
         $query->where('condition', 'new');
       })
-      ->paginate(25);
+      ->get();
 
     // Retrieve All Forms
-    $forms = $baseQuery->paginate(25);
+    $forms = $baseQuery->get();
 
     return view('user.submitform.sub_index', compact('forms', 'Newforms', 'Usedforms'));
   }
@@ -61,17 +61,8 @@ class LeadController extends Controller
     } else {
       $baseQuery = BikeLeads::where('dealer_id', Auth::user()->id)->orderby('id', 'desc');
     }
-
-
-
-
-    // Get paginated forms
-    $posts = $baseQuery->paginate(25);
-
-
-    // dd($posts);
-
-
+    
+    $posts = $baseQuery->get();
 
     return view('user.submitform.bike_leads', compact('posts'));
   }

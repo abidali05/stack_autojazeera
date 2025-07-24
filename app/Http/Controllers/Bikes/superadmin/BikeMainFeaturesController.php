@@ -12,10 +12,10 @@ class BikeMainFeaturesController extends Controller
     {
         if($request->feature_id)
         {
-            $features=BikeMainFeatures::where('id',$request->feature_id)->paginate(25);
+            $features=BikeMainFeatures::where('id',$request->feature_id)->get();
         }
         else{
-            $features=BikeMainFeatures::orderby('id','desc')->paginate(25);
+            $features=BikeMainFeatures::orderby('id','desc')->get();
         }
      
         return view('bikes.superadmin.bike_main_features.index',compact('features'));

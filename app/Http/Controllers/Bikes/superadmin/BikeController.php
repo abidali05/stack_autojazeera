@@ -35,7 +35,7 @@ class BikeController extends Controller
 {
     public function index()
     {
-        $bike_posts = BikePost::paginate(25);
+        $bike_posts = BikePost::get();
         $users = User::where('role', 1)->get();
         return view('bikes.superadmin.bike_ads.index', compact('bike_posts', 'users'));
     }

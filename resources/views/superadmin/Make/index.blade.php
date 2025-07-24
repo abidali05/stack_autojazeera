@@ -148,13 +148,9 @@
                             </form>
                         </div>
                     </div>
-                    <div class="col-md-8 d-none">
+                    {{-- <div class="col-md-8 d-none">
                         @if ($makes->hasPages())
                             <nav class="d-flex justify-content-end align-items-center">
-                                <!-- Page Info -->
-
-
-                                <!-- Pagination -->
                                 <ul class="pagination"
                                     style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
                                     @if ($makes->onFirstPage())
@@ -251,19 +247,21 @@
                             {{ ($makes->currentPage() - 1) * $makes->perPage() + 1 }}
                             - {{ min($makes->currentPage() * $makes->perPage(), $makes->total()) }}
                             of {{ $makes->total() }} Results
-                        </span></div>
+                        </span></div> --}}
                     <div class="col-md-12 text-end">
                         <button class="btn custom-btn-nav rounded" data-bs-toggle="modal" data-bs-target="#makeModal">
                             Add Make Name
                         </button>
                         <a href="{{ route('superadmin.make-export') }}">
-                            <button type="submit" class="btn btn-light px-4 py-2 " style="background-color: white; font-weight:400; color: #281F48; border-radius: 5px; border:1px solid #281F48">
+                            <button type="submit" class="btn btn-light px-4 py-2 "
+                                style="background-color: white; font-weight:400; color: #281F48; border-radius: 5px; border:1px solid #281F48">
                                 <i class="bi bi-file-earmark-excel"></i> Export Excel
                             </button>
                         </a>
                         <!-- Import Button (triggers modal) -->
-                        <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:400; color: white; border-radius: 5px;" data-bs-toggle="modal"
-                            data-bs-target="#importExcelModal">
+                        <button type="button" class="btn btn-light px-4 py-2 "
+                            style="background-color: #281F48; font-weight:400; color: white; border-radius: 5px;"
+                            data-bs-toggle="modal" data-bs-target="#importExcelModal">
                             <i class="bi bi-upload"></i> Import Excel
                         </button>
                     </div>
@@ -275,11 +273,9 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="importExcelModalLabel">Import Ads from Excel</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{ route('superadmin.make-import') }}" method="POST"
-                            enctype="multipart/form-data">
+                        <form action="{{ route('superadmin.make-import') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="modal-body">
                                 <div class="mb-3">
@@ -296,7 +292,7 @@
                     </div>
                 </div>
             </div>
-            <div class="container my-2">
+            {{-- <div class="container my-2">
                 <div class="row d-flex justify-content-between">
                     <div class="col-md-4"> <span class="pt-md-3 pagination_count"
                             style="font-size: 18px; color: #281F48; font-weight:700;">
@@ -307,10 +303,6 @@
                     <div class="col-md-4">
                         @if ($makes->hasPages())
                             <nav class="d-flex justify-content-end align-items-center">
-                                <!-- Page Info -->
-
-
-                                <!-- Pagination -->
                                 <ul class="pagination"
                                     style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
                                     @if ($makes->onFirstPage())
@@ -403,7 +395,7 @@
                         @endif
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="container table-responsive ">
                 <div class="row">
                     <table class="table table-striped transparent-table align-middle datatable">
@@ -411,7 +403,6 @@
                             <tr>
                                 <th>Sr#</th>
                                 <th>Action</th>
-
                                 <th>Icon</th>
                                 <th>Make Name</th>
                                 <th>Status</th>
@@ -448,20 +439,12 @@
                                 </tr>
                                 @include('superadmin.modal.editmake')
                             @endforeach
-                            <!-- Repeat this block for each row -->
-
-
-
                         </tbody>
                     </table>
                 </div>
-
-
-
-
             </div>
 
-            <div class="container my-2">
+            {{-- <div class="container my-2">
                 <div class="row d-flex justify-content-between">
                     <div class="col-md-4"> <span class="pt-md-3 pagination_count"
                             style="font-size: 18px; color: #281F48; font-weight:700;">
@@ -568,7 +551,8 @@
                         @endif
                     </div>
                 </div>
-            </div>
+            </div> --}}
+
             @include('superadmin.modal.addmake')
             @if (isset($make))
                 <form action="{{ route('superadmin.make.destroy', $make->id) }}" method="post">
@@ -578,7 +562,6 @@
         </div>
         {{-- tab end  --}}
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            {{-- tab start  --}}
             <div class="container mt-5">
 
                 <div class="row align-items-center mb-4">
@@ -597,13 +580,9 @@
                             </form>
                         </div>
                     </div>
-                    <div class="col-md-8">
+                    {{-- <div class="col-md-8">
                         @if ($bikemakes->hasPages())
                             <nav class="d-flex justify-content-end align-items-center">
-                                <!-- Page Info -->
-
-
-                                <!-- Pagination -->
                                 <ul class="pagination"
                                     style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
                                     @if ($bikemakes->onFirstPage())
@@ -694,13 +673,13 @@
 
                             </nav>
                         @endif
-                    </div>
-                    <div class="col-md-4"> <span class="pt-md-3 pagination_count"
+                    </div> --}}
+                    {{-- <div class="col-md-4"> <span class="pt-md-3 pagination_count"
                             style="font-size: 18px; color: #281F48; font-weight:700;">
                             {{ ($bikemakes->currentPage() - 1) * $bikemakes->perPage() + 1 }}
                             - {{ min($bikemakes->currentPage() * $bikemakes->perPage(), $bikemakes->total()) }}
                             of {{ $bikemakes->total() }} Results
-                        </span></div>
+                        </span></div> --}}
                     <div class="col-md-8 text-end">
                         <button class="btn custom-btn-nav rounded" data-bs-toggle="modal"
                             data-bs-target="#addbikemakeModal">
@@ -717,15 +696,12 @@
                             <tr>
                                 <th>Sr#</th>
                                 <th>Action</th>
-
                                 <th>Icon</th>
                                 <th>Make Name</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
-
-                            <!-- Repeat this block for each row -->
                             @foreach ($bikemakes as $key => $make)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
@@ -753,7 +729,6 @@
 
                                     </td>
                                 </tr>
-                                {{-- edit make modal  --}}
 
                                 <div class="modal fade" id="editbikemakeModal{{ $make->id }}" tabindex="-1"
                                     aria-labelledby="colorModalLabel" aria-hidden="true">
@@ -880,7 +855,7 @@
 
             </div>
 
-            <div class="container my-2">
+            {{-- <div class="container my-2">
                 <div class="row d-flex justify-content-between">
                     <div class="col-md-4"> <span class="pt-md-3 pagination_count"
                             style="font-size: 18px; color: #281F48; font-weight:700;">
@@ -987,17 +962,13 @@
                         @endif
                     </div>
                 </div>
-            </div>
+            </div> --}}
             @include('superadmin.modal.addmake')
             @if (isset($make))
                 <form action="{{ route('superadmin.make.destroy', $make->id) }}" method="post">
                     @include('superadmin.modal.delete')
                 </form>
             @endif
-
-
-
-            {{-- add bike make modal  --}}
 
             <div class="modal fade" id="addbikemakeModal" tabindex="-1" aria-labelledby="colorModalLabel"
                 aria-hidden="true">
@@ -1043,7 +1014,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                         </div>
 
                         <div class="modal-footer border-0">

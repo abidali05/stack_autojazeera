@@ -51,13 +51,14 @@ class ServicesController extends Controller
     public function search(Request $request)
     {
         // dd($request->all());
-        $search = $request->search;
-        $city = $request->city;
+        $search = $request->search;     
+        $city = $request->input('city') === '1e' ? null : $request->input('city');
         $page = $request->input('page', 1);
         $query = Shops::with(['shop_amenities', 'shop_timings', 'shop_services', 'shop_images'])->where('status', '1');
         if ($search) {
             $query->where('name', 'like', '%' . $search . '%');
         }
+
         if ($city) {
             $query->where('city', $city);
         }

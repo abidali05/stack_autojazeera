@@ -106,17 +106,12 @@
                     </form>
                 </div>
             </div>
-            <div class="col-md-8 d-none">
+            {{-- <div class="col-md-8 d-none">
                 @if ($bike_makes->hasPages())
                     <nav class="d-flex justify-content-end align-items-center">
-                        <!-- Page Info -->
-
-
-                        <!-- Pagination -->
                         <ul class="pagination"
                             style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
 
-                            {{-- Previous Page Button --}}
                             @if ($bike_makes->onFirstPage())
                                 <li style="display: inline-block;">
                                     <span
@@ -140,7 +135,6 @@
                                 @endif
                             @endif
 
-                            {{-- Pagination Links --}}
                             @foreach ($bike_makes->links()->elements as $element)
                                 @if (is_string($element))
                                     <li style="display: inline-block;">
@@ -177,7 +171,6 @@
                                 @endif
                             @endforeach
 
-                            {{-- Next Page Button --}}
                             @if ($bike_makes->hasMorePages())
                                 @if (request()->isMethod('post'))
                                     <li style="display: inline-block;">
@@ -211,19 +204,21 @@
                     {{ ($bike_makes->currentPage() - 1) * $bike_makes->perPage() + 1 }}
                     - {{ min($bike_makes->currentPage() * $bike_makes->perPage(), $bike_makes->total()) }}
                     of {{ $bike_makes->total() }} Results
-                </span></div>
+                </span></div> --}}
             <div class="col-md-12 text-end">
                 <button class="btn custom-btn-nav rounded" data-bs-toggle="modal" data-bs-target="#addbikemakeModal">
                     Add Make
                 </button>
                 <a href="{{ route('superadmin.export-bike-make') }}">
-                    <button type="submit" class="btn btn-light px-4 py-2 " style="background-color: white; font-weight:400; color: #281F48; border-radius: 5px; border:1px solid #281F48">
+                    <button type="submit" class="btn btn-light px-4 py-2 "
+                        style="background-color: white; font-weight:400; color: #281F48; border-radius: 5px; border:1px solid #281F48">
                         <i class="bi bi-file-earmark-excel"></i> Export Excel
                     </button>
                 </a>
                 <!-- Import Button (triggers modal) -->
-                <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:400; color: white; border-radius: 5px;" data-bs-toggle="modal"
-                    data-bs-target="#importExcelModal">
+                <button type="button" class="btn btn-light px-4 py-2 "
+                    style="background-color: #281F48; font-weight:400; color: white; border-radius: 5px;"
+                    data-bs-toggle="modal" data-bs-target="#importExcelModal">
                     <i class="bi bi-upload"></i> Import Excel
                 </button>
             </div>
@@ -232,28 +227,33 @@
     <div class="modal fade" id="importExcelModal" tabindex="-1" aria-labelledby="importExcelModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
-                <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                <div class="modal-header"
+                    style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                     <h5 class="modal-title" id="importExcelModalLabel"><strong> Import Ads from Excel</strong></h5>
-                    <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form action="{{ route('superadmin.import-bike-make') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="modal-body"  style="background-color: #F0F3F6; color: #FD5631;">
+                    <div class="modal-body" style="background-color: #F0F3F6; color: #FD5631;">
                         <div class="mb-3">
                             <label for="excelFile" class="form-label">Select Excel File (.xlsx)</label>
-                            <input type="file" class="form-control" id="excelFile" name="excel_file"
-                                accept=".xlsx,.xls" required>
+                            <input type="file" class="form-control" id="excelFile" name="excel_file" accept=".xlsx,.xls"
+                                required>
                         </div>
                     </div>
                     <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                        <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-light px-4 py-2 " style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Import</button>
+                        <button type="button" class="btn btn-light px-4 py-2 "
+                            style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                            data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-light px-4 py-2 "
+                            style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Import</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <div class="container my-3">
+    {{-- <div class="container my-3">
         <div class="row d-flex justify-content-between">
             <div class="col-md-4"> <span class="pt-md-3 pagination_count"
                     style="font-size: 18px; color: #281F48; font-weight:700;">
@@ -264,14 +264,9 @@
             <div class="col-md-4">
                 @if ($bike_makes->hasPages())
                     <nav class="d-flex justify-content-end align-items-center">
-                        <!-- Page Info -->
-
-
-                        <!-- Pagination -->
                         <ul class="pagination"
                             style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
 
-                            {{-- Previous Page Button --}}
                             @if ($bike_makes->onFirstPage())
                                 <li style="display: inline-block;">
                                     <span
@@ -282,8 +277,7 @@
                                     <li style="display: inline-block;">
                                         <form method="POST" action="{{ url()->current() }}">
                                             @csrf
-                                            <input type="hidden" name="page"
-                                                value="{{ $posts->currentPage() - 1 }}">
+                                            <input type="hidden" name="page" value="{{ $posts->currentPage() - 1 }}">
                                             <button type="submit"
                                                 style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&laquo;</button>
                                         </form>
@@ -296,7 +290,6 @@
                                 @endif
                             @endif
 
-                            {{-- Pagination Links --}}
                             @foreach ($bike_makes->links()->elements as $element)
                                 @if (is_string($element))
                                     <li style="display: inline-block;">
@@ -334,7 +327,6 @@
                                 @endif
                             @endforeach
 
-                            {{-- Next Page Button --}}
                             @if ($bike_makes->hasMorePages())
                                 @if (request()->isMethod('post'))
                                     <li style="display: inline-block;">
@@ -364,7 +356,7 @@
                 @endif
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="container table-responsive ">
         <div class="row">
             <table class="table table-striped transparent-table align-middle datatable">
@@ -372,15 +364,12 @@
                     <tr>
                         <th>Sr#</th>
                         <th>Action</th>
-
                         <th>Icon</th>
                         <th>Make Name</th>
                         <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
-
-                    <!-- Repeat this block for each row -->
                     @foreach ($bike_makes as $key => $make)
                         <tr>
                             <td>{{ $key + 1 }}</td>
@@ -414,10 +403,12 @@
                             aria-labelledby="colorModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
-                                    <div class="modal-header border-0" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                                    <div class="modal-header border-0"
+                                        style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                                         <h5 class="modal-title" id="colorModalLabel"> <strong>Edit Make</strong></h5>
-                                        <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
+                                        <button type="button" class="btn-close"
+                                            style="background-color: #D9D9D9 !important; color: #FD5631;"
+                                            data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body" style="background-color: #F0F3F6; color: #FD5631;">
                                         <form id="featureForm" method="post"
@@ -466,9 +457,11 @@
                                             </div>
 
                                             <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                                                <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                                                <button type="button" class="btn btn-light px-4 py-2 "
+                                                    style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
                                                     data-bs-dismiss="modal">Cancel</button>
-                                                <button type="submit" class="btn btn-light px-4 py-2 " style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Save</button>
+                                                <button type="submit" class="btn btn-light px-4 py-2 "
+                                                    style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Save</button>
                                             </div>
                                         </form>
                                     </div>
@@ -477,17 +470,9 @@
                             </div>
                         </div>
                     @endforeach
-                    <!-- Repeat this block for each row -->
-
-
-
                 </tbody>
             </table>
         </div>
-
-
-
-
     </div>
 
     <div class="container my-3">
@@ -614,10 +599,13 @@
 
     <div class="modal fade" id="addbikemakeModal" tabindex="-1" aria-labelledby="colorModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content"  style="border-radius: 10px; overflow: hidden;">
-                <div class="modal-header border-0" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+            <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
+                <div class="modal-header border-0"
+                    style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                     <h5 class="modal-title" id="colorModalLabel"><strong> Add Make</strong></h5>
-                    <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close"
+                        style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body" style="background-color: #F0F3F6; color: #FD5631;">
                     <form id="featureForm" method="post" action="{{ route('superadmin.bike-make.store') }}"
@@ -658,8 +646,11 @@
                 </div>
 
                 <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                    <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-light px-4 py-2 " style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Save</button>
+                    <button type="button" class="btn btn-light px-4 py-2 "
+                        style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                        data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-light px-4 py-2 "
+                        style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Save</button>
                 </div>
                 </form>
             </div>

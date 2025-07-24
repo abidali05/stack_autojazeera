@@ -20,26 +20,24 @@ class ServiceCategories extends Controller
 
 
     public function store(Request $request)
-{
-    $request->validate([
-        'category_name' => 'required|unique:service_categories,name',
-        'icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'app_icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    ]);
+    {
+        $request->validate([
+            'category_name' => 'required|unique:service_categories,name',
+            'icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'app_icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
 
-    $iconPath = $request->file('icon')->store('service_categories', 'public');
-    $appIconPath = $request->file('app_icon')->store('service_categories/app_icons', 'public');
+        $iconPath = $request->file('icon')->store('service_categories', 'public');
+        $appIconPath = $request->file('app_icon')->store('service_categories/app_icons', 'public');
 
-    $category = new ServiceCategoriesModel();
-    $category->name = $request->category_name;
-    $category->icon = $iconPath;
-    $category->app_icon = $appIconPath;
-    $category->save();
+        $category = new ServiceCategoriesModel();
+        $category->name = $request->category_name;
+        $category->icon = $iconPath;
+        $category->app_icon = $appIconPath;
+        $category->save();
 
-    return redirect()->back()->with('servicecategoryresponse', 'Category added successfully');
-}
-
-
+        return redirect()->back()->with('servicecategoryresponse', 'Category added successfully');
+    }
 
 
     public function update(Request $request, $id)
@@ -61,7 +59,7 @@ class ServiceCategories extends Controller
             $iconPath = $request->file('icon')->store('service_categories', 'public');
             $category->icon = $iconPath;
         }
-        
+
         if ($request->hasFile('app_icon')) {
             if ($category->app_icon && Storage::disk('public')->exists(str_replace('storage/', '', $category->getRawOriginal('app_icon')))) {
                 Storage::disk('public')->delete(str_replace('storage/', '', $category->getRawOriginal('app_icon')));

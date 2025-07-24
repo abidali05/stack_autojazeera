@@ -204,6 +204,7 @@
                                     style="border-radius:0px !important ;border:0px !important" aria-label="Select City"
                                     name="city">
                                     <option value="" selected>Select City</option>
+                                    <option value="1e">Any</option>
                                     @foreach ($cities as $city)
                                         <option value="{{ $city->id }}">{{ $city->name }}</option>
                                     @endforeach

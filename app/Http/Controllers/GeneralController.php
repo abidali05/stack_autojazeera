@@ -187,7 +187,7 @@ class GeneralController extends Controller
 
     public function all_newsletters()
     {
-        $newsletters = NewsLetter::paginate(25);
+        $newsletters = NewsLetter::get();
         return view('superadmin.newsletters.index', compact('newsletters'));
     }
 }
