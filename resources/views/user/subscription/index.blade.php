@@ -248,7 +248,7 @@
                         <div class="col-md-12 colorback p-3">
                             <p class="m-0" style="color: white">Advertisement Plans </p>
                         </div>
-                        <div class="col-md-12 p-3 borderdiv">
+                        <div class="col-md-12 p-3 pb-0 borderdiv"  style="border: none">
                             <p class="m-0 mb-2" style="font-size: 14px">Just One Simple Monthly Fee: No Ad Expiry, No Additional Payments for Featured
                                 Ads. </br>
                                 💰 One Flat Monthly Fee — All-Inclusive</br>
@@ -257,11 +257,8 @@
 
                            
                             </p>
-                                 <span class="pt-5" style="font-size: 16px ; color:black"><strong>Choose the Plan That Suits You and Start Posting Today!</strong></span><br>
-                            <span class="mt-5"
-                                style="background-color: #F40000; color:white; font-size:22px ;font-weight:600;border-radius:5px; padding:5px">
-                                First month free with any paid plan</span>
-                            <img src="{{ asset('web/images/Group (2).svg') }}" class="img-fluid md-3" alt="...">
+                                 <span class="pt-5" style="font-size: 16px ; color:black"><strong>Choose the Plan That Suits You and Start Posting Today!</strong><img src="{{ asset('web/images/start_posting.svg') }}" style="height:60px;width:60px" class="img-fluid md-3 ms-3 " alt="..."></span>
+                          
                         </div>
                     </div>
                 </div>
@@ -292,8 +289,8 @@
                                                     class="m-0 premiumbadge {{ $ads_plan->metadata->is_recomended == '1' ? '' : 'd-none' }}">
                                                     Recommended</p>
                                                 <p
-                                                    class="twenty mt-5  {{ $ads_plan->metadata->is_recomended == '1' ? 'textclas' : '' }}">
-                                                    {{ $ads_plan->name }}</p>
+                                                    class="twenty mt-5 d-flex  {{ $ads_plan->metadata->is_recomended == '1' ? 'textclas' : '' }}">
+                                                    {{ $ads_plan->name }} </p>
                                                 <p class="headsured keep-color" style="font-size:28px !important">
                                                     @if ($ads_plan->price)
                                                         Rs {{ number_format($ads_plan->price) }} <span
@@ -365,8 +362,10 @@
                                                     class="m-0 premiumbadge  {{ $ads_plan->metadata->is_recomended == '1' ? '' : 'd-none' }}">
                                                     Recommended</p>
                                                 <p
-                                                    class="twenty mt-5 {{ $ads_plan->metadata->is_recomended == '1' ? 'textclas' : '' }}">
-                                                    {{ $ads_plan->name }}</p>
+                                                    class="twenty mt-5 d-flex justify-content-between align-items-center {{ $ads_plan->metadata->is_recomended == '1' ? 'textclas' : '' }}">
+                                                    {{ $ads_plan->name }}     @if ($loop->first)
+        <img src="{{ asset('web/images/Group (2).svg') }}" style="height:80px;width:80px" class="img-fluid md-3" alt="...">
+    @endif</p>
                                                 <p class="headsured keep-color" style="font-size:28px !important">
                                                     @if ($ads_plan->price)
                                                         Rs {{ number_format($ads_plan->price) }} <span
@@ -437,8 +436,10 @@
                                                     class="m-0 premiumbadge  {{ $plan->metadata->is_recomended == '1' ? '' : 'd-none' }}">
                                                     Recommended</p>
                                                 <p
-                                                    class="twenty mt-5 {{ $plan->metadata->is_recomended == '1' ? 'textclas' : '' }}">
-                                                    {{ $plan->name }}</p>
+                                                    class="twenty mt-5 d-flex justify-content-between align-items-center {{ $plan->metadata->is_recomended == '1' ? 'textclas' : '' }}">
+                                                    {{ $plan->name }} @if ($loop->first)
+        <img src="{{ asset('web/images/Group (2).svg') }}" style="height:80px;width:80px" class="img-fluid md-3" alt="...">
+    @endif</p>
                                                 <p class="headsured keep-color" style="font-size:28px !important">
                                                     @if ($plan->price)
                                                         Rs {{ number_format($plan->price) }} <span
