@@ -1136,9 +1136,6 @@
             <span class="text" style="   font-size: 12px;">Dashboard</span>
         </a>
 
-
-
-
 @php
      $isAdsActive = request()->is(['ads/create', 'bike/ads/create']);
 @endphp
@@ -1253,7 +1250,6 @@
         </a>
 
 
-
         <form action="{{ route('logout') }}" method="post">
             @csrf
             <button type="submit" class="btn btn-link text-decoration-none d-flex align-items-center">
@@ -1266,7 +1262,12 @@
         </form>
 
 
-
+<a class="nav-link {{ request()->is('chats') ? 'active' : '' }}" href="{{ url('chats') }}">
+                <span class="d-flex align-items-center">
+                    <img src="{{ asset('web/images/chats.svg') }}"
+                        style="height:20px !important ; width:20px !important; " class="me-2" alt="..."> Chats
+                </span>
+            </a>
     </div>
 @endif
 
