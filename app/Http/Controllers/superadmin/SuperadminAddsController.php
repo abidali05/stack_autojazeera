@@ -874,13 +874,14 @@ class SuperadminAddsController extends Controller
         }
         return view('superadmin.Cars.index', compact('users', 'makes', 'models', 'posts', 'colors', 'provinces', 'cities',  'features', 'bodytypes'));
     }
+
     public function comingsoon()
     {
         return view('superadmin.bike.coming_soon');
     }
+
     public function welcome(Request $request)
     {
-
         $users = User::where('role', 1)->get();
         $makes = MakeCompany::where('status', 1)->get();
         $models = ModelCompany::where('status', 1)->get();
@@ -891,7 +892,6 @@ class SuperadminAddsController extends Controller
         $features = MainFeature::where('status', 1)->get();
         // if($request->search)
         // {
-
         //      $posts = Post::where('status', 0)
         //      ->when($request->bodytype, function ($query) use ($request) {
         //          return $query->where('body_type', $request->bodytype);

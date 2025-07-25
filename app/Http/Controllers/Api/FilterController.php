@@ -161,7 +161,7 @@ class FilterController extends Controller
     }
     public function newcar(Request $request)
     {
-        $posts = Post::orderBy('feature_ad','Desc')->with(['feature' => function ($query) {
+        $posts = Post::orderBy('feature_ad', 'Desc')->with(['feature' => function ($query) {
 
             $query->with('mainfeature')->get();
         }, 'document', 'location', 'location.province', 'location.city', 'contact', 'dealer'])->where(['status' => 1, 'condition' => 'new']);
@@ -262,82 +262,83 @@ class FilterController extends Controller
             ], 402);
         }
     }
+    
     public function search(Request $request)
-{
-    $query = Post::with([
-        'feature.mainfeature',
-        'document',
-        'location.province',
-        'location.city',
-        'contact',
-        'dealer',
-        'bodytype1',
-        'make1'
-    ])->where('status', 1)
-    ->when($request->filled('bodytype'), fn($q) => $q->where('body_type', $request->bodytype))
-    ->when($request->filled('model'), fn($q) => $q->where('model', $request->model))
-    ->when($request->filled('budget'), function ($q) use ($request) {
-        $budget = (array) $request->budget;
-        if (isset($budget['from'], $budget['to'])) {
-            $q->whereBetween('price', [(int)$budget['from'], (int)$budget['to']]);
-        }
-    })
-    ->when($request->filled('year'), function ($q) use ($request) {
-        $year = (array) $request->year;
-        if (isset($year['from'], $year['to'])) {
-            $q->whereBetween('year', [(int)$year['from'], (int)$year['to']]);
-        }
-    })
-    ->when($request->filled('price'), function ($q) use ($request) {
-        $price = (array) $request->price;
-        if (isset($price['from'], $price['to'])) {
-            $q->whereBetween('price', [(int)$price['from'], (int)$price['to']]);
-        }
-    })
-    ->when($request->filled('make'), fn($q) => $q->where('make', $request->make));
+    {
+        $query = Post::with([
+            'feature.mainfeature',
+            'document',
+            'location.province',
+            'location.city',
+            'contact',
+            'dealer',
+            'bodytype1',
+            'make1'
+        ])->where('status', 1)
+            ->when($request->filled('bodytype'), fn($q) => $q->where('body_type', $request->bodytype))
+            ->when($request->filled('model'), fn($q) => $q->where('model', $request->model))
+            ->when($request->filled('budget'), function ($q) use ($request) {
+                $budget = (array) $request->budget;
+                if (isset($budget['from'], $budget['to'])) {
+                    $q->whereBetween('price', [(int)$budget['from'], (int)$budget['to']]);
+                }
+            })
+            ->when($request->filled('year'), function ($q) use ($request) {
+                $year = (array) $request->year;
+                if (isset($year['from'], $year['to'])) {
+                    $q->whereBetween('year', [(int)$year['from'], (int)$year['to']]);
+                }
+            })
+            ->when($request->filled('price'), function ($q) use ($request) {
+                $price = (array) $request->price;
+                if (isset($price['from'], $price['to'])) {
+                    $q->whereBetween('price', [(int)$price['from'], (int)$price['to']]);
+                }
+            })
+            ->when($request->filled('make'), fn($q) => $q->where('make', $request->make));
 
-    if ($request->filled('province')) {
-        $provincePostIds = Location::where('province', $request->province)->pluck('post_id');
-        $query->whereIn('id', $provincePostIds);
+        if ($request->filled('province')) {
+            $provincePostIds = Location::where('province', $request->province)->pluck('post_id');
+            $query->whereIn('id', $provincePostIds);
+        }
+
+        if ($request->filled('city')) {
+            $cityPostIds = Location::where('city', $request->city)->pluck('post_id');
+            $query->whereIn('id', $cityPostIds);
+        }
+
+        $posts = $query->get();
+
+        $posts->each(function ($car) {
+            $car->shareable_link = route('cardetail', ['id' => $car->id]);
+        });
+
+        $user = auth('sanctum')->user();
+        if ($user) {
+            foreach ($posts as $post) {
+                $post->favorite = Whishlist::where('post_id', $post->id)
+                    ->where('status', 1)
+                    ->where('user_id', $user->id)
+                    ->exists() ? 1 : 0;
+
+                $post->price_alert = PriceAlert::where('post_id', $post->id)
+                    ->where('status', 1)
+                    ->where('user_id', $user->id)
+                    ->exists() ? 1 : 0;
+            }
+        } else {
+            foreach ($posts as $post) {
+                $post->favorite = 0;
+                $post->price_alert = 0;
+            }
+        }
+
+        return response()->json([
+            "data" => $posts,
+            "status" => 200,
+            "message" => $posts->isNotEmpty() ? "cars found" : "cars not found"
+        ]);
     }
-
-    if ($request->filled('city')) {
-        $cityPostIds = Location::where('city', $request->city)->pluck('post_id');
-        $query->whereIn('id', $cityPostIds);
-    }
-
-    $posts = $query->get();
-
-    $posts->each(function ($car) {
-        $car->shareable_link = route('cardetail', ['id' => $car->id]);
-    });
-
-    $user = auth('sanctum')->user();
-    if ($user) {
-        foreach ($posts as $post) {
-            $post->favorite = Whishlist::where('post_id', $post->id)
-                ->where('status', 1)
-                ->where('user_id', $user->id)
-                ->exists() ? 1 : 0;
-
-            $post->price_alert = PriceAlert::where('post_id', $post->id)
-                ->where('status', 1)
-                ->where('user_id', $user->id)
-                ->exists() ? 1 : 0;
-        }
-    } else {
-        foreach ($posts as $post) {
-            $post->favorite = 0;
-            $post->price_alert = 0;
-        }
-    }
-
-    return response()->json([
-        "data" => $posts,
-        "status" => 200,
-        "message" => $posts->isNotEmpty() ? "cars found" : "cars not found"
-    ]);
-}
 
     public function feature()
     {

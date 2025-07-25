@@ -1175,24 +1175,24 @@ class ApiPostController extends Controller
 
         $user = auth('sanctum')->user();
 
-        if($user) {
+        if ($user) {
             $post_id = $request->id;
             $post = Post::find($post_id);
-    
+
             if (!$post) {
                 return response()->json([
                     'status' => 200,
                     'message' => 'Post not found'
                 ]);
             }
-    
+
             // if ($post->dealer_id !== $user->id) {
             //     return response()->json([
             //         'status' => 422,
             //         'message' => 'You are not authorized to delete this post'
             //     ]);
             // }
-    
+
             $post->delete();
 
             return response()->json([
@@ -1203,7 +1203,7 @@ class ApiPostController extends Controller
             return response()->json([
                 'status' => 501,
                 'message' => 'Something went wrong!',
-                ]);
+            ]);
         }
     }
 

@@ -2135,7 +2135,7 @@
                                                             <div class="row">
                                                                 <!-- Use class instead of ID for reCAPTCHA -->
                                                                 <div class="g-recaptcha recaptcha-container"
-                                                                    data-sitekey="6LfUATArAAAAALKTzza1dubHBdizdyL_WVl4ZW_F">
+                                                                    data-sitekey="6Ld03I4rAAAAAIzu8T5yEAhaC_OiY1GB5s2YSHCW">
                                                                 </div>
                                                             </div>
                                                         </div>

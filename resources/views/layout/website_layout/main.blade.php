@@ -1019,7 +1019,6 @@
             });
         }
 
-
         function handleDrop(event) {
             event.preventDefault();
             const files = event.dataTransfer.files;

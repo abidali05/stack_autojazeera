@@ -633,15 +633,25 @@
                                                                             </div>
                                                                         </div> -->
 
-                <div class="my-2">
+                {{-- <div class="my-2">
                     <label class="form-label mb-3 citylabel d-none"><strong>City</strong></label>
                     <div id="city_filter_wrapper"
                         style="max-height: 200px !important ;     overflow-y: scroll;
                                 scrollbar-color: #1F1B2D transparent;
                                 scrollbar-width: thin;">
-                        {{-- Cities will be added dynamically here --}}
                     </div>
-                </div>
+                </div> --}}
+
+                <div class="my-2">
+                        <label class="form-label mb-3 mt-2 citylabel "><strong>City</strong></label>
+                        <div class="select-wrapper">
+                            <select class="form-select select2 select-search assembly-filter filter-style assembly_filter"
+                                style="width:100% !important" id="city">
+                                <option value="" disabled selected>Select Province First</option>
+                            </select>
+                            <i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
+                        </div>
+                    </div>
                 <div class="my-2">
                     <label class="form-label mb-2 mt-2"><strong>Price</strong></label>
                     <div class="slider-container">
@@ -994,8 +1004,6 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>
@@ -1006,50 +1014,81 @@
             $('#make_filter').change();
         });
 
-        $('#province_filter').change(function(e) {
-            var selectedCityId = "{{ request()->city }}";
+        // $('#province_filter').change(function(e) {
+        //     var selectedCityId = "{{ request()->city }}";
 
-            var provinceId = this.value;
-            var cityWrapper = document.getElementById('city_filter_wrapper');
-            var cityLabel = $('.citylabel');
-            // Clear the existing city checkboxes
-            cityWrapper.innerHTML = '';
-            cityLabel.addClass('d-none'); // Hide label initially
+        //     var provinceId = this.value;
+        //     var cityWrapper = document.getElementById('city_filter_wrapper');
+        //     var cityLabel = $('.citylabel');
+        //     // Clear the existing city checkboxes
+        //     cityWrapper.innerHTML = '';
+        //     cityLabel.addClass('d-none'); // Hide label initially
+        //     var urlPath = encodeURIComponent(window.location.pathname);
+        //     // Fetch cities based on the selected province
+        //     // if (provinceId) {
+        //     //     fetch(`/getCity/${provinceId}?path=${urlPath}`)
+        //     //         .then(response => response.json())
+        //     //         .then(data => {
+        //     //             data.forEach(city => {
+        //     //                 var div = document.createElement('div');
+        //     //                 div.classList.add('form-check', 'my-2');
+
+        //     //                 var checkbox = document.createElement('input');
+        //     //                 checkbox.type = 'checkbox';
+        //     //                 checkbox.classList.add('filter-checkbox',
+        //     //                     'city_filter'); // Apply custom checkbox class
+        //     //                 checkbox.id = 'city_' + city.id;
+        //     //                 checkbox.value = city.id;
+        //     //                 checkbox.name = 'city[]';
+        //     //                 if (selectedCityId == city.id) {
+        //     //                     checkbox.checked = true;
+        //     //                 }
+        //     //                 var label = document.createElement('label');
+        //     //                 label.classList.add('form-check-label', 'ms-3');
+        //     //                 label.htmlFor = 'city_' + city.id;
+        //     //                 label.textContent = city.name + ' (' + (city.count || 0) + ')';
+
+        //     //                 div.appendChild(checkbox);
+        //     //                 div.appendChild(label);
+        //     //                 $('.citylabel').removeClass('d-none');
+        //     //                 cityWrapper.appendChild(div);
+        //     //             });
+        //     //             fetchFilteredResults();
+        //     //         })
+        //     //         .catch(error => console.error('Error fetching cities:', error));
+        //     // } else {
+        //     //     $('.citylabel').addClass('d-none');
+        //     // }
+
+        //     if (provinceId) {
+        //         $.get(`/getCity/${provinceId}?path=${urlPath}`, function(data) {
+        //             data.forEach(city => {
+        //                 citySelect.append(
+        //                     `<option value="${city.id}" ${city.id == selectedCityId ? 'selected' : ''} >${city.name + '('+ city.bike_count +')' }</option>`
+        //                 );
+        //             });
+        //             citySelect.trigger('change.select2');
+        //         });
+        //     }
+        // });
+
+        
+        $('#province_filter').on('change', function() {
+            const provinceId = $(this).val();
+            const citySelect = $('#city');
             var urlPath = encodeURIComponent(window.location.pathname);
-            // Fetch cities based on the selected province
+            var selectedCityId = "{{ request()->city }}";
+            citySelect.empty().append('<option value="">Select City</option>');
+
             if (provinceId) {
-                fetch(`/getCity/${provinceId}?path=${urlPath}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        data.forEach(city => {
-                            var div = document.createElement('div');
-                            div.classList.add('form-check', 'my-2');
-
-                            var checkbox = document.createElement('input');
-                            checkbox.type = 'checkbox';
-                            checkbox.classList.add('filter-checkbox',
-                                'city_filter'); // Apply custom checkbox class
-                            checkbox.id = 'city_' + city.id;
-                            checkbox.value = city.id;
-                            checkbox.name = 'city[]';
-                            if (selectedCityId == city.id) {
-                                checkbox.checked = true;
-                            }
-                            var label = document.createElement('label');
-                            label.classList.add('form-check-label', 'ms-3');
-                            label.htmlFor = 'city_' + city.id;
-                            label.textContent = city.name + ' (' + (city.count || 0) + ')';
-
-                            div.appendChild(checkbox);
-                            div.appendChild(label);
-                            $('.citylabel').removeClass('d-none');
-                            cityWrapper.appendChild(div);
-                        });
-                        fetchFilteredResults();
-                    })
-                    .catch(error => console.error('Error fetching cities:', error));
-            } else {
-                $('.citylabel').addClass('d-none');
+                $.get(`/getCity/${provinceId}?path=${urlPath}`, function(data) {
+                    data.forEach(city => {
+                        citySelect.append(
+                            `<option value="${city.id}" ${city.id == selectedCityId ? 'selected' : ''} >${city.name + '('+ city.count +')' }</option>`
+                        );
+                    });
+                    citySelect.trigger('change.select2');
+                });
             }
         });
 
