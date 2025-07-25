@@ -111,7 +111,7 @@
             padding: 2px;
         }
 
-     .table>:not(caption)>*>* {
+        .table>:not(caption)>*>* {
             padding: 0rem .5rem;
             color: var(--bs-table-color-state, var(--bs-table-color-type, var(--bs-table-color)));
             background-color: var(--bs-table-bg);
@@ -124,12 +124,25 @@
             padding: 0px 10px 5px 10px;
             border-bottom: 1px solid rgba(0, 0, 0, 0.3);
         }
-        div.dt-container .dt-length, div.dt-container .dt-search, div.dt-container .dt-info, div.dt-container .dt-processing, div.dt-container .dt-paging {
-    color: inherit;
-    display: flex
-;
-    justify-content: end;
-}
+
+        div.dt-container .dt-length,
+        div.dt-container .dt-search,
+        div.dt-container .dt-info,
+        div.dt-container .dt-processing,
+        div.dt-container .dt-paging {
+            color: inherit;
+            display: flex;
+            justify-content: end;
+        }
+
+        .bike-column-search {
+            width: 90px;
+            font-size: 10px;
+            border: 1px solid #D9D9D9;
+            border-radius: 2px;
+            padding: 2px;
+        }
+
         /* For inline search version */
     </style>
     <div class="container mt-3">
@@ -765,7 +778,7 @@
                     language: {
                         search: "Search: "
                     },
-                           dom: `
+                    dom: `
   <"search-wrapper mb-3"f>
   <"pagination-wrapper d-flex justify-content-between align-items-center mb-3"i p>
   rt
@@ -776,14 +789,15 @@
 
                 // Add search row
                 $(this).find('thead').append('<tr class="search-row"></tr>');
+
                 $(this).find('thead th').each(function(index) {
                     var title = $(this).text().trim();
                     var searchHtml = '';
 
-                    // Custom search for Featured column (Yes/No dropdown with Select2)
+                    // Custom search for Featured column (Yes/No dropdown)
                     if (title === 'Featured') {
                         searchHtml = `
-                    <select class="ads-column-search select2">
+                    <select class="bike-column-search">
                         <option value="">Any</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
@@ -801,33 +815,20 @@
                 `;
                     }
                     // Regular text search for Make and Model
-                    else if (['Make', 'Model'].includes(title)) {
+                    else if (['Dealer Name', 'Make', 'Model'].includes(title)) {
                         searchHtml =
-                            `<input type="text" placeholder="Search ${title}" class="ads-column-search"/>`;
+                            `<input type="text" placeholder="Search ${title}" class="bike-column-search"/>`;
                     }
 
-                    $(this).closest('thead').find('.search-row').append('<th>' + searchHtml +
-                        '</th>');
-                });
-
-                // Initialize Select2 for the Featured column dropdown
-                $(this).find('.search-row .select2').select2({
-                    minimumResultsForSearch: -1, // Disable the search box in the dropdown
-                    width: '90px', // Match the width of ads-column-search
-                    dropdownParent: $(this).closest(
-                        '.dataTables_wrapper') // Ensure dropdown appears correctly within DataTable
+                    $(this).closest('thead').find('.search-row').append(
+                        '<th>' + searchHtml + '</th>'
+                    );
                 });
 
                 // Apply search functionality
-                $(this).find('.search-row input').on('keyup', function() {
+                $(this).find('.search-row select, .search-row input').on('keyup change', function() {
                     var columnIndex = $(this).closest('th').index();
                     table.column(columnIndex).search(this.value).draw();
-                });
-
-                $(this).find('.search-row .select2').on('change', function() {
-                    var columnIndex = $(this).closest('th').index();
-                    var value = $(this).val() || ''; // Use empty string for "All" option
-                    table.column(columnIndex).search(value).draw();
                 });
             });
         });

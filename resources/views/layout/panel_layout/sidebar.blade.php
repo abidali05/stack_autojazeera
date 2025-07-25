@@ -371,7 +371,7 @@
                             alt="...">Service
                     </span>
                 </a> --}}
-                 <a href="javascript:void(0);" id="serviceQuotesBtn" class="nav-link">
+                <a href="javascript:void(0);" id="serviceQuotesBtn" class="nav-link">
                     <span class="d-flex align-items-center">
                         <img src="{{ asset('web/images/submitedfrms.svg') }}" class="me-2"
                             style="height:20px; width:20px;" alt="...">
@@ -484,7 +484,9 @@
 
 
         <!-- Manage System Main Toggle -->
-        <a class="nav-link d-flex justify-content-between align-items-center {{ Auth::user()->shop_package ? '' : 'd-none' }} @if (Request::is('shop') || Request::is('shop/create') || Request::is('shop/edit') ||
+        <a class="nav-link d-flex justify-content-between align-items-center {{ Auth::user()->shop_package ? '' : 'd-none' }} @if (Request::is('shop') ||
+                Request::is('shop/create') ||
+                Request::is('shop/edit') ||
                 Request::is('subscription') ||
                 Request::is('subscription-history') ||
                 Request::is('service-quotes') ||
@@ -507,7 +509,8 @@
         <div class="collapse ps-3 {{ Request::is('shop') || Request::is('shop/create') || Request::is('shop/edit') || Request::is('subscription') || Request::is('subscription-history') || Request::is('service-quotes') || Request::is('submitted-service-quotes') || Request::is('service-chats') || Request::is('shops/wishlist') || Request::is('service/users') ? 'show' : '' }} {{ Auth::user()->shop_package ? '' : 'd-none' }}"
             id="Systemee">
 
-            <a class="nav-link {{ Request::is('shop') || Request::is('shop/create') || Request::is('shop/edit') ? 'active' : '' }}" href="{{ url('shop') }}">
+            <a class="nav-link {{ Request::is('shop') || Request::is('shop/create') || Request::is('shop/edit') ? 'active' : '' }}"
+                href="{{ url('shop') }}">
                 <span class="d-flex align-items-center">
                     <img src="{{ asset('web/images/Mask group.svg') }}"
                         style="height:20px !important ; width:20px !important; " class="me-2" alt="..."> Ad
@@ -528,8 +531,7 @@
             </a>
 
             <!-- Subscription Items -->
-            <div class="collapse ps-4 {{  Request::is('subscription-history') ? 'show' : '' }}"
-                id="Subscription">
+            <div class="collapse ps-4 {{ Request::is('subscription-history') ? 'show' : '' }}" id="Subscription">
                 <a class="nav-link {{ Request::is('subscription') ? 'active' : '' }}"
                     href="{{ url('subscription') }}">
                     <span class="d-flex align-items-center">
@@ -655,7 +657,7 @@
                 'subscription',
                 'subscription/*',
                 'subscription-history',
-        
+
                 'lead',
                 'lead/*',
                 'leads/bikes',
@@ -791,10 +793,10 @@
                     <span class="d-flex align-items-center">
                         <img src="{{ asset('web/images/subhistory.svg') }}"
                             style="height:20px !important ; width:20px !important; " class="me-2" alt="...">
-                       Ad History
+                        Ad History
                     </span>
                 </a>
-              {{-- <a class="nav-link {{ request()->is('service-subscription-history') ? 'active' : '' }}"
+                {{-- <a class="nav-link {{ request()->is('service-subscription-history') ? 'active' : '' }}"
                     href="{{ url('service-subscription-history') }}">
                     <span class="d-flex align-items-center">
                         <img src="{{ asset('web/images/subhistory.svg') }}"
@@ -998,7 +1000,8 @@
         <!-- Manage Shop Submenu -->
         <div class="collapse ps-3 {{ Auth::user()->shop_package ? '' : 'd-none' }} {{ $isManageShopActive ? 'show' : '' }}"
             id="Systemee">
-            <a class="nav-link {{ request()->is('shop') || request()->is('shop/create') || request()->is('shop/edit') ? 'active' : '' }}" href="{{ url('shop') }}">
+            <a class="nav-link {{ request()->is('shop') || request()->is('shop/create') || request()->is('shop/edit') ? 'active' : '' }}"
+                href="{{ url('shop') }}">
                 <span class="d-flex align-items-center">
                     <img src="{{ asset('web/images/Mask group.svg') }}"
                         style="height:20px !important ; width:20px !important; " class="me-2" alt="..."> Ad
@@ -1038,7 +1041,7 @@
                     <span class="d-flex align-items-center">
                         <img src="{{ asset('web/images/subhistory.svg') }}"
                             style="height:20px !important ; width:20px !important; " class="me-2" alt="...">
-                       Service History
+                        Service History
                     </span>
                 </a>
             </div>
@@ -1130,15 +1133,16 @@
         <a id="sidebarLogo" class="navbar-brand d-flex justify-content-center" href="{{ route('dashboard') }}">
             <img src="{{ asset('web/images/Frame 1171275409.svg') }}" class="imgheightfix" alt="...">
         </a>
-        <a href="{{ route('dashboard') }}" class="mt-3 d-flex align-items-baseline @if (request()->routeIs('dashboard')) active @endif">
+        <a href="{{ route('dashboard') }}"
+            class="mt-3 d-flex align-items-baseline @if (request()->routeIs('dashboard')) active @endif">
             <span class="icon"><img src="{{ asset('web/images/Icon (1).svg') }}"
                     style="height:25px !important ; width:25px !important; " alt="..."></span>
             <span class="text" style="   font-size: 12px;">Dashboard</span>
         </a>
 
-@php
-     $isAdsActive = request()->is(['ads/create', 'bike/ads/create']);
-@endphp
+        @php
+            $isAdsActive = request()->is(['ads/create', 'bike/ads/create']);
+        @endphp
         {{-- post ad start  --}}
         <a class="nav-link d-flex justify-content-between align-items-center {{ in_array('post_ads', $userPermissions) ? '' : 'd-none' }}  {{ $isAdsActive ? 'active' : '' }} "
             data-bs-toggle="collapse" href="#bikeSubmenuqq" role="button" aria-expanded="false">
@@ -1150,7 +1154,8 @@
             <i class="bi bi-chevron-compact-down toggle-icon"></i>
         </a>
         <div class="collapse ps-4 {{ in_array('post_ads', $userPermissions) ? '' : 'd-none' }}  {{ $isAdsActive ? 'show' : '' }}
-            " id="bikeSubmenuqq">
+            "
+            id="bikeSubmenuqq">
             <a class="nav-link {{ request()->is('ads/create') ? 'active' : '' }}" href="{{ url('ads/create') }}">
                 <span class="d-flex align-items-center">
                     <img src="{{ asset('web/images/car1.svg') }}"
@@ -1158,7 +1163,8 @@
                     Car ads
                 </span>
             </a>
-            <a class="nav-link {{ request()->is('bike/ads/create') ? 'active' : '' }}" href="{{ url('bike/ads/create') }}">
+            <a class="nav-link {{ request()->is('bike/ads/create') ? 'active' : '' }}"
+                href="{{ url('bike/ads/create') }}">
                 <span class="d-flex align-items-center">
                     <img src="{{ asset('web/images/Vector (2).svg') }}"
                         style="height:20px !important ; width:20px !important; " class="me-2" alt="...">
@@ -1168,12 +1174,9 @@
         </div>
         {{-- post ad end --}}
 
-
-
-@php
-     $isManageAdsActive = request()->is(['ads', 'bike/ads']);
-@endphp
-
+        @php
+            $isManageAdsActive = request()->is(['ads', 'bike/ads']);
+        @endphp
 
 
         <a class="nav-link d-flex justify-content-between align-items-center {{ in_array('manage_ads', $userPermissions) ? '' : 'd-none' }} {{ $isManageAdsActive ? 'active' : '' }}"
@@ -1186,7 +1189,8 @@
             <i class="bi bi-chevron-compact-down toggle-icon"></i>
         </a>
         <div class="collapse ps-4 {{ in_array('manage_ads', $userPermissions) ? '' : 'd-none' }} {{ $isManageAdsActive ? 'show' : '' }}
-            " id="bikeSubmenu">
+            "
+            id="bikeSubmenu">
             <a class="nav-link {{ request()->is('ads') ? 'active' : '' }}" href="{{ url('ads') }}">
                 <span class="d-flex align-items-center">
                     <img src="{{ asset('web/images/car1.svg') }}"
@@ -1203,9 +1207,9 @@
             </a>
         </div>
 
-@php
-     $isLeadsActive = request()->is(['lead', 'leads/bikes','get-price-alerts']);
-@endphp
+        @php
+            $isLeadsActive = request()->is(['lead', 'leads/bikes', 'get-price-alerts']);
+        @endphp
 
         <!-- Leads -->
         <a class="nav-link d-flex justify-content-between align-items-center {{ in_array('view_leads', $userPermissions) ? '' : 'd-none' }} {{ $isLeadsActive ? 'active' : '' }}"
@@ -1217,7 +1221,8 @@
             <i class="bi bi-chevron-compact-down toggle-icon"></i>
         </a>
         <div class="collapse ps-4 {{ in_array('view_leads', $userPermissions) ? '' : 'd-none' }} {{ $isLeadsActive ? 'show' : '' }}
-            " id="busSubmenu">
+            "
+            id="busSubmenu">
             <a class="nav-link {{ request()->is('lead') ? 'active' : '' }}" href="{{ url('lead') }}">
                 <span class="d-flex align-items-center">
                     <img src="{{ asset('web/images/car1.svg') }}"
@@ -1225,14 +1230,16 @@
                     Car Leads
                 </span>
             </a>
-            <a class="nav-link {{ request()->is('leads/bikes') ? 'active' : '' }}"  href="{{ url('leads/bikes') }}">
+            <a class="nav-link {{ request()->is('leads/bikes') ? 'active' : '' }}"
+                href="{{ url('leads/bikes') }}">
                 <span class="d-flex align-items-center">
                     <img src="{{ asset('web/images/Vector (2).svg') }}"
                         style="height:20px !important ; width:20px !important; " class="me-2" alt="...">
                     Bike Leads
                 </span>
             </a>
-            <a class="nav-link {{ request()->is('get-price-alerts') ? 'active' : '' }}" href="{{ url('get-price-alerts') }}">
+            <a class="nav-link {{ request()->is('get-price-alerts') ? 'active' : '' }}"
+                href="{{ url('get-price-alerts') }}">
                 <span class="d-flex align-items-center">
                     <img src="{{ asset('web/images/lead.svg') }}"
                         style="height:20px !important ; width:20px !important; " class="me-2" alt="...">
@@ -1241,6 +1248,12 @@
             </a>
         </div>
 
+        <a class="nav-link {{ request()->is('chats') ? 'active' : '' }}" href="{{ url('chats') }}">
+            <span class="d-flex align-items-center">
+                <img src="{{ asset('web/images/chats.svg') }}"
+                    style="height:20px !important ; width:20px !important; " class="me-2" alt="..."> Chats
+            </span>
+        </a>
 
 
         <a href="{{ url('personal-info') }}" class="{{ request()->is('personal-info') ? 'active' : '' }}">
@@ -1260,14 +1273,6 @@
             </button>
 
         </form>
-
-
-<a class="nav-link {{ request()->is('chats') ? 'active' : '' }}" href="{{ url('chats') }}">
-                <span class="d-flex align-items-center">
-                    <img src="{{ asset('web/images/chats.svg') }}"
-                        style="height:20px !important ; width:20px !important; " class="me-2" alt="..."> Chats
-                </span>
-            </a>
     </div>
 @endif
 
@@ -1277,7 +1282,8 @@
         <a id="sidebarLogo" class="navbar-brand d-flex justify-content-center" href="{{ route('dashboard') }}">
             <img src="{{ asset('web/images/Frame 1171275409.svg') }}" class="imgheightfix" alt="...">
         </a>
-        <a href="{{ route('dashboard') }}" class="mt-3 d-flex align-items-baseline @if (request()->routeIs('dashboard')) active @endif">
+        <a href="{{ route('dashboard') }}"
+            class="mt-3 d-flex align-items-baseline @if (request()->routeIs('dashboard')) active @endif">
             <span class="icon"><img src="{{ asset('web/images/Icon (1).svg') }}"
                     style="height:25px !important ; width:25px !important; " alt="..."></span>
             <span class="text" style="   font-size: 12px;">Dashboard</span>
@@ -1285,7 +1291,8 @@
 
 
         <!--  Leads -->
-        <a class="nav-link {{ request()->is(['service-quotes']) ? 'active' : '' }}" href="{{ url('service-quotes') }} ">
+        <a class="nav-link {{ request()->is(['service-quotes']) ? 'active' : '' }}"
+            href="{{ url('service-quotes') }} ">
             <span class="d-flex align-items-center">
                 <img src="{{ asset('web/images/customer.svg') }}"
                     style="height:20px !important ; width:20px !important; " class="me-2" alt="...">
@@ -1295,7 +1302,8 @@
 
 
         <!-- Chats -->
-        <a class="nav-link {{ request()->is('service-chats') ? 'active' : '' }}" href="{{ url('service-chats') }}">
+        <a class="nav-link {{ request()->is('service-chats') ? 'active' : '' }}"
+            href="{{ url('service-chats') }}">
             <span class="d-flex align-items-center">
                 <img src="{{ asset('web/images/chats.svg') }}"
                     style="height:20px !important ; width:20px !important; " class="me-2" alt="..."> Chats

@@ -932,7 +932,7 @@ class SuperadminAddsController extends Controller
         $model = $request->input('model') === '1e' ? null : $request->input('model');
         $province = $request->input('province') === '1e' ? null : $request->input('province');
         $city = $request->input('city') === '1e' ? null : $request->input('city');
-// dd($request->all(), $condition, $bodytype, $make, $model, $province, $city);
+
         $users = User::where('role', 1)->get();
         $makes = MakeCompany::where('status', 1)->get();
         $models = ModelCompany::where('status', 1)->get();
