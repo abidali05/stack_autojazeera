@@ -122,7 +122,7 @@
     </div>
 
 
-    <div class="container mt-2 ">
+    {{-- <div class="container mt-2 ">
 
         <div class="row align-items-center mb-2">
              <div class="col-md-4 "> <span class="pt-md-3 pagination_count"
@@ -230,7 +230,7 @@
           
       
         </div>
-    </div>
+    </div> --}}
     <div class="container table-responsive ">
         <div class="row">
             <table class="table table-striped transparent-table align-middle datatable">
@@ -463,7 +463,7 @@
 
     </div>
 
-    <div class="container my-2">
+    {{-- <div class="container my-2">
         <div class="row d-flex justify-content-between">
             <div class="col-md-4"> <span class="pt-md-3 pagination_count"
                     style="font-size: 18px; color: #281F48; font-weight:700;">
@@ -570,7 +570,7 @@
            
             </div>
         </div>
-    </div>
+    </div> --}}
 
 
 

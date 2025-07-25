@@ -27,6 +27,26 @@
         table.dataTable {
             width: 100% !important;
         }
+        
+        .table>:not(caption)>*>* {
+            padding: 0rem .5rem;
+            color: var(--bs-table-color-state, var(--bs-table-color-type, var(--bs-table-color)));
+            background-color: var(--bs-table-bg);
+            border-bottom-width: var(--bs-border-width);
+            box-shadow: inset 0 0 0 9999px var(--bs-table-bg-state, var(--bs-table-bg-type, var(--bs-table-accent-bg)));
+        }
+
+        table.dataTable>thead>tr>th,
+        table.dataTable>thead>tr>td {
+            padding: 0px 10px 5px 10px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+        }
+        div.dt-container .dt-length, div.dt-container .dt-search, div.dt-container .dt-info, div.dt-container .dt-processing, div.dt-container .dt-paging {
+    color: inherit;
+    display: flex
+;
+    justify-content: end;
+}
     </style>
     @php
         $dealershipNames = \App\Models\User::where('role', 1)->pluck('dealershipName')->toArray();
@@ -495,7 +515,7 @@
             </div>
 
             <div class="tab-pane fade" id="dealer-user" role="tabpanel">
-                <div class="col-md-12 text-end">
+                <div class="col-md-12 text-end mb-3">
                     <button class="btn custom-btn-nav new py-0 rounded roleid" data-role="0" data-bs-toggle="modal"
                         data-bs-target="#superadmin_add_userModal">Add New User</button>
                 </div>
@@ -737,7 +757,13 @@
                     language: {
                         search: "Search: "
                     },
-                    dom: '<"top"f i lp>rt<"bottom"i lp><"clear">'
+                       dom: `
+  <"search-wrapper mb-3"f>
+  <"pagination-wrapper d-flex justify-content-between align-items-center mb-3"i p>
+  rt
+  <"pagination-wrapper d-flex justify-content-between align-items-center mt-3"i p>
+  <"clear">
+`
                 });
             });
         });
