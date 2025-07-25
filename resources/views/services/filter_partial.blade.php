@@ -829,7 +829,7 @@
                                          <div class="col-9 p-3 rounded-3" style="background-color: #F9F9F9;">
                                              <div class="row">
                                                  <div class="g-recaptcha"
-                                                     data-sitekey="{{ env('RECAPTCHA_KEY') }}">
+                                                     data-sitekey="6LfUATArAAAAALKTzza1dubHBdizdyL_WVl4ZW_F">
                                                  </div>
                                              </div>
                                          </div>

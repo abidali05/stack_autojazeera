@@ -2135,7 +2135,7 @@
                                                             <div class="row">
                                                                 <!-- Use class instead of ID for reCAPTCHA -->
                                                                 <div class="g-recaptcha recaptcha-container"
-                                                                    data-sitekey="{{ env('RECAPTCHA_KEY') }}">
+                                                                    data-sitekey="6LfUATArAAAAALKTzza1dubHBdizdyL_WVl4ZW_F">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -2426,11 +2426,11 @@
 
     {{-- step form logic start  --}}
     <!-- Include this in your HTML head or before closing body -->
-    {{-- <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script> --}}
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-    <div class="g-recaptcha recaptcha-container" data-sitekey="{{ env('RECAPTCHA_KEY') }}"></div>
+    {{-- <div class="g-recaptcha recaptcha-container" data-sitekey="6LdWxY4rAAAAABzF1TAq6DwgnyyDRxhviKx-5VWg"></div> --}}
 
     <script>
         // $("#loadingSpinner").removeClass("d-none");

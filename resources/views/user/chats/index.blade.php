@@ -347,16 +347,8 @@
                         </div>
                         <div class="row ">
                             <div class="col-12 scrll" id="chatList">
-
                             </div>
-
                         </div>
-
-
-
-
-
-
                     </div>
                     <div class="col-md-9  mt-2 " style="border-left: 1px solid rgba(255, 255, 255, 0.2);s">
                         <div class="row d-flex justify-content-between d-none" id="chatTopNav"
@@ -437,7 +429,6 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-storage-compat.js"></script>
-
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -860,6 +851,133 @@
                 }
             }
 
+            // function listenForChatMessages(chatId) {
+            //     const chatMessages = document.getElementById('chatMessages');
+            //     chatMessages.innerHTML = '';
+
+            //     db.collection("messages")
+            //         .where("key", "==", chatId)
+            //         .orderBy("timestamp", "asc")
+            //         .onSnapshot(snapshot => {
+            //             chatMessages.innerHTML = '';
+
+            //             snapshot.forEach(doc => {
+            //                 const msg = doc.data();
+
+            //                 // Skip rendering if message is deleted and current user is not the sender
+            //                 if (msg.deleted && parseInt(msg.sender.id) !== parseInt(authUserId)) {
+            //                     return;
+            //                 }
+
+            //                 if (msg.visibleTo && Array.isArray(msg.visibleTo) && !msg.visibleTo
+            //                     .includes(authUserId)) {
+            //                     return;
+            //                 }
+
+            //                 // Ensure correct sender check
+            //                 const isSender = parseInt(msg.sender.id) === parseInt(authUserId);
+
+            //                 // Assign correct images for sender and receiver
+            //                 const senderImage = msg.sender.image ? msg.sender.image :
+            //                     "web/images/default-avatar.png";
+            //                 const receiverImage = msg.sender.id === authUserId ? authUserImage :
+            //                     senderImage;
+
+            //                 // CSS class for styling
+            //                 const messageClass = isSender ? 'chatfont' : 'chatfonte';
+
+            //                 // Handle deleted messages
+            //                 let messageText = msg.message || '';
+            //                 if (msg.deleted) {
+            //                     messageText = '<em class="text-muted">This message was deleted</em>';
+            //                 }
+
+            //                 // Handle file attachments
+            //                 const fileAttachment = msg.attachment && !msg.deleted ? getFilePreview(msg
+            //                     .attachment) : '';
+
+            //                 // Handle reply if this message is a reply to another
+            //                 let replyHtml = '';
+            //                 if (msg.reply_to && !msg.deleted) {
+            //                     replyHtml = `
+        //                 <div class="replied-message mb-2 p-2 rounded" 
+        //                     style="background-color: rgba(255,255,255,0.1); border-left: 3px solid #FD5631;" onclick="highlightMessage('${msg.reply_to}', '${msg.reply_to_message}')">
+        //                     <p class="m-0 text-white-50 small">${msg.reply_message}</p>
+        //                 </div>
+        //             `;
+            //                 }
+
+            //                 // Message action buttons (only show for sender's messages)
+            //                 const messageActions = isSender ? `
+        //             <div class="message-actions d-none">
+        //                 <button class="btn btn-sm text-white-50" onclick="showMessageOptions('${doc.id}')">
+        //                     <i class="bi bi-three-dots-vertical"></i>
+        //                 </button>
+        //             </div>
+        //         ` : '';
+
+            //                 // Wrap messages in a container for proper positioning
+            //                 const messageHtml = `
+        //         <div class="message-container ${isSender ? 'sent' : 'received'}" id="message-${doc.id}" data-message-id="${doc.id}" data-reply_meta_data="${JSON.stringify(msg.metadata ?? null)}">
+        //             ${!isSender ? `
+            //                                                                                             <img src="${receiverImage}" class="chat-avatar me-2" 
+            //                                                                                                 style="height: 45px; width: 45px; border-radius: 50%;" 
+            //                                                                                                 alt="Receiver">
+            //                                                                                         ` : ''}
+
+        //             <div class="${messageClass} p-3 rounded-3 position-relative" 
+        //                  oncontextmenu="showMessageContextMenu(event, '${doc.id}', ${isSender}, '${msg.message?.replace(/'/g, "\\'")}', '${msg.sender.name?.replace(/'/g, "\\'")}', '${msg.attachment ?? null}', '${JSON.stringify(msg.meta_data ?? null).replace(/"/g, '&quot;')}'); return false;"
+        //                  style="max-width: 50%; word-wrap: break-word; ${isSender ? 'background-color: #282435;' : 'background-color: #433B5D;'}" id="messagee-${doc.id}">
+        //                 ${replyHtml}
+        //                 ${messageText ? `<p class="m-0 text-white">${messageText}</p>` : ''}
+        //                 ${fileAttachment}
+        //                 <div class="timestamp text-white-50 mt-1 text-end d-flex align-items-center justify-content-end" style="font-size: 10px;">
+        //                     <span style="color:white" class="me-1">
+        //                         ${ msg.timestamp && msg.timestamp.seconds 
+        //                             ? (new Date(msg.timestamp.seconds * 1000)).toLocaleString('en-GB', { 
+        //                                 day: '2-digit', 
+        //                                 month: 'short', 
+        //                                 year: 'numeric', 
+        //                                 hour: '2-digit', 
+        //                                 minute: '2-digit', 
+        //                                 hour12: true 
+        //                             }) 
+        //                             : '' 
+        //                         }
+        //                     </span>
+
+        //                     ${msg.attachment && !msg.message ? '<span class="ms-1">File</span>' :  messageActions}
+        //                 </div>
+        //             </div>
+
+        //             ${isSender ? `
+            //                                                                                             <img src="${authUserImage}" class="chat-avatar ms-2" 
+            //                                                                                                 style="height: 45px; width: 45px; border-radius: 50%;" 
+            //                                                                                                 alt="You">
+            //                                                                                         ` : ''}
+        //         </div>`;
+
+            //                 chatMessages.innerHTML += messageHtml;
+            //             });
+
+            //             // // Add hover effect for message actions
+            //             // document.querySelectorAll('.message-container.sent .chatfont').forEach(messageEl => {
+            //             //     messageEl.addEventListener('mouseenter', function() {
+            //             //         const actionsEl = this.querySelector('.message-actions');
+            //             //         if (actionsEl) actionsEl.classList.remove('d-none');
+            //             //     });
+
+            //             //     messageEl.addEventListener('mouseleave', function() {
+            //             //         const actionsEl = this.querySelector('.message-actions');
+            //             //         if (actionsEl) actionsEl.classList.add('d-none');
+            //             //     });
+            //             // });
+
+            //             // Scroll to bottom after rendering messages
+            //             chatMessages.scrollTop = chatMessages.scrollHeight;
+            //         });
+            // }
+
             function listenForChatMessages(chatId) {
                 const chatMessages = document.getElementById('chatMessages');
                 chatMessages.innerHTML = '';
@@ -869,6 +987,7 @@
                     .orderBy("timestamp", "asc")
                     .onSnapshot(snapshot => {
                         chatMessages.innerHTML = '';
+                        let lastDateLabel = null;
 
                         snapshot.forEach(doc => {
                             const msg = doc.data();
@@ -881,6 +1000,39 @@
                             if (msg.visibleTo && Array.isArray(msg.visibleTo) && !msg.visibleTo
                                 .includes(authUserId)) {
                                 return;
+                            }
+
+                            // Get the message's timestamp
+                            const messageDate = msg.timestamp && msg.timestamp.seconds ?
+                                new Date(msg.timestamp.seconds * 1000) :
+                                new Date();
+
+                            const todayStr = new Date().toDateString();
+                            const yesterdayStr = new Date(Date.now() - 86400000).toDateString();
+                            const currentDateStr = messageDate.toDateString();
+
+                            // Determine the date label
+                            let dateLabel = '';
+                            if (currentDateStr === todayStr) {
+                                dateLabel = "Today";
+                            } else if (currentDateStr === yesterdayStr) {
+                                dateLabel = "Yesterday";
+                            } else {
+                                dateLabel = messageDate.toLocaleDateString('en-GB', {
+                                    day: '2-digit',
+                                    month: 'short',
+                                    year: 'numeric'
+                                }); // e.g., "25 Jul 2025"
+                            }
+
+                            // Insert date separator if the date changes
+                            let messageHtml = '';
+                            if (lastDateLabel !== dateLabel) {
+                                messageHtml += `
+                        <div class="text-center text-muted my-2" style="font-size: 0.85rem;">
+                            <span style="background: #eee; padding: 5px 10px; border-radius: 10px;">${dateLabel}</span>
+                        </div>`;
+                                lastDateLabel = dateLabel;
                             }
 
                             // Ensure correct sender check
@@ -909,44 +1061,40 @@
                             let replyHtml = '';
                             if (msg.reply_to && !msg.deleted) {
                                 replyHtml = `
-                            <div class="replied-message mb-2 p-2 rounded" 
-                                style="background-color: rgba(255,255,255,0.1); border-left: 3px solid #FD5631;" onclick="highlightMessage('${msg.reply_to}', '${msg.reply_to_message}')">
-                                <p class="m-0 text-white-50 small">${msg.reply_message}</p>
-                            </div>
-                        `;
+                        <div class="replied-message mb-2 p-2 rounded" 
+                            style="background-color: rgba(255,255,255,0.1); border-left: 3px solid #FD5631;" 
+                            onclick="highlightMessage('${msg.reply_to}', '${msg.reply_message}')">
+                            <p class="m-0 text-white-50 small">${msg.reply_message}</p>
+                        </div>`;
                             }
 
                             // Message action buttons (only show for sender's messages)
                             const messageActions = isSender ? `
-                        <div class="message-actions d-none">
-                            <button class="btn btn-sm text-white-50" onclick="showMessageOptions('${doc.id}')">
-                                <i class="bi bi-three-dots-vertical"></i>
-                            </button>
-                        </div>
-                    ` : '';
+                    <div class="message-actions d-none">
+                        <button class="btn btn-sm text-white-50" onclick="showMessageOptions('${doc.id}')">
+                            <i class="bi bi-three-dots-vertical"></i>
+                        </button>
+                    </div>` : '';
 
                             // Wrap messages in a container for proper positioning
-                            const messageHtml = `
-                    <div class="message-container ${isSender ? 'sent' : 'received'}" id="message-${doc.id}" data-message-id="${doc.id}" data-reply_meta_data="${JSON.stringify(msg.metadata ?? null)}">
+                            messageHtml += `
+                    <div class="message-container ${isSender ? 'sent' : 'received'}" id="message-${doc.id}" data-message-id="${doc.id}" data-reply_meta_data="${JSON.stringify(msg.meta_data ?? null)}">
                         ${!isSender ? `
-                                                                                                        <img src="${receiverImage}" class="chat-avatar me-2" 
-                                                                                                            style="height: 45px; width: 45px; border-radius: 50%;" 
-                                                                                                            alt="Receiver">
-                                                                                                    ` : ''}
+                                <img src="${receiverImage}" class="chat-avatar me-2" 
+                                    style="height: 45px; width: 45px; border-radius: 50%;" 
+                                    alt="Receiver">
+                            ` : ''}
 
                         <div class="${messageClass} p-3 rounded-3 position-relative" 
-                             oncontextmenu="showMessageContextMenu(event, '${doc.id}', ${isSender}, '${msg.message?.replace(/'/g, "\\'")}', '${msg.sender.name?.replace(/'/g, "\\'")}', '${msg.attachment ?? null}', '${JSON.stringify(msg.meta_data ?? null).replace(/"/g, '&quot;')}'); return false;"
-                             style="max-width: 50%; word-wrap: break-word; ${isSender ? 'background-color: #282435;' : 'background-color: #433B5D;'}" id="messagee-${doc.id}">
+                            oncontextmenu="showMessageContextMenu(event, '${doc.id}', ${isSender}, '${msg.message?.replace(/'/g, "\\'")}', '${msg.sender.name?.replace(/'/g, "\\'")}', '${msg.attachment ?? null}', '${JSON.stringify(msg.meta_data ?? null).replace(/"/g, '"')}'); return false;"
+                            style="max-width: 50%; word-wrap: break-word; ${isSender ? 'background-color: #282435;' : 'background-color: #433B5D;'}" id="messagee-${doc.id}">
                             ${replyHtml}
                             ${messageText ? `<p class="m-0 text-white">${messageText}</p>` : ''}
                             ${fileAttachment}
                             <div class="timestamp text-white-50 mt-1 text-end d-flex align-items-center justify-content-end" style="font-size: 10px;">
                                 <span style="color:white" class="me-1">
-                                    ${ msg.timestamp && msg.timestamp.seconds 
-                                        ? (new Date(msg.timestamp.seconds * 1000)).toLocaleString('en-GB', { 
-                                            day: '2-digit', 
-                                            month: 'short', 
-                                            year: 'numeric', 
+                                    ${msg.timestamp && msg.timestamp.seconds 
+                                        ? (new Date(msg.timestamp.seconds * 1000)).toLocaleTimeString('en-GB', { 
                                             hour: '2-digit', 
                                             minute: '2-digit', 
                                             hour12: true 
@@ -954,33 +1102,19 @@
                                         : '' 
                                     }
                                 </span>
-                              
-                                ${msg.attachment && !msg.message ? '<span class="ms-1">File</span>' :  messageActions}
+                                ${msg.attachment && !msg.message ? '<span class="ms-1">File</span>' : messageActions}
                             </div>
                         </div>
 
                         ${isSender ? `
-                                                                                                        <img src="${authUserImage}" class="chat-avatar ms-2" 
-                                                                                                            style="height: 45px; width: 45px; border-radius: 50%;" 
-                                                                                                            alt="You">
-                                                                                                    ` : ''}
+                                <img src="${authUserImage}" class="chat-avatar ms-2" 
+                                    style="height: 45px; width: 45px; border-radius: 50%;" 
+                                    alt="You">
+                            ` : ''}
                     </div>`;
 
                             chatMessages.innerHTML += messageHtml;
                         });
-
-                        // // Add hover effect for message actions
-                        // document.querySelectorAll('.message-container.sent .chatfont').forEach(messageEl => {
-                        //     messageEl.addEventListener('mouseenter', function() {
-                        //         const actionsEl = this.querySelector('.message-actions');
-                        //         if (actionsEl) actionsEl.classList.remove('d-none');
-                        //     });
-
-                        //     messageEl.addEventListener('mouseleave', function() {
-                        //         const actionsEl = this.querySelector('.message-actions');
-                        //         if (actionsEl) actionsEl.classList.add('d-none');
-                        //     });
-                        // });
 
                         // Scroll to bottom after rendering messages
                         chatMessages.scrollTop = chatMessages.scrollHeight;

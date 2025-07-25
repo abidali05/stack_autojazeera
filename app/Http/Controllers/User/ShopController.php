@@ -425,11 +425,13 @@ class ShopController extends Controller
 
         // reCAPTCHA Verification
         $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-            'secret' => env('RECAPTCHA_SECRET'),
+            'secret' => "6LfUATArAAAAAC8P6cpCaYscLmzbCRaJqypYZwpW",
             // 'secret' => env('RECAPTCHA_SECRET'),
             'response' => $request->input('g-recaptcha-response'),
             'remoteip' => $request->ip(),
         ]);
+
+        // dd($response->json());
 
         if (!$response->json('success')) {
             return response()->json(['success' => false, 'message' => 'Captcha verification failed']);
@@ -478,8 +480,6 @@ class ShopController extends Controller
             if ($fcm_tokens) {
 
                 SendFcmNotification::sendPriceAlertNotification($fcm_tokens, ['title' => 'New Services Quote', 'body' => 'You have a new services quote from ' . $user->name]);
-
-
 
                 Notifications::create([
                     'user_id' => $dealer->id,
