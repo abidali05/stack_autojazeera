@@ -382,7 +382,7 @@
                         </div>
                         <div class="col-md-6 d-flex justify-content-end">
                             <img src="{{ asset('web/bikes/images/image 51.svg') }}"
-                                class=" w-100 hover-grow pt-0 pt-md-5" alt="Slide 2">
+                                class=" w-100  pt-0 pt-md-5" alt="Slide 2">
                         </div>
                     </div>
                 </div>
@@ -672,7 +672,7 @@
             <div class="col-12 mt-4 d-flex align-items-center justify-content-between">
                 <p class="twentyfourblack m-0 p-0" style="color:#281F48 !important">Bikes by Body Type</p>
                 <h6>
-                    <a href="javascript:void(0)" id="viewBodyToggle" style="color: #281F48;"
+                    <a href="javascript:void(0)" id="viewBodyToggle" style="color: #281F48; "
                         class="view"><strong>View All</strong></a>
                 </h6>
             </div>
@@ -731,7 +731,7 @@
     </div>
 
 
-    <div class="container mt-4" data-aos="fade-down">
+    <div class="container mb-2 mt-4" data-aos="fade-down">
         <p class="twentyfourblack" style="color:#281F48 !important">Search By Price</p>
 
         <form method="post"
@@ -781,13 +781,13 @@
                 <span class="twentyfourblack" style="color:#281F48 !important">Recent featured new bikes</span>
                 <span>
                     <a href="{{ url('bikes/new') }}"
-                        style="font-size: 18px; font-weight: 500; text-decoration: none; color: #281F48;">View all</a>
+                        style="font-size: 14px; font-weight: 600; text-decoration: none; color: #281F48;">View all</a>
                 </span>
             </div>
 
             <div id="featuredPostsCarousel" style="min-height:500px !important" class="carousel slide"
                 data-bs-ride="carousel">
-                <div class="carousel-inner">
+                <div class="carousel-inner" style="    height: 445px;">
                     @if (count($featured_new_posts) == 0)
                         <div class="col-md-12 mt-5 pt-5">
                             <div class="row d-flex justify-content-center my-3 mt-5">
@@ -899,7 +899,7 @@
                     <span class="twentyfourblack" style="color:#281F48 !important">Recent featured used bikes</span>
                     <span>
                         <a href="{{ url('bikes/used') }}"
-                            style="font-size: 18px; font-weight: 500; text-decoration: none; color: #281F48;">View
+                            style="font-size: 14px; font-weight: 600; text-decoration: none; color: #281F48;">View
                             all</a>
                     </span>
                 </div>
@@ -928,7 +928,7 @@
                             </div>
                         @endif
                         @foreach ($featured_used_posts->chunk(3) as $chunkIndex => $postChunk)
-                            <div class="carousel-item {{ $chunkIndex == 0 ? 'active' : '' }}">
+                            <div class="carousel-item {{ $chunkIndex == 0 ? 'active' : '' }}" style="    height: 445px;">
                                 <div class="row">
                                     @foreach ($postChunk as $key => $post)
                                         <div class="col-lg-4 car" data-longitude="{{ $post->longitude }}"

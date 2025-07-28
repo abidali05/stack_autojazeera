@@ -478,6 +478,8 @@ class SubscriptionController extends Controller
 
         // Update local user record
         $user->package = $product->id;
+         $user->userType = $product->metadata['type'] ?? 'private_seller';
+        $user->dealershipName = $product->metadata['type'] == 'private_seller' ? 'Private Seller' : '';
         $user->trial_availed = 1;
         $user->free_package_availed = 1;
         $user->role = 1;

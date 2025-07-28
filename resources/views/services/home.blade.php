@@ -28,7 +28,13 @@
             overflow: hidden;
             border-radius: 20px 20px 0px 0px;
         }
-
+@media (min-width: 768px) {
+    .col-md-1-5 {
+        width: 20%;
+        flex: 0 0 20%;
+        max-width: 20%;
+    }
+}
         .featureicn {
             position: absolute;
             left: 0;
@@ -199,7 +205,7 @@
                                 <input type="text" class="form-control"
                                     style="border-radius:5px 0px 0px 5px !important; border:0px !important"
                                     placeholder="Search By Shop Name" aria-label="Search" name="search" />
-                                <div class="bbrder py-3"></div>
+                                <div class=" py-3" style="border-left: 1px solid black"></div>
                                 <select class="form-select select2-city-search"
                                     style="border-radius:0px !important ;border:0px !important" aria-label="Select City"
                                     name="city">
@@ -233,7 +239,7 @@
                                             Quality Auto Services Reliable, Professional, On Time
                                         </p>
 
-                                        <div class="paddingthis">
+                                        <div class="paddingthis d-none d-md-block">
                                             <a style="color: white" href="#"
                                                 onclick="document.getElementById('serviceSearchBtn').click()">
                                                 <div class="search-box">
@@ -260,7 +266,7 @@
                                             Looking for the perfect car to match your needs?
                                         </p>
 
-                                        <div class="paddingthis">
+                                        <div class="paddingthis d-none d-md-block">
                                             <a style="color: white" href="#"
                                                 onclick="document.getElementById('searchBtn').click()">
                                                 <div class="search-box">
@@ -287,7 +293,7 @@
                                             Looking for the perfect bike to match your needs?
                                         </p>
 
-                                        <div class="paddingthis">
+                                        <div class="paddingthis d-none d-md-block">
                                             <a style="color: white" href="#"
                                                 onclick="document.getElementById('searchBtn').click()">
                                                 <div class="search-box">
@@ -326,7 +332,7 @@
             </div>
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-3 p-3">
+                    <div class="col-md-3 col-6 p-3">
                         <a href="{{ url('cars/new') }}" class="text-decoration-none text-dark">
                             <div class="row">
                                 <div class="col-md-12">
@@ -342,7 +348,7 @@
                         </a>
                     </div>
 
-                    <div class="col-md-3 p-3">
+                    <div class="col-md-3 col-6 p-3">
                         <a href="{{ url('cars/used') }}" class="text-decoration-none text-dark">
                             <div class="row">
                                 <div class="col-md-12">
@@ -354,7 +360,7 @@
                         </a>
                     </div>
 
-                    <div class="col-md-3 p-3">
+                    <div class="col-md-3 col-6 p-3">
                         <a href="{{ url('bikes/new') }}" class="text-decoration-none text-dark">
                             <div class="row">
                                 <div class="col-md-12">
@@ -366,7 +372,7 @@
                         </a>
                     </div>
 
-                    <div class="col-md-3 p-3">
+                    <div class="col-md-3 col-6  p-3">
                         <a href="{{ url('bikes/used') }}" class="text-decoration-none text-dark">
                             <div class="row">
                                 <div class="col-md-12">
@@ -380,34 +386,34 @@
 
                 </div>
             </div>
-            <div class="col-md-12 d-flex justify-content-between">
-                <p class="twentyeight">Looking for auto services today?</p>
-                <span class="sixteen">
-                    <a href="javascript:void(0)" id="toggleServices" class=" text-danger">View all</a>
-                </span>
-            </div>
+<!-- View All Toggle Section -->
+<div class="col-md-12 d-flex justify-content-between align-items-center">
+    <p class="twentyeight m-0">Looking for auto services today?</p>
+    <span class="sixteen">
+        <a href="javascript:void(0)" id="toggleServices" class="text-danger">View all</a>
+    </span>
+</div>
 
-            <!-- Services Grid -->
-            <div class="col-md-12">
-                <div class="row d-flex justify-content-between" id="serviceCategories">
-                    @foreach ($service_categories as $key => $service_category)
-                        <div class="col-md-2 p-3 rounded-3 mx-2 {{ $key >= 10 ? 'd-none extra-service' : '' }}"
-                            style="cursor: pointer; ">
-                            <div class="row">
-                                <div class="col-md-12 rounded-3 p-4" style="background-color:#F4F4F4">
-                                    <a href="{{ route('services.categorysearch', $service_category->name) }}"
-                                        class="text-decoration-none text-dark">
-                                        <img src="{{ $service_category->icon }}" class="img-fluid rounded"
-                                            style="height:100px ; width:100%;" alt="{{ $service_category->name }}" />
-
-                                    </a>
-                                </div>
-                                <p class="text-center m-0 sixteen my-1">{{ $service_category->name }}</p>
-                            </div>
-                        </div>
-                    @endforeach
+<!-- Services Grid -->
+<div class="col-md-12">
+    <div class="row d-flex flex-wrap justify-content-start" id="serviceCategories">
+        @foreach ($service_categories as $key => $service_category)
+            <div class="col-6 col-md-1-5 p-3 rounded-3 extra-service" 
+                 style="cursor: pointer; {{ $key >= 10 ? 'display: none;' : '' }}">
+                <div class="rounded-3 p-4" style="background-color:#F4F4F4">
+                    <a href="{{ route('services.categorysearch', $service_category->name) }}"
+                       class="text-decoration-none text-dark">
+                        <img src="{{ $service_category->icon }}" class="img-fluid rounded"
+                             style="height:100px; width:100%;" alt="{{ $service_category->name }}" />
+                    </a>
                 </div>
+                <p class="text-center m-0 sixteen my-1">{{ $service_category->name }}</p>
             </div>
+        @endforeach
+    </div>
+</div>
+
+
         </div>
     </div>
     <div class="container my-3">
@@ -443,7 +449,7 @@
                                 </div>
                             @endif
                             @foreach ($top_rated_services->chunk(3) as $chunkIndex => $serviceChunk)
-                                <div class="carousel-item {{ $chunkIndex == 0 ? 'active' : '' }}">
+                                <div class="carousel-item {{ $chunkIndex == 0 ? 'active' : '' }}" style="height:395px !important">
                                     <div class="row">
                                         @foreach ($serviceChunk as $service)
                                             <div class="col-md-4 car" data-longitude="{{ $service->longitude }}"
@@ -967,7 +973,7 @@
                         </div>
                     @endif
                     @foreach ($featured_services->chunk(3) as $chunkIndex => $serviceChunk)
-                        <div class="carousel-item {{ $chunkIndex == 0 ? 'active' : '' }}">
+                        <div class="carousel-item {{ $chunkIndex == 0 ? 'active' : '' }}" style="height:395px !important">
                             <div class="row">
                                 @foreach ($serviceChunk as $service)
                                     <div class="col-md-4 car" data-longitude="{{ $service->longitude }}"
@@ -1836,8 +1842,10 @@
             });
         });
     </script>
-    <script>
-        document.getElementById('toggleServices').addEventListener('click', function() {
+<!-- jQuery Toggle Script -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    document.getElementById('toggleServices').addEventListener('click', function() {
             const extraItems = document.querySelectorAll('.extra-service');
             extraItems.forEach(item => item.classList.toggle('d-none'));
 
@@ -1853,7 +1861,26 @@
             $('.select2-city-search').select2({
                 placeholder: "Select City",
                 allowClear: true
+                
             });
         });
+    $(document).ready(function () {
+        let isExpanded = false;
+        
+
+        $('#toggleServices').click(function () {
+            if (!isExpanded) {
+                $('.extra-service').show(); // Show hidden categories
+                $(this).text('View less');
+            } else {
+                $('.extra-service').each(function(index) {
+                    if (index >= 10) $(this).hide(); // Hide again
+                });
+                $(this).text('View all');
+            }
+            isExpanded = !isExpanded;
+        });
+    });
+</script>
     </script>
 @endsection

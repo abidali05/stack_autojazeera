@@ -346,7 +346,7 @@
                         </div>
                         <div class="col-md-6 d-flex justify-content-end">
                             <img src="{{ asset('web/bikes/images/image 51.svg') }}"
-                                class=" w-100 hover-grow pt-0 pt-md-5" alt="Slide 2">
+                                class=" w-100  pt-0 pt-md-5" alt="Slide 2">
                         </div>
                     </div>
                 </div>
@@ -723,7 +723,7 @@
     </div>
 
 
-    <div class="container mt-4" data-aos="fade-down">
+    <div class="container mt-4 mb-2" data-aos="fade-down">
         <p class="twentyfourblack" style="color:#281F48 !important">Search By Price</p>
 
         <form method="post"
@@ -769,11 +769,11 @@
     </div>
     <div class="container ">
         <div class="row mb-3">
-            <div class="col-12 d-flex justify-content-between mb-3">
-                <span class="twentyfourblack" style="color:#281F48 !important">Recent featured new cars</span>
+            <div class="col-12 d-flex justify-content-between align-items-center mb-3">
+                <span class="twentyfourblack" style="color:#281F48 !important ;font-size:24px !important;">Recent featured new cars</span>
                 <span>
                     <a href="{{ url('cars/new') }}"
-                        style="font-size: 18px; font-weight: 500; text-decoration: none; color: #281F48;">View all</a>
+                        style="font-size: 14px; font-weight: 600; text-decoration: none; color: #281F48;">View all</a>
                 </span>
             </div>
 
@@ -800,7 +800,7 @@
                         </div>
                     @endif
                     @foreach ($featured_new_posts->chunk(3) as $chunkIndex => $chunk)
-                        <div class="carousel-item {{ $chunkIndex == 0 ? 'active' : '' }}">
+                        <div class="carousel-item {{ $chunkIndex == 0 ? 'active' : '' }}" style="    height: 475px;">
                             <div class="row">
                                 @foreach ($chunk as $key => $post)
                                     <div class="col-lg-4 mt-3 car"
@@ -906,11 +906,11 @@
         </div>
 
         <div class="row mb-3">
-            <div class="col-12 d-flex justify-content-between mb-3">
-                <span class="twentyfourblack" style="color:#281F48 !important">Recent featured used cars</span>
+            <div class="col-12 d-flex justify-content-between align-items-center mb-3">
+                <span class="twentyfourblack" style="color:#281F48 !important ; font-size:24px !important;">Recent featured used cars</span>
                 <span>
                     <a href="{{ url('cars/used') }}"
-                        style="font-size: 18px; font-weight: 500; text-decoration: none; color: #281F48;">View all</a>
+                        style="font-size: 14px; font-weight: 600; text-decoration: none; color: #281F48; ">View all</a>
                 </span>
             </div>
 
@@ -937,7 +937,7 @@
                         </div>
                     @endif
                     @foreach ($featured_used_posts->chunk(3) as $chunkIndex => $chunk)
-                        <div class="carousel-item {{ $chunkIndex == 0 ? 'active' : '' }}">
+                        <div class="carousel-item {{ $chunkIndex == 0 ? 'active' : '' }}" style="    height: 475px;">
                             <div class="row">
                                 @foreach ($chunk as $key => $post)
                                     <div class="col-lg-4 mt-3 car"

@@ -292,9 +292,11 @@
                                                     class="twenty mt-5 d-flex justify-content-between align-items-center  {{ $ads_plan->metadata->is_recomended == '1' ? 'textclas' : '' }}">
                                                     
                                                     {{ $ads_plan->name }} 
-                                                 @if ($loop->first)
-        <img src="{{ asset('web/images/free_trail.svg') }}" style="height:60px;width:60px" class="img-fluid md-3" alt="...">
-    @endif</p>
+                                                @if ($loop->first)
+    <img src="{{ asset('web/images/free_trail.svg') }}" style="height:60px;width:60px" class="img-fluid mb-3" alt="Free Trial">
+@else
+    <img src="{{ asset('web/images/other_icon.svg') }}" style="height:60px;width:10px" class="img-fluid mb-3" >
+@endif</p>
                                                 <p class="headsured keep-color" style="font-size:28px !important">
                                                     @if ($ads_plan->price)
                                                         Rs {{ number_format($ads_plan->price) }} <span
@@ -362,7 +364,7 @@
                                     <div class="col-md-3 col-12 p-3 {{ $ads_plan->metadata->is_recomended == '1' ? 'topclas' : '' }}"
                                         id="card1-1">
                                         <div class="row">
-                                   <div class="col-12 d-flex flex-column " style="height: 470px">
+                                   <div class="col-12 d-flex flex-column " style="height: 510px">
 
     {{-- Top Section --}}
     <div>
@@ -373,7 +375,9 @@
                                                     class="twenty mt-5 d-flex justify-content-between align-items-center {{ $ads_plan->metadata->is_recomended == '1' ? 'textclas' : '' }}">
                                                     {{ $ads_plan->name }}     @if ($loop->first)
         <img src="{{ asset('web/images/Group (2).svg') }}" style="height:80px;width:80px" class="img-fluid md-3" alt="...">
-    @endif</p>
+   @else
+    <img src="{{ asset('web/images/other_icon.svg') }}" style="height:60px;width:10px" class="img-fluid mb-3" >
+@endif</p>
                                                 <p class="headsured keep-color" style="font-size:28px !important">
                                                     @if ($ads_plan->price)
                                                         Rs {{ number_format($ads_plan->price) }} <span
@@ -436,7 +440,7 @@
                                     <div class="col-md-3 col-12 p-3 {{ $plan->metadata->is_recomended == '1' ? 'topclas' : '' }}"
                                         id="card1-1">
                                         <div class="row">
-                                                              <div class="col-12 d-flex flex-column " style="height: 725px">
+                                                              <div class="col-12 d-flex flex-column " style="height: 770px">
 
     {{-- Top Section --}}
     <div>
@@ -447,7 +451,9 @@
                                                     class="twenty mt-5 d-flex justify-content-between align-items-center {{ $plan->metadata->is_recomended == '1' ? 'textclas' : '' }}">
                                                     {{ $plan->name }} @if ($loop->first)
         <img src="{{ asset('web/images/Group (2).svg') }}" style="height:80px;width:80px" class="img-fluid md-3" alt="...">
-    @endif</p>
+   @else
+    <img src="{{ asset('web/images/other_icon.svg') }}" style="height:60px;width:10px" class="img-fluid mb-3" >
+@endif</p>
                                                 <p class="headsured keep-color" style="font-size:28px !important">
                                                     @if ($plan->price)
                                                         Rs {{ number_format($plan->price) }} <span

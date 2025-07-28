@@ -323,7 +323,7 @@
                     </ul>
                 </div>
 
-                <div class="col-xxl-4  col-lg-4 col-md-4 col-sm-8 col-8">
+                <div class="col-xxl-4  col-lg-4 col-md-4 col-sm-12 col-12 mb-2">
                     <h3 class="ab">Subscribe to our newsletter</h3>
                     <p class="firstpp"></p>
 
@@ -513,10 +513,10 @@
                     <img src="{{ asset('web/bikes/images/image 11.svg') }}" class="img-fluid" alt="...">
                 </div>
                 <div class="row">
-                    <div class="col-5 copyright">
+                    <div class="col-md-6 copyright">
                         <p class="ankere" style="color:#B4B3B8">© 2025 AutoJazeera, All Rights Reserved.</p>
                     </div>
-                    <div class="col-3 ms-auto copyright">
+                    <div class="col-md-6 ms-auto copyright text-center text-md-end" >
                         <p><span class="me-3"><a class="ankere" style="color:#B4B3B8" target="_blank"
                                     href="{{ route('term_condition') }}">Terms of use</a></span> <a class="ankere"
                                 style="color:#B4B3B8" target="_blank" href="{{ route('privacy_policy') }}">Privacy
@@ -557,19 +557,20 @@
 
 <div class="modal fade" id="newsletterresponse" tabindex="-1" aria-labelledby="newsletterresponseLabel"
     aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
-            <div class="modal-header" style="background-color: #FD5631; color: white; border-bottom: none;">
-                <h5 class="modal-title" id="newsletterresponseLabel">News Letter</h5>
-                <button type="button" class="btn-close" style="background-color: white; color: #FD5631;"
+            <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                <h5 class="modal-title" id="newsletterresponseLabel"> <strong>News Letter</strong></h5>
+                <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;"
                     data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body text-center" id="newsletterresponseBody">
+            <div class="modal-body text-center" id="newsletterresponseBody" style="background-color: white !important; color: #281F48;">
 
             </div>
-            <div class="modal-footer border-0 pt-0">
+            <div class="modal-footer justify-content-center border-0 p-0 pb-3" style="background-color: white !important;">
                 <button type="button"
-                    style="color:white; background-color:#FD5631;padding:5px 20px; border:none;border-radius:5px"
+                     class="btn btn-light px-4 py-2 "
+                            style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
                     data-bs-dismiss="modal" onclick="location.reload();">Close</button>
             </div>
         </div>

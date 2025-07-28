@@ -633,51 +633,27 @@
                     </div>
                 </div>
            <div class="row">
-    <div class="col-md-12">
-        <h2 class="twentyeight">Photos & Videos</h2>
-        <div class="row">
-            <div class="col-md-9">
-                <div class="row">
-                    <div class="col-12">
-                        @if (isset($shop->shop_images) && count($shop->shop_images) > 0)
-                            <!-- First image -->
-                            <img src="{{ asset($shop->shop_images[0]->path) }}" class="img-fluid w-100 rounded-5" alt="Shop Image">
-                        @endif
-                    </div>
+ <div class="col-md-12">
+    <h2 class="twentyeight mb-4">Photos & Videos</h2>
+
+    <div class="row">
+        @if (isset($shop->shop_images) && count($shop->shop_images) > 0)
+            @foreach ($shop->shop_images as $image)
+                <div class="col-6 col-sm-6 col-md-3 mb-4">
+                    <img src="{{ asset($image->path) }}"
+                         class="img-fluid rounded"
+                         style="width: 100%; height: 200px; object-fit: cover;"
+                         alt="Shop Image">
                 </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="row">
-                    <div class="col-12">
-                        @if (isset($shop->shop_images) && count($shop->shop_images) > 1)
-                            <!-- Second image -->
-                            <img src="{{ asset($shop->shop_images[1]->path) }}" class="img-fluid mb-3 " style="width:100% ;height:200px" alt="Shop Image">
-                        @endif
-
-                        @if (count($shop->shop_images) > 2)
-                            <!-- Third image -->
-                            <img src="{{ asset($shop->shop_images[2]->path) }}" class="img-fluid" style="width:100% ;height:200px"  alt="Shop Image">
-                        @endif
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        @if (count($shop->shop_images) > 3)
-            <div class="row mt-4">       @foreach ($shop->shop_images->slice(3) as $image)
-                <div class="col-md-3">
-                    <div class="row">
-                 
-                            <div class="col-12 mb-3">
-                                <img src="{{ asset($image->path) }}" class="img-fluid rounded" style="width:100% ; height:200px" alt="Shop Image">
-                            </div>
-                      
-                    </div>
-                </div>  @endforeach
+            @endforeach
+        @else
+            <div class="col-12">
+                <p>No images available.</p>
             </div>
         @endif
     </div>
+</div>
+
 </div>
 
                 <div class="row">
@@ -842,22 +818,23 @@
 
     <div class="modal fade" id="response" tabindex="-1" aria-labelledby="responseLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
+            <div class="modal-content"  style="border-radius: 10px; overflow: hidden;">
                 <!-- Modal Header -->
-                <div class="modal-header">
-                    <h5 class="modal-title" id="responseLabel">Shop</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                    <h5 class="modal-title" id="responseLabel"><strong>Shop </strong></h5>
+                    <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <!-- Modal body -->
-                <div class="modal-body">
+                <div class="modal-body text-center" style="background-color: white !important; color: #281F48;">
                     <p>{{ session('response') }}</p>
                 </div>
                 <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <div class="modal-footer justify-content-center border-0 p-0 pb-3" style="background-color: white !important;">
+                    <button type="button"   class="btn btn-light px-4 py-2 "
+                            style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
-        </div>
+        </div>gi
     </div>
 
     {{-- success modal end --}}
