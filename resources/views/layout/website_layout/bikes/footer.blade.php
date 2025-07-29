@@ -561,7 +561,7 @@
         <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
             <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                 <h5 class="modal-title" id="newsletterresponseLabel"> <strong>News Letter</strong></h5>
-                <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;"
+                <button type="button" class="btn-close" style="background-color: white !important; color: #281F48;"
                     data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center" id="newsletterresponseBody" style="background-color: white !important; color: #281F48;">

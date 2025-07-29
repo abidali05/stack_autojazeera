@@ -4,6 +4,61 @@
      $end = min($shops->currentPage() * $shops->perPage(), $shops->total());
  @endphp
  <style>
+    .dropzone {
+        border: 2px dashed #ccc;
+        padding: 10px;
+        border-radius: 10px;
+        cursor: pointer;
+        height: 150px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+    }
+
+    .dropzone input[type="file"] {
+        opacity: 0;
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        cursor: pointer;
+    }
+
+    .image-box {
+        position: relative;
+    }
+
+    .image-preview {
+        height: 150px;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    .remove-btn {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        font-size: 16px;
+        line-height: 22px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .remove-btn:hover {
+        background: red;
+    }
+</style>
+
+ <style>
      .loading-overlay {
          position: fixed;
          top: 0;
@@ -444,22 +499,22 @@
  <!-- review Modal -->
  <div class="modal fade" id="reviewModal{{ $shop->id }}" tabindex="-1" aria-labelledby="uploadModalLabel"
      aria-hidden="true">
-     <div class="modal-dialog modal-lg">
-         <div class="modal-content">
+     <div class="modal-dialog modal-lg modal-dialog-centered">
+         <div class="modal-content"  style="border-radius: 10px; overflow: hidden;">
+           <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                <h5 class="modal-title" id="newsletterresponseLabel"> <strong>{{ $shop->name }}</strong></h5>
+                <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;"
+                    data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
 
-
-             <div class="modal-body">
+             <div class="modal-body" style="background-color: white !important; color: #281F48;">
                  <form action="{{ route('review.store') }}" method="post" enctype="multipart/form-data"
                      id="reviewForm">
                      @csrf
 
                      <input type="hidden" name="shop_id" value="{{ $shop->id }}">
                      <div class="row mb-3">
-                         <div class="col-md-12 d-flex justify-content-between">
-                             <p class="fourtyeight">{{ $shop->name }}</p>
-                             <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                 aria-label="Close"></button>
-                         </div>
+                   
                          <div class="col-md-12 mb-2">
                              <div class="feedback-rating-container align-items-center ">
                                  <div id="feedback-stars-group">
@@ -481,36 +536,30 @@
                      </div>
 
                      <!-- Dropzone + Images Row -->
-                     <div class="row g-3">
-                         <div class="col-2">
-                             <div class="dropzone text-center">
-                                 <div class="upload-icon">
-                                     <i class="bi bi-cloud-arrow-up fs-1 mb-3" style="color: #281F48;"></i>
-                                 </div>
-                                 <div class="upload-text">Upload Photo Here</div>
-                                 <div class="upload-subtext">Maximum 10 Photos</div>
-                                 <div id="image-counter" class="mt-1" style="font-size: 10px; color: #281F48;">
-                                     0/10
-                                     photos</div>
-                                 <input type="file" multiple class="upload-input" accept="image/*"
-                                     name="review_images[]" />
-                             </div>
-                         </div>
+                   <div class="row g-3" id="image-upload-row">
+    <!-- Dropzone uploader -->
+    <div class="col-2">
+        <div class="dropzone text-center position-relative">
+            <div class="upload-icon">
+                <i class="bi bi-cloud-arrow-up fs-1 mb-3" style="color: #281F48;"></i>
+            </div>
+            <div class="upload-text">Upload Photo Here</div>
+            <div class="upload-subtext">Maximum 10 Photos</div>
+            <div id="image-counter" class="mt-1" style="font-size: 10px; color: #281F48;">0/10 photos</div>
+            <input type="file" multiple class="upload-input" accept="image/*" name="review_images[]" id="imageInput" />
+        </div>
+    </div>
+</div>
 
-                         <!-- Empty divs for images -->
-                         <div class="col-2 image-box"></div>
-                         <div class="col-2 image-box"></div>
-                         <div class="col-2 image-box"></div>
-                         <div class="col-2 image-box"></div>
-                         <div class="col-2 image-box"></div>
-                     </div>
 
              </div>
 
-             <div class="modal-footer d-flex justify-content-start" style="border: none;">
-                 <button type="button" class="whitebtn py-2" data-bs-dismiss="modal"
+             <div class="modal-footer justify-content-center border-0 p-0 pb-3" style="background-color: white !important;">
+                 <button type="button" class="btn btn-light px-4 py-2 "
+                            style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;" data-bs-dismiss="modal"
                      onclick="window.location.reload();">Cancel</button>
-                 <button type="submit" class="bluebtn py-2" id="submit-review-btn">Submit Review</button>
+                 <button type="submit"   class="btn btn-light px-4 py-2 ms-2"
+                            style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px; border:1px solid #281F48;" id="submit-review-btn">Submit Review</button>
              </div>
              </form>
 
@@ -546,16 +595,18 @@
                                      <p class="twentyeight mt-4">Select your
                                          Vehicle </p>
 
-                                     <div class="checkbox-group">
-                                         <label class="checkbox-button">
-                                             <input type="checkbox" name="vehicle_type" value="bike" hidden>
-                                             <span>Bike</span>
-                                         </label>
-                                         <label class="checkbox-button">
-                                             <input type="checkbox" name="vehicle_type" value="car" hidden>
-                                             <span>Car</span>
-                                         </label>
-                                     </div>
+                                   <div class="checkbox-group mb-3">
+                                                        <label class="checkbox-button">
+                                                            <input type="radio" name="vehicle_type" value="bike"
+                                                                hidden>
+                                                            <span>Bike</span>
+                                                        </label>
+                                                        <label class="checkbox-button">
+                                                            <input type="radio" name="vehicle_type" value="car"
+                                                                hidden>
+                                                            <span>Car</span>
+                                                        </label>
+                                                    </div>
                                      <div id="vehicle-error" class="reed mt-2" style="display:none;">Please select a
                                          vehicle type</div>
 
@@ -643,8 +694,15 @@
                                  </div>
                              </div>
                              <div class="col-md-7">
-                                 <img src="{{ asset('web/services/images/Frameee.svg') }}" class="img-fluid"
-                                     alt="...">
+                                       <div class="vehicle-image-container mt-3">
+                                                    <!-- Image will be injected here -->
+                                                    <img src="{{ asset('web/services/images/Frameee.svg') }}"
+                                                        class="img-fluid" alt="...">
+                                                    <img src="{{ asset('web/services/images/bike_request_qoute.svg') }}"
+                                                        class="img-fluid" alt="...">
+                                                    <img src="{{ asset('web/services/images/carbike.svg') }}"
+                                                        class="img-fluid" alt="...">
+                                                </div>
 
                              </div>
                          </div>
@@ -707,8 +765,15 @@
                                  </div>
                              </div>
                              <div class="col-md-7">
-                                 <img src="{{ asset('web/services/images/Frameee.svg') }}" class="img-fluid"
-                                     alt="...">
+                                     <div class="vehicle-image-container mt-3">
+                                                    <!-- Image will be injected here -->
+                                                    <img src="{{ asset('web/services/images/Frameee.svg') }}"
+                                                        class="img-fluid" alt="...">
+                                                    <img src="{{ asset('web/services/images/bike_request_qoute.svg') }}"
+                                                        class="img-fluid" alt="...">
+                                                    <img src="{{ asset('web/services/images/carbike.svg') }}"
+                                                        class="img-fluid" alt="...">
+                                                </div>
                              </div>
                          </div>
                      </div>
@@ -744,8 +809,15 @@
                                  </div>
                              </div>
                              <div class="col-md-7">
-                                 <img src="{{ asset('web/services/images/Frameee.svg') }}" class="img-fluid"
-                                     alt="...">
+                                    <div class="vehicle-image-container mt-3">
+                                                    <!-- Image will be injected here -->
+                                                    <img src="{{ asset('web/services/images/Frameee.svg') }}"
+                                                        class="img-fluid" alt="...">
+                                                    <img src="{{ asset('web/services/images/bike_request_qoute.svg') }}"
+                                                        class="img-fluid" alt="...">
+                                                    <img src="{{ asset('web/services/images/carbike.svg') }}"
+                                                        class="img-fluid" alt="...">
+                                                </div>
                              </div>
                          </div>
                      </div>
@@ -779,8 +851,15 @@
                                  </div>
                              </div>
                              <div class="col-md-7">
-                                 <img src="{{ asset('web/services/images/popupimg.svg') }}" class="img-fluid"
-                                     alt="...">
+                                       <div class="vehicle-image-container mt-3">
+                                                    <!-- Image will be injected here -->
+                                                    <img src="{{ asset('web/services/images/Frameee.svg') }}"
+                                                        class="img-fluid" alt="...">
+                                                    <img src="{{ asset('web/services/images/bike_request_qoute.svg') }}"
+                                                        class="img-fluid" alt="...">
+                                                    <img src="{{ asset('web/services/images/carbike.svg') }}"
+                                                        class="img-fluid" alt="...">
+                                                </div>
                              </div>
                          </div>
                      </div>
@@ -808,10 +887,10 @@
                                      <button type="button" class="bluebtn  next px-5">Next</button>
                                  </div>
                              </div>
-                             <div class="col-md-7">
-                                 <img src="{{ asset('web/services/images/popupimg.svg') }}" class="img-fluid"
-                                     alt="...">
-                             </div>
+                               <div class="col-md-7">
+                                              <img src="{{ asset('web/images/service_quotes.svg') }}"
+                                                        class="img-fluid" alt="...">
+                                            </div>
                          </div>
                      </div>
 
@@ -840,10 +919,10 @@
                                      <button type="button" class="bluebtn  next px-5">Submit</button>
                                  </div>
                              </div>
-                             <div class="col-md-7">
-                                 <img src="{{ asset('web/services/images/popupimg.svg') }}" class="img-fluid"
-                                     alt="...">
-                             </div>
+                              <div class="col-md-7">
+                                              <img src="{{ asset('web/images/service_quotes.svg') }}"
+                                                        class="img-fluid" alt="...">
+                                            </div>
                          </div>
                      </div>
 
@@ -1280,4 +1359,174 @@
          });
      });
  </script>
+ <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const imageInput = document.getElementById('imageInput');
+        const row = document.getElementById('image-upload-row');
+        const imageCounter = document.getElementById('image-counter');
+        let selectedImages = [];
+
+        imageInput.addEventListener('change', function (e) {
+            const files = Array.from(e.target.files);
+
+            files.forEach((file) => {
+                if (selectedImages.length >= 10) return;
+
+                const previewURL = URL.createObjectURL(file);
+
+                const col = document.createElement('div');
+                col.className = 'col-2 image-box mb-3';
+
+                const img = document.createElement('img');
+                img.src = previewURL;
+                img.className = 'image-preview';
+
+                const btn = document.createElement('button');
+                btn.className = 'remove-btn';
+                btn.innerHTML = '&times;';
+                btn.onclick = function () {
+                    col.remove();
+                    selectedImages = selectedImages.filter(f => f !== file);
+
+                    // Update file input
+                    const dt = new DataTransfer();
+                    selectedImages.forEach(f => dt.items.add(f));
+                    imageInput.files = dt.files;
+
+                    updateCounter();
+                };
+
+                col.appendChild(img);
+                col.appendChild(btn);
+                row.appendChild(col);
+
+                selectedImages.push(file);
+                updateCounter();
+            });
+
+            // Reset the input and re-add selected images to it
+            const dt = new DataTransfer();
+            selectedImages.forEach(file => dt.items.add(file));
+            imageInput.files = dt.files;
+
+            imageInput.value = '';
+        });
+
+        function updateCounter() {
+            imageCounter.textContent = `${selectedImages.length}/10 photos`;
+        }
+    });
+</script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const imageInput = document.getElementById('imageInput');
+            const row = document.getElementById('image-upload-row');
+            const imageCounter = document.getElementById('image-counter');
+            let selectedImages = [];
+
+            imageInput.addEventListener('change', function(e) {
+                const files = Array.from(e.target.files);
+
+                // Stop if over 10
+                if (selectedImages.length + files.length > 10) {
+                    alert("You can upload up to 10 images only.");
+                    return;
+                }
+
+                files.forEach((file, index) => {
+                    const previewURL = URL.createObjectURL(file);
+                    const col = document.createElement('div');
+                    col.className = 'col-2 image-box mb-3';
+
+                    const img = document.createElement('img');
+                    img.src = previewURL;
+                    img.className = 'image-preview';
+
+                    const btn = document.createElement('button');
+                    btn.className = 'remove-btn';
+                    btn.innerHTML = '&times;';
+                    btn.onclick = function() {
+                        col.remove();
+
+                        // Remove file from selectedImages
+                        const inputFiles = new DataTransfer();
+                        selectedImages = selectedImages.filter(f => f !== file);
+                        selectedImages.forEach(f => inputFiles.items.add(f));
+                        imageInput.files = inputFiles.files;
+
+                        updateCounter();
+                    };
+
+                    col.appendChild(img);
+                    col.appendChild(btn);
+                    row.appendChild(col);
+
+                    selectedImages.push(file);
+
+                    updateCounter();
+                });
+
+                // Reset original input's files
+                const dt = new DataTransfer();
+                selectedImages.forEach(file => dt.items.add(file));
+                imageInput.files = dt.files;
+            });
+
+            function updateCounter() {
+                imageCounter.textContent = `${selectedImages.length}/10 photos`;
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Track selected vehicle type globally
+            let selectedVehicle = null;
+            const vehicleCheckboxes = document.querySelectorAll('input[name="vehicle_type"]');
+
+            // Function to update all vehicle images in all steps
+            function updateAllVehicleImages() {
+                // Get selected value (only one can be selected)
+                const selectedValue = document.querySelector('input[name="vehicle_type"]:checked')?.value;
+                selectedVehicle = selectedValue || null;
+
+                // Determine image source
+                let imgSrc = '';
+                if (selectedVehicle === 'car') {
+                    imgSrc = "{{ asset('web/services/images/Frameee.svg') }}";
+                } else if (selectedVehicle === 'bike') {
+                    imgSrc = "{{ asset('web/services/images/bike_request_qoute.svg') }}";
+                }
+
+                // Update all image containers
+                document.querySelectorAll('.vehicle-image-container').forEach(container => {
+                    container.innerHTML = imgSrc ?
+                        `<img src="${imgSrc}" class="img-fluid" alt="${selectedVehicle} image">` :
+                        '';
+                });
+            }
+
+            // Make vehicle selection mutually exclusive
+            vehicleCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        // Uncheck other vehicle options
+                        vehicleCheckboxes.forEach(cb => {
+                            if (cb !== this) cb.checked = false;
+                        });
+                        updateAllVehicleImages();
+                    } else {
+                        // Prevent unchecking the last checked option
+                        const anyChecked = [...vehicleCheckboxes].some(cb => cb.checked);
+                        if (!anyChecked) {
+                            this.checked = true;
+                        }
+                    }
+                });
+            });
+
+            // Initialize images on load
+            updateAllVehicleImages();
+        });
+    </script>
  <script src="{{ asset('customjs/shopdetail.js') }}"></script>

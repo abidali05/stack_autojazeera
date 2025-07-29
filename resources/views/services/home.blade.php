@@ -63,7 +63,7 @@
 
         .crouserheading1 {
             color: #281f48;
-            font-size: 35px;
+            font-size: 36px;
             padding-left: 100px;
             padding-top: 60px;
             font-weight: 700;
@@ -178,7 +178,7 @@
             border-radius: 0px !important;
             border: 0px !important;
             height: 44px;
-            padding: 6px 12px;
+            padding: 11px 12px;
         }
 
         .select2-container--default .select2-selection--single .select2-selection__arrow {
@@ -192,6 +192,61 @@
         .select2 select2-container select2-container--default {
             border-left: 2px solid black;
         }
+     .select2-container--default .select2-selection--single .select2-selection__placeholder {
+    color: black !important;
+}
+.select2-container--open .select2-dropdown--below {
+    border-top: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+       border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}.search-box {
+    display: flex;
+    align-items: center;
+    background-color: #D90600;
+    border-radius: 50px;
+    padding: 10px 20px;
+    width: 300px;
+    
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    background: none;
+    color: white;
+    font-size: 16px;
+    flex: 1;
+}
+
+.search-box input::placeholder {
+    color: white;
+}
+
+.search-box i {
+    color: white;
+    font-size: 18px;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+    border-color: #888 transparent transparent transparent;
+    border-style: solid;
+    border-width: 5px 4px 0 4px;
+    height: 0;
+    left: 50%;
+    margin-left: -4px;
+    margin-top: 5px ! important;
+    position: absolute;
+    top: 50%;
+    width: 0;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 26px;
+    position: absolute;
+    top: 2px !important;
+    right: 1px;
+    width: 20px;
+}
     </style>
 
     <div class="container-fluid">
@@ -1453,7 +1508,8 @@
                             <div class="col-md-7 d-flex align-items-center justify-content-center">
                                 <div class="row d-flex align-items-center justify-content-center">
                                     <div class="col-10">
-                                        <div class=" ">
+                                       <div class="row ">
+                                        <div class="col-md-12">
                                             <h1 class="colors">
                                                 <strong>Download our mobile app.</strong>
                                             </h1>
@@ -1462,16 +1518,18 @@
                                                 offer you a trusty insurance on your veicle.
                                             </p>
                                         </div>
-                                        <div class="d-flex mt-3 justify-content-start">
-                                            <button class="btn" style="width: 200px">
-                                                <img src="{{ asset('web/services/images/Group111.svg') }}" class="w-100"
-                                                    alt="..." />
-                                            </button>
-                                            <button class="btn" style="width: 200px">
-                                                <img src="{{ asset('web/services/images/Group1111.svg') }}"
-                                                    class="w-100" alt="..." />
-                                            </button>
+                                           <div class="col-md-12 d-flex  align-items-center mt-4">
+
+                                            <a class=" text-start"><img
+                                                    src="{{ asset('web/bikes/images/Group111.svg') }}" class="img-fluid " style="width:160px"
+                                                    alt="..."></a>
+                                            <a class=" text-start ms-3"><img
+                                                    src="{{ asset('web/bikes/images/Group1111.svg') }}" style="width:160px"
+                                                    class="img-fluid" alt="..."></a>
+
                                         </div>
+                                          </div>
+                                      
                                     </div>
                                 </div>
                             </div>
