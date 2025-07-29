@@ -537,6 +537,7 @@
                             <select class="form-select select-search select2 assembly-filter filter-style assembly_filter"
                                 style="width:100% !important" id="assembly">
                                 <option value="" disabled selected>Select Assembly</option>
+                                <option value="any">Any</option>
                                 <option value="local" {{ request()->assembly == 'local' ? 'selected' : '' }}>Local</option>
                                 <option value="imported" {{ request()->assembly == 'imported' ? 'selected' : '' }}>Imported
                                 </option>
@@ -550,7 +551,8 @@
                         <div class="select-wrapper mt-2">
                             <select id="make_filter" class="form-select select-search select2 mb-2 make-filter filter-style"
                                 style="width:100% !important" name="make">
-                                <option value="">Make</option>
+                                <option value="" disabled selected>Make</option>
+                                <option value="any">Any</option>
                                 @foreach ($makes as $make)
                                     <option value="{{ $make->id }}"
                                         {{ request()->type ? (request()->type == 'make' && request()->id == $make->id ? 'selected' : '') : (request()->make == $make->id ? 'selected' : '') }}>
@@ -561,7 +563,8 @@
                         <div class="select-wrapper mt-2">
                             <select id="model_filter"
                                 class="form-select select2 select-search mb-2 make-filter filter-style" name="Model">
-                                <option value="">Select Make First</option>
+                                <option value="" disabled selected>Select Make First</option>
+                                <option value="any">Any</option>
                             </select> <i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
                         </div>
                     </div>
@@ -572,6 +575,7 @@
                             <select class="form-select select2 select-search assembly-filter filter-style assembly_filter"
                                 style="width:100% !important" id="province">
                                 <option value="" disabled selected>Province</option>
+                                <option value="any">Any</option>
                                 @foreach ($provinces as $province)
                                     <option value="{{ $province->id }}"
                                         {{ request()->province == $province->id ? 'selected' : '' }}>{{ $province->name }}
@@ -590,6 +594,7 @@
                             <select class="form-select select2 select-search assembly-filter filter-style assembly_filter"
                                 style="width:100% !important" id="city">
                                 <option value="" disabled selected>Select Province First</option>
+                                <option value="any">Any</option>
                             </select>
                             <i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
                         </div>
@@ -605,6 +610,7 @@
                             <select class="form-select select2 select-search assembly-filter filter-style assembly_filter"
                                 style="width:100% !important" id="fuel_type">
                                 <option value="" disabled selected>Fuel Type</option>
+                                <option value="any">Any</option>
                                 @foreach (['Diesel', 'Electric', 'Gasoline', 'Hybrid', 'LPG', 'CNG', 'Petrol'] as $fuelType)
                                     <option value="{{ $fuelType }}"
                                         {{ request()->fuel_type == $fuelType ? 'selected' : '' }}>
@@ -643,6 +649,7 @@
                             <select class="form-select select2 engine-capacity-filter select-search filter-style"
                                 id="engine_capacity_filter">
                                 <option value="">Select Fuel Capacity</option>
+                                <option value="any">Any</option>
                                 <option value="3" {{ request()->fuel_type == '3' ? 'selected' : '' }}>3L</option>
                                 <option value="4" {{ request()->fuel_type == '4' ? 'selected' : '' }}>4L</option>
                                 <option value="5" {{ request()->fuel_type == '5' ? 'selected' : '' }}>5L</option>
@@ -708,12 +715,13 @@
 
 
                     <div>
-                        <label class="form-label  mt-1"><strong>Body type</strong></label>
+                        <label class="form-label mt-1"><strong>Body type</strong></label>
                         <div class="select-wrapper mt-1">
                             <select class="form-select select2 seating-capacity-filter select-search formcontrol"
                                 style="width:100% !important" style="background-color:#282435" placeholder="Seats"
                                 id="seating_capacity_filter">
-                                <option value="">Body type</option>
+                                <option value="" disabled selected>Body type</option>
+                                <option value="any">Any</option>
                                 @foreach ($bodytypes as $body_type)
                                     <option value="{{ $body_type->id }}"
                                         {{ request()->type == 'bodytype' && request()->id == $body_type->id ? 'selected' : '' }}>

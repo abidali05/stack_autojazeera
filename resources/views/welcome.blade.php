@@ -14,9 +14,11 @@
 
         background-color: #D90600 !important;
     }
-.select2-container--default .select2-selection--single {
-  width: 160px !important;
-}
+
+    .select2-container--default .select2-selection--single {
+        width: 160px !important;
+    }
+
     .carousel-control-prev,
     .carousel-control-next {
         width: 40px;
@@ -345,8 +347,8 @@
                             </div>
                         </div>
                         <div class="col-md-6 d-flex justify-content-end">
-                            <img src="{{ asset('web/bikes/images/image 51.svg') }}"
-                                class=" w-100  pt-0 pt-md-5" alt="Slide 2">
+                            <img src="{{ asset('web/bikes/images/image 51.svg') }}" class=" w-100  pt-0 pt-md-5"
+                                alt="Slide 2">
                         </div>
                     </div>
                 </div>
@@ -532,9 +534,9 @@
                         <div class="custom-select-icon flex-grow-1">
                             <img src="{{ asset('web/bikes/images/Group12.svg') }}" class="me-2 img-fluid">
                             <select id="condition" name="condition" style="width:160px !important;"
-                                class="form-select select2">
+                                class="form-select condition-select2">
                                 <option value="">Condition</option>
-                                <option value="">Any</option>
+                                <option value="1e">Any</option>
                                 <option value="new">New Cars</option>
                                 <option value="used">Used Cars</option>
                             </select>
@@ -770,7 +772,8 @@
     <div class="container ">
         <div class="row mb-3">
             <div class="col-12 d-flex justify-content-between align-items-center mb-3">
-                <span class="twentyfourblack" style="color:#281F48 !important ;font-size:24px !important;">Recent featured new cars</span>
+                <span class="twentyfourblack" style="color:#281F48 !important ;font-size:24px !important;">Recent
+                    featured new cars</span>
                 <span>
                     <a href="{{ url('cars/new') }}"
                         style="font-size: 14px; font-weight: 600; text-decoration: none; color: #281F48;">View all</a>
@@ -848,19 +851,25 @@
                                                             style="background-color:#D6D6D6; border-radius: 10px;">
                                                             <i class="bi bi-speedometer2 fs-4"
                                                                 style="color: #281F48;"></i>
-                                                                  @php
-                                        $mileage = (float) $post->milleage;
-                                        if ($mileage >= 1000000) {
-                                            // For values in millions, display 'M'
-                                            $formattedMileage = rtrim(number_format($mileage / 1000000, 1), '.0') . 'M';
-                                        } elseif ($mileage >= 1000) {
-                                            // For values in thousands, display 'K'
-                                            $formattedMileage = rtrim(number_format($mileage / 1000, 1), '.0') . 'K';
-                                        } else {
-                                            // For values less than 1000, display the raw number
-                                            $formattedMileage = $mileage;
-                                        }
-                                    @endphp
+                                                            @php
+                                                                $mileage = (float) $post->milleage;
+                                                                if ($mileage >= 1000000) {
+                                                                    // For values in millions, display 'M'
+                                                                    $formattedMileage =
+                                                                        rtrim(
+                                                                            number_format($mileage / 1000000, 1),
+                                                                            '.0',
+                                                                        ) . 'M';
+                                                                } elseif ($mileage >= 1000) {
+                                                                    // For values in thousands, display 'K'
+                                                                    $formattedMileage =
+                                                                        rtrim(number_format($mileage / 1000, 1), '.0') .
+                                                                        'K';
+                                                                } else {
+                                                                    // For values less than 1000, display the raw number
+                                                                    $formattedMileage = $mileage;
+                                                                }
+                                                            @endphp
                                                             <p class="cardp m-0">{{ $formattedMileage ?? 'N/A' }} Km
                                                             </p>
                                                         </div>
@@ -907,7 +916,8 @@
 
         <div class="row mb-3">
             <div class="col-12 d-flex justify-content-between align-items-center mb-3">
-                <span class="twentyfourblack" style="color:#281F48 !important ; font-size:24px !important;">Recent featured used cars</span>
+                <span class="twentyfourblack" style="color:#281F48 !important ; font-size:24px !important;">Recent
+                    featured used cars</span>
                 <span>
                     <a href="{{ url('cars/used') }}"
                         style="font-size: 14px; font-weight: 600; text-decoration: none; color: #281F48; ">View all</a>
@@ -1206,11 +1216,12 @@
 
 <script>
     $(document).ready(function() {
-        // $('.select2').select2({
-        //     minimumResultsForSearch: Infinity,
-        //     dropdownAutoWidth: true,
-        //     width: '100%'
-        // });
+        $('.condition-select2').select2({
+            // minimumResultsForSearch: Infinity,
+            placeholder: "Condition",
+            dropdownAutoWidth: true,
+            width: '100%'
+        });
 
         $('.body-type-select2').select2({
             placeholder: "Body Type",
@@ -1230,13 +1241,13 @@
             width: '100%'
         });
 
-                $('.province-select2').select2({
+        $('.province-select2').select2({
             placeholder: "Provience",
             allowClear: true,
             width: '100%'
         });
 
-                        $('.city-select2').select2({
+        $('.city-select2').select2({
             placeholder: "City",
             allowClear: true,
             width: '100%'

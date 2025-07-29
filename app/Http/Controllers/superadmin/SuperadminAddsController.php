@@ -852,9 +852,9 @@ class SuperadminAddsController extends Controller
         $post->update();
         return redirect()->back()->with('warning', 'status change successfully');
     }
+    
     public function Cars_data(Request $request, $name)
     {
-        //dd($request->all());
         $users = User::where('role', 1)->get();
         $makes = MakeCompany::where('status', 1)->get();
         $models = ModelCompany::where('status', 1)->get();
@@ -1124,7 +1124,6 @@ class SuperadminAddsController extends Controller
     }
     public function search_data($id, $type)
     {
-        //dd($type);
         $users = User::where('role', 1)->get();
         $makes = MakeCompany::where('status', 1)->get();
         $models = ModelCompany::where('status', 1)->get();

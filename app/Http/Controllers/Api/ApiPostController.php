@@ -499,9 +499,6 @@ class ApiPostController extends Controller
 
     }
 
-
-
-
     public function wishlist(Request $request)
     {
         if (!auth('sanctum')->check()) {
@@ -849,8 +846,6 @@ class ApiPostController extends Controller
 
                 SendFcmNotification::sendPriceAlertNotification($fcm_tokens, ['title' => 'New Sales Lead', 'body' => 'New Sales Lead for ' . $post->makeName . ' ' . $post->modelname]);
 
-
-
                 Notifications::create([
                     'user_id' => $user->id,
                     'title' => 'New Sales Lead',
@@ -933,8 +928,6 @@ class ApiPostController extends Controller
 
     public function ContactUs(Request $request)
     {
-
-
         $contact = new ContactUs();
         $contact->first_name = $request->first_name;
         $contact->last_name = $request->last_name;
@@ -945,7 +938,7 @@ class ApiPostController extends Controller
         //$body = view('emails.contact_us', compact('contact'));
         //sendMail($contact->first_name, $contact->email, 'Auto Jazeera', 'Auto Jazera Contact', $body);
         //sendMail($contact->first_name, 'contactus@autojazeera.pk', 'Auto Jazeera', 'Auto Jazera Contact', $body);
-        Mail::to($contact->email)->send(new Contact($contact));
+        // Mail::to($contact->email)->send(new Contact($contact));
         Mail::to('contactus@autojazeera.pk')->send(new Contact($contact));
         if ($contact) {
             return response()->json([

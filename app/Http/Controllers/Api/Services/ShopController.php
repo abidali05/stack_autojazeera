@@ -73,6 +73,13 @@ class ShopController extends Controller
         }
         Log::info($request->all());
         $user = auth('sanctum')->user();
+
+        Validator::extend('relaxed_url', function ($attribute, $value, $parameters, $validator) {
+            // Allow URLs with or without protocol, e.g., facebook.com, www.instagram.com, or https://twitter.com
+            $pattern = '/^(?:(?:https?:\/\/)?(?:www\.)?)?[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+$/';
+            return preg_match($pattern, $value);
+        }, 'The :attribute must be a valid URL or domain (e.g., facebook.com).');
+
         $validator = Validator::make($request->all(), [
             'shop_name' => 'required|string|max:255|unique:shops,name',
             'shop_contact' => 'required|string|max:20|unique:shops,number',
@@ -91,10 +98,10 @@ class ShopController extends Controller
             'days' => 'required|array',
             'days.*.start' => 'required_with:days.*.end|date_format:H:i',
             'days.*.end' => 'required_with:days.*.start|date_format:H:i',
-            'website' => 'nullable|url|max:255',
-            'facebook' => 'nullable|url|max:255',
-            'instagram' => 'nullable|url|max:255',
-            'twitter' => 'nullable|url|max:255',
+            'website' => 'nullable|relaxed_url|max:255',
+            'facebook' => 'nullable|relaxed_url|max:255',
+            'instagram' => 'nullable|relaxed_url|max:255',
+            'twitter' => 'nullable|relaxed_url|max:255',
         ]);
 
         if ($validator->fails()) {
@@ -234,6 +241,11 @@ class ShopController extends Controller
         }
         $id = $shop->id;
 
+        Validator::extend('relaxed_url', function ($attribute, $value, $parameters, $validator) {
+            // Allow URLs with or without protocol, e.g., facebook.com, www.instagram.com, or https://twitter.com
+            $pattern = '/^(?:(?:https?:\/\/)?(?:www\.)?)?[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+$/';
+            return preg_match($pattern, $value);
+        }, 'The :attribute must be a valid URL or domain (e.g., facebook.com).');
 
         $validator = Validator::make($request->all(), [
             'shop_name' => 'required|string|max:255|unique:shops,name,' . $id,
@@ -253,10 +265,10 @@ class ShopController extends Controller
             'days' => 'required|array',
             'days.*.start' => 'required_with:days.*.end',
             'days.*.end' => 'required_with:days.*.start',
-            'website' => 'nullable|url|max:255',
-            'facebook' => 'nullable|url|max:255',
-            'instagram' => 'nullable|url|max:255',
-            'twitter' => 'nullable|url|max:255',
+            'website' => 'nullable|relaxed_url|max:255',
+            'facebook' => 'nullable|relaxed_url|max:255',
+            'instagram' => 'nullable|relaxed_url|max:255',
+            'twitter' => 'nullable|relaxed_url|max:255',
         ]);
 
         if ($validator->fails()) {

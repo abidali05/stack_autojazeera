@@ -598,14 +598,15 @@
                 <div class="row d-flex justify-content-between align-items-center px-2 chatRow" 
                 onclick="openChat('${chatId}', this)" 
                 style="cursor: pointer; padding: 10px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.2);"
-                data-dealer_name="${receiver.name}"
-                data-dealer_image="${receiver.image}" 
+                data-dealer_name="${receiver.id == authUserId ? sender.name : receiver.name}"
+                data-dealer_image="${receiver.id == authUserId ? sender.image : receiver.image}" 
                 data-car_title="${car.title}" 
                 data-price="${car.price}" 
                 data-car_id="${car.id}" 
                 data-receiver_id="${receiver.id}" 
                 data-car_image="${car.poster}"
                 data-receiver='${JSON.stringify(chat.receiver).replace(/"/g, '&quot;')}'
+                data-sender='${JSON.stringify(chat.sender).replace(/"/g, '&quot;')}'
                 data-receiver_id="${receiver.id}"
                 data-sender_id="${sender.id}">
                 <div class="col-10 d-flex align-items-center">
@@ -614,7 +615,7 @@
                             style="height: 45px; width: 45px; border-radius: 50%;" alt="Chat User">
                     </div>
                     <div class="ms-2">
-                        <p class="m-0 leftchat text-dark"><strong>${receiver.name}</strong></p>
+                        <p class="m-0 leftchat text-dark"><strong>${receiver.id == authUserId ? sender.name : receiver.name}</strong></p>
                         <p class="m-0 leftchatname text-dark">${car.title}</p>
                     </div>
                 </div>
@@ -1080,10 +1081,10 @@
                             messageHtml += `
                     <div class="message-container ${isSender ? 'sent' : 'received'}" id="message-${doc.id}" data-message-id="${doc.id}" data-reply_meta_data="${JSON.stringify(msg.meta_data ?? null)}">
                         ${!isSender ? `
-                                <img src="${receiverImage}" class="chat-avatar me-2" 
-                                    style="height: 45px; width: 45px; border-radius: 50%;" 
-                                    alt="Receiver">
-                            ` : ''}
+                                    <img src="${receiverImage}" class="chat-avatar me-2" 
+                                        style="height: 45px; width: 45px; border-radius: 50%;" 
+                                        alt="Receiver">
+                                ` : ''}
 
                         <div class="${messageClass} p-3 rounded-3 position-relative" 
                             oncontextmenu="showMessageContextMenu(event, '${doc.id}', ${isSender}, '${msg.message?.replace(/'/g, "\\'")}', '${msg.sender.name?.replace(/'/g, "\\'")}', '${msg.attachment ?? null}', '${JSON.stringify(msg.meta_data ?? null).replace(/"/g, '"')}'); return false;"
@@ -1107,10 +1108,10 @@
                         </div>
 
                         ${isSender ? `
-                                <img src="${authUserImage}" class="chat-avatar ms-2" 
-                                    style="height: 45px; width: 45px; border-radius: 50%;" 
-                                    alt="You">
-                            ` : ''}
+                                    <img src="${authUserImage}" class="chat-avatar ms-2" 
+                                        style="height: 45px; width: 45px; border-radius: 50%;" 
+                                        alt="You">
+                                ` : ''}
                     </div>`;
 
                             chatMessages.innerHTML += messageHtml;
@@ -1382,11 +1383,13 @@
 
             // Function to open chat
             window.openChat = async function(chatId, element) {
+                console.log(element)
                 selectedChatId = chatId;
                 selectedCarId = element.getAttribute("data-car_id") || "";
                 receiverId = element.getAttribute("data-receiver_id") || "";
                 sender_Id = element.getAttribute("data-sender_id") || "";
                 receiver = element.getAttribute("data-receiver") || "";
+                sender = element.getAttribute("data-sender") || "";
 
                 if (!selectedCarId) {
                     console.error("Car ID is missing.");

@@ -298,7 +298,6 @@ Start Car Ad Posting today!'
             'sub_type' => 'required|in:ads,service',
         ];
 
-
         $validator = Validator::make($request->all(), $validationRules);
 
         if ($validator->fails()) {
@@ -325,47 +324,47 @@ Start Car Ad Posting today!'
         }
 
         // Reset user role and package
-        if($request->sub_type == 'ads'){
-        $user->role = 0;
-        $user->package = null;
-        $user->save();
+        if ($request->sub_type == 'ads') {
+            $user->role = 0;
+            $user->package = null;
+            $user->save();
 
 
-        // Deactivate child users and posts
-        User::where(['dealer_id' => $user->id, 'role' => 2])->update([
-            'status' => 'inactive',
-            'package' => null
-        ]);
+            // Deactivate child users and posts
+            User::where(['dealer_id' => $user->id, 'role' => 2])->update([
+                'status' => 'inactive',
+                'package' => null
+            ]);
 
-        Post::where(['dealer_id' => $user->id])->update(['status' => '0']);
-        BikePost::where(['dealer_id' => $user->id])->update(['status' => '0']);
+            Post::where(['dealer_id' => $user->id])->update(['status' => '0']);
+            BikePost::where(['dealer_id' => $user->id])->update(['status' => '0']);
+        } else {
+            // Update user record
+            $user->shop_package = null;
+            $user->save();
 
-    }
-    else{
-         // Update user record
-        $user->shop_package = null;
-        $user->save();
-
-        // Deactivate shop
-        $shop = Shops::where('dealer_id', $user->id)->first();
-        if ($shop) {
-            $shop->status = '0';
-            $shop->save();
+            // Deactivate shop
+            $shop = Shops::where('dealer_id', $user->id)->first();
+            if ($shop) {
+                $shop->status = '0';
+                $shop->save();
+            }
+            User::where(['dealer_id' => $user->id, 'role' => 3])->update([
+                'status' => 'inactive'
+            ]);
         }
-        User::where(['dealer_id' => $user->id, 'role' => 3])->update([
-            'status' => 'inactive'
-        ]);
-    }
         // Send cancellation email
         $body = view('emails.cancel_subscription');
-        sendMail($user->name, $user->email, 'Auto Jazeera', 'Plan Cancelled Successfully', $body);
+        try {
+            $body = view('emails.cancel_subscription')->render();
+            sendMail($user->name, $user->email, 'Auto Jazeera', 'Plan Cancelled Successfully', $body);
+        } catch (\Exception $e) {
+            Log::error('Failed to send cancellation email: ' . $e->getMessage());
+        }
 
-         $fcm_tokens = [$user->fcm_token];
+        $fcm_tokens = [$user->fcm_token];
         if ($fcm_tokens) {
-
             SendFcmNotification::sendPriceAlertNotification($fcm_tokens, ['title' => 'Plan Cancelled', 'body' => 'You have successfully cancelled your plan']);
-
-
 
             Notifications::create([
                 'user_id' => $user->id,
@@ -376,23 +375,21 @@ Start Car Ad Posting today!'
         }
         $token = $user->createToken('auth:sanctum')->plainTextToken;
 
-        if($request->sub_type == 'ads'){
+        if ($request->sub_type == 'ads') {
             return response()->json([
-            "data" => $user,
-            "token" => $token,
-            "message" => 'Your plan is canceled and now you are user',
-            'status' => 200
-        ], 200);
-        }
-        else{
+                "data" => $user,
+                "token" => $token,
+                "message" => 'Your plan is canceled and now you are user',
+                'status' => 200
+            ], 200);
+        } else {
             return response()->json([
-            "data" => $user,
-            "token" => $token,
-            "message" => 'Your plan is canceled',
-            'status' => 200
-        ], 200);
+                "data" => $user,
+                "token" => $token,
+                "message" => 'Your plan is canceled',
+                'status' => 200
+            ], 200);
         }
-        
     }
 
     private function getOrCreateCustomer1($user)
