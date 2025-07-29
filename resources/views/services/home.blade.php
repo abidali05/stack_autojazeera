@@ -178,7 +178,7 @@
             border-radius: 0px !important;
             border: 0px !important;
             height: 44px;
-            padding: 6px 12px;
+            padding: 11px 12px;
         }
 
         .select2-container--default .select2-selection--single .select2-selection__arrow {
@@ -227,6 +227,25 @@
 .search-box i {
     color: white;
     font-size: 18px;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+    border-color: #888 transparent transparent transparent;
+    border-style: solid;
+    border-width: 5px 4px 0 4px;
+    height: 0;
+    left: 50%;
+    margin-left: -4px;
+    margin-top: 5px ! important;
+    position: absolute;
+    top: 50%;
+    width: 0;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 26px;
+    position: absolute;
+    top: 2px !important;
+    right: 1px;
+    width: 20px;
 }
     </style>
 

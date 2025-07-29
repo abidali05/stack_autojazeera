@@ -1254,7 +1254,7 @@
         });
 
         $('.province-select2').select2({
-            placeholder: "Provience",
+            placeholder: "Province",
             allowClear: true,
             width: '100%'
         });
