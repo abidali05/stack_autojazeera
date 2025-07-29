@@ -1,6 +1,60 @@
 @extends('layout.website_layout.services.main')
 
-@section('content')
+@section('content')<style>
+        .dropzone {
+            border: 2px dashed #ccc;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .dropzone input[type="file"] {
+            opacity: 0;
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .image-box {
+            position: relative;
+        }
+
+        .image-preview {
+            height: 150px;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .remove-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-size: 16px;
+            line-height: 22px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .remove-btn:hover {
+            background: red;
+        }
+    </style>
+
     <style>
         body {
             padding: 0%;
@@ -12,7 +66,7 @@
             padding: 0%;
             margin: 0%;
         }
-		
+
         .loading-overlay {
             position: fixed;
             top: 0;
@@ -1010,11 +1064,12 @@
 
         .step-content.active {
             display: block;
-        } 
-		.featureicn {
+        }
+
+        .featureicn {
             position: absolute;
             left: 0;
-            background:#281F48;
+            background: #281F48;
             color: white;
             font-size: 12px;
             font-weight: 500;
@@ -1025,9 +1080,9 @@
         }
 
         .featureicoxn {
-   position: absolute;
+            position: absolute;
             left: 0;
-            background:  #BF0000;
+            background: #BF0000;
             color: white;
             font-size: 12px;
             font-weight: 500;
@@ -1036,12 +1091,14 @@
             margin-top: 30px;
             margin-left: 60px;
         }
-    @media (min-width: 300px) and (max-width: 500px) {
-        .fourtyeight {
-            font-size: 28px; /* Example size, adjust as needed */
-          
+
+        @media (min-width: 300px) and (max-width: 500px) {
+            .fourtyeight {
+                font-size: 28px;
+                /* Example size, adjust as needed */
+
+            }
         }
-    }
     </style>
     {{-- step form css end --}}
 
@@ -1523,25 +1580,26 @@
                 {{-- @endif --}}
 
                 @if (count($shops) == 0)
-                        <div class=col-md-12>
-		 <div class="row d-flex justify-content-center my-3">
-		       <div class="p-3 col-8" style="border:1px solid #281F48;border-radius:9px;">
-                    <div class="row">
-                        <div class="col-md-3 text-center text-md-start ">
-                            <img src="{{ asset('web/images/noinputs.svg') }}" alt="" class="img-fluid"
-                                srcset="">
-                        </div>
-                        <div class="col-md-9 text-start">
-                            <h1 style="color:#FD5631">Sorry</h1>
-                            <p>No matches found for your search. Try adjusting your filters or expanding your criteria
-                                to
-                                explore available Shop!</p>
+                    <div class=col-md-12>
+                        <div class="row d-flex justify-content-center my-3">
+                            <div class="p-3 col-8" style="border:1px solid #281F48;border-radius:9px;">
+                                <div class="row">
+                                    <div class="col-md-3 text-center text-md-start ">
+                                        <img src="{{ asset('web/images/noinputs.svg') }}" alt=""
+                                            class="img-fluid" srcset="">
+                                    </div>
+                                    <div class="col-md-9 text-start">
+                                        <h1 style="color:#FD5631">Sorry</h1>
+                                        <p>No matches found for your search. Try adjusting your filters or expanding your
+                                            criteria
+                                            to
+                                            explore available Shop!</p>
 
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-		 </div>
-</div>
                 @endif
                 <div class="shops-container" style="width:100%">
                     <div id="loadingSpinner" class="loading-overlay d-none">
@@ -1559,19 +1617,21 @@
                                             <div class="imagediv" style="height: 240px;">
                                                 <img src="{{ $shop->logo }}" class="imagewidth" alt="...">
                                             </div>
-											
-										@if($shop->is_top_rated == '1')
-    <span class="featureicn">
-        <img src="{{ asset('web/bikes/images/Star 7.svg') }}" class="img-fluid">
-        Top Rated
-    </span>
-@endif
-																			@if($shop->is_featured == '1')
-    <span class="featureicoxn">
-        <img src="{{ asset('web/bikes/images/Star 7.svg') }}" class="img-fluid">
-     Featured
-    </span>
-@endif
+
+                                            @if ($shop->is_top_rated == '1')
+                                                <span class="featureicn">
+                                                    <img src="{{ asset('web/bikes/images/Star 7.svg') }}"
+                                                        class="img-fluid">
+                                                    Top Rated
+                                                </span>
+                                            @endif
+                                            @if ($shop->is_featured == '1')
+                                                <span class="featureicoxn">
+                                                    <img src="{{ asset('web/bikes/images/Star 7.svg') }}"
+                                                        class="img-fluid">
+                                                    Featured
+                                                </span>
+                                            @endif
 
                                         </a>
                                     </div>
@@ -1722,8 +1782,8 @@
                                                         @endguest
                                                     </div>
                                                     <div class="d-flex justify-content-end align-items-center mt-2">
-                                               
-													
+
+
                                                         <span class="d-flex align-items-center">
                                                             @auth
                                                                 @php
@@ -1768,17 +1828,22 @@
 
                                                     </div>
                                                     <div class="d-flex align-items-center ">
-@if ($shop->dealer->shop_pkg && $shop->dealer->shop_pkg->metadata->whatsapp_allowed == '1')
-    @php
-        // remove all non-numeric characters except +
-        $whatsappNumber = preg_replace('/[^0-9]/', '', $shop->number);
-    @endphp
-    <span class="twelvewhitee {{ $shop->number ? '' : 'd-none' }}"
-        onclick="window.open('https://wa.me/{{ $whatsappNumber }}','_blank')"
-        style="cursor: pointer">
-        <img src="{{ asset('web/services/images/whatsapp.svg') }}" class="img-fluid me-3" alt="...">
-    </span>
-@endif
+                                                        @if ($shop->dealer->shop_pkg && $shop->dealer->shop_pkg->metadata->whatsapp_allowed == '1')
+                                                            @php
+                                                                // remove all non-numeric characters except +
+                                                                $whatsappNumber = preg_replace(
+                                                                    '/[^0-9]/',
+                                                                    '',
+                                                                    $shop->number,
+                                                                );
+                                                            @endphp
+                                                            <span class="twelvewhitee {{ $shop->number ? '' : 'd-none' }}"
+                                                                onclick="window.open('https://wa.me/{{ $whatsappNumber }}','_blank')"
+                                                                style="cursor: pointer">
+                                                                <img src="{{ asset('web/services/images/whatsapp.svg') }}"
+                                                                    class="img-fluid me-3" alt="...">
+                                                            </span>
+                                                        @endif
 
 
                                                         <span class="twelvewhitee {{ $shop->facebook ? '' : 'd-none' }}"
@@ -1799,10 +1864,11 @@
                                                                 src="{{ asset('web/services/images/Vector0.svg') }}"
                                                                 class="img-fluid me-3" alt="...">
                                                         </span>
-															         <span class=" sixteen me-3"
+                                                        <span class=" sixteen me-3"
                                                             style="word-break: break-word; max-width: 300px; display: inline-block;">
                                                             @if ($shop->website)
-                                                     	<a href="  {{ $shop->website }}" style="color:#281F48"><i class="bi bi-globe fs-4"></i></a>
+                                                                <a href="  {{ $shop->website }}" style="color:#281F48"><i
+                                                                        class="bi bi-globe fs-4"></i></a>
                                                             @endif
                                                         </span>
                                                     </div>
@@ -1822,22 +1888,24 @@
                 <!-- review Modal -->
                 <div class="modal fade" id="reviewModal{{ $shop->id }}" tabindex="-1"
                     aria-labelledby="uploadModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-
-
-                            <div class="modal-body">
+                    <div class="modal-dialog modal-lg  modal-dialog-centered">
+                        <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
+                            <div class="modal-header"
+                                style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                                <h5 class="modal-title" id="newsletterresponseLabel">
+                                    <strong>{{ $shop->name }}</strong>
+                                </h5>
+                                <button type="button" class="btn-close"
+                                    style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" style="background-color: white !important; color: #281F48;">
                                 <form action="{{ route('review.store') }}" method="post" enctype="multipart/form-data"
                                     id="reviewForm">
                                     @csrf
-
                                     <input type="hidden" name="shop_id" value="{{ $shop->id }}">
                                     <div class="row mb-3">
-                                        <div class="col-md-12 d-flex justify-content-between">
-                                            <p class="fourtyeight">{{ $shop->name }}</p>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
+
                                         <div class="col-md-12 mb-2">
                                             <div class="feedback-rating-container align-items-center ">
                                                 <div id="feedback-stars-group">
@@ -1854,15 +1922,15 @@
                                         <div class="col-md-12">
                                             <div class="mb-3">
                                                 <textarea class="form-controless" id="exampleFormControlTextarea1" rows="3" name="comment"></textarea>
-                                                <p class="reed">You review should have at least 20 characters.</p>
+
                                             </div>
                                         </div>
                                     </div>
-
                                     <!-- Dropzone + Images Row -->
-                                    <div class="row g-3">
+                                    <div class="row g-3" id="image-upload-row">
+                                        <!-- Dropzone uploader -->
                                         <div class="col-2">
-                                            <div class="dropzone text-center">
+                                            <div class="dropzone text-center position-relative">
                                                 <div class="upload-icon">
                                                     <img src="{{ asset('web/services/images/upload.svg') }}"
                                                         class="img-fluid" alt="Upload">
@@ -1871,20 +1939,16 @@
                                                 <div class="upload-subtext">Maximum 10 Photos</div>
                                                 <div id="image-counter" class="mt-1"
                                                     style="font-size: 10px; color: #281F48;">
-                                                    0/10
-                                                    photos</div>
+                                                    0/10 photos
+                                                </div>
                                                 <input type="file" multiple class="upload-input" accept="image/*"
-                                                    name="review_images[]" />
+                                                    name="review_images[]" id="imageInput" />
                                             </div>
                                         </div>
 
-                                        <!-- Empty divs for images -->
-                                        <div class="col-2 image-box"></div>
-                                        <div class="col-2 image-box"></div>
-                                        <div class="col-2 image-box"></div>
-                                        <div class="col-2 image-box"></div>
-                                        <div class="col-2 image-box"></div>
+                                        <!-- Previews -->
                                     </div>
+
 
                                     <!-- Second row for more image slots -->
                                     <div class="row g-3 mt-2">
@@ -1896,10 +1960,14 @@
                                     </div>
                             </div>
 
-                            <div class="modal-footer d-flex justify-content-start" style="border: none;">
+                            <div class="modal-footer justify-content-center border-0 p-0 pb-3"
+                                style="background-color: white !important;">
                                 <button type="button" class="whitebtn py-2" data-bs-dismiss="modal"
-                                    onclick="window.location.reload();">Cancel</button>
-                                <button type="submit" class="bluebtn py-2" id="submit-review-btn">Submit Review</button>
+                                    onclick="window.location.reload();" class="btn btn-light px-4 py-2 "
+                                    style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;">Cancel</button>
+                                <button type="submit" class="btn btn-light px-4 py-2 ms-2"
+                                    style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px; border:1px solid #281F48;"
+                                    id="submit-review-btn">Submit Review</button>
                             </div>
                             </form>
 
@@ -1934,15 +2002,14 @@
                                                 <div class="scrollable-content">
                                                     <p class="twentyeight mt-4">Select your
                                                         Vehicle </p>
-
-                                                    <div class="checkbox-group">
+                                                    <div class="checkbox-group mb-3">
                                                         <label class="checkbox-button">
-                                                            <input type="checkbox" name="vehicle_type" value="bike"
+                                                            <input type="radio" name="vehicle_type" value="bike"
                                                                 hidden>
                                                             <span>Bike</span>
                                                         </label>
                                                         <label class="checkbox-button">
-                                                            <input type="checkbox" name="vehicle_type" value="car"
+                                                            <input type="radio" name="vehicle_type" value="car"
                                                                 hidden>
                                                             <span>Car</span>
                                                         </label>
@@ -1950,7 +2017,6 @@
                                                     <div id="vehicle-error" class="reed mt-2" style="display:none;">
                                                         Please select a
                                                         vehicle type</div>
-
                                                 </div>
                                                 <div class="d-flex justify-content-end mt-5">
                                                     <button type="button"
@@ -1960,6 +2026,7 @@
                                             <div class="col-md-7">
                                                 <img src="{{ asset('web/services/images/carbike.svg') }}"
                                                     class="img-fluid" alt="...">
+
                                             </div>
                                         </div>
                                     </div>
@@ -1988,9 +2055,15 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-7">
-                                                <img src="{{ asset('web/services/images/Frameee.svg') }}"
-                                                    class="img-fluid" alt="...">
-
+                                                <div class="vehicle-image-container mt-3">
+                                                    <!-- Image will be injected here -->
+                                                    <img src="{{ asset('web/services/images/Frameee.svg') }}"
+                                                        class="img-fluid" alt="...">
+                                                    <img src="{{ asset('web/services/images/bike_request_qoute.svg') }}"
+                                                        class="img-fluid" alt="...">
+                                                    <img src="{{ asset('web/services/images/carbike.svg') }}"
+                                                        class="img-fluid" alt="...">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -2015,8 +2088,15 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-7">
-                                                <img src="{{ asset('web/services/images/Frameee.svg') }}"
-                                                    class="img-fluid" alt="...">
+                                                <div class="vehicle-image-container mt-3">
+                                                    <!-- Image will be injected here -->
+                                                    <img src="{{ asset('web/services/images/Frameee.svg') }}"
+                                                        class="img-fluid" alt="...">
+                                                    <img src="{{ asset('web/services/images/bike_request_qoute.svg') }}"
+                                                        class="img-fluid" alt="...">
+                                                    <img src="{{ asset('web/services/images/carbike.svg') }}"
+                                                        class="img-fluid" alt="...">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -2046,8 +2126,15 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-7">
-                                                <img src="{{ asset('web/services/images/Frameee.svg') }}"
-                                                    class="img-fluid" alt="...">
+                                                <div class="vehicle-image-container mt-3">
+                                                    <!-- Image will be injected here -->
+                                                    <img src="{{ asset('web/services/images/Frameee.svg') }}"
+                                                        class="img-fluid" alt="...">
+                                                    <img src="{{ asset('web/services/images/bike_request_qoute.svg') }}"
+                                                        class="img-fluid" alt="...">
+                                                    <img src="{{ asset('web/services/images/carbike.svg') }}"
+                                                        class="img-fluid" alt="...">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -2082,8 +2169,15 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-7">
-                                                <img src="{{ asset('web/services/images/popupimg.svg') }}"
-                                                    class="img-fluid" alt="...">
+                                                <div class="vehicle-image-container mt-3">
+                                                    <!-- Image will be injected here -->
+                                                    <img src="{{ asset('web/services/images/Frameee.svg') }}"
+                                                        class="img-fluid" alt="...">
+                                                    <img src="{{ asset('web/services/images/bike_request_qoute.svg') }}"
+                                                        class="img-fluid" alt="...">
+                                                    <img src="{{ asset('web/services/images/carbike.svg') }}"
+                                                        class="img-fluid" alt="...">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -2115,8 +2209,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-7">
-                                                <img src="{{ asset('web/services/images/popupimg.svg') }}"
-                                                    class="img-fluid" alt="...">
+                                              <img src="{{ asset('web/images/service_quotes.svg') }}"
+                                                        class="img-fluid" alt="...">
                                             </div>
                                         </div>
                                     </div>
@@ -2153,8 +2247,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-7">
-                                                <img src="{{ asset('web/services/images/popupimg.svg') }}"
-                                                    class="img-fluid" alt="...">
+                                               <img src="{{ asset('web/images/service_quotes.svg') }}"
+                                                        class="img-fluid" alt="...">
                                             </div>
                                         </div>
                                     </div>
@@ -3233,7 +3327,117 @@
     </script>
 
 
-    {{-- sorting logic end here --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const imageInput = document.getElementById('imageInput');
+            const row = document.getElementById('image-upload-row');
+            const imageCounter = document.getElementById('image-counter');
+            let selectedImages = [];
+
+            imageInput.addEventListener('change', function(e) {
+                const files = Array.from(e.target.files);
+
+                // Stop if over 10
+                if (selectedImages.length + files.length > 10) {
+                    alert("You can upload up to 10 images only.");
+                    return;
+                }
+
+                files.forEach((file, index) => {
+                    const previewURL = URL.createObjectURL(file);
+                    const col = document.createElement('div');
+                    col.className = 'col-2 image-box mb-3';
+
+                    const img = document.createElement('img');
+                    img.src = previewURL;
+                    img.className = 'image-preview';
+
+                    const btn = document.createElement('button');
+                    btn.className = 'remove-btn';
+                    btn.innerHTML = '&times;';
+                    btn.onclick = function() {
+                        col.remove();
+
+                        // Remove file from selectedImages
+                        const inputFiles = new DataTransfer();
+                        selectedImages = selectedImages.filter(f => f !== file);
+                        selectedImages.forEach(f => inputFiles.items.add(f));
+                        imageInput.files = inputFiles.files;
+
+                        updateCounter();
+                    };
+
+                    col.appendChild(img);
+                    col.appendChild(btn);
+                    row.appendChild(col);
+
+                    selectedImages.push(file);
+
+                    updateCounter();
+                });
+
+                // Reset original input's files
+                const dt = new DataTransfer();
+                selectedImages.forEach(file => dt.items.add(file));
+                imageInput.files = dt.files;
+            });
+
+            function updateCounter() {
+                imageCounter.textContent = `${selectedImages.length}/10 photos`;
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Track selected vehicle type globally
+            let selectedVehicle = null;
+            const vehicleCheckboxes = document.querySelectorAll('input[name="vehicle_type"]');
+
+            // Function to update all vehicle images in all steps
+            function updateAllVehicleImages() {
+                // Get selected value (only one can be selected)
+                const selectedValue = document.querySelector('input[name="vehicle_type"]:checked')?.value;
+                selectedVehicle = selectedValue || null;
+
+                // Determine image source
+                let imgSrc = '';
+                if (selectedVehicle === 'car') {
+                    imgSrc = "{{ asset('web/services/images/Frameee.svg') }}";
+                } else if (selectedVehicle === 'bike') {
+                    imgSrc = "{{ asset('web/services/images/bike_request_qoute.svg') }}";
+                }
+
+                // Update all image containers
+                document.querySelectorAll('.vehicle-image-container').forEach(container => {
+                    container.innerHTML = imgSrc ?
+                        `<img src="${imgSrc}" class="img-fluid" alt="${selectedVehicle} image">` :
+                        '';
+                });
+            }
+
+            // Make vehicle selection mutually exclusive
+            vehicleCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        // Uncheck other vehicle options
+                        vehicleCheckboxes.forEach(cb => {
+                            if (cb !== this) cb.checked = false;
+                        });
+                        updateAllVehicleImages();
+                    } else {
+                        // Prevent unchecking the last checked option
+                        const anyChecked = [...vehicleCheckboxes].some(cb => cb.checked);
+                        if (!anyChecked) {
+                            this.checked = true;
+                        }
+                    }
+                });
+            });
+
+            // Initialize images on load
+            updateAllVehicleImages();
+        });
+    </script>
 
 
 @endsection

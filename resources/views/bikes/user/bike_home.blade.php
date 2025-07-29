@@ -4,10 +4,10 @@
 <link rel="stylesheet" href="{{ asset('web/bikes/css/bike_home.css') }}">
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+     @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
     body {
-        font-family: 'Maven Pro', sans-serif !important;
+     font-family: 'poppins', sans-serif !important;
     }
 
     .carousel-indicators .active {
@@ -114,7 +114,7 @@
 
     .crouserheading1 {
         color: #281F48;
-        font-size: 34px;
+        font-size: 36px;
         padding-left: 100px;
         padding-top: 100px;
         font-weight: 800;
@@ -327,6 +327,9 @@
         border: 1px solid #ccc !important;
         overflow: hidden !important;
     }
+        .select2-container--default .select2-selection--single .select2-selection__placeholder {
+        color: black !important;
+    }
 </style>
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
@@ -526,7 +529,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <p class="twentyfourblack" style="color:#281F48 !important"><strong>Quick filters</strong></p>
+                <p class="twentyfourblack" style="color:#281F48 !important ;     font-weight: 500;"><strong>Quick filters</strong></p>
             </div>
             <div class="col-lg-12">
                 <form method="post"
@@ -1043,23 +1046,26 @@
                         <div class="col-md-7 d-flex align-items-center justify-content-center">
                             <div class="row  d-flex align-items-center justify-content-center">
                                 <div class="col-10 ">
-                                    <div class=" ">
+                                   <div class="row ">
+                                        <div class="col-md-12">
                                         <h1 style="color: #281F48;" data-aos="fade-right"><strong>Download our
                                                 mobile app.</strong>
                                         </h1>
                                         <p class="eighteenorange mt-3" data-aos="fade-right">We are a professional
                                             and creative company and we offer you a trusty insurance on your veicle.
                                         </p>
+ </div>       <div class="col-md-12 d-flex  align-items-center mt-4">
 
+                                            <a class=" text-start"><img
+                                                    src="{{ asset('web/bikes/images/Group111.svg') }}" class="img-fluid " style="width:160px"
+                                                    alt="..."></a>
+                                            <a class=" text-start ms-3"><img
+                                                    src="{{ asset('web/bikes/images/Group1111.svg') }}" style="width:160px"
+                                                    class="img-fluid" alt="..."></a>
+
+                                        </div>
                                     </div>
-                                    <div class="d-flex p-0 m-0 mt-3" data-aos="fade-right"> <button
-                                            class="btn p-0 m-0"><img
-                                                src="{{ asset('web/bikes/images/Group111.svg') }}" class="w-75  "
-                                                alt="..."></button>
-                                        <button class="btn m-0 p-0"><img
-                                                src="{{ asset('web/bikes/images/Group1111.svg') }}" class="w-75"
-                                                alt="..."></button>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>

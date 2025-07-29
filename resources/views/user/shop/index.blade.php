@@ -788,7 +788,6 @@
                                     @else
                                         <p class="sixteen">No amenities listed</p>
                                     @endif
-
                                     <p class="twentyeight mt-4">Our Social Media</p>
                                     <div class="col-md-12 twelve" style="font-weight: 600; color: #000000;">
                                         <span class="me-5" onclick="window.open('{{ $shop->facebook }}','_blank')"><img
@@ -834,7 +833,7 @@
                             style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
-        </div>gi
+        </div>
     </div>
 
     {{-- success modal end --}}

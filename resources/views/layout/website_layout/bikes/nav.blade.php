@@ -6,7 +6,7 @@
     font-size: var(--bs-nav-link-font-size);
     font-weight: var(--bs-nav-link-font-weight);
     font-weight: 600 !important;
-    color: var(--bs-nav-link-color);
+    color: black;
     text-decoration: none;
     background: 0 0;
     border: 0;
