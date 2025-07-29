@@ -111,7 +111,7 @@
             <div class="col-md-8">
                 <h2 class="sec mb-0 primary-color-custom">Manage Service Categories</h2>
             </div>
-			  <div class="col-md-4 text-end">
+            <div class="col-md-4 text-end">
                 <button class="btn custom-btn-nav rounded" data-bs-toggle="modal" data-bs-target="#addServiceCategoryModal">
                     Add Service
                     Category
@@ -122,7 +122,7 @@
 
     </div>
 
-{{-- 
+    {{-- 
     <div class="container my-2 ">
 
         <div class="row align-items-center mb-2">
@@ -241,7 +241,7 @@
                         <th>Sr#</th>
                         <th>Action</th>
                         <th>Web Icon</th>
-						<th>App Icon</th>
+                        <th>App Icon</th>
                         <th>Name</th>
                     </tr>
                 </thead>
@@ -264,14 +264,14 @@
 
                             <td><img src="{{ $category->icon }}" alt="" srcset="" width="40"
                                     height="30"></td>
-							
-							<td>
-								@if($category->app_icon)
-								<img src="{{ $category->app_icon }}" alt="" srcset="" width="40"
-                                    height="30">
-								@endif
-							</td>
-							
+
+                            <td>
+                                @if ($category->app_icon)
+                                    <img src="{{ $category->app_icon }}" alt="" srcset="" width="40"
+                                        height="30">
+                                @endif
+                            </td>
+
                             <td>{{ $category->name }}</td>
 
                         </tr>
@@ -281,10 +281,12 @@
                             aria-labelledby="colorModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
-                                    <div class="modal-header border-0 " style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                                    <div class="modal-header border-0 "
+                                        style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                                         <h5 class="modal-title" id="colorModalLabel"><strong> Edit Category</strong></h5>
-                                        <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
+                                        <button type="button" class="btn-close"
+                                            style="background-color: #D9D9D9 !important; color: #FD5631;"
+                                            data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <form id="featureForm" method="post"
                                         action="{{ route('superadmin.service-categories.update', $category->id) }}"
@@ -298,7 +300,7 @@
                                                 <div class="col-md-6 text-center">
                                                     <div class="upload-area border border-dashed rounded p-4 text-center"
                                                         onclick="document.getElementById('categoryiconupload{{ $category->id }}').click();">
-                                                        <p class="mb-0">Click here to upload  Web Icon</p>
+                                                        <p class="mb-0">Click here to upload Web Icon</p>
                                                         <input type="file" id="categoryiconupload{{ $category->id }}"
                                                             name="icon" class="d-none"
                                                             accept=".png, .jpg, .jpeg, .gif, .ico, .svg"
@@ -309,8 +311,8 @@
                                                         <img src="{{ $category->icon }}" alt="">
                                                     </div>
                                                 </div>
-                                               
-                                               
+
+
                                                 <div class="col-md-6 text-center">
                                                     <div class="upload-area border border-dashed rounded p-4 text-center"
                                                         onclick="document.getElementById('categoryappiconupload{{ $category->id }}').click();">
@@ -346,9 +348,11 @@
                                         </div>
 
                                         <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                                            <button type="button"  class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                                            <button type="button" class="btn btn-light px-4 py-2 "
+                                                style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
                                                 data-bs-dismiss="modal">Cancel</button>
-                                            <button type="submit"  class="btn btn-light px-4 py-2 " style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Save</button>
+                                            <button type="submit" class="btn btn-light px-4 py-2 "
+                                                style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Save</button>
                                         </div>
                                     </form>
                                 </div>
@@ -376,12 +380,13 @@
                         <div class="modal fade" id="deleteServiceCategoryModal{{ $category->id }}" tabindex="-1"
                             aria-labelledby="addDealerModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content"
-                     style="border-radius: 10px; overflow: hidden;">
-                                    <div class="modal-header border-0" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                                <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
+                                    <div class="modal-header border-0"
+                                        style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                                         <h5 class="modal-title" id="editDealerModalLabel"><strong>Delete </strong></h5>
-                                        <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
+                                        <button type="button" class="btn-close"
+                                            style="background-color: #D9D9D9 !important; color: #FD5631;"
+                                            data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
 
                                     <div class="modal-body" style="background-color: #F0F3F6; color: #FD5631;">
@@ -403,9 +408,11 @@
 
                                     </div>
                                     <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                                        <button type="button"  class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                                        <button type="button" class="btn btn-light px-4 py-2 "
+                                            style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
                                             data-bs-dismiss="modal">Cancel</button>
-                                        <button type="submit"  class="btn btn-light px-4 py-2 " style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Delete</button>
+                                        <button type="submit" class="btn btn-light px-4 py-2 "
+                                            style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Delete</button>
                                     </div>
                                     </form>
                                 </div>
@@ -431,9 +438,12 @@
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
-                    <div class="modal-header border-0 " style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
-                        <h5 class="modal-title" id="colorModalLabel"> <strong>Edit Category</strong></h5>
-                        <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-header border-0 "
+                        style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                        <h5 class="modal-title" id="colorModalLabel"> <strong>Add Category</strong></h5>
+                        <button type="button" class="btn-close"
+                            style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <form id="featureForm" method="post" action="{{ route('superadmin.service-categories.store') }}"
                         enctype="multipart/form-data">
@@ -453,7 +463,7 @@
                                     </div>
                                     <div id="categoryiconpreview" class="mt-3 text-success image-preview"></div>
                                 </div>
-                               
+
                                 <div class="col-md-6 text-center">
                                     <div class="upload-area border border-dashed rounded p-4 text-center"
                                         onclick="document.getElementById('categoryappiconupload').click();">
@@ -484,8 +494,11 @@
                         </div>
 
                         <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                            <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-light px-4 py-2 " style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Save</button>
+                            <button type="button" class="btn btn-light px-4 py-2 "
+                                style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                                data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-light px-4 py-2 "
+                                style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Save</button>
                         </div>
                     </form>
                 </div>
@@ -502,9 +515,12 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
                     <!-- Modal Header -->
-                    <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                    <div class="modal-header"
+                        style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                         <h5 class="modal-title" id="servicecategoryresponseLabel"><strong> Service Category</strong></h5>
-                        <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close"
+                            style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <!-- Modal body -->
                     <div class="modal-body text-center" style="background-color: #F0F3F6; color: #FD5631;">
@@ -512,7 +528,9 @@
                     </div>
                     <!-- Modal footer -->
                     <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                        <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-light px-4 py-2 "
+                            style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                            data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
@@ -647,37 +665,36 @@
 
 
     <script>
-    function handleServiceCategoryIconUpload(input, previewElementId) {
-    const previewElement = document.getElementById(previewElementId);
-    const file = input.files[0];
+        function handleServiceCategoryIconUpload(input, previewElementId) {
+            const previewElement = document.getElementById(previewElementId);
+            const file = input.files[0];
 
-    if (file) {
-        const reader = new FileReader();
+            if (file) {
+                const reader = new FileReader();
 
-        reader.onload = function(e) {
-            const img = new Image();
-            img.src = e.target.result;
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.src = e.target.result;
 
-            img.onload = function() {
-                // Set image dimensions
-                img.style.height = '100px';
-                img.style.width = '100px';
+                    img.onload = function() {
+                        // Set image dimensions
+                        img.style.height = '100px';
+                        img.style.width = '100px';
 
-                // Display the image
-                previewElement.innerHTML = '';
-                previewElement.appendChild(img);
-            };
+                        // Display the image
+                        previewElement.innerHTML = '';
+                        previewElement.appendChild(img);
+                    };
 
-            img.onerror = function() {
-                previewElement.textContent = 'Uploaded file is not a valid image.';
-            };
-        };
+                    img.onerror = function() {
+                        previewElement.textContent = 'Uploaded file is not a valid image.';
+                    };
+                };
 
-        reader.readAsDataURL(file);
-    } else {
-        previewElement.textContent = 'No file uploaded.';
-    }
-}
-
+                reader.readAsDataURL(file);
+            } else {
+                previewElement.textContent = 'No file uploaded.';
+            }
+        }
     </script>
 @endsection

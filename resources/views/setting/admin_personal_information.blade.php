@@ -136,11 +136,12 @@
                     <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
                             <div class="border-0 modal-header"  style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                                     <h4 class=" sec primary-color-custom m-0">Edit Personal Info</h4>
                                 <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
                             <div class="px-5 modal-body" style="background-color: #F0F3F6; color: #FD5631;">
-                                <h4 class="mb-4 sec primary-color-custom">Edit Personal Info</h4>
+                          
                                 <form method="post" action="{{ route('superadmin.update_profile') }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="mb-2">

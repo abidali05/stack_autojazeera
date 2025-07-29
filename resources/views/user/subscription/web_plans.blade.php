@@ -238,13 +238,18 @@
                                         <div class="col-md-3 col-12 p-3 {{ $ads_plan->metadata->is_recomended == '1' ? 'topclas' : '' }}"
                                             id="card1-1">
                                             <div class="row">
-                                                <div class="col-12 ">
+                                               <div class="col-12 d-flex flex-column " style="height: 390px">
                                                     <p
                                                         class="m-0 premiumbadge {{ $ads_plan->metadata->is_recomended == '1' ? '' : 'd-none' }}">
                                                         Recommended</p>
                                                     <p
-                                                        class="twenty mt-5   {{ $ads_plan->metadata->is_recomended == '1' ? 'textclas' : '' }}">
-                                                        {{ $ads_plan->name }}</p>
+                                                        class="twenty mt-5 d-flex justify-content-between align-items-center  {{ $ads_plan->metadata->is_recomended == '1' ? 'textclas' : '' }}">
+                                                        {{ $ads_plan->name }}
+                                                    @if ($loop->first)
+        <img src="{{ asset('web/images/free_trail.svg') }}" style="height:60px;width:60px" class="img-fluid md-3" alt="...">
+    @else
+    <img src="{{ asset('web/images/other_icon.svg') }}" style="height:50px;width:10px" class="img-fluid mb-3" >
+@endif</p>
                                                     <p class="headsured keep-color" style="font-size:28px !important">
                                                         @if ($ads_plan->price)
                                                             Rs {{ $ads_plan->price }} <span
@@ -264,7 +269,10 @@
                                                             </div>
                                                         </div>
                                                     @endforeach
+    </div>
 
+    {{-- Bottom Button --}}
+    <div class="mt-auto">
 
                                                     <button id="btn1-1" class="btnsub" style="background-color: #F40000;"
                                                         onclick="window.location='/login'">
@@ -304,7 +312,9 @@
                                                         class="twenty mt-5 d-flex justify-content-between align-items-center {{ $ads_plan->metadata->is_recomended == '1' ? 'textclas' : '' }}">
                                                         {{ $ads_plan->name }} @if ($loop->first)
         <img src="{{ asset('web/images/Group (2).svg') }}" style="height:80px;width:80px" class="img-fluid md-3" alt="...">
-    @endif</p>
+    @else
+    <img src="{{ asset('web/images/other_icon.svg') }}" style="height:60px;width:10px" class="img-fluid mb-3" >
+@endif</p>
                                                     <p class="headsured keep-color" style="font-size:28px !important">
                                                         @if ($ads_plan->price)
                                                             Rs {{ $ads_plan->price }} <span
@@ -371,7 +381,9 @@
                                                     class="twenty mt-5 d-flex justify-content-between align-items-center {{ $plan->metadata->is_recomended == '1' ? 'textclas' : '' }}">
                                                     {{ $plan->name }} @if ($loop->first)
         <img src="{{ asset('web/images/Group (2).svg') }}" style="height:80px;width:80px" class="img-fluid md-3" alt="...">
-    @endif</p>
+    @else
+    <img src="{{ asset('web/images/other_icon.svg') }}" style="height:60px;width:10px" class="img-fluid mb-3" >
+@endif</p>
                                                 <p class="headsured keep-color" style="font-size:28px !important">
                                                     @if ($plan->price)
                                                         Rs {{ $plan->price }} <span

@@ -107,14 +107,14 @@
     {{-- tabs navigaition  --}}
     <div class="container mt-3">
         <div class="row align-items-center mb-2">
-         
+
             <div class="col-md-8">
                 <h2 class="sec mb-0 primary-color-custom">Manage Amenities</h2>
             </div>
-			      <div class="col-md-4 text-end">
+            <div class="col-md-4 text-end">
                 <button class="btn custom-btn-nav rounded" data-bs-toggle="modal" data-bs-target="#addServiceCategoryModal">
-                  Add New
-                   
+                    Add New
+
                 </button>
             </div>
         </div>
@@ -266,10 +266,12 @@
                             aria-labelledby="colorModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
-                                    <div class="modal-header border-0 " style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
-                                        <h5 class="modal-title" id="colorModalLabel"> <strong>Edit Category</strong></h5>
-                                        <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
+                                    <div class="modal-header border-0 "
+                                        style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                                        <h5 class="modal-title" id="colorModalLabel"> <strong>Edit Amenities</strong></h5>
+                                        <button type="button" class="btn-close"
+                                            style="background-color: #D9D9D9 !important; color: #FD5631;"
+                                            data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <form id="featureForm" method="post"
                                         action="{{ route('superadmin.amenities.update', $amenity->id) }}"
@@ -279,7 +281,7 @@
                                             @csrf
                                             @method('PUT')
                                             <div class="row">
-                                               
+
                                                 <div class="col-md-12">
                                                     <div class="mb-3">
                                                         <label for="bodyType" class="form-label">Enter Amenity
@@ -299,9 +301,11 @@
                                         </div>
 
                                         <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                                            <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                                            <button type="button" class="btn btn-light px-4 py-2 "
+                                                style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
                                                 data-bs-dismiss="modal">Cancel</button>
-                                            <button type="submit" class="btn btn-light px-4 py-2 " style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Save</button>
+                                            <button type="submit" class="btn btn-light px-4 py-2 "
+                                                style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Save</button>
                                         </div>
                                     </form>
                                 </div>
@@ -329,12 +333,13 @@
                         <div class="modal fade" id="deleteServiceCategoryModal{{ $amenity->id }}" tabindex="-1"
                             aria-labelledby="addDealerModalLabel" aria-hidden="true">
                             <div class="modal-dialog  modal-dialog-centered">
-                                <div class="modal-content "
-               style="border-radius: 10px; overflow: hidden;">
-                                    <div class="modal-header border-0" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                                <div class="modal-content " style="border-radius: 10px; overflow: hidden;">
+                                    <div class="modal-header border-0"
+                                        style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                                         <h5 class="modal-title" id="editDealerModalLabel"><strong>Delete </strong></h5>
-                                        <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
+                                        <button type="button" class="btn-close"
+                                            style="background-color: #D9D9D9 !important; color: #FD5631;"
+                                            data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
 
                                     <div class="modal-body text-center" style="background-color: #F0F3F6; color: #FD5631;">
@@ -355,9 +360,11 @@
 
                                     </div>
                                     <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                                        <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                                        <button type="button" class="btn btn-light px-4 py-2 "
+                                            style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
                                             data-bs-dismiss="modal">Cancel</button>
-                                        <button type="submit" class="btn btn-light px-4 py-2 " style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Delete</button>
+                                        <button type="submit" class="btn btn-light px-4 py-2 "
+                                            style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Delete</button>
                                     </div>
                                     </form>
                                 </div>
@@ -382,10 +389,13 @@
         <div class="modal fade" id="addServiceCategoryModal" tabindex="-1" aria-labelledby="colorModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content"  style="border-radius: 10px; overflow: hidden;">
-                    <div class="modal-header border-0 " style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
+                    <div class="modal-header border-0 "
+                        style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                         <h5 class="modal-title" id="colorModalLabel"><strong> Add Amenity</strong></h5>
-                        <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close"
+                            style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <form id="featureForm" method="post" action="{{ route('superadmin.amenities.store') }}"
                         enctype="multipart/form-data">
@@ -394,10 +404,10 @@
                             @csrf
                             @method('POST')
                             <div class="row">
-                               
+
                                 <div class="col-md-12">
 
-                                   
+
                                     <div class="mb-3">
                                         <label for="bodyType" class="form-label">Enter Amenity
                                             Name*</label>
@@ -416,8 +426,11 @@
                         </div>
 
                         <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                            <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-light px-4 py-2 " style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Save</button>
+                            <button type="button" class="btn btn-light px-4 py-2 "
+                                style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                                data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-light px-4 py-2 "
+                                style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Save</button>
                         </div>
                     </form>
                 </div>
@@ -432,11 +445,14 @@
         <div class="modal fade" id="amenityresponse" tabindex="-1" aria-labelledby="amenityresponseLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content"  style="border-radius: 10px; overflow: hidden;">
+                <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
                     <!-- Modal Header -->
-                    <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                    <div class="modal-header"
+                        style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                         <h5 class="modal-title" id="amenityresponseLabel"><strong> Amenity</strong></h5>
-                        <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close"
+                            style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <!-- Modal body -->
                     <div class="modal-body text-center" style="background-color: #F0F3F6; color: #FD5631;">
@@ -444,7 +460,9 @@
                     </div>
                     <!-- Modal footer -->
                     <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                        <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-light px-4 py-2 "
+                            style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;""
+                            data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>

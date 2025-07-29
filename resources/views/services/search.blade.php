@@ -1036,7 +1036,12 @@
             margin-top: 30px;
             margin-left: 60px;
         }
-
+    @media (min-width: 300px) and (max-width: 500px) {
+        .fourtyeight {
+            font-size: 28px; /* Example size, adjust as needed */
+          
+        }
+    }
     </style>
     {{-- step form css end --}}
 
@@ -1052,7 +1057,7 @@
         <div class="row d-flex justify-content-between align-items-baseline">
             <div class="col-md-10 d-flex flex-wrap mt-4">
 
-                <div class="dropdown me-2">
+                <div class="dropdown mt-2 me-2">
                     <button class="distancecheck dropdown-toggle" type="button" id="dropdownMenuButton"
                         data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
 
@@ -1156,7 +1161,7 @@
                     </form>
                 </div>
 
-                <div class="dropdown me-2">
+                <div class="dropdown mt-2 me-2">
                     <button class="distancecheck dropdown-toggle" type="button" id="dropdownMenuButton"
                         data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                         Location
@@ -1202,7 +1207,7 @@
 
 
 
-                <div class="dropdown">
+                <div class="dropdown mt-2">
                     <button class=" distancecheck dropdown-toggle" type="button" id="dropdownMenuButton"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Distance
@@ -1261,7 +1266,7 @@
                         </form>
                     </ul>
                 </div>
-                <div class="dropdown ms-2">
+                <div class="dropdown mt-2 ms-2">
                     <button class=" distancecheck dropdown-toggle" type="button" id="dropdownMenuButton"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Service Type
@@ -1293,7 +1298,7 @@
                         </form>
                     </ul>
                 </div>
-                <div class="dropdown ms-2 me-2">
+                <div class="dropdown mt-2 ms-2 me-2">
                     <button class=" distancecheck dropdown-toggle" type="button" id="dropdownMenuButton"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Amenities
@@ -1369,8 +1374,8 @@
 
 
                 <input type="checkbox" id="openToggle" class="btn-checkbox">
-                <label for="openToggle" class="btn-label">Open Now</label>
-                <label class="btn-label ms-1" onclick="window.location.reload()">Clear Filters</label>
+                <label for="openToggle" class="btn-label mt-2">Open Now</label>
+                <label class="btn-label ms-1 mt-2" onclick="window.location.reload()">Clear Filters</label>
             </div>
 
             <div class="col-md-2 d-flex justify-content-end">
@@ -1522,11 +1527,11 @@
 		 <div class="row d-flex justify-content-center my-3">
 		       <div class="p-3 col-8" style="border:1px solid #281F48;border-radius:9px;">
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-md-3 text-center text-md-start ">
                             <img src="{{ asset('web/images/noinputs.svg') }}" alt="" class="img-fluid"
                                 srcset="">
                         </div>
-                        <div class="col-9 text-start">
+                        <div class="col-md-9 text-start">
                             <h1 style="color:#FD5631">Sorry</h1>
                             <p>No matches found for your search. Try adjusting your filters or expanding your criteria
                                 to
