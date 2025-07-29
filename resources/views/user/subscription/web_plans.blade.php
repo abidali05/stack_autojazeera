@@ -250,9 +250,9 @@
     @else
     <img src="{{ asset('web/images/other_icon.svg') }}" style="height:50px;width:10px" class="img-fluid mb-3" >
 @endif</p>
-                                                    <p class="headsured keep-color" style="font-size:28px !important">
+                                                    <p class="headsured keep-color" style="font-size:26px !important">
                                                         @if ($ads_plan->price)
-                                                            Rs {{ $ads_plan->price }} <span
+                                                            Rs {{number_format($ads_plan->price) }} <span
                                                                 class="{{ $ads_plan->metadata->is_recomended == '1' ? 'textclas' : 'textclrbluee' }}">/month</span>
                                                         @else
                                                             Free Forever
@@ -304,7 +304,7 @@
                                         <div class="col-md-3 col-12 p-3 {{ $ads_plan->metadata->is_recomended == '1' ? 'topclas' : '' }}"
                                             id="card1-1">
                                             <div class="row">
-                                                <div class="col-12 d-flex flex-column " style="height: 360px">
+                                                <div class="col-12 d-flex flex-column " style="height: 390px">
                                                     <p
                                                         class="m-0 premiumbadge  {{ $ads_plan->metadata->is_recomended == '1' ? '' : 'd-none' }}">
                                                         Recommended</p>
@@ -315,9 +315,9 @@
     @else
     <img src="{{ asset('web/images/other_icon.svg') }}" style="height:60px;width:10px" class="img-fluid mb-3" >
 @endif</p>
-                                                    <p class="headsured keep-color" style="font-size:28px !important">
+                                                    <p class="headsured keep-color" style="font-size:26px !important">
                                                         @if ($ads_plan->price)
-                                                            Rs {{ $ads_plan->price }} <span
+                                                            Rs {{number_format($ads_plan->price) }} <span
                                                                 class="{{ $ads_plan->metadata->is_recomended == '1' ? 'textclas' : 'textclrbluee' }}">/month</span>
                                                         @else
                                                             Free Forever
@@ -373,7 +373,7 @@
                                     <div class="col-md-3 col-12 p-3 {{ $plan->metadata->is_recomended == '1' ? 'topclas' : '' }}"
                                         id="card1-1">
                                         <div class="row">
-                                           <div class="col-12 d-flex flex-column " style="height: 640px">
+                                           <div class="col-12 d-flex flex-column " style="height: 650px">
                                                 <p
                                                     class="m-0 premiumbadge  {{ $plan->metadata->is_recomended == '1' ? '' : 'd-none' }}">
                                                     Recommended</p>
@@ -384,9 +384,9 @@
     @else
     <img src="{{ asset('web/images/other_icon.svg') }}" style="height:60px;width:10px" class="img-fluid mb-3" >
 @endif</p>
-                                                <p class="headsured keep-color" style="font-size:28px !important">
+                                                <p class="headsured keep-color" style="font-size:26px !important">
                                                     @if ($plan->price)
-                                                        Rs {{ $plan->price }} <span
+                                                        Rs {{ number_format($plan->price) }} <span
                                                             class="{{ $plan->metadata->is_recomended == '1' ? 'textclas' : 'textclrbluee' }}">/month</span>
                                                     @else
                                                         Free Forever

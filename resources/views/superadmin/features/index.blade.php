@@ -1079,7 +1079,7 @@
                         lengthChange: false,
                         searching: true,
                         ordering: true,
-                        scrollX: false,
+                        scrollX: true,
                         order: [
                             [0, 'asc']
                         ],
