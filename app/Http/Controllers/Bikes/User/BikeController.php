@@ -206,7 +206,6 @@ class BikeController extends Controller
         });
         // Replace request data with cleaned one
         $request->merge($filteredData->toArray());
-        dd($request->all());
 
         $query = BikePost::where('status', '1');
 

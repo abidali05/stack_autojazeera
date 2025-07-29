@@ -104,7 +104,6 @@ class RegisterationController extends Controller
                 User::upsert(
                     [
                         [
-
                             'name' => $request->name,
                             'email' => $request->identifier,
                             'fcm_token' => $request->fcm_token,
@@ -137,8 +136,8 @@ class RegisterationController extends Controller
                     ], 401);
                 }
 
-				//Mail::to($request->identifier)->send(new Welcome());
-				
+                //Mail::to($request->identifier)->send(new Welcome());
+
                 return response()->json([
                     "data" => $user,
                     "token" => $token,
@@ -146,9 +145,6 @@ class RegisterationController extends Controller
                     'status' => 200
                 ], 200);
             }
-
-
-
 
 
             if ($request->input('provider') === 'email') {
@@ -183,8 +179,8 @@ class RegisterationController extends Controller
                         'error' => $e->getMessage()
                     ], 500);
                 }
-				
-				Mail::to($request->identifier)->send(new Welcome());
+
+                Mail::to($request->identifier)->send(new Welcome());
             }
 
             if ($request->input('provider') === 'phone') {
@@ -199,7 +195,7 @@ class RegisterationController extends Controller
 
                 $otp_instance = new ApiNumbereController();
                 $response = $otp_instance->send_number_otp($user->number, $otp);
-				// Mail::to($request->identifier)->send(new Welcome());
+                // Mail::to($request->identifier)->send(new Welcome());
                 return $response;
             }
 
@@ -414,9 +410,6 @@ class RegisterationController extends Controller
         }
     }
 
-
-
-
     public function send_otp(Request $request)
     {
         try {
@@ -451,9 +444,6 @@ class RegisterationController extends Controller
                 $messages['prefix.required'] = 'The country code field is required.';
                 $messages['prefix.string'] = 'The country code must be a string.';
             }
-
-
-
 
 
             $validator = Validator::make($request->all(), $rules, $messages);
@@ -609,8 +599,6 @@ class RegisterationController extends Controller
                 ->orWhere('number', $data['identifier'])
                 ->first();
 
-
-
             if (!$user) {
                 return response()->json([
                     'message' => 'Invalid user credentials.',
@@ -687,7 +675,6 @@ class RegisterationController extends Controller
 
     public function register(Request $request)
     {
-
         $request->merge(['number' => "+92" . $request->number]);
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
@@ -698,8 +685,6 @@ class RegisterationController extends Controller
                 'unique:users', // Ensures no duplicate phone numbers
                 'regex:/[0-9]{10}/' // Validates only the 10-digit local number part
             ],
-
-
             // 'password' => 'required|string|min:8',
 
         ]);
@@ -713,28 +698,26 @@ class RegisterationController extends Controller
         $user = User::create($input);
         //$body = view('emails.welcome');
         //sendMail($user->name, $user->email, 'Auto Jazeera', 'Welcome To Auto Jazeera', $body);
-       // try {
-            Mail::to($user->email)->send(new Welcome());
+        // try {
+        Mail::to($user->email)->send(new Welcome());
 
-         //   return response()->json([
-           //     "message" => 'OTP sent to your email',
-             //   'status' => 200
-           // ], 200);
+        //   return response()->json([
+        //     "message" => 'OTP sent to your email',
+        //   'status' => 200
+        // ], 200);
         //} catch (\Exception $e) {
         //    return response()->json([
-          //      "message" => 'Email not sent, please try again later.',
-            //    'status' => 500,
-              //  'error' => $e->getMessage()
-           // ], 500);
-      //  }
+        //      "message" => 'Email not sent, please try again later.',
+        //    'status' => 500,
+        //  'error' => $e->getMessage()
+        // ], 500);
+        //  }
         // $token = $user->createToken('auth:sanctum')->plainTextToken;
         // $otp = random_int(100000, 999999);
         // $data['url'] = $url;
         // $data['email'] = $request->email;
         // $data['title'] = 'Register Account';
         // $data['otp'] = $otp;
-
-
 
         // $data['body'] = 'Otp to register your account';
         // Mail::send('Api.register_account', ['data' => $data], function ($message) use ($data) {
@@ -750,16 +733,14 @@ class RegisterationController extends Controller
         ], 200);
         // return response()->json(['status' => 200, 'message' => 'Item removed Successfully']);
     }
+
     public function login(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
-
             'email' => 'required|string|email|max:255|exists:users,email',
-
             // 'password' => 'required|string|min:8',
-
         ]);
+
         if ($validator->fails()) {
             return response(['errors' => $validator->errors()->all()], 422);
         }
@@ -896,21 +877,21 @@ class RegisterationController extends Controller
                 $user->save();
                 //$body = view('emails.welcome');
                 //sendMail($user->name, $user->email, 'Auto Jazeera', 'Welcome To Auto Jazeera', $body);
-                
-               // try {
-                    Mail::to($user->email)->send(new Welcome());
-        
+
+                // try {
+                Mail::to($user->email)->send(new Welcome());
+
                 //    return response()->json([
-                       // "message" => 'OTP sent to your email',
+                // "message" => 'OTP sent to your email',
                 //        'status' => 200
-                 //   ], 200);
-            //    } catch (\Exception $e) {
-              //      return response()->json([
+                //   ], 200);
+                //    } catch (\Exception $e) {
+                //      return response()->json([
                 //        "message" => 'Email not sent, please try again later.',
-                  //      'status' => 500,
-                    //    'error' => $e->getMessage()
-            //        ], 500);
-             //   }
+                //      'status' => 500,
+                //    'error' => $e->getMessage()
+                //        ], 500);
+                //   }
                 // Auth::login($user);
                 $token = $user->createToken('auth:sanctum')->plainTextToken;
                 $u = User::where(['email' => $request->email])->first();
@@ -1145,10 +1126,6 @@ class RegisterationController extends Controller
                 $messages['prefix.string'] = 'The country code must be a string.';
                 $messages['identifier.unique'] = 'The phone number has already been taken.';
             }
-
-
-
-
 
             $validator = Validator::make($request->all(), $rules, $messages);
 

@@ -49,8 +49,6 @@ Route::post('/verify_otp', [RegisterationController::class, 'verify_otp']);
 
 Route::post('/verification', [RegisterationController::class, 'verification']);
 
-
-
 //stripe
 Route::get('/plans', [ApiPostController::class, 'plans']);
 Route::get('subscription', [ApiPostController::class, 'subscription']);
