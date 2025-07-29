@@ -63,7 +63,7 @@
 
         .crouserheading1 {
             color: #281f48;
-            font-size: 35px;
+            font-size: 36px;
             padding-left: 100px;
             padding-top: 60px;
             font-weight: 700;
