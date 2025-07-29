@@ -626,15 +626,13 @@ class ShopController extends Controller
             $booking = Bookings::with(['shop', 'make_r', 'model_r', 'bodytype_r'])->find($booking->id);
             // dd($booking);
             $body = view('emails.service_quote_submitted', compact('booking'));
-            sendMail($user->name, $user->email, 'Auto Jazeera', 'Service Quote Submitted', $body);
+            // sendMail($user->name, $user->email, 'Auto Jazeera', 'Service Quote Submitted', $body);
 
             $dealer = User::find($shop->dealer_id);
             $fcm_tokens = [$dealer->fcm_token];
             if ($fcm_tokens) {
 
                 SendFcmNotification::sendPriceAlertNotification($fcm_tokens, ['title' => 'New Services Quote', 'body' => 'You have a new services quote from ' . $user->name]);
-
-
 
                 Notifications::create([
                     'user_id' => $dealer->id,

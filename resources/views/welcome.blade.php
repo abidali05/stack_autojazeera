@@ -1104,10 +1104,6 @@
     });
 </script>
 
-
-
-
-
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script src="{{ asset('web/bikes/js/bike_home.js') }}"></script>
 
