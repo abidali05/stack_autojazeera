@@ -262,7 +262,7 @@
                     </div>
                 </div>
             </div>
-                {{-- <div class="container my-2">
+            {{-- <div class="container my-2">
                     <div class="row d-flex justify-content-between">
                         <div class="col-md-5"> <span class="pt-md-3 pagination_count"
                                 style="font-size: 18px; color: #281F48; font-weight:700;">
@@ -372,7 +372,7 @@
                 </div> --}}
             <div class="container table-responsive ">
                 <div class="row">
-                    <table class="table table-striped transparent-table align-middle datatable">
+                    <table class="table table-striped transparent-table align-middle model-datatable">
                         <thead>
                             <tr>
                                 <th>Sr#</th>
@@ -1011,4 +1011,53 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('.model-datatable').each(function() {
+                var table = $(this).DataTable({
+                    paging: true,
+                    pageLength: 25,
+                    lengthChange: false,
+                    searching: true,
+                    ordering: true,
+                    scrollX: false,
+                    order: [
+                        [0, 'asc']
+                    ],
+                    language: {
+                        search: "Search: "
+                    },
+                    dom: `<"search-wrapper mb-3"f>
+                        <"pagination-wrapper d-flex justify-content-between align-items-center mb-3"i p>
+                        rt
+                        <"pagination-wrapper d-flex justify-content-between align-items-center mt-3"i p>
+                        <"clear">`
+                });
+
+                // Add search row
+                $(this).find('thead').append('<tr class="search-row"></tr>');
+
+                $(this).find('thead th').each(function(index) {
+                    var title = $(this).text().trim();
+                    var searchHtml = '';
+
+                    // Only create inputs for specific columns
+                    if (['Dealer Name', 'Make', 'Model', 'Year'].includes(title)) {
+                        searchHtml = '<input type="text" placeholder="Search ' + title +
+                            '" class="ads-column-search"/>';
+                    }
+
+                    $(this).closest('thead').find('.search-row').append(
+                        '<th>' + searchHtml + '</th>'
+                    );
+                });
+
+                // Apply search functionality
+                $(this).find('.search-row input').on('keyup change', function() {
+                    var columnIndex = $(this).closest('th').index();
+                    table.column(columnIndex).search(this.value).draw();
+                });
+            });
+        });
+    </script>
 @endsection
