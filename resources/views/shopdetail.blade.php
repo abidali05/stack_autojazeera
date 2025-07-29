@@ -2,6 +2,43 @@
 
 @extends('layout.website_layout.services.main')
 
+<style>
+    .image-preview-box {
+        width: 120px;
+        height: 120px;
+        position: relative;
+        border-radius: 5px;
+        overflow: hidden;
+        border: 1px solid #ccc;
+    }
+
+    .image-preview-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .remove-btn {
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 22px;
+        height: 22px;
+        font-size: 14px;
+        cursor: pointer;
+        line-height: 20px;
+        text-align: center;
+        padding: 0;
+    }
+
+    .remove-btn:hover {
+        background: red;
+    }
+</style>
 
 <style>
     body {
@@ -533,7 +570,7 @@
         /* Adjust vertical alignment */
         z-index: 10;
     }
- 
+
 
     .carousel-indicators [data-bs-target] {
         box-sizing: content-box;
@@ -979,13 +1016,13 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <h1 class="fourtyeight">{{ $shop->name }}</h1>
-								       <p class="m-0 mt-4">
-                            @foreach ($shop->shop_services as $i => $shopservice)
-                                @if ($i < 3)
-                                    <span class="eighteen m-0 me-4 mt-3">{{ $shopservice->service->name }}</span>
-                                @endif
-                            @endforeach
-                        </p>
+                                <p class="m-0 mt-4">
+                                    @foreach ($shop->shop_services as $i => $shopservice)
+                                        @if ($i < 3)
+                                            <span class="eighteen m-0 me-4 mt-3">{{ $shopservice->service->name }}</span>
+                                        @endif
+                                    @endforeach
+                                </p>
                             </div>
                             <div>
                                 <div class="feedback-rating-container align-items-center ">
@@ -1005,205 +1042,193 @@
                                     <p class="text-end m-0">{{ number_format($shop->rating, 1) }}
                                         ({{ $shop->total_ratings }} Reviews)</p>
                                 </div>
-     <div class="d-flex justify-content-end align-items-center mt-4">
-                            <span class="eighteen  " style="font-size:20px">{{$shop->views ?? '0' }}</span><i class="bi bi-eye fs-4 ms-2 me-2"></i>
-                            @auth
-							@if(Auth::user()->role == '2' || Auth::user()->role == '3')
-					
-							
-							<button style="background-color: transparent; border: none; color:#281F48 !important">
-                                    <i class="bi bi-heart' fs-5"></i></button>
-							
-							@else
-							
-                                @php
-                                    $check = \App\Models\AutoServices\ShopWishlist::where('user_id', auth()->id())
-                                        ->where('shop_id', $shop->id)
-                                        ->first();
-                                @endphp
+                                <div class="d-flex justify-content-end align-items-center mt-4">
+                                    <span class="eighteen  " style="font-size:20px">{{ $shop->views ?? '0' }}</span><i
+                                        class="bi bi-eye fs-4 ms-2 me-2"></i>
+                                    @auth
+                                        @if (Auth::user()->role == '2' || Auth::user()->role == '3')
+                                            <button
+                                                style="background-color: transparent; border: none; color:#281F48 !important">
+                                                <i class="bi bi-heart' fs-5"></i></button>
+                                        @else
+                                            @php
+                                                $check = \App\Models\AutoServices\ShopWishlist::where(
+                                                    'user_id',
+                                                    auth()->id(),
+                                                )
+                                                    ->where('shop_id', $shop->id)
+                                                    ->first();
+                                            @endphp
 
-                                <a href="{{ route('shops.wishlist.add', ['shop' => $shop->id, 'user' => auth()->id()]) }}"
-                                    style="background-color: transparent; border: none; color:#281F48 !important">
-                                    <i class="bi {{ $check ? 'bi-heart-fill text-danger' : 'bi-heart' }} fs-5"></i>
-                                </a>
-							@endif
-                            @endauth
+                                            <a href="{{ route('shops.wishlist.add', ['shop' => $shop->id, 'user' => auth()->id()]) }}"
+                                                style="background-color: transparent; border: none; color:#281F48 !important">
+                                                <i class="bi {{ $check ? 'bi-heart-fill text-danger' : 'bi-heart' }} fs-5"></i>
+                                            </a>
+                                        @endif
+                                    @endauth
 
 
-                            @guest
-                                <a href="{{ route('login') }}" style="background-color: transparent; border: none;">
-                                    <i class="bi bi-heart fs-4"></i>
-                                </a>
-                            @endguest
-                        </div>
+                                    @guest
+                                        <a href="{{ route('login') }}" style="background-color: transparent; border: none;">
+                                            <i class="bi bi-heart fs-4"></i>
+                                        </a>
+                                    @endguest
+                                </div>
                             </div>
                         </div>
                     </div>
-                  </div>
-
-
-                    @php
-                        $currentDay = date('l');
-                        $timings = $shop->shop_timings->where('day', $currentDay)->first();
-                    @endphp
-
-
-
-                    @if ($timings)
-                        <div class="row">
-                            <div class="col-md-4">
-                                <span class="twentygreen ">Open Now<span
-                                        class="twentygrey ms-4">{{ date('h:i A', strtotime($timings->start_time)) }} -
-                                        {{ date('h:i A', strtotime($timings->end_time)) }}</span></span>
-
-                            </div>
-                            <div class="col-md-8 text-end">
-                                <span class="twentyfourlabel ">{{ $shop->address }} (14 km
-                                    away) <img src="{{ asset('web/services/images/Icon (Stroke).svg') }}"
-                                        class="img-fluid ms-2" alt="..."></span>
-                            </div>
-                        </div>
-                    @else
-                        <span style="color: orangered;">Closed</span>
-                    @endif
                 </div>
 
 
+                @php
+                    $currentDay = date('l');
+                    $timings = $shop->shop_timings->where('day', $currentDay)->first();
+                @endphp
+
+
+
+                @if ($timings)
+                    <div class="row">
+                        <div class="col-md-4">
+                            <span class="twentygreen ">Open Now<span
+                                    class="twentygrey ms-4">{{ date('h:i A', strtotime($timings->start_time)) }} -
+                                    {{ date('h:i A', strtotime($timings->end_time)) }}</span></span>
+
+                        </div>
+                        <div class="col-md-8 text-end">
+                            <span class="twentyfourlabel ">{{ $shop->address }} (14 km
+                                away) <img src="{{ asset('web/services/images/Icon (Stroke).svg') }}"
+                                    class="img-fluid ms-2" alt="..."></span>
+                        </div>
+                    </div>
+                @else
+                    <span style="color: orangered;">Closed</span>
+                @endif
             </div>
-            <div class="row">
-                <div class="col-6 ">
-                    @auth
-                        @php
-                            $user = Auth::user();
-                            if ($user->role == '1') {
-                                $userId = $user->id;
-                            }
-                            if ($user->role == '2') {
-                                $userId = $user->dealer_id;
-                            }
-                        @endphp
-                        @if ( Auth::user()->id == $shop->dealer_id)
-                            <button class="button11 me-2 mt-4"
-                                onclick="alert('You can not request a quote from your own shop')">Request a Quote
-                            </button>
+
+
+        </div>
+        <div class="row">
+            <div class="col-6 ">
+                @auth
+                    @php
+                        $user = Auth::user();
+                        if ($user->role == '1') {
+                            $userId = $user->id;
+                        }
+                        if ($user->role == '2') {
+                            $userId = $user->dealer_id;
+                        }
+                    @endphp
+                    @if (Auth::user()->id == $shop->dealer_id)
+                        <button class="button11 me-2 mt-4"
+                            onclick="alert('You can not request a quote from your own shop')">Request a Quote
+                        </button>
+                    @else
+                        @if (Auth::user()->role == '2' || Auth::user()->role == '3')
+                            <button class="button11 me-2 mt-4" onclick="alert('You are not authorized for this action!')">
+                                <strong>Request a Quote</strong></button>
                         @else
-					@if(Auth::user()->role == '2' || Auth::user()->role == '3')
-					 <button class="button11 me-2 mt-4"
-                            onclick="alert('You are not authorized for this action!')">
-                            <strong>Request a Quote</strong></button>
-					@else
                             <button class="button11 me-2 mt-4" data-bs-toggle="modal"
                                 data-bs-target="#requestQuoteModal">Request a Quote
                             </button>
-					@endif
                         @endif
-                    @endauth
+                    @endif
+                @endauth
 
-                    @guest
-                        <a href="{{ route('login') }}" class="button11 me-2 mt-4"><strong>Request a Quote</strong>
-                        </a>
-                    @endguest
+                @guest
+                    <a href="{{ route('login') }}" class="button11 me-2 mt-4"><strong>Request a Quote</strong>
+                    </a>
+                @endguest
 
-                    {{-- <a href="tel:{{ $shop->number }}" class="buttons me-2 mt-4 "><img
+                {{-- <a href="tel:{{ $shop->number }}" class="buttons me-2 mt-4 "><img
                                 src="{{ asset('web/services/images/Icon7.svg') }}" class="img-fluid me-2 pb-1"
 																						  style="height: 20px; width: 20px;" alt="..."><strong>Call</strong></a>
                         <a href="https://wa.me/{{ $shop->number }}" class="buttons me-2 mt-4 "><img
                                 src="{{ asset('web/services/images/Icon7.svg') }}" class="img-fluid me-2 pb-1"
                                 style="height: 20px; width: 20px;" alt="..."><strong>WhatsApp</strong></a> --}}
-                    @auth
-					@if(Auth::user()->role == '2' || Auth::user()->role == '3')
-					
-					
-					<button class="buttons me-2 mt-4" onclick="alert('You are not authorized for this action!')"><img
+                @auth
+                    @if (Auth::user()->role == '2' || Auth::user()->role == '3')
+                        <button class="buttons me-2 mt-4" onclick="alert('You are not authorized for this action!')"><img
                                 src="{{ asset('web/services/images/starr.svg') }}" class="img-fluid me-2 pb-1"
                                 style="height: 20px; width: 20px;" alt="..."><strong>Write
                                 a review</strong></button>
-					
-					
-					
-					@else
+                    @else
                         <button class="buttons me-2 mt-4" data-bs-toggle="modal" data-bs-target="#reviewModal"><img
                                 src="{{ asset('web/services/images/starr.svg') }}" class="img-fluid me-2 pb-1"
                                 style="height: 20px; width: 20px;" alt="..."><strong>Write
                                 a review</strong></button>
-					@endif
-                    @endauth
+                    @endif
+                @endauth
 
-                    @guest
-                        <a href="{{ route('login') }}" class="buttons me-2 mt-4"><strong>Write
-                                a review</strong></a>
-                    @endguest
+                @guest
+                    <a href="{{ route('login') }}" class="buttons me-2 mt-4"><strong>Write
+                            a review</strong></a>
+                @endguest
 
-                    <button class="buttons me-2 mt-4 "
-                        onclick="shareLink()"><img
-                            src="{{ asset('web/services/images/icon8.svg') }}"
-                            class="img-fluid me-2 "style="height: 13px; width: 20px;"
-                            alt="..."><strong>Share</strong></button>
- @auth
-					@if(auth()->id() == $shop->dealer_id )
-					   <button class="buttons me-2 mt-4 "
-                            onclick="alert('You can not chat with yourself')">
+                <button class="buttons me-2 mt-4 " onclick="shareLink()"><img
+                        src="{{ asset('web/services/images/icon8.svg') }}"
+                        class="img-fluid me-2 "style="height: 13px; width: 20px;"
+                        alt="..."><strong>Share</strong></button>
+                @auth
+                    @if (auth()->id() == $shop->dealer_id)
+                        <button class="buttons me-2 mt-4 " onclick="alert('You can not chat with yourself')">
                             <strong>Chat</strong></button>
-					@else
-                    @if ($shop->dealer->shop_pkg && $shop->dealer->shop_pkg->metadata->chat_allowed == '1')
-					
-					@if(Auth::user()->role == '2' || Auth::user()->role == '3')
-					 <button class="buttons me-2 mt-4 "
-                            onclick="alert('You are not authorized for this action!')">
-                            <strong>Chat</strong></button>
-					@else
-					
-                        <button class="buttons me-2 mt-4 "
-                            onclick="createOrOpenChat({{ $shop->id }}, {{ $shop->dealer_id }})">
-                            <strong>Chat</strong></button>
-					@endif
+                    @else
+                        @if ($shop->dealer->shop_pkg && $shop->dealer->shop_pkg->metadata->chat_allowed == '1')
+                            @if (Auth::user()->role == '2' || Auth::user()->role == '3')
+                                <button class="buttons me-2 mt-4 " onclick="alert('You are not authorized for this action!')">
+                                    <strong>Chat</strong></button>
+                            @else
+                                <button class="buttons me-2 mt-4 "
+                                    onclick="createOrOpenChat({{ $shop->id }}, {{ $shop->dealer_id }})">
+                                    <strong>Chat</strong></button>
+                            @endif
+                        @endif
                     @endif
-					@endif
-					  @endauth
-					
-					   @guest
-					 <a href="{{url('login')}}" class="buttons me-2 mt-4 ">
-                            <strong>Chat</strong></a>
-					   @endguest
-                </div>
-                <div class="col-md-6 mt-3 text-end align-items-center">
+                @endauth
 
-					 @if ($shop->dealer->shop_pkg && $shop->dealer->shop_pkg->metadata->number_allowed == '1')
-                   @if ($shop->number)
-    <i class="bi bi-telephone-fill fs-2 pt-5"
-       onclick="window.location.href='tel:{{ str_replace(' ', '', $shop->number) }}'"></i>
-@endif
-					@endif
- @if ($shop->dealer->shop_pkg && $shop->dealer->shop_pkg->metadata->whatsapp_allowed == '1')
-@if ($shop->number)
-    <i class="bi bi-whatsapp ms-3 fs-2 pt-5"
-       onclick="window.location.href='https://wa.me/{{ str_replace(' ', '', $shop->number) }}'"></i>
-@endif
-					@endif
-
-                    @if ($shop->facebook)
-                        <i class="bi bi-facebook ms-3 fs-2 pt-5"
-                            onclick="window.location.href='{{ $shop->facebook }}'"></i>
-                    @endif
-                    @if ($shop->instagram)
-                        <i class="bi bi-instagram ms-3 fs-2 pt-5"
-                            onclick="window.location.href='{{ $shop->instagram }}'"></i>
-                    @endif
-                    @if ($shop->twitter)
-                        <i class="bi bi-twitter-x ms-3 fs-2 pt-5"
-                            onclick="window.location.href='{{ $shop->twitter }}'"></i>
-                    @endif
-
-                </div>
+                @guest
+                    <a href="{{ url('login') }}" class="buttons me-2 mt-4 ">
+                        <strong>Chat</strong></a>
+                @endguest
             </div>
-            <div class="row">
-   
+            <div class="col-md-6 mt-3 text-end align-items-center">
+
+                @if ($shop->dealer->shop_pkg && $shop->dealer->shop_pkg->metadata->number_allowed == '1')
+                    @if ($shop->number)
+                        <i class="bi bi-telephone-fill fs-2 pt-5"
+                            onclick="window.location.href='tel:{{ str_replace(' ', '', $shop->number) }}'"></i>
+                    @endif
+                @endif
+                @if ($shop->dealer->shop_pkg && $shop->dealer->shop_pkg->metadata->whatsapp_allowed == '1')
+                    @if ($shop->number)
+                        <i class="bi bi-whatsapp ms-3 fs-2 pt-5"
+                            onclick="window.location.href='https://wa.me/{{ str_replace(' ', '', $shop->number) }}'"></i>
+                    @endif
+                @endif
+
+                @if ($shop->facebook)
+                    <i class="bi bi-facebook ms-3 fs-2 pt-5" onclick="window.location.href='{{ $shop->facebook }}'"></i>
+                @endif
+                @if ($shop->instagram)
+                    <i class="bi bi-instagram ms-3 fs-2 pt-5"
+                        onclick="window.location.href='{{ $shop->instagram }}'"></i>
+                @endif
+                @if ($shop->twitter)
+                    <i class="bi bi-twitter-x ms-3 fs-2 pt-5" onclick="window.location.href='{{ $shop->twitter }}'"></i>
+                @endif
+
             </div>
-            <div class="row">
-                <div class="col-md-7 col-12 p-3">
-                    <div class="row">
-                        <div class="col-12 p-0">
-                            @if (count($shop->shop_images) > 0)
+        </div>
+        <div class="row">
+
+        </div>
+        <div class="row">
+            <div class="col-md-7 col-12 p-3">
+                <div class="row">
+                    <div class="col-12 p-0">
+                        @if (count($shop->shop_images) > 0)
                             <h2 class="twentyeight my-3">Photos & Videos</h2>
                             <div id="mainCarousel" class="carousel slide mb-3" data-bs-ride="carousel">
                                 <div class="carousel-inner">
@@ -1231,176 +1256,170 @@
                                     <span class="visually-hidden">Next</span>
                                 </button>
                             </div>
-                            @endif 
-                            <h2 class="my-3 twentyeight">Services Offered</h2>
-                            <div class="row">
-                                @foreach ($shop->shop_services as $service)
-                                    <div class="col-md-4 col-6">
-                                        <div class="row mb-2 d-flex align-items-center">
-                                            <div class="col-md-3"><img src="{{ $service->service->icon }}"
-                                                    class="img-fluid " style="width: 40px; height: 40px;" alt="...">
-                                            </div>
-                                            <div class="col-md-9 ps-0">
-                                                <p class="sixteennn">{{ $service->service->name }}</p>
-                                            </div>
+                        @endif
+                        <h2 class="my-3 twentyeight">Services Offered</h2>
+                        <div class="row">
+                            @foreach ($shop->shop_services as $service)
+                                <div class="col-md-4 col-6">
+                                    <div class="row mb-2 d-flex align-items-center">
+                                        <div class="col-md-3"><img src="{{ $service->service->icon }}"
+                                                class="img-fluid " style="width: 40px; height: 40px;" alt="...">
                                         </div>
+                                        <div class="col-md-9 ps-0">
+                                            <p class="sixteennn">{{ $service->service->name }}</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            @endforeach
+
+
+                        </div>
+
+                        <h2 class="my-3 twentyeight">Amenities</h2>
+
+                        <div class="row">
+                            @foreach ($shop->shop_amenities as $amenity)
+                                <div class="col-md-4 col-6">
+                                    <div class="row mb-2 d-flex align-items-center">
+
+                                        <div class="col-md-9 ps-0">
+                                            <p class="sixteennn ms-2 ps-1">{{ $amenity->amenity->name }}</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            @endforeach
+
+
+                        </div>
+                        <div class="row">
+
+                            <div class="col-12 divcolor rounded-3 p-3">
+                                <div class="row text-center">
+                                    <div class="col-12 col-md-4 p-0 m-0 ">
+                                        <span
+                                            class="bigfont  p-0 m-0"><strong>{{ number_format($shop->rating, 1) }}</strong></span>
 
                                     </div>
-                                @endforeach
-
-
-                            </div>
-
-                            <h2 class="my-3 twentyeight">Amenities</h2>
-
-                            <div class="row">
-                                @foreach ($shop->shop_amenities as $amenity)
-                                    <div class="col-md-4 col-6">
-                                        <div class="row mb-2 d-flex align-items-center">
-
-                                            <div class="col-md-9 ps-0">
-                                                <p class="sixteennn ms-2 ps-1">{{ $amenity->amenity->name }}</p>
-                                            </div>
-                                        </div>
-
+                                    <div class="col-md-4 text-end col-12 p-0 m-0">
+                                        <p class=" pt-4 text-end  twentyfour">Reviews</p>
+                                        <p class="p-0 m-0 eighteen text-end ">{{ $shop->name }}</p>
+                                        <p class="p-0 twelve mt-2 text-end ">{{ $shop->address }}</p>
                                     </div>
-                                @endforeach
 
-
-                            </div>
-                            <div class="row">
-
-                                <div class="col-12 divcolor rounded-3 p-3">
-                                    <div class="row text-center">
-                                        <div class="col-12 col-md-4 p-0 m-0 ">
-                                            <span
-                                                class="bigfont  p-0 m-0"><strong>{{ number_format($shop->rating, 1) }}</strong></span>
-
-                                        </div>
-                                        <div class="col-md-4 text-end col-12 p-0 m-0">
-                                            <p class=" pt-4 text-end  twentyfour">Reviews</p>
-                                            <p class="p-0 m-0 eighteen text-end ">{{ $shop->name }}</p>
-											<p class="p-0 twelve mt-2 text-end ">{{ $shop->address }}</p>
-                                        </div>
-
-                                        <div class="col-12 col-md-4 p-0 m-0">
-                                            <div
-                                                class="custom-rating-wrapper d-flex align-items-center justify-content-center ">
-                                                <div id="custom-star-container">
-                                                    <span
-                                                        class="custom-star {{ $shop->rating >= 1 ? 'highlighted' : '' }}"
-                                                        data-value="1">&#9733;</span>
-                                                    <span
-                                                        class="custom-star {{ $shop->rating >= 2 ? 'highlighted' : '' }}"
-                                                        data-value="2">&#9733;</span>
-                                                    <span
-                                                        class="custom-star {{ $shop->rating >= 3 ? 'highlighted' : '' }}"
-                                                        data-value="3">&#9733;</span>
-                                                    <span
-                                                        class="custom-star {{ $shop->rating >= 4 ? 'highlighted' : '' }}"
-                                                        data-value="4">&#9733;</span>
-                                                    <span
-                                                        class="custom-star {{ $shop->rating >= 5 ? 'highlighted' : '' }}"
-                                                        data-value="5">&#9733;</span>
-                                                </div>
+                                    <div class="col-12 col-md-4 p-0 m-0">
+                                        <div
+                                            class="custom-rating-wrapper d-flex align-items-center justify-content-center ">
+                                            <div id="custom-star-container">
+                                                <span class="custom-star {{ $shop->rating >= 1 ? 'highlighted' : '' }}"
+                                                    data-value="1">&#9733;</span>
+                                                <span class="custom-star {{ $shop->rating >= 2 ? 'highlighted' : '' }}"
+                                                    data-value="2">&#9733;</span>
+                                                <span class="custom-star {{ $shop->rating >= 3 ? 'highlighted' : '' }}"
+                                                    data-value="3">&#9733;</span>
+                                                <span class="custom-star {{ $shop->rating >= 4 ? 'highlighted' : '' }}"
+                                                    data-value="4">&#9733;</span>
+                                                <span class="custom-star {{ $shop->rating >= 5 ? 'highlighted' : '' }}"
+                                                    data-value="5">&#9733;</span>
                                             </div>
-                                            @foreach ($shop->shop_services->take(3) as $index => $service)
-                                                <p class="fourteen {{ $index === 0 ? 'mt-3' : '' }}">
-                                                    {{ $service->service->name }}</p>
-                                            @endforeach
-
                                         </div>
+                                        @foreach ($shop->shop_services->take(3) as $index => $service)
+                                            <p class="fourteen {{ $index === 0 ? 'mt-3' : '' }}">
+                                                {{ $service->service->name }}</p>
+                                        @endforeach
+
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-12 mt-3">
-                                    <h2 class="twentyeight">About Business</h2>
-                                    <p class="fourteen"> {{ $shop->description }}
-                                    </p>
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 mt-3">
+                                <h2 class="twentyeight">About Business</h2>
+                                <p class="fourteen"> {{ $shop->description }}
+                                </p>
                             </div>
-                            @php
-                                $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-                            @endphp
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h2 class="twentyeight">Hours & Location</h2>
-                                    <div class="row">
-                                        <div class="col-4" style="font-weight: 600;color: #000000;">
-                                            @foreach (['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] as $day)
-                                                <p class="sixteen">{{ $day }}</p>
-                                            @endforeach
-                                        </div>
-                                        <div class="col-8" style="font-weight: 600; color: #000000;">
-                                            @foreach ($days as $day)
-                                                @php
-                                                    $timing = $shop->shop_timings->where('day', $day)->first();
-                                                @endphp
-                                                <p id="preview-{{ strtolower($day) }}-hours" class="sixteen text-end">
-                                                    @if ($timing)
-                                                        {{ date('h:i A', strtotime($timing->start_time)) }} -
-                                                        {{ date('h:i A', strtotime($timing->end_time)) }}
-                                                    @else
-                                                        <span style="color: orangered">Closed</span>
-                                                    @endif
-                                                </p>
-                                            @endforeach
-                                        </div>
+                        </div>
+                        @php
+                            $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+                        @endphp
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2 class="twentyeight">Hours & Location</h2>
+                                <div class="row">
+                                    <div class="col-4" style="font-weight: 600;color: #000000;">
+                                        @foreach (['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] as $day)
+                                            <p class="sixteen">{{ $day }}</p>
+                                        @endforeach
+                                    </div>
+                                    <div class="col-8" style="font-weight: 600; color: #000000;">
+                                        @foreach ($days as $day)
+                                            @php
+                                                $timing = $shop->shop_timings->where('day', $day)->first();
+                                            @endphp
+                                            <p id="preview-{{ strtolower($day) }}-hours" class="sixteen text-end">
+                                                @if ($timing)
+                                                    {{ date('h:i A', strtotime($timing->start_time)) }} -
+                                                    {{ date('h:i A', strtotime($timing->end_time)) }}
+                                                @else
+                                                    <span style="color: orangered">Closed</span>
+                                                @endif
+                                            </p>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-5">
-                    <div class="row">
-                        <div class="col-md-12 mt-5 pt-3">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="row g-2" id="thumbnailGallery">
-                                        @foreach ($shop->shop_images as $index => $image)
-                                            <div class="col-md-4">
-                                                <img src="{{ asset($image->path) }}"
-                                                    class="w-100 rounded thumbnail-image" data-bs-target="#mainCarousel"
-                                                    data-bs-slide-to="{{ $index }}"
-                                                    data-index="{{ $index }}"
-                                                    style="height: 130px; object-fit: cover; border: 2px solid #281F48;">
-                                            </div>
-                                        @endforeach
-                                    </div>
+            </div>
+            <div class="col-md-5">
+                <div class="row">
+                    <div class="col-md-12 mt-5 pt-3">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row g-2" id="thumbnailGallery">
+                                    @foreach ($shop->shop_images as $index => $image)
+                                        <div class="col-md-4">
+                                            <img src="{{ asset($image->path) }}" class="w-100 rounded thumbnail-image"
+                                                data-bs-target="#mainCarousel" data-bs-slide-to="{{ $index }}"
+                                                data-index="{{ $index }}"
+                                                style="height: 130px; object-fit: cover; border: 2px solid #281F48;">
+                                        </div>
+                                    @endforeach
                                 </div>
+                            </div>
 
-                                <div class="col-md-12 mt-3">
+                            <div class="col-md-12 mt-3">
 
-                                    <div class="map-container rounded-3">
-                                        <iframe width="100%" height="300px" frameborder="0" class="{{$shop->dealer->shop_pkg && $shop->dealer->shop_pkg->metadata->map_allowed == '1' ? '' : 'd-none'}}"
-                                            style="border:0; border-radius: 8px;"
-                                            src="https://www.google.com/maps?q={{ $shop->latitude }},{{ $shop->longitude }}&output=embed"
-                                            allowfullscreen>
-                                        </iframe>
+                                <div class="map-container rounded-3">
+                                    <iframe width="100%" height="300px" frameborder="0"
+                                        class="{{ $shop->dealer->shop_pkg && $shop->dealer->shop_pkg->metadata->map_allowed == '1' ? '' : 'd-none' }}"
+                                        style="border:0; border-radius: 8px;"
+                                        src="https://www.google.com/maps?q={{ $shop->latitude }},{{ $shop->longitude }}&output=embed"
+                                        allowfullscreen>
+                                    </iframe>
 
-                                        <div class="d-flex justify-content-between mt-2 align-items-center">
-                                            <p class="sixteen m-0"> {{ $shop->address }}</p>
-											 @if ($shop->dealer->shop_pkg && $shop->dealer->shop_pkg->metadata->map_allowed == '1')
+                                    <div class="d-flex justify-content-between mt-2 align-items-center">
+                                        <p class="sixteen m-0"> {{ $shop->address }}</p>
+                                        @if ($shop->dealer->shop_pkg && $shop->dealer->shop_pkg->metadata->map_allowed == '1')
                                             <button
                                                 onclick="window.open('https://www.google.com/maps?q={{ $shop->latitude }},{{ $shop->longitude }}&output=embed', '_blank')"
                                                 class="mapbutton ms-4">Get Directions <img
                                                     src="{{ asset('web/services/images/Group 1171275297.svg') }}"
                                                     class="img-fluid ms-2" style="height: 20px; width: 20px;"
                                                     alt="..."></button>
-											
-											@endif
-                                        </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
-     
+
+        </div>
+
         <div class="col-md-12">
 
             <div class="row">
@@ -1437,16 +1456,16 @@
                                 </div>
                                 <div class="col-md-4 text-end">
                                     @auth
-									@if(Auth::user()->role == '2' || Auth::user()->role == '3')
-					 <button class="bluebtn"
-                            onclick="alert('You are not authorized for this action!')">
-                            Write a Review</button>
-									
-									@else
-                                        <button class="bluebtn" data-bs-toggle="modal" data-bs-target="#reviewModal">Write a
-                                            Review</button>
+                                        @if (Auth::user()->role == '2' || Auth::user()->role == '3')
+                                            <button class="bluebtn"
+                                                onclick="alert('You are not authorized for this action!')">
+                                                Write a Review</button>
+                                        @else
+                                            <button class="bluebtn" data-bs-toggle="modal"
+                                                data-bs-target="#reviewModal">Write a
+                                                Review</button>
                                     </div>
-								@endif
+                                    @endif
                                 @endauth
 
                                 @guest
@@ -1513,7 +1532,7 @@
                         @foreach ($shop->shop_reviews as $index => $review)
                             <div class="col-md-6 p-3 review-item {{ $index >= 2 ? 'd-none' : '' }}">
                                 <div class="row rounded p-3" style="background-color:#F4F4F4">
-                                    <div class="col-12 d-flex justify-content-between " >
+                                    <div class="col-12 d-flex justify-content-between ">
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div class="d-flex">
@@ -1638,39 +1657,32 @@
                         </div>
 
                         <!-- Dropzone + Images Row -->
-                      <div class="row g-3">
-    <div class="col-md-3">
-        <div id="reviewImagesDropzone" class="border border-dashed rounded p-2 text-center mb-3" 
-             style="cursor: pointer; min-height: 150px;">
-            <i class="bi bi-cloud-arrow-up fs-1 mb-3" style="color: #281F48;"></i>
-            <p class="mb-2" style="font-size:12px">Click or drag files here to upload</p>
-            <button type="button" class="btn p-0 px-2 py-2" style="font-size:12px;background-color:#281F48; color:white">
-                Select Files
-            </button>
+                        <div class="row g-3">
+                            <!-- Dropzone Upload Box -->
+                            <div class="col-md-3">
+                                <div id="reviewImagesDropzone" class="border border-dashed rounded p-2 text-center mb-3"
+                                    style="cursor: pointer; min-height: 150px; position: relative;">
+                                    <i class="bi bi-cloud-arrow-up fs-1 mb-3" style="color: #281F48;"></i>
+                                    <p class="mb-2" style="font-size:12px">Click or drag files here to upload</p>
+                                    <button type="button" id="selectFilesBtn" class="btn p-0 px-2 py-2"
+                                        style="font-size:12px;background-color:#281F48; color:white">
+                                        Select Files
+                                    </button>
 
-            <input type="file" id="review_images" name="review_images[]" multiple
-                   accept="image/jpeg,image/jpg,image/png" class="d-none">
-        </div>
-        
-     
-    </div>
-       <div id="review_images_preview" class="d-flex flex-wrap gap-3 mt-3">
-            <!-- Preview boxes will be added here -->
-            <div class="image-box" style="width: 120px; height: 120px;"></div>
-            <div class="image-box" style="width: 120px; height: 120px;"></div>
-            <div class="image-box" style="width: 120px; height: 120px;"></div>
-            <div class="image-box" style="width: 120px; height: 120px;"></div>
-            <div class="image-box" style="width: 120px; height: 120px;"></div>
-            <div class="image-box" style="width: 120px; height: 120px;"></div>
-            <div class="image-box" style="width: 120px; height: 120px;"></div>
-            <div class="image-box" style="width: 120px; height: 120px;"></div>
-            <div class="image-box" style="width: 120px; height: 120px;"></div>
-            <div class="image-box" style="width: 120px; height: 120px;"></div>
-        </div>
-</div>
+                                    <input type="file" id="review_images" name="review_images[]" multiple
+                                        accept="image/jpeg,image/jpg,image/png" class="d-none">
+                                </div>
+                            </div>
 
-                      
-                    
+                            <!-- Preview Grid -->
+                            <div id="review_images_preview" class="d-flex flex-wrap gap-3 mt-3">
+                                <!-- Preview image boxes will be inserted dynamically -->
+                            </div>
+                        </div>
+
+
+
+
                 </div>
 
                 <div class="modal-footer d-flex justify-content-start" style="border: none;">
@@ -1720,15 +1732,16 @@
                                                 <span>Car</span>
                                             </label>
                                         </div>
-                                        <div id="vehicle-error" class="reed mt-2" style="display:none;">Please select a
-                                            vehicle type</div>
+                                        <div id="vehicle-error" class="reed mt-2" style="display:none;">
+                                            Please select a vehicle type
+                                        </div>
 
                                     </div>
                                     <div class="d-flex justify-content-end mt-5">
                                         <button type="button" class="bluebtn ms-auto next-validate px-5">Next</button>
                                     </div>
                                 </div>
-                                <div class="col-md-7">
+                                <div class="col-md-7 picchang d-flex justify-content-center">
                                     <img src="{{ asset('web/services/images/carbike.svg') }}" class="img-fluid"
                                         alt="...">
                                 </div>
@@ -1803,10 +1816,9 @@
                                             id="secondstepbtn">Next</button>
                                     </div>
                                 </div>
-                                <div class="col-md-7">
-                                    <img src="{{ asset('web/services/images/Frameee.svg') }}" class="img-fluid"
+                                <div class="col-md-7 picchang d-flex justify-content-center">
+                                    <img src="{{ asset('web/services/images/carbike.svg') }}" class="img-fluid"
                                         alt="...">
-
                                 </div>
                             </div>
                         </div>
@@ -1867,8 +1879,8 @@
                                         <button type="button" class="bluebtn  next px-5">Next</button>
                                     </div>
                                 </div>
-                                <div class="col-md-7">
-                                    <img src="{{ asset('web/services/images/Frameee.svg') }}" class="img-fluid"
+                                <div class="col-md-7 picchang d-flex justify-content-center">
+                                    <img src="{{ asset('web/services/images/carbike.svg') }}" class="img-fluid"
                                         alt="...">
                                 </div>
                             </div>
@@ -1903,8 +1915,8 @@
                                         <button type="button" class="bluebtn  next px-5">Next</button>
                                     </div>
                                 </div>
-                                <div class="col-md-7">
-                                    <img src="{{ asset('web/services/images/Frameee.svg') }}" class="img-fluid"
+                                <div class="col-md-7 picchang d-flex justify-content-center">
+                                    <img src="{{ asset('web/services/images/carbike.svg') }}" class="img-fluid"
                                         alt="...">
                                 </div>
                             </div>
@@ -1937,8 +1949,8 @@
                                         <button type="button" class="bluebtn  next px-5">Next</button>
                                     </div>
                                 </div>
-                                <div class="col-md-7">
-                                    <img src="{{ asset('web/services/images/popupimg.svg') }}" class="img-fluid"
+                                <div class="col-md-7 picchang d-flex justify-content-center">
+                                    <img src="{{ asset('web/services/images/carbike.svg') }}" class="img-fluid"
                                         alt="...">
                                 </div>
                             </div>
@@ -1966,9 +1978,9 @@
                                         <button type="button" class="bluebtn  next px-5">Next</button>
                                     </div>
                                 </div>
-                                <div class="col-md-7">
-                                    <img src="{{ asset('web/services/images/popupimg.svg') }}" class="img-fluid"
-                                        alt="...">
+                                <div class="col-md-7  d-flex justify-content-center">
+                                   <img src="{{ asset('web/images/service_quotes.svg') }}" class="img-fluid vehicle-image" alt="...">
+
                                 </div>
                             </div>
                         </div>
@@ -1985,8 +1997,8 @@
                                         <div class="row mt-2">
                                             <div class="col-9 p-3 rounded-3" style="background-color: #F9F9F9;">
                                                 <div class="row">
-                                                    <div class="g-recaptcha"
-                                                        data-sitekey="{{ env('RECAPTCHA_KEY') }}"></div>
+                                                    <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_KEY') }}">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1996,9 +2008,9 @@
                                         <button type="button" class="bluebtn  next px-5">Submit</button>
                                     </div>
                                 </div>
-                                <div class="col-md-7">
-                                    <img src="{{ asset('web/services/images/popupimg.svg') }}" class="img-fluid"
-                                        alt="...">
+                                <div class="col-md-7 d-flex justify-content-center">
+                                  <img src="{{ asset('web/images/service_quotes.svg') }}" class="img-fluid vehicle-image" alt="...">
+
                                 </div>
                             </div>
                         </div>
@@ -2073,17 +2085,22 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
                 <!-- Modal Header -->
-                <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                <div class="modal-header"
+                    style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                     <h5 class="modal-title" id="reviewresponseLabel"><strong> Review </strong></h5>
-                    <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close"
+                        style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <!-- Modal body -->
-                <div class="modal-body text-center" style="background-color: #F0F3F6; color: #FD5631;">
+                <div class="modal-body text-center" style="background-color: white; color: #281F48;">
                     <p>{{ session('reviewresponse') }}</p>
                 </div>
                 <!-- Modal footer -->
                 <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                    <button type="button"   class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-light px-4 py-2 "
+                        style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                        data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -2166,17 +2183,22 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
                 <!-- Modal Header -->
-                <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;" >
+                <div class="modal-header"
+                    style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                     <h5 class="modal-title" id="wishlistresponseLabel"><strong> Wishlist </strong></h5>
-                    <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close"
+                        style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <!-- Modal body -->
-                <div class="modal-body text-center"  style="background-color: transparent !important; color: #281F48;">
+                <div class="modal-body text-center" style="background-color: transparent !important; color: #281F48;">
                     <p>{{ session('wishlistresponse') }}</p>
                 </div>
                 <!-- Modal footer -->
                 <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                    <button type="button"  class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-light px-4 py-2 "
+                        style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                        data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -2211,125 +2233,8 @@
         });
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const dropzone = document.getElementById('reviewImagesDropzone');
-    const fileInput = document.getElementById('review_images');
-    const previewContainer = document.getElementById('review_images_preview');
-    const imageCounter = document.getElementById('image-counter');
-    const maxImages = 10;
-    let uploadedFiles = [];
-    let imageBoxes = Array.from(document.querySelectorAll('.image-box'));
 
-    // Click handler
-    dropzone.addEventListener('click', function() {
-        fileInput.click();
-    });
 
-    // Drag and drop handlers
-    dropzone.addEventListener('dragover', function(e) {
-        e.preventDefault();
-        this.style.borderColor = '#281F48';
-        this.style.backgroundColor = 'rgba(40, 31, 72, 0.1)';
-    });
-
-    dropzone.addEventListener('dragleave', function() {
-        this.style.borderColor = '';
-        this.style.backgroundColor = '';
-    });
-
-    dropzone.addEventListener('drop', function(e) {
-        e.preventDefault();
-        this.style.borderColor = '';
-        this.style.backgroundColor = '';
-        
-        if (e.dataTransfer.files.length) {
-            handleImageFiles(e.dataTransfer.files);
-        }
-    });
-
-    // File input change handler
-    fileInput.addEventListener('change', function() {
-        if (this.files.length) {
-            handleImageFiles(this.files);
-        }
-    });
-
-    function handleImageFiles(files) {
-        const availableBoxes = imageBoxes.filter(box => !box.querySelector('img'));
-        const filesToProcess = Math.min(files.length, availableBoxes.length);
-        
-        if (filesToProcess === 0) {
-            alert("Maximum 10 images already uploaded");
-            return;
-        }
-
-        Array.from(files).slice(0, filesToProcess).forEach((file, index) => {
-            // Validate file type
-            if (!file.type.match(/image\/(jpeg|jpg|png)/)) {
-                alert('Only JPG, JPEG, and PNG files are allowed.');
-                return;
-            }
-            
-            // Validate file size
-            if (file.size > 8 * 1024 * 1024) {
-                alert('Each image must be smaller than 8MB.');
-                return;
-            }
-            
-            // Add to uploaded files
-            uploadedFiles.push(file);
-            
-            // Create preview
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const box = availableBoxes[index];
-                box.innerHTML = '';
-                
-                const imgContainer = document.createElement('div');
-                imgContainer.className = 'position-relative w-100 h-100';
-                
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                img.className = 'img-thumbnail w-100 h-100';
-                img.style.objectFit = 'cover';
-                
-                const removeBtn = document.createElement('button');
-                removeBtn.innerHTML = '×';
-                removeBtn.className = 'btn btn-sm btn-danger position-absolute top-0 end-0 rounded-circle';
-                removeBtn.style.transform = 'translate(50%, -50%)';
-                removeBtn.onclick = function() {
-                    const boxIndex = imageBoxes.indexOf(box);
-                    uploadedFiles.splice(boxIndex, 1);
-                    box.innerHTML = '';
-                    updateCounter();
-                    updateFileInput();
-                };
-                
-                imgContainer.appendChild(img);
-                imgContainer.appendChild(removeBtn);
-                box.appendChild(imgContainer);
-                
-                updateCounter();
-                updateFileInput();
-            };
-            reader.readAsDataURL(file);
-        });
-    }
-    
-    function updateCounter() {
-        const uploadedCount = imageBoxes.filter(box => box.querySelector('img')).length;
-        imageCounter.textContent = `${uploadedCount}/${maxImages} photos`;
-    }
-    
-    function updateFileInput() {
-        const dataTransfer = new DataTransfer();
-        uploadedFiles.forEach(file => dataTransfer.items.add(file));
-        fileInput.files = dataTransfer.files;
-    }
-});
-</script>
 
 
     <script>
@@ -2351,18 +2256,110 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     </script>
-<script>
-function shareLink() {
-    if (navigator.share) {
-        navigator.share({
-            title: document.title,
-            text: 'Check this out!',
-            url: window.location.href
-        }).catch((error) => console.log('Error sharing', error));
-    } else {
-        navigator.clipboard.writeText(window.location.href);
-        alert('Link copied!');
-    }
-}
-</script>
+    <script>
+        function shareLink() {
+            if (navigator.share) {
+                navigator.share({
+                    title: document.title,
+                    text: 'Check this out!',
+                    url: window.location.href
+                }).catch((error) => console.log('Error sharing', error));
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                alert('Link copied!');
+            }
+        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Track selected vehicle type
+            let selectedVehicle = null;
+            const vehicleRadios = document.querySelectorAll('input[name="vehicle-type"]');
+
+            // Image paths
+            const imagePaths = {
+                'car': "{{ asset('web/services/images/Frameee.svg') }}",
+                'bike': "{{ asset('web/services/images/bike_request_qoute.svg') }}",
+                'default': "{{ asset('web/services/images/carbike.svg') }}"
+            };
+
+            // Update all vehicle images in the form
+            function updateAllVehicleImages() {
+                const selectedValue = document.querySelector('input[name="vehicle-type"]:checked')?.value;
+                selectedVehicle = selectedValue || null;
+
+                // Determine which image to show
+                let imgSrc = selectedVehicle ? imagePaths[selectedVehicle] : imagePaths['default'];
+
+                // Update all image containers in each step
+                document.querySelectorAll('.step-content .picchang img').forEach(img => {
+                    img.src = imgSrc;
+                    img.alt = selectedVehicle ? `${selectedVehicle} image` : 'Vehicle selection';
+                    img.style.height = '300px'; // Set height
+                    img.style.objectFit = 'contain'; // Optional for aspect ratio
+                });
+            }
+
+            // Make vehicle selection mutually exclusive and update images
+            vehicleRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    // Uncheck other option if this one is checked
+                    if (this.checked) {
+                        vehicleRadios.forEach(r => {
+                            if (r !== this) r.checked = false;
+                        });
+                    }
+                    updateAllVehicleImages();
+                });
+            });
+
+            // Form navigation
+            const steps = document.querySelectorAll('.step-content');
+            let currentStep = 0;
+
+            function showStep(stepIndex) {
+                steps.forEach((step, index) => {
+                    step.classList.toggle('active', index === stepIndex);
+                });
+                currentStep = stepIndex;
+            }
+
+            // Next button functionality
+            document.querySelectorAll('.next').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    // Validate vehicle selection on first step
+                    if (currentStep === 0 && !selectedVehicle) {
+                        document.getElementById('vehicle-error').style.display = 'block';
+                        e.preventDefault();
+                        return;
+                    }
+
+                    showStep(currentStep + 1);
+                });
+            });
+
+            // Previous button functionality
+            document.querySelectorAll('.prev').forEach(button => {
+                button.addEventListener('click', function() {
+                    showStep(currentStep - 1);
+                });
+            });
+
+            // Special validation for the first "Next" button
+            document.querySelector('.next-validate').addEventListener('click', function(e) {
+                if (!selectedVehicle) {
+                    document.getElementById('vehicle-error').style.display = 'block';
+                    e.preventDefault();
+                    return;
+                }
+                document.getElementById('vehicle-error').style.display = 'none';
+                showStep(1);
+            });
+
+            // Initialize
+            updateAllVehicleImages();
+        });
+    </script>
+
+
 @endsection
