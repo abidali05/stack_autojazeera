@@ -425,7 +425,7 @@ class ShopController extends Controller
 
         // reCAPTCHA Verification
         $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-            'secret' => "6LfUATArAAAAAC8P6cpCaYscLmzbCRaJqypYZwpW",
+            'secret' => "6Ld03I4rAAAAAFDQ-ssOG8qdiExMrTpleT9bt7ZS",
             // 'secret' => env('RECAPTCHA_SECRET'),
             'response' => $request->input('g-recaptcha-response'),
             'remoteip' => $request->ip(),
@@ -474,7 +474,7 @@ class ShopController extends Controller
             $booking = Bookings::with(['shop', 'make_r', 'model_r', 'bodytype_r'])->find($booking->id);
             // dd($booking);
             $body = view('emails.service_quote_submitted', compact('booking'));
-            sendMail($user->name, $user->email, 'Auto Jazeera', 'Service Quote Submitted', $body);
+            // sendMail($user->name, $user->email, 'Auto Jazeera', 'Service Quote Submitted', $body);
             $dealer = User::find($shop->dealer_id);
             $fcm_tokens = [$dealer->fcm_token];
             if ($fcm_tokens) {
