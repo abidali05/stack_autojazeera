@@ -604,34 +604,6 @@
 
     <script>
         $(document).ready(function() {
-            // Initialize Select2
-            $('.select-search').select2({
-                placeholder: "Make",
-                allowClear: true,
-                minimumResultsForSearch: 0
-            });
-
-            $('.select-search-class').select2({
-                placeholder: "Select Model",
-                allowClear: true,
-                minimumResultsForSearch: 0
-            });
-
-            $('.select2-search').select2({
-                placeholder: false,
-                allowClear: false
-            });
-
-            // Submit the form automatically when a dealer is selected
-            $('.select-search').on('change', function() {
-                $('#dealerForm').submit();
-            });
-        });
-    </script>
-
-
-    <script>
-        $(document).ready(function() {
             $('#addDealerForm').on('submit', function(e) {
                 e.preventDefault();
 

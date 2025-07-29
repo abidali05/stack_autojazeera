@@ -391,14 +391,16 @@
             background-color: #F0F3F6 !important;
             color: #281F48 !important;
             /* Change text color for better contrast */
-        }label.form-label {
-    font-family: Maven Pro;
-    font-size: 17.6px;
-    font-weight: 500;
-    line-height: 20.68px;
-    text-align: left;
-    color: #281F48;
-}
+        }
+
+        label.form-label {
+            font-family: Maven Pro;
+            font-size: 17.6px;
+            font-weight: 500;
+            line-height: 20.68px;
+            text-align: left;
+            color: #281F48;
+        }
     </style>
     <div class="container mt-5">
         <div class="row">
@@ -466,7 +468,6 @@
                 </div>
                 <div class="">
 
-
                     <div class="my-3" style="display: flex; gap: 10px; align-items: center ;">
                         <div class="{{ request()->name == 'new' ? 'd-none' : '' }}">
                             <input type="checkbox" class="filter-checkbox" name="condition" data-filter="condition"
@@ -525,7 +526,7 @@
                     </div>
                 </div>
                 <!-- Make & Model Filters -->
-                <div class="">
+                {{-- <div class="">
                     <label class="mb-2 form-label" style=" color:#281F48"><strong>Make</strong></label>
                     <div class="mt-3 select-wrapper">
                         <select id="make_filter" class="mb-2 form-select select-search make-filter filter-style"
@@ -548,7 +549,42 @@
 									scrollbar-width: thin;">
                         </div>
                     </div>
+                </div> --}}
+
+                <div class="my-2">
+                    <label class="form-label"><strong>Make & Model</strong></label>
+                    <div class="select-wrapper mt-2">
+                        <select id="make_filter" class="form-select select-search mb-2 make-filter filter-style"
+                            style="width:100% !important" name="make">
+                            <option value="">Make</option>
+                            <option value="any">Any</option>
+                            @foreach ($makes as $make)
+                                <option value="{{ $make->id }}"
+                                    {{ request()->make == $make->id || request()->segment(2) == $make->id ? 'selected' : '' }}>
+                                    {{ $make->name }} ({{ $make->count }})
+                                </option>
+                            @endforeach
+                        </select> <i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
+                    </div>
+
+                    {{-- <div class="select-wrapper mt-3">
+                        <label class="form-label modellabel d-none"> Model</label>
+                        <div id="model_filter_wrapper"
+                            style="max-height: 200px !important; overflow-y: scroll;
+                                        scrollbar-color: #FD5631 #1F1B2D;
+                                        scrollbar-width: thin;">
+                        </div>
+                    </div> --}}
+
+                    <div class="select-wrapper mt-2">
+                        <select class="form-select model-filter select-search-class filter-style"
+                            style="width:100% !important" name="model" id="model_filter">
+                            <option value="" disabled selected>Any model</option>
+                            <option value="any">Any</option>
+                        </select><i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
+                    </div>
                 </div>
+
                 <!-- Province & City Filters -->
                 <div class="">
                     <label class="mt-2 form-label" style=" color:#281F48"><strong>Province</strong></label>
@@ -556,6 +592,7 @@
                         <select class="mb-2 form-select select-search filter-style " style="width:100% !important"
                             id="province_filter">
                             <option value="" disabled selected>Select Province</option>
+                            <option value="any">Any</option>
                             @if (isset($provinces))
                                 @foreach ($provinces as $province)
                                     <option value="{{ $province->id }}"
@@ -619,11 +656,14 @@
 
                 <!-- Engine Capacity, Mileage, and Price Range Filters -->
                 <div class="my-3">
-                    <label class="mt-2 mb-2 form-label" style=" color:#281F48"><strong>Engine Capacity (CC)</strong></label>
+                    <label class="mt-2 mb-2 form-label" style=" color:#281F48"><strong>Engine Capacity
+                            (CC)</strong></label>
                     <div class="mt-3 select-wrapper">
                         <select class="form-select engine-capacity-filter select-search filter-style"
                             id="engine_capacity_filter">
-                            <option value="">Select Engine Capacity</option>
+                            <option value="" selected disabled>Select Engine Capacity</option>
+                            <option value="any">Any</option>
+                            <option value="any">Any</option>
                             <option value="1.6L">1.6L</option>
                             <option value="2.0L">2.0L</option>
                             <option value="3.0L+">3.0L+</option>
@@ -662,7 +702,8 @@
                                         id="body_type_filter{{ $bodytype->id }}"
                                         {{ request()->bodytype == $bodytype->id ? 'checked' : '' }}>
                                     <label for="usedCars" style="font-size:16px; color: #281F48;">{{ $bodytype->name }}
-                                        ({{ $bodytype->count }})</label>
+                                        ({{ $bodytype->count }})
+                                    </label>
                                 </div>
                             @endforeach
                         @endif
@@ -695,7 +736,8 @@
                             <select class="form-select seating-capacity-filter select-search formcontrol"
                                 style="width:100% !important" style="background-color:#282435" placeholder="Seats"
                                 id="seating_capacity_filter">
-                                <option value="" selected>Seating Capacity</option>
+                                <option value="" disabled selected>Seating Capacity</option>
+                                <option value="any">Any</option>
                                 <option value="2">2</option>
                                 <option value="4">4</option>
                                 <option value="5+">5+</option>
@@ -722,7 +764,8 @@
                         <div class="select-wrapper">
                             <select class="form-select select-search door-count-filter formcontrol door_count_filter"
                                 style="width:100% !important" placeholder="Doors">
-                                <option value="" selected>Door Count</option>
+                                <option value="" disabled selected>Door Count</option>
+                                <option value="any">Any</option>
                                 <option value="2">2</option>
                                 <option value="4">4</option>
                                 <option value="5+">5+</option>
@@ -737,6 +780,7 @@
                             <select class="form-select select-search assembly-filter filter-style assembly_filter"
                                 style="width:100% !important">
                                 <option value="" disabled selected>Select Assembly</option>
+                                <option value="any">Any</option>
                                 <option value="local">Local</option>
                                 <option value="imported">Imported</option>
                             </select>
@@ -756,7 +800,8 @@
                                             style="font-size:16px; color: #281F48;"> <span
                                                 style="background-color:{{ $color->color_id }}"
                                                 class="p-0 px-4 m-0 me-3"></span>{{ $color->name }}
-                                            ({{ $color->count }})</label>
+                                            ({{ $color->count }})
+                                        </label>
                                     </div>
                                 @endforeach
                             @endif
@@ -797,7 +842,7 @@
             <div class="row">
                 <div class="col-md-6 col-12">
                     <h1 class="pb-md-2" style=" color:#281F48"><strong>Available Cars </strong> (<span
-                                id="filter_available_results"></span>) </h1>
+                            id="filter_available_results"></span>) </h1>
                 </div>
                 <div class="col-md-6 col-12 d-flex justify-content-end">
                     <span class="pt-md-3 pagination_count" style="font-size: 18px; color: #FD5631; font-weight:700 ">
@@ -1048,377 +1093,972 @@
                 </div>
             </div>
         </div>
- </div> </div>
-        <script>
-            $('#province_filter').change(function(e) {
-                var provinceId = this.value;
-                var cityWrapper = document.getElementById('city_filter_wrapper');
-                var cityLabel = $('.citylabel');
-                // Clear the existing city checkboxes
-                cityWrapper.innerHTML = '';
-                cityLabel.addClass('d-none'); // Hide label initially
-                var urlPath = encodeURIComponent(window.location.pathname);
-                // Fetch cities based on the selected province
-                if (provinceId) {
-                    fetch(`/getCity/${provinceId}?path=${urlPath}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            data.forEach(city => {
-                                var div = document.createElement('div');
-                                div.classList.add('form-check', 'my-2');
-
-                                var checkbox = document.createElement('input');
-                                checkbox.type = 'checkbox';
-                                checkbox.classList.add('filter-checkbox',
-                                    'city_filter'); // Apply custom checkbox class
-                                checkbox.id = 'city_' + city.id;
-                                checkbox.value = city.id;
-                                checkbox.name = 'city[]';
-
-                                var label = document.createElement('label');
-                                label.classList.add('form-check-label', 'ms-3');
-                                label.htmlFor = 'city_' + city.id;
-                                label.textContent = city.name + ' (' + (city.count || 0) + ')';
-
-                                div.appendChild(checkbox);
-                                div.appendChild(label);
-                                $('.citylabel').removeClass('d-none');
-                                cityWrapper.appendChild(div);
-                            });
-                            fetchFilteredResults();
-                        })
-                        .catch(error => console.error('Error fetching cities:', error));
-                } else {
-                    $('.citylabel').addClass('d-none');
-                }
+    </div>
+    </div>
+    {{-- <script>
+        $(document).ready(function() {
+            // Initialize Select2 for Make filter
+            $('#make_filter').select2({
+                placeholder: "Select Make",
+                allowClear: true,
+                minimumResultsForSearch: 0
             });
 
-            // to get models based on selected make
-            $('#make_filter').change(function(e) {
-                var makeId = this.value;
-                var modelWrapper = document.getElementById('model_filter_wrapper');
-                var modelLabel = $('.model-label'); // Target the label
-
-                // Clear the current model options
-                modelWrapper.innerHTML = '';
-                modelLabel.addClass('d-none'); // Hide label initially
-                var urlPath = encodeURIComponent(window.location.pathname);
-                // console.log(urlPath);
-                // Fetch models based on selected make
-                if (makeId) {
-                    fetch(`/getmodel/${makeId}?path=${urlPath}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            //console.log(data);
-                            if (data.length > 0) {
-                                modelLabel.removeClass('d-none'); // Show label if models exist
-                            }
-
-                            data.forEach(model => {
-                                var div = document.createElement('div');
-                                div.classList.add('form-check', 'my-2');
-
-                                var checkbox = document.createElement('input');
-                                checkbox.type = 'checkbox';
-                                checkbox.classList.add('filter-checkbox',
-                                    'model-filter'); // Apply custom checkbox styling
-                                checkbox.id = 'model_' + model.id;
-                                checkbox.value = model.id;
-                                checkbox.name = 'model[]';
-
-                                var label = document.createElement('label');
-                                label.classList.add('form-check-label', 'ms-3');
-                                label.htmlFor = 'model_' + model.id;
-                                label.textContent = model.name + ' (' + (model.count || 0) + ')';
-
-                                div.appendChild(checkbox);
-                                div.appendChild(label);
-                                $('.modellabel').removeClass('d-none');
-                                modelWrapper.appendChild(div);
-                            });
-                            fetchFilteredResults();
-                        })
-                        .catch(error => console.error('Error fetching models:', error));
-                } else {
-                    $('.modellabel').addClass('d-none');
-                }
+            // Initialize Select2 for Province filter
+            $('#province_filter').select2({
+                placeholder: "Select Province",
+                allowClear: true,
+                minimumResultsForSearch: 0
             });
-        </script>
 
-        {{-- filters script  --}}
-        <script>
-            $(document).ready(function() {
-                $('#minRange').on('input', function() {
-                    let minVal = parseInt($(this).val());
-                    let maxVal = parseInt($('#maxRange').val());
-
-                    if (minVal >= maxVal) {
-                        $(this).val(maxVal - 1); // Keep minRange below maxRange
-                    }
-                });
-
-                $('#maxRange').on('input', function() {
-                    let minVal = parseInt($('#minRange').val());
-                    let maxVal = parseInt($(this).val());
-
-                    if (maxVal <= minVal) {
-                        $(this).val(minVal + 1); // Keep maxRange above minRange
-                    }
-                });
+            // Initialize Select2 for City filter
+            $('#city').select2({
+                placeholder: "Select City",
+                allowClear: true,
+                minimumResultsForSearch: 0
             });
-            $(document).ready(function() {
-                $(".price_class").on("focus", function() {
-                    if ($(this).val() == "0" || $(this).val() == "60000000") {
-                        $(this).val("");
-                    }
-                });
 
-                $(".price_class").on("blur", function() {
-                    if ($(this).val().trim() === "") {
-                        $(this).val($(this).attr("id") === "minPrice_filter" ? "0" : "60000000");
-                    }
-                });
+            // Initialize Select2 for Model filter
+            $('.select-search-class').select2({
+                placeholder: "Select Model",
+                allowClear: true,
+                minimumResultsForSearch: 0
             });
-        </script>
 
-        <script>
-            function fetchFilteredResults(page = 1) {
-                let sortBy = $('#sortbyorder').val() || null;
-                let fromYear = $('#from-year-filter').val() || null;
-                let toYear = $('#to-year-filter').val() || null;
-                let engineCapacity = $('#engine_capacity_filter').val() || null;
-                let mileageFrom = $('#mileage_from').val() || null;
-                let mileageTo = $('#mileage_to').val() || null;
-                let minPrice = Number($('#minPrice_filter').val()) || 0;
-                let maxPrice = Number($('#maxPrice_filter').val()) || 60000000;
-                let seatingCapacity = $('#seating_capacity_filter').val() || null;
-                let transmission = $('.transmission_filter:checked').map(function() {
-                    return this.value;
-                }).get();
-                let doorCount = $('.door_count_filter').val() || null;
-                let assembly = $('.assembly_filter').val() || null;
-                let featureAd = $('#featureAd_filter').is(':checked') ? 1 : null;
-                let sellerType = $('input[name="userType"]:checked').map(function() {
-                    return this.value;
-                }).get();
-                let conditionType = $('input[name="condition"]:checked').map(function() {
-                    return this.value;
-                }).get();
-                let fuelType = $('.fuel_type_filter:checked').map(function() {
-                    return this.value;
-                }).get();
-                let exteriorColor = $('.exterior_color_filter:checked').map(function() {
-                    return this.value;
-                }).get();
-                let bodyType = $('.body_type_filter:checked').map(function() {
-                    return this.value;
-                }).get();
-                let make = $('#make_filter').val() || null;
+            // Initialize Select2 for Body Type filter
+            $('#bodytype_filter').select2({
+                placeholder: "Select Body Type",
+                allowClear: true,
+                minimumResultsForSearch: 0
+            });
 
-                let model = $('input.model-filter:checked').map(function() {
-                    return this.value;
-                }).get();
+            // Initialize Select2 for Engine Capacity filter
+            $('#engine_capacity_filter').select2({
+                placeholder: "Select Engine Capacity",
+                allowClear: true,
+                minimumResultsForSearch: 0
+            });
 
-                let province = $('#province_filter').val() || null;
+            // Initialize Select2 for Seating Capacity filter
+            $('#seating_capacity_filter').select2({
+                placeholder: "Seating Capacity",
+                allowClear: true,
+                minimumResultsForSearch: 0
+            });
 
-                let city = $('input.city_filter:checked').map(function() {
-                    return this.value;
-                }).get();
+            // Initialize Select2 for Door Count filter
+            $('.door_count_filter').select2({
+                placeholder: "Door Count",
+                allowClear: true,
+                minimumResultsForSearch: 0
+            });
 
+            // Initialize Select2 for Assembly filter
+            $('.assembly_filter').select2({
+                placeholder: "Select Assembly",
+                allowClear: true,
+                minimumResultsForSearch: 0
+            });
 
-                let urlPath = window.location.pathname.split('/');
-                let type = urlPath[2] || 'search';
+            // Trigger change events for dependent filters
+            $('#province_filter').change();
+            $('#make_filter').change();
 
-                let filters = {
-                    from_year: fromYear,
-                    to_year: toYear,
-                    engine_capacity: engineCapacity,
-                    mileage_from: mileageFrom,
-                    mileage_to: mileageTo,
-                    min_price: minPrice,
-                    max_price: maxPrice,
-                    seating_capacity: seatingCapacity,
-                    door_count: doorCount,
-                    assembly: assembly,
-                    transmission: transmission,
-                    feature_ad: featureAd,
-                    seller_type: sellerType.length > 0 ? sellerType : null,
-                    fuel_type: fuelType.length > 0 ? fuelType : null,
-                    exterior_color: exteriorColor.length > 0 ? exteriorColor : null,
-                    body_type: bodyType.length > 0 ? bodyType : null,
-                    make: make,
-                    model: model,
-                    city: city,
-                    province: province,
-                    sortby: sortBy,
-                    condition: conditionType,
-                    page: page
-                };
-                //console.log(filters);
-                $("#loadingSpinner").removeClass("d-none");
+            // Submit the form automatically when a dealer is selected
+            $('.select-search, .select-search-class').on('change', function() {
+                $('#dealerForm').submit();
+            });
+        });
+        $('#province_filter').change(function(e) {
+            var provinceId = this.value;
+            var cityWrapper = document.getElementById('city_filter_wrapper');
+            var cityLabel = $('.citylabel');
+            // Clear the existing city checkboxes
+            cityWrapper.innerHTML = '';
+            cityLabel.addClass('d-none'); // Hide label initially
+            var urlPath = encodeURIComponent(window.location.pathname);
+            // Fetch cities based on the selected province
+            if (provinceId) {
+                fetch(`/getCity/${provinceId}?path=${urlPath}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        data.forEach(city => {
+                            var div = document.createElement('div');
+                            div.classList.add('form-check', 'my-2');
 
-                $.ajax({
-                    url: "/posts/" + type,
-                    method: "GET",
-                    data: filters,
-                    success: function(response) {
-                        $('#postresultsContainer').html(response.html);
-                        $("#filter_available_results").text(response.posts_count);
+                            var checkbox = document.createElement('input');
+                            checkbox.type = 'checkbox';
+                            checkbox.classList.add('filter-checkbox',
+                                'city_filter'); // Apply custom checkbox class
+                            checkbox.id = 'city_' + city.id;
+                            checkbox.value = city.id;
+                            checkbox.name = 'city[]';
 
-                        if (response.posts_count > 0) {
-                            loadGoogleMaps(initDistance);
+                            var label = document.createElement('label');
+                            label.classList.add('form-check-label', 'ms-3');
+                            label.htmlFor = 'city_' + city.id;
+                            label.textContent = city.name + ' (' + (city.count || 0) + ')';
 
-                            $(".post-container")
-                                .removeClass("d-none")
-                                .css({
-                                    "display": "flex",
-                                    "justify-content": "flex-end"
-                                });
+                            div.appendChild(checkbox);
+                            div.appendChild(label);
+                            $('.citylabel').removeClass('d-none');
+                            cityWrapper.appendChild(div);
+                        });
+                        fetchFilteredResults();
+                    })
+                    .catch(error => console.error('Error fetching cities:', error));
+            } else {
+                $('.citylabel').addClass('d-none');
+            }
+        });
 
-                            $("#no_results_message").addClass("d-none"); // Hide no results message
-                        } else {
-                            $(".post-container").addClass("d-none"); // Hide container
-                            $("#no_results_message").removeClass("d-none"); // Show no results message
+        // to get models based on selected make
+        $('#make_filter').change(function(e) {
+            var makeId = this.value;
+            var modelWrapper = document.getElementById('model_filter_wrapper');
+            var modelLabel = $('.model-label'); // Target the label
 
+            // Clear the current model options
+            modelWrapper.innerHTML = '';
+            modelLabel.addClass('d-none'); // Hide label initially
+            var urlPath = encodeURIComponent(window.location.pathname);
+            // console.log(urlPath);
+            // Fetch models based on selected make
+            if (makeId) {
+                fetch(`/getmodel/${makeId}?path=${urlPath}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        //console.log(data);
+                        if (data.length > 0) {
+                            modelLabel.removeClass('d-none'); // Show label if models exist
                         }
-                    },
-                    complete: function() {
-                        $("#loadingSpinner").addClass("d-none");
+
+                        data.forEach(model => {
+                            var div = document.createElement('div');
+                            div.classList.add('form-check', 'my-2');
+
+                            var checkbox = document.createElement('input');
+                            checkbox.type = 'checkbox';
+                            checkbox.classList.add('filter-checkbox',
+                                'model-filter'); // Apply custom checkbox styling
+                            checkbox.id = 'model_' + model.id;
+                            checkbox.value = model.id;
+                            checkbox.name = 'model[]';
+
+                            var label = document.createElement('label');
+                            label.classList.add('form-check-label', 'ms-3');
+                            label.htmlFor = 'model_' + model.id;
+                            label.textContent = model.name + ' (' + (model.count || 0) + ')';
+
+                            div.appendChild(checkbox);
+                            div.appendChild(label);
+                            $('.modellabel').removeClass('d-none');
+                            modelWrapper.appendChild(div);
+                        });
+                        fetchFilteredResults();
+                    })
+                    .catch(error => console.error('Error fetching models:', error));
+            } else {
+                $('.modellabel').addClass('d-none');
+            }
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#minRange').on('input', function() {
+                let minVal = parseInt($(this).val());
+                let maxVal = parseInt($('#maxRange').val());
+
+                if (minVal >= maxVal) {
+                    $(this).val(maxVal - 1); // Keep minRange below maxRange
+                }
+            });
+
+            $('#maxRange').on('input', function() {
+                let minVal = parseInt($('#minRange').val());
+                let maxVal = parseInt($(this).val());
+
+                if (maxVal <= minVal) {
+                    $(this).val(minVal + 1); // Keep maxRange above minRange
+                }
+            });
+        });
+        $(document).ready(function() {
+            $(".price_class").on("focus", function() {
+                if ($(this).val() == "0" || $(this).val() == "60000000") {
+                    $(this).val("");
+                }
+            });
+
+            $(".price_class").on("blur", function() {
+                if ($(this).val().trim() === "") {
+                    $(this).val($(this).attr("id") === "minPrice_filter" ? "0" : "60000000");
+                }
+            });
+        });
+    </script>
+
+    <script>
+        function fetchFilteredResults(page = 1) {
+            let sortBy = $('#sortbyorder').val() || null;
+            let fromYear = $('#from-year-filter').val() || null;
+            let toYear = $('#to-year-filter').val() || null;
+            let engineCapacity = $('#engine_capacity_filter').val() || null;
+            let mileageFrom = $('#mileage_from').val() || null;
+            let mileageTo = $('#mileage_to').val() || null;
+            let minPrice = Number($('#minPrice_filter').val()) || 0;
+            let maxPrice = Number($('#maxPrice_filter').val()) || 60000000;
+            let seatingCapacity = $('#seating_capacity_filter').val() || null;
+            let transmission = $('.transmission_filter:checked').map(function() {
+                return this.value;
+            }).get();
+            let doorCount = $('.door_count_filter').val() || null;
+            let assembly = $('.assembly_filter').val() || null;
+            let featureAd = $('#featureAd_filter').is(':checked') ? 1 : null;
+            let sellerType = $('input[name="userType"]:checked').map(function() {
+                return this.value;
+            }).get();
+            let conditionType = $('input[name="condition"]:checked').map(function() {
+                return this.value;
+            }).get();
+            let fuelType = $('.fuel_type_filter:checked').map(function() {
+                return this.value;
+            }).get();
+            let exteriorColor = $('.exterior_color_filter:checked').map(function() {
+                return this.value;
+            }).get();
+            let bodyType = $('.body_type_filter:checked').map(function() {
+                return this.value;
+            }).get();
+            let make = $('#make_filter').val() || null;
+
+            let model = $('input.model-filter:checked').map(function() {
+                return this.value;
+            }).get();
+
+            let province = $('#province_filter').val() || null;
+
+            let city = $('input.city_filter:checked').map(function() {
+                return this.value;
+            }).get();
+
+
+            let urlPath = window.location.pathname.split('/');
+            let type = urlPath[2] || 'search';
+
+            let filters = {
+                from_year: fromYear,
+                to_year: toYear,
+                engine_capacity: engineCapacity,
+                mileage_from: mileageFrom,
+                mileage_to: mileageTo,
+                min_price: minPrice,
+                max_price: maxPrice,
+                seating_capacity: seatingCapacity,
+                door_count: doorCount,
+                assembly: assembly,
+                transmission: transmission,
+                feature_ad: featureAd,
+                seller_type: sellerType.length > 0 ? sellerType : null,
+                fuel_type: fuelType.length > 0 ? fuelType : null,
+                exterior_color: exteriorColor.length > 0 ? exteriorColor : null,
+                body_type: bodyType.length > 0 ? bodyType : null,
+                make: make,
+                model: model,
+                city: city,
+                province: province,
+                sortby: sortBy,
+                condition: conditionType,
+                page: page
+            };
+            //console.log(filters);
+            $("#loadingSpinner").removeClass("d-none");
+
+            $.ajax({
+                url: "/posts/" + type,
+                method: "GET",
+                data: filters,
+                success: function(response) {
+                    $('#postresultsContainer').html(response.html);
+                    $("#filter_available_results").text(response.posts_count);
+
+                    if (response.posts_count > 0) {
+                        loadGoogleMaps(initDistance);
+
+                        $(".post-container")
+                            .removeClass("d-none")
+                            .css({
+                                "display": "flex",
+                                "justify-content": "flex-end"
+                            });
+
+                        $("#no_results_message").addClass("d-none"); // Hide no results message
+                    } else {
+                        $(".post-container").addClass("d-none"); // Hide container
+                        $("#no_results_message").removeClass("d-none"); // Show no results message
+
                     }
-                });
+                },
+                complete: function() {
+                    $("#loadingSpinner").addClass("d-none");
+                }
+            });
+        }
+
+
+        $(document).ready(function() {
+            const minRange = document.getElementById("minRange");
+            const maxRange = document.getElementById("maxRange");
+            const minPrice = document.getElementById("minPrice_filter");
+            const maxPrice = document.getElementById("maxPrice_filter");
+            const progressBar = document.getElementById("progressBar");
+
+            function updateProgress() {
+                let minValue = parseInt(minRange.value);
+                let maxValue = parseInt(maxRange.value);
+                let totalRange = 60000000;
+
+                let minPercent = (minValue / totalRange) * 100;
+                let maxPercent = (maxValue / totalRange) * 100;
+
+                progressBar.style.left = minPercent + "%";
+                progressBar.style.width = (maxPercent - minPercent) + "%";
             }
 
+            function updateRange() {
+                let minValue = Number(minRange.value) || 0;
+                let maxValue = Number(maxRange.value) || 60000000;
 
-            $(document).ready(function() {
-                const minRange = document.getElementById("minRange");
-                const maxRange = document.getElementById("maxRange");
-                const minPrice = document.getElementById("minPrice_filter");
-                const maxPrice = document.getElementById("maxPrice_filter");
-                const progressBar = document.getElementById("progressBar");
-
-                function updateProgress() {
-                    let minValue = parseInt(minRange.value);
-                    let maxValue = parseInt(maxRange.value);
-                    let totalRange = 60000000;
-
-                    let minPercent = (minValue / totalRange) * 100;
-                    let maxPercent = (maxValue / totalRange) * 100;
-
-                    progressBar.style.left = minPercent + "%";
-                    progressBar.style.width = (maxPercent - minPercent) + "%";
-                }
-
-                function updateRange() {
-                    let minValue = Number(minRange.value) || 0;
-                    let maxValue = Number(maxRange.value) || 60000000;
-
-                    minPrice.value = minValue;
-                    maxPrice.value = maxValue;
-
-                    updateProgress();
-                    fetchFilteredResults();
-                }
-
-                function updateInputs() {
-                    let minValue = Number(minPrice.value) || 0;
-                    let maxValue = Number(maxPrice.value) || 60000000;
-
-                    if (minValue > 60000000) minValue = 60000000;
-                    if (minValue < 0) minValue = 0;
-                    if (maxValue > 60000000) maxValue = 60000000;
-                    if (maxValue < minValue) maxValue = minValue;
-
-                    minPrice.value = minValue;
-                    maxPrice.value = maxValue;
-                    minRange.value = minValue;
-                    maxRange.value = maxValue;
-
-                    updateProgress();
-                    fetchFilteredResults();
-                }
-
-                minRange.addEventListener("input", updateRange);
-                maxRange.addEventListener("input", updateRange);
-                minPrice.addEventListener("input", updateInputs);
-                maxPrice.addEventListener("input", updateInputs);
+                minPrice.value = minValue;
+                maxPrice.value = maxValue;
 
                 updateProgress();
+                fetchFilteredResults();
+            }
 
-                $(document).on('change', '.form-select, .price_class, .filter-checkbox, .transmission_filter, \
-                            #engine_capacity_filter, #from-year-filter, #to-year-filter, \
-                            #mileage_from, #mileage_to, #sortbyorder, .door_count_filter, .assembly_filter, \
-                            #featureAd_filter, input[name="userType"], input[name="model"], input[name="city"]', function() {
+            function updateInputs() {
+                let minValue = Number(minPrice.value) || 0;
+                let maxValue = Number(maxPrice.value) || 60000000;
+
+                if (minValue > 60000000) minValue = 60000000;
+                if (minValue < 0) minValue = 0;
+                if (maxValue > 60000000) maxValue = 60000000;
+                if (maxValue < minValue) maxValue = minValue;
+
+                minPrice.value = minValue;
+                maxPrice.value = maxValue;
+                minRange.value = minValue;
+                maxRange.value = maxValue;
+
+                updateProgress();
+                fetchFilteredResults();
+            }
+
+            minRange.addEventListener("input", updateRange);
+            maxRange.addEventListener("input", updateRange);
+            minPrice.addEventListener("input", updateInputs);
+            maxPrice.addEventListener("input", updateInputs);
+
+            updateProgress();
+
+            $(document).on('change', '.form-select, .price_class, .filter-checkbox, .transmission_filter, \
+                                    #engine_capacity_filter, #from-year-filter, #to-year-filter, \
+                                    #mileage_from, #mileage_to, #sortbyorder, .door_count_filter, .assembly_filter, \
+                                    #featureAd_filter, input[name="userType"], input[name="model"], input[name="city"]',
+                function() {
                     fetchFilteredResults();
                 });
-                fetchFilteredResults();
-            });
-            $(document).on('click', '.pagination a', function(event) {
-                event.preventDefault();
-                let page = $(this).attr('href').split('page=')[1];
-                if (page) {
-                    fetchFilteredResults(page);
-                }
-            });
-        </script>
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                const fromYearFilter = document.getElementById("from-year-filter");
-                const toYearFilter = document.getElementById("to-year-filter");
-                const currentYear = new Date().getFullYear(); // Get the current year
+            fetchFilteredResults();
+        });
+        $(document).on('click', '.pagination a', function(event) {
+            event.preventDefault();
+            let page = $(this).attr('href').split('page=')[1];
+            if (page) {
+                fetchFilteredResults(page);
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const fromYearFilter = document.getElementById("from-year-filter");
+            const toYearFilter = document.getElementById("to-year-filter");
+            const currentYear = new Date().getFullYear(); // Get the current year
 
-                fromYearFilter.addEventListener("change", function() {
-                    let selectedFromYear = parseInt(this.value) ||
+            fromYearFilter.addEventListener("change", function() {
+                let selectedFromYear = parseInt(this.value) ||
                     currentYear; // Default to current year if empty
 
-                    // Reset the "To Year" dropdown
-                    toYearFilter.innerHTML = '<option value="" selected>To</option>';
+                // Reset the "To Year" dropdown
+                toYearFilter.innerHTML = '<option value="" selected>To</option>';
 
-                    // Populate "To Year" dropdown from (selectedFromYear + 1) to current year
-                    for (let year = currentYear; year >= selectedFromYear + 1; year--) {
-                        let option = document.createElement("option");
-                        option.value = year;
-                        option.textContent = year;
-                        toYearFilter.appendChild(option);
+                // Populate "To Year" dropdown from (selectedFromYear + 1) to current year
+                for (let year = currentYear; year >= selectedFromYear + 1; year--) {
+                    let option = document.createElement("option");
+                    option.value = year;
+                    option.textContent = year;
+                    toYearFilter.appendChild(option);
+                }
+            });
+        });
+        $(document).ready(function() {
+            $(document).on("click", ".custom-page-link", function(e) {
+                e.preventDefault(); // Prevent default page reload
+
+                let page = $(this).data("page"); // Get the clicked page number
+                let url = $(this).attr("href"); // Keep the original URL for SEO
+
+                if (!page) return; // Exit if no page number
+
+                $.ajax({
+                    url: url, // Use Laravel-generated pagination URL
+                    type: "GET",
+                    beforeSend: function() {
+                        $("#post-container").css("opacity",
+                            "0.5"); // Add fade effect while loading
+                    },
+                    success: function(response) {
+                        // Update posts and pagination
+                        $("#post-container").html($(response).find("#post-container").html());
+                        $("#custom-pagination-container").html($(response).find(
+                            "#custom-pagination-container").html());
+
+                        // Reset opacity
+                        $("#post-container").css("opacity", "1");
+
+                        // Update active state
+                        $(".custom-page-link").removeClass("custom-active").css(
+                            "background-color", "#444"); // Reset all
+                        $('.custom-page-link[data-page="' + page + '"]').addClass(
+                            "custom-active").css("background-color",
+                            "#FD5631"); // Highlight active
+                    },
+                    error: function(xhr) {
+                        console.error(xhr.responseText);
                     }
                 });
             });
-            $(document).ready(function() {
-                $(document).on("click", ".custom-page-link", function(e) {
-                    e.preventDefault(); // Prevent default page reload
+        });
+    </script> --}}
 
-                    let page = $(this).data("page"); // Get the clicked page number
-                    let url = $(this).attr("href"); // Keep the original URL for SEO
+    <script>
+        $(document).ready(function() {
+            $('#bodytype_filter').select2({
+                placeholder: "Select Body Type",
+                allowClear: true,
+                minimumResultsForSearch: 0
+            });
+            // Initialize Select2 for Make filter
+            $('#make_filter').select2({
+                placeholder: "Select Make",
+                allowClear: true,
+                minimumResultsForSearch: 0
+            });
 
-                    if (!page) return; // Exit if no page number
+            // Initialize Select2 for Province filter
+            $('#province_filter').select2({
+                placeholder: "Select Province",
+                allowClear: true,
+                minimumResultsForSearch: 0
+            });
 
-                    $.ajax({
-                        url: url, // Use Laravel-generated pagination URL
-                        type: "GET",
-                        beforeSend: function() {
-                            $("#post-container").css("opacity",
-                            "0.5"); // Add fade effect while loading
-                        },
-                        success: function(response) {
-                            // Update posts and pagination
-                            $("#post-container").html($(response).find("#post-container").html());
-                            $("#custom-pagination-container").html($(response).find(
-                                "#custom-pagination-container").html());
+            // Initialize Select2 for City filter
+            $('#city').select2({
+                placeholder: "Select City",
+                allowClear: true,
+                minimumResultsForSearch: 0
+            });
 
-                            // Reset opacity
-                            $("#post-container").css("opacity", "1");
+            // Initialize Select2 for Model filter
+            $('.select-search-class').select2({
+                placeholder: "Select Model",
+                allowClear: true,
+                minimumResultsForSearch: 0
+            });
 
-                            // Update active state
-                            $(".custom-page-link").removeClass("custom-active").css(
-                                "background-color", "#444"); // Reset all
-                            $('.custom-page-link[data-page="' + page + '"]').addClass(
-                                "custom-active").css("background-color",
-                            "#FD5631"); // Highlight active
-                        },
-                        error: function(xhr) {
-                            console.error(xhr.responseText);
-                        }
+
+
+            // Initialize Select2 for other filters (if needed)
+            $('.select-search').not('#make_filter, #province_filter, #city').select2({
+                placeholder: function() {
+                    return $(this).data('placeholder') || 'Select an option';
+                },
+                allowClear: true,
+                minimumResultsForSearch: 0
+            });
+
+            // Trigger change events for dependent filters
+            $('#province_filter').change();
+            $('#make_filter').change();
+
+            // Submit the form automatically when a dealer is selected (if still needed)
+            $('.select-search, .select-search-class').on('change', function() {
+                $('#dealerForm').submit();
+            });
+
+            $('.select-search').not('#make_filter, #province_filter, #city').select2({
+                placeholder: function() {
+                    return $(this).data('placeholder') || 'Select an option';
+                },
+                allowClear: true,
+                minimumResultsForSearch: 0
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#province_filter').change();
+            $('#make_filter').change();
+        });
+
+        // $('#province_filter').change(function(e) {
+        //     var selectedCityId = "{{ request()->city }}";
+
+        //     var provinceId = this.value;
+        //     var cityWrapper = document.getElementById('city_filter_wrapper');
+        //     var cityLabel = $('.citylabel');
+        //     // Clear the existing city checkboxes
+        //     cityWrapper.innerHTML = '';
+        //     cityLabel.addClass('d-none'); // Hide label initially
+        //     var urlPath = encodeURIComponent(window.location.pathname);
+        //     // Fetch cities based on the selected province
+        //     // if (provinceId) {
+        //     //     fetch(`/getCity/${provinceId}?path=${urlPath}`)
+        //     //         .then(response => response.json())
+        //     //         .then(data => {
+        //     //             data.forEach(city => {
+        //     //                 var div = document.createElement('div');
+        //     //                 div.classList.add('form-check', 'my-2');
+
+        //     //                 var checkbox = document.createElement('input');
+        //     //                 checkbox.type = 'checkbox';
+        //     //                 checkbox.classList.add('filter-checkbox',
+        //     //                     'city_filter'); // Apply custom checkbox class
+        //     //                 checkbox.id = 'city_' + city.id;
+        //     //                 checkbox.value = city.id;
+        //     //                 checkbox.name = 'city[]';
+        //     //                 if (selectedCityId == city.id) {
+        //     //                     checkbox.checked = true;
+        //     //                 }
+        //     //                 var label = document.createElement('label');
+        //     //                 label.classList.add('form-check-label', 'ms-3');
+        //     //                 label.htmlFor = 'city_' + city.id;
+        //     //                 label.textContent = city.name + ' (' + (city.count || 0) + ')';
+
+        //     //                 div.appendChild(checkbox);
+        //     //                 div.appendChild(label);
+        //     //                 $('.citylabel').removeClass('d-none');
+        //     //                 cityWrapper.appendChild(div);
+        //     //             });
+        //     //             fetchFilteredResults();
+        //     //         })
+        //     //         .catch(error => console.error('Error fetching cities:', error));
+        //     // } else {
+        //     //     $('.citylabel').addClass('d-none');
+        //     // }
+
+        //     if (provinceId) {
+        //         $.get(`/getCity/${provinceId}?path=${urlPath}`, function(data) {
+        //             data.forEach(city => {
+        //                 citySelect.append(
+        //                     `<option value="${city.id}" ${city.id == selectedCityId ? 'selected' : ''} >${city.name + '('+ city.bike_count +')' }</option>`
+        //                 );
+        //             });
+        //             citySelect.trigger('change.select2');
+        //         });
+        //     }
+        // });
+
+
+        $('#province_filter').on('change', function() {
+            const provinceId = $(this).val();
+            const citySelect = $('#city');
+            var urlPath = encodeURIComponent(window.location.pathname);
+            var selectedCityId = "{{ request()->city }}";
+            citySelect.empty().append('<option value="">Select City</option>');
+
+            if (provinceId) {
+                $.get(`/getCity/${provinceId}?path=${urlPath}`, function(data) {
+                    data.forEach(city => {
+                        citySelect.append(
+                            `<option value="${city.id}" ${city.id == selectedCityId ? 'selected' : ''} >${city.name + '('+ city.count +')' }</option>`
+                        );
                     });
+                    citySelect.trigger('change.select2');
+                });
+            }
+        });
+
+        $('#make_filter').on('change', function() {
+            const makeId = $(this).val();
+            const urlPath = encodeURIComponent(window.location.pathname);
+            const modelSelect = $('#model_filter');
+            const selectedModelId = "{{ request()->model }}"; // This works if inside a Blade view
+            modelSelect.empty().append('<option value="">Select Model</option>');
+
+            if (makeId) {
+                $.get('/getmodel/' + makeId, {
+                    path: urlPath
+                }, function(data) {
+                    // Remove return; if you want it to populate!
+                    data.forEach(model => {
+                        modelSelect.append(
+                            `<option value="${model.id}" ${model.id == selectedModelId ? 'selected' : ''}>
+                        ${model.name} (${model.count})
+                    </option>`
+                        );
+                    });
+                    modelSelect.trigger('change.select2'); // Update select2
+                });
+            }
+        });
+
+
+        // to get models based on selected make
+        // $('#make_filter').change(function(e) {
+        //     var selectedModelId = "{{ request()->model }}";
+        //     var makeId = this.value;
+        //     var modelWrapper = document.getElementById('model_filter_wrapper');
+        //     var modelLabel = $('.model-label'); // Target the label
+
+        //     // Clear the current model options
+        //     modelWrapper.innerHTML = '';
+        //     modelLabel.addClass('d-none'); // Hide label initially
+        //     var urlPath = encodeURIComponent(window.location.pathname);
+        //     // console.log(urlPath);
+        //     // Fetch models based on selected make
+        //     if (makeId) {
+        //         fetch(`/getmodel/${makeId}?path=${urlPath}`)
+        //             .then(response => response.json())
+        //             .then(data => {
+        //                 //console.log(data);
+        //                 if (data.length > 0) {
+        //                     modelLabel.removeClass('d-none'); // Show label if models exist
+        //                 }
+
+        //                 data.forEach(model => {
+        //                     var div = document.createElement('div');
+        //                     div.classList.add('form-check', 'my-2');
+
+        //                     var checkbox = document.createElement('input');
+        //                     checkbox.type = 'checkbox';
+        //                     checkbox.classList.add('filter-checkbox',
+        //                         'model-filter'); // Apply custom checkbox styling
+        //                     checkbox.id = 'model_' + model.id;
+        //                     checkbox.value = model.id;
+        //                     checkbox.name = 'model[]';
+        //                     if (selectedModelId == model.id) {
+        //                         checkbox.checked = true;
+        //                     }
+        //                     var label = document.createElement('label');
+        //                     label.classList.add('form-check-label', 'ms-3');
+        //                     label.htmlFor = 'model_' + model.id;
+        //                     label.textContent = model.name + ' (' + (model.count || 0) + ')';
+
+        //                     div.appendChild(checkbox);
+        //                     div.appendChild(label);
+        //                     $('.modellabel').removeClass('d-none');
+        //                     modelWrapper.appendChild(div);
+        //                 });
+        //                 fetchFilteredResults();
+        //             })
+        //             .catch(error => console.error('Error fetching models:', error));
+        //     } else {
+        //         $('.modellabel').addClass('d-none');
+        //     }
+        // });
+    </script>
+
+    {{-- filters script  --}}
+    <script>
+        $(document).ready(function() {
+            $(".price_class").on("focus", function() {
+                if ($(this).val() == "0" || $(this).val() == "60000000") {
+                    $(this).val("");
+                }
+            });
+
+            $(".price_class").on("blur", function() {
+                if ($(this).val().trim() === "") {
+                    $(this).val($(this).attr("id") === "minPrice_filter" ? "0" : "60000000");
+                }
+            });
+        });
+    </script>
+
+    <script>
+        function fetchFilteredResults(page = 1) {
+            let sortBy = $('#sortbyorder').val() || null;
+            let fromYear = $('#from-year-filter').val() || null;
+            let toYear = $('#to-year-filter').val() || null;
+            let engineCapacity = $('#engine_capacity_filter').val() || null;
+            let mileageFrom = $('#mileage_from').val() || null;
+            let mileageTo = $('#mileage_to').val() || null;
+            let minPrice = Number($('#minPrice_filter').val()) || 0;
+            let maxPrice = Number($('#maxPrice_filter').val()) || 60000000;
+            let seatingCapacity = $('#seating_capacity_filter').val() || null;
+            let transmission = $('.transmission_filter:checked').map(function() {
+                return this.value;
+            }).get();
+            let doorCount = $('.door_count_filter').val() || null;
+            let assembly = $('.assembly_filter').val() || null;
+            let featureAd = $('#featureAd_filter').is(':checked') ? 1 : null;
+            let sellerType = $('input[name="userType"]:checked').map(function() {
+                return this.value;
+            }).get();
+            let conditionType = $('input[name="condition"]:checked').map(function() {
+                return this.value;
+            }).get();
+            let fuelType = $('.fuel_type_filter:checked').map(function() {
+                return this.value;
+            }).get();
+            let exteriorColor = $('.exterior_color_filter:checked').map(function() {
+                return this.value;
+            }).get();
+            let bodyType = $('.body_type_filter:checked').map(function() {
+                return this.value;
+            }).get();
+            let make = $('#make_filter').val() || null;
+
+            let model = $('input.model-filter:checked').map(function() {
+                return this.value;
+            }).get();
+
+            let province = $('#province_filter').val() || null;
+
+            let city = $('input.city_filter:checked').map(function() {
+                return this.value;
+            }).get();
+
+
+            let urlPath = window.location.pathname.split('/');
+            let type = urlPath[2] || 'search';
+
+            let filters = {
+                from_year: fromYear,
+                to_year: toYear,
+                engine_capacity: engineCapacity,
+                mileage_from: mileageFrom,
+                mileage_to: mileageTo,
+                min_price: minPrice,
+                max_price: maxPrice,
+                seating_capacity: seatingCapacity,
+                door_count: doorCount,
+                assembly: assembly,
+                transmission: transmission,
+                feature_ad: featureAd,
+                seller_type: sellerType.length > 0 ? sellerType : null,
+                fuel_type: fuelType.length > 0 ? fuelType : null,
+                exterior_color: exteriorColor.length > 0 ? exteriorColor : null,
+                body_type: bodyType.length > 0 ? bodyType : null,
+                make: make,
+                model: model,
+                city: city,
+                province: province,
+                sortby: sortBy,
+                condition: conditionType,
+                page: page
+            };
+            //console.log(filters);
+            $("#loadingSpinner").removeClass("d-none");
+
+            $.ajax({
+                url: "/posts/" + type,
+                method: "GET",
+                data: filters,
+                success: function(response) {
+                    $('#postresultsContainer').html(response.html);
+                    $("#filter_available_results").text(response.posts_count);
+
+                    if (response.posts_count > 0) {
+
+                        loadGoogleMaps(initDistance);
+                        $(".post-container")
+                            .removeClass("d-none")
+                            .css({
+                                "display": "flex",
+                                "justify-content": "flex-end"
+                            });
+
+                        $("#no_results_message").addClass("d-none"); // Hide no results message
+                    } else {
+                        $(".post-container").addClass("d-none"); // Hide container
+                        $("#no_results_message").removeClass("d-none"); // Show no results message
+
+                    }
+                },
+                complete: function() {
+                    $("#loadingSpinner").addClass("d-none");
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            const minRange = document.getElementById("minRange");
+            const maxRange = document.getElementById("maxRange");
+            const minPrice = document.getElementById("minPrice_filter");
+            const maxPrice = document.getElementById("maxPrice_filter");
+            const progressBar = document.getElementById("progressBar");
+
+            const gap = 10000; // Minimum allowed gap
+            const totalRange = 60000000; // Max price
+
+            function updateProgress() {
+                let minValue = parseInt(minRange.value);
+                let maxValue = parseInt(maxRange.value);
+
+                let minPercent = (minValue / totalRange) * 100;
+                let maxPercent = (maxValue / totalRange) * 100;
+
+                progressBar.style.left = minPercent + "%";
+                progressBar.style.width = (maxPercent - minPercent) + "%";
+            }
+
+            function handleMinChange() {
+                let minValue = parseInt(minRange.value);
+                let maxValue = parseInt(maxRange.value);
+
+                if (minValue + gap > maxValue) {
+                    minValue = maxValue - gap; // Prevent pushing max forward
+                }
+                minRange.value = minValue;
+                minPrice.value = minValue;
+                updateProgress();
+                fetchFilteredResults();
+            }
+
+            function handleMaxChange() {
+                let minValue = parseInt(minRange.value);
+                let maxValue = parseInt(maxRange.value);
+
+                if (maxValue - gap < minValue) {
+                    maxValue = minValue + gap; // Prevent pulling min backward
+                }
+                maxRange.value = maxValue;
+                maxPrice.value = maxValue;
+                updateProgress();
+                fetchFilteredResults();
+            }
+
+            function handleMinInputChange() {
+                let minValue = parseInt(minPrice.value) || 0;
+                let maxValue = parseInt(maxRange.value);
+
+                if (minValue < 0) minValue = 0;
+                if (minValue + gap > maxValue) minValue = maxValue - gap;
+
+                minPrice.value = minValue;
+                minRange.value = minValue;
+                updateProgress();
+                fetchFilteredResults();
+            }
+
+            function handleMaxInputChange() {
+                let minValue = parseInt(minRange.value);
+                let maxValue = parseInt(maxPrice.value) || totalRange;
+
+                if (maxValue > totalRange) maxValue = totalRange;
+                if (maxValue - gap < minValue) maxValue = minValue + gap;
+
+                maxPrice.value = maxValue;
+                maxRange.value = maxValue;
+                updateProgress();
+                fetchFilteredResults();
+            }
+
+            minRange.addEventListener("input", handleMinChange);
+            maxRange.addEventListener("input", handleMaxChange);
+            minPrice.addEventListener("input", handleMinInputChange);
+            maxPrice.addEventListener("input", handleMaxInputChange);
+
+            updateProgress();
+
+            $(document).on('change',
+                '.form-select, .price_class, .filter-checkbox, .transmission_filter, \
+                                                                                                #engine_capacity_filter, #from-year-filter, #to-year-filter, \
+                                                                                                #mileage_from, #mileage_to, #sortbyorder, .door_count_filter, .assembly_filter, \
+                                                                                                #featureAd_filter, input[name="userType"], input[name="model"], input[name="city"]',
+                function() {
+                    fetchFilteredResults();
+                });
+
+            fetchFilteredResults();
+        });
+
+
+
+        $(document).on('click', '.pagination a', function(event) {
+            event.preventDefault();
+            let page = $(this).attr('href').split('page=')[1];
+            if (page) {
+                fetchFilteredResults(page);
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const fromYearFilter = document.getElementById("from-year-filter");
+            const toYearFilter = document.getElementById("to-year-filter");
+            const currentYear = new Date().getFullYear(); // Get the current year
+
+            fromYearFilter.addEventListener("change", function() {
+                let selectedFromYear = parseInt(this.value) ||
+                    currentYear; // Default to current year if empty
+
+                // Reset the "To Year" dropdown
+                toYearFilter.innerHTML = '<option value="" selected>To</option>';
+
+                // Populate "To Year" dropdown from (selectedFromYear + 1) to current year
+                for (let year = currentYear; year >= selectedFromYear + 1; year--) {
+                    let option = document.createElement("option");
+                    option.value = year;
+                    option.textContent = year;
+                    toYearFilter.appendChild(option);
+                }
+            });
+        });
+        $(document).ready(function() {
+            $(document).on("click", ".page-link", function(e) {
+                e.preventDefault(); // Stop default page reload
+
+                let page = $(this).data("page"); // Get the page number from data attribute
+                let url = $(this).attr("href"); // Get the pagination URL
+
+                if (!page) return; // Ensure page number exists
+
+                $.ajax({
+                    url: "{{ route('search') }}", // Update with your actual route
+                    type: "POST",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        page: page,
+                    },
+                    beforeSend: function() {
+                        $("#post-container").css("opacity", "0.5"); // Show loading effect
+                    },
+                    success: function(response) {
+                        // Update only the post container
+                        $("#post-container").html($(response).find("#post-container").html());
+
+                        // Update pagination links
+                        $("#pagination-links").html($(response).find("#pagination-links")
+                            .html());
+
+                        // Reset opacity after loading
+                        $("#post-container").css("opacity", "1");
+
+                        // Update active state for pagination
+                        $(".page-link").removeClass("active").css("background-color",
+                            "#444"); // Reset all
+                        $('.page-link[data-page="' + page + '"]').addClass("active").css(
+                            "background-color", "#FD5631"); // Set active link
+
+                    },
+                    error: function(xhr) {
+                        console.error(xhr.responseText);
+                    }
                 });
             });
-        </script>
-    @endsection
+        });
+    </script>
+@endsection

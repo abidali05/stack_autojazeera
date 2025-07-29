@@ -577,6 +577,7 @@
                         <select id="make_filter" class="form-select select-search mb-2 make-filter filter-style"
                             style="width:100% !important" name="make">
                             <option value="">Make</option>
+                            <option value="any">Any</option>
                             @foreach ($makes as $make)
                                 <option value="{{ $make->id }}"
                                     {{ request()->make == $make->id || request()->segment(2) == $make->id ? 'selected' : '' }}>
@@ -598,7 +599,8 @@
                     <div class="select-wrapper mt-2">
                         <select class="form-select model-filter select-search-class filter-style"
                             style="width:100% !important" name="model" id="model_filter">
-                            <option value="" selected>Any model</option>
+                            <option value="" disabled selected>Any model</option>
+                            <option value="any">Any</option>
                         </select><i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
                     </div>
                 </div>
@@ -610,6 +612,7 @@
                         <select class="form-select mb-2  select-search filter-style " style="width:100% !important"
                             id="province_filter">
                             <option value="" disabled selected>Select Province</option>
+                            <option value="any">Any</option>
                             @foreach ($provinces as $province)
                                 <option value="{{ $province->id }}"
                                     {{ request()->province == $province->id || request()->province_ == $province->id || request()->segment(2) == $province->id ? 'selected' : '' }}>
@@ -621,17 +624,17 @@
                     </div>
                 </div>
                 <!--     <div class="my-3">
-                                                                            <label class="form-label mb-3">City</label>
-                                                                            <div class="select-wrapper">
-                                                                                <select class="form-select select-search filter-style" style="width:100% !important"
-                                                                                    id="city_filter">
-                                                                                    <option value="" disabled selected>Select City</option>
-                                                                                    {{-- @foreach ($cities as $city)
+                                                                                                                <label class="form-label mb-3">City</label>
+                                                                                                                <div class="select-wrapper">
+                                                                                                                    <select class="form-select select-search filter-style" style="width:100% !important"
+                                                                                                                        id="city_filter">
+                                                                                                                        <option value="" disabled selected>Select City</option>
+                                                                                                                        {{-- @foreach ($cities as $city)
                                         <option value="{{ $city->id }}">{{ $city->name }} ({{ $city->count }})</option>
                                     @endforeach --}}
-                                                                                </select><i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
-                                                                            </div>
-                                                                        </div> -->
+                                                                                                                    </select><i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
+                                                                                                                </div>
+                                                                                                            </div> -->
 
                 {{-- <div class="my-2">
                     <label class="form-label mb-3 citylabel d-none"><strong>City</strong></label>
@@ -643,15 +646,16 @@
                 </div> --}}
 
                 <div class="my-2">
-                        <label class="form-label mb-3 mt-2 citylabel "><strong>City</strong></label>
-                        <div class="select-wrapper">
-                            <select class="form-select select2 select-search assembly-filter filter-style assembly_filter"
-                                style="width:100% !important" id="city">
-                                <option value="" disabled selected>Select Province First</option>
-                            </select>
-                            <i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
-                        </div>
+                    <label class="form-label mb-3 mt-2 citylabel "><strong>City</strong></label>
+                    <div class="select-wrapper">
+                        <select class="form-select select2 select-search assembly-filter filter-style assembly_filter"
+                            style="width:100% !important" id="city">
+                            <option value="" disabled selected>Select Province First</option>
+                            <option value="any">Any</option>
+                        </select>
+                        <i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
                     </div>
+                </div>
                 <div class="my-2">
                     <label class="form-label mb-2 mt-2"><strong>Price</strong></label>
                     <div class="slider-container">
@@ -690,16 +694,15 @@
 
                 </div>
 
-
-
                 <!-- Engine Capacity, Mileage, and Price Range Filters -->
                 <div class="my-3">
                     <label class="form-label mb-4 mt-2"><strong>Engine Capacity (CC)</strong></label>
                     <div class="select-wrapper my-2">
                         {{-- <input type="range" class="form-range engine-capacity-filter" min="1" max="10" step="0.1"> --}}
-                        <select class="form-select  engine-capacity-filter select-search filter-style" style="width:100%"
+                        <select class="form-select engine-capacity-filter select-search filter-style" style="width:100%"
                             id="engine_capacity_filter">
-                            <option value="">Select Engine Capacity</option>
+                            <option value="" disabled selected>Select Engine Capacity</option>
+                            <option value="any">Any</option>
                             <option value="1.6L">1.6L</option>
                             <option value="2.0L">2.0L</option>
                             <option value="3.0L+">3.0L+</option>
@@ -732,8 +735,8 @@
                             <i class="bi bi-dash-lg milagedash" style=" "></i>
                         </div>
                     </div>
-
                 </div>
+                
                 <div class="col-12 divheight">
                     <label class="form-label mb-3 mt-2"><strong>Body type</strong></label>
                     @foreach ($bodytypes as $bodytype)
@@ -747,10 +750,26 @@
                             </label>
                         </div>
                     @endforeach
-
-
-
                 </div>
+
+                {{-- <div>
+                    <label class="form-label mt-1"><strong>Body type</strong></label>
+                    <div class="select-wrapper mt-1">
+                        <select class="form-select select2 bodytype-filter select-search formcontrol"
+                            style="width:100% !important" style="background-color:#282435" placeholder="Seats"
+                            id="bodytype_filter">
+                            <option value="" disabled selected>Body type</option>
+                            <option value="">Any</option>
+                            @foreach ($bodytypes as $body_type)
+                                <option value="{{ $body_type->id }}"
+                                    {{ request()->type == 'bodytype' && request()->id == $body_type->id ? 'selected' : '' }}>
+                                    {{ $body_type->name }} ({{ $body_type->count }})
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div> --}}
+
                 <!-- Fuel Type Filter -->
                 <div class="my-2">
                     <label class="form-label mb-2 "><strong>Fuel Type</strong></label>
@@ -790,7 +809,8 @@
                         <select class="form-select seating-capacity-filter select-search formcontrol"
                             style="width:100% !important" style="background-color:#282435" placeholder="Seats"
                             id="seating_capacity_filter">
-                            <option value="" selected>Seating Capacity</option>
+                            <option value="" disabled selected>Seating Capacity</option>
+                            <option value="any">Any</option>
                             <option value="2">2</option>
                             <option value="4">4</option>
                             <option value="5+">5+</option>
@@ -818,7 +838,8 @@
                     <div class="select-wrapper">
                         <select class="form-select select-search door-count-filter formcontrol door_count_filter"
                             style="width:100% !important" placeholder="Doors">
-                            <option value="" selected>Door Count</option>
+                            <option value="" disabled selected>Door Count</option>
+                            <option value="any">Any</option>
                             <option value="2">2</option>
                             <option value="4">4</option>
                             <option value="5+">5+</option>
@@ -834,6 +855,7 @@
                         <select class="form-select select-search assembly-filter filter-style assembly_filter"
                             style="width:100% !important">
                             <option value="" disabled selected>Select Assembly</option>
+                            <option value="any">Any</option>
                             <option value="local">Local</option>
                             <option value="imported">Imported</option>
                         </select>
@@ -1008,6 +1030,71 @@
         </div>
     </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#bodytype_filter').select2({
+                placeholder: "Select Body Type",
+                allowClear: true,
+                minimumResultsForSearch: 0
+            });
+            // Initialize Select2 for Make filter
+            $('#make_filter').select2({
+                placeholder: "Select Make",
+                allowClear: true,
+                minimumResultsForSearch: 0
+            });
+
+            // Initialize Select2 for Province filter
+            $('#province_filter').select2({
+                placeholder: "Select Province",
+                allowClear: true,
+                minimumResultsForSearch: 0
+            });
+
+            // Initialize Select2 for City filter
+            $('#city').select2({
+                placeholder: "Select City",
+                allowClear: true,
+                minimumResultsForSearch: 0
+            });
+
+            // Initialize Select2 for Model filter
+            $('.select-search-class').select2({
+                placeholder: "Select Model",
+                allowClear: true,
+                minimumResultsForSearch: 0
+            });
+
+            
+
+            // Initialize Select2 for other filters (if needed)
+            $('.select-search').not('#make_filter, #province_filter, #city').select2({
+                placeholder: function() {
+                    return $(this).data('placeholder') || 'Select an option';
+                },
+                allowClear: true,
+                minimumResultsForSearch: 0
+            });
+
+            // Trigger change events for dependent filters
+            $('#province_filter').change();
+            $('#make_filter').change();
+
+            // Submit the form automatically when a dealer is selected (if still needed)
+            $('.select-search, .select-search-class').on('change', function() {
+                $('#dealerForm').submit();
+            });
+
+            $('.select-search').not('#make_filter, #province_filter, #city').select2({
+                placeholder: function() {
+                    return $(this).data('placeholder') || 'Select an option';
+                },
+                allowClear: true,
+                minimumResultsForSearch: 0
+            });
+        });
+    </script>
     <script>
         $(document).ready(function() {
             $('#province_filter').change();
@@ -1072,7 +1159,7 @@
         //     }
         // });
 
-        
+
         $('#province_filter').on('change', function() {
             const provinceId = $(this).val();
             const citySelect = $('#city');
@@ -1378,9 +1465,9 @@
 
             $(document).on('change',
                 '.form-select, .price_class, .filter-checkbox, .transmission_filter, \
-                                                        #engine_capacity_filter, #from-year-filter, #to-year-filter, \
-                                                        #mileage_from, #mileage_to, #sortbyorder, .door_count_filter, .assembly_filter, \
-                                                        #featureAd_filter, input[name="userType"], input[name="model"], input[name="city"]',
+                                                                                            #engine_capacity_filter, #from-year-filter, #to-year-filter, \
+                                                                                            #mileage_from, #mileage_to, #sortbyorder, .door_count_filter, .assembly_filter, \
+                                                                                            #featureAd_filter, input[name="userType"], input[name="model"], input[name="city"]',
                 function() {
                     fetchFilteredResults();
                 });

@@ -538,9 +538,9 @@
                         <div class="custom-select-icon flex-grow-1">
                             <img src="{{ asset('web/bikes/images/Group12.svg') }}" class="me-2 img-fluid">
                             <select id="condition" name="condition" style="width:160px !important;"
-                                class="form-select select2">
+                                class="form-select condition-select2">
                                 <option value="">Condition</option>
-                                <option value="">Any</option>
+                                <option value="1e">Any</option>
                                 <option value="new">New Cars</option>
                                 <option value="used">Used Cars</option>
                             </select>
@@ -1225,11 +1225,12 @@
 
 <script>
     $(document).ready(function() {
-        // $('.select2').select2({
-        //     minimumResultsForSearch: Infinity,
-        //     dropdownAutoWidth: true,
-        //     width: '100%'
-        // });
+        $('.condition-select2').select2({
+            // minimumResultsForSearch: Infinity,
+            placeholder: "Condition",
+            dropdownAutoWidth: true,
+            width: '100%'
+        });
 
         $('.body-type-select2').select2({
             placeholder: "Body Type",

@@ -97,7 +97,7 @@ class AddsController extends Controller
                 // $posts = Post::with(['feature', 'document' => function ($q) {
                 //     $q->orderBy('position', 'asc');
                 // }, 'location', 'contact'])->orderby('id', 'desc')->where(['dealer_id' => $user->dealer_id, 'employee_id' => $user->id])->get();
-                                $posts = Post::with(['feature', 'document' => function ($q) {
+                $posts = Post::with(['feature', 'document' => function ($q) {
                     $q->orderBy('position', 'asc');
                 }, 'location', 'contact'])->orderby('id', 'desc')->where(['dealer_id' => $user->dealer_id])->get();
             } else {
@@ -793,8 +793,8 @@ class AddsController extends Controller
             }
         }
         //dd('1');
-  return redirect()->route('thankyou');
-      //  return redirect()->to(url('ads'));
+        return redirect()->route('thankyou');
+        //  return redirect()->to(url('ads'));
 
         // return response()->json(['success' => true, 'redirect' => url('ads')]);
     }
@@ -802,7 +802,7 @@ class AddsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-   public function destroy(Request $request, string $id)
+    public function destroy(Request $request, string $id)
     {
         $post = Post::find($request->deleted_id);
         $post->status = 0;
@@ -835,10 +835,8 @@ class AddsController extends Controller
         }
         foreach ($posts as $post) {
             $dealer = User::find($post->dealer_id);
-            //dd($dealer);
 
             $post->user_type = $dealer->userType;
-            //dd($post->user_type);
         }
         return view('superadmin.Cars.index',  compact('users', 'makes', 'models', 'posts', 'colors', 'provinces', 'cities',  'features', 'bodytypes'));
     }
@@ -889,6 +887,21 @@ class AddsController extends Controller
         Log::info($request->all());
         $type = $request->segment(2);
         Log::info($type);
+
+        $filteredData = collect($request->all())->map(function ($value) {
+            if (is_array($value)) {
+                return empty($value) ? null : $value;
+            }
+
+            if (in_array(strtolower(trim((string) $value)), ['any', 'null', ''], true)) {
+                return null;
+            }
+
+            return $value;
+        });
+
+        // Replace request data with cleaned one
+        $request->merge($filteredData->toArray());
 
         $query = Post::with('dealer')->where('status', 1)->whereNull('deleted_at');
 

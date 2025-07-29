@@ -47,12 +47,8 @@ class BikeController extends Controller
         return view('bikes.user.bike_home', compact('makes', 'models', 'colors', 'provinces', 'cities',  'features', 'bodytypes', 'featured_new_posts', 'featured_used_posts'));
     }
 
-
-
     public function get_model($modelId, Request $request)
     {
-
-
         $models = BikeModels::where('make_id', $modelId)->where('status', 1)->get();
 
         return response()->json($models);
@@ -197,7 +193,21 @@ class BikeController extends Controller
 
     public function filter(Request $request)
     {
-        // dd($request->all());
+        $filteredData = collect($request->all())->map(function ($value) {
+            if (is_array($value)) {
+                return empty($value) ? null : $value;
+            }
+
+            if (in_array(strtolower(trim((string) $value)), ['any', 'null', ''], true)) {
+                return null;
+            }
+
+            return $value;
+        });
+        // Replace request data with cleaned one
+        $request->merge($filteredData->toArray());
+        dd($request->all());
+
         $query = BikePost::where('status', '1');
 
         $query
