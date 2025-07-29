@@ -464,7 +464,6 @@
                                 <th>Comment</th>
                                 <th>Created On </th>
                                 <th>Updated On</th>
-
                             </tr>
                         </thead>
                         <tbody>

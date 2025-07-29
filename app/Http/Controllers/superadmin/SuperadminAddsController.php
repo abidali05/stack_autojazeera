@@ -62,7 +62,6 @@ class SuperadminAddsController extends Controller
      */
     public function index(Request $request)
     {
-
         $users = User::where('role', 1)->get();
         if ($request->car_search) {
             $query = Post::withTrashed()->orderBy('feature_ad', 'DESC')->orderBy('created_at', 'DESC')->query();
@@ -130,7 +129,6 @@ class SuperadminAddsController extends Controller
                     ->orWhere('description', 'like', "%$searchTerm%");
             });
         }
-
 
         $bike_posts = $bike_posts->get();
 
@@ -852,7 +850,7 @@ class SuperadminAddsController extends Controller
         $post->update();
         return redirect()->back()->with('warning', 'status change successfully');
     }
-    
+
     public function Cars_data(Request $request, $name)
     {
         $users = User::where('role', 1)->get();

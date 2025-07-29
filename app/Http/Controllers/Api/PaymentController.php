@@ -354,18 +354,11 @@ class PaymentController extends Controller
         }
     }
 
-
-
-
-
-
     public function signupwithfreeplan(Request $request)
     {
         if (!auth('sanctum')->check()) {
             return response()->json(['status' => 422, 'message' => "You are not authorized to access this route"]);
         }
-
-
 
         $user = auth('sanctum')->user();
         if ($user->free_package_availed == '1') {

@@ -20,8 +20,8 @@ class ApiNumbereController extends Controller
 
     public function __construct()
     {
-        // $this->twilio = new Client(env('TWILIO_ACCOUNT_SID'), env('TWILIO_AUTH_TOKEN'));
-        $this->twilio = new Client('ACf7b88a5f46cf4a5f8215d0018c55f355', '342711440a4f95845b398ebad6f9f7a1');
+        $this->twilio = new Client(env('TWILIO_ACCOUNT_SID'), env('TWILIO_AUTH_TOKEN'));
+        // $this->twilio = new Client('ACf7b88a5f46cf4a5f8215d0018c55f355', '342711440a4f95845b398ebad6f9f7a1');
     }
 
     public function requestOTP(Request $request)
@@ -62,7 +62,6 @@ class ApiNumbereController extends Controller
            //      'from' => '+13655361575',
              //    'body' => "Your OTP For login to AutoJazeera is: $otp"
            //  ]);
-
 
             return  response()->json([
                 'otp' => $otp,
