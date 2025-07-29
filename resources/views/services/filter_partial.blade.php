@@ -176,11 +176,11 @@
 		 <div class="row d-flex justify-content-center my-3">
 		       <div class="p-3 col-8" style="border:1px solid #281F48;border-radius:9px;">
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-md-3 text-center text-md-start ">
                             <img src="{{ asset('web/images/noinputs.svg') }}" alt="" class="img-fluid"
                                 srcset="">
                         </div>
-                        <div class="col-9 text-start">
+                        <div class="col-md-9 text-start">
                             <h1 style="color:#FD5631">Sorry</h1>
                             <p>No matches found for your search. Try adjusting your filters or expanding your criteria
                                 to

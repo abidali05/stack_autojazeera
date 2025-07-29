@@ -43,14 +43,21 @@
 <div class="modal fade" id="superadmin_add_userModal" tabindex="-1" aria-labelledby="addDealerModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-
+   <div class="border-0 modal-header"
+                                                style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+										
+												 <h5 class="modal-title" id="newsletterresponseLabel"> <strong> 	Add New User	</strong></h5>
+                                                <button type="button" class="btn-close"
+                                                    style="background-color: #D9D9D9 !important; color: #FD5631;"
+                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
             <form id="superadmin_add_userForm" method="post" action="{{ route('superadmin.user.store') }}"
                 enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body p-5 "  style="background-color:#F0F3F6 !important;">
                     <div class="row mb-4">
                         <div class="col-6">
-                            <h3 style="color: #281F48; font-weight: 600;">Add New User</h3>
+             
                         </div>
                         <div class="col-6 d-flex justify-content-end">
                             <div class="dropzone"

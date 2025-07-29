@@ -277,6 +277,8 @@
                                         <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
                                             <div class="border-0 modal-header"
                                                 style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+										
+												 <h5 class="modal-title" id="newsletterresponseLabel"> <strong> 		{{ $form->requesttype }}</strong></h5>
                                                 <button type="button" class="btn-close"
                                                     style="background-color: #D9D9D9 !important; color: #FD5631;"
                                                     data-bs-dismiss="modal" aria-label="Close"></button>
@@ -286,12 +288,12 @@
                                                 <form>
                                                     <div class="row mb-3">
                                                         <div class="col-12 text-center"
-                                                            style="border-bottom:1px solid #B7B7B7">
+                                                            >
                                                             <h3 class="modal-title"
                                                                 style="color: #FD5631; font-weight: bold;padding-bottom: 13px;"
                                                                 id="viewCommentLabel{{ $form->id }}">
-                                                                {{ $form->fullname }} <span style=color:#281F48>|
-                                                                    {{ $form->requesttype }} </span>
+                                                                <h3 style="color:#281F48"> {{ $form->fullname }}
+                                                                     </h3>
                                                             </h3>
                                                         </div>
                                                         <div class="mb-3 mt-4">
@@ -304,7 +306,7 @@
                                                         <div class="col-md-4 mt-3">
                                                             {{--  <label for="fullname{{$form->id}}" class="form-label" style="color: #FD5631;">Full Name</label>
                                                         <input type="text" class="form-control" id="fullname{{$form->id}}" placeholder="Enter full name" value="{{$form->fullname}}" readonly> --}}
-                                                            <p class="p-0 m-0 orange">Phone</p>
+                                                            <p class="p-0 m-0 orange" style="color:#281F48">Phone</p>
                                                         </div>
                                                         <div class="col-md-6 mt-3">
 
@@ -317,7 +319,7 @@
                                                         <div class="col-md-4">
                                                             {{--   <label for="phone{{$form->id}}" class="form-label">Phone Number</label>
                                                         <input type="text" class="form-control" id="phone{{$form->id}}" placeholder="Enter phone number" value="{{$form->number}}" readonly> --}}
-                                                            <p class="p-0 orange">Email</p>
+                                                            <p class="p-0 orange" style="color:#281F48">Email</p>
                                                         </div>
                                                         <div class="col-md-6">
                                                             {{--     <label for="dob{{$form->id}}" class="form-label">Date of Birth</label>
@@ -330,7 +332,7 @@
                                                         <div class="col-md-4">
                                                             {{--  <label for="time{{$form->id}}" class="form-label">Time</label>
                                                         <input type="time" class="form-control" id="time{{$form->id}}" value="{{$form->apointment_time}}" readonly> --}}
-                                                            <p class="p-0 orange">Requested Date</p>
+                                                            <p class="p-0 orange" style="color:#281F48">Requested Date</p>
                                                         </div>
                                                         <div class="col-md-6">
                                                             {{-- <label for="contactMethod{{$form->id}}" class="form-label">Preferred Contact Method</label>
@@ -347,19 +349,19 @@
                                                     <textarea class="form-control" id="message{{$form->id}}" rows="4" placeholder="Enter your message here" readonly>{{$form->comment}}</textarea>
                                                 </div> --}}
                                                         <div class="col-md-4">
-                                                            <p class="orange">Ad Id</p>
+                                                            <p class="orange" style="color:#281F48">Ad Id</p>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <p>{{ $form->post->id }}</p>
                                                         </div>
                                                         <div class="col-md-4">
-                                                            <p class="orange">Ad Title</p>
+                                                            <p class="orange" style="color:#281F48">Ad Title</p>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <p>{{ $form->post->title }}</p>
                                                         </div>
                                                         <div class="col-md-4">
-                                                            <p class="orange">Ad Published Date</p>
+                                                            <p class="orange" style="color:#281F48">Ad Published Date</p>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <p>

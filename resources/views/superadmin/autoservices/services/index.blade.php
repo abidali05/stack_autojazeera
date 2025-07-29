@@ -298,7 +298,7 @@
                                                     </div>
                                                     <div id="categoryiconpreview{{ $service->id }}"
                                                         class="mt-3 text-success image-preview">
-                                                    <img src="{{ $service->icon }}" alt="">
+                                                    <img src="{{ $service->icon }}" alt="" style="height: 100px !important; width: 100px !important;">
                                                     </div>
                                                 </div>
 

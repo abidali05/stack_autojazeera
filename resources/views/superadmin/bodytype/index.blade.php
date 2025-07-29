@@ -127,7 +127,7 @@
         <div class="row align-items-center mb-4">
 
             <div class="col-md-12">
-                <h2 class="sec mb-0 primary-color-custom">Manage Body Type</h2>
+                <h2 class="sec mb-0 primary-color-custom">Manage Car Body Type</h2>
             </div>
             <div class="col-md-12 text-end">
 

@@ -27,7 +27,7 @@
         table.dataTable {
             width: 100% !important;
         }
-        
+
         .table>:not(caption)>*>* {
             padding: 0rem .5rem;
             color: var(--bs-table-color-state, var(--bs-table-color-type, var(--bs-table-color)));
@@ -41,12 +41,16 @@
             padding: 0px 10px 5px 10px;
             border-bottom: 1px solid rgba(0, 0, 0, 0.3);
         }
-        div.dt-container .dt-length, div.dt-container .dt-search, div.dt-container .dt-info, div.dt-container .dt-processing, div.dt-container .dt-paging {
-    color: inherit;
-    display: flex
-;
-    justify-content: end;
-}
+
+        div.dt-container .dt-length,
+        div.dt-container .dt-search,
+        div.dt-container .dt-info,
+        div.dt-container .dt-processing,
+        div.dt-container .dt-paging {
+            color: inherit;
+            display: flex;
+            justify-content: end;
+        }
     </style>
     @php
         $dealershipNames = \App\Models\User::where('role', 1)->pluck('dealershipName')->toArray();
@@ -125,6 +129,14 @@
                                     aria-labelledby="editUsererModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
+                                               <div class="border-0 modal-header"
+                                                style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+										
+												 <h5 class="modal-title" id="newsletterresponseLabel"> <strong> 	Edit User	</strong></h5>
+                                                <button type="button" class="btn-close"
+                                                    style="background-color: #D9D9D9 !important; color: #FD5631;"
+                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
                                             <form method="post" action="{{ route('superadmin.user.update', $user->id) }}"
                                                 enctype="multipart/form-data">
                                                 @csrf
@@ -132,7 +144,7 @@
                                                 <div class="modal-body" style="background-color:#F0F3F6 !important;">
                                                     <div class="mb-4 row">
                                                         <div class="col-6 mb-3">
-                                                            <h3 style="color: #281F48; font-weight: 600;">Edit User</h3>
+                                                       
                                                         </div>
 
                                                         <div class="col-6 mb-3 d-flex justify-content-end pe-4">
@@ -342,6 +354,14 @@
                                     aria-labelledby="editUsererModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg modal-dialog-centered">
                                         <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
+                                                <div class="border-0 modal-header"
+                                                style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+										
+												 <h5 class="modal-title" id="newsletterresponseLabel"> <strong> 	Edit User	</strong></h5>
+                                                <button type="button" class="btn-close"
+                                                    style="background-color: #D9D9D9 !important; color: #FD5631;"
+                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
                                             <form method="post"
                                                 action="{{ route('superadmin.user.update', $user->id) }}"
                                                 enctype="multipart/form-data">
@@ -351,7 +371,7 @@
                                                     style="background-color: #F0F3F6; color: #FD5631;">
                                                     <div class="mb-4 row">
                                                         <div class="col-6 mb-3">
-                                                            <h3 style="color: #281F48; font-weight: 600;">Edit User</h3>
+                                                            <h3 style="color: #281F48; font-weight: 600;"></h3>
                                                         </div>
 
                                                         <div class="col-6 mb-3 d-flex justify-content-end pe-4">
@@ -562,6 +582,14 @@
                                     aria-labelledby="editUsererModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg modal-dialog-centered">
                                         <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
+                                                <div class="border-0 modal-header"
+                                                style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+										
+												 <h5 class="modal-title" id="newsletterresponseLabel"> <strong> 	Edit User	</strong></h5>
+                                                <button type="button" class="btn-close"
+                                                    style="background-color: #D9D9D9 !important; color: #FD5631;"
+                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
                                             <form method="post"
                                                 action="{{ route('superadmin.user.update', $user->id) }}"
                                                 enctype="multipart/form-data">
@@ -571,7 +599,7 @@
                                                     style="background-color: #F0F3F6; color: #FD5631;">
                                                     <div class="mb-4 row">
                                                         <div class="col-6 mb-3">
-                                                            <h3 style="color: #281F48; font-weight: 600;">Edit User</h3>
+                                                         
                                                         </div>
 
                                                         <div class="col-6 mb-3 d-flex justify-content-end pe-4">
@@ -742,31 +770,31 @@
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
     <script>
         const initializeTables = () => {
-             $(document).ready(function() {
-            $('.datatable12').each(function() {
-                var table = $(this).DataTable({
-                    paging: true,
-                    pageLength: 25,
-                    lengthChange: false,
-                    searching: true,
-                    ordering: true,
-                    scrollX: false,
-                    order: [
-                        [0, 'asc']
-                    ],
-                    language: {
-                        search: "Search: "
-                    },
-                       dom: `
+            $(document).ready(function() {
+                $('.datatable12').each(function() {
+                    var table = $(this).DataTable({
+                        paging: true,
+                        pageLength: 25,
+                        lengthChange: false,
+                        searching: true,
+                        ordering: true,
+                        scrollX: false,
+                        order: [
+                            [0, 'asc']
+                        ],
+                        language: {
+                            search: "Search: "
+                        },
+                        dom: `
   <"search-wrapper mb-3"f>
   <"pagination-wrapper d-flex justify-content-between align-items-center mb-3"i p>
   rt
   <"pagination-wrapper d-flex justify-content-between align-items-center mt-3"i p>
   <"clear">
 `
+                    });
                 });
             });
-        });
         };
 
         document.addEventListener('DOMContentLoaded', initializeTables);

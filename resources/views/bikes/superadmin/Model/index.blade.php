@@ -547,7 +547,7 @@
             <div class="modal-content " style="border-radius: 10px; overflow: hidden;">
                 <div class="modal-header border-0"
                     style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
-                    <h5 class="modal-title" id="colorModalLabel"> <strong> Add Make</strong></h5>
+                    <h5 class="modal-title" id="colorModalLabel"> <strong> Add Model</strong></h5>
                     <button type="button" class="btn-close"
                         style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
                         aria-label="Close"></button>

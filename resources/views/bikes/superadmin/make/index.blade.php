@@ -374,7 +374,7 @@
                         <tr>
                             <td>{{ $key + 1 }}</td>
                             <td>
-                                <a class=" me-2" title="Edit" data-bs-toggle="modal"
+                                <a class=" me-2" title="Edit" data-bs-toggle="modal" style="text-decoration: none"
                                     data-bs-target="#editbikemakeModal{{ $make->id }}">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
