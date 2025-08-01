@@ -167,6 +167,14 @@
             background-color: #e65028;
         }
 
+        .ads-column-search {
+            width: 90px;
+            font-size: 10px;
+            border: 1px solid #D9D9D9;
+            border-radius: 2px;
+            padding: 2px;
+        }
+
         tbody,
         td,
         tfoot,
@@ -337,7 +345,8 @@
             border-radius: 5px !important;
             border: none !important;
         }
-              .table>:not(caption)>*>* {
+
+        .table>:not(caption)>*>* {
             padding: 0rem .5rem;
             color: var(--bs-table-color-state, var(--bs-table-color-type, var(--bs-table-color)));
             background-color: var(--bs-table-bg);
@@ -350,12 +359,16 @@
             padding: 0px 10px 5px 10px;
             border-bottom: 1px solid rgba(0, 0, 0, 0.3);
         }
-        div.dt-container .dt-length, div.dt-container .dt-search, div.dt-container .dt-info, div.dt-container .dt-processing, div.dt-container .dt-paging {
-    color: inherit;
-    display: flex
-;
-    justify-content: end;
-}
+
+        div.dt-container .dt-length,
+        div.dt-container .dt-search,
+        div.dt-container .dt-info,
+        div.dt-container .dt-processing,
+        div.dt-container .dt-paging {
+            color: inherit;
+            display: flex;
+            justify-content: end;
+        }
     </style>
 </head>
 
@@ -1203,7 +1216,7 @@
                     language: {
                         search: "Search: "
                     },
-                                   dom: `
+                    dom: `
   <"search-wrapper mb-3"f>
   <"pagination-wrapper d-flex justify-content-between align-items-center mb-3"i p>
   rt

@@ -390,7 +390,7 @@
                 </form>
             @endif
             <script>
-        $(document).ready(function() {
+$(document).ready(function() {
             $('.color-datatable').each(function() {
                 var table = $(this).DataTable({
                     paging: true,
@@ -398,20 +398,44 @@
                     lengthChange: false,
                     searching: true,
                     ordering: true,
-                    scrollX: true,
+                    scrollX: false,
                     order: [
                         [0, 'asc']
                     ],
                     language: {
                         search: "Search: "
                     },
-                                         dom: `
+                         dom: `
   <"search-wrapper mb-3"f>
   <"pagination-wrapper d-flex justify-content-between align-items-center mb-3"i p>
   rt
   <"pagination-wrapper d-flex justify-content-between align-items-center mt-3"i p>
   <"clear">
 `
+                });
+
+                // Add search row
+                $(this).find('thead').append('<tr class="search-row"></tr>');
+
+                $(this).find('thead th').each(function(index) {
+                    var title = $(this).text().trim();
+                    var searchHtml = '';
+
+                    // Only create inputs for specific columns
+                    if (['Name'].includes(title)) {
+                        searchHtml = '<input type="text" placeholder="Search ' + title +
+                            '" class="ads-column-search"/>';
+                    }
+
+                    $(this).closest('thead').find('.search-row').append(
+                        '<th>' + searchHtml + '</th>'
+                    );
+                });
+
+                // Apply search functionality
+                $(this).find('.search-row input').on('keyup change', function() {
+                    var columnIndex = $(this).closest('th').index();
+                    table.column(columnIndex).search(this.value).draw();
                 });
             });
         });

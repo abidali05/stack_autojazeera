@@ -706,10 +706,10 @@
                                 <input type="hidden" name="currency" id="currencySelect" value="PKR">
                                 <p class="mb-0">PKR</p>
                                 <!-- <select class="form-select" id="currencySelect" disabled>
-                                                                                            <option value="PKR" selected>PKR</option>
-                                                                                            <option value="USD">USD</option>
-                                                                                            <option value="EUR">EUR</option>
-                                                                                        </select> -->
+                                                                                                <option value="PKR" selected>PKR</option>
+                                                                                                <option value="USD">USD</option>
+                                                                                                <option value="EUR">EUR</option>
+                                                                                            </select> -->
                                 @error('currency')
                                     <div class="alert ">{{ $message }}</div>
                                 @enderror
@@ -1235,8 +1235,8 @@
                                         value="{{ isset($post->location) && $post->location->city ? '$post->location->city' : '' }}">
                                         {{ $post->location->cityname ?? '' }}</option>
                                     <!-- @foreach ($cities as $city)
-    <option value="{{ $city->id }}">{{ $city->name }}</option>
-    @endforeach   -->
+                                        <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                        @endforeach   -->
                                 </select>
                                 {{-- <div id="city-error" class="orange" style="display: none;">City is required.</div> --}}
                                 @error('city')
@@ -1272,7 +1272,7 @@
 
                         <div id="map" class="border rounded mb-3 d-none" style="height: 300px;">
                             <!-- <input type="text" id="location" name="location" class="form-control"
-                                                                            placeholder=""> -->
+                                                                                placeholder=""> -->
                         </div>
                     </div>
                     <!-- Step 9: Contacts -->
@@ -1338,33 +1338,33 @@
                             </div> --}}
                         </div>
                         <!-- <div id="socialMediaSection" class="collapse">
-                                                                                    <div class="mb-3">
-                                                                                        <label for="facebook" name="facebook" class="form-label">Your Facebook Account *</label>
-                                                                                        <input type="url" class="form-control" name="facebookUrl" id="facebook" placeholder="Enter Facebook URL">
-                                                                                        @error('facebookUrl')
+                                                                                        <div class="mb-3">
+                                                                                            <label for="facebook" name="facebook" class="form-label">Your Facebook Account *</label>
+                                                                                            <input type="url" class="form-control" name="facebookUrl" id="facebook" placeholder="Enter Facebook URL">
+                                                                                            @error('facebookUrl')
         <div class="alert ">{{ $message }}</div>
     @enderror
-                                                                                    </div>
-                                                                                    <div class="mb-3">
-                                                                                        <label for="linkedin" class="form-label">Your LinkedIn Account *</label>
-                                                                                        <input type="url" name="linkedin" class="form-control" id="linkedin" placeholder="Eneter LinkedIn URL">
-                                                                                        @error('linkedin')
+                                                                                        </div>
+                                                                                        <div class="mb-3">
+                                                                                            <label for="linkedin" class="form-label">Your LinkedIn Account *</label>
+                                                                                            <input type="url" name="linkedin" class="form-control" id="linkedin" placeholder="Eneter LinkedIn URL">
+                                                                                            @error('linkedin')
         <div class="alert ">{{ $message }}</div>
     @enderror
-                                                                                    </div>
-                                                                                    <div class="mb-3">
-                                                                                        <label for="twitter" class="form-label">Your Twitter Account *</label>
-                                                                                        <input type="url" name="twitter" class="form-control" id="twitter" placeholder="Twitter URL">
-                                                                                        @error('twitter')
+                                                                                        </div>
+                                                                                        <div class="mb-3">
+                                                                                            <label for="twitter" class="form-label">Your Twitter Account *</label>
+                                                                                            <input type="url" name="twitter" class="form-control" id="twitter" placeholder="Twitter URL">
+                                                                                            @error('twitter')
         <div class="alert ">{{ $message }}</div>
     @enderror
+                                                                                        </div>
                                                                                     </div>
-                                                                                </div>
 
-                                                                                <button type="button" class="btn btn-link text-white" data-bs-toggle="collapse"
-                                                                                    data-bs-target="#socialMediaSection" aria-expanded="false">
-                                                                                    Show More
-                                                                                </button> -->
+                                                                                    <button type="button" class="btn btn-link text-white" data-bs-toggle="collapse"
+                                                                                        data-bs-target="#socialMediaSection" aria-expanded="false">
+                                                                                        Show More
+                                                                                    </button> -->
                     </div>
 
                     <div style="display:flex;justify-content:end">

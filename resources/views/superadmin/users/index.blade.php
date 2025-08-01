@@ -28,6 +28,14 @@
             width: 100% !important;
         }
 
+        .ads-column-search {
+            width: 90px;
+            font-size: 10px;
+            border: 1px solid #D9D9D9;
+            border-radius: 2px;
+            padding: 2px;
+        }
+
         .table>:not(caption)>*>* {
             padding: 0rem .5rem;
             color: var(--bs-table-color-state, var(--bs-table-color-type, var(--bs-table-color)));
@@ -93,7 +101,7 @@
                                 <th>Sr#</th>
                                 <th>Action</th>
                                 <th>Name</th>
-                                <th>Dealership Name</th>
+                                {{-- <th>Dealership Name</th> --}}
                                 <th>Phone</th>
                                 <th>Email</th>
                                 <th>Created Date</th>
@@ -114,7 +122,7 @@
                                         </a>
                                     </td>
                                     <td>{{ $user->name }}</td>
-                                    <td>{{ $user->dealershipName }}</td>
+                                    {{-- <td>{{ $user->dealershipName }}</td> --}}
                                     <td>{{ $user->number }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->created_at->format('d M Y') }}</td>
@@ -129,10 +137,11 @@
                                     aria-labelledby="editUsererModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
-                                               <div class="border-0 modal-header"
+                                            <div class="border-0 modal-header"
                                                 style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
-										
-												 <h5 class="modal-title" id="newsletterresponseLabel"> <strong> 	Edit User	</strong></h5>
+
+                                                <h5 class="modal-title" id="newsletterresponseLabel"> <strong> Edit User
+                                                    </strong></h5>
                                                 <button type="button" class="btn-close"
                                                     style="background-color: #D9D9D9 !important; color: #FD5631;"
                                                     data-bs-dismiss="modal" aria-label="Close"></button>
@@ -144,7 +153,7 @@
                                                 <div class="modal-body" style="background-color:#F0F3F6 !important;">
                                                     <div class="mb-4 row">
                                                         <div class="col-6 mb-3">
-                                                       
+
                                                         </div>
 
                                                         <div class="col-6 mb-3 d-flex justify-content-end pe-4">
@@ -354,10 +363,11 @@
                                     aria-labelledby="editUsererModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg modal-dialog-centered">
                                         <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
-                                                <div class="border-0 modal-header"
+                                            <div class="border-0 modal-header"
                                                 style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
-										
-												 <h5 class="modal-title" id="newsletterresponseLabel"> <strong> 	Edit User	</strong></h5>
+
+                                                <h5 class="modal-title" id="newsletterresponseLabel"> <strong> Edit User
+                                                    </strong></h5>
                                                 <button type="button" class="btn-close"
                                                     style="background-color: #D9D9D9 !important; color: #FD5631;"
                                                     data-bs-dismiss="modal" aria-label="Close"></button>
@@ -582,10 +592,11 @@
                                     aria-labelledby="editUsererModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg modal-dialog-centered">
                                         <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
-                                                <div class="border-0 modal-header"
+                                            <div class="border-0 modal-header"
                                                 style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
-										
-												 <h5 class="modal-title" id="newsletterresponseLabel"> <strong> 	Edit User	</strong></h5>
+
+                                                <h5 class="modal-title" id="newsletterresponseLabel"> <strong> Edit User
+                                                    </strong></h5>
                                                 <button type="button" class="btn-close"
                                                     style="background-color: #D9D9D9 !important; color: #FD5631;"
                                                     data-bs-dismiss="modal" aria-label="Close"></button>
@@ -599,7 +610,7 @@
                                                     style="background-color: #F0F3F6; color: #FD5631;">
                                                     <div class="mb-4 row">
                                                         <div class="col-6 mb-3">
-                                                         
+
                                                         </div>
 
                                                         <div class="col-6 mb-3 d-flex justify-content-end pe-4">
@@ -769,35 +780,55 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
     <script>
-        const initializeTables = () => {
-            $(document).ready(function() {
-                $('.datatable12').each(function() {
-                    var table = $(this).DataTable({
-                        paging: true,
-                        pageLength: 25,
-                        lengthChange: false,
-                        searching: true,
-                        ordering: true,
-                        scrollX: true,
-                        order: [
-                            [0, 'asc']
-                        ],
-                        language: {
-                            search: "Search: "
-                        },
-                        dom: `
-  <"search-wrapper mb-3"f>
-  <"pagination-wrapper d-flex justify-content-between align-items-center mb-3"i p>
-  rt
-  <"pagination-wrapper d-flex justify-content-between align-items-center mt-3"i p>
-  <"clear">
+        $(document).ready(function() {
+            $('.datatable12').each(function() {
+                var table = $(this).DataTable({
+                    paging: true,
+                    pageLength: 25,
+                    lengthChange: false,
+                    searching: true,
+                    ordering: true,
+                    scrollX: false,
+                    order: [
+                        [0, 'asc']
+                    ],
+                    language: {
+                        search: "Search: "
+                    },
+                    dom: `
+                            <"search-wrapper mb-3"f>
+                            <"pagination-wrapper d-flex justify-content-between align-items-center mb-3"i p>
+                            rt
+                            <"pagination-wrapper d-flex justify-content-between align-items-center mt-3"i p>
+                            <"clear">
 `
-                    });
+                });
+
+                // Add search row
+                $(this).find('thead').append('<tr class="search-row"></tr>');
+
+                $(this).find('thead th').each(function(index) {
+                    var title = $(this).text().trim();
+                    var searchHtml = '';
+
+                    // Only create inputs for specific columns
+                    if (['Name', 'Phone', 'Email'].includes(title)) {
+                        searchHtml = '<input type="text" placeholder="Search ' + title +
+                            '" class="ads-column-search"/>';
+                    }
+
+                    $(this).closest('thead').find('.search-row').append(
+                        '<th>' + searchHtml + '</th>'
+                    );
+                });
+
+                // Apply search functionality
+                $(this).find('.search-row input').on('keyup change', function() {
+                    var columnIndex = $(this).closest('th').index();
+                    table.column(columnIndex).search(this.value).draw();
                 });
             });
-        };
-
-        document.addEventListener('DOMContentLoaded', initializeTables);
+        });
     </script>
 
 

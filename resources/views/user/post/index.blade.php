@@ -771,7 +771,7 @@
                     lengthChange: false,
                     searching: true,
                     ordering: true,
-                    scrollX: true,
+                    scrollX: false,
                     order: [
                         [0, 'asc']
                     ],
@@ -785,6 +785,7 @@
   <"pagination-wrapper d-flex justify-content-between align-items-center mt-3"i p>
   <"clear">
 `
+
                 });
 
                 // Add search row
@@ -794,39 +795,29 @@
                     var title = $(this).text().trim();
                     var searchHtml = '';
 
-                    // Custom search for Featured column (Yes/No dropdown)
+                    // Create select for Featured column
                     if (title === 'Featured') {
-                        searchHtml = `
-                    <select class="bike-column-search">
-                        <option value="">Any</option>
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                    </select>
-                `;
-                    }
-                    // Custom search for Year column (numeric input)
-                    else if (title === 'Year') {
-                        searchHtml = `
-                    <input type="number" 
-                           placeholder="Search Year" 
-                           class="ads-column-search" 
-                           min="1900" 
-                           max="${new Date().getFullYear() + 1}">
-                `;
-                    }
-                    // Regular text search for Make and Model
-                    else if (['Dealer Name', 'Make', 'Model'].includes(title)) {
                         searchHtml =
-                            `<input type="text" placeholder="Search ${title}" class="bike-column-search"/>`;
+                            '<select class="ads-column-search"><option value="">Any</option><option value="Yes">Yes</option><option value="No">No</option></select>';
                     }
 
-                    $(this).closest('thead').find('.search-row').append(
-                        '<th>' + searchHtml + '</th>'
-                    );
+                    if (title === 'Status') {
+                        searchHtml =
+                            '<select class="ads-column-search"><option value="">Any</option><option value="Active">Active</option><option value="InActive">InActive</option></select>';
+                    }
+                    // Create text inputs for other specified columns
+                    else if (['Deleted On', 'Dealer Name', 'Dealer Email', 'Make', 'Model', 'Year']
+                        .includes(title)) {
+                        searchHtml = '<input type="text" placeholder="Search ' + title +
+                            '" class="ads-column-search"/>';
+                    }
+
+                    $(this).closest('thead').find('.search-row').append('<th>' + searchHtml +
+                        '</th>');
                 });
 
                 // Apply search functionality
-                $(this).find('.search-row select, .search-row input').on('keyup change', function() {
+                $(this).find('.search-row input, .search-row select').on('keyup change', function() {
                     var columnIndex = $(this).closest('th').index();
                     table.column(columnIndex).search(this.value).draw();
                 });

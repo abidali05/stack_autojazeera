@@ -52,7 +52,8 @@
         .modal-content {
             background-color: #F0F3F6 !important;
         }
-           .table>:not(caption)>*>* {
+
+        .table>:not(caption)>*>* {
             padding: 0rem .5rem;
             color: var(--bs-table-color-state, var(--bs-table-color-type, var(--bs-table-color)));
             background-color: var(--bs-table-bg);
@@ -65,12 +66,16 @@
             padding: 0px 10px 5px 10px;
             border-bottom: 1px solid rgba(0, 0, 0, 0.3);
         }
-        div.dt-container .dt-length, div.dt-container .dt-search, div.dt-container .dt-info, div.dt-container .dt-processing, div.dt-container .dt-paging {
-    color: inherit;
-    display: flex
-;
-    justify-content: end;
-}
+
+        div.dt-container .dt-length,
+        div.dt-container .dt-search,
+        div.dt-container .dt-info,
+        div.dt-container .dt-processing,
+        div.dt-container .dt-paging {
+            color: inherit;
+            display: flex;
+            justify-content: end;
+        }
     </style>
     <div class="container mt-3">
         <!-- Header Section -->
@@ -238,11 +243,11 @@
                     </div>
                 </div> --}}
                 <div class="table-section table-responsive">
-                    <table class="table table-striped transparent-table align-middle datatable">
+                    <table class="table table-striped transparent-table align-middle lead1-datatable">
                         <thead>
                             <tr>
                                 <!-- <th>Action</th>-->
-                                <th class="d-none">S.No</th>
+                                {{-- <th class="d-none">S.No</th> --}}
                                 <th>Type</th>
                                 <th>Name</th>
                                 <th>Phone</th>
@@ -255,7 +260,7 @@
                         <tbody>
                             @foreach ($forms as $i => $form)
                                 <tr class="table-row">
-                                    <td class="d-none">{{ $i + 1 }}</td>
+                                    {{-- <td class="d-none">{{ $i + 1 }}</td> --}}
                                     <td>{{ $form->requesttype }}</td>
                                     <td>{{ $form->fullname }}</td>
                                     <td>{{ $form->number }}</td>
@@ -270,30 +275,28 @@
                                     </td>
                                 </tr>
 
-                                <div class="modal fade modal-lg" id="view_comment_modal{{ $form->id }}"
-                                    tabindex="-1" aria-labelledby="viewCommentLabel{{ $form->id }}"
-                                    aria-hidden="true">
+                                <div class="modal fade modal-lg" id="view_comment_modal{{ $form->id }}" tabindex="-1"
+                                    aria-labelledby="viewCommentLabel{{ $form->id }}" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
                                             <div class="border-0 modal-header"
                                                 style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
-										
-												 <h5 class="modal-title" id="newsletterresponseLabel"> <strong> 		{{ $form->requesttype }}</strong></h5>
+
+                                                <h5 class="modal-title" id="newsletterresponseLabel"> <strong>
+                                                        {{ $form->requesttype }}</strong></h5>
                                                 <button type="button" class="btn-close"
                                                     style="background-color: #D9D9D9 !important; color: #FD5631;"
                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <div class="modal-body p-3"
-                                                style="background-color: #F0F3F6; color: #FD5631;">
+                                            <div class="modal-body p-3" style="background-color: #F0F3F6; color: #FD5631;">
                                                 <form>
                                                     <div class="row mb-3">
-                                                        <div class="col-12 text-center"
-                                                            >
+                                                        <div class="col-12 text-center">
                                                             <h3 class="modal-title"
                                                                 style="color: #FD5631; font-weight: bold;padding-bottom: 13px;"
                                                                 id="viewCommentLabel{{ $form->id }}">
                                                                 <h3 style="color:#281F48"> {{ $form->fullname }}
-                                                                     </h3>
+                                                                </h3>
                                                             </h3>
                                                         </div>
                                                         <div class="mb-3 mt-4">
@@ -602,11 +605,11 @@
                 </div> --}}
 
                 <div class="table-section">
-                    <table class="table table-striped transparent-table align-middle datatable">
+                    <table class="table table-striped transparent-table align-middle lead2-datatable">
                         <thead>
                             <tr>
                                 <!-- <th>Action</th>-->
-                                <th class="d-none">S.No</th>
+                                {{-- <th class="d-none">S.No</th> --}}
                                 <th>Type</th>
                                 <th>Name</th>
                                 <th>Phone</th>
@@ -621,7 +624,7 @@
                             <!-- new cars rows -->
                             @foreach ($Newforms as $i => $form)
                                 <tr class="table-row">
-                                    <td class="d-none">{{ $i + 1 }}</td>
+                                    {{-- <td class="d-none">{{ $i + 1 }}</td> --}}
                                     <!--  <td><i class="bi bi-list text-warning"></i> <i class="bi bi-trash text-danger"></i></td> -->
                                     <td>{{ $form->requesttype }}</td>
                                     <td>{{ $form->fullname }}</td>
@@ -715,8 +718,8 @@
                                                     <div class="mb-3">
                                                         <label for="message{{ $form->id }}"
                                                             class="form-label">Message</label>
-                                                        <textarea class="form-control" id="message{{ $form->id }}" rows="4"
-                                                            placeholder="Enter your message here" readonly>{{ $form->comment }}</textarea>
+                                                        <textarea class="form-control" id="message{{ $form->id }}" rows="4" placeholder="Enter your message here"
+                                                            readonly>{{ $form->comment }}</textarea>
                                                     </div>
                                                 </form>
                                             </div>
@@ -941,11 +944,11 @@
                     </div> --}}
                 </div>
                 <div class="table-section">
-                    <table class="table table-striped transparent-table align-middle datatable">
+                    <table class="table table-striped transparent-table align-middle lead3-datatable">
                         <thead>
                             <tr>
                                 <!-- <th>Action</th>-->
-                                <th class="d-none">S.No</th>
+                                {{-- <th class="d-none">S.No</th> --}}
                                 <th>Type</th>
                                 <th>Name</th>
                                 <th>Phone</th>
@@ -960,7 +963,7 @@
                             <!-- Used cars rows -->
                             @foreach ($Usedforms as $i => $form)
                                 <tr class="table-row">
-                                    <td class="d-none">{{ $i + 1 }}</td>
+                                    {{-- <td class="d-none">{{ $i + 1 }}</td> --}}
                                     <!--  <td><i class="bi bi-list text-warning"></i> <i class="bi bi-trash text-danger"></i></td> -->
                                     <td>{{ $form->requesttype }}</td>
                                     <td>{{ $form->fullname }}</td>
@@ -1054,8 +1057,8 @@
                                                     <div class="mb-3">
                                                         <label for="message{{ $form->id }}"
                                                             class="form-label">Message</label>
-                                                        <textarea class="form-control" id="message{{ $form->id }}" rows="4"
-                                                            placeholder="Enter your message here" readonly>{{ $form->comment }}</textarea>
+                                                        <textarea class="form-control" id="message{{ $form->id }}" rows="4" placeholder="Enter your message here"
+                                                            readonly>{{ $form->comment }}</textarea>
                                                     </div>
                                                 </form>
                                             </div>
@@ -1201,25 +1204,155 @@
         });
 
         $(document).ready(function() {
-            $('.datatable1').DataTable({
-                "paging": false,
-                "info": false,
-                "lengthChange": false,
-                "ordering": true,
-                "searching": true,
-                        order: [
+            $('.lead1-datatable').each(function() {
+                var table = $(this).DataTable({
+                    paging: true,
+                    pageLength: 25,
+                    lengthChange: false,
+                    searching: true,
+                    ordering: true,
+                    scrollX: false,
+                    order: [
                         [0, 'asc']
                     ],
                     language: {
                         search: "Search: "
                     },
-                           dom: `
+                    dom: `
   <"search-wrapper mb-3"f>
   <"pagination-wrapper d-flex justify-content-between align-items-center mb-3"i p>
   rt
   <"pagination-wrapper d-flex justify-content-between align-items-center mt-3"i p>
   <"clear">
 `
+
+                });
+
+                // Add search row
+                $(this).find('thead').append('<tr class="search-row"></tr>');
+
+                $(this).find('thead th').each(function(index) {
+                    var title = $(this).text().trim();
+                    var searchHtml = '';
+
+                    // Create text inputs for other specified columns
+                    if (['Type', 'Name', 'Phone', 'Email', 'City']
+                        .includes(title)) {
+                        searchHtml = '<input type="text" placeholder="Search ' + title +
+                            '" class="ads-column-search"/>';
+                    }
+
+                    $(this).closest('thead').find('.search-row').append('<th>' + searchHtml +
+                        '</th>');
+                });
+
+                // Apply search functionality
+                $(this).find('.search-row input, .search-row select').on('keyup change', function() {
+                    var columnIndex = $(this).closest('th').index();
+                    table.column(columnIndex).search(this.value).draw();
+                });
+            });
+        });
+
+        $(document).ready(function() {
+            $('.lead2-datatable').each(function() {
+                var table = $(this).DataTable({
+                    paging: true,
+                    pageLength: 25,
+                    lengthChange: false,
+                    searching: true,
+                    ordering: true,
+                    scrollX: false,
+                    order: [
+                        [0, 'asc']
+                    ],
+                    language: {
+                        search: "Search: "
+                    },
+                    dom: `
+  <"search-wrapper mb-3"f>
+  <"pagination-wrapper d-flex justify-content-between align-items-center mb-3"i p>
+  rt
+  <"pagination-wrapper d-flex justify-content-between align-items-center mt-3"i p>
+  <"clear">
+`
+
+                });
+
+                // Add search row
+                $(this).find('thead').append('<tr class="search-row"></tr>');
+
+                $(this).find('thead th').each(function(index) {
+                    var title = $(this).text().trim();
+                    var searchHtml = '';
+
+                    // Create text inputs for other specified columns
+                    if (['Type', 'Name', 'Phone', 'Email', 'City & Province']
+                        .includes(title)) {
+                        searchHtml = '<input type="text" placeholder="Search ' + title +
+                            '" class="ads-column-search"/>';
+                    }
+
+                    $(this).closest('thead').find('.search-row').append('<th>' + searchHtml +
+                        '</th>');
+                });
+
+                // Apply search functionality
+                $(this).find('.search-row input, .search-row select').on('keyup change', function() {
+                    var columnIndex = $(this).closest('th').index();
+                    table.column(columnIndex).search(this.value).draw();
+                });
+            });
+        });
+
+        $(document).ready(function() {
+            $('.lead3-datatable').each(function() {
+                var table = $(this).DataTable({
+                    paging: true,
+                    pageLength: 25,
+                    lengthChange: false,
+                    searching: true,
+                    ordering: true,
+                    scrollX: false,
+                    order: [
+                        [0, 'asc']
+                    ],
+                    language: {
+                        search: "Search: "
+                    },
+                    dom: `
+  <"search-wrapper mb-3"f>
+  <"pagination-wrapper d-flex justify-content-between align-items-center mb-3"i p>
+  rt
+  <"pagination-wrapper d-flex justify-content-between align-items-center mt-3"i p>
+  <"clear">
+`
+
+                });
+
+                // Add search row
+                $(this).find('thead').append('<tr class="search-row"></tr>');
+
+                $(this).find('thead th').each(function(index) {
+                    var title = $(this).text().trim();
+                    var searchHtml = '';
+
+                    // Create text inputs for other specified columns
+                    if (['Type', 'Name', 'Phone', 'Email', 'City & Province']
+                        .includes(title)) {
+                        searchHtml = '<input type="text" placeholder="Search ' + title +
+                            '" class="ads-column-search"/>';
+                    }
+
+                    $(this).closest('thead').find('.search-row').append('<th>' + searchHtml +
+                        '</th>');
+                });
+
+                // Apply search functionality
+                $(this).find('.search-row input, .search-row select').on('keyup change', function() {
+                    var columnIndex = $(this).closest('th').index();
+                    table.column(columnIndex).search(this.value).draw();
+                });
             });
         });
     </script>

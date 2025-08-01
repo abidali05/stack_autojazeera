@@ -102,7 +102,8 @@
             background-color: #281F48;
 
         }
-              .table>:not(caption)>*>* {
+
+        .table>:not(caption)>*>* {
             padding: 0rem .5rem;
             color: var(--bs-table-color-state, var(--bs-table-color-type, var(--bs-table-color)));
             background-color: var(--bs-table-bg);
@@ -115,12 +116,16 @@
             padding: 0px 10px 5px 10px;
             border-bottom: 1px solid rgba(0, 0, 0, 0.3);
         }
-        div.dt-container .dt-length, div.dt-container .dt-search, div.dt-container .dt-info, div.dt-container .dt-processing, div.dt-container .dt-paging {
-    color: inherit;
-    display: flex
-;
-    justify-content: end;
-}
+
+        div.dt-container .dt-length,
+        div.dt-container .dt-search,
+        div.dt-container .dt-info,
+        div.dt-container .dt-processing,
+        div.dt-container .dt-paging {
+            color: inherit;
+            display: flex;
+            justify-content: end;
+        }
     </style>
     {{-- tabs navigaition  --}}
     <div class="container mt-3">
@@ -1071,30 +1076,54 @@
         </div>
 
         <script>
-            $(document).ready(function() {
-                $('.feature-datatable').each(function() {
-                    var table = $(this).DataTable({
-                        paging: true,
-                        pageLength: 25,
-                        lengthChange: false,
-                        searching: true,
-                        ordering: true,
-                        scrollX: true,
-                        order: [
-                            [0, 'asc']
-                        ],
-                        language: {
-                            search: "Search: "
-                        },
-                                            dom: `
+        $(document).ready(function() {
+            $('.feature-datatable').each(function() {
+                var table = $(this).DataTable({
+                    paging: true,
+                    pageLength: 25,
+                    lengthChange: false,
+                    searching: true,
+                    ordering: true,
+                    scrollX: false,
+                    order: [
+                        [0, 'asc']
+                    ],
+                    language: {
+                        search: "Search: "
+                    },
+                    dom: `
   <"search-wrapper mb-3"f>
   <"pagination-wrapper d-flex justify-content-between align-items-center mb-3"i p>
   rt
   <"pagination-wrapper d-flex justify-content-between align-items-center mt-3"i p>
   <"clear">
 `
-                    });
+
+                });
+
+                // Add search row
+                $(this).find('thead').append('<tr class="search-row"></tr>');
+
+                $(this).find('thead th').each(function(index) {
+                    var title = $(this).text().trim();
+                    var searchHtml = '';
+                    // Create text inputs for other specified columns
+                    if (['Feature Type','Feature Name']
+                        .includes(title)) {
+                        searchHtml = '<input type="text" placeholder="Search ' + title +
+                            '" class="ads-column-search"/>';
+                    }
+
+                    $(this).closest('thead').find('.search-row').append('<th>' + searchHtml +
+                        '</th>');
+                });
+
+                // Apply search functionality
+                $(this).find('.search-row input, .search-row select').on('keyup change', function() {
+                    var columnIndex = $(this).closest('th').index();
+                    table.column(columnIndex).search(this.value).draw();
                 });
             });
+        });
         </script>
     @endsection

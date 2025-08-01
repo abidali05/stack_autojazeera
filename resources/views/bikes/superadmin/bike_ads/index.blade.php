@@ -1,7 +1,6 @@
 @extends('layout.superadmin_layout.main')
 
 @section('content')
-
     <style>
         .form-select {
             max-width: 100%;
@@ -104,13 +103,13 @@
 
         }
 
-       .bike-column-search {
-    width: 90px;
-    font-size: 10px;
-    border: 1px solid #D9D9D9;
-    border-radius: 2px;
-    padding: 2px;
-}
+        .bike-column-search {
+            width: 90px;
+            font-size: 10px;
+            border: 1px solid #D9D9D9;
+            border-radius: 2px;
+            padding: 2px;
+        }
 
         .table>:not(caption)>*>* {
             padding: 0rem .5rem;
@@ -125,12 +124,16 @@
             padding: 0px 10px 5px 10px;
             border-bottom: 1px solid rgba(0, 0, 0, 0.3);
         }
-        div.dt-container .dt-length, div.dt-container .dt-search, div.dt-container .dt-info, div.dt-container .dt-processing, div.dt-container .dt-paging {
-    color: inherit;
-    display: flex
-;
-    justify-content: end;
-}
+
+        div.dt-container .dt-length,
+        div.dt-container .dt-search,
+        div.dt-container .dt-info,
+        div.dt-container .dt-processing,
+        div.dt-container .dt-paging {
+            color: inherit;
+            display: flex;
+            justify-content: end;
+        }
     </style>
     {{-- tabs navigaition  --}}
     <div class="container mt-3">
@@ -342,8 +345,8 @@
                                             title="Edit" style="text-decoration:none;">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
-                                        <a href="#" class="primary-color-custom cancel"
-                                            data-id="{{ $post->id }}" title="Delete" data-bs-toggle="modal"
+                                        <a href="#" class="primary-color-custom cancel" data-id="{{ $post->id }}"
+                                            title="Delete" data-bs-toggle="modal"
                                             data-bs-target="#bikedeleteModal{{ $post->id }}">
                                             <i class="bi bi-trash"></i>
                                         </a>
@@ -399,16 +402,18 @@
                                     aria-labelledby="statusModalLabel{{ $post->id }}" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
-                                            <div class="modal-header border-0" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
-                                                <h5 class="modal-title" id="statusModalLabel{{ $post->id }}"><strong>Update Post
-                                                    Status</strong>
-                                                    </h5>
-                                                <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
+                                            <div class="modal-header border-0"
+                                                style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                                                <h5 class="modal-title" id="statusModalLabel{{ $post->id }}">
+                                                    <strong>Update Post
+                                                        Status</strong>
+                                                </h5>
+                                                <button type="button" class="btn-close"
+                                                    style="background-color: #D9D9D9 !important; color: #FD5631;"
+                                                    data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body" style="background-color: #F0F3F6; color: #FD5631;">
-                                                <form method="post"
-                                                    action="{{ route('superadmin.change_posts_status') }}"
+                                                <form method="post" action="{{ route('superadmin.change_posts_status') }}"
                                                     enctype="multipart/form-data">
                                                     @csrf
                                                     <input type="hidden" name="post_id" value="{{ $post->id }}">
@@ -417,7 +422,8 @@
                                                         <label for="bikepostStatus{{ $post->id }}"
                                                             class="form-label">Select
                                                             Status*</label>
-                                                        <select class="form-select" name="status" style="background-color: white;color:#281F48"
+                                                        <select class="form-select" name="status"
+                                                            style="background-color: white;color:#281F48"
                                                             id="bikepostStatus{{ $post->id }}" required
                                                             onchange="toggleRejectionReason({{ $post->id }})">
                                                             <option value="0"
@@ -441,9 +447,11 @@
                                                     </div>
                                             </div>
                                             <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                                                <button type="button" class="btn btn-light px-4 py-2 " style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;"
+                                                <button type="button" class="btn btn-light px-4 py-2 "
+                                                    style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;"
                                                     data-bs-dismiss="modal">Cancel</button>
-                                                <button type="submit" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;">Update</button>
+                                                <button type="submit" class="btn btn-light px-4 py-2 "
+                                                    style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;">Update</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -454,15 +462,18 @@
                                 <div class="modal fade" id="bikedeleteModal{{ $post->id }}" tabindex="-1"
                                     aria-labelledby="addDealerModalLabel" aria-hidden="true">
                                     <div class="modal-dialog ">
-                                        <div class="modal-content"
-                                           style="border-radius: 10px; overflow: hidden;">
-                                            <div class="modal-header border-0"  style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
-                                                <h5 class="modal-title" id="editDealerModalLabel"><strong>Delete </strong></h5>
-                                                <button type="button"  class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
+                                        <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
+                                            <div class="modal-header border-0"
+                                                style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                                                <h5 class="modal-title" id="editDealerModalLabel"><strong>Delete </strong>
+                                                </h5>
+                                                <button type="button" class="btn-close"
+                                                    style="background-color: #D9D9D9 !important; color: #FD5631;"
+                                                    data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
 
-                                            <div class="modal-body text-center" style="background-color: #F0F3F6; color: #FD5631;">
+                                            <div class="modal-body text-center"
+                                                style="background-color: #F0F3F6; color: #FD5631;">
                                                 <h4 style="color:#281F48 !important;">Are you sure to delete this record?
                                                 </h4>
                                                 <div class="row mb-3">
@@ -478,9 +489,11 @@
 
                                             </div>
                                             <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                                                <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                                                <button type="button" class="btn btn-light px-4 py-2 "
+                                                    style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
                                                     data-bs-dismiss="modal">Cancel</button>
-                                                <button type="submit" class="btn btn-light px-4 py-2 " style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Delete</button>
+                                                <button type="submit" class="btn btn-light px-4 py-2 "
+                                                    style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Delete</button>
                                             </div>
                                             </form>
                                         </div>
@@ -508,7 +521,7 @@
                     </table>
                 </div>
             </div>
-            
+
             <div class="container py-3">
                 {{-- <div class="row d-flex justify-content-between">
                     <div class="col-md-4"> <span class="pt-md-3 pagination_count"
@@ -636,14 +649,14 @@
                     lengthChange: false,
                     searching: true,
                     ordering: true,
-                    scrollX: true,
+                    scrollX: false,
                     order: [
                         [0, 'asc']
                     ],
                     language: {
                         search: "Search: "
                     },
-                         dom: `
+                    dom: `
   <"search-wrapper mb-3"f>
   <"pagination-wrapper d-flex justify-content-between align-items-center mb-3"i p>
   rt
@@ -653,25 +666,31 @@
                 });
 
                 // Add search row
+
                 $(this).find('thead').append('<tr class="search-row"></tr>');
 
                 $(this).find('thead th').each(function(index) {
                     var title = $(this).text().trim();
                     var searchHtml = '';
 
-                    // Only create inputs for specific columns
-                    if (['Dealer Name','Make', 'Model', 'Year'].includes(title)) {
+                    // Create select for Featured column
+                    if (title === 'Featured') {
+                        searchHtml =
+                            '<select class="bike-column-search"><option value="">Any</option><option value="Yes">Yes</option><option value="No">No</option></select>';
+                    }
+                    // Create text inputs for other specified columns
+                    else if (['Deleted On', 'Dealer Name', 'Dealer Email', 'Make', 'Model', 'Year']
+                        .includes(title)) {
                         searchHtml = '<input type="text" placeholder="Search ' + title +
                             '" class="bike-column-search"/>';
                     }
 
-                    $(this).closest('thead').find('.search-row').append(
-                        '<th>' + searchHtml + '</th>'
-                    );
+                    $(this).closest('thead').find('.search-row').append('<th>' + searchHtml +
+                        '</th>');
                 });
 
                 // Apply search functionality
-                $(this).find('.search-row input').on('keyup change', function() {
+                $(this).find('.search-row input, .search-row select').on('keyup change', function() {
                     var columnIndex = $(this).closest('th').index();
                     table.column(columnIndex).search(this.value).draw();
                 });
