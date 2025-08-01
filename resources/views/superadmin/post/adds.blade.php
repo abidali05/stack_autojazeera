@@ -1,6 +1,5 @@
 @extends('layout.superadmin_layout.main')
 @section('content')
-
     <style>
         .form-select {
             max-width: 100%;
@@ -124,12 +123,16 @@
             padding: 0px 10px 5px 10px;
             border-bottom: 1px solid rgba(0, 0, 0, 0.3);
         }
-        div.dt-container .dt-length, div.dt-container .dt-search, div.dt-container .dt-info, div.dt-container .dt-processing, div.dt-container .dt-paging {
-    color: inherit;
-    display: flex
-;
-    justify-content: end;
-}
+
+        div.dt-container .dt-length,
+        div.dt-container .dt-search,
+        div.dt-container .dt-info,
+        div.dt-container .dt-processing,
+        div.dt-container .dt-paging {
+            color: inherit;
+            display: flex;
+            justify-content: end;
+        }
     </style>
     {{-- tabs navigaition  --}}
     <div class="container mt-3">
@@ -464,6 +467,7 @@
                                 <th>Comment</th>
                                 <th>Created On </th>
                                 <th>Updated On</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -1186,14 +1190,14 @@
                     lengthChange: false,
                     searching: true,
                     ordering: true,
-                  scrollX: true
+                    scrollX: false,
                     order: [
                         [0, 'asc']
                     ],
                     language: {
                         search: "Search: "
                     },
-         dom: `
+                    dom: `
   <"search-wrapper mb-3"f>
   <"pagination-wrapper d-flex justify-content-between align-items-center mb-3"i p>
   rt
@@ -1210,19 +1214,24 @@
                     var title = $(this).text().trim();
                     var searchHtml = '';
 
-                    // Only create inputs for specific columns
-                    if (['Dealer Name', 'Make', 'Model', 'Year'].includes(title)) {
+                    // Create select for Featured column
+                    if (title === 'Featured') {
+                        searchHtml =
+                            '<select class="ads-column-search"><option value="">Any</option><option value="Yes">Yes</option><option value="No">No</option></select>';
+                    }
+                    // Create text inputs for other specified columns
+                    else if (['Deleted On', 'Dealer Name', 'Dealer Email', 'Make', 'Model', 'Year']
+                        .includes(title)) {
                         searchHtml = '<input type="text" placeholder="Search ' + title +
                             '" class="ads-column-search"/>';
                     }
 
-                    $(this).closest('thead').find('.search-row').append(
-                        '<th>' + searchHtml + '</th>'
-                    );
+                    $(this).closest('thead').find('.search-row').append('<th>' + searchHtml +
+                        '</th>');
                 });
 
                 // Apply search functionality
-                $(this).find('.search-row input').on('keyup change', function() {
+                $(this).find('.search-row input, .search-row select').on('keyup change', function() {
                     var columnIndex = $(this).closest('th').index();
                     table.column(columnIndex).search(this.value).draw();
                 });

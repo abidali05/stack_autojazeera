@@ -106,14 +106,14 @@
     {{-- tabs navigaition  --}}
     <div class="container mt-3">
         <div class="row align-items-center mb-2">
-        
+
             <div class="col-md-8">
                 <h2 class="sec mb-0 primary-color-custom">Manage Services</h2>
-            </div>    
-			<div class="col-md-4 text-end">
+            </div>
+            <div class="col-md-4 text-end">
                 <button class="btn custom-btn-nav rounded" data-bs-toggle="modal" data-bs-target="#addServiceCategoryModal">
-                  Add New Service
-                        
+                    Add New Service
+
                     Name
                 </button>
             </div>
@@ -234,7 +234,7 @@
     </div> --}}
     <div class="container table-responsive ">
         <div class="row">
-            <table class="table table-striped transparent-table align-middle datatable">
+            <table class="table table-striped transparent-table align-middle manage-services-datatable">
                 <thead>
                     <tr>
                         <th>Sr#</th>
@@ -261,8 +261,8 @@
                                 </a>
                             </td>
 
-                            <td><img src="{{ $service->icon }}" alt="" srcset=""
-                                    width="40" height="30"></td>
+                            <td><img src="{{ $service->icon }}" alt="" srcset="" width="40" height="30">
+                            </td>
                             <td>{{ $service->category_name }}</td>
                             <td>{{ $service->name }}</td>
 
@@ -273,15 +273,17 @@
                             aria-labelledby="colorModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
-                                    <div class="modal-header border-0 " style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                                    <div class="modal-header border-0 "
+                                        style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                                         <h5 class="modal-title" id="colorModalLabel"> <strong>Edit Service</strong></h5>
-                                        <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
+                                        <button type="button" class="btn-close"
+                                            style="background-color: #D9D9D9 !important; color: #FD5631;"
+                                            data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <form id="featureForm" method="post"
                                         action="{{ route('superadmin.services.update', $service->id) }}"
                                         enctype="multipart/form-data">
-                                        <div class="modal-body"  style="background-color: #F0F3F6; color: #FD5631;">
+                                        <div class="modal-body" style="background-color: #F0F3F6; color: #FD5631;">
 
                                             @csrf
                                             @method('PUT')
@@ -298,7 +300,8 @@
                                                     </div>
                                                     <div id="categoryiconpreview{{ $service->id }}"
                                                         class="mt-3 text-success image-preview">
-                                                    <img src="{{ $service->icon }}" alt="" style="height: 100px !important; width: 100px !important;">
+                                                        <img src="{{ $service->icon }}" alt=""
+                                                            style="height: 100px !important; width: 100px !important;">
                                                     </div>
                                                 </div>
 
@@ -309,22 +312,23 @@
                                                     <div class="mb-3">
                                                         <label for="bodyType" class="form-label">Select Category*</label>
 
-                                                            <select name="category_id" style="background-color: white; color:#281F48" class="form-select" id="category_id{{ $service->id }}">
-                                                                <option value="">Select Category</option>
-                                                                @foreach ($categories as $category)
-                                                                    <option value="{{ $category->id }}"
-                                                                        {{ $service->category_id == $category->id ? 'selected' : '' }}>
-                                                                        {{ $category->name }}</option>
-                                                                @endforeach
-                                                            </select>
+                                                        <select name="category_id"
+                                                            style="background-color: white; color:#281F48"
+                                                            class="form-select" id="category_id{{ $service->id }}">
+                                                            <option value="">Select Category</option>
+                                                            @foreach ($categories as $category)
+                                                                <option value="{{ $category->id }}"
+                                                                    {{ $service->category_id == $category->id ? 'selected' : '' }}>
+                                                                    {{ $category->name }}</option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
-                                                    
+
                                                     <div class="mb-3">
                                                         <label for="bodyType" class="form-label">Enter Service
                                                             Name*</label>
                                                         <input type="text" class="form-control" name="name"
-                                                            value="{{ $service->name }}"
-                                                            id="name{{ $service->id }}"
+                                                            value="{{ $service->name }}" id="name{{ $service->id }}"
                                                             placeholder="Enter Service Name" required>
                                                     </div>
 
@@ -335,9 +339,11 @@
                                         </div>
 
                                         <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                                            <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                                            <button type="button" class="btn btn-light px-4 py-2 "
+                                                style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
                                                 data-bs-dismiss="modal">Cancel</button>
-                                            <button type="submit" class="btn btn-light px-4 py-2 " style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Save</button>
+                                            <button type="submit" class="btn btn-light px-4 py-2 "
+                                                style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Save</button>
                                         </div>
                                     </form>
                                 </div>
@@ -362,33 +368,42 @@
 
 
 
-                        <div class="modal fade" id="deleteServiceCategoryModal{{ $service->id }}" tabindex="-1" aria-labelledby="addDealerModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="deleteServiceCategoryModal{{ $service->id }}" tabindex="-1"
+                            aria-labelledby="addDealerModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
-                                    <div class="modal-header border-0" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                                    <div class="modal-header border-0"
+                                        style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                                         <h5 class="modal-title" id="editDealerModalLabel"><strong>Delete </strong></h5>
-                                        <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <button type="button" class="btn-close"
+                                            style="background-color: #D9D9D9 !important; color: #FD5631;"
+                                            data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                
-                                    <div class="modal-body text-center" style="background-color: #F0F3F6; color: #FD5631;">
-                                     <h4 style="color:#281F48 !important;">Are you sure to delete this record? </h4>
-                                            <div class="row mb-3">
-                                                <form action="{{ route('superadmin.services.destroy', $service->id) }}" method="post">
-                                                 @method('DELETE')
-                                                 @csrf
+
+                                    <div class="modal-body text-center"
+                                        style="background-color: #F0F3F6; color: #FD5631;">
+                                        <h4 style="color:#281F48 !important;">Are you sure to delete this record? </h4>
+                                        <div class="row mb-3">
+                                            <form action="{{ route('superadmin.services.destroy', $service->id) }}"
+                                                method="post">
+                                                @method('DELETE')
+                                                @csrf
                                                 <div class="col-sm-8">
                                                     <input type="hidden" class="form-control" name="deleted_id"
-                                                         value="{{ $service->id }}" required>
+                                                        value="{{ $service->id }}" required>
                                                 </div>
-                                            </div>
-                                    
-                                         
-                                     
-                                   
+                                        </div>
+
+
+
+
                                     </div>
                                     <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                                        <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;" data-bs-dismiss="modal">Cancel</button>
-                                        <button type="submit" class="btn btn-light px-4 py-2 " style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Delete</button>
+                                        <button type="button" class="btn btn-light px-4 py-2 "
+                                            style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                                            data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-light px-4 py-2 "
+                                            style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Delete</button>
                                     </div>
                                     </form>
                                 </div>
@@ -414,9 +429,12 @@
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
-                    <div class="modal-header border-0 " style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                    <div class="modal-header border-0 "
+                        style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                         <h5 class="modal-title" id="colorModalLabel"><strong> Add Service</strong></h5>
-                        <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close"
+                            style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <form id="featureForm" method="post" action="{{ route('superadmin.services.store') }}"
                         enctype="multipart/form-data">
@@ -444,23 +462,22 @@
                                     <div class="mb-3">
                                         <label for="bodyType" class="form-label">Select Category*</label>
 
-                                            <select name="category_id" class="form-control">
-                                                <option value="">Select Category</option>
-                                                @foreach ($categories as $category)
-                                                    <option value="{{ $category->id }}"
-                                                        {{ old('category_id') == $category->id ? 'selected' : '' }}>
-                                                        {{ $category->name }}</option>
-                                                @endforeach
-                                            </select>
+                                        <select name="category_id" class="form-control">
+                                            <option value="">Select Category</option>
+                                            @foreach ($categories as $category)
+                                                <option value="{{ $category->id }}"
+                                                    {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                                    {{ $category->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
-                                    
+
                                     <div class="mb-3">
                                         <label for="bodyType" class="form-label">Enter Service
                                             Name*</label>
                                         <input type="text" class="form-control" name="name"
-                                            value="{{ old('name') }}"
-                                            id="name"
-                                            placeholder="Enter Service Name" required>
+                                            value="{{ old('name') }}" id="name" placeholder="Enter Service Name"
+                                            required>
                                     </div>
 
 
@@ -470,8 +487,11 @@
                         </div>
 
                         <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                            <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-light px-4 py-2 " style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Save</button>
+                            <button type="button" class="btn btn-light px-4 py-2 "
+                                style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                                data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-light px-4 py-2 "
+                                style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Save</button>
                         </div>
                     </form>
                 </div>
@@ -482,36 +502,42 @@
 
         {{-- success modal start --}}
 
-        
-        <div class="modal fade" id="serviceresponse" tabindex="-1" aria-labelledby="serviceresponseLabel" aria-hidden="true">
+
+        <div class="modal fade" id="serviceresponse" tabindex="-1" aria-labelledby="serviceresponseLabel"
+            aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content"  style="border-radius: 10px; overflow: hidden;" >
+                <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
                     <!-- Modal Header -->
-                    <div class="modal-header"  style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                    <div class="modal-header"
+                        style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                         <h5 class="modal-title" id="serviceresponseLabel"><strong>Service </strong></h5>
-                        <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;"  data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close"
+                            style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <!-- Modal body -->
-                    <div class="modal-body" style="background-color: #F0F3F6; color: #FD5631;" >
+                    <div class="modal-body" style="background-color: #F0F3F6; color: #FD5631;">
                         <p>{{ session('serviceresponse') }}</p>
                     </div>
                     <!-- Modal footer -->
                     <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                        <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-light px-4 py-2 "
+                            style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                            data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
         </div>
-       
+
         {{-- success modal end --}}
 
-        @if(session('serviceresponse'))
-        <script>
-            window.addEventListener('DOMContentLoaded', () => {
-                let modal = new bootstrap.Modal(document.getElementById('serviceresponse'));
-                modal.show();
-            });
-        </script>
+        @if (session('serviceresponse'))
+            <script>
+                window.addEventListener('DOMContentLoaded', () => {
+                    let modal = new bootstrap.Modal(document.getElementById('serviceresponse'));
+                    modal.show();
+                });
+            </script>
         @endif
 
     </div>
@@ -624,45 +650,94 @@
             </div>
         </div>
     </div> --}}
-  
-    
-   
-   
-
-
 
     <script>
-       function handleServiceCategoryIconUpload(input, previewElementId) {
-    const previewElement = document.getElementById(previewElementId);
-    const file = input.files[0];
+        function handleServiceCategoryIconUpload(input, previewElementId) {
+            const previewElement = document.getElementById(previewElementId);
+            const file = input.files[0];
 
-    if (file) {
-        const reader = new FileReader();
+            if (file) {
+                const reader = new FileReader();
 
-        reader.onload = function(e) {
-            const img = new Image();
-            img.src = e.target.result;
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.src = e.target.result;
 
-            img.onload = function() {
-                // Set image dimensions to 100x100 pixels
-                img.style.width = '100px';
-                img.style.height = '100px';
+                    img.onload = function() {
+                        // Set image dimensions to 100x100 pixels
+                        img.style.width = '100px';
+                        img.style.height = '100px';
 
-                // Clear previous content and show the new image
-                previewElement.innerHTML = '';
-                previewElement.appendChild(img);
-            };
+                        // Clear previous content and show the new image
+                        previewElement.innerHTML = '';
+                        previewElement.appendChild(img);
+                    };
 
-            img.onerror = function() {
-                previewElement.textContent = 'Uploaded file is not a valid image.';
-            };
-        };
+                    img.onerror = function() {
+                        previewElement.textContent = 'Uploaded file is not a valid image.';
+                    };
+                };
 
-        reader.readAsDataURL(file);
-    } else {
-        previewElement.textContent = 'No file uploaded.';
-    }
-}
+                reader.readAsDataURL(file);
+            } else {
+                previewElement.textContent = 'No file uploaded.';
+            }
+        }
 
+        $(document).ready(function() {
+            $('.manage-services-datatable').each(function() {
+                var table = $(this).DataTable({
+                    paging: true,
+                    pageLength: 25,
+                    lengthChange: false,
+                    searching: true,
+                    ordering: true,
+                    scrollX: false,
+                    order: [
+                        [0, 'asc']
+                    ],
+                    language: {
+                        search: "Search: "
+                    },
+                    dom: `
+  <"search-wrapper mb-3"f>
+  <"pagination-wrapper d-flex justify-content-between align-items-center mb-3"i p>
+  rt
+  <"pagination-wrapper d-flex justify-content-between align-items-center mt-3"i p>
+  <"clear">
+`
+
+                });
+
+                // Add search row
+                $(this).find('thead').append('<tr class="search-row"></tr>');
+
+                $(this).find('thead th').each(function(index) {
+                    var title = $(this).text().trim();
+                    var searchHtml = '';
+
+                    // Create select for Featured column
+                    if (title === 'Status') {
+                        searchHtml =
+                            '<select class="ads-column-search"><option value="">Any</option><option value="Active">Active</option><option value="InActive">InActive</option></select>';
+                    }
+                    // Create text inputs for other specified columns
+                    else if (['Category','Name']
+                        .includes(title)) {
+                        searchHtml = '<input type="text" placeholder="Search ' + title +
+                            '" class="ads-column-search"/>';
+                    }
+
+                    $(this).closest('thead').find('.search-row').append('<th>' + searchHtml +
+                        '</th>');
+                });
+
+                // Apply search functionality
+                $(this).find('.search-row input, .search-row select').on('keyup change', function() {
+                    var columnIndex = $(this).closest('th').index();
+                    table.column(columnIndex).search(this.value).draw();
+                });
+            });
+        });
     </script>
 @endsection

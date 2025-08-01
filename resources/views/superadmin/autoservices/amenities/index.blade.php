@@ -233,7 +233,7 @@
     </div> --}}
     <div class="container table-responsive ">
         <div class="row">
-            <table class="table table-striped transparent-table align-middle datatable">
+            <table class="table table-striped transparent-table align-middle amenities-datatable">
                 <thead>
                     <tr>
                         <th>Sr#</th>
@@ -590,12 +590,6 @@
         </div>
     </div> --}}
 
-
-
-
-
-
-
     <script>
         function handleServiceCategoryIconUpload(input, previewElementId) {
             const previewElement = document.getElementById(previewElementId);
@@ -624,5 +618,61 @@
                 previewElement.textContent = 'No file uploaded.';
             }
         }
+
+                $(document).ready(function() {
+            $('.amenities-datatable').each(function() {
+                var table = $(this).DataTable({
+                    paging: true,
+                    pageLength: 25,
+                    lengthChange: false,
+                    searching: true,
+                    ordering: true,
+                    scrollX: false,
+                    order: [
+                        [0, 'asc']
+                    ],
+                    language: {
+                        search: "Search: "
+                    },
+                    dom: `
+  <"search-wrapper mb-3"f>
+  <"pagination-wrapper d-flex justify-content-between align-items-center mb-3"i p>
+  rt
+  <"pagination-wrapper d-flex justify-content-between align-items-center mt-3"i p>
+  <"clear">
+`
+
+                });
+
+                // Add search row
+                $(this).find('thead').append('<tr class="search-row"></tr>');
+
+                $(this).find('thead th').each(function(index) {
+                    var title = $(this).text().trim();
+                    var searchHtml = '';
+
+                    // Create select for Featured column
+                    if (title === 'Status') {
+                        searchHtml =
+                            '<select class="ads-column-search"><option value="">Any</option><option value="Active">Active</option><option value="InActive">InActive</option></select>';
+                    }
+                    // Create text inputs for other specified columns
+                    else if (['Name']
+                        .includes(title)) {
+                        searchHtml = '<input type="text" placeholder="Search ' + title +
+                            '" class="ads-column-search"/>';
+                    }
+
+                    $(this).closest('thead').find('.search-row').append('<th>' + searchHtml +
+                        '</th>');
+                });
+
+                // Apply search functionality
+                $(this).find('.search-row input, .search-row select').on('keyup change', function() {
+                    var columnIndex = $(this).closest('th').index();
+                    table.column(columnIndex).search(this.value).draw();
+                });
+            });
+        });
     </script>
 @endsection

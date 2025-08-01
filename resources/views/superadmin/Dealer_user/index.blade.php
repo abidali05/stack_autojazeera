@@ -66,7 +66,7 @@
     </style>
     <div class="container mt-3">
         <div class="row align-items-center mb-2">
-          
+
             <div class="col-lg-8">
                 <h2 class="sec mb-0 primary-color-custom">Dealer User Management </h2>
             </div>
@@ -77,7 +77,7 @@
                 </button>
             </div>
         </div>
-     {{--   <div class="row align-items-center mb-4 ">
+        {{--   <div class="row align-items-center mb-4 ">
             <div class="col-md-4 mb-md-0 mb-2 ">
                 <form id="dealerForm" action="" method="get">
                     <select class="form-select  select-search formselect" name="post_id" style="color:black !important"
@@ -114,15 +114,20 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content  " style="border-radius: 10px; overflow: hidden;">
 
-                    <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                    <div class="modal-header"
+                        style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                         <h5 class="modal-title" id="warningModalLabel"><strong> Warning</strong></h5>
-                        <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close"
+                            style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body text-center p-3 " style="background-color: #F0F3F6; color: #FD5631;">
                         {{ session('warning') }}
                     </div>
                     <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                        <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-light px-4 py-2 "
+                            style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                            data-bs-dismiss="modal">Cancel</button>
 
                     </div>
                 </div>
@@ -143,9 +148,12 @@
         <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content " style="border-radius: 10px; overflow: hidden;">
-                    <div class="modal-header" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                    <div class="modal-header"
+                        style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                         <h5 class="modal-title" id="errorModalLabel"><strong> Validation Errors</strong></h5>
-                        <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close"
+                            style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body" style="background-color: #F0F3F6; color: #FD5631;">
 
@@ -155,7 +163,9 @@
 
                     </div>
                     <div class="modal-footer justify-content-center border-0 p-0 pb-3">
-                        <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-light px-4 py-2 "
+                            style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                            data-bs-dismiss="modal">Cancel</button>
 
                     </div>
                 </div>
@@ -163,7 +173,7 @@
         </div>
 
         <div class="row">
-            <table class="table table-striped transparent-table align-middle datatable">
+            <table class="table table-striped transparent-table align-middle dealer-user-datatable">
                 <thead>
                     <tr>
                         <th>Action</th>
@@ -224,50 +234,106 @@
                         </tr>
                         @include('superadmin.modal.editDealeuserrModal')
 
-                        <div class="modal fade" id="deleteModal{{ $user->id }}" tabindex="-1" aria-labelledby="addDealerModalLabel"
-                          aria-hidden="true">
-                          <div class="modal-dialog  modal-dialog-centered">
-                              <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
-                                  <div class="modal-header border-0" style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
-                                      <h5 class="modal-title" id="editDealerModalLabel"><strong> Delete</strong></h5>
-                                      <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal" aria-label="Close"></button>
-                                  </div>
-              
-                                  <div class="modal-body text-center" style="background-color: #F0F3F6; color: #FD5631;">
-                                      <form action="{{ route('dealer_user.destroy', $user->id) }}" method="post">
-                                          @method('DELETE')
-                                          @csrf
-                                          <h4 style="color:#281F48 !important;">Are you sure to delete this record? </h4>
-                                          <div class="row mb-3">
-              
-                                              <div class="col-sm-8">
-                                                  <input type="hidden" class="form-control" name="deleted_id" id="deleted_id"
-                                                      name="dealershipName" required>
-                                              </div>
-                                          </div>
-              
-              
-              
-              
-                                  </div>
-                                  <div class="modal-footer border-0">
-                                      <button type="button" class="btn btn-light px-4 py-2 " style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;" data-bs-dismiss="modal">Cancel</button>
-                                      <button type="submit" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;">Delete</button>
-                                  </div>
-                                  </form>
-                              </div>
-                          </div>
-                      </div>
+                        <div class="modal fade" id="deleteModal{{ $user->id }}" tabindex="-1"
+                            aria-labelledby="addDealerModalLabel" aria-hidden="true">
+                            <div class="modal-dialog  modal-dialog-centered">
+                                <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
+                                    <div class="modal-header border-0"
+                                        style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                                        <h5 class="modal-title" id="editDealerModalLabel"><strong> Delete</strong></h5>
+                                        <button type="button" class="btn-close"
+                                            style="background-color: #D9D9D9 !important; color: #FD5631;"
+                                            data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+
+                                    <div class="modal-body text-center" style="background-color: #F0F3F6; color: #FD5631;">
+                                        <form action="{{ route('dealer_user.destroy', $user->id) }}" method="post">
+                                            @method('DELETE')
+                                            @csrf
+                                            <h4 style="color:#281F48 !important;">Are you sure to delete this record? </h4>
+                                            <div class="row mb-3">
+
+                                                <div class="col-sm-8">
+                                                    <input type="hidden" class="form-control" name="deleted_id"
+                                                        id="deleted_id" name="dealershipName" required>
+                                                </div>
+                                            </div>
+                                    </div>
+                                    <div class="modal-footer border-0">
+                                        <button type="button" class="btn btn-light px-4 py-2 "
+                                            style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;"
+                                            data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-light px-4 py-2 "
+                                            style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;">Delete</button>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     @endforeach
 
                     {{ $users->links('pagination::bootstrap-5') }}
                     {{-- @endif --}}
-
                 </tbody>
             </table>
         </div>
     </div>
-   
-        
-    
+
+    <script>
+        $(document).ready(function() {
+            $('.dealer-user-datatable').each(function() {
+                var table = $(this).DataTable({
+                    paging: true,
+                    pageLength: 25,
+                    lengthChange: false,
+                    searching: true,
+                    ordering: true,
+                    scrollX: false,
+                    order: [
+                        [0, 'asc']
+                    ],
+                    language: {
+                        search: "Search: "
+                    },
+                    dom: `
+  <"search-wrapper mb-3"f>
+  <"pagination-wrapper d-flex justify-content-between align-items-center mb-3"i p>
+  rt
+  <"pagination-wrapper d-flex justify-content-between align-items-center mt-3"i p>
+  <"clear">
+`
+
+                });
+
+                // Add search row
+                $(this).find('thead').append('<tr class="search-row"></tr>');
+
+                $(this).find('thead th').each(function(index) {
+                    var title = $(this).text().trim();
+                    var searchHtml = '';
+
+                    if (title === 'Status') {
+                        searchHtml =
+                            '<select class="ads-column-search"><option value="">Any</option><option value="Active">Active</option><option value="InActive">InActive</option></select>';
+                    }
+                    // Create text inputs for other specified columns
+                    else if (['Name', 'Phone', 'Email', 'Dealership name']
+                        .includes(title)) {
+                        searchHtml = '<input type="text" placeholder="Search ' + title +
+                            '" class="ads-column-search"/>';
+                    }
+
+                    $(this).closest('thead').find('.search-row').append('<th>' + searchHtml +
+                        '</th>');
+                });
+
+                // Apply search functionality
+                $(this).find('.search-row input, .search-row select').on('keyup change', function() {
+                    var columnIndex = $(this).closest('th').index();
+                    table.column(columnIndex).search(this.value).draw();
+                });
+            });
+        });
+    </script>
+
 @endsection

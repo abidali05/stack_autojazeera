@@ -61,7 +61,7 @@ class LeadController extends Controller
     } else {
       $baseQuery = BikeLeads::where('dealer_id', Auth::user()->id)->orderby('id', 'desc');
     }
-    
+
     $posts = $baseQuery->get();
 
     return view('user.submitform.bike_leads', compact('posts'));
