@@ -511,6 +511,7 @@
                 <div class="col-xxl-2  col-lg-2  col-md-3 col-sm-4 col-6">
                     <img src="{{ asset('web/bikes/images/image 10.svg') }}" class="img-fluid mb-2" alt="...">
                     <img src="{{ asset('web/bikes/images/image 11.svg') }}" class="img-fluid" alt="...">
+					    <img src="{{ asset('web/images/footer_comingsoon.svg') }}" class="img-fluid mt-2" alt="...">
                 </div>
                 <div class="row">
                     <div class="col-md-6 copyright">
