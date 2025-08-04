@@ -266,6 +266,8 @@
          <span class="text-nowrap"><img src="{{ asset('web/images/Icon (2).svg') }}" class="me-2"
                  alt="..."></span><span> Post An
              Ad</span>
+             <i class="bi bi-chevron-down ms-auto"></i>
+
      </a>
 
      <!-- Collapsed Menu -->
@@ -280,9 +282,11 @@
 
      <a class="nav-link d-flex  align-items-center" data-bs-toggle="collapse" href="#manageAdMenu" role="button"
          aria-expanded="false" aria-controls="manageAdMenu">
-         <span class="text-nowrap"><img src="{{ asset('web/images/Mask group.svg') }}" class="img-fluid"
-                 alt="..."><span>Manage
+         <span class="text-nowrap"><img src="{{ asset('web/images/Mask group.svg') }}" class=""
+                 alt="..."></span><span>Manage
                  Ads</span>
+          <i class="bi bi-chevron-down ms-auto"></i>
+
      </a>
 
      <!-- Collapsed Menu -->
@@ -326,6 +330,8 @@
              <img src="{{ asset('web/images/manage_system_icon.svg') }}" class="img-fluid " alt="...">
              <span>Manage System</span>
          </span>
+      <i class="bi bi-chevron-down ms-auto"></i>
+
      </a>
 
      <!-- First Level Collapse: Manage System -->
@@ -342,6 +348,8 @@
          <a class="nav-link d-flex align-items-center" style="font-size:12px" data-bs-toggle="collapse" href="#bikeSubmenu" role="button">
              <img src="{{ asset('web/images/newfeature.svg') }}" style="height: 20px; width: 20px" class="me-2"
                  alt="...">Features
+      <i class="bi bi-chevron-down ms-auto"></i>
+
          </a>
          <div class="collapse ps-4" id="bikeSubmenu">
              <a class="nav-link" href="{{ url('superadmin/feature') }}">  <img src="{{ asset('web/images/car1.svg') }}"                         style="height:20px !important ; width:20px !important; "  alt="..."><span class="text-secondary">Cars</span></a>
@@ -352,6 +360,8 @@
 		   <a class="nav-link d-flex align-items-center" style="font-size:12px" data-bs-toggle="collapse" href="#bodytype" role="button">
              <img src="{{ asset('web/bikes/images/hahah.svg') }}" style="height: 20px; width: 20px" class="me-2"
                  alt="...">Body type
+          <i class="bi bi-chevron-down ms-auto"></i>
+
          </a>
          <div class="collapse ps-4" id="bodytype">
              <a class="nav-link" href="{{ url('superadmin/bodytype') }}">  <img src="{{ asset('web/images/car1.svg') }}"                         style="height:20px !important ; width:20px !important; "  alt="..."><span class="text-secondary">Cars</span></a>
@@ -365,6 +375,8 @@
              role="button">
              <img src="{{ asset('web/images/truck.svg') }}" style="height: 20px; width: 20px" class="me-2"
                  alt="...">Model
+               <i class="bi bi-chevron-down ms-auto"></i>
+
          </a>
          <div class="collapse ps-4" id="truckSubmenu">
              <a class="nav-link" href="{{ url('superadmin/model') }}">  <img src="{{ asset('web/images/car1.svg') }}"                         style="height:20px !important ; width:20px !important; "  alt="..."><span
@@ -378,6 +390,8 @@
          <a class="nav-link d-flex align-items-center" style="font-size:12px" data-bs-toggle="collapse" href="#busSubmenu" role="button">
              <img src="{{ asset('web/images/bus.svg') }}" style="height: 20px; width: 20px" class="me-2"
                  alt="...">Make
+             <i class="bi bi-chevron-down ms-auto"></i>
+
          </a>
          <div class="collapse ps-4" id="busSubmenu">
              <a class="nav-link" href="{{ url('superadmin/make') }}">  <img src="{{ asset('web/images/car1.svg') }}"                         style="height:20px !important ; width:20px !important; "  alt="..."><span
@@ -402,6 +416,8 @@
          <span class="text-nowrap"><img src="{{ asset('web/images/subscription.svg') }}" class=""
                  alt="..."></span><span>
              Subscription</span>
+         <i class="bi bi-chevron-down ms-auto"></i>
+
      </a>
 
      <!-- Collapsed Menu -->
@@ -421,6 +437,8 @@
          <span class="text-nowrap"><img src="{{ asset('web/images/Mask group (1).svg') }}" class="img-fluid"
                  alt="..."><span>Manage
                  Services</span>
+              <i class="bi bi-chevron-down ms-auto"></i>
+
      </a>
 
      <!-- Collapsed Menu -->
@@ -467,3 +485,21 @@
 
 
  </div>
+<script>
+    document.querySelectorAll('[data-bs-toggle="collapse"]').forEach(toggle => {
+        const targetId = toggle.getAttribute('href');
+        const icon = toggle.querySelector('.toggle-icon');
+        const collapseEl = document.querySelector(targetId);
+
+        if (collapseEl && icon) {
+            collapseEl.addEventListener('show.bs.collapse', () => {
+                icon.classList.remove('bi bi-chevron-down');
+                icon.classList.add('bi bi-chevron-up');
+            });
+            collapseEl.addEventListener('hide.bs.collapse', () => {
+                icon.classList.remove('bi bi-chevron-up');
+                icon.classList.add('bi bi-chevron-down');
+            });
+        }
+    });
+</script>
