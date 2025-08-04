@@ -203,7 +203,7 @@
                         </div>
                         <div class="col-md-12 p-3 pb-0 borderdiv" style="border: none">
                             <p class="m-0 mb-3">Just One Simple Monthly Fee: No Ad Expiry, No Additional Payments for Featured
-                                Ads. </br>
+                                Ads. <img src="{{ asset('web/images/handprice.svg') }}" style="height:40px;width:40px" class="img-fluid pb-2 " alt="..."></br>
                                 💰 One Flat Monthly Fee — All-Inclusive</br>
                                 📈 Better ROI, Guaranteed - Get longer visibility, more inquiries, and higher turnover — without
                                 breaking the bank.</br>
@@ -373,7 +373,7 @@
                                     <div class="col-md-3 col-12 p-3 {{ $plan->metadata->is_recomended == '1' ? 'topclas' : '' }}"
                                         id="card1-1">
                                         <div class="row">
-                                           <div class="col-12 d-flex flex-column " style="height: 650px">
+                                           <div class="col-12 d-flex flex-column " style="height: 680px">
                                                 <p
                                                     class="m-0 premiumbadge  {{ $plan->metadata->is_recomended == '1' ? '' : 'd-none' }}">
                                                     Recommended</p>

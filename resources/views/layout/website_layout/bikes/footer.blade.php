@@ -98,7 +98,7 @@
         <div class="col-md-10">
             <div class="row">
                 <div class="col-xxl-4  col-lg-4 col-md-4 col-sm-6 col-6">
-                    <img src="{{ asset('web/bikes/images/fotter.svg') }}" class="img-fluid w-75 mb-3" alt="...">
+                    <img src="{{ asset('web/images/logo_with_r.svg') }}" class="img-fluid w-75 mb-3" alt="...">
                     <p class="footerl mt-2">From Auto to Auto Service — Pakistan’s Smart Platform</p>
                 </div>
                 <div class="col-xxl-2 col-lg-2 col-md-2 col-sm-4 col-6">

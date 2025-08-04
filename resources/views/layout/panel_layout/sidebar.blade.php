@@ -4,20 +4,40 @@
         overflow-x: hidden;
     }
 
-    #sidebar {
-        position: static;
-        top: 0;
-        left: 0;
-        width: 200px;
-        height: 100vh;
-        background-color: #f8f9fa;
-        transition: all 0.3s ease;
-        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-        overflow-x: hidden;
-        overflow-y: scroll;
+   #sidebar {
+    position: static;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100vh;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
 
+/* Custom scrollbar */
+#sidebar::-webkit-scrollbar {
+    width: 5px;
+}
 
-    }
+#sidebar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+#sidebar::-webkit-scrollbar-thumb {
+    background-color: #999;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+/* Optional: For Firefox */
+#sidebar {
+    scrollbar-width: thin;         /* "auto" or "thin" */
+    scrollbar-color: #281F48 #F4F4F4; /* thumb and track */
+}
+
 
     #sidebar.closed {
         width: 60px;
@@ -98,8 +118,8 @@
     }
 
     .imgheightfix {
-        height: 40px;
-        width: 120px;
+        height: 60px;
+        width: 140px;
     }
 
     .eighteenblue {
@@ -277,7 +297,7 @@
     <!-- Sidebar -->
     <div id="sidebar">
         <a id="sidebarLogo" class="navbar-brand d-flex justify-content-center " href="{{ route('dashboard') }}">
-            <img src="{{ asset('web/images/Frame 1171275409.svg') }}" class="imgheightfix" alt="...">
+            <img src="{{asset('web/bikes/images/logo.svg')}}" class="imgheightfix" alt="...">
         </a>
         <a href="{{ route('dashboard') }}"
             class="mt-3 d-flex align-items-baseline @if (request()->routeIs('dashboard')) active @endif">
@@ -635,7 +655,7 @@
     <!-- Sidebar -->
     <div id="sidebar">
         <a id="sidebarLogo" class="navbar-brand d-flex justify-content-center" href="{{ route('dashboard') }}">
-            <img src="{{ asset('web/images/Frame 1171275409.svg') }}" class="imgheightfix" alt="...">
+            <img src="{{asset('web/bikes/images/logo.svg')}}" class="imgheightfix" alt="...">
         </a>
 
         <!-- Dashboard Link -->
@@ -1131,7 +1151,7 @@
     <!-- Sidebar -->
     <div id="sidebar">
         <a id="sidebarLogo" class="navbar-brand d-flex justify-content-center" href="{{ route('dashboard') }}">
-            <img src="{{ asset('web/images/Frame 1171275409.svg') }}" class="imgheightfix" alt="...">
+            <img src="{{asset('web/bikes/images/logo.svg')}}" class="imgheightfix" alt="...">
         </a>
         <a href="{{ route('dashboard') }}"
             class="mt-3 d-flex align-items-baseline @if (request()->routeIs('dashboard')) active @endif">
@@ -1280,7 +1300,7 @@
     <!-- Sidebar -->
     <div id="sidebar">
         <a id="sidebarLogo" class="navbar-brand d-flex justify-content-center" href="{{ route('dashboard') }}">
-            <img src="{{ asset('web/images/Frame 1171275409.svg') }}" class="imgheightfix" alt="...">
+            <img src="{{asset('web/bikes/images/logo.svg')}}" class="imgheightfix" alt="...">
         </a>
         <a href="{{ route('dashboard') }}"
             class="mt-3 d-flex align-items-baseline @if (request()->routeIs('dashboard')) active @endif">

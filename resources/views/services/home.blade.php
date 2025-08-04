@@ -1514,8 +1514,7 @@
                                                 <strong>Download our mobile app.</strong>
                                             </h1>
                                             <p class="eighteen mt-3">
-                                                We are a professional and creative company and we
-                                                offer you a trusty insurance on your veicle.
+                                                We are a professional and creative company From Auto to Auto Service — Pakistan’s Smart Platform
                                             </p>
                                         </div>
                                            <div class="col-md-12 d-flex  align-items-center mt-4">
@@ -1528,13 +1527,19 @@
                                                     class="img-fluid" alt="..."></a>
 
                                         </div>
+										         <div class="col-md-12 d-flex  align-items-center mt-4">
+
+                                          <img
+                                                    src="{{ asset('web/bikes/images/Coming_Soon.svg') }}" class="img-fluid " style="width:160px"
+                                                    alt="...">
+												   </div>
                                           </div>
                                       
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-5">
-                                <img src="{{ asset('web/bikes/images/newmobile.svg') }}" class="img-fluid"
+                                <img src="{{ asset('web/bikes/images/mobileauto.svg') }}" class="img-fluid"
                                     alt="...">
                             </div>
                         </div>

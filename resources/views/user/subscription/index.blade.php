@@ -250,7 +250,7 @@
                         </div>
                         <div class="col-md-12 p-3 pb-0 borderdiv"  style="border: none">
                             <p class="m-0 mb-2" style="font-size: 14px">Just One Simple Monthly Fee: No Ad Expiry, No Additional Payments for Featured
-                                Ads. </br>
+                                Ads. <img src="{{ asset('web/images/handprice.svg') }}" style="height:40px;width:40px" class="img-fluid pb-2 " alt="..."></br>
                                 💰 One Flat Monthly Fee — All-Inclusive</br>
                                 📈 Better ROI, Guaranteed - Get longer visibility, more inquiries, and higher turnover — without
                                 breaking the bank.</br>
@@ -752,10 +752,11 @@
                     <div class="row shadowss">
                         <div class="col-md-12 colorback p-3">
                             <p class="m-0" style="color: white">Advertisement Plans </p>
+							<img src="{{ asset('web/images/handprice.svg') }}" class="img-fluid" style="height:200px; width:200px" alt="...">
                         </div>
                         <div class="col-md-12 p-3 borderdiv">
                             <p class="m-0 mb-3">Just One Simple Monthly Fee: No Ad Expiry, No Additional Payments for Featured
-                                Ads. </br>
+                                Ads.   </br>
                                 💰 One Flat Monthly Fee — All-Inclusive</br>
                                 📈 Better ROI, Guaranteed - Get longer visibility, more inquiries, and higher turnover — without
                                 breaking the bank.</br>
