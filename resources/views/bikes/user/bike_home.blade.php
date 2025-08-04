@@ -1051,8 +1051,7 @@
                                         <h1 style="color: #281F48;" data-aos="fade-right"><strong>Download our
                                                 mobile app.</strong>
                                         </h1>
-                                        <p class="eighteenorange mt-3" data-aos="fade-right">We are a professional
-                                            and creative company from Auto to Auto Service — Pakistan’s Smart Platform.
+                                        <p class="eighteenorange mt-3" data-aos="fade-right">From Auto to Auto Service — Pakistan’s Smart Platform.
                                         </p>
  </div>       <div class="col-md-12 d-flex  align-items-center mt-4">
 

@@ -1514,7 +1514,7 @@
                                                 <strong>Download our mobile app.</strong>
                                             </h1>
                                             <p class="eighteen mt-3">
-                                                We are a professional and creative company From Auto to Auto Service — Pakistan’s Smart Platform
+                                            From Auto to Auto Service — Pakistan’s Smart Platform.
                                             </p>
                                         </div>
                                            <div class="col-md-12 d-flex  align-items-center mt-4">
