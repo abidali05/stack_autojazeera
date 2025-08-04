@@ -114,8 +114,18 @@
             border-radius: 10px;
             padding: 5px;
             color: white;
-            right: 90px;
+            right: 5%;
         }
+             .premiumbadge1s {
+            position: absolute;
+            font-size: 12px;
+            background-color: #FFFFFF29;
+            border-radius: 10px;
+            padding: 5px;
+            color: white;
+            right: 1%;
+        }
+
 
         .textclas {
             color: white !important;
@@ -241,16 +251,16 @@
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div class="container-fluid">
             <div class="row mt-5 d-flex justify-content-center">
-                <div class="col-11">
-                    <div class="row shadowss">
-                        <div class="col-md-12 colorback p-3">
+                <div class="col-11 shadowss">
+                    <div class="row ">
+                        <div class="col-md-12 colorback p-3 ">
                             <p class="m-0" style="color: white">Advertisement Plans </p>
                         </div>
                         <div class="col-md-12 p-3 pb-0 borderdiv"  style="border: none">
                             <p class="m-0 mb-2" style="font-size: 14px">Just One Simple Monthly Fee: No Ad Expiry, No Additional Payments for Featured
-                                Ads. </br>
+                                Ads. <img src="{{ asset('web/images/handprice.svg') }}" style="height:40px;width:40px" class="img-fluid pb-2 " alt="..."></br>
                                 💰 One Flat Monthly Fee — All-Inclusive</br>
                                 📈 Better ROI, Guaranteed - Get longer visibility, more inquiries, and higher turnover — without
                                 breaking the bank.</br>
@@ -268,11 +278,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 mt-4">
-                    <p class="m-0 headsub">Want to Post Car/Bike Ad?</p>
+                    <p class="m-0 ps-4 headsub">Want to Post Car/Bike Ad?</p>
                 </div>
             </div>
         </div>
-        <div class="container-fluid backimg1  p-5">
+        <div class="container-fluid backimg1  p-3">
             <div class="row  d-flex justify-content-center ">
                 <div class="col-11 rounded-5" style="background-color: #E6F1FE;">
 
@@ -353,7 +363,7 @@
                 </div>
             </div>
         </div>
-        <div class="container-fluid backimg1 p-5">
+        <div class="container-fluid backimg1 p-3">
             <div class="row d-flex justify-content-center">
                 <div class="col-11 rounded-5" style="background-color: #E6F1FE;">
                     <div class="row">
@@ -369,7 +379,7 @@
     {{-- Top Section --}}
     <div>
                                                 <p
-                                                    class="m-0 premiumbadge  {{ $ads_plan->metadata->is_recomended == '1' ? '' : 'd-none' }}">
+                                                    class="m-0 premiumbadge1s  {{ $ads_plan->metadata->is_recomended == '1' ? '' : 'd-none' }}">
                                                     Recommended</p>
                                                 <p
                                                     class="twenty mt-5 d-flex justify-content-between align-items-center {{ $ads_plan->metadata->is_recomended == '1' ? 'textclas' : '' }}">
@@ -425,11 +435,11 @@
         <div class="container">
             <div class="row" id="services_packages">
                 <div class="col-md-12 mt-4">
-                    <p class="m-0 headsub">Want to advertise Auto Service Business ?</p>
+                    <p class="m-0 ps-4 headsub">Want to advertise Auto Service Business ?</p>
                 </div>
             </div>
         </div>
-        <div class="container-fluid backimg1 p-5">
+        <div class="container-fluid backimg1 p-3">
             <div class="row d-flex justify-content-center py-5">
                 <div class="col-11 rounded-5" style="background-color: #E6F1FE;">
                     <div class="row">
@@ -752,10 +762,11 @@
                     <div class="row shadowss">
                         <div class="col-md-12 colorback p-3">
                             <p class="m-0" style="color: white">Advertisement Plans </p>
+							<img src="{{ asset('web/images/handprice.svg') }}" class="img-fluid" style="height:200px; width:200px" alt="...">
                         </div>
                         <div class="col-md-12 p-3 borderdiv">
                             <p class="m-0 mb-3">Just One Simple Monthly Fee: No Ad Expiry, No Additional Payments for Featured
-                                Ads. </br>
+                                Ads.   </br>
                                 💰 One Flat Monthly Fee — All-Inclusive</br>
                                 📈 Better ROI, Guaranteed - Get longer visibility, more inquiries, and higher turnover — without
                                 breaking the bank.</br>
@@ -775,11 +786,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 mt-4">
-                    <p class="m-0 headsub">Want to Post Car/Bike Ad?</p>
+                    <p class="m-0  ps-4 headsub">Want to Post Car/Bike Ad?</p>
                 </div>
             </div>
         </div>
-        <div class="container-fluid backimg1  p-5">
+        <div class="container-fluid backimg1  p-3">
             <div class="row  d-flex justify-content-center ">
                 <div class="col-11 rounded-5" style="background-color: #E6F1FE;">
 
@@ -838,7 +849,7 @@
                 </div>
             </div>
         </div>
-        <div class="container-fluid backimg1 p-5">
+        <div class="container-fluid backimg1 p-3">
             <div class="row d-flex justify-content-center">
                 <div class="col-11 rounded-5" style="background-color: #E6F1FE;">
                     <div class="row">
@@ -898,11 +909,11 @@
         <div class="container">
             <div class="row" id="services_packages">
                 <div class="col-md-12 mt-4">
-                    <p class="m-0 headsub">Want to advertise Auto Service Business ?</p>
+                    <p class="m-0 ps-4 headsub">Want to advertise Auto Service Business ?</p>
                 </div>
             </div>
         </div>
-        <div class="container-fluid backimg1 p-5">
+        <div class="container-fluid backimg1 p-3">
             <div class="row d-flex justify-content-center py-5">
                 <div class="col-11 rounded-5" style="background-color: #E6F1FE;">
                     <div class="row">

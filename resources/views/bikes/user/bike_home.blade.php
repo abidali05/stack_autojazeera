@@ -1051,8 +1051,7 @@
                                         <h1 style="color: #281F48;" data-aos="fade-right"><strong>Download our
                                                 mobile app.</strong>
                                         </h1>
-                                        <p class="eighteenorange mt-3" data-aos="fade-right">We are a professional
-                                            and creative company and we offer you a trusty insurance on your veicle.
+                                        <p class="eighteenorange mt-3" data-aos="fade-right">From Auto to Auto Service — Pakistan’s Smart Platform.
                                         </p>
  </div>       <div class="col-md-12 d-flex  align-items-center mt-4">
 
@@ -1064,13 +1063,19 @@
                                                     class="img-fluid" alt="..."></a>
 
                                         </div>
+									      <div class="col-md-12 d-flex  align-items-center mt-4">
+
+                                          <img
+                                                    src="{{ asset('web/bikes/images/Coming_Soon.svg') }}" class="img-fluid " style="width:160px"
+                                                    alt="...">
+												   </div>
                                     </div>
                                     
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-5 " data-aos="fade-right">
-                            <img src="{{ asset('web/bikes/images/newmobile.svg') }}" class="img-fluid"
+                            <img src="{{ asset('web/bikes/images/mobileauto.svg') }}" class="img-fluid"
                                 alt="...">
                         </div>
                     </div>

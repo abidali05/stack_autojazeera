@@ -116,9 +116,17 @@
             border-radius: 10px;
             padding: 5px;
             color: white;
-            right: 95px;
+            right: 6%;
         }
-
+ .premiumbadge1s {
+            position: absolute;
+            font-size: 12px;
+            background-color: #FFFFFF29;
+            border-radius: 10px;
+            padding: 5px;
+            color: white;
+            right: 2%;
+        }
         .textclas {
             color: white !important;
         }
@@ -194,16 +202,16 @@
             </div>
         </div>
         </div>
-        <div class="container">
-            <div class="row mt-5  ">
-                <div class="col-12">
+        <div class="container-fluid">
+            <div class="row mt-5 d-flex justify-content-center ">
+                <div class="col-11">
                     <div class="row shadowss">
                         <div class="col-md-12 colorback p-3">
                             <p class="m-0" style="color: white">Advertisement Plans </p>
                         </div>
                         <div class="col-md-12 p-3 pb-0 borderdiv" style="border: none">
                             <p class="m-0 mb-3">Just One Simple Monthly Fee: No Ad Expiry, No Additional Payments for Featured
-                                Ads. </br>
+                                Ads. <img src="{{ asset('web/images/handprice.svg') }}" style="height:40px;width:40px" class="img-fluid pb-2 " alt="..."></br>
                                 💰 One Flat Monthly Fee — All-Inclusive</br>
                                 📈 Better ROI, Guaranteed - Get longer visibility, more inquiries, and higher turnover — without
                                 breaking the bank.</br>
@@ -225,7 +233,7 @@
                 </div>
             </div>
         </div>
-        <div class="container-fluid backimg1  p-5">
+        <div class="container-fluid backimg1  p-3">
             <div class="row  d-flex justify-content-center ">
                 <div class="col-11 rounded-5" style="background-color: #E6F1FE;">
 
@@ -292,7 +300,7 @@
                 </div>
             </div>
         </div>
-        <div class="container-fluid backimg1 p-5">
+        <div class="container-fluid backimg1 p-3">
             <div class="row d-flex justify-content-center">
                 <div class="col-11 rounded-5" style="background-color: #E6F1FE;">
                     <div class="row">
@@ -306,7 +314,7 @@
                                             <div class="row">
                                                 <div class="col-12 d-flex flex-column " style="height: 390px">
                                                     <p
-                                                        class="m-0 premiumbadge  {{ $ads_plan->metadata->is_recomended == '1' ? '' : 'd-none' }}">
+                                                        class="m-0 premiumbadge1s  {{ $ads_plan->metadata->is_recomended == '1' ? '' : 'd-none' }}">
                                                         Recommended</p>
                                                     <p
                                                         class="twenty mt-5 d-flex justify-content-between align-items-center {{ $ads_plan->metadata->is_recomended == '1' ? 'textclas' : '' }}">
@@ -362,7 +370,7 @@
                 </div>
             </div>
         </div>
-        <div class="container-fluid backimg1 p-5">
+        <div class="container-fluid backimg1 p-3">
             <div class="row d-flex justify-content-center py-5">
                 <div class="col-11 rounded-5" style="background-color: #E6F1FE;">
                     <div class="row">
@@ -373,7 +381,7 @@
                                     <div class="col-md-3 col-12 p-3 {{ $plan->metadata->is_recomended == '1' ? 'topclas' : '' }}"
                                         id="card1-1">
                                         <div class="row">
-                                           <div class="col-12 d-flex flex-column " style="height: 650px">
+                                           <div class="col-12 d-flex flex-column " style="height: 680px">
                                                 <p
                                                     class="m-0 premiumbadge  {{ $plan->metadata->is_recomended == '1' ? '' : 'd-none' }}">
                                                     Recommended</p>
