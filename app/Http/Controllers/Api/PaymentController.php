@@ -367,7 +367,7 @@ class PaymentController extends Controller
         Stripe::setApiKey(config('services.stripe.secret'));
 
         // Retrieve the free plan product and get default price
-        $product = Product::retrieve('prod_SOPkazJWEipyKp');
+        $product = Product::retrieve('prod_SmQWWOAD044RiK');
         $priceId = $product->default_price;
 
         // Get or create Stripe customer
