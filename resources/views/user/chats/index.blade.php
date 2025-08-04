@@ -570,6 +570,7 @@
             async function fetchUserChats() {
                 const senderId = parseInt(authUserId, 10);
                 const chatList = document.getElementById("chatList");
+                const chatSearch = document.getElementById("chatSearch");
 
                 const chatQuery = await db.collection("chats")
                     .where("keys", "array-contains", senderId).get();
@@ -578,6 +579,8 @@
                 chatList.innerHTML = "";
 
                 if (chatQuery.empty) {
+                    chatList.addClass('d-none');
+                    chatSearch.addClass('d-none');
                     chatList.innerHTML = "<p class='text-center py-3'>No chats found</p>";
                     return;
                 }

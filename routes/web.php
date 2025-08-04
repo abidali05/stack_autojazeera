@@ -302,6 +302,7 @@ Route::group(['prefix' => 'superadmin', 'as' => 'superadmin.'], function () {
 
         Route::get('shop-reviews', [SuperadminShopController::class, 'shop_reviews'])->name('shop_reviews');
         Route::delete('delete-shop-review/{id}', [SuperadminShopController::class, 'delete_shop_review'])->name('delete_shop_review');
+    Route::get('delete-shop-image/{image_id}/{shop_id}', [ShopController::class, 'deleteShopImage'])->name('delete.shop.image');
 
         Route::get('news-letter', [GeneralController::class, 'all_newsletters']);
 
