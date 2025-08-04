@@ -1,5 +1,7 @@
 @extends('layout.panel_layout.main')
 @section('content')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <style>
         .headername {
             font-size: 16px;
@@ -331,7 +333,7 @@
         <div class="row">
             <div class="col-12 col-md-12 col-lg-12">
                 <div class="row">
-                    <div class="col-md-3  ">
+                    <div class="col-md-3  " id="containerchatslist">
                         <div class="row mt-3">
                             <div class="col-12 pe-0 px-4">
                                 <p class="chats m-0"><strong>Ads chats</strong></p>
@@ -339,11 +341,14 @@
 
                         </div>
                         <div class="row px-2 mt-2 mb-3">
-                            <div class="col-12">
-                                <input type="text" class="form-control w-100" style="" id="chatSearch"
-                                    autocomplete="off" placeholder="Search">
+                         <div class="col-12 ">
+                    <div class="position-relative w-100">
+  <input type="text" class="form-control w-100 pe-5" id="chatSearch"
+         autocomplete="off" placeholder="Search">
+  <i class="bi bi-search position-absolute top-50 end-0 translate-middle-y me-3 text-muted"></i>
+</div>
+</div>
 
-                            </div>
                         </div>
                         <div class="row ">
                             <div class="col-12 scrll" id="chatList">
@@ -579,8 +584,9 @@
                 chatList.innerHTML = "";
 
                 if (chatQuery.empty) {
-                    chatList.addClass('d-none');
-                    chatSearch.addClass('d-none');
+                    document.getElementById("chatList").classList.add('d-none');
+document.getElementById("containerchatslist").classList.add('d-none');
+
                     chatList.innerHTML = "<p class='text-center py-3'>No chats found</p>";
                     return;
                 }
