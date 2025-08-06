@@ -545,7 +545,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize Stripe with your publishable key
             const stripe = Stripe(
-                'pk_test_51P9UuSP2COuPjTaiiMu3M5sYksW1ClhLwGsxBmZwLNClNXyIWJwd3nwNMyubS6GOy2FlhsTvJMcdLL0Wpvs4z7C600m4dd2sHD'
+                env('STRIPE_KEY')
             );
             const elements = stripe.elements({
                 loader: 'auto'

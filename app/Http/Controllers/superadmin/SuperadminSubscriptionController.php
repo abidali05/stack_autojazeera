@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers\superadmin;
 
-use App\Http\Controllers\Controller;
-use App\Mail\SubscriptionEndedadmin;
-use App\Models\AdsSubscriptions;
-use App\Models\AutoServices\ServiceSubscriptions;
-use App\Models\DeallerSubscription;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\AdsSubscriptions;
+use App\Models\DeallerSubscription;
+use App\Http\Controllers\Controller;
+use App\Mail\SubscriptionEndedadmin;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use App\Models\AutoServices\ServiceSubscriptions;
+use Stripe\Customer;
+use Stripe\Stripe;
+use Stripe\Subscription;
+use Stripe\Product;
 
 class SuperadminSubscriptionController extends Controller
 {
@@ -139,10 +144,206 @@ class SuperadminSubscriptionController extends Controller
     }
 
 
+
     public function ads_subscriptions()
     {
-        $subscriptions = AdsSubscriptions::with(['plan', 'user'])->get();
-        return view('superadmin.subscription.ads_subscriptions', compact('subscriptions'));
+        Stripe::setApiKey(config('services.stripe.secret'));
+
+        $users = User::where('role', 1)->get();
+        $userSubscriptions = [];
+
+        foreach ($users as $user) {
+            $customer = $this->getExistingCustomer($user->email);
+            if (!$customer) continue;
+
+            $subscriptions = Subscription::all([
+                'customer' => $customer->id,
+                'status' => 'active',
+                'limit' => 100,
+                // 'expand' => ['data.items.data.price.product']
+            ])->data;
+
+            $adsSubscriptions = [];
+
+            foreach ($subscriptions as $sub) {
+                if (($sub->metadata['sub_type'] ?? null) === 'ads') {
+                    $item = $sub->items->data[0];
+                    $product = Product::retrieve($item->price->product);
+
+                    $adsSubscriptions[] = [
+                        'id' => $sub->id,
+                        'product_name' => $product->name ?? 'Unknown',
+                        'start_date' => date('Y-m-d', $sub->start_date),
+                        'end_date' => date('Y-m-d', $sub->current_period_end),
+                        'status' => $sub->status,
+                    ];
+                }
+            }
+
+            if (!empty($adsSubscriptions)) {
+                $userSubscriptions[] = [
+                    'user' => $user,
+                    'subscriptions' => $adsSubscriptions
+                ];
+            }
+        }
+
+        return view('superadmin.subscription.ads_subscriptions', compact('userSubscriptions'));
+    }
+
+
+    public function superadminActiveServiceSubscriptions()
+    {
+        Stripe::setApiKey(config('services.stripe.secret'));
+
+        $users = User::all();
+        $userSubscriptions = [];
+
+        foreach ($users as $user) {
+            $customer = $this->getExistingCustomer($user->email);
+            if (!$customer) continue;
+
+            $subscriptions = Subscription::all([
+                'customer' => $customer->id,
+                'status' => 'active',
+                'limit' => 100,
+                'expand' => ['data.items.data.price.product']
+            ])->data;
+
+            $serviceSubscriptions = [];
+
+            foreach ($subscriptions as $sub) {
+                if (($sub->metadata['sub_type'] ?? null) === 'service') {
+                    $item = $sub->items->data[0];
+                    $product = $item->price->product;
+
+                    $serviceSubscriptions[] = [
+                        'id' => $sub->id,
+                        'product_name' => $product->name ?? 'Unknown',
+                        'start_date' => date('Y-m-d', $sub->start_date),
+                        'end_date' => date('Y-m-d', $sub->current_period_end),
+                        'status' => $sub->status,
+                    ];
+                }
+            }
+
+            if (!empty($serviceSubscriptions)) {
+                $userSubscriptions[] = [
+                    'user' => $user,
+                    'subscriptions' => $serviceSubscriptions
+                ];
+            }
+        }
+
+        return view('superadmin.subscriptions.service', compact('userSubscriptions'));
+    }
+
+
+    private function getExistingCustomer($email)
+    {
+        try {
+            $customers = \Stripe\Customer::all(['limit' => 100]);
+
+            foreach ($customers->autoPagingIterator() as $customer) {
+                if ($customer->email === $email) {
+                    return $customer;
+                }
+            }
+
+            return null;
+        } catch (\Exception $e) {
+            // Optionally log the error
+            // \Log::error('Stripe customer fetch failed: ' . $e->getMessage());
+            return null;
+        }
+    }
+
+
+
+    // public function ads_subscriptions()
+    // {
+
+    //     \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
+
+    //     $ads_invoices = [];
+    //     $service_invoices = [];
+    //     $ads_product_ids = [];
+    //     $service_product_ids = [];
+    //     $subscriptions = [];
+
+    //     // Get all subscriptions (limit can be increased up to 100, use pagination for more)
+    //     $allSubscriptions = \Stripe\Subscription::all([
+    //         'limit' => 100,
+    //         'expand' => ['data.customer']
+    //     ])->data;
+
+    //     foreach ($allSubscriptions as $subscription) {
+    //         $subscriptionId = $subscription->id;
+    //         $subscriptions[$subscriptionId] = $subscription;
+    //         $type = $subscription->metadata['sub_type'] ?? null;
+
+    //         // Get related invoice(s) for this subscription
+    //         try {
+    //             $invoices = \Stripe\Invoice::all([
+    //                 'subscription' => $subscriptionId,
+    //                 'limit' => 100,
+    //                 'expand' => ['data.lines.data.price']
+    //             ])->data;
+    //         } catch (\Exception $e) {
+    //             continue;
+    //         }
+
+    //         foreach ($invoices as $invoice) {
+    //             foreach ($invoice->lines->data as $line) {
+    //                 $productId = $line->price->product ?? null;
+
+    //                 if ($productId) {
+    //                     if ($type === 'ads') {
+    //                         $ads_product_ids[] = $productId;
+    //                         $ads_invoices[] = $invoice;
+    //                     } elseif ($type === 'service') {
+    //                         $service_product_ids[] = $productId;
+    //                         $service_invoices[] = $invoice;
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+
+    //     // Get product info
+    //     $all_product_ids = array_unique(array_merge($ads_product_ids, $service_product_ids));
+    //     $products = [];
+
+    //     foreach ($all_product_ids as $productId) {
+    //         try {
+    //             $products[$productId] = \Stripe\Product::retrieve($productId);
+    //         } catch (\Exception $e) {
+    //             $products[$productId] = (object)['name' => 'Unknown Plan'];
+    //         }
+    //     }
+
+    //     return view('superadmin.subscription.ads_subscriptions', compact(
+    //         'ads_invoices',
+    //         'service_invoices',
+    //         'products',
+    //         'subscriptions'
+    //     ));
+    // }
+
+
+    private function getOrCreateCustomer($user)
+    {
+        $customers = Customer::all(['limit' => 10000]);
+        foreach ($customers->data as $cust) {
+            if ($cust->email === $user->email) {
+                return $cust;
+            }
+        }
+
+        return Customer::create([
+            'name' => $user->name,
+            'email' => $user->email,
+        ]);
     }
 
 

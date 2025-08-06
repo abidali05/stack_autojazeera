@@ -55,7 +55,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link " aria-current="page" href="{{ Request::is('superadmin/*') ? route('superadmin.advertise') : route('advertise')}}"><button
-                            style="border: none; padding: 5px 15px; color: white; background-color: #D90600; border-radius: 20px;">Advertise</button></a>
+                            style="border: none; padding: 5px 15px; color: white; background-color: #D90600; border-radius: 20px;">Post an ad</button></a>
                 </li>
                 <li class="nav-item">
                    <div class="dropdown">
