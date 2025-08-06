@@ -75,7 +75,11 @@
                 <div class="col-md-8">
                     <ul class="nav nav-tabs" id="userTabs" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link  active" id="private-seller-tab" data-bs-toggle="tab"
+                            <button class="nav-link active" id="user-tab" data-bs-toggle="tab"
+                                data-bs-target="#user-seller" type="button" role="tab">Users</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="private-seller-tab" data-bs-toggle="tab"
                                 data-bs-target="#private-seller" type="button" role="tab">Private Seller</button>
                         </li>
                         <li class="nav-item" role="presentation">
@@ -93,7 +97,234 @@
         </div>
 
         <div class="tab-content p-3 border border-top-0" id="userTabsContent">
-            <div class="tab-pane fade show active" id="private-seller" role="tabpanel">
+
+            <div class="tab-pane fade show active" id="user-seller" role="tabpanel">
+                <div class="table-container">
+                    <table class="table table-striped align-middle datatable12" style="min-width: 1000px;">
+                        <thead>
+                            <tr>
+                                <th>Sr#</th>
+                                <th>Action</th>
+                                <th>Name</th>
+                                {{-- <th>Dealership Name</th> --}}
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>Created Date</th>
+                                <th>Updated Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($userSellers as $key => $user)
+                                <tr>
+                                    <td>{{ $key + 1 }}</td>
+                                    <td>
+                                        <i class="bi bi-pencil-square me-2" title="Edit" data-bs-toggle="modal"
+                                            data-bs-target="#editUsererModal{{ $user->id }}"></i>
+                                        <a href="#" data-bs-toggle="modal"
+                                            data-bs-target="#deleteModal{{ $user->id }}">
+                                            <i class="bi bi-trash text-danger"></i>
+                                        </a>
+                                    </td>
+                                    <td>{{ $user->name }}</td>
+                                    {{-- <td>{{ $user->dealershipName }}</td> --}}
+                                    <td>{{ $user->number }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->created_at->format('d M Y') }}</td>
+                                    <td>{{ $user->updated_at ? $user->updated_at->format('d M Y') : 'N/A' }}</td>
+                                    <td><span
+                                            class="badge bg-{{ $user->status === 'active' ? 'success' : 'danger' }}">{{ ucfirst($user->status) }}</span>
+                                    </td>
+                                </tr>
+
+                                <!-- Edit Modal -->
+                                <div class="modal fade" id="editUsererModal{{ $user->id }}" tabindex="-1"
+                                    aria-labelledby="editUsererModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
+                                            <div class="border-0 modal-header"
+                                                style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+
+                                                <h5 class="modal-title" id="newsletterresponseLabel"> <strong> Edit User
+                                                    </strong></h5>
+                                                <button type="button" class="btn-close"
+                                                    style="background-color: #D9D9D9 !important; color: #FD5631;"
+                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <form method="post"
+                                                action="{{ route('superadmin.user.update', $user->id) }}"
+                                                enctype="multipart/form-data">
+                                                @csrf
+                                                @method('PUT')
+                                                <input type="hidden" name="role_name" value="user">
+                                                <div class="modal-body" style="background-color:#F0F3F6 !important;">
+                                                    <div class="mb-4 row">
+                                                        <div class="col-6 mb-3">
+
+                                                        </div>
+
+                                                        <div class="col-6 mb-3 d-flex justify-content-end pe-4">
+                                                            <div class="dropzone"
+                                                                style="border: 2px dotted #ccc; border-radius: 8px; width: 150px; height: 150px;
+                                display: flex; align-items: center; justify-content: center; text-align: center;
+                                position: relative; background-color:#28223ECC;"
+                                                                onmouseenter="admin_edit_user_showButtons({{ $user->id }})"
+                                                                onmouseleave="admin_edit_user_hideButtons({{ $user->id }})">
+
+                                                                <input type="file"
+                                                                    id="admin_edit_user_profileimg{{ $user->id }}"
+                                                                    accept="image/*" style="display: none;"
+                                                                    name="image">
+
+                                                                <label
+                                                                    id="admin_edit_user_dropzoneLabel{{ $user->id }}"
+                                                                    for="admin_edit_user_profileimg{{ $user->id }}"
+                                                                    style="color: #888; cursor: pointer; font-size: 14px; padding: 10px;"
+                                                                    class="dropzone-label">
+                                                                    Drop an image here or click to upload
+                                                                </label>
+
+                                                                <img id="admin_edit_user_previewImage{{ $user->id }}"
+                                                                    data-id="{{ $user->id }}" alt="Preview"
+                                                                    src="{{ $user->image ? asset('web/profile/' . $user->image) : '' }}"
+                                                                    style="{{ $user->image ? 'display: block;' : 'display: none;' }}
+                                    position: absolute; max-width:150px; max-height: 150px; object-fit: contain;">
+
+                                                                <div id="admin_edit_user_buttons{{ $user->id }}"
+                                                                    class="action-buttons"
+                                                                    style="display: {{ $user->image ? 'flex' : 'none' }}; position: absolute; bottom: 10px; gap: 5px;
+                                    justify-content: center; align-items: center;">
+                                                                    <i class="bi bi-x-circle me-auto"
+                                                                        style="color: black; font-size: 18px;"
+                                                                        onclick="admin_edit_user_deleteImage({{ $user->id }})"></i>
+                                                                    <i class="bi bi-plus-circle ms-auto"
+                                                                        onclick="admin_edit_user_triggerFileInput({{ $user->id }})"
+                                                                        style="color: black; font-size: 18px;"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="alert alert-danger" style="display:none;"></div>
+{{-- 
+                                                        <div class="row mb-3">
+                                                            <label for="dealershipName"
+                                                                class="col-sm-4 col-form-label">Dealership Name*</label>
+                                                            <div class="col-sm-8 pe-0">
+                                                                <select name="dealershipName" class="form-select"
+                                                                    style="color:#281F48;background-color:white;border:1px solid #281F48;text-align:center">
+                                                                    @foreach ($dealershipNames as $dealershipName)
+                                                                        <option value="{{ $dealershipName }}"
+                                                                            {{ $user->dealershipName == $dealershipName ? 'selected' : '' }}>
+                                                                            {{ $dealershipName }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div> --}}
+
+                                                        <div class="row mb-3">
+                                                            <label for="fullName" class="col-sm-4 col-form-label">Full
+                                                                Name*</label>
+                                                            <div class="col-sm-8 pe-0">
+                                                                <input type="text" class="form-control" name="name"
+                                                                    value="{{ $user->name }}"
+                                                                    placeholder="Enter full name">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row mb-3">
+                                                            <label class="col-sm-4 col-form-label">Phone*</label>
+                                                            <div class="col-sm-8 pe-0">
+                                                                <input type="text" class="form-control" name="number"
+                                                                    value="{{ $user->number }}"
+                                                                    placeholder="Enter phone">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row mb-3">
+                                                            <label class="col-sm-4 col-form-label">Email*</label>
+                                                            <div class="col-sm-8 pe-0">
+                                                                <input type="email" class="form-control" name="email"
+                                                                    value="{{ $user->email }}"
+                                                                    placeholder="Enter email">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row mb-3">
+                                                            <label class="col-sm-4 col-form-label">Status*</label>
+                                                            <div class="col-sm-8 pe-0">
+                                                                <select name="status" class="form-select"
+                                                                    style="color:#281F48;background-color:white;border:1px solid #281F48;text-align:center">
+                                                                    <option value="active"
+                                                                        {{ $user->status == 'active' ? 'selected' : '' }}>
+                                                                        Active</option>
+                                                                    <option value="inactive"
+                                                                        {{ $user->status == 'inactive' ? 'selected' : '' }}>
+                                                                        Inactive</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="modal-footer justify-content-center border-0 p-0 pb-3">
+                                                    <button type="button" class="btn btn-light px-4 py-2 "
+                                                        style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                                                        data-bs-dismiss="modal">Cancel</button>
+                                                    <button type="submit" class="btn btn-light px-4 py-2 "
+                                                        style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Update</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!-- Delete User Modal -->
+                                <div class="modal fade" id="deleteModal{{ $user->id }}" tabindex="-1"
+                                    aria-labelledby="deleteModalLabel{{ $user->id }}" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
+                                            <form method="POST"
+                                                action="{{ route('superadmin.user.destroy', $user->id) }}">
+                                                @csrf
+                                                <input type="hidden" name="deleted_id" value="{{ $user->id }}">
+
+                                                @method('DELETE')
+                                                <div class="modal-header"
+                                                    style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                                                    <h5 class="modal-title" id="deleteModalLabel{{ $user->id }}">
+                                                        <strong>Confirm Deletion</strong>
+                                                    </h5>
+                                                    <button type="button" class="btn-close"
+                                                        style="background-color: #D9D9D9 !important; color: #FD5631;"
+                                                        data-bs-dismiss="modal"></button>
+                                                </div>
+                                                <div class="modal-body text-center"
+                                                    style="background-color: #F0F3F6; color: #FD5631;">
+                                                    Are you sure you want to delete user
+                                                    <strong>{{ $user->name }}</strong>?
+                                                </div>
+                                                <div class="modal-footer justify-content-center border-0 p-0 pb-3">
+                                                    <button type="button" class="btn btn-light px-4 py-2 "
+                                                        style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                                                        data-bs-dismiss="modal">Cancel</button>
+                                                    <button type="submit" class="btn btn-light px-4 py-2 "
+                                                        style="background-color: white; font-weight:600; color: #281F48; border-radius: 5px;">Yes,
+                                                        Delete</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="private-seller" role="tabpanel">
                 <div class="table-container">
                     <table class="table table-striped align-middle datatable12" style="min-width: 1000px;">
                         <thead>
@@ -146,7 +377,8 @@
                                                     style="background-color: #D9D9D9 !important; color: #FD5631;"
                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <form method="post" action="{{ route('superadmin.user.update', $user->id) }}"
+                                            <form method="post"
+                                                action="{{ route('superadmin.user.update', $user->id) }}"
                                                 enctype="multipart/form-data">
                                                 @csrf
                                                 @method('PUT')
@@ -166,7 +398,8 @@
 
                                                                 <input type="file"
                                                                     id="admin_edit_user_profileimg{{ $user->id }}"
-                                                                    accept="image/*" style="display: none;" name="image">
+                                                                    accept="image/*" style="display: none;"
+                                                                    name="image">
 
                                                                 <label
                                                                     id="admin_edit_user_dropzoneLabel{{ $user->id }}"

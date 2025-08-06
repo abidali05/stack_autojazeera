@@ -98,77 +98,81 @@
                     {{-- Ads Tab --}}
                     <div class="tab-pane fade show active" id="tab1" role="tabpanel">
                         <div class="table-responsive ">
-							
-							@if(!empty($ads_invoices))
-                            <table class="table table-striped transparent-table align-middle datatable">
-                                <thead>
-                                    <tr>
-                                        <th>S.No</th>
-                                        <th>Plan</th>
-                                        <th>Start Date</th>
-                                        <th>End Date</th>
-                                        <th>Price</th>
-                                        <th>Cancelled Date</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($ads_invoices as $i => $invoice)
-                                        @php
-                                            $productId = $invoice->lines->data[0]->price->product ?? null;
-                                            $sub = $subscriptions[$invoice->subscription] ?? null;
-                                            $now = \Carbon\Carbon::now()->timestamp;
-                                            $isExpired =
-                                                $sub && $sub->status !== 'canceled' && $sub->current_period_end < $now;
-                                        @endphp
-                                        <tr>
-                                            <td>{{ $i + 1 }}</td>
-                                            <td>{{ $products[$productId]->name ?? 'Plan' }}  {{ $products[$productId]->metadata->is_free == '0' && $invoice->amount_paid == 0 ? '( Trial)' : ''}}</td>
-                                            <td>{{ \Carbon\Carbon::createFromTimestamp($invoice->created)->format('d M Y') }}
-                                            </td>
-                                            <td>
-                                                {{ $sub && $sub->current_period_end ? \Carbon\Carbon::createFromTimestamp($sub->current_period_end)->format('d M Y') : 'N/A' }}
-                                            </td>
-                                            <td>{{ strtoupper($invoice->currency) }}
-                                                {{ number_format($invoice->amount_paid / 100, 2) }} </td>
-                                            <td>
-                                                {{ $sub && $sub->canceled_at ? \Carbon\Carbon::createFromTimestamp($sub->canceled_at)->format('d M Y') : '' }}
-                                            </td>
-                                            <td>
-                                                @if ($sub && $sub->status === 'trialing')
-                                                    <span class="badge bg-info">Trial (Ends
-                                                        {{ \Carbon\Carbon::createFromTimestamp($sub->trial_end)->format('d M Y') }})</span>
-                                                @elseif ($sub && $sub->status === 'active' && !$sub->cancel_at && !$isExpired)
-                                                    <span class="badge bg-success">Active</span>
-                                                @elseif ($sub && $sub->status === 'canceled')
-                                                    <span class="badge bg-danger">Cancelled</span>
-                                                @elseif ($isExpired)
-                                                    <span class="badge bg-secondary">Ended</span>
-                                                @else
-                                                    <span class="badge bg-warning text-dark">Unknown</span>
-                                                @endif
 
-                                            </td>
-                                            <td>
-                                                @if ($sub && $sub->status === 'trialing')
-                                                    <span>
-                                                        N/A
-                                                    </span>
-                                                @else
-                                                    <a href="{{ route('downloadInvoice', $invoice->id) }}"
-                                                        target="_blank">View Invoice</a>
-                                                @endif
-                                            </td>
+                            @if (!empty($ads_invoices))
+                                <table class="table table-striped transparent-table align-middle datatable">
+                                    <thead>
+                                        <tr>
+                                            <th>S.No</th>
+                                            <th>Plan</th>
+                                            <th>Start Date</th>
+                                            <th>End Date</th>
+                                            <th>Price</th>
+                                            <th>Cancelled Date</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
                                         </tr>
-                                  @endforeach
-                                </tbody>
-                            </table>
-					@endif
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($ads_invoices as $i => $invoice)
+                                            @php
+                                                $productId = $invoice->lines->data[0]->price->product ?? null;
+                                                $sub = $subscriptions[$invoice->subscription] ?? null;
+                                                $now = \Carbon\Carbon::now()->timestamp;
+                                                $isExpired =
+                                                    $sub &&
+                                                    $sub->status !== 'canceled' &&
+                                                    $sub->current_period_end < $now;
+                                            @endphp
+                                            <tr>
+                                                <td>{{ $i + 1 }}</td>
+                                                <td>{{ $products[$productId]->name ?? 'Plan' }}
+                                                    {{ $products[$productId]->metadata->is_free == '0' && $invoice->amount_paid == 0 ? '( Trial)' : '' }}
+                                                </td>
+                                                <td>{{ \Carbon\Carbon::createFromTimestamp($invoice->created)->format('d M Y') }}
+                                                </td>
+                                                <td>
+                                                    {{ $sub && $sub->current_period_end ? \Carbon\Carbon::createFromTimestamp($sub->current_period_end)->format('d M Y') : 'N/A' }}
+                                                </td>
+                                                <td>{{ strtoupper($invoice->currency) }}
+                                                    {{ number_format($invoice->amount_paid / 100, 2) }} </td>
+                                                <td>
+                                                    {{ $sub && $sub->canceled_at ? \Carbon\Carbon::createFromTimestamp($sub->canceled_at)->format('d M Y') : '' }}
+                                                </td>
+                                                <td>
+                                                    @if ($sub && $sub->status === 'trialing')
+                                                        <span class="badge bg-info">Trial (Ends
+                                                            {{ \Carbon\Carbon::createFromTimestamp($sub->trial_end)->format('d M Y') }})</span>
+                                                    @elseif ($sub && $sub->status === 'active' && !$sub->cancel_at && !$isExpired)
+                                                        <span class="badge bg-success">Active</span>
+                                                    @elseif ($sub && $sub->status === 'canceled')
+                                                        <span class="badge bg-danger">Cancelled</span>
+                                                    @elseif ($isExpired)
+                                                        <span class="badge bg-secondary">Ended</span>
+                                                    @else
+                                                        <span class="badge bg-warning text-dark">Unknown</span>
+                                                    @endif
+
+                                                </td>
+                                                <td>
+                                                    @if ($sub && $sub->status === 'trialing')
+                                                        <span>
+                                                            N/A
+                                                        </span>
+                                                    @else
+                                                        <a href="{{ route('downloadInvoice', $invoice->id) }}"
+                                                            target="_blank">View Invoice</a>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            @endif
                         </div>
                     </div>
 
-                    
+
 
                 </div>
 
