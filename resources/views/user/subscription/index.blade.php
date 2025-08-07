@@ -514,30 +514,44 @@
                                                 </div>
 
                                                 {{-- Bottom Button --}}
-                                                {{-- <div class="mt-auto">
+                                                
+                                                <div class="mt-auto">
                                                     @if ($plan->id == Auth::user()->shop_package)
                                                         <button class="btnsub" style="background-color: #f4000079"
                                                             id="btn1-1" disabled>Already Purchased</button>
                                                     @else
-                                                        <button class="btnsub" style="background-color: #F40000"
-                                                            id="btn1-1"
-                                                            onclick="openModal('{{ $plan->id }}', {{ $plan->price }}, 'service'); changeText(this);">Choose
-                                                            plan</button>
-                                                    @endif
-                                                </div> --}}
-
-                                                <div class="mt-auto">
-                                                    @if ($ads_plan->id == Auth::user()->shop_package)
-                                                        <button class="btnsub" style="background-color: #f4000079"
-                                                            id="btn1-1" disabled>Already Purchased</button>
-                                                    @else
-                                                        @if ($loop->first && Auth::user()->trial_availed == 0)
+                                                        @if ($loop->first && Auth::user()->shop_trial_availed == 0)
                                                             <form action="{{ route('payment.start.trial') }}" method="POST"
                                                                 id="trial-form-{{ $ads_plan->id }}">
                                                                 @csrf
                                                                 <input type="hidden" name="plan_id"
                                                                     value="{{ $ads_plan->id }}">
-                                                                <input type="hidden" name="sub_type" value="ads">
+                                                                <input type="hidden" name="sub_type" value="service">
+                                                                <button type="submit" class="btnsub"
+                                                                    style="background-color: #F40000" id="btn1-1"
+                                                                    onclick="changeText(this);">Start Trial</button>
+                                                            </form>
+                                                        @else
+                                                        <button class="btnsub" style="background-color: #F40000"
+                                                            id="btn1-1"
+                                                            onclick="openModal('{{ $plan->id }}', {{ $plan->price }}, 'service'); changeText(this);">Choose
+                                                            plan</button>
+                                                    @endif
+                                                    @endif
+                                                </div>
+
+                                                {{-- <div class="mt-auto">
+                                                    @if ($ads_plan->id == Auth::user()->shop_package)
+                                                        <button class="btnsub" style="background-color: #f4000079"
+                                                            id="btn1-1" disabled>Already Purchased</button>
+                                                    @else
+                                                        @if ($loop->first && Auth::user()->shop_trial_availed == 0)
+                                                            <form action="{{ route('payment.start.trial') }}" method="POST"
+                                                                id="trial-form-{{ $ads_plan->id }}">
+                                                                @csrf
+                                                                <input type="hidden" name="plan_id"
+                                                                    value="{{ $ads_plan->id }}">
+                                                                <input type="hidden" name="sub_type" value="service">
                                                                 <button type="submit" class="btnsub"
                                                                     style="background-color: #F40000" id="btn1-1"
                                                                     onclick="changeText(this);">Start Trial</button>
@@ -545,11 +559,11 @@
                                                         @else
                                                             <button class="btnsub" style="background-color: #F40000"
                                                                 id="btn1-1"
-                                                                onclick="openModal('{{ $ads_plan->id }}', {{ $ads_plan->price }}, 'ads'); changeText(this);">Choose
+                                                                onclick="openModal('{{ $ads_plan->id }}', {{ $ads_plan->price }}, 'service'); changeText(this);">Choose
                                                                 plan</button>
                                                         @endif
                                                     @endif
-                                                </div>
+                                                </div> --}}
 
                                             </div>
                                         </div>
