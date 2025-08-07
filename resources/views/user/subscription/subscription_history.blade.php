@@ -59,6 +59,14 @@
         .nav-link:active {
             color: #ffffff !important;
         }
+
+        .bike-column-search {
+            width: 90px;
+            font-size: 10px;
+            border: 1px solid #D9D9D9;
+            border-radius: 2px;
+            padding: 2px;
+        }
     </style>
 
     <div class="container my-3">
@@ -100,7 +108,7 @@
                         <div class="table-responsive ">
 
                             @if (!empty($ads_invoices))
-                                <table class="table table-striped transparent-table align-middle datatable">
+                                <table class="table table-striped transparent-table align-middle subscription-datatable">
                                     <thead>
                                         <tr>
                                             <th>S.No</th>
@@ -171,9 +179,6 @@
                             @endif
                         </div>
                     </div>
-
-
-
                 </div>
 
             </div>
@@ -194,6 +199,56 @@
                     this.classList.add('active');
                     this.style.backgroundColor = '#281F48';
                     this.style.color = '#ffffff';
+                });
+            });
+        });
+
+        $(document).ready(function() {
+            $('.subscription-datatable').each(function() {
+                var table = $(this).DataTable({
+                    paging: true,
+                    pageLength: 25,
+                    lengthChange: false,
+                    searching: true,
+                    ordering: true,
+                    scrollX: false,
+                    order: [
+                        [0, 'asc']
+                    ],
+                    language: {
+                        search: "Search: "
+                    },
+                    dom: `
+  <"search-wrapper mb-3"f>
+  <"pagination-wrapper d-flex justify-content-between align-items-center mb-3"i p>
+  rt
+  <"pagination-wrapper d-flex justify-content-between align-items-center mt-3"i p>
+  <"clear">
+`
+                });
+
+                // Add search row
+
+                $(this).find('thead').append('<tr class="search-row"></tr>');
+
+                $(this).find('thead th').each(function(index) {
+                    var title = $(this).text().trim();
+                    var searchHtml = '';
+
+                    if (['Plan', 'Start Date', 'End Date', 'Price', 'Cancelled Date','Status']
+                        .includes(title)) {
+                        searchHtml = '<input type="text" placeholder="Search ' + title +
+                            '" class="bike-column-search"/>';
+                    }
+
+                    $(this).closest('thead').find('.search-row').append('<th>' + searchHtml +
+                        '</th>');
+                });
+
+                // Apply search functionality
+                $(this).find('.search-row input, .search-row select').on('keyup change', function() {
+                    var columnIndex = $(this).closest('th').index();
+                    table.column(columnIndex).search(this.value).draw();
                 });
             });
         });

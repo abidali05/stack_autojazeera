@@ -522,10 +522,10 @@
                                                     @else
                                                         @if ($loop->first && Auth::user()->shop_trial_availed == 0)
                                                             <form action="{{ route('payment.start.trial') }}" method="POST"
-                                                                id="trial-form-{{ $ads_plan->id }}">
+                                                                id="trial-form-{{ $plan->id }}">
                                                                 @csrf
                                                                 <input type="hidden" name="plan_id"
-                                                                    value="{{ $ads_plan->id }}">
+                                                                    value="{{ $plan->id }}">
                                                                 <input type="hidden" name="sub_type" value="service">
                                                                 <button type="submit" class="btnsub"
                                                                     style="background-color: #F40000" id="btn1-1"
