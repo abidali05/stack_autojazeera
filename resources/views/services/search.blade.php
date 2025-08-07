@@ -1593,7 +1593,7 @@
                                         <p>No matches found for your search. Try adjusting your filters or expanding your
                                             criteria
                                             to
-                                            explore available Shop!</p>
+                                            explore available Shop!<br> Note : Calling all private sellers, dealers and auto service providers! We’re now onboarding new inventory and businesses. Join early and boost your visibility.</p>
 
                                     </div>
                                 </div>
