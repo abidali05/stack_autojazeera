@@ -1590,6 +1590,7 @@
                                     </div>
                                     <div class="col-md-9 text-start">
                                         <h1 style="color:#FD5631">Sorry</h1>
+
                                         <p>Sorry
                                             No matches found for your search. Try adjusting your filters or expanding your
                                             criteria to explore available Shop!

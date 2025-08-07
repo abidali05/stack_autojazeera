@@ -1118,9 +1118,11 @@
                         </div>
 
                         ${isSender ? `
-                                        <img src="${authUserImage}" class="chat-avatar ms-2" 
-                                            style="height: 45px; width: 45px; border-radius: 50%;" 
-                                            alt="You">
+                                  <img src="${authUserImage ? authUserImage : base_url + '/web/images/Avatar.svg'}" 
+     class="chat-avatar ms-2" 
+     style="height: 45px; width: 45px; border-radius: 50%;" 
+     alt="You">
+
                                     ` : ''}
                     </div>`;
 

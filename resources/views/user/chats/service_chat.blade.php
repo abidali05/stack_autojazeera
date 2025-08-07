@@ -900,10 +900,15 @@ document.getElementById("containerchatslist").classList.add('d-none');
                             const messageHtml = `
                     <div class="message-container ${isSender ? 'sent' : 'received'}" id="message-${doc.id}" data-message-id="${doc.id}" data-reply_meta_data="${JSON.stringify(msg.metadata ?? null)}">
                         ${!isSender ? `
-                                                                                                                        <img src="${receiverImage}" class="chat-avatar me-2" 
-                                                                                                                            style="height: 45px; width: 45px; border-radius: 50%;" 
-                                                                                                                            alt="Receiver">
-                                                                                                                    ` : ''}
+                                                  
+                 <img src="${receiverImage ? receiverImage : '/web/images/Avatar.svg'}" 
+     class="chat-avatar me-2" 
+     style="height: 45px; width: 45px; border-radius: 50%;" 
+     alt="Receiver">
+
+
+                                         
+                        ` : ''}
 
                         <div class="${messageClass} p-3 rounded-3 position-relative" 
                              oncontextmenu="showMessageContextMenu(event, '${doc.id}', ${isSender}, '${msg.message?.replace(/'/g, "\\'")}', '${msg.sender.name?.replace(/'/g, "\\'")}', '${msg.attachment ?? null}', '${JSON.stringify(msg.meta_data ?? null).replace(/"/g, '&quot;')}'); return false;"

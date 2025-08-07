@@ -574,7 +574,7 @@
                     </div>
                     @auth
                         <div class="d-flex align-items-center ms-3">
-                            <img src="{{ Auth::user()->image ? asset('web/profile/' . Auth::user()->image) : asset('web/images/avatar.png') }}"
+                            <img src="{{ Auth::user()->image ? asset('web/profile/' . Auth::user()->image) : asset('web/images/Avatar.svg') }}"
                                 class="rounded-circle me-2" alt="User" width="40" height="40">
 
                             <div>

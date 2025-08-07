@@ -265,13 +265,13 @@
 
                     <!-- Single Modal sdfdsfdsf -->
                     <div class="modal fade" id="photoModal" data-bs-backdrop="static" data-bs-keyboard="false"
-                        tabindex="-1" aria-labelledby="photoModalLabel" aria-hidden="true">
+                        tabindex="-1" aria-labelledby="photoModalLabel" aria-hidden="true" style="background-color: #F0F3F6 !important;">
 
-                        <div class="modal-dialog modal-dialog-centered modal-fullscreen">
-                            <div class="modal-content"
-                                style="border-radius: 12px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);">
+                         <div class="modal-dialog modal-dialog-centered" style="max-width: 100%; height: 100vh;background-color: #F0F3F6 !important;" >
+                            <div class="modal-content "
+                                style="border-radius: 12px;  border: none; background-color: #F0F3F6 !important;">
                                 <div class="modal-body text-center p-4"
-                                    style="border-radius: 12px; background: #1F1B2D; position: relative;">
+                                    style="border-radius: 12px;  position: relative;">
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                                         style="position: absolute; top: 15px; right: 15px; z-index:1"></button>
 
@@ -310,6 +310,41 @@
                                             </div>
                                         @endforeach
                                     </div>
+                                          <div class="row">
+                            <div class="col-12 mt-3">
+                                <!-- Call Button -->
+                                <a href="tel:{{ $post->dealer->number }}"
+                                    class="btn custom-btn-3 {{ isset($post->dealer->number) ? '' : 'd-none' }}">
+                                    <i class="bi bi-telephone me-1"></i> Call
+                                </a>
+                                <!-- WhatsApp Button -->
+                                <a href="https://wa.me/{{ $post->dealer->number }}"
+                                    class="btn custom-btn-3 {{ isset($post->dealer->number) ? '' : 'd-none' }}"
+                                    target="_blank">
+                                    <i class="bi bi-whatsapp me-1"></i> WhatsApp
+                                </a>
+                                <!-- Share Button -->
+
+                                <button class="btn custom-btn-3 "
+                                    data-url="{{ route('cardetail', ['id' => $post->id]) }}" onclick="shareLink()">
+                                    <i class="bi bi-share me-1"></i> Share
+                                </button>
+                                @auth
+                                    <button class="btn custom-btn-3 "
+                                        onclick="createOrOpenChat({{ $post->id }}, {{ $post->dealer_id }})">
+                                        <i class="bi bi-chat me-1"></i> Chat
+                                    </button>
+                                @endauth
+
+                                @guest
+                                    <a href="{{ url('login') }}" class="btn custom-btn-3 ">
+                                        <i class="bi bi-chat me-1"></i> Chat
+                                    </a>
+                                @endguest
+
+
+                            </div>
+                        </div>
                                 </div>
                             </div>
                         </div>
@@ -639,8 +674,11 @@
                             <div class="d-flex align-items-center">
                                 <!-- Dealer Image -->
                                 <div class="profile-image">
-                                    <img src="{{ isset($post->dealer->image) ? asset('web/profile/' . $post->dealer->image) : asset('web/images/logo version.svg') }}"
-                                        alt="Dealer Image">
+                                  <img src="{{ !empty($post->dealer->image) ? asset('web/profile/' . $post->dealer->image) : asset('web/images/Avatar.svg') }}"
+     alt="Dealer Image"
+     class="rounded-circle"
+     style="width: 80px; height: 80px;">
+
                                 </div>
 
                                 <!-- Dealer Name and Designation -->
@@ -792,6 +830,25 @@
             <div class="container mt-2">
                 <div id="adsCarousel" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
+                           @if (count($posts) == 0)
+                        <div class="col-md-12">
+                            <div class="row d-flex mt-5 justify-content-center my-3">
+                                <div class="p-3 col-8" style="border:1px solid #281F48;border-radius:9px;">
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-3">
+                                            <img src="{{ asset('web/images/noinputs.svg') }}" alt=""
+                                                class="img-fluid" srcset="">
+                                        </div>
+                                        <div class="col-9 text-start">
+
+                                            <p class="m-0">No Similar Ads found </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                         @foreach ($posts->chunk(3) as $chunkIndex => $chunk)
                             <div class="carousel-item {{ $chunkIndex === 0 ? 'active' : '' }}">
                                 <div class="row">
