@@ -1590,11 +1590,14 @@
                                     </div>
                                     <div class="col-md-9 text-start">
                                         <h1 style="color:#FD5631">Sorry</h1>
-                                        <p>No matches found for your search. Try adjusting your filters or expanding your
-                                            criteria
-                                            to
-                                            explore available Shop!<br> Note : Calling all private sellers, dealers and auto service providers! We’re now onboarding new inventory and businesses. Join early and boost your visibility.</p>
 
+                                        <p>Sorry
+                                            No matches found for your search. Try adjusting your filters or expanding your
+                                            criteria to explore available Shop!
+
+                                            Note : Calling all private sellers, dealers and auto service providers! We’re
+                                            now onboarding new inventory and businesses. Join early and boost
+                                            your visibility.</p>
                                     </div>
                                 </div>
                             </div>
@@ -2209,8 +2212,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-7">
-                                              <img src="{{ asset('web/images/service_quotes.svg') }}"
-                                                        class="img-fluid" alt="...">
+                                                <img src="{{ asset('web/images/service_quotes.svg') }}"
+                                                    class="img-fluid" alt="...">
                                             </div>
                                         </div>
                                     </div>
@@ -2247,8 +2250,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-7">
-                                               <img src="{{ asset('web/images/service_quotes.svg') }}"
-                                                        class="img-fluid" alt="...">
+                                                <img src="{{ asset('web/images/service_quotes.svg') }}"
+                                                    class="img-fluid" alt="...">
                                             </div>
                                         </div>
                                     </div>

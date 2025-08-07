@@ -158,7 +158,6 @@ class SuperadminSubscriptionController extends Controller
 
             $subscriptions = Subscription::all([
                 'customer' => $customer->id,
-                'status' => 'active',
                 'limit' => 100,
                 // 'expand' => ['data.items.data.price.product']
             ])->data;

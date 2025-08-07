@@ -150,8 +150,6 @@ class PaymentController extends Controller
 
                         SendFcmNotification::sendPriceAlertNotification($fcm_tokens, ['title' => 'Trial Started', 'body' => 'Your trial has started for ' . $product->name]);
 
-
-
                         Notifications::create([
                             'user_id' => $user->id,
                             'title' => 'Trial Started',
@@ -168,8 +166,6 @@ class PaymentController extends Controller
                     if ($fcm_tokens) {
 
                         SendFcmNotification::sendPriceAlertNotification($fcm_tokens, ['title' => 'Subscribed Successfully', 'body' => 'You have successfully subscribed ' . $product->name]);
-
-
 
                         Notifications::create([
                             'user_id' => $user->id,
@@ -192,8 +188,6 @@ class PaymentController extends Controller
                     if ($fcm_tokens) {
 
                         SendFcmNotification::sendPriceAlertNotification($fcm_tokens, ['title' => 'Payment Failed', 'body' => 'Your payment has failed for ' . $product->name]);
-
-
 
                         Notifications::create([
                             'user_id' => Auth::user()->id,
@@ -220,103 +214,342 @@ class PaymentController extends Controller
             'sub_type' => 'required|in:ads,service',
         ]);
 
-        try {
-            Stripe::setApiKey(config('services.stripe.secret'));
-            $user = Auth::user();
-            $product = Product::retrieve($request->plan_id);
-            $priceId = $product->default_price;
-            $customer = $this->getOrCreateCustomer($user);
+        if (!Auth::user()) {
+            return redirect()->route('login')->with('error', 'Please log in first.');
+        }
 
-            // Verify trial eligibility
-            $meta = $product->metadata;
-            $trialAllowed = ($meta->trial_allowed ?? '0') === '1';
-            $days = $meta->trial_days ?? $meta->{'trial_days '} ?? null;
-            $isService = $request->sub_type === 'service';
-            $trialEligible = $isService ? $user->shop_trial_availed == 0 : $user->trial_availed == 0;
+        $user = Auth::user();
 
-            if (!$trialAllowed || !is_numeric($days) || !$trialEligible) {
-                return back()->with('paymentresponse', 'You are not eligible for a trial or this plan does not offer a trial.');
-            }
+        Stripe::setApiKey(config('services.stripe.secret'));
 
+        // Get the Stripe product
+        // dd($request->plan_id);
+
+        // prod_SOPoRKrKmt8OfG
+        $product = Product::retrieve($request->plan_id);
+        $priceId = $product->default_price;
+        $meta = $product->metadata ?? [];
+
+        // Extract trial days from metadata
+        $trialDays = isset($meta->trial_days) ? (int) trim($meta->trial_days) : 0;
+        // $trialAllowed = $trialDays > 0;
+
+        $trialAllowed = ($meta->trial_allowed ?? '0') === '1';
+        $trialDays = null;
+
+        $days = $meta->trial_days ?? $meta->{'trial_days '} ?? null;
+
+        $isService = $request->sub_type === 'service';
+        $trialEligible = $isService ? $user->shop_trial_availed == 0 : $user->trial_availed == 0;
+
+        if ($trialEligible && $trialAllowed && is_numeric($days)) {
             $trialDays = (int) $days;
+        }
 
-            // Cancel previous same-type subscriptions
-            $subscriptions = Subscription::all([
-                'customer' => $customer->id,
-                'status' => 'all',
-                'limit' => 100,
-            ]);
+        // Get or create Stripe customer
+        $customer = $this->getOrCreateCustomer($user);
 
-            foreach ($subscriptions->data as $sub) {
-                $subType = $sub->metadata['sub_type'] ?? null;
-                if (
-                    in_array($sub->status, ['active', 'trialing', 'past_due']) &&
-                    $subType === $request->sub_type
-                ) {
-                    $sub->cancel();
-                }
-            }
+        // Cancel all previous active subscriptions
+        $activeSubs = Subscription::all([
+            'customer' => $customer->id,
+            'status' => 'active',
+            'limit' => 100,
+        ]);
 
-            // Create Subscription with trial
+        foreach ($activeSubs->data as $sub) {
+            $sub->cancel();
+        }
+        $subscription = null;
+        // CASE 1: Ads Subscription Trial
+        if ($request->sub_type === 'ads' && $trialAllowed && $user->trial_availed == 0) {
+
             $subscription = Subscription::create([
                 'customer' => $customer->id,
                 'items' => [['price' => $priceId]],
-                'expand' => ['latest_invoice.payment_intent'],
+                'trial_end' => now()->addDays($trialDays)->timestamp,
                 'metadata' => [
                     'user_id' => $user->id,
-                    'sub_type' => $request->sub_type,
+                    'sub_type' => 'ads',
+                    'is_trial' => true,
                 ],
-                'collection_method' => 'charge_automatically',
-                'trial_end' => now()->addDays($trialDays)->timestamp,
-                'payment_behavior' => 'allow_incomplete',
             ]);
 
-            // Flag user trial status
-            if ($isService) {
-                $user->shop_trial_availed = 1;
-                $user->shop_package = $request->plan_id;
-                $shop = Shops::where('dealer_id', $user->id)->first();
-                if ($shop) {
-                    $shop->is_featured = ($meta->feature_allowed ?? '0') === '1' ? 1 : 0;
-                    $shop->save();
-                }
+            $user->package = $product->id;
+            $user->trial_availed = 1;
+            $user->role = 1;
+
+            if (($meta->type ?? '') === 'private_seller') {
+                $user->userType = 'private_seller';
+                $user->dealershipName = 'Private Seller';
             } else {
-                $user->trial_availed = 1;
-                $user->package = $request->plan_id;
-                $user->role = 1;
-                if (($meta->type ?? '') === 'private_seller') {
-                    $user->userType = 'private_seller';
-                    $user->dealershipName = 'Private Seller';
-                } else {
-                    $user->userType = 'car_dealer';
-                    $user->dealershipName = '';
-                }
+                $user->userType = 'car_dealer';
+                $user->dealershipName = '';
             }
+        }
 
-            $user->save();
+        // CASE 2: Service Subscription Trial
+        elseif ($request->sub_type === 'service' && $trialAllowed && $user->shop_trial_availed == 0) {
 
-            // Send notifications
-            Mail::to($user->email)->send(new TrialStarted($product));
-            if ($user->fcm_token) {
-                $fcm_tokens = [$user->fcm_token];
-                SendFcmNotification::sendPriceAlertNotification($fcm_tokens, [
-                    'title' => 'Trial Started',
-                    'body' => 'Your trial has started for ' . $product->name,
-                ]);
-                Notifications::create([
+            $subscription = Subscription::create([
+                'customer' => $customer->id,
+                'items' => [['price' => $priceId]],
+                'trial_end' => now()->addDays($trialDays)->timestamp,
+                'metadata' => [
                     'user_id' => $user->id,
-                    'title' => 'Trial Started',
-                    'body' => 'Your trial has started for ' . $product->name,
-                    'url' => url('subscription'),
-                ]);
-            }
+                    'sub_type' => 'service',
+                    'is_trial' => true,
+                ],
+            ]);
 
-            return back()->with('paymentresponse', 'Thanks for subscribing! Your trial has started for ' . $product->name);
-        } catch (\Exception $e) {
-            Log::error('Start Trial Error: ' . $e->getMessage());
-            return back()->with('paymentresponse', 'Failed to start trial: ' . $e->getMessage());
+            $user->shop_package = $product->id;
+            $user->shop_trial_availed = 1;
+        }
+
+        // Save updated user info
+        $user->save();
+
+        // Send email confirmation
+        Mail::to($user->email)->send(new SubscriptionBuy($product));
+
+        if ($subscription) {
+            return back()->with('paymentresponse', 'You have successfully subscribed to ' . $product->name);
+        } else {
+            return back()->with('paymenterror', 'There was a problem subscribing to ' . $product->name . '. Please try again or contact support.');
         }
     }
+
+    // public function startTrial(Request $request)
+    // {
+    //     Log::info('Start Trial Request Data: ', $request->all());
+
+    //     $request->validate([
+    //         'plan_id' => 'required|string',
+    //         'sub_type' => 'required|in:ads,service',
+    //     ]);
+
+    //     if (!Auth::user()) {
+    //         return redirect()->route('login')->with('error', 'Please log in first.');
+    //     }
+
+    //     try {
+    //         $user = Auth::user();
+    //         \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
+
+    //         // Get plan and metadata
+    //         $product = \Stripe\Product::retrieve($request->plan_id);
+    //         $meta = $product->metadata ?? [];
+    //         $priceId = $product->default_price;
+
+    //         $trialAllowed = ($meta->trial_allowed ?? '0') === '1';
+    //         $trialDays = null;
+    //         $days = $meta->trial_days ?? $meta->{'trial_days '} ?? null;
+
+    //         $isService = $request->sub_type === 'service';
+    //         $trialEligible = $isService ? $user->shop_trial_availed == 0 : $user->trial_availed == 0;
+
+    //         if ($trialEligible && $trialAllowed && is_numeric($days)) {
+    //             $trialDays = (int) $days;
+    //         }
+
+    //         $customer = $this->getOrCreateCustomer($user);
+
+    //         // Cancel previous same-type subscriptions only
+    //         $subscriptions = \Stripe\Subscription::all([
+    //             'customer' => $customer->id,
+    //             'status' => 'all',
+    //             'limit' => 100,
+    //         ]);
+
+    //         foreach ($subscriptions->data as $sub) {
+    //             $subType = $sub->metadata['sub_type'] ?? null;
+    //             if (
+    //                 in_array($sub->status, ['active', 'trialing', 'past_due']) &&
+    //                 $subType === $request->sub_type
+    //             ) {
+    //                 $sub->cancel();
+    //             }
+    //         }
+
+    //         // Build subscription data
+    //         $subscriptionData = [
+    //             'customer' => $customer->id,
+    //             'items' => [['price' => $priceId]],
+    //             'metadata' => [
+    //                 'user_id' => $user->id,
+    //                 'sub_type' => $request->sub_type,
+    //                 'is_trial' => true,
+    //             ],
+    //         ];
+
+    //         if ($trialDays) {
+    //             $subscriptionData['trial_end'] = now()->addDays($trialDays)->timestamp;
+    //         }
+
+    //         $subscription = \Stripe\Subscription::create($subscriptionData);
+
+    //         // Update user flags
+    //         if ($trialDays) {
+    //             if ($isService) {
+    //                 $user->shop_trial_availed = 1;
+    //                 $user->shop_package = $product->id;
+
+    //                 // Feature flag
+    //                 $shop = Shops::where('dealer_id', $user->id)->first();
+    //                 if ($shop) {
+    //                     $shop->is_featured = ($meta->feature_allowed ?? '0') === '1' ? 1 : 0;
+    //                     $shop->save();
+    //                 }
+    //             } else {
+    //                 $user->trial_availed = 1;
+    //                 $user->package = $product->id;
+    //                 $user->role = 1;
+
+    //                 // Type check
+    //                 if (($meta->type ?? '') === 'private_seller') {
+    //                     $user->userType = 'private_seller';
+    //                     $user->dealershipName = 'Private Seller';
+    //                 } else {
+    //                     $user->userType = 'car_dealer';
+    //                     $user->dealershipName = '';
+    //                 }
+    //             }
+    //         }
+
+    //         $user->save();
+
+    //         // Notifications
+    //         if ($trialDays) {
+    //             // Mail::to($user->email)->send(new \App\Mail\TrialStarted($product));
+
+    //             // if ($user->fcm_token) {
+    //             //     $fcm_tokens = [$user->fcm_token];
+
+    //             //     SendFcmNotification::sendPriceAlertNotification($fcm_tokens, [
+    //             //         'title' => 'Trial Started',
+    //             //         'body' => 'Your trial has started for ' . $product->name,
+    //             //     ]);
+
+    //             //     Notifications::create([
+    //             //         'user_id' => $user->id,
+    //             //         'title' => 'Trial Started',
+    //             //         'body' => 'Your trial has started for ' . $product->name,
+    //             //         'url' => url('subscription'),
+    //             //     ]);
+    //             // }
+
+    //             return back()->with('paymentresponse', 'Thanks for subscribing! Your trial has started for ' . $product->name);
+    //         } else {
+    //             return back()->with('paymentresponse', 'Trial not available or already used.');
+    //         }
+    //     } catch (\Exception $e) {
+    //         Log::error('Start Trial Error: ' . $e->getMessage());
+    //         return back()->with('paymentresponse', 'Failed to start trial: ' . $e->getMessage());
+    //     }
+    // }
+
+
+    // public function startTrial(Request $request)
+    // {
+    //     Log::info('Start Trial Request Data: ', $request->all());
+
+    //     $request->validate([
+    //         'plan_id' => 'required|string',
+    //         'sub_type' => 'required|in:ads,service',
+    //     ]);
+
+    //     try {
+    //         Stripe::setApiKey(config('services.stripe.secret'));
+    //         $user = Auth::user();
+    //         $product = Product::retrieve($request->plan_id);
+    //         $priceId = $product->default_price;
+    //         $customer = $this->getOrCreateCustomer($user);
+
+    //         // Verify trial eligibility
+    //         $meta = $product->metadata;
+
+    //         $days = $meta->trial_days ?? $meta->{'trial_days '} ?? null;
+
+    //         $isService = $request->sub_type === 'service';
+
+    //         $trialDays = max(30, (int) $days);
+
+    //         // Cancel previous same-type subscriptions
+    //         $subscriptions = Subscription::all([
+    //             'customer' => $customer->id,
+    //             'status' => 'all',
+    //             'limit' => 100,
+    //         ]);
+
+    //         foreach ($subscriptions->data as $sub) {
+    //             $subType = $sub->metadata['sub_type'] ?? null;
+    //             if (
+    //                 in_array($sub->status, ['active', 'trialing', 'past_due']) &&
+    //                 $subType === $request->sub_type
+    //             ) {
+    //                 $sub->cancel();
+    //             }
+    //         }
+
+    //         // Create Subscription with trial
+    //         $subscription = Subscription::create([
+    //             'customer' => $customer->id,
+    //             'items' => [['price' => $priceId]],
+    //             'expand' => ['latest_invoice.payment_intent'],
+    //             'metadata' => [
+    //                 'user_id' => $user->id,
+    //                 'sub_type' => $request->sub_type,
+    //             ],
+    //             'collection_method' => 'charge_automatically',
+    //             'trial_end' => now()->addDays($trialDays)->timestamp,
+    //             'payment_behavior' => 'allow_incomplete',
+    //         ]);
+
+    //         // Flag user trial status
+    //         if ($isService) {
+    //             $user->shop_trial_availed = 1;
+    //             $user->shop_package = $request->plan_id;
+    //             $shop = Shops::where('dealer_id', $user->id)->first();
+    //             if ($shop) {
+    //                 $shop->is_featured = ($meta->feature_allowed ?? '0') === '1' ? 1 : 0;
+    //                 $shop->save();
+    //             }
+    //         } else {
+    //             $user->trial_availed = 1;
+    //             $user->package = $request->plan_id;
+    //             $user->role = 1;
+    //             if (($meta->type ?? '') === 'private_seller') {
+    //                 $user->userType = 'private_seller';
+    //                 $user->dealershipName = 'Private Seller';
+    //             } else {
+    //                 $user->userType = 'car_dealer';
+    //                 $user->dealershipName = '';
+    //             }
+    //         }
+
+    //         $user->save();
+
+    //         // Send notifications
+    //         Mail::to($user->email)->send(new TrialStarted($product));
+    //         if ($user->fcm_token) {
+    //             $fcm_tokens = [$user->fcm_token];
+    //             SendFcmNotification::sendPriceAlertNotification($fcm_tokens, [
+    //                 'title' => 'Trial Started',
+    //                 'body' => 'Your trial has started for ' . $product->name,
+    //             ]);
+    //             Notifications::create([
+    //                 'user_id' => $user->id,
+    //                 'title' => 'Trial Started',
+    //                 'body' => 'Your trial has started for ' . $product->name,
+    //                 'url' => url('subscription'),
+    //             ]);
+    //         }
+
+    //         return back()->with('paymentresponse', 'Thanks for subscribing! Your trial has started for ' . $product->name);
+    //     } catch (\Exception $e) {
+    //         Log::error('Start Trial Error: ' . $e->getMessage());
+    //         return back()->with('paymentresponse', 'Failed to start trial: ' . $e->getMessage());
+    //     }
+    // }
 
     private function getOrCreateCustomer($user)
     {
