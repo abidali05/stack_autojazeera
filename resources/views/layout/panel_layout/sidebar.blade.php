@@ -4,43 +4,23 @@
         overflow-x: hidden;
     }
 
-   #sidebar {
-    position: static;
-    top: 0;
-    left: 0;
-    width: 200px;
-    height: 100vh;
-    background-color: #f8f9fa;
-    transition: all 0.3s ease;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    overflow-x: hidden;
-    overflow-y: scroll;
-}
+    #sidebar {
+        position: static;
+        top: 0;
+        left: 0;
+        width: 200px;
+        height: 100vh;
+        background-color: #f8f9fa;
+        transition: all 0.3s ease;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        overflow-x: hidden;
+        overflow-y: scroll;
 
-/* Custom scrollbar */
-#sidebar::-webkit-scrollbar {
-    width: 5px;
-}
 
-#sidebar::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-
-#sidebar::-webkit-scrollbar-thumb {
-    background-color: #999;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-}
-
-/* Optional: For Firefox */
-#sidebar {
-    scrollbar-width: thin;         /* "auto" or "thin" */
-    scrollbar-color: #281F48 #F4F4F4; /* thumb and track */
-}
-
+    }
 
     #sidebar.closed {
-        width: 60px;
+        width: 55px;
     }
 
     #sidebar::-webkit-scrollbar {
@@ -118,8 +98,8 @@
     }
 
     .imgheightfix {
-        height: 60px;
-        width: 140px;
+        height: 40px;
+        width: 120px;
     }
 
     .eighteenblue {
@@ -297,12 +277,12 @@
     <!-- Sidebar -->
     <div id="sidebar">
         <a id="sidebarLogo" class="navbar-brand d-flex justify-content-center " href="{{ route('dashboard') }}">
-            <img src="{{asset('web/bikes/images/logo.svg')}}" class="imgheightfix" alt="...">
+            <img src="{{ asset('web/images/Frame 1171275409.svg') }}" class="imgheightfix" alt="...">
         </a>
         <a href="{{ route('dashboard') }}"
             class="mt-3 d-flex align-items-baseline @if (request()->routeIs('dashboard')) active @endif">
             <span class="icon"><img src="{{ asset('web/images/Icon (1).svg') }}"
-                    style="height:25px !important ; width:25px !important; " alt="..."></span>
+                    style="height:20px !important ; width:20px !important; " alt="..."></span>
             <span class="text" style="   font-size: 12px;">Dashboard</span>
         </a>
 
@@ -316,7 +296,7 @@
                         style="height:20px !important ; width:20px !important;" class="me-2" alt="...">
                     Subscription
                 </span>
-                <i class="bi bi-chevron-compact-down toggle-icon"></i>
+                <i class="bi bi-chevron-down"></i>
             </a>
             <div class="collapse ps-4 {{ Request::is('subscription') || Request::is('subscription-history') ? 'show' : '' }}"
                 id="Subscription">
@@ -358,7 +338,7 @@
                     style="height:20px !important ; width:20px !important; " class=" me-2" alt="...">
                 <span class="m-0" style="font-size: 12px;">Submitted Leads</span>
             </span>
-            <i class="bi bi-chevron-compact-down toggle-icon"></i>
+            <i class="bi bi-chevron-down"></i>
         </a>
 
         <!-- Collapsed Menu -->
@@ -411,7 +391,7 @@
                     style="height:20px !important ; width:20px !important; " alt="...">
                 <span class="m-0" style="font-size: 12px;">Price alert</span>
             </span>
-            <i class="bi bi-chevron-compact-down toggle-icon"></i>
+            <i class="bi bi-chevron-down"></i>
         </a>
 
         <!-- Collapsed Menu -->
@@ -441,7 +421,7 @@
         <a class="nav-link {{ Request::is('chats') ? 'active' : '' }}" href="{{ url('chats') }}">
             <span class="d-flex align-items-center">
                 <img src="{{ asset('web/images/chats.svg') }}"
-                    style="height:20px !important ; width:20px !important; " class="me-2" alt="..."> Chats
+                    style="height:20px !important ; width:20px !important; " class="me-2" alt="..."> Ads Chats
             </span>
         </a>
         @if (!Auth::user()->shop_package)
@@ -469,7 +449,7 @@
                     style="height:20px !important ; width:20px !important; " class="img-fluid me-2" alt="...">
                 <span class="m-0" style="font-size: 12px;">Wishlist</span>
             </span>
-            <i class="bi bi-chevron-compact-down toggle-icon"></i>
+           <i class="bi bi-chevron-down"></i>
         </a>
 
         <!-- Collapsed Menu -->
@@ -519,10 +499,10 @@
             aria-controls="Systemee">
             <span class="d-flex align-items-center">
                 <img src="{{ asset('web/images/Shop.svg') }}"
-                    style="height:25px !important ; width:25px !important; " class="" alt="...">
+                    style="height:20px !important ; width:20px !important; " class="" alt="...">
                 <span style="font-size: 12px;">Manage Shop</span>
             </span>
-            <i class="bi bi-chevron-compact-down toggle-icon"></i>
+            <i class="bi bi-chevron-down"></i>
         </a>
 
         <!-- First Level Collapse: Manage Shop -->
@@ -547,7 +527,7 @@
                         style="height:20px !important ; width:20px !important; " class="me-2" alt="...">
                     Subscription
                 </span>
-                <i class="bi bi-chevron-compact-down toggle-icon"></i>
+               <i class="bi bi-chevron-down"></i>
             </a>
 
             <!-- Subscription Items -->
@@ -594,7 +574,8 @@
                 href="{{ url('service-chats') }}">
                 <span class="d-flex align-items-center">
                     <img src="{{ asset('web/images/chats.svg') }}"
-                        style="height:20px !important ; width:20px !important; " class="me-2" alt="..."> Chats
+                        style="height:20px !important ; width:20px !important; " class="me-2" alt="...">
+                    Service Chats
                 </span>
             </a>
 
@@ -627,7 +608,7 @@
         <a href="{{ url('personal-info') }}" class="{{ Request::is('personal-info') ? 'active' : '' }}">
             <span class="icon d-flex align-items-baseline">
                 <img src="{{ asset('web/images/Icon (Stroke).svg') }}"
-                    style="height:25px !important ; width:25px !important;" class="" alt="...">
+                    style="height:20px !important ; width:20px !important;" class="" alt="...">
             </span>
             <span class="text m-0 ms-2" style="font-size: 12px;">User Profile</span>
         </a>
@@ -639,7 +620,7 @@
             @csrf
             <button type="submit" class="btn btn-link text-decoration-none d-flex align-items-center">
                 <span class="icon m-0 d-flex align-items-baseline"><img src="{{ asset('web/images/logout.svg') }}"
-                        style="height:25px !important ; width:25px !important; " class=""
+                        style="height:20px !important ; width:20px !important; " class=""
                         alt="..."></span>
                 <span class="text m-0 ms-3" style="   font-size: 12px;font-weight:500 !important ">Logout</span>
             </button>
@@ -655,14 +636,14 @@
     <!-- Sidebar -->
     <div id="sidebar">
         <a id="sidebarLogo" class="navbar-brand d-flex justify-content-center" href="{{ route('dashboard') }}">
-            <img src="{{asset('web/bikes/images/logo.svg')}}" class="imgheightfix" alt="...">
+            <img src="{{ asset('web/images/Frame 1171275409.svg') }}" class="imgheightfix" alt="...">
         </a>
 
         <!-- Dashboard Link -->
         <a href="{{ route('dashboard') }}"
             class="mt-3 d-flex align-items-baseline @if (request()->routeIs('dashboard')) active @endif">
             <span class="icon"><img src="{{ asset('web/images/Icon (1).svg') }}"
-                    style="height:25px !important ; width:25px !important; " alt="..."></span>
+                    style="height:20px !important ; width:20px !important; " alt="..."></span>
             <span class="text" style="font-size: 12px;">Dashboard</span>
         </a>
 
@@ -743,7 +724,7 @@
                     {{ Auth::user()->userType == 'private_seller' ? 'My Account' : 'Manage Dealership' }}
                 </span>
             </span>
-            <i class="bi bi-chevron-compact-down toggle-icon"></i>
+            <i class="bi bi-chevron-down"></i>
         </a>
 
         <!-- Manage Dealership Submenu -->
@@ -767,7 +748,7 @@
                     <img src="{{ asset('web/images/Mask group.svg') }}"
                         style="height:20px !important ; width:20px !important; " class="me-2" alt="..."> Ads
                 </span>
-                <i class="bi bi-chevron-compact-down toggle-icon"></i>
+                <i class="bi bi-chevron-down"></i>
             </a>
             <div class="collapse ps-4 {{ $isAdsActive ? 'show' : '' }}" id="bikeSubmenu">
                 <a class="nav-link {{ request()->is(['ads', 'ads/*']) ? 'active' : '' }}"
@@ -797,7 +778,7 @@
                         style="height:20px !important ; width:20px !important; " class="me-2" alt="...">
                     Subscription
                 </span>
-                <i class="bi bi-chevron-compact-down toggle-icon"></i>
+                <i class="bi bi-chevron-down"></i>
             </a>
             <div class="collapse ps-4 {{ $isSubscriptionActive ? 'show' : '' }}" id="Subscription">
                 <a class="nav-link {{ request()->is(['subscription', 'subscription/*']) ? 'active' : '' }}"
@@ -834,7 +815,7 @@
                     <img src="{{ asset('web/images/customer.svg') }}"
                         style="height:20px !important ; width:20px !important; " class="me-2" alt="..."> Leads
                 </span>
-                <i class="bi bi-chevron-compact-down toggle-icon"></i>
+                <i class="bi bi-chevron-down"></i>
             </a>
             <div class="collapse ps-4 {{ $isLeadsActive ? 'show' : '' }}" id="busSubmenu">
                 <a class="nav-link {{ request()->is(['lead', 'lead/*']) ? 'active' : '' }}"
@@ -872,7 +853,7 @@
                         style="height:20px !important ; width:20px !important; " class="me-2" alt="...">
                     <span class="m-0" style="font-size: 12px;">Submitted Leads</span>
                 </span>
-                <i class="bi bi-chevron-compact-down toggle-icon"></i>
+               <i class="bi bi-chevron-down"></i>
             </a>
             <div class="collapse ps-4 {{ $isSubmittedLeadsActive ? 'show' : '' }}" id="Submitted">
                 <a class="nav-link {{ request()->is('submitted-forms') ? 'active' : '' }}"
@@ -912,7 +893,7 @@
                         style="height:20px !important ; width:20px !important; " alt="...">
                     <span class="m-0" style="font-size: 12px;">Price alert</span>
                 </span>
-                <i class="bi bi-chevron-compact-down toggle-icon"></i>
+               <i class="bi bi-chevron-down"></i>
             </a>
             <div class="collapse ps-4 {{ $isPriceAlertActive ? 'show' : '' }}" id="price">
                 <a class="nav-link {{ request()->is(['price-alert', 'price-alert/*']) ? 'active' : '' }}"
@@ -937,7 +918,8 @@
             <a class="nav-link {{ request()->is('chats') ? 'active' : '' }}" href="{{ url('chats') }}">
                 <span class="d-flex align-items-center">
                     <img src="{{ asset('web/images/chats.svg') }}"
-                        style="height:20px !important ; width:20px !important; " class="me-2" alt="..."> Chats
+                        style="height:20px !important ; width:20px !important; " class="me-2" alt="...">Ads
+                    Chats
                 </span>
             </a>
 
@@ -963,7 +945,7 @@
                         alt="...">
                     <span class="m-0" style="font-size: 12px;">Wishlist</span>
                 </span>
-                <i class="bi bi-chevron-compact-down toggle-icon"></i>
+               <i class="bi bi-chevron-down"></i>
             </a>
             <div class="collapse ps-4 {{ $isWishlistActive ? 'show' : '' }}" id="Wishlist">
                 <a class="nav-link {{ request()->is('whishlist') ? 'active' : '' }}"
@@ -1011,10 +993,10 @@
             aria-expanded="{{ $isManageShopActive ? 'true' : 'false' }}" aria-controls="Systemee">
             <span class="d-flex align-items-center">
                 <img src="{{ asset('web/images/Shop.svg') }}"
-                    style="height:25px !important ; width:25px !important; " class="" alt="...">
+                    style="height:20px !important ; width:20px !important; " class="" alt="...">
                 <span style="font-size: 12px;">Manage Shop</span>
             </span>
-            <i class="bi bi-chevron-compact-down toggle-icon"></i>
+            <i class="bi bi-chevron-down"></i>
         </a>
 
         <!-- Manage Shop Submenu -->
@@ -1037,7 +1019,7 @@
                         style="height:20px !important ; width:20px !important; " class="me-2" alt="...">
                     Subscription
                 </span>
-                <i class="bi bi-chevron-compact-down toggle-icon"></i>
+               <i class="bi bi-chevron-down"></i>
             </a>
             <div class="collapse ps-4 {{ $isSubscriptionActive ? 'show' : '' }}" id="ShopSubscription">
                 <a class="nav-link {{ request()->is(['subscription', 'subscription/*']) ? 'active' : '' }}"
@@ -1090,7 +1072,8 @@
                 href="{{ url('service-chats') }}">
                 <span class="d-flex align-items-center">
                     <img src="{{ asset('web/images/chats.svg') }}"
-                        style="height:20px !important ; width:20px !important; " class="me-2" alt="..."> Chats
+                        style="height:20px !important ; width:20px !important; " class="me-2"
+                        alt="...">Service Chats
                 </span>
             </a>
 
@@ -1120,7 +1103,7 @@
         <!-- User Profile -->
         <a href="{{ url('personal-info') }}" class="{{ request()->is('personal-info') ? 'active' : '' }}">
             <span class="icon d-flex align-items-baseline"><img src="{{ asset('web/images/Icon (Stroke).svg') }}"
-                    style="height:25px !important ; width:25px !important; " class="" alt="..."></span>
+                    style="height:20px !important ; width:20px !important; " class="" alt="..."></span>
             <span class="text m-0 ms-2" style="font-size: 12px;">User Profile</span>
         </a>
 
@@ -1129,7 +1112,7 @@
             @csrf
             <button type="submit" class="btn btn-link text-decoration-none d-flex align-items-center">
                 <span class="icon m-0 d-flex align-items-baseline"><img src="{{ asset('web/images/logout.svg') }}"
-                        style="height:25px !important ; width:25px !important; " class=""
+                        style="height:20px !important ; width:20px !important; " class=""
                         alt="..."></span>
                 <span class="text m-0 ms-3" style="font-size: 12px;font-weight:500 !important ">Logout</span>
             </button>
@@ -1151,12 +1134,12 @@
     <!-- Sidebar -->
     <div id="sidebar">
         <a id="sidebarLogo" class="navbar-brand d-flex justify-content-center" href="{{ route('dashboard') }}">
-            <img src="{{asset('web/bikes/images/logo.svg')}}" class="imgheightfix" alt="...">
+            <img src="{{ asset('web/images/Frame 1171275409.svg') }}" class="imgheightfix" alt="...">
         </a>
         <a href="{{ route('dashboard') }}"
             class="mt-3 d-flex align-items-baseline @if (request()->routeIs('dashboard')) active @endif">
             <span class="icon"><img src="{{ asset('web/images/Icon (1).svg') }}"
-                    style="height:25px !important ; width:25px !important; " alt="..."></span>
+                    style="height:20px !important ; width:20px !important; " alt="..."></span>
             <span class="text" style="   font-size: 12px;">Dashboard</span>
         </a>
 
@@ -1171,7 +1154,7 @@
                     style="height:20px !important ; width:20px !important; " class="me-2" alt="...">
                 Post An Ad
             </span>
-            <i class="bi bi-chevron-compact-down toggle-icon"></i>
+            <i class="bi bi-chevron-down"></i>
         </a>
         <div class="collapse ps-4 {{ in_array('post_ads', $userPermissions) ? '' : 'd-none' }}  {{ $isAdsActive ? 'show' : '' }}
             "
@@ -1206,7 +1189,7 @@
                     style="height:20px !important ; width:20px !important; " class="me-2" alt="...">
                 Ads
             </span>
-            <i class="bi bi-chevron-compact-down toggle-icon"></i>
+            <i class="bi bi-chevron-down"></i>
         </a>
         <div class="collapse ps-4 {{ in_array('manage_ads', $userPermissions) ? '' : 'd-none' }} {{ $isManageAdsActive ? 'show' : '' }}
             "
@@ -1238,7 +1221,7 @@
                 <img src="{{ asset('web/images/customer.svg') }}"
                     style="height:20px !important ; width:20px !important; " class="me-2" alt="..."> Leads
             </span>
-            <i class="bi bi-chevron-compact-down toggle-icon"></i>
+           <i class="bi bi-chevron-down"></i>
         </a>
         <div class="collapse ps-4 {{ in_array('view_leads', $userPermissions) ? '' : 'd-none' }} {{ $isLeadsActive ? 'show' : '' }}
             "
@@ -1271,14 +1254,14 @@
         <a class="nav-link {{ request()->is('chats') ? 'active' : '' }}" href="{{ url('chats') }}">
             <span class="d-flex align-items-center">
                 <img src="{{ asset('web/images/chats.svg') }}"
-                    style="height:20px !important ; width:20px !important; " class="me-2" alt="..."> Chats
+                    style="height:20px !important ; width:20px !important; " class="me-2" alt="...">Ads Chats
             </span>
         </a>
 
 
         <a href="{{ url('personal-info') }}" class="{{ request()->is('personal-info') ? 'active' : '' }}">
             <span class="icon d-flex align-items-baseline"><img src="{{ asset('web/images/Icon (Stroke).svg') }}"
-                    style="height:25px !important ; width:25px !important; " class="" alt="..."></span>
+                    style="height:20px !important ; width:20px !important; " class="" alt="..."></span>
             <span class="text m-0 ms-2" style="   font-size: 12px;">User Profile</span>
         </a>
 
@@ -1287,7 +1270,7 @@
             @csrf
             <button type="submit" class="btn btn-link text-decoration-none d-flex align-items-center">
                 <span class="icon m-0 d-flex align-items-baseline"><img src="{{ asset('web/images/logout.svg') }}"
-                        style="height:25px !important ; width:25px !important; " class=""
+                        style="height:20px !important ; width:20px !important; " class=""
                         alt="..."></span>
                 <span class="text m-0 ms-3" style="   font-size: 12px;font-weight:500 !important ">Logout</span>
             </button>
@@ -1300,12 +1283,12 @@
     <!-- Sidebar -->
     <div id="sidebar">
         <a id="sidebarLogo" class="navbar-brand d-flex justify-content-center" href="{{ route('dashboard') }}">
-            <img src="{{asset('web/bikes/images/logo.svg')}}" class="imgheightfix" alt="...">
+            <img src="{{ asset('web/images/Frame 1171275409.svg') }}" class="imgheightfix" alt="...">
         </a>
         <a href="{{ route('dashboard') }}"
             class="mt-3 d-flex align-items-baseline @if (request()->routeIs('dashboard')) active @endif">
             <span class="icon"><img src="{{ asset('web/images/Icon (1).svg') }}"
-                    style="height:25px !important ; width:25px !important; " alt="..."></span>
+                    style="height:20px !important ; width:20px !important; " alt="..."></span>
             <span class="text" style="   font-size: 12px;">Dashboard</span>
         </a>
 
@@ -1326,14 +1309,15 @@
             href="{{ url('service-chats') }}">
             <span class="d-flex align-items-center">
                 <img src="{{ asset('web/images/chats.svg') }}"
-                    style="height:20px !important ; width:20px !important; " class="me-2" alt="..."> Chats
+                    style="height:20px !important ; width:20px !important; " class="me-2" alt="...">Service
+                Chats
             </span>
         </a>
 
 
         <a href="{{ url('personal-info') }}" class="{{ request()->is('personal-info') ? 'active' : '' }}">
             <span class="icon d-flex align-items-baseline"><img src="{{ asset('web/images/Icon (Stroke).svg') }}"
-                    style="height:25px !important ; width:25px !important; " class="" alt="..."></span>
+                    style="height:20px !important ; width:20px !important; " class="" alt="..."></span>
             <span class="text m-0 ms-2" style="   font-size: 12px;">User Profile</span>
         </a>
 
@@ -1343,7 +1327,7 @@
             @csrf
             <button type="submit" class="btn btn-link text-decoration-none d-flex align-items-center">
                 <span class="icon m-0 d-flex align-items-baseline"><img src="{{ asset('web/images/logout.svg') }}"
-                        style="height:25px !important ; width:25px !important; " class=""
+                        style="height:20px !important ; width:20px !important; " class=""
                         alt="..."></span>
                 <span class="text m-0 ms-3" style="   font-size: 12px;font-weight:500 !important ">Logout</span>
             </button>
@@ -1363,12 +1347,12 @@
 
         if (collapseEl && icon) {
             collapseEl.addEventListener('show.bs.collapse', () => {
-                icon.classList.remove('bi-chevron-compact-down');
-                icon.classList.add('bi-chevron-compact-up');
+                icon.classList.remove('bi bi-chevron-down');
+                icon.classList.add('bi bi-chevron-up');
             });
             collapseEl.addEventListener('hide.bs.collapse', () => {
-                icon.classList.remove('bi-chevron-compact-up');
-                icon.classList.add('bi-chevron-compact-down');
+                icon.classList.remove('bi bi-chevron-up');
+                icon.classList.add('bi bi-chevron-down');
             });
         }
     });

@@ -282,8 +282,6 @@ class PaymentController extends Controller
 
                         SendFcmNotification::sendPriceAlertNotification($fcm_tokens, ['title' => 'Trial Started', 'body' => 'Your trial has started for ' . $product->name]);
 
-
-
                         Notifications::create([
                             'user_id' => $user->id,
                             'title' => 'Trial Started',
@@ -304,8 +302,6 @@ class PaymentController extends Controller
                     if ($fcm_tokens) {
 
                         SendFcmNotification::sendPriceAlertNotification($fcm_tokens, ['title' => 'Subscribed Successfully', 'body' => 'You have successfully subscribed ' . $product->name]);
-
-
 
                         Notifications::create([
                             'user_id' => $user->id,
@@ -367,7 +363,7 @@ class PaymentController extends Controller
         Stripe::setApiKey(config('services.stripe.secret'));
 
         // Retrieve the free plan product and get default price
-        $product = Product::retrieve('prod_SmQWWOAD044RiK');
+        $product = Product::retrieve(config('services.stripe.free_forever'));
         $priceId = $product->default_price;
 
         // Get or create Stripe customer
@@ -415,7 +411,7 @@ class PaymentController extends Controller
         return response()->json([
             "data" => $user,
             "token" => null,
-            "message" => 'Your account has been successfully upgraded to the free plan. Please fill your profile information to start posting ads.',
+            "message" => 'You have successfully subscribed to the free plan.',
             'status' => 200
         ], 200);
     }

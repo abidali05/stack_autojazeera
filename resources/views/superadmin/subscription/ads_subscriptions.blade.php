@@ -213,7 +213,7 @@
             </div>
         </div> --}}
     </div>
-    <div class="container">
+    {{-- <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="table-responsive">
@@ -227,7 +227,6 @@
                                 <th>End Date</th>
                                 <th>Price</th>
                                 <th>Cancelled Date</th>
-                                {{-- <th>Refunded Date</th> --}}
                                 <th>Status</th>
                             </tr>
                         </thead>
@@ -241,7 +240,6 @@
                                     <td>{{ $ads_subscription->end_date ?? 'N/A' }}</td>
                                     <td>{{ $ads_subscription->amount_paid ?? 'N/A' }}</td>
                                     <td>{{ $ads_subscription->cancel_date ?? 'N/A' }}</td>
-                                    {{-- <td>{{ $ads_subscription->refunded_date ?? 'N/A' }}</td> --}}
                                     <td>
                                         @if ($ads_subscription->status == 'active')
                                             <span class="badge bg-success">Active</span>
@@ -259,107 +257,78 @@
                     </table>
                     <div class="container">
                         <div class="row mb-2">
-                            {{-- <div class="col-md-4 "> <span class=" pagination_count"
-                                    style="font-size: 18px; color: #281F48; font-weight:700;">
-                                    {{ ($subscriptions->currentPage() - 1) * $subscriptions->perPage() + 1 }}
-                                    -
-                                    {{ min($subscriptions->currentPage() * $subscriptions->perPage(), $subscriptions->total()) }}
-                                    of {{ $subscriptions->total() }} Results
-                                </span></div> --}}
-                            {{-- <div class="col-md-8">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> --}}
 
-                                <nav class="d-flex justify-content-end align-items-center">
-                                    <ul class="pagination"
-                                        style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
-                                        @if ($subscriptions->onFirstPage())
-                                            <li style="display: inline-block;">
-                                                <span
-                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</span>
-                                            </li>
-                                        @else
-                                            @if (request()->isMethod('post'))
-                                                <li style="display: inline-block;">
-                                                    <form method="POST" action="{{ url()->current() }}">
-                                                        @csrf
-                                                        <input type="hidden" name="page"
-                                                            value="{{ $newsletters->currentPage() - 1 }}">
-                                                        <button type="submit"
-                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&laquo;</button>
-                                                    </form>
-                                                </li>
-                                            @else
-                                                <li style="display: inline-block;">
-                                                    <a href="{{ $subscriptions->previousPageUrl() }}"
-                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</a>
-                                                </li>
-                                            @endif
-                                        @endif
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
 
-                                        @foreach ($subscriptions->links()->elements as $element)
-                                            @if (is_string($element))
-                                                <li style="display: inline-block;">
-                                                    <span
-                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $element }}</span>
-                                                </li>
-                                            @endif
+                <div class="tab-content" id="myTabContent">
 
-                                            @if (is_array($element))
-                                                @foreach ($element as $page => $url)
-                                                    @if ($page == $subscriptions->currentPage())
-                                                        <li style="display: inline-block;">
-                                                            <span
-                                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #281F48; color: #fff;">{{ $page }}</span>
-                                                        </li>
-                                                    @else
-                                                        @if (request()->isMethod('post'))
-                                                            <li style="display: inline-block;">
-                                                                <form method="POST" action="{{ url()->current() }}">
-                                                                    @csrf
-                                                                    <input type="hidden" name="page"
-                                                                        value="{{ $page }}">
-                                                                    <button type="submit"
-                                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">{{ $page }}</button>
-                                                                </form>
-                                                            </li>
-                                                        @else
-                                                            <li style="display: inline-block;">
-                                                                <a href="{{ $url }}"
-                                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $page }}</a>
-                                                            </li>
-                                                        @endif
-                                                    @endif
+                    {{-- Ads Tab --}}
+                    <div class="tab-pane fade show active" id="tab1" role="tabpanel">
+                        <div class="table-responsive ">
+
+                           @if (count($userSubscriptions))
+                                <div class="card mb-4">
+                                    <div class="card-body p-0">
+                                        <table class="table table-bordered mb-0 subscription-datatable">
+                                            <thead class="bg-light">
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>User Name</th>
+                                                    <th>Email</th>
+                                                    <th>Subscription ID</th>
+                                                    <th>Plan</th>
+                                                    <th>Start Date</th>
+                                                    <th>End Date</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @php $index = 1; @endphp
+                                                @foreach ($userSubscriptions as $entry)
+                                                    @foreach ($entry['subscriptions'] as $sub)
+                                                        <tr>
+                                                            <td>{{ $index++ }}</td>
+                                                            <td>{{ $entry['user']->name }}</td>
+                                                            <td>{{ $entry['user']->email }}</td>
+                                                            <td>{{ $sub['id'] }}</td>
+                                                            <td>{{ $sub['product_name'] }}</td>
+                                                            <td>{{ $sub['start_date'] }}</td>
+                                                            <td>{{ $sub['end_date'] }}</td>
+                                                            <td>
+                                                                @php
+                                                                    $status = ucfirst($sub['status']);
+                                                                @endphp
+
+                                                                @if ($status === 'Active')
+                                                                    <span
+                                                                        class="badge bg-success">{{ $status }}</span>
+                                                                @elseif ($status === 'Trialing')
+                                                                    <span class="badge bg-info">{{ $status }}</span>
+                                                                @else
+                                                                    <span
+                                                                        class="badge bg-secondary">{{ $status }}</span>
+                                                                @endif
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
                                                 @endforeach
-                                            @endif
-                                        @endforeach
-
-                                        @if ($subscriptions->hasMorePages())
-                                            @if (request()->isMethod('post'))
-                                                <li style="display: inline-block;">
-                                                    <form method="POST" action="{{ url()->current() }}">
-                                                        @csrf
-                                                        <input type="hidden" name="page"
-                                                            value="{{ $subscriptions->currentPage() + 1 }}">
-                                                        <button type="submit"
-                                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&raquo;</button>
-                                                    </form>
-                                                </li>
-                                            @else
-                                                <li style="display: inline-block;">
-                                                    <a href="{{ $subscriptions->nextPageUrl() }}"
-                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</a>
-                                                </li>
-                                            @endif
-                                        @else
-                                            <li style="display: inline-block;">
-                                                <span
-                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</span>
-                                            </li>
-                                        @endif
-                                    </ul>
-
-                                </nav>
-
-                            </div> --}}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            @else
+                                <div class="alert alert-warning">
+                                    No active ads subscriptions found.
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>

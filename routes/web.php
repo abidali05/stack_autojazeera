@@ -384,6 +384,7 @@ Route::get('/posts/{type}', [AddsController::class, 'filterPosts'])->name('filte
 
 
 Route::get('/payment', [PaymentController::class, 'showPaymentForm'])->name('payment.form');
+Route::post('/payment/start-free-trial', [PaymentController::class, 'startTrial'])->name('payment.start.trial');
 Route::post('/payment', [PaymentController::class, 'processPayment'])->name('payment.process');
 
 //Export 

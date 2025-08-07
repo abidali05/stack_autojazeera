@@ -137,6 +137,8 @@ class SubscriptionController extends Controller
         $provinces = Province::all();
         return view('user.subscription.index', compact('plans', 'provinces'));
     }
+
+    
     public function plan()
     {
         if (Auth::user()) {
@@ -446,7 +448,7 @@ class SubscriptionController extends Controller
         Stripe::setApiKey(config('services.stripe.secret'));
 
         // Get the free plan product
-        $product = Product::retrieve('prod_SmQWWOAD044RiK');
+        $product = Product::retrieve(config('services.stripe.free_forever'));
         $priceId = $product->default_price;
 
         // Get or create Stripe customer
@@ -494,9 +496,6 @@ class SubscriptionController extends Controller
         return back()->with('paymentresponse', 'You have successfully subscribed ' . $product->name);
     }
 
-
-
-
     private function getOrCreateCustomer($user)
     {
         $customers = Customer::all(['limit' => 10000]);
@@ -515,8 +514,6 @@ class SubscriptionController extends Controller
 
     public function downloadInvoice($id)
     {
-
-
         Stripe::setApiKey(config('services.stripe.secret'));
 
         try {
@@ -724,11 +721,6 @@ class SubscriptionController extends Controller
             'subscriptions'
         ));
     }
-
-
-
-
-
 
     public function subscription_plans()
     {

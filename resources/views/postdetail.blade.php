@@ -73,7 +73,7 @@
 
                     <!-- Modal Footer -->
                     <div class="modal-footer justify-content-center border-0">
-                        <a href="#" class="btn btn-light px-4 py-2 "
+                        <a href="#" class="btn btn-light px-4 py-2"
                             style="background-color: white; font-weight:600; color: #FD5631; border-radius: 5px;"
                             data-bs-dismiss="modal">close</a>
 
@@ -448,56 +448,56 @@
                                 </div>
                             @endforeach
                             <!-- <div class="col-md-4 feature-item">
-                                                                    <i class="bi bi-shield-shaded"></i> Air Bags
-                                                                </div> -->
+                                                                        <i class="bi bi-shield-shaded"></i> Air Bags
+                                                                    </div> -->
                             <!-- <div class="col-md-4 feature-item">
-                                                                    <i class="bi bi-radio"></i> AM / FM Radio
-                                                                </div>
-                                                                <div class="col-md-4 feature-item">
-                                                                    <i class="bi bi-cassette-fill"></i> Cassette Player
-                                                                </div>
-                                                                <div class="col-md-4 feature-item">
-                                                                    <i class="bi bi-thermometer-half"></i> Cool Box
-                                                                </div>
-                                                                <div class="col-md-4 feature-item">
-                                                                    <i class="bi bi-speedometer2"></i> Cruise Control
-                                                                </div>
-                                                                <div class="col-md-4 feature-item">
-                                                                    <i class="bi bi-disc"></i> DVD Player
-                                                                </div>
-                                                                <div class="col-md-4 feature-item">
-                                                                    <i class="bi bi-speaker"></i> Front Speaker
-                                                                </div> -->
+                                                                        <i class="bi bi-radio"></i> AM / FM Radio
+                                                                    </div>
+                                                                    <div class="col-md-4 feature-item">
+                                                                        <i class="bi bi-cassette-fill"></i> Cassette Player
+                                                                    </div>
+                                                                    <div class="col-md-4 feature-item">
+                                                                        <i class="bi bi-thermometer-half"></i> Cool Box
+                                                                    </div>
+                                                                    <div class="col-md-4 feature-item">
+                                                                        <i class="bi bi-speedometer2"></i> Cruise Control
+                                                                    </div>
+                                                                    <div class="col-md-4 feature-item">
+                                                                        <i class="bi bi-disc"></i> DVD Player
+                                                                    </div>
+                                                                    <div class="col-md-4 feature-item">
+                                                                        <i class="bi bi-speaker"></i> Front Speaker
+                                                                    </div> -->
                             <!-- <div class="col-md-4 feature-item">
-                                                                    <i class="bi bi-camera-video"></i> Front Camera
-                                                                </div>
-                                                                <div class="col-md-4 feature-item">
-                                                                    <i class="bi bi-key"></i> Keyless Entry
-                                                                </div>
-                                                                <div class="col-md-4 feature-item">
-                                                                    <i class="bi bi-shield"></i> Immobilizer Key
-                                                                </div>
-                                                                <div class="col-md-4 feature-item">
-                                                                    <i class="bi bi-map"></i> Navigation System
-                                                                </div>
-                                                                <div class="col-md-4 feature-item">
-                                                                    <i class="bi bi-mirror"></i> Power Mirror
-                                                                </div>
-                                                                <div class="col-md-4 feature-item">
-                                                                    <i class="bi bi-steering-wheel"></i> Power Steering
-                                                                </div>
-                                                                <div class="col-md-4 feature-item">
-                                                                    <i class="bi bi-lock"></i> Power Lock
-                                                                </div>
-                                                                <div class="col-md-4 feature-item">
-                                                                    <i class="bi bi-thermometer-sun"></i> Heated Seats
-                                                                </div>
-                                                                <div class="col-md-4 feature-item">
-                                                                    <i class="bi bi-cloud"></i> Climate Control
-                                                                </div>
-                                                                <div class="col-md-4 feature-item">
-                                                                    <i class="bi bi-rim"></i> Alloy Rim
-                                                                </div> -->
+                                                                        <i class="bi bi-camera-video"></i> Front Camera
+                                                                    </div>
+                                                                    <div class="col-md-4 feature-item">
+                                                                        <i class="bi bi-key"></i> Keyless Entry
+                                                                    </div>
+                                                                    <div class="col-md-4 feature-item">
+                                                                        <i class="bi bi-shield"></i> Immobilizer Key
+                                                                    </div>
+                                                                    <div class="col-md-4 feature-item">
+                                                                        <i class="bi bi-map"></i> Navigation System
+                                                                    </div>
+                                                                    <div class="col-md-4 feature-item">
+                                                                        <i class="bi bi-mirror"></i> Power Mirror
+                                                                    </div>
+                                                                    <div class="col-md-4 feature-item">
+                                                                        <i class="bi bi-steering-wheel"></i> Power Steering
+                                                                    </div>
+                                                                    <div class="col-md-4 feature-item">
+                                                                        <i class="bi bi-lock"></i> Power Lock
+                                                                    </div>
+                                                                    <div class="col-md-4 feature-item">
+                                                                        <i class="bi bi-thermometer-sun"></i> Heated Seats
+                                                                    </div>
+                                                                    <div class="col-md-4 feature-item">
+                                                                        <i class="bi bi-cloud"></i> Climate Control
+                                                                    </div>
+                                                                    <div class="col-md-4 feature-item">
+                                                                        <i class="bi bi-rim"></i> Alloy Rim
+                                                                    </div> -->
                         </div>
                     </div>
                     <!-- Seller's Description Section -->
@@ -524,7 +524,7 @@
                             @endif
 
                             <!-- <button class="btn custom-btn-3 p-3">Download Brochure</button>
-                                                                <button class="btn custom-btn-3 p-3">Download Auction Sheet</button> -->
+                                                                    <button class="btn custom-btn-3 p-3">Download Auction Sheet</button> -->
                         </div>
                     </div>
                     <!-- Information Section -->
@@ -696,7 +696,6 @@
                                 </a>
                                 <!-- Share Button -->
 
-
                                 <button class="btn custom-btn-3 "
                                     data-url="{{ route('cardetail', ['id' => $post->id]) }}" onclick="shareLink()">
                                     <i class="bi bi-share me-1"></i> Share
@@ -707,7 +706,6 @@
                                         <i class="bi bi-chat me-1"></i> Chat
                                     </button>
                                 @endauth
-
 
                                 @guest
                                     <a href="{{ url('login') }}" class="btn custom-btn-3 ">
@@ -765,7 +763,7 @@
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <label for="phoneNo" class="form-label">Phone Number</label>
-                                    <input type="tel" name="number" class="form-control " id="phoneNo">
+                                    <input type="tel" name="number" class="form-control" id="phoneNo">
                                 </div>
 
                                 {{-- <div class="col-md-12 mb-3">
@@ -1242,5 +1240,27 @@
                 alert('Link copied!');
             }
         }
+
+        $(document).ready(function() {
+            // Restrict phone input to 10 digits
+            $('.phone-input').on('input', function() {
+                let value = $(this).val().replace(/[^0-9]/g, ''); // Remove non-digits
+                if (value.length > 10) {
+                    value = value.substring(0, 10); // Limit to 10 digits
+                }
+                $(this).val(value);
+            }).on('keydown', function(e) {
+                if (e.key === 'Backspace' && $(this).val().length === 0) {
+                    e.preventDefault(); // Prevent deleting when empty
+                }
+            });
+
+            // Reopen modal with errors for the specific user
+            @if ($errors->any() && session('edit_user_id'))
+                const modal = new bootstrap.Modal(document.getElementById(
+                    'editUsererModal{{ session('edit_user_id') }}'));
+                modal.show();
+            @endif
+        });
     </script>
 @endsection
