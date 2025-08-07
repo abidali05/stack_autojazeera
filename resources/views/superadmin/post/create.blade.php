@@ -1311,7 +1311,7 @@
                                 <label for="email" class="form-label" style="color:white">Email <span
                                         style="color:#FD5631">*</span></label>
                                 <input type="email" class="form-control  formcontrol" name="email" id="email"
-                                    placeholder="Enter Email" value="{{ Auth::user()->email ?? '' }}"required readonly>
+                                    placeholder="Enter Email" value="{{ Auth::user()->email ?? '' }}"required >
                                 @error('email')
                                     <div class="alert ">{{ $message }}</div>
                                 @enderror

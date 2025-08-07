@@ -331,14 +331,14 @@
         <div class="row">
             <div class="col-12 col-md-12 col-lg-12">
                 <div class="row">
-                    <div class="col-md-3  ">
+                    <div class="col-md-3  " id="containerchatslist">
                         <div class="row mt-3">
                             <div class="col-12 pe-0 px-4">
                                 <p class="chats m-0"><strong>Service Chats</strong></p>
                             </div>
 
                         </div>
-                        <div class="row px-2 mt-2 mb-3">
+                        <div class="row px-2 mt-2 mb-3" >
                             <div class="col-12">
                      <div class="position-relative w-100">
   <input type="text" class="form-control w-100 pe-5" id="chatSearch"
@@ -522,7 +522,7 @@
             async function fetchUserChats() {
                 const senderId = authUserId;
                 const chatList = document.getElementById("chatList");
-                const chatSearch = document.getElementById("chatSearch");
+                const chatSearch = document.getElementById("containerchatslist");
 
                 const chatQuery = await db.collection("service_chats")
                     .where("keys", "array-contains", senderId).get();
@@ -530,8 +530,10 @@
                 chatList.innerHTML = "";
 
                 if (chatQuery.empty) {
-                     chatList.addClass('d-none');
-                    chatSearch.addClass('d-none');
+                    document.getElementById("chatList").classList.add('d-none');
+document.getElementById("containerchatslist").classList.add('d-none');
+
+
                     chatList.innerHTML = "<p class='text-center py-3'>No chats found</p>";
                     return;
                 }
