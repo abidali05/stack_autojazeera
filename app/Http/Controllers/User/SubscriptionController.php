@@ -85,7 +85,7 @@ class SubscriptionController extends Controller
             return redirect()->route('dashboard')->with('error', 'You are not authorized to access this page.');
         }
         $user = Auth::user();
-        if($user->email == '' || $user->email == null){
+        if ($user->email == '' || $user->email == null) {
             return redirect()->route('personal_info')->with('error', 'Please update your email first.');
         }
         // $ads_plans = AdsSubscriptionPlans::with('features')->where('status', '1')->get();
@@ -488,14 +488,14 @@ class SubscriptionController extends Controller
         // $user->dealershipName = $product->metadata['type'] == 'private_seller' ? 'Private Seller' : '';
         $user->userType = $product->metadata['type'] ?? 'private_seller';
         $user->dealershipName = $product->metadata['type'] == 'private_seller' ? 'Private Seller' : '';
-        $user->trial_availed = 1;
+        // $user->trial_availed = 1;
         $user->free_package_availed = 1;
         $user->role = 1;
         $user->save();
 
         Mail::to($user->email)->send(new SubscriptionBuy($product));
 
-        //    return redirect()->route('personal_info')->with('register_success', 'Your account has been successfully upgraded to the free plan. Please fill your profile information to start posting ads.');
+        //return redirect()->route('personal_info')->with('register_success', 'Your account has been successfully upgraded to the free plan. Please fill your profile information to start posting ads.');
 
         return back()->with('paymentresponse', 'You have successfully subscribed ' . $product->name);
     }
@@ -594,7 +594,7 @@ class SubscriptionController extends Controller
         }
 
 
-        if($user->email == '' || $user->email == null){
+        if ($user->email == '' || $user->email == null) {
             return redirect()->route('personal_info')->with('error', 'Please update your email first.');
         }
 
@@ -669,8 +669,8 @@ class SubscriptionController extends Controller
             return redirect()->route('dashboard')->with('error', 'You are not authorized to access this page.');
         }
 
-         $user = Auth::user();
-        if($user->email == '' || $user->email == null){
+        $user = Auth::user();
+        if ($user->email == '' || $user->email == null) {
             return redirect()->route('personal_info')->with('error', 'Please update your email first.');
         }
 
