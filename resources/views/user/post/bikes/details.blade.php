@@ -16,7 +16,14 @@
         }
 
 
-
+.carousel-control-next-icon, .carousel-control-prev-icon {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: 100% 100%;
+}
         .carousel-control-prev,
         .carousel-control-next {
             width: 40px;
@@ -311,12 +318,12 @@
                                         <!-- Controls -->
                                         <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel"
                                             data-bs-slide="prev"
-                                            style="width: 4%; left: 10px; top: 50%; transform: translateY(-50%); position: absolute;">
+                                            style=" left: 10px; top: 50%; transform: translateY(-50%); position: absolute;">
                                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                         </button>
                                         <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel"
                                             data-bs-slide="next"
-                                            style="width: 4%; right: 10px; top: 50%; transform: translateY(-50%); position: absolute;">
+                                            style=" right: 10px; top: 50%; transform: translateY(-50%); position: absolute;">
                                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                         </button>
                                     </div>

@@ -147,7 +147,14 @@
             padding: 5px 10px;
 
             margin-left: 10px
-        }
+        }.carousel-control-next-icon, .carousel-control-prev-icon {
+    display: inline-block;
+    width: 1rem !important;
+    height: 1rem !important;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: 100% 100%;
+}
     </style>
     <div class="container mt-4 ">
         <div class="breadcrumb-nav mb-3">
@@ -282,13 +289,13 @@
                                         <!-- Carousel Controls -->
                                         <button class="carousel-control-prev" type="button"
                                             data-bs-target="#imageCarousel" data-bs-slide="prev"
-                                            style="width: 4%; border-radius: 50%; position: absolute; left: 10px; top: 50%; transform: translateY(-50%);">
+                                            style=" border-radius: 50%; position: absolute; left: 10px; top: 50%; transform: translateY(-50%);">
                                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                         </button>
 
                                         <button class="carousel-control-next" type="button"
                                             data-bs-target="#imageCarousel" data-bs-slide="next"
-                                            style="width: 4%; border-radius: 50%; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                                            style=" border-radius: 50%; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
                                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                         </button>
                                     </div>
