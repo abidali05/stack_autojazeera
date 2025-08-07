@@ -9,6 +9,8 @@ use Twilio\Rest\Client;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\LoginOtp;
 
 class OTPController extends Controller
 {
@@ -17,7 +19,9 @@ class OTPController extends Controller
     public function __construct()
     {
         $accountSid = env('TWILIO_ACCOUNT_SID');
-    $authToken = env('TWILIO_AUTH_TOKEN');
+        $authToken = env('TWILIO_AUTH_TOKEN');
+        // $accountSid = 'ACf7b88a5f46cf4a5f8215d0018c55f355';
+        // $authToken = '342711440a4f95845b398ebad6f9f7a1';
 
         // Validate the credentials
         if (!$accountSid || !$authToken) {
@@ -128,12 +132,12 @@ class OTPController extends Controller
             // }
 
 
-            if (!$user->email || !$user->is_email_verified) {
-                return redirect()->route('emailNumber.verification', ['user_id' => $user->id]);
-            } else {
-                $user->is_email_verified = true;
-                $user->save();
-            }
+            // if (!$user->email || !$user->is_email_verified) {
+            //     return redirect()->route('emailNumber.verification', ['user_id' => $user->id]);
+            // } else {
+            //     $user->is_email_verified = true;
+            //     $user->save();
+            // }
 
             Auth::login($user);
             return redirect('/dashboard');
@@ -230,11 +234,11 @@ class OTPController extends Controller
 
         $user->otp = $otp;
         $user->save();
-
+        Mail::to($user->email)->send(new LoginOtp($otp));
         // Save OTP in the database
 
-        $body = view('emails.login_otp', compact('otp'));
-        sendMail($user->name, $request->email, 'Auto Jazeera', $otp . ' is your secure sign in code', $body);
+        // $body = view('emails.login_otp', compact('otp'));
+        // sendMail($user->name, $request->email, 'Auto Jazeera', $otp . ' is your secure sign in code', $body);
         // Send OTP via Email
 
         return redirect()->route('emailNumber.verification', ['user_id' => $user->id])

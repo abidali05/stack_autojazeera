@@ -1,6 +1,6 @@
 @extends('layout.panel_layout.main')
 @section('content')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
         .headername {
@@ -333,7 +333,7 @@
         <div class="row">
             <div class="col-12 col-md-12 col-lg-12">
                 <div class="row">
-                    <div class="col-md-3  ">
+                    <div class="col-md-3  " id="containerchatslist">
                         <div class="row mt-3">
                             <div class="col-12 pe-0 px-4">
                                 <p class="chats m-0"><strong>Ads chats</strong></p>
@@ -341,13 +341,14 @@
 
                         </div>
                         <div class="row px-2 mt-2 mb-3">
-                         <div class="col-12 ">
-                    <div class="position-relative w-100">
-  <input type="text" class="form-control w-100 pe-5" id="chatSearch"
-         autocomplete="off" placeholder="Search">
-  <i class="bi bi-search position-absolute top-50 end-0 translate-middle-y me-3 text-muted"></i>
-</div>
-</div>
+                            <div class="col-12 ">
+                                <div class="position-relative w-100">
+                                    <input type="text" class="form-control w-100 pe-5" id="chatSearch" autocomplete="off"
+                                        placeholder="Search">
+                                    <i
+                                        class="bi bi-search position-absolute top-50 end-0 translate-middle-y me-3 text-muted"></i>
+                                </div>
+                            </div>
 
                         </div>
                         <div class="row ">
@@ -438,7 +439,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const authUserRole = @json(auth()->user()->role);
-            const authUserId = parseInt((authUserRole == '1' || authUserRole == 1) ? @json(auth()->id()) :
+           const authUserId = parseInt((authUserRole == '1' || authUserRole == 1 || authUserRole == '0' || authUserRole == 0) ? @json(auth()->id()) :
                 @json(auth()->user()->dealer_id), 10);
 
             const authUserName = @json(auth()->user()->name);
@@ -584,8 +585,9 @@
                 chatList.innerHTML = "";
 
                 if (chatQuery.empty) {
-                    chatList.addClass('d-none');
-                    chatSearch.addClass('d-none');
+                    document.getElementById("chatList").classList.add('d-none');
+                    document.getElementById("containerchatslist").classList.add('d-none');
+
                     chatList.innerHTML = "<p class='text-center py-3'>No chats found</p>";
                     return;
                 }
@@ -1089,10 +1091,10 @@
                             messageHtml += `
                     <div class="message-container ${isSender ? 'sent' : 'received'}" id="message-${doc.id}" data-message-id="${doc.id}" data-reply_meta_data="${JSON.stringify(msg.meta_data ?? null)}">
                         ${!isSender ? `
-                                    <img src="${receiverImage}" class="chat-avatar me-2" 
-                                        style="height: 45px; width: 45px; border-radius: 50%;" 
-                                        alt="Receiver">
-                                ` : ''}
+                                        <img src="${receiverImage}" class="chat-avatar me-2" 
+                                            style="height: 45px; width: 45px; border-radius: 50%;" 
+                                            alt="Receiver">
+                                    ` : ''}
 
                         <div class="${messageClass} p-3 rounded-3 position-relative" 
                             oncontextmenu="showMessageContextMenu(event, '${doc.id}', ${isSender}, '${msg.message?.replace(/'/g, "\\'")}', '${msg.sender.name?.replace(/'/g, "\\'")}', '${msg.attachment ?? null}', '${JSON.stringify(msg.meta_data ?? null).replace(/"/g, '"')}'); return false;"
@@ -1116,10 +1118,10 @@
                         </div>
 
                         ${isSender ? `
-                                    <img src="${authUserImage}" class="chat-avatar ms-2" 
-                                        style="height: 45px; width: 45px; border-radius: 50%;" 
-                                        alt="You">
-                                ` : ''}
+                                        <img src="${authUserImage}" class="chat-avatar ms-2" 
+                                            style="height: 45px; width: 45px; border-radius: 50%;" 
+                                            alt="You">
+                                    ` : ''}
                     </div>`;
 
                             chatMessages.innerHTML += messageHtml;

@@ -84,6 +84,10 @@ class SubscriptionController extends Controller
         if (Auth::user()->role == '2' || Auth::user()->role == '3' || Auth::user()->dealer_id != null) {
             return redirect()->route('dashboard')->with('error', 'You are not authorized to access this page.');
         }
+        $user = Auth::user();
+        if($user->email == '' || $user->email == null){
+            return redirect()->route('personal_info')->with('error', 'Please update your email first.');
+        }
         // $ads_plans = AdsSubscriptionPlans::with('features')->where('status', '1')->get();
         // $service_plans = ServiceSubscriptionPlans::with('features')->where('status', '1')->get();
 
@@ -138,7 +142,7 @@ class SubscriptionController extends Controller
         return view('user.subscription.index', compact('plans', 'provinces'));
     }
 
-    
+
     public function plan()
     {
         if (Auth::user()) {
@@ -482,7 +486,7 @@ class SubscriptionController extends Controller
         $user->package = $product->id;
         // $user->userType = $product->metadata['type'] ?? 'private_seller';
         // $user->dealershipName = $product->metadata['type'] == 'private_seller' ? 'Private Seller' : '';
-         $user->userType = $product->metadata['type'] ?? 'private_seller';
+        $user->userType = $product->metadata['type'] ?? 'private_seller';
         $user->dealershipName = $product->metadata['type'] == 'private_seller' ? 'Private Seller' : '';
         $user->trial_availed = 1;
         $user->free_package_availed = 1;
@@ -589,6 +593,11 @@ class SubscriptionController extends Controller
             return redirect()->route('dashboard')->with('error', 'You are not authorized to access this page.');
         }
 
+
+        if($user->email == '' || $user->email == null){
+            return redirect()->route('personal_info')->with('error', 'Please update your email first.');
+        }
+
         \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
         $customer = $this->getOrCreateCustomer($user);
 
@@ -658,6 +667,11 @@ class SubscriptionController extends Controller
 
         if ($user->role == '2') {
             return redirect()->route('dashboard')->with('error', 'You are not authorized to access this page.');
+        }
+
+         $user = Auth::user();
+        if($user->email == '' || $user->email == null){
+            return redirect()->route('personal_info')->with('error', 'Please update your email first.');
         }
 
         \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
@@ -783,6 +797,9 @@ class SubscriptionController extends Controller
 
         $ads_sub = null;
         $service_sub = null;
+        if ($user->email == '' || $user->email == null) {
+            return redirect()->route('personal_info')->with('error', 'Please update your email address first.');
+        }
 
         if ($user->role == '0' || $user->role == '1') {
 
@@ -863,7 +880,7 @@ class SubscriptionController extends Controller
                     }
                 }
             }
-            
+
             return view('dashboard', compact('service_sub', 'ads_sub'));
         }
 
