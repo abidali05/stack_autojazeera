@@ -39,7 +39,7 @@
             <p class="orange">Track Your Ad:</p>
             <p class="white">At any time, you can monitor the status of your ad under <a href="{{url('/ads')}}" class="orange">manage ads</a>. Stay informed about its progress and any required actions.</p>
                 <p class="orange">Need Help?</p>
-        <p class="white">If you have any questions about the process or need assistance, feel free to reach out to our support team at <span class="orange m-0" style="font-size:16px;"><strong>support@autojazeera.com</strong></span>. We’re here to help ensure your ad gets listed smoothly. </p>
+        <p class="white">If you have any questions about the process or need assistance, feel free to reach out to our support team at <span class="orange m-0" style="font-size:16px;"><strong>contactus@autojazeera.pk</strong></span>. We’re here to help ensure your ad gets listed smoothly. </p>
         <p class="white">Thank you for choosing our platform to connect with buyers. We’re excited to help you showcase your product!</p>
         </div>
      
