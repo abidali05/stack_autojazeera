@@ -445,26 +445,37 @@
 <div class="col-md-12 d-flex justify-content-between align-items-center">
     <p class="twentyeight m-0">Looking for auto services today?</p>
     <span class="sixteen">
-        <a href="javascript:void(0)" id="toggleServices" class="text-danger">View all</a>
+        <div class="text-center mt-3">
+ <div class="text-center mt-3">
+    <span class="sixteen">
+        <a href="javascript:void(0)" id="toggleBtn" class="text-danger">View all</a>
+    </span> 
+ 
+</div>
+
+</div>
+
     </span>
 </div>
 
 <!-- Services Grid -->
 <div class="col-md-12">
     <div class="row d-flex flex-wrap justify-content-start" id="serviceCategories">
-        @foreach ($service_categories as $key => $service_category)
-            <div class="col-6 col-md-1-5 p-3 rounded-3 extra-service" 
-                 style="cursor: pointer; {{ $key >= 10 ? 'display: none;' : '' }}">
-                <div class="rounded-3 p-4" style="background-color:#F4F4F4">
-                    <a href="{{ route('services.categorysearch', $service_category->name) }}"
-                       class="text-decoration-none text-dark">
-                        <img src="{{ $service_category->icon }}" class="img-fluid rounded"
-                             style="height:100px; width:100%;" alt="{{ $service_category->name }}" />
-                    </a>
-                </div>
-                <p class="text-center m-0 sixteen my-1">{{ $service_category->name }}</p>
-            </div>
-        @endforeach
+    @foreach ($service_categories as $key => $service_category)
+    <div class="col-6 col-md-1-5 p-3 rounded-3 extra-service service-item {{ $key >= 10 ? 'd-none' : '' }}"
+         style="cursor: pointer;">
+        <div class="rounded-3 p-4" style="background-color:#F4F4F4">
+            <a href="{{ route('services.categorysearch', $service_category->name) }}"
+               class="text-decoration-none text-dark">
+                <img src="{{ $service_category->icon }}" class="img-fluid rounded"
+                     style="height:100px; width:100%;" alt="{{ $service_category->name }}" />
+            </a>
+        </div>
+        <p class="text-center m-0 sixteen my-1">{{ $service_category->name }}</p>
+    </div>
+@endforeach
+
+
     </div>
 </div>
 
@@ -1927,23 +1938,29 @@
                 
             });
         });
-    $(document).ready(function () {
-        let isExpanded = false;
-        
 
-        $('#toggleServices').click(function () {
-            if (!isExpanded) {
-                $('.extra-service').show(); // Show hidden categories
-                $(this).text('View less');
-            } else {
-                $('.extra-service').each(function(index) {
-                    if (index >= 10) $(this).hide(); // Hide again
-                });
-                $(this).text('View all');
-            }
-            isExpanded = !isExpanded;
-        });
+
+</script>
+<script>
+    document.getElementById('toggleBtn').addEventListener('click', function () {
+        const hiddenItems = document.querySelectorAll('.service-item.d-none');
+        const allItems = document.querySelectorAll('.service-item');
+        const limit = 10;
+
+        if (hiddenItems.length) {
+            // Show all
+            hiddenItems.forEach(el => el.classList.remove('d-none'));
+            this.textContent = 'Show less';
+        } else {
+            // Show only first 10
+            allItems.forEach((el, index) => {
+                if (index >= limit) {
+                    el.classList.add('d-none');
+                }
+            });
+            this.textContent = 'Show all';
+        }
     });
 </script>
-    </script>
+
 @endsection

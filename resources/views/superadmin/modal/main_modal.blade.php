@@ -318,7 +318,7 @@
         }
     }
 </script>
-<script>
+{{-- <script>
 $(document).ready(function() {
 	
     $(document).on('input', '#email', function() {
@@ -348,7 +348,7 @@ $(document).ready(function() {
        // }
     });
 });
-</script>
+</script> --}}
 <script>
 $(document).ready(function() {
     let debounceTimer;

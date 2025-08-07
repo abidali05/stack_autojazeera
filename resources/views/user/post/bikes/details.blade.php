@@ -298,18 +298,16 @@
                     </div>
 
                     <!-- Modal -->
-                    <div class="modal fade" id="photoModal" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-fullscreen">
-                            <div class="modal-content" style="border-radius: 12px; background-color:#F0F3F6 !important;">
+                    <div class="modal fade" id="photoModal" tabindex="-1" aria-hidden="true" style="background-color: #F0F3F6 !important;">
+                     <div class="modal-dialog modal-dialog-centered" style="max-width: 100%; height: 100vh;background-color: #F0F3F6 !important;" >
+                            <div class="modal-content" style="border-radius: 12px; background-color:#F0F3F6 !important;border: none;">
                                 <div class="modal-body text-center p-4">
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         style="position: absolute; top: 15px; right: 15px;"></button>
-
                                     <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
                                         <div class="carousel-inner" id="carouselInner">
                                             <!-- Images are loaded dynamically with jQuery -->
                                         </div>
-
                                         <!-- Controls -->
                                         <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel"
                                             data-bs-slide="prev"
@@ -342,6 +340,41 @@
                                             </div>
                                         </div>
                                     </div>
+                                     <div class="row mt-3">
+                            <div class="col-12">
+                                <!-- Call Button -->
+                                <a href="tel:{{ $post->dealer->number }}" style="color: white"
+                                    class="btn custom-btn-nav me-1 py-2 {{ $post->dealer->number ? '' : 'd-none' }}">
+                                    <i class="bi bi-telephone me-1"></i> Call
+                                </a>
+                                <!-- WhatsApp Button -->
+                                <a href="https://wa.me/{{ $post->dealer->number }}" style="color: white"
+                                    class="btn custom-btn-nav me-1 py-2 {{ $post->dealer->number ? '' : 'd-none' }}"
+                                    target="_blank">
+                                    <i class="bi bi-whatsapp me-1"></i> WhatsApp
+                                </a>
+                                <!-- Share Button -->
+                                <button class="btn custom-btn-nav me-1 py-2" style="color: white" onclick="shareLink()">
+                                    <i class="bi bi-share me-1"></i> Share
+                                </button>
+                                <!-- SMS Button -->
+                                @auth
+                                    <button style="color: white" onclick="createOrOpenChat({{ $post->id }}, {{ $post->dealer_id }})"
+                                        class="btn custom-btn-nav py-2 {{ $post->dealer->number ? '' : 'd-none' }}">
+                                        <i class="bi bi-chat-dots me-1"></i> Chat
+                                    </button>
+                                @endauth
+
+                                @guest
+                                    <a href="{{ url('login') }}" style="color: white"
+                                        class="btn custom-btn-nav py-2 {{ $post->dealer->number ? '' : 'd-none' }}">
+                                        <i class="bi bi-chat-dots me-1"></i> Chat
+                                    </a>
+
+                                @endguest
+                            </div>
+
+                        </div>
                                 </div>
                             </div>
                         </div>
@@ -631,8 +664,17 @@
                         <div class="row d-flex justify-content-between align-items-center">
                             <!-- Dummy Circular Image -->
                             <div class="col-3 pe-0">
-                                <img src="{{ asset('web/profile') . '/' . $post->dealer->image }}" alt="Dealer Image"
-                                    class="rounded-circle " style="width: 80px; height: 80px;">
+                           @if ($post->dealer->image)
+    <img src="{{ asset('web/profile/' . $post->dealer->image) }}" 
+         alt="Dealer Image" 
+         class="rounded-circle" 
+         style="width: 80px; height: 80px;">
+@else
+    <img src="{{ asset('web/images/Avatar.svg') }}" 
+         alt="Default Avatar" 
+         class="rounded-circle" 
+         style="width: 80px; height: 80px;">
+@endif
                             </div>
                             <!-- Dealer Name and Designation -->
                             <div class="col-4 p-0">
@@ -754,6 +796,25 @@
             <div class="container mt-2">
                 <div id="adsCarousel" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
+                           @if (count($posts) == 0)
+                        <div class="col-md-12 ">
+                            <div class="row d-flex mt-5 justify-content-center my-3">
+                                <div class="p-3 col-8" style="border:1px solid #281F48;border-radius:9px;">
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-3">
+                                            <img src="{{ asset('web/images/noinputs.svg') }}" alt=""
+                                                class="img-fluid" srcset="">
+                                        </div>
+                                        <div class="col-9 text-start">
+
+                                            <p class="m-0">No Similar Ads found </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                         @foreach ($posts->chunk(3) as $chunkIndex => $chunk)
                             <div class="carousel-item {{ $chunkIndex === 0 ? 'active' : '' }}">
                                 <div class="row">
