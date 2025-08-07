@@ -20,6 +20,8 @@ class OTPController extends Controller
     {
         $accountSid = env('TWILIO_ACCOUNT_SID');
         $authToken = env('TWILIO_AUTH_TOKEN');
+        // $accountSid = 'ACf7b88a5f46cf4a5f8215d0018c55f355';
+        // $authToken = '342711440a4f95845b398ebad6f9f7a1';
 
         // Validate the credentials
         if (!$accountSid || !$authToken) {
@@ -130,12 +132,12 @@ class OTPController extends Controller
             // }
 
 
-            if (!$user->email || !$user->is_email_verified) {
-                return redirect()->route('emailNumber.verification', ['user_id' => $user->id]);
-            } else {
-                $user->is_email_verified = true;
-                $user->save();
-            }
+            // if (!$user->email || !$user->is_email_verified) {
+            //     return redirect()->route('emailNumber.verification', ['user_id' => $user->id]);
+            // } else {
+            //     $user->is_email_verified = true;
+            //     $user->save();
+            // }
 
             Auth::login($user);
             return redirect('/dashboard');

@@ -90,9 +90,12 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content " style="border-radius: 10px; overflow: hidden;">
                         <!-- Modal Header -->
-                        <div class="modal-header " style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                        <div class="modal-header "
+                            style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                             <h5 class="modal-title" id="alertModalLabel"><strong> Notification</strong></h5>
-                            <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close"
+                                style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                         </div>
 
                         <!-- Modal Body -->
@@ -101,8 +104,10 @@
                         </div>
 
                         <!-- Modal Footer -->
-                        <div class="modal-footer justify-content-center border-0 p-0 pb-3" >
-                            <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;" data-bs-dismiss="modal">
+                        <div class="modal-footer justify-content-center border-0 p-0 pb-3">
+                            <button type="button" class="btn btn-light px-4 py-2 "
+                                style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                                data-bs-dismiss="modal">
                                 Close
                             </button>
                         </div>
@@ -159,7 +164,7 @@
                         <input type="file" id="profile_fileInput" accept="image/*" name="image" style="display: none;"
                             onchange="handleprofile_FileUpload(event)">
                     </div>
-                   
+
                     <div class="mb-2">
                         <label for="f-name" class="form-label">Full Name</label>
                         <div class="input-groups" style="padding: 0px !important;">
@@ -190,10 +195,10 @@
                         <label for="email" class="form-label">Email</label>
                         <div class="input-groups">
                             <input type="email" class="form-control formcontrol" name="email" id="email"
-                                value="{{ $user->email }}" disabled>
+                                value="{{ $user->email ?? old('email') }}" {{ $user->email ? 'disabled' : '' }} required>
                             <!-- <button class="btn primary-color-custom" style="border-bottom: 2px solid white; border-radius: 0px;" type="button" id="edit-name">
-                                                                        <i class="bi bi-pencil-square"></i>
-                                                                    </button> -->
+                                                                            <i class="bi bi-pencil-square"></i>
+                                                                        </button> -->
                         </div>
                     </div>
                     <div class="mb-2">
@@ -205,15 +210,16 @@
                             {{-- <button class="btn primary-color-custom" style="border-bottom: 2px solid white; border-radius: 0px;" type="button" id="edit-name">
                                                 <i class="bi bi-pencil-square"></i>
                                             </button> --}}
-                        </div>  @if ($errors->any())
-                    <div class="alert alert-danger p-0 m-0 mt-2">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+                        </div>
+                        @if ($errors->any())
+                            <div class="alert alert-danger p-0 m-0 mt-2">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
 
                         <small class="" style="color:#FD5631" id="phone-error" style="display:none;"></small>
                     </div>
@@ -225,7 +231,7 @@
                         </label>
                         <input type="text" id="address" name="address"
                             class="form-control formcontrol validate-field" placeholder="Enter Address"
-                            autocomplete="off" required value="{{ $user->address }}" />
+                            autocomplete="off" required value="{{ $user->address ?? old('address') }}" />
                         <div id="address-error" class="orange" style="display: none;">Street address is
                             required.</div>
                     </div>
@@ -325,7 +331,7 @@
             <!-- Right Column -->
 
             <div class="col-md-2">
-              
+
                 <script>
                     // Function to trigger the hidden file input
                     function profile_triggerFileInput() {
