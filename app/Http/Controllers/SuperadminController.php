@@ -20,7 +20,6 @@ class SuperadminController extends Controller
 
     public function showLoginForm()
     {
-
         return view('superadmin.auth.login');
     }
 

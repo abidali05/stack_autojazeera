@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
-use App\Models\Province;
-use App\Models\State;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\View\View;
+use App\Models\State;
 use App\Mail\LoginOtp;
+use App\Models\Province;
+use Illuminate\View\View;
+use Illuminate\Http\Request;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Http\RedirectResponse;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Session;
+use App\Http\Requests\Auth\LoginRequest;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -23,6 +25,12 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
+        if (url()->previous() == url('/subscription-plans')) {
+            session()->put('url.intended', url('/subscription-plans'));
+        }
+
+        Log::info(session()->get('url.intended'));
+
         return view('auth.login');
     }
 
@@ -112,6 +120,14 @@ class AuthenticatedSessionController extends Controller
             //}
 
             Auth::login($check);
+
+            if (session()->has('url.intended')) {
+                $intendedUrl = session()->get('url.intended');
+                Log::info($intendedUrl);
+                return redirect($intendedUrl);
+            }
+
+
             session()->forget('email');
 
             return redirect()->intended(RouteServiceProvider::HOME);
@@ -119,8 +135,13 @@ class AuthenticatedSessionController extends Controller
             return redirect()->route('verify_login_otp')->with('resendOtp', 'OTP is Invalid');
         }
     }
+
+
     public function create_number()
     {
+        // if (url()->previous() == url('/subscription-plans')) {
+        //     session()->put('url.intended', url('/subscription-plans'));
+        // }
         return view('auth.number_login');
     }
     /**

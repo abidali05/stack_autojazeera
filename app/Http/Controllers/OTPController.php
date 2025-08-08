@@ -140,6 +140,7 @@ class OTPController extends Controller
             // }
 
             Auth::login($user);
+            
             return redirect('/dashboard');
             // return response()->json(['message' => 'OTP verified successfully!'], 200);
         }

@@ -27,7 +27,8 @@ class SuperadminUserController extends Controller
         $userSellers = User::where('role', 0)->where('userType', 'car_dealer')->get();
         $privateSellers = User::where('role', 1)->where('userType', 'private_seller')->get();
         $dealerusers = User::where('role', 2)->get();
-        return view('superadmin.users.index', compact('dealers', 'privateSellers', 'dealerusers', 'userSellers'));
+        $shopUsers = Shops::all();
+        return view('superadmin.users.index', compact('dealers', 'privateSellers', 'dealerusers', 'userSellers','shopUsers'));
     }
 
     public function getUsersByRole(Request $request)
