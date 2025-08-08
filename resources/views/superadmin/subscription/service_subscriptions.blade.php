@@ -83,7 +83,8 @@
         .nav-link:active {
             color: #ffffff !important;
         }
-              .table>:not(caption)>*>* {
+
+        .table>:not(caption)>*>* {
             padding: 0rem .5rem;
             color: var(--bs-table-color-state, var(--bs-table-color-type, var(--bs-table-color)));
             background-color: var(--bs-table-bg);
@@ -96,12 +97,24 @@
             padding: 0px 10px 5px 10px;
             border-bottom: 1px solid rgba(0, 0, 0, 0.3);
         }
-        div.dt-container .dt-length, div.dt-container .dt-search, div.dt-container .dt-info, div.dt-container .dt-processing, div.dt-container .dt-paging {
-    color: inherit;
-    display: flex
-;
-    justify-content: end;
-}
+
+        div.dt-container .dt-length,
+        div.dt-container .dt-search,
+        div.dt-container .dt-info,
+        div.dt-container .dt-processing,
+        div.dt-container .dt-paging {
+            color: inherit;
+            display: flex;
+            justify-content: end;
+        }
+
+        .bike-column-search {
+            width: 90px;
+            font-size: 10px;
+            border: 1px solid #D9D9D9;
+            border-radius: 2px;
+            padding: 2px;
+        }
     </style>
     <!-- Buttons to toggle between Ads and Services -->
     <div class="container my-3">
@@ -215,7 +228,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="table-responsive">
-                    <table class="table align-middle service-datatable">
+                    <table class="table align-middle subscription-datatable">
                         <thead>
                             <tr>
                                 <th>S.No</th>
@@ -368,27 +381,53 @@
     </div>
     <script>
         $(document).ready(function() {
-            $('.service-datatable').each(function() {
+            $('.subscription-datatable').each(function() {
                 var table = $(this).DataTable({
                     paging: true,
                     pageLength: 25,
                     lengthChange: false,
                     searching: true,
                     ordering: true,
-                    scrollX: true,
+                    scrollX: false,
                     order: [
                         [0, 'asc']
                     ],
                     language: {
                         search: "Search: "
                     },
-                                 dom: `
+                    dom: `
   <"search-wrapper mb-3"f>
   <"pagination-wrapper d-flex justify-content-between align-items-center mb-3"i p>
   rt
   <"pagination-wrapper d-flex justify-content-between align-items-center mt-3"i p>
   <"clear">
 `
+                });
+
+                // Add search row
+
+                $(this).find('thead').append('<tr class="search-row"></tr>');
+
+                $(this).find('thead th').each(function(index) {
+                    var title = $(this).text().trim();
+                    var searchHtml = '';
+
+                    if (['User Name', 'Start Date', 'Email', 'Subscription ID', 'Plan',
+                            'Start Date', 'End Date', 'Status'
+                        ]
+                        .includes(title)) {
+                        searchHtml = '<input type="text" placeholder="Search ' + title +
+                            '" class="bike-column-search"/>';
+                    }
+
+                    $(this).closest('thead').find('.search-row').append('<th>' + searchHtml +
+                        '</th>');
+                });
+
+                // Apply search functionality
+                $(this).find('.search-row input, .search-row select').on('keyup change', function() {
+                    var columnIndex = $(this).closest('th').index();
+                    table.column(columnIndex).search(this.value).draw();
                 });
             });
         });
