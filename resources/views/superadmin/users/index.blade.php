@@ -1011,8 +1011,7 @@
 
             <div class="tab-pane fade" id="shop" role="tabpanel">
                 <div class="col-md-12 text-end mb-3">
-                    <button class="btn custom-btn-nav new py-0 rounded roleid" data-role="0" data-bs-toggle="modal"
-                        data-bs-target="#superadmin_add_userModal">Add New Shop</button>
+                    <button class="btn custom-btn-nav new py-0 rounded roleid">Add New Shop</button>
                 </div>
                 <div class="table-container">
                     <table class="table table-striped align-middle datatable12" style="min-width: 1000px;">
