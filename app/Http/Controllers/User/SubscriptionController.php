@@ -443,6 +443,7 @@ class SubscriptionController extends Controller
 
     public function signupwithfreeplan(Request $request)
     {
+        dd('sdfsdfsd');
         if (!Auth::user()) {
             return redirect()->route('login')->with('error', 'Please log in first.');
         }
