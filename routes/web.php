@@ -59,6 +59,7 @@ use App\Http\Controllers\superadmin\SuperadminSubscriptionController;
 use App\Http\Controllers\Bikes\superadmin\BikeController as SuperadminBikeController;
 use App\Http\Controllers\Autoservices\ServicesController as AutoservicesServicesController;
 use App\Http\Controllers\Autoservices\superadmin\ShopController as SuperadminShopController;
+use App\Http\Controllers\ManageAdminsController;
 use App\Models\Post;
 use Illuminate\Support\Facades\Artisan;
 
@@ -298,11 +299,12 @@ Route::group(['prefix' => 'superadmin', 'as' => 'superadmin.'], function () {
         // ====================superadmin service module ends===================================
 
         Route::resource('shops', SuperadminShopController::class);
+        Route::resource('admins', ManageAdminsController::class);
         Route::post('update-shop-status', [SuperadminShopController::class, 'update_status'])->name('update_shop_status');
 
         Route::get('shop-reviews', [SuperadminShopController::class, 'shop_reviews'])->name('shop_reviews');
         Route::delete('delete-shop-review/{id}', [SuperadminShopController::class, 'delete_shop_review'])->name('delete_shop_review');
-    Route::get('delete-shop-image/{image_id}/{shop_id}', [ShopController::class, 'deleteShopImage'])->name('delete.shop.image');
+        Route::get('delete-shop-image/{image_id}/{shop_id}', [ShopController::class, 'deleteShopImage'])->name('delete.shop.image');
 
         Route::get('news-letter', [GeneralController::class, 'all_newsletters']);
 

@@ -406,7 +406,11 @@
                             <div>
                                 <h6 class="menu pb-0 mb-1">{{ Auth::user()->name }}</h6>
                                 <p class="menus pb-0 mb-0">
-                                    <span class="badge bg-success">Superadmin</span>
+                                    @if (Auth::guard('superadmin')->user()->role == '')
+                                        <span class="badge bg-success">Superadmin</span>
+                                    @else
+                                        <span class="badge bg-success">Admin</span>
+                                    @endif
                                 </p>
                             </div>
                         </div>

@@ -28,6 +28,136 @@ class ShopController extends Controller
         return view('superadmin.autoservices.shops.index', compact('shops'));
     }
 
+    public function create()
+    {
+        $provinces = Province::all();
+        $cities = City::all();
+        $services = Services::all()->groupBy('category_name');
+        $amenities = Amenities::all();
+        $users = User::where('role', '!=', 3)
+            ->whereNotNull('shop_package')
+            ->whereDoesntHave('shop') // Checks if no related shop exists
+            ->orderBy('name', 'asc') // Optional: alphabetical order
+            ->get();
+
+        return view('superadmin.autoservices.shops.create', compact('provinces', 'cities', 'services', 'amenities', 'users'));
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'dealer_id' => 'required',
+            'shop_name' => 'required|string|max:255|unique:shops,name',
+            'shop_contact' => 'required|string|max:20|unique:shops,number|min:13',
+            'shop_email' => 'required|email|max:255|unique:shops,email',
+            'province' => 'required|exists:provinces,id',
+            'city' => 'required|exists:cities,id',
+            'postal_code' => 'required|string|max:20',
+            'shop_address' => 'required|string',
+            'description' => 'required|string',
+            'shop_logo' => 'required|image|mimes:jpeg,png,jpg|max:8192',
+            'shop_images.*' => 'nullable|image|mimes:jpeg,png,jpg|max:8192',
+            'services' => 'required|array',
+            'services.*' => 'exists:services,id',
+            'amenities' => 'nullable|array',
+            'amenities.*' => 'exists:amenities,id',
+            'days' => 'required|array',
+            'days.*.start' => 'required_with:days.*.end|date_format:H:i',
+            'days.*.end' => 'required_with:days.*.start|date_format:H:i',
+            'website' => 'nullable|url|max:255',
+            'facebook' => 'nullable|url|max:255',
+            'instagram' => 'nullable|url|max:255',
+            'twitter' => 'nullable|url|max:255',
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+            $user = User::findOrFail($request->dealer_id);
+            if (!$user) {
+                return redirect()->back()->with('imagedeleteresponse', 'Dealer not found.');
+            }
+            // Rename logo
+            $logoFile = $request->file('shop_logo');
+            $logoName = microtime(true) . '.' . $logoFile->getClientOriginalExtension();
+            $logoPath = $logoFile->storeAs('shop_logos', $logoName, 'public');
+
+            $shop = Shops::create([
+                'dealer_id' => $user->id,
+                'name' => $validated['shop_name'],
+                'number' => $validated['shop_contact'],
+                'email' => $validated['shop_email'],
+                'province' => $validated['province'],
+                'city' => $validated['city'],
+                'postal_code' => $validated['postal_code'],
+                'address' => $validated['shop_address'],
+                'description' => $validated['description'],
+                'website' => $request->input('website'),
+                'facebook' => $request->input('facebook'),
+                'instagram' => $request->input('instagram'),
+                'twitter' => $request->input('twitter'),
+                'logo' => $logoPath,
+                'online_quotes' => $request->input('online_quotes') ? 1 : 0,
+                'offer_services' => $request->input('offer_services') ? 1 : 0,
+                'latitude' => $request->input('latitude'),
+                'longitude' => $request->input('longitude'),
+                'is_featured' => $user->shop_pkg->metadata->feature_allowed == '1' ?? '0',
+
+            ]);
+
+            foreach ($request->services as $service_id) {
+                ShopServices::create([
+                    'shop_id' => $shop->id,
+                    'service_id' => $service_id,
+                ]);
+            }
+
+            if ($request->amenities) {
+                foreach ($request->amenities as $amenity_id) {
+                    ShopAmenities::create([
+                        'shop_id' => $shop->id,
+                        'amenity_id' => $amenity_id,
+                    ]);
+                }
+            }
+
+            foreach ($request->days as $day => $data) {
+                if (!isset($data['start'], $data['end'])) {
+                    continue;
+                }
+
+                ShopTimings::create([
+                    'shop_id' => $shop->id,
+                    'day' => $day,
+                    'start_time' => $data['start'],
+                    'end_time' => $data['end'],
+                    // 'active' => isset($data['active']),
+                ]);
+            }
+
+            if ($request->hasFile('shop_images')) {
+                foreach ($request->file('shop_images') as $img) {
+                    if (!$img) continue;
+
+                    $imageName = microtime(true) . '.' . $img->getClientOriginalExtension();
+                    $path = $img->storeAs('shop_images', $imageName, 'public');
+
+                    ShopImages::create([
+                        'shop_id' => $shop->id,
+                        'path' => $path,
+                    ]);
+                }
+            }
+
+            DB::commit();
+
+            return redirect()->route('superadmin.shops.index')->with('success', 'Shop created successfully.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withErrors(['error' => 'Something went wrong: ' . $e->getMessage()]);
+        }
+    }
+
     public function update_status(Request $request)
     {
 
@@ -57,12 +187,11 @@ class ShopController extends Controller
         }
         $user = User::findOrFail($shop->dealer_id);
         return view('superadmin.autoservices.shops.edit', compact('shop', 'provinces', 'cities', 'services', 'amenities', 'user'));
-       
     }
 
     public function update(Request $request, $id)
     {
-    
+
         $validated = $request->validate([
             'shop_name' => 'required|string|max:255|unique:shops,name,' . $id,
             'shop_contact' => 'required|string|max:20|min:13|unique:shops,number,' . $id,
@@ -228,5 +357,11 @@ class ShopController extends Controller
 
             return redirect()->back()->with('error', 'Failed to delete review. Please try again later.');
         }
+    }
+
+    public function destroy($id)
+    {
+        Shops::findOrFail($id)->delete();
+        return redirect()->back()->with('success', 'Shop deleted successfully!');
     }
 }

@@ -162,7 +162,7 @@
     <div class="tab-content " id="myTabContent">
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
             {{-- tab start  --}}
-            <div class="container ">
+            <div class="container">
                 <div class="row align-items-center mb-2">
                     {{--  <div class="col-md-4 mb-md-0 mb-2">
                         <div class="input-group" style="width: 100%;">

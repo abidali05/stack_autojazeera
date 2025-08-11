@@ -492,7 +492,6 @@ class ShopController extends Controller
             DB::commit();
             return response()->json(['success' => true, 'message' => 'Quote Submitted Successfully']);
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();
             Log::error('Quote submission failed: ' . $e->getMessage());
             return response()->json(['success' => false, 'message' => 'Something went wrong. Please try again.']);
