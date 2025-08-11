@@ -526,7 +526,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <p class="twentyfourblack" style="color:#281F48 !important ;    font-weight: 500;"><strong>Quick filters</strong></p>
+                <p class="twentyfourblack" style="color:#281F48 !important;font-weight: 500;"><strong>Quick filters</strong></p>
             </div>
             <div class="col-lg-12">
                 <form method="post"

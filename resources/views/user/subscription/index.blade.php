@@ -271,7 +271,7 @@
                             </p>
                             <span class="pt-5" style="font-size: 16px ; color:black"><strong>Choose the Plan That Suits You
                                     and Start Posting Today!</strong><img src="{{ asset('web/images/start_posting.svg') }}"
-                                    style="height:60px;width:60px" class="img-fluid md-3 ms-3 " alt="..."></span>
+                                    style="height:80px;width:80px" class="img-fluid md-3 ms-3 " alt="..."></span>
 
                         </div>
                     </div>

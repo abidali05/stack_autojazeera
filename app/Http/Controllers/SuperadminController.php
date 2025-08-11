@@ -25,14 +25,6 @@ class SuperadminController extends Controller
 
     public function login(LoginRequest $request)
     {
-        // dd($request->all());
-
-
-        // $validator = Validator::make($request->all(), [
-        //     'email' => 'required|email',
-        //     'password' => 'required',
-        // ]);
-
         $credentials = $request->only('email', 'password');
 
         if (Auth::guard('superadmin')->attempt($credentials)) {

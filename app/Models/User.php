@@ -88,21 +88,22 @@ class User extends Authenticatable
 
         return null;
     }
+
     public function getpackagenameAttribute()
-{
-    Stripe::setApiKey(config('services.stripe.secret'));
+    {
+        Stripe::setApiKey(config('services.stripe.secret'));
 
-    if (!empty($this->package)) {
-        try {
-            $sub = Product::retrieve($this->package);
-            return $sub?->name;
-        } catch (\Exception $e) {
-            return null;
+        if (!empty($this->package)) {
+            try {
+                $sub = Product::retrieve($this->package);
+                return $sub?->name;
+            } catch (\Exception $e) {
+                return null;
+            }
         }
-    }
 
-    return null;
-}
+        return null;
+    }
 
 
     public function getfeatureAdCountAttribute()
@@ -203,74 +204,72 @@ class User extends Authenticatable
     // }
 
     public function getServicePackageNameAttribute()
-{
-    Stripe::setApiKey(config('services.stripe.secret'));
+    {
+        Stripe::setApiKey(config('services.stripe.secret'));
 
-    if (!empty($this->shop_package)) {
-        try {
-            $sub = Product::retrieve($this->shop_package);
-            return $sub?->name;
-        } catch (\Exception $e) {
-            return null;
-        }
-    }
-
-    return null;
-}
-
-
-public function getShopPkgAttribute()
-{
-    Stripe::setApiKey(config('services.stripe.secret'));
-
-    if ($this->role == 2 && !empty($this->dealer_id)) {
-        $user = User::find($this->dealer_id);
-
-        if ($user && !empty($user->shop_package)) {
+        if (!empty($this->shop_package)) {
             try {
-                return Product::retrieve($user->shop_package);
+                $sub = Product::retrieve($this->shop_package);
+                return $sub?->name;
             } catch (\Exception $e) {
                 return null;
             }
         }
 
-    } elseif (!empty($this->shop_package)) {
-        try {
-            return Product::retrieve($this->shop_package);
-        } catch (\Exception $e) {
-            return null;
-        }
+        return null;
     }
 
-    return null;
-}
 
+    public function getShopPkgAttribute()
+    {
+        Stripe::setApiKey(config('services.stripe.secret'));
 
-  public function getAdsPkgAttribute()
-{
-    Stripe::setApiKey(config('services.stripe.secret'));
+        if ($this->role == 2 && !empty($this->dealer_id)) {
+            $user = User::find($this->dealer_id);
 
-    if ($this->role == 2 && !empty($this->dealer_id)) {
-        $user = User::find($this->dealer_id);
-
-        if ($user && !empty($user->package)) {
+            if ($user && !empty($user->shop_package)) {
+                try {
+                    return Product::retrieve($user->shop_package);
+                } catch (\Exception $e) {
+                    return null;
+                }
+            }
+        } elseif (!empty($this->shop_package)) {
             try {
-                return Product::retrieve($user->package);
+                return Product::retrieve($this->shop_package);
             } catch (\Exception $e) {
                 return null;
             }
         }
 
-    } elseif (!empty($this->package)) {
-        try {
-            return Product::retrieve($this->package);
-        } catch (\Exception $e) {
-            return null;
-        }
+        return null;
     }
 
-    return null;
-}
+
+    public function getAdsPkgAttribute()
+    {
+        Stripe::setApiKey(config('services.stripe.secret'));
+
+        if ($this->role == 2 && !empty($this->dealer_id)) {
+            $user = User::find($this->dealer_id);
+
+            if ($user && !empty($user->package)) {
+                try {
+                    return Product::retrieve($user->package);
+                } catch (\Exception $e) {
+                    return null;
+                }
+            }
+        } elseif (!empty($this->package)) {
+            try {
+                return Product::retrieve($this->package);
+            } catch (\Exception $e) {
+                return null;
+            }
+        }
+
+        return null;
+    }
 
 
     public function getTotalAdsCountAttribute()
@@ -284,5 +283,9 @@ public function getShopPkgAttribute()
             $bike_ads = BikePost::where('dealer_id', $this->id)->count();
             return $car_ads + $bike_ads;
         }
+    }
+
+    public function shop() {
+        return $this->hasOne(Shops::class, 'dealer_id');
     }
 }
