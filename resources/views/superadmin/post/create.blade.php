@@ -605,7 +605,7 @@
 
                     <input type="hidden" name="latitude" id="latitude">
                     <input type="hidden" name="longitude" id="longitude">
-                    <div class="mb-3 p-3" style="background-color:#F0F3F6;">
+                    <div class="mb-3 p-3" >
                         <label for="dealerSelect" class="form-label" style="color:white">Select Dealer</label>
 
                         <select class="form-select " id="dealerSelect" name="dealer">
@@ -625,7 +625,7 @@
                     </div>
                     <!-- Step 2: Basic Info -->
                     {{-- <input type="hidden" value="{{ Auth::user()->id }}" name="dealer"> --}}
-                    <div class="mb-3 p-3 rounded" style="background-color:#F0F3F6;">
+                    <div class=" p-3 rounded" >
                         <h4 class="step-header">Basic Info</h4>
                         <div class="mb-3 d-none">
                             <label for="adTitle" class="form-label">Title <span style="color:#FD5631">*</span></label>
@@ -698,7 +698,7 @@
                     </div>
 
                     <!-- Step 3: Currency & Price -->
-                    <div class="mb-3 p-3 rounded" style="background-color:#F0F3F6;">
+                    <div class=" p-3 rounded" >
                         <h4 class="step-header">Price</h4>
                         <div class="row align-items-center mb-3">
                             <div class="col-4">
@@ -736,7 +736,7 @@
                         </div> --}}
                     </div>
                     <!-- Step 4: Vehicle Information -->
-                    <div class="mb-3 p-3 rounded" style="background-color:#F0F3F6;">
+                    <div class=" p-3 rounded">
                         <h4 class="step-header">Vehicle information</h4>
                         <input type="hidden" name="step4" value="step4">
                         <div class="row mb-3">
@@ -999,7 +999,7 @@
                     </div>
                     <!-- Step 5: Vehicle Features -->
 
-                    <div class="mb-3 p-3 rounded" style="background-color:#F0F3F6;">
+                    <div class=" p-3 rounded">
                         <h4 class="step-header">Features <span class="text-danger">*</span></h4>
 
                         <div class="feature-section">
@@ -1081,7 +1081,7 @@
                         @enderror
                     </div>
                     <!-- Step 6: Upload Photos / Videos -->
-                    <div class="mb-3 p-3 rounded" style="background-color:#F0F3F6;">
+                    <div class=" p-3 rounded" >
                         <h4 class="step-header">Photos</h4>
 
                         <p class="rounded p-3" style="background-color:#281F48; color: white; ">
@@ -1126,10 +1126,10 @@
                         <div id="previewContainer" class="mt-4 d-flex flex-wrap gap-3"></div>
                     </div>
 
-                    <div class="mb-3 p-3 rounded" style="background-color:#F0F3F6;">
+                    <div class=" p-3 rounded" >
 
                         <h4 class="step-header">Upload Documents <span
-                                style="color:white ;font-size:12px">(Optional)</span></h4>
+                                style="color:#281F48 ;font-size:12px">(Optional)</span></h4>
                         <p class="rounded p-3" style="background-color:#281F48; color: white; ">
                             You can upload a maximum of <strong>1 auction sheet</strong> and <strong>1 brochure PDF
                                 file</strong>.
@@ -1185,7 +1185,7 @@
 
                     </div>
                     <!-- Step 8: Location -->
-                    <div class="mb-3 p-3 rounded" style="background-color:#F0F3F6;">
+                    <div class="p-3 rounded" >
                         <h4 class="mb-4 step-header">Location</h4>
 
                         <div class="row mb-3">
@@ -1277,7 +1277,7 @@
                     </div>
                     <!-- Step 9: Contacts -->
 
-                    <div class="mb-3 p-3" style="background-color:#F0F3F6;">
+                    <div class="mb-3 p-3" >
                         <h4 class="step-header">Contacts</h4>
                         <div class="row mb-3">
                             <div class="col-md-6">

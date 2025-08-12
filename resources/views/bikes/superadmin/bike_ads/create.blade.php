@@ -253,6 +253,25 @@
             font-weight: 700;
             font-size: 48px;
         }
+        .select-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.select-wrapper select {
+    padding-right: 2rem; /* space for the icon */
+}
+
+.select-wrapper i {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    pointer-events: none; /* make sure clicks go to the select */
+    transform: translateY(-50%);
+    color: #6c757d;
+    font-size: 1rem;
+}
     </style>
 
     <style>
@@ -416,20 +435,20 @@
                     </div>
                     <!-- Step 4: Vehicle Information -->
                     <div class=" row mb-3  rounded" style="background-color:white;">
-                        <div class="col-md-12 mb-2">
-                            <div class="row">
-                                <select name="dealer" class="form-control" required
-                                    style="     border: 1px solid #D0D5DD !important;   line-height: 1 !important;"
-                                    id="dealer">
-                                    <option value="">Select Dealer</option>
-                                    @foreach ($users as $dealer)
-                                        <option value="{{ $dealer->id }}">{{ $dealer->name }}</option>
-                                    @endforeach
-                                </select>
-
-                            </div>
-                            <div id="dealerSelect-error" class="orange"></div>
-                        </div>
+                       <div class="col-md-12 mb-2">
+    <div class="select-wrapper">
+        <select name="dealer" class="form-control" required
+            style="border: 1px solid #D0D5DD !important; line-height: 1 !important;"
+            id="dealer">
+            <option value="">Select Dealer</option>
+            @foreach ($users as $dealer)
+                <option value="{{ $dealer->id }}">{{ $dealer->name }}</option>
+            @endforeach
+        </select>
+        <i class="bi bi-chevron-down"></i>
+    </div>
+    <div id="dealerSelect-error" class="orange"></div>
+</div>
                         <div class="col-md-12">
                             <div class="row">
                                 <h4 class="step-header">Vehicle information</h4>
