@@ -335,6 +335,8 @@ Route::group(['prefix' => 'superadmin', 'as' => 'superadmin.'], function () {
 
     });
 });
+
+
 Route::get('dealer/{id}/ads/all', [SuperadminAddsController::class, 'allDealerAds'])->name('dealer.posts.all');
 Route::get('dealer/{id}/bikes/all', [SuperadminAddsController::class, 'allDealerBikeAds'])->name('dealer.bikeposts.all');
 

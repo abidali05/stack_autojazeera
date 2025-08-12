@@ -27,14 +27,14 @@ class ManageAdminsController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:superadmins,email',
-            'phone' => 'required|string|unique:superadmins,number',
+            'number' => 'required|string|unique:superadmins,number',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
         $user = Superadmin::create([
             'name' => $request->name,
             'email' => $request->email,
-            'number' => $request->phone,
+            'number' => $request->number,
             'password' => bcrypt($request->password),
             'role' => '2',
         ]);

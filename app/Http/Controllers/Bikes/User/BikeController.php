@@ -70,7 +70,7 @@ class BikeController extends Controller
     }
 
     public function search(Request $request)
-    {
+    {   
         $makes = BikeMake::where('status', 1)->get();
         $models = BikeModels::where('status', 1)->get();
         $colors = Color::all();
@@ -193,6 +193,7 @@ class BikeController extends Controller
 
     public function filter(Request $request)
     {
+        // dd('sdsdfsdf');
         $filteredData = collect($request->all())->map(function ($value) {
             if (is_array($value)) {
                 return empty($value) ? null : $value;

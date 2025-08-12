@@ -623,39 +623,40 @@
                         </select><i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
                     </div>
                 </div>
-                <!--     <div class="my-3">
-                                                                                                                <label class="form-label mb-3">City</label>
-                                                                                                                <div class="select-wrapper">
-                                                                                                                    <select class="form-select select-search filter-style" style="width:100% !important"
-                                                                                                                        id="city_filter">
-                                                                                                                        <option value="" disabled selected>Select City</option>
-                                                                                                                        {{-- @foreach ($cities as $city)
-                                        <option value="{{ $city->id }}">{{ $city->name }} ({{ $city->count }})</option>
-                                    @endforeach --}}
-                                                                                                                    </select><i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
-                                                                                                                </div>
-                                                                                                            </div> -->
+                {{-- <div class="my-3">
+                    <label class="form-label mb-3">City</label>
+                    <div class="select-wrapper">
+                        <select class="form-select select-search filter-style" style="width:100% !important"
+                            id="city_filter">
+                            <option value="" disabled selected>Select City</option>
+                            @foreach ($cities as $city)
+                                <option value="{{ $city->id }}">{{ $city->name }} ({{ $city->count }})</option>
+                            @endforeach
+                        </select><i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
+                    </div>
+                </div> --}}
 
                 {{-- <div class="my-2">
                     <label class="form-label mb-3 citylabel d-none"><strong>City</strong></label>
                     <div id="city_filter_wrapper"
-                        style="max-height: 200px !important ;     overflow-y: scroll;
+                        style="max-height: 200px !important; overflow-y: scroll;
                                 scrollbar-color: #1F1B2D transparent;
                                 scrollbar-width: thin;">
                     </div>
                 </div> --}}
 
                 <div class="my-2">
-                    <label class="form-label mb-3 mt-2 citylabel "><strong>City</strong></label>
+                    <label class="form-label mb-3 mt-2 citylabel"><strong>City</strong></label>
                     <div class="select-wrapper">
-                        <select class="form-select select2 select-search assembly-filter filter-style assembly_filter"
+                        <select class="form-select select2 select-search city-filter filter-style"
                             style="width:100% !important" id="city">
                             <option value="" disabled selected>Select Province First</option>
                             <option value="any">Any</option>
                         </select>
-                        <i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
+                        <i class="bi bi-chevron-down" style="color: #BFBEC3;"></i>
                     </div>
                 </div>
+
                 <div class="my-2">
                     <label class="form-label mb-2 mt-2"><strong>Price</strong></label>
                     <div class="slider-container">
@@ -736,7 +737,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-12 divheight">
                     <label class="form-label mb-3 mt-2"><strong>Body type</strong></label>
                     @foreach ($bodytypes as $bodytype)
@@ -1066,7 +1067,7 @@
                 minimumResultsForSearch: 0
             });
 
-            
+
 
             // Initialize Select2 for other filters (if needed)
             $('.select-search').not('#make_filter, #province_filter, #city').select2({
@@ -1151,7 +1152,7 @@
         //         $.get(`/getCity/${provinceId}?path=${urlPath}`, function(data) {
         //             data.forEach(city => {
         //                 citySelect.append(
-        //                     `<option value="${city.id}" ${city.id == selectedCityId ? 'selected' : ''} >${city.name + '('+ city.bike_count +')' }</option>`
+        //                     `<option value="${city.id}" ${city.id == selectedCityId ? 'selected' : ''} >${city.name + '('+ city.count +')' }</option>`
         //                 );
         //             });
         //             citySelect.trigger('change.select2');
@@ -1159,25 +1160,48 @@
         //     }
         // });
 
-
         $('#province_filter').on('change', function() {
             const provinceId = $(this).val();
             const citySelect = $('#city');
-            var urlPath = encodeURIComponent(window.location.pathname);
-            var selectedCityId = "{{ request()->city }}";
-            citySelect.empty().append('<option value="">Select City</option>');
+            const urlPath = encodeURIComponent(window.location.pathname);
+            const selectedCityId = "{{ request()->city }}";
+            citySelect.empty().append(
+                '<option value="" disabled selected>Select City</option><option value="any">Any</option>');
 
             if (provinceId) {
                 $.get(`/getCity/${provinceId}?path=${urlPath}`, function(data) {
                     data.forEach(city => {
                         citySelect.append(
-                            `<option value="${city.id}" ${city.id == selectedCityId ? 'selected' : ''} >${city.name + '('+ city.count +')' }</option>`
+                            `<option value="${city.id}" ${city.id == selectedCityId ? 'selected' : ''}>${city.name} (${city.count || 0})</option>`
                         );
                     });
                     citySelect.trigger('change.select2');
+                    fetchFilteredResults(); // Trigger filter update
+                }).fail(function(jqXHR, textStatus, errorThrown) {
+                    console.error('Error fetching cities:', textStatus, errorThrown);
                 });
             }
         });
+
+
+        // $('#province_filter').on('change', function() {
+        //     const provinceId = $(this).val();
+        //     const citySelect = $('#city');
+        //     var urlPath = encodeURIComponent(window.location.pathname);
+        //     var selectedCityId = "{{ request()->city }}";
+        //     citySelect.empty().append('<option value="">Select City</option>');
+
+        //     if (provinceId) {
+        //         $.get(`/getCity/${provinceId}?path=${urlPath}`, function(data) {
+        //             data.forEach(city => {
+        //                 citySelect.append(
+        //                     `<option value="${city.id}" ${city.id == selectedCityId ? 'selected' : ''} >${city.name + '('+ city.count +')' }</option>`
+        //                 );
+        //             });
+        //             citySelect.trigger('change.select2');
+        //         });
+        //     }
+        // });
 
         $('#make_filter').on('change', function() {
             const makeId = $(this).val();
@@ -1316,9 +1340,11 @@
 
             let province = $('#province_filter').val() || null;
 
-            let city = $('input.city_filter:checked').map(function() {
-                return this.value;
-            }).get();
+            let city = $('#city').val();
+
+            // let city = $('input.city_filter:checked').map(function() {
+            //     return this.value;
+            // }).get();
 
 
             let urlPath = window.location.pathname.split('/');
@@ -1465,9 +1491,9 @@
 
             $(document).on('change',
                 '.form-select, .price_class, .filter-checkbox, .transmission_filter, \
-                                                                                            #engine_capacity_filter, #from-year-filter, #to-year-filter, \
-                                                                                            #mileage_from, #mileage_to, #sortbyorder, .door_count_filter, .assembly_filter, \
-                                                                                            #featureAd_filter, input[name="userType"], input[name="model"], input[name="city"]',
+                                                                                                        #engine_capacity_filter, #from-year-filter, #to-year-filter, \
+                                                                                                        #mileage_from, #mileage_to, #sortbyorder, .door_count_filter, .assembly_filter, \
+                                                                                                        #featureAd_filter, input[name="userType"], input[name="model"], input[name="city"]',
                 function() {
                     fetchFilteredResults();
                 });
