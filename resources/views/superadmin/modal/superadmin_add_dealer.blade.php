@@ -180,7 +180,7 @@
                     <div class="row mb-3">
                         <label for="province" class="col-sm-4 col-form-label">Province*</label>
                         <div class="col-sm-8">
-                            <select class="form-select" id="province11" name="province">
+                            <select class="form-select" style="color:#281F48;background-color:white;border:1px solid #281F48;text-align:center" id="province11" name="province">
                                 <option value="" selected>Select province</option>
                                 @foreach ($provinces as $province)
                                     <option value="{{ $province->id }}">{{ $province->name }}</option>
@@ -194,7 +194,7 @@
                     <div class="row mb-3">
                         <label for="city" class="col-sm-4 col-form-label">City*</label>
                         <div class="col-sm-8">
-                            <select class="form-select" id="city11" name="city">
+                            <select class="form-select" style="color:#281F48;background-color:white;border:1px solid #281F48;text-align:center" id="city11" name="city">
                                 <option value="" selected>Select City</option>
                                 <!-- Cities will be populated here based on selected province -->
                             </select>
