@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Models\AutoServices\Services;
-use App\Models\Autoservices\Amenities;
+use App\Models\AutoServices\Amenities;
 use App\Models\Autoservices\ShopImages;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Autoservices\ShopTimings;
