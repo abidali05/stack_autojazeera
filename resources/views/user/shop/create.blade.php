@@ -716,7 +716,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <form action="{{ route('shop.store') }}" method="Post" enctype="multipart/form-data">
+                <form id="shopForm" action="{{ route('shop.store') }}" method="Post" enctype="multipart/form-data">
                     @csrf
 
                     <input type="hidden" name="latitude" id="latitude">
@@ -725,7 +725,7 @@
                         <div class="col-md-9 ps-">
                             <label for="shop_name" class="form-label twentyfourlabel">Shop name*</label>
                             <input type="text" class="form-controles" id="shop_name" name="shop_name"
-                                placeholder="Enter Shop name" value="{{ old('shop_name') }}" required>
+                                placeholder="Enter Shop name" value="{{ old('shop_name') }}" >
                         </div>
                         @error('shop_name')
                             <div class="text-danger mt-1">{{ $message }}</div>
@@ -751,7 +751,7 @@
             <div class="col-md-6">
                 <label for="shop_contact" class="form-label twentyfourlabel">Shop Phone number*</label>
                 <input type="text" class="form-controles" id="shop_contact" name="shop_contact"
-                    placeholder="+92 300 1234567" maxlength="16" value="{{ old('shop_contact') }}" required>
+                    placeholder="+92 300 1234567" maxlength="16" value="{{ old('shop_contact') }}" >
 
             </div>
             @error('shop_contact')
@@ -760,16 +760,16 @@
             <div class="col-md-6 ">
                 <label for="shop_email" class="form-label twentyfourlabel">Shop Email*</label>
                 <input type="email" class="form-controles" id="shop_email" name="shop_email"
-                    placeholder="Enter Shop Email" value="{{ old('shop_email') }}"required>
+                    placeholder="Enter Shop Email" value="{{ old('shop_email') }}">
             </div>
             @error('shop_email')
                 <div class="text-danger mt-1">{{ $message }}</div>
             @enderror
             <div class="col-md-4  mt-3">
                 <label for="province" class="form-label twentyfourlabel">Province*</label>
-                <select class="form-select select-start" aria-label="Default select example" name="province"
-                    style="background-color:#F0F3F6 !important ; color:#000000 ; max-width:100% !important;text-align:start !important"
-                    id="province"required>
+                <select class="form-select" aria-label="Default select example" name="province"
+                    style="background-color:#F0F3F6 !important ; color:#000000 ; width:100% !important"
+                    id="province">
                     <option selected>Select province</option>
                     @foreach ($provinces as $province)
                         <option value="{{ $province->id }}" {{ old('province') == $province->id ? 'selected' : '' }}>
@@ -782,9 +782,9 @@
             @enderror
             <div class="col-md-4 mt-3">
                 <label for="city" class="form-label twentyfourlabel">city*</label>
-                <select class="form-select select-start" aria-label="Default select example" name="city"
-                    style="background-color:#F0F3F6 !important ; color:#000000 ; max-width:100% !important;text-align:start !important" id="city"
-                    required>
+                <select class="form-select" aria-label="Default select example" name="city"
+                    style="background-color:#F0F3F6 !important ; color:#000000 ; width:100% !important" id="city"
+                    >
                     <option selected>Select Province first</option>
                     {{-- @foreach ($cities as $city)
                         <option value="{{ $city->id }}" {{old('city') == $city->id ? 'selected' : ''}}>{{ $city->name }}</option>
@@ -797,7 +797,7 @@
             <div class="col-md-4  mt-3">
                 <label for="postal_code" class="form-label twentyfourlabel">Postal Code*</label>
                 <input type="text" class="form-controles" id="postal_code" placeholder="Enter Postal Code"
-                    value="{{ old('postal_code') }}" name="postal_code" required>
+                    value="{{ old('postal_code') }}" name="postal_code" >
             </div>
             @error('postal_code')
                 <div class="text-danger mt-1">{{ $message }}</div>
@@ -805,7 +805,7 @@
             <div class="col-md-12  mt-3">
                 <label for="shop_address" class="form-label twentyfourlabel">Shop Address*</label>
                 <input type="text" class="form-controles" id="shop_address" name="shop_address"
-                    value="{{ old('shop_address') }}" placeholder="Enter Shop Address"required autocomplete="off">
+                    value="{{ old('shop_address') }}" placeholder="Enter Shop Address" autocomplete="off">
             </div>
             @error('shop_address')
                 <div class="text-danger mt-1">{{ $message }}</div>
@@ -872,7 +872,7 @@
             <div class="col-md-12  mt-3">
                 <label for="description" class="form-label twentyfourlabel">About Shop*</label>
                 <textarea class="form-controles" id="description" name="description" rows="3" placeholder="details..."
-                    required>{{ old('description') }}</textarea>
+                    >{{ old('description') }}</textarea>
             </div>
             @error('description')
                 <div class="text-danger mt-1">{{ $message }}</div>
@@ -1225,7 +1225,215 @@
         </div>
     </div>
     {{-- preview modal end --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('shopForm');
 
+            // Rules matching your Laravel validation
+            const rules = {
+                dealer_id: {
+                    required: true
+                },
+                shop_name: {
+                    required: true,
+                    max: 255
+                },
+                shop_contact: {
+                    required: true,
+                    min: 13,
+                    max: 20
+                },
+                shop_email: {
+                    required: true,
+                    email: true,
+                    max: 255
+                },
+                services: {
+                    required: true
+                },
+                days: {
+                    required: true
+                },
+                province: {
+                    required: true
+                },
+                city: {
+                    required: true
+                },
+                postal_code: {
+                    required: true,
+                    max: 20
+                },
+                shop_address: {
+                    required: true
+                },
+                description: {
+                    required: true
+                },
+                shop_logo: {
+                    required: true,
+                    filetypes: ['jpg', 'jpeg', 'png'],
+                    maxsize: 8192
+                },
+                website: {
+                    url: true,
+                    max: 255
+                },
+                facebook: {
+                    url: true,
+                    max: 255
+                },
+                instagram: {
+                    url: true,
+                    max: 255
+                },
+                twitter: {
+                    url: true,
+                    max: 255
+                }
+            };
+
+            function showError(field, message) {
+                removeError(field);
+                field.classList.add('is-invalid');
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'text-danger mt-1 field-error';
+                errorDiv.innerText = message;
+                field.parentNode.appendChild(errorDiv);
+            }
+
+            function removeError(field) {
+                field.classList.remove('is-invalid');
+                const existingError = field.parentNode.querySelector('.field-error');
+                if (existingError) existingError.remove();
+            }
+
+            function validateField(name, field) {
+                const rule = rules[name];
+                if (!rule) return true;
+
+                let value = field.value?.trim?.() ?? '';
+                let file = field.files && field.files[0];
+
+                // Special case: services[]
+                if (name == 'services') {
+                    alert('hello');
+                    let servicesChecked = form.querySelectorAll('input[name="services[]"]:checked').length;
+                    if (rule.required && servicesChecked === 0) {
+                        showError(field.closest('.backcolor') || field, 'Please select at least one service.');
+                        return false;
+                    }
+                    removeError(field.closest('.backcolor') || field);
+                    return true;
+                }
+
+                // Special case: days
+                if (name === 'days') {
+                    let dayBlocks = form.querySelectorAll('input[name^="days["][type="checkbox"]');
+                    let validDays = false;
+                    let daysError = '';
+
+                    dayBlocks.forEach(cb => {
+                        if (cb.checked) {
+                            validDays = true;
+                            let dayName = cb.name.match(/days\[(.*?)\]/)[1];
+                            let start = form.querySelector(`[name="days[${dayName}][start]"]`)?.value;
+                            let end = form.querySelector(`[name="days[${dayName}][end]"]`)?.value;
+                            if (!start || !end) {
+                                daysError = `Please provide start and end time for ${dayName}.`;
+                            }
+                        }
+                    });
+
+                    if (!validDays) {
+                        showError(dayBlocks[0].closest('.border'), 'Please select at least one day.');
+                        return false;
+                    }
+                    if (daysError) {
+                        showError(dayBlocks[0].closest('.border'), daysError);
+                        return false;
+                    }
+
+                    removeError(dayBlocks[0].closest('.border'));
+                    return true;
+                }
+
+                // Required
+                if (rule.required && (!value && !file)) {
+                    showError(field, 'This field is required.');
+                    return false;
+                }
+
+                // Max length
+                if (rule.max && value.length > rule.max) {
+                    showError(field, `Maximum ${rule.max} characters allowed.`);
+                    return false;
+                }
+
+                // Min length
+                if (rule.min && value.length < rule.min) {
+                    showError(field, `Minimum ${rule.min} characters required.`);
+                    return false;
+                }
+
+                // Email format
+                if (rule.email && value && !/^\S+@\S+\.\S+$/.test(value)) {
+                    showError(field, 'Please enter a valid email.');
+                    return false;
+                }
+
+                // URL format
+                if (rule.url && value && !/^(https?:\/\/)?([\w-]+\.)+[\w-]{2,}(\/.*)?$/.test(value)) {
+                    showError(field, 'Please enter a valid URL.');
+                    return false;
+                }
+
+                // File type check
+                if (file && rule.filetypes) {
+                    const ext = file.name.split('.').pop().toLowerCase();
+                    if (!rule.filetypes.includes(ext)) {
+                        showError(field, `Allowed file types: ${rule.filetypes.join(', ')}`);
+                        return false;
+                    }
+                }
+
+                // File size check (KB)
+                if (file && rule.maxsize) {
+                    const sizeKB = file.size / 1024;
+                    if (sizeKB > rule.maxsize) {
+                        showError(field, `Max file size is ${rule.maxsize / 1024} MB`);
+                        return false;
+                    }
+                }
+
+                removeError(field);
+                return true;
+            }
+
+
+            form.addEventListener('submit', function(e) {
+                let valid = true;
+                Object.keys(rules).forEach(name => {
+                    const field = document.getElementById(name) || form.querySelector(
+                        `[name="${name}"]`);
+                    if (field && !validateField(name, field)) {
+                        valid = false;
+                    }
+                });
+                if (!valid) e.preventDefault();
+            });
+
+
+            // Live validation
+            Object.keys(rules).forEach(name => {
+                const field = document.getElementById(name) || form.querySelector(`[name="${name}"]`);
+                if (field) {
+                    field.addEventListener('input', () => validateField(name, field));
+                    field.addEventListener('change', () => validateField(name, field));
+                }
+            });
+        });
+    </script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

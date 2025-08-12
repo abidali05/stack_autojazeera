@@ -201,17 +201,10 @@ class AddsController extends Controller
     }
 
 
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-
         $validationRules = [];
 
-        // switch (true) {
-        // case $request->step <= 4:
         $request->validate([
             'makecompany' => 'required',
             'model' => 'required',
@@ -225,51 +218,21 @@ class AddsController extends Controller
             'transmission' => 'required',
             'driveType' => 'required',
             'exterior_color' => 'required',
-            // ]);
-            // break;
-            // No break here as we want to add further rules for higher steps.
-
-            // case $request->step <= 5:
-            //     $validationRules = array_merge($validationRules, [
             'Features' => 'required',
-            // ]);
-            // break;
-            // No break here as we want to add further rules for higher steps.
-
-            // case $request->step <= 6:
-            //     $validationRules = array_merge($validationRules, [
             'filedata' => 'required',
-            // ]);
-            // break;
-            // No break here as we want to add further rules for higher steps.
-
-            // case $request->step <= 8:
-            //     $validationRules = array_merge($validationRules, [
             'country' => 'required',
             'province' => 'required',
             'city' => 'required',
             'street_address' => 'required',
-            // ]);
-            // break;
-            // No break here as we want to add further rules for higher steps.
-
-            // case $request->step <= 9:
-            //     $validationRules = array_merge($validationRules, [
             'firstName' => 'required',
             'secondName' => 'required',
             'email' => 'required|email',
-            //'area' => 'required',
             'number' => 'required|string',
         ]);
-        // break;
-        // }
-
 
         $post = new Post;
 
-        // if ($request->step >= 4) {
         $post->fill([
-            // 'dealer_id' => $request->dealer,
             'title' => $request->title,
             'condition' => $request->condition,
             'assembly' => $request->assembly,
@@ -400,8 +363,6 @@ class AddsController extends Controller
         return redirect()->route('thankyou');
         // return response()->json(['success' => true, 'redirect' => url('thankyou')]);
     }
-
-    private function handleStepFour($post, $request) {}
 
     private function handleFeatures($postId, $features)
     {

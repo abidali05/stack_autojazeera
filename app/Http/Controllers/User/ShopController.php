@@ -71,9 +71,6 @@ class ShopController extends Controller
 
     public function store(Request $request)
     {
-        // Log::info($request->all());
-
-        // dd($request->all());
         $validated = $request->validate([
             'shop_name' => 'required|string|max:255|unique:shops,name',
             'shop_contact' => 'required|string|max:20|unique:shops,number|min:13',
