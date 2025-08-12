@@ -940,8 +940,6 @@ class AddsController extends Controller
             $query->whereIn('body_type', $bodyTypeFilter);
         }
 
-
-
         if ($request->filled('min_price')) {
             $query->where('price', '>=', (int)$request->min_price);
         }
@@ -1002,10 +1000,18 @@ class AddsController extends Controller
             $query->where('locations.province', $request->province);
         }
 
+        // if ($request->filled('city')) {
+        //     $cities = is_array($request->city) ? $request->city : [$request->city];
+        //     $query->whereIn('locations.city', $cities);
+        // }
+
         if ($request->filled('city')) {
-            $cities = is_array($request->city) ? $request->city : [$request->city];
-            $query->whereIn('locations.city', $cities);
-        }
+    Log::info('Applying city filter: ' . $request->city);
+    $query->where(function ($q) use ($request) {
+        $q->where('locations.city', (int) $request->city)
+          ->orWhereNull('locations.city');
+    });
+}
 
         if ($request->filled('sortby')) {
             switch ($request->sortby) {

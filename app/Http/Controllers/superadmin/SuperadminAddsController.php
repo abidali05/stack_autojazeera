@@ -296,7 +296,6 @@ class SuperadminAddsController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
-    private function handleStepFour($post, $request) {}
 
     private function handleFeatures($postId, $features)
     {
@@ -687,7 +686,7 @@ class SuperadminAddsController extends Controller
             $oldprice = $post->price;
 
             $post->fill([
-                'dealer_id' => $request->dealer,
+                'dealer_id' => $post->dealer_id,
                 'title' => $request->title,
                 'condition' => $request->condition,
                 'assembly' => $request->assembly,
@@ -713,6 +712,7 @@ class SuperadminAddsController extends Controller
             ]);
 
             $user = User::findOrFail($post->dealer_id);
+            
             $dealerId = $user->role == 2 ? $user->dealer_id : $user->id;
 
             Stripe::setApiKey(config('services.stripe.secret'));
@@ -922,7 +922,6 @@ class SuperadminAddsController extends Controller
 
     public function carlist(Request $request)
     {
-        // dd($request->all());
         $page = $request->input('page', 1);
         $condition = $request->input('condition') === '1e' ? null : $request->input('condition');
         $bodytype = $request->input('bodytype') === '1e' ? null : $request->input('bodytype');
@@ -1120,6 +1119,7 @@ class SuperadminAddsController extends Controller
             return redirect()->back()->with('price_alert', 'Price Alert removed successfully');
         }
     }
+    
     public function search_data($id, $type)
     {
         $users = User::where('role', 1)->get();

@@ -1011,7 +1011,9 @@
 
             <div class="tab-pane fade" id="shop" role="tabpanel">
                 <div class="col-md-12 text-end mb-3">
-                    <button class="btn custom-btn-nav new py-0 rounded roleid">Add New Shop</button>
+                    <a href="{{ route('superadmin.shops.create') }}" class="btn custom-btn-nav rounded">
+                    Add New Shop
+                </a>
                 </div>
                 <div class="table-container">
                     <table class="table table-striped align-middle datatable12" style="min-width: 1000px;">
