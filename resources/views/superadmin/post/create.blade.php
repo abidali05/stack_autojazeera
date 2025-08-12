@@ -2761,10 +2761,4 @@
             }
         });
     </script>
-
-
-
-
-
-
 @endsection

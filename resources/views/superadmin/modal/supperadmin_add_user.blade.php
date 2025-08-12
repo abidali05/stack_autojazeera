@@ -40,24 +40,24 @@
         transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
     }
 </style>
-<div class="modal fade" id="superadmin_add_userModal" tabindex="-1" aria-labelledby="addDealerModalLabel" aria-hidden="true">
+<div class="modal fade" id="superadmin_add_userModal" tabindex="-1" aria-labelledby="addDealerModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-   <div class="border-0 modal-header"
-                                                style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
-										
-												 <h5 class="modal-title" id="newsletterresponseLabel"> <strong> 	Add New User	</strong></h5>
-                                                <button type="button" class="btn-close"
-                                                    style="background-color: #D9D9D9 !important; color: #FD5631;"
-                                                    data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
+            <div class="border-0 modal-header"
+                style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+
+                <h5 class="modal-title" id="newsletterresponseLabel"> <strong> Add New User </strong></h5>
+                <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;"
+                    data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
             <form id="superadmin_add_userForm" method="post" action="{{ route('superadmin.user.store') }}"
                 enctype="multipart/form-data">
                 @csrf
-                <div class="modal-body p-5 "  style="background-color:#F0F3F6 !important;">
+                <div class="modal-body p-5 " style="background-color:#F0F3F6 !important;">
                     <div class="row mb-4">
                         <div class="col-6">
-             
+
                         </div>
                         <div class="col-6 d-flex justify-content-end">
                             <div class="dropzone"
@@ -100,20 +100,25 @@
                             </div>
                         </div>
                     </div>
-                   @php
-       $dealershipNames = \App\Models\User::where('status','active')->where('role','1')->whereNotNull('dealershipName')->pluck('dealershipName');
-    @endphp
+                    @php
+                        $dealershipNames = \App\Models\User::where('status', 'active')
+                            ->where('role', '1')
+                            ->whereNotNull('dealershipName')
+                            ->pluck('dealershipName');
+                    @endphp
                     <input type="hidden" name="role" id="role_id">
                     <div class="row mb-3 mt-3" id="dealershipNameRow">
                         <label for="dealershipName" class="col-sm-4 col-form-label">Dealership Name*</label>
                         <div class="col-sm-8">
-							<select style="color:#281F48;background-color:white;border:1px solid #281F48;text-align:center" name="dealershipName" id="dealershipName" class=" form-select" required>
-								<option value="">Select Dealership Name </option>
-								@foreach($dealershipNames as $dealershipName)
-								<option value="{{$dealershipName}}">{{$dealershipName}}</option>
-								@endforeach
-							</select>
-                           
+                            <select
+                                style="color:#281F48;background-color:white;border:1px solid #281F48;text-align:center"
+                                name="dealershipName" id="dealershipName" class=" form-select" required>
+                                <option value="">Select Dealership Name </option>
+                                @foreach ($dealershipNames as $dealershipName)
+                                    <option value="{{ $dealershipName }}">{{ $dealershipName }}</option>
+                                @endforeach
+                            </select>
+
                             @error('dealershipName')
                                 <div class="alert bg-none">{{ $message }}</div>
                             @enderror
@@ -133,13 +138,14 @@
                     <div class="row mb-3">
                         <label for="phone" class="col-sm-4 col-form-label">Phone*</label>
                         <div class="col-sm-1">
-                            <input type="tel" class="form-control px-0 ps-1" id="phone" placeholder="Enter phone"
-                                value="{{ '+92' }}" disabled>
+                            <input type="tel" class="form-control px-0 ps-1" id="phone"
+                                placeholder="Enter phone" value="{{ '+92' }}" disabled>
 
                         </div>
                         <div class="col-sm-7">
                             <input type="string" class="form-control" id="phone" name="number"
-                                placeholder="Enter phone" maxlength="10" pattern="\d{10}" oninput="this.value = this.value.replace(/\D/g, '').slice(0, 10);" required>
+                                placeholder="Enter phone" maxlength="10" pattern="\d{10}"
+                                oninput="this.value = this.value.replace(/\D/g, '').slice(0, 10);" required>
                             @error('number')
                                 <div class="alert ">{{ $message }}</div>
                             @enderror
@@ -169,7 +175,7 @@
                     <div class="row mb-3 d-none">
                         <label for="province" class="col-sm-4 col-form-label">Province*</label>
                         <div class="col-sm-8">
-                            <select  class="form-select" id="province11" name="province">
+                            <select class="form-select" id="province11" name="province">
                                 <option value="" selected>Select province</option>
                                 @foreach ($provinces as $province)
                                     <option value="{{ $province->id }}">{{ $province->name }}</option>
@@ -195,7 +201,9 @@
                     <div class="row mb-3">
                         <label for="addStatus" class="col-sm-4 col-form-label">Add Status*</label>
                         <div class="col-sm-8">
-                            <select class="form-select" style="color:#281F48;background-color:white;border:1px solid #281F48;text-align:center" id="addStatus" name="status" required>
+                            <select class="form-select"
+                                style="color:#281F48;background-color:white;border:1px solid #281F48;text-align:center"
+                                id="addStatus" name="status" required>
                                 <option value="" selected>Select Status</option>
                                 <option value="active">Active</option>
                                 <option value="inactive">Inactive</option>
@@ -311,7 +319,7 @@
         }
 
         // Clear the input value to allow re-selection of the same file
-        
+
     });
 
     // Delete the image

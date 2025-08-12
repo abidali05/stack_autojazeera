@@ -39,6 +39,7 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
         'free_forever' => env('LIVE_PACKAGE_FOREVER'),
+        'ads_start_plan' => env('ADS_START_PLAN'),
     ],
     'google_maps' => [
         'key' => env('GOOGLE_MAP_API'),
