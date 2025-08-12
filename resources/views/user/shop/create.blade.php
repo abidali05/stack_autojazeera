@@ -767,8 +767,8 @@
             @enderror
             <div class="col-md-4  mt-3">
                 <label for="province" class="form-label twentyfourlabel">Province*</label>
-                <select class="form-select" aria-label="Default select example" name="province"
-                    style="background-color:#F0F3F6 !important ; color:#000000 ; width:100% !important"
+                <select class="form-select select-start" aria-label="Default select example" name="province"
+                    style="background-color:#F0F3F6 !important ; color:#000000 ; max-width:100% !important;text-align:start !important"
                     id="province"required>
                     <option selected>Select province</option>
                     @foreach ($provinces as $province)
@@ -782,8 +782,8 @@
             @enderror
             <div class="col-md-4 mt-3">
                 <label for="city" class="form-label twentyfourlabel">city*</label>
-                <select class="form-select" aria-label="Default select example" name="city"
-                    style="background-color:#F0F3F6 !important ; color:#000000 ; width:100% !important" id="city"
+                <select class="form-select select-start" aria-label="Default select example" name="city"
+                    style="background-color:#F0F3F6 !important ; color:#000000 ; max-width:100% !important;text-align:start !important" id="city"
                     required>
                     <option selected>Select Province first</option>
                     {{-- @foreach ($cities as $city)

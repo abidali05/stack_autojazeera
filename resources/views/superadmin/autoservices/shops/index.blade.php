@@ -139,11 +139,11 @@
                         <tr>
                             <td>{{ $key + 1 }}</td>
                             <td>
-                                <a class="primary-color-custom cancel" data-id="{{ $shop->id }}" title="View"
+                                <a class="primary-color-custom cancel" style="text-decoration: none" data-id="{{ $shop->id }}" title="View"
                                     data-bs-toggle="modal" data-bs-target="#previewmodal{{ $shop->id }}">
                                     <i class="bi bi-eye"></i>
                                 </a>
-                                <a class="primary-color-custom cancel"
+                                <a class="primary-color-custom cancel" style="text-decoration: none"
                                     href="{{ url('superadmin/shops/' . $shop->id . '/edit') }}" title="Edit">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
@@ -151,7 +151,7 @@
                                 <form action="{{ route('superadmin.shops.destroy', $shop->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="primary-color-custom cancel" title="Delete"
+                                    <button type="submit" style="border: none" class="primary-color-custom cancel" title="Delete"
                                         onclick="return confirm('Are you sure you want to delete this shop?')">
                                         <i class="bi bi-trash"></i>
                                     </button>

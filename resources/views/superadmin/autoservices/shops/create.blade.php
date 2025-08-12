@@ -731,9 +731,9 @@
                         <div class="col-md-3  mt-3">
                             <label for="dealer_id" class="form-label twentyfourlabel">Select Dealer*</label>
                             <select class="form-select" aria-label="Default select example" name="dealer_id"
-                                style="background-color:#F0F3F6 !important ; color:#000000 ; width:100% !important"
+                                style="background-color:#F0F3F6 !important ; color:#000000 ; max-width:100% !important;text-align:start !important"
                                 id="dealer_id"required>
-                                <option value="">-- Select Dealer --</option>
+                                <option value="">Select Dealer </option>
                                 @foreach ($users as $user)
                                     <option value="{{ $user->id }}">{{ $user->name }}</option>
                                 @endforeach
@@ -780,7 +780,7 @@
             <div class="col-md-4  mt-3">
                 <label for="province" class="form-label twentyfourlabel">Province*</label>
                 <select class="form-select" aria-label="Default select example" name="province"
-                    style="background-color:#F0F3F6 !important ; color:#000000 ; width:100% !important"
+                    style="background-color:#F0F3F6 !important ; color:#000000 ; max-width:100% !important;text-align:start !important"
                     id="province"required>
                     <option selected>Select province</option>
                     @foreach ($provinces as $province)
@@ -795,7 +795,7 @@
             <div class="col-md-4 mt-3">
                 <label for="city" class="form-label twentyfourlabel">city*</label>
                 <select class="form-select" aria-label="Default select example" name="city"
-                    style="background-color:#F0F3F6 !important ; color:#000000 ; width:100% !important" id="city"
+                    style="background-color:#F0F3F6 !important ; color:#000000 ;  max-width:100% !important;text-align:start !important" id="city"
                     required>
                     <option selected>Select Province first</option>
                     {{-- @foreach ($cities as $city)
@@ -913,8 +913,7 @@
             <div class="col-md-12 px-5 py-3 backcolor rounded mt-3">
                 <h4 style="color:#281F48">Photos</h4>
                 <p class="alert alert-dark p-2 rounded p-3" style="background-color:#281F48; color:#9D9D9D !important">
-                    You can upload a minimum of 1 and a maximum of
-                    <span id="maxImagesAllowed">20</span> photos.
+                    You can upload a minimum of 1 and a maximum of <span id="maxImagesAllowed" class="ms-0 text-white">20</span> photos.
                     Max file size: 8 MB. Allowed formats: JPEG, JPG, PNG.
                 </p>
 
