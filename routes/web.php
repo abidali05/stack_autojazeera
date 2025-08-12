@@ -236,6 +236,7 @@ Route::group(['prefix' => 'superadmin', 'as' => 'superadmin.'], function () {
         Route::post('/subscription-update/{id}/update-status', [SuperadminSubscriptionController::class, 'updatestatus'])->name('updatestatus');
 
         Route::resource('dealer', SuperadminDealerController::class);
+        Route::post('dealer-store', [SuperadminDealerController::class, 'dealerStore'])->name('dealerStore');
         Route::post('change-password', [SuperadminController::class, 'admin_change_password'])->name('change_password');
         Route::get('dealeruser/{id}', [SuperadminDealerUserController::class, 'index'])->name('dealeruser');
         Route::resource('dealer-user', SuperadminDealerUserController::class);
