@@ -153,7 +153,7 @@ class ServicesController extends Controller
                     }
 
                     try {
-                        $apiKey = 'AIzaSyBHTfGE9bbvleasezO-T-j1u5UVm6aTnl0';
+                        $apiKey = config('services.google_maps.key');
                         $url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins={$latitude},{$longitude}&destinations={$shopLat},{$shopLng}&key={$apiKey}";
 
                         $response = file_get_contents($url);

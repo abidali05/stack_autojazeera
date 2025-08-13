@@ -519,9 +519,6 @@ class AddsController extends Controller
 
     public function update(Request $request, string $id)
     {
-
-        //dd($request->all());
-
         $validationRules = [];
 
         $request->validate([
@@ -537,9 +534,7 @@ class AddsController extends Controller
             'transmission' => 'required',
             'driveType' => 'required',
             'exterior_color' => 'required',
-
             'Features' => 'required',
-            // 'filedata' => 'required',
             'country' => 'required',
             'province' => 'required',
             'city' => 'required',
@@ -547,33 +542,24 @@ class AddsController extends Controller
             'firstName' => 'required',
             'secondName' => 'required',
             'email' => 'required|email',
-            //  'area' => 'required',
             'number' => 'required|string',
         ]);
 
-
-
         $post = Post::find($request->id);
-
-
 
         if ($post->price != $request->price) {
             $sendfcm = true;
         } else {
             $sendfcm = false;
         }
-        // Step-based data handling
 
-        // if ($request->step >= 4 || $request->step == "3" || $request->step1 == "1" || $request->step1 == "2") {
         $oldprice = $post->price;
         $post->fill([
-            // 'dealer_id' => $request->dealer,
             'title' => $request->title,
             'condition' => $request->condition,
             'assembly' => $request->assembly,
             'company_conection' => $request->dealerType,
             'currency' => $request->currency,
-            //'price' => $request->price,
             'negotiated_price' => $request->negotiatedPrice === 'on' ? 1 : 0,
             'make' => $request->makecompany,
             'model' => $request->model,
@@ -589,11 +575,11 @@ class AddsController extends Controller
             'exterior_color' => $request->exterior_color,
             'dealer_comment' => $request->dealer_comment,
             'submitedby' => 'superadmin',
-
             'feature_ad' => $request->feature_ad === 'on' ? 1 : 0,
-            'latitude' => $request->latitude ?? '',
-            'longitude' => $request->longitude ?? '',
+            // 'latitude' => $request->latitude ?? '',
+            // 'longitude' => $request->longitude ?? '',
         ]);
+
         // Get authenticated user info
         $authUser = Auth::user();
         $userId = $authUser->role == 2 ? $authUser->dealer_id : $authUser->id;
@@ -614,7 +600,6 @@ class AddsController extends Controller
             'expand' => ['data.lines.data.price']
         ])->data;
 
-        // Validate Stripe Subscription
         $hasValidAdSubscription = false;
         $plan = null;
 
@@ -641,17 +626,14 @@ class AddsController extends Controller
             }
         }
 
-        // Abort if no valid plan
         if (!$hasValidAdSubscription || !$plan) {
             return redirect()->route('dashboard')->with('error', 'Your subscription is invalid or expired.');
         }
 
-        // Count existing featured ads
         $posted_ads = Post::where('dealer_id', $userId)->where('feature_ad', '1')->count();
         $posted_ads2 = BikePost::where('dealer_id', $userId)->where('is_featured', '1')->count();
         $total_ads = $posted_ads + $posted_ads2;
 
-        // Handle feature_ad flag
         if (($plan->metadata->allowed_feature_ads ?? '0') !== 'unlimited') {
             if ($total_ads >= (int) $plan->metadata->allowed_feature_ads) {
                 $post->feature_ad = 0;
@@ -662,7 +644,6 @@ class AddsController extends Controller
             $post->feature_ad = $request->feature_ad === 'on' ? 1 : 0;
         }
 
-        // Assign employee/dealer IDs
         if ($authUser->role == 2) {
             $post->employee_id = $authUser->id;
             $post->dealer_id = $authUser->dealer_id;
@@ -670,60 +651,43 @@ class AddsController extends Controller
             $post->employee_id = null;
             $post->dealer_id = $authUser->id;
         }
-        //dd($post->price);
         if ($request->has('price') && $request->price != $post->price) {
-            //dd($oldprice,$request->price,$post->price);
-            // Store the previous price
             $post->previous_price = $oldprice;
 
-            // Update the current price
             $post->price = $request->price;
-
-            // Calculate the percentage difference if the previous price is not zero
 
             $difference = $request->price - $oldprice; // Difference between new and previous price
             $percentageChange = ($difference / $oldprice) * 100; // Calculate percentage change
             $post->percentage_diff = round($percentageChange, 2); // Round to 2 decimal places
-
         }
-        //dd('e');
-
 
         $post->save();
-        //dd($post);
-        // }
 
         if (isset($request->Features)) {
             $this->handleFeatures($post->id, $request->Features);
         }
 
-        // if ($request->step >= 6) {
-        //     $this->validateStep($request, ['filedata' => 'required']);
         if ($request->filedata) {
             $this->handleFileUpload($post->id, $request->filedata);
         }
-        // }
 
         if ($request->file('document_brochure') || $request->file('document_auction')) {
             $this->handleDocuments($post->id, $request);
         }
 
-        // if ($request->step >= 8) {
         $this->handleLocation($post->id, $request);
-        // }
 
-        // if ($request->step == 9) {
+
         $this->handleContactInfo($post->id, $request);
         $this->updatePostStatus();
-        // }
-        //dd($sendfcm);
+
         if ($sendfcm == true) {
-            //dd('e');
+
             $user_ids = PriceAlert::where('post_id', $request->id)->where('status', 1)->pluck('user_id')->toArray();
             if (count($user_ids) > 0) {
-                // dd($post->makecompany);
+
                 $fcm_tokens = User::wherein('id', $user_ids)->whereNotNull('fcm_token')->pluck('fcm_token')->toArray();
-                // dd('zaid');
+
                 if ($fcm_tokens) {
                     SendFcmNotification::sendPriceAlertNotification($fcm_tokens, ['title' => 'Price Alert', 'body' => 'Vehicle ' . $post->makecompany->name . ' ' . $post->modelcompany->name . ' has been updated']);
                 }
@@ -732,32 +696,21 @@ class AddsController extends Controller
                 $mainDoc = $post->document->first() ?? null;
                 $post->setAttribute('image', $mainDoc ? url('posts/doc/' . $mainDoc->doc_name) : url('web/images/default-car.jpg'));
 
-                // Set icons for mileage, transmission, and fuel
-
 
                 $url = url('/');
                 $url = $url . '/car-detail/' . $request->id;
                 $post->url = $url;
-                // $post->url = route('cardetail', $post->id);
                 $post->updated_at = Carbon::parse($post->updated_at)->format('d M Y');
                 foreach ($user_ids as $id) {
                     $user = User::find($id);
                     if ($user) {
-                        //dd($post->image);
-                        //$body = view('emails.price_alert',$post);
-                        //$body = 'azhar';
-                        //sendMail($user->name, $user->email, 'Auto Jazeera', 'Auto Jazeera Price Alert', $body);
 
                         Mail::to($user->email)->send(new PriceAlertMail($post));
                     }
                 }
             }
         }
-        //dd('1');
         return redirect()->route('thankyou');
-        //  return redirect()->to(url('ads'));
-
-        // return response()->json(['success' => true, 'redirect' => url('ads')]);
     }
 
     /**
@@ -967,12 +920,12 @@ class AddsController extends Controller
         // }
 
         if ($request->filled('city')) {
-    Log::info('Applying city filter: ' . $request->city);
-    $query->where(function ($q) use ($request) {
-        $q->where('locations.city', (int) $request->city)
-          ->orWhereNull('locations.city');
-    });
-}
+            Log::info('Applying city filter: ' . $request->city);
+            $query->where(function ($q) use ($request) {
+                $q->where('locations.city', (int) $request->city)
+                    ->orWhereNull('locations.city');
+            });
+        }
 
         if ($request->filled('sortby')) {
             switch ($request->sortby) {

@@ -895,7 +895,7 @@
                                 <label for="streetAddress" class="form-label" style="color:white">
                                     Street Address <span style="color:#FD5631">*</span>
                                 </label>
-                                <input type="text" id="streetAddress" name="street_address"
+                                <input type="text" name="street_address"
                                     class="form-control formcontrol validate-field" style="color:#281F48 !important"
                                     placeholder="Enter Address" autocomplete="off" required
                                     value="{{ $post->location->street_address }}" />
@@ -905,7 +905,7 @@
 
 
                             <script
-                                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHTfGE9bbvleasezO-T-j1u5UVm6aTnl0&libraries=places&callback=initAutocomplete"
+                                src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_maps.key') }}&libraries=places&callback=initAutocomplete"
                                 async defer></script>
 
                             <script>

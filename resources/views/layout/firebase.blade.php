@@ -31,7 +31,7 @@
     function loadGoogleMaps(callback) {
         const script = document.createElement('script');
         script.src =
-            "https://maps.googleapis.com/maps/api/js?key=AIzaSyBHTfGE9bbvleasezO-T-j1u5UVm6aTnl0&callback=initDistance";
+            "https://maps.googleapis.com/maps/api/js?key={{ config('services.google_maps.key') }}&callback=initDistance";
         script.async = true;
         script.defer = true;
         window.initDistance = callback;

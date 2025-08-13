@@ -90,19 +90,24 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content" style="border-radius: 10px; overflow: hidden;">
                         <!-- Modal Header -->
-                        <div class="modal-header " style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
+                        <div class="modal-header "
+                            style="background-color: #D9D9D9 !important; color: #281F48; border-bottom: none;">
                             <h5 class="modal-title" id="alertModalLabel"><strong> Notification</strong></h5>
-                            <button type="button" class="btn-close" style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close"
+                                style="background-color: #D9D9D9 !important; color: #FD5631;" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                         </div>
 
                         <!-- Modal Body -->
-                        <div class="modal-body text-center"  style="background-color: #F0F3F6; color: #FD5631;">
+                        <div class="modal-body text-center" style="background-color: #F0F3F6; color: #FD5631;">
                             <p id="modalMessage" class="mt-3"></p>
                         </div>
 
                         <!-- Modal Footer -->
-                        <div class="modal-footer justify-content-center border-0 p-0 pb-3" >
-                            <button type="button" class="btn btn-light px-4 py-2 " style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;" data-bs-dismiss="modal">
+                        <div class="modal-footer justify-content-center border-0 p-0 pb-3">
+                            <button type="button" class="btn btn-light px-4 py-2 "
+                                style="background-color: #281F48; font-weight:600; color: white; border-radius: 5px;"
+                                data-bs-dismiss="modal">
                                 Close
                             </button>
                         </div>
@@ -185,7 +190,7 @@
                             </div>
                         </div>
                     @endif
-                    
+
                     <div class="mb-2 d-none">
                         <label for="gender" class="form-label">Gender</label>
                         <div class="input-groups">
@@ -208,8 +213,8 @@
                             <input type="email" class="form-control formcontrol" name="email" id="email"
                                 value="{{ $user->email }}" disabled>
                             <!-- <button class="btn primary-color-custom" style="border-bottom: 2px solid white; border-radius: 0px;" type="button" id="edit-name">
-                                                                            <i class="bi bi-pencil-square"></i>
-                                                                        </button> -->
+                                                                                <i class="bi bi-pencil-square"></i>
+                                                                            </button> -->
                         </div>
                     </div>
                     <div class="mb-2">
@@ -230,7 +235,7 @@
                         <label for="address" class="form-label">
                             Street Address <span style="color:#FD5631">*</span>
                         </label>
-                        <input type="text" id="address" name="address"
+                        <input type="text" name="address"
                             class="form-control formcontrol validate-field" placeholder="Enter Address"
                             autocomplete="off" required value="{{ $user->address }}" />
                         <div id="address-error" class="orange" style="display: none;">Street address is
@@ -240,7 +245,7 @@
 
 
                     <script
-                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHTfGE9bbvleasezO-T-j1u5UVm6aTnl0&libraries=places&callback=initAutocomplete"
+                        src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_maps.key') }}&libraries=places&callback=initAutocomplete"
                         async defer></script>
 
                     <script>
@@ -281,7 +286,7 @@
                     </script>
 
 
-                    
+
                     <div class="d-flex justify-content-end">
                         <button type="submit" class="px-5 mt-3 rounded btn custom-btn-nav">Save
                             changes</button>
@@ -458,16 +463,13 @@
         });
     </script>
 
-
-
-
-
-
     <script>
+        const googleMapsApiKey = @json(config('services.google_maps.key'));
+
         async function getAddressFromCoordinates(lat, lng, callback) {
             try {
                 const response = await fetch(
-                    `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyBHTfGE9bbvleasezO-T-j1u5UVm6aTnl0`
+                    `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${googleMapsApiKey}`
                 );
                 const data = await response.json();
 

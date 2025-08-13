@@ -914,7 +914,7 @@
                              <label for="streetAddress" class="form-label" style="color:white">
                                  Street Address <span style="color:#FD5631" class="m-0 fs-5">*</span>
                              </label>
-                             <input type="text" id="streetAddress" name="street_address"
+                             <input type="text" name="street_address"
                                  class="form-control formcontrol validate-field" style="color:#281F48 !important"
                                  placeholder="Enter Address" autocomplete="off" required
                                  value="{{ old('street_address') }}" />

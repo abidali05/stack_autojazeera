@@ -817,7 +817,7 @@
 
 
             <script
-                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHTfGE9bbvleasezO-T-j1u5UVm6aTnl0&libraries=places&callback=initAutocomplete"
+                src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_maps.key') }}&libraries=places&callback=initAutocomplete"
                 async defer></script>
 
             <script>
@@ -1600,10 +1600,6 @@
                 document.getElementById('preview-map').src =
                     `https://www.google.com/maps?q=${encodeURIComponent(address)}&output=embed`;
                 document.getElementById('preview-map-address').textContent = address;
-
-                // Logo preview
-
-
 
                 // Days and hours
                 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];

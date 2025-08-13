@@ -19,19 +19,19 @@ class SettingController extends Controller
     {
         return view('setting.loginSecurity');
     }
-	    public function personal_info()
+    public function personal_info()
     {
         return view('setting.personal_information');
     }
-	public function admin_loginSecurity()
+    public function admin_loginSecurity()
     {
         return view('setting.admin_loginSecurity');
     }
-	    public function admin_personal_info()
+    public function admin_personal_info()
     {
         return view('setting.admin_personal_information');
     }
-	    public function change_password(Request $request)
+    public function change_password(Request $request)
     {
         $validator = Validator::make($request->all(), [
             // 'dealer' => 'required|max:255',
@@ -59,113 +59,111 @@ class SettingController extends Controller
 
         return back()->with('success', 'Password updated successfully.');
     }
-	 public function change_image(Request $request)
+    public function change_image(Request $request)
     {
         //dd($request->all());
-			   $request->validate([
-        'image' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048', // Validation rules
-    ], [
-        'image.required' => 'The image is required.',
-        'image.image' => 'The file must be an image.',
-        'image.mimes' => 'Allowed image types are jpeg, png, jpg, and svg.',
-        'image.max' => 'The image must not be greater than 2MB.',
-    ]);
-  
-       $user= User::find(Auth::user()->id);
-       if($request->file('image'))
-       {
-           $file=$request->file('image');
-           $filename = date('His') . $file->getClientOriginalName(); // Ensure correct method name
-           $file->move(public_path('web/profile/'), $filename);
-           $user->image = $filename;
-       }
-        $user->update();
-        return redirect()->back()->with('success','image updated successfully');
-    }
- public function profile(Request $request)
-{
-    $input = $request->except('_token');
-
-    if ($request->number) {
-        // Keep leading +, remove all other non-digit characters
-        $cleanNumber = preg_replace('/(?!^\+)\D/', '', $request->number);
-        $input['number'] = $cleanNumber;
-    }
-
-    // Validate using the cleaned number
-    Validator::make(
-        ['number' => $input['number'] ?? null],
-        [
-            'number' => 'nullable|unique:users,number,' . auth()->user()->id,
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
-        ],
-        [
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048', // Validation rules
+        ], [
+            'image.required' => 'The image is required.',
             'image.image' => 'The file must be an image.',
             'image.mimes' => 'Allowed image types are jpeg, png, jpg, and svg.',
             'image.max' => 'The image must not be greater than 2MB.',
-        ]
-    )->validate();
+        ]);
 
-    try {
-        $user = Auth::user();
-
-        // Handle image upload
+        $user = User::find(Auth::user()->id);
         if ($request->file('image')) {
             $file = $request->file('image');
-            $filename = date('His') . '_' . $file->getClientOriginalName();
-            $file->move(public_path('web/profile'), $filename);
+            $filename = date('His') . $file->getClientOriginalName(); // Ensure correct method name
+            $file->move(public_path('web/profile/'), $filename);
+            $user->image = $filename;
+        }
+        $user->update();
+        return redirect()->back()->with('success', 'image updated successfully');
+    }
+    public function profile(Request $request)
+    {
+        $input = $request->except('_token');
 
-            if ($user->image && file_exists(public_path('web/profile/' . $user->image))) {
-                unlink(public_path('web/profile/' . $user->image));
-            }
-
-            $input['image'] = $filename;
+        if ($request->number) {
+            // Keep leading +, remove all other non-digit characters
+            $cleanNumber = preg_replace('/(?!^\+)\D/', '', $request->number);
+            $input['number'] = $cleanNumber;
         }
 
-        // Set additional fields
-        $input['province'] = $request->province;
-        $input['city'] = $request->city;
+        // Validate using the cleaned number
+        Validator::make(
+            ['number' => $input['number'] ?? null],
+            [
+                'number' => 'nullable|unique:users,number,' . auth()->user()->id,
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
+            ],
+            [
+                'image.image' => 'The file must be an image.',
+                'image.mimes' => 'Allowed image types are jpeg, png, jpg, and svg.',
+                'image.max' => 'The image must not be greater than 2MB.',
+            ]
+        )->validate();
 
-        // Update user profile
-        $user->update($input);
-        $user->province = $request->province;
-        $user->city = $request->city;
-        $user->address = $request->address;
-        $user->save();
+        try {
+            $user = Auth::user();
 
-        return redirect()->back()->with('success', 'Profile updated successfully.');
-    } catch (\Exception $e) {
-        return redirect()->back()->with('error', 'Failed to update profile.');
+            // Handle image upload
+            if ($request->file('image')) {
+                $file = $request->file('image');
+                $filename = date('His') . '_' . $file->getClientOriginalName();
+                $file->move(public_path('web/profile'), $filename);
+
+                if ($user->image && file_exists(public_path('web/profile/' . $user->image))) {
+                    unlink(public_path('web/profile/' . $user->image));
+                }
+
+                $input['image'] = $filename;
+            }
+
+            // Set additional fields
+            $input['province'] = $request->province;
+            $input['city'] = $request->city;
+
+            // Update user profile
+            $user->update($input);
+            $user->province = $request->province;
+            $user->city = $request->city;
+            $user->address = $request->address;
+            $user->save();
+
+            return redirect()->back()->with('success', 'Profile updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to update profile.');
+        }
     }
-}
 
-	 public function admin_change_image(Request $request)
+    public function admin_change_image(Request $request)
     {
         //dd($request->all());
-		   $request->validate([
-        'image' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048', // Validation rules
-    ], [
-        'image.required' => 'The image is required.',
-        'image.image' => 'The file must be an image.',
-        'image.mimes' => 'Allowed image types are jpeg, png, jpg, and svg.',
-        'image.max' => 'The image must not be greater than 2MB.',
-    ]);
-  
-       $user= Superadmin::find( Auth::guard('superadmin')->user()->id);
-       if($request->file('image'))
-       {
-           $file=$request->file('image');
-           $filename = date('His') . $file->getClientOriginalName(); // Ensure correct method name
-           $file->move(public_path('web/profile/'), $filename);
-           $user->image = $filename;
-       }
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048', // Validation rules
+        ], [
+            'image.required' => 'The image is required.',
+            'image.image' => 'The file must be an image.',
+            'image.mimes' => 'Allowed image types are jpeg, png, jpg, and svg.',
+            'image.max' => 'The image must not be greater than 2MB.',
+        ]);
+
+        $user = Superadmin::find(Auth::guard('superadmin')->user()->id);
+        if ($request->file('image')) {
+            $file = $request->file('image');
+            $filename = date('His') . $file->getClientOriginalName(); // Ensure correct method name
+            $file->move(public_path('web/profile/'), $filename);
+            $user->image = $filename;
+        }
         $user->update();
-        return redirect()->back()->with('success','image updated successfully');
+        return redirect()->back()->with('success', 'image updated successfully');
     }
     public function admin_profile(Request $request)
     {
 
-        $input = $request->except('_token','password_confirmation');
+        $input = $request->except('_token', 'password_confirmation');
 
         $request->validate([
             'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
@@ -194,35 +192,34 @@ class SettingController extends Controller
         if ($request->filled('password')) {
             $input['password'] = Hash::make($request->password);
         } else {
-			unset($input['password']);
-		}
+            unset($input['password']);
+        }
         try {
-		$user = Superadmin::where('id', Auth::guard('superadmin')->user()->id)->update($input);	
-		} catch(\Exception $e) {
-			dd($e->getMessage());
-		}
+            $user = Superadmin::where('id', Auth::guard('superadmin')->user()->id)->update($input);
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
 
         return redirect()->back()->with('success', 'profile updated successfully');
     }
-	    public function complete_registration()
+    public function complete_registration()
     {
-        $user=Auth::user();
-        if($user->role == '1' && $user->dealershipName !=null){
+        $user = Auth::user();
+        if ($user->role == '1' && $user->dealershipName != null) {
 
-            return redirect('/dashboard')->with('success','congratulation, your plan has been upgraded');
-        }
-        else{
+            return redirect('/dashboard')->with('success', 'congratulation, your plan has been upgraded');
+        } else {
 
             $provinces = Province::all();
-            return view('user.complete_registration',compact('user','provinces'));
+            return view('user.complete_registration', compact('user', 'provinces'));
         }
     }
-   public function dealer_store(Request $request)
+    public function dealer_store(Request $request)
     {
         $request->merge(['number' => "+92" . $request->number]);
         $validator = Validator::make($request->all(), [
             'dealershipName' => 'required|string',
-         
+
             'number' => [
                 'required',
                 'string',
@@ -232,91 +229,89 @@ class SettingController extends Controller
 
             'province' => 'required',
             'city' => 'required',
-        
+
             'address' => 'required',
             // 'website' => 'required',
-         
-           
-            
+
+
+
         ]);
-        $user=User::find(Auth::user()->id);
-        
-        $user->dealershipName=$request->dealershipName;
-		
-        $user->number=$request->number;     
-        
-       
-        $user->province=$request->province;
-        $user->city=$request->city;
-     
-        $user->role=1;
-        $user->free_package_availed=1;
-        $user->offer_test_drive=$request->offer_test_drive;
-        $user->address=$request->address;
+        $user = User::find(Auth::user()->id);
+
+        $user->dealershipName = $request->dealershipName;
+
+        $user->number = $request->number;
+
+
+        $user->province = $request->province;
+        $user->city = $request->city;
+
+        $user->role = 1;
+        $user->free_package_availed = 1;
+        $user->offer_test_drive = $request->offer_test_drive;
+        $user->address = $request->address;
         $user->save();
         //$body = view('emails.subscription_buy');
         //sendMail($user->name, $user->email, 'Auto Jazera', 'Plan Subscribed Successfully', $body);
-	   	Mail::to($user->email)->send(new SubscriptionBuy());
-        return redirect('/dashboard')->with('dealer_register_success','Thanks for subscribing ! Your payment is confirmed, and you`re now part of our platform');
-
-    }
-	
-	public function dealership_info(){
-		if(Auth::user()->userType == 'private_seller'){
-			return redirect('unauthorized');
-		}
-		 return view('setting.dealer_profile');
-	}
-	
-	public function dealership_profile(Request $request)
-{
-    $input = $request->except('_token');
-
-    if ($request->number) {
-        // Clean number: remove non-digits except leading +
-        $cleanNumber = preg_replace('/(?!^\+)\D/', '', $request->number);
-        $input['number'] = $cleanNumber;
+        Mail::to($user->email)->send(new SubscriptionBuy());
+        return redirect('/dashboard')->with('dealer_register_success', 'Thanks for subscribing ! Your payment is confirmed, and you`re now part of our platform');
     }
 
-    $request->validate([
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
-        'dealershipName' => $request->seller_type === 'car_dealer' ? 'required' : 'nullable',
-    ], [
-        'image.image' => 'The file must be an image.',
-        'image.mimes' => 'Allowed image types are jpeg, png, jpg, and svg.',
-        'image.max' => 'The image must not be greater than 2MB.',
-        'dealershipName.required' => 'Dealership Name is required.',
-    ]);
+    public function dealership_info()
+    {
+        if (Auth::user()->userType == 'private_seller') {
+            return redirect('unauthorized');
+        }
+        return view('setting.dealer_profile');
+    }
 
-    try {
-        $user = Auth::user();
+    public function dealership_profile(Request $request)
+    {
+        $input = $request->except('_token');
 
-        if ($request->file('image')) {
-            $file = $request->file('image');
-            $filename = date('His') . '_' . $file->getClientOriginalName();
-
-            $file->move(public_path('web/profile'), $filename);
-
-            if ($user->image && file_exists(public_path('web/profile/' . $user->image))) {
-                unlink(public_path('web/profile/' . $user->image));
-            }
-
-            $input['image'] = $filename;
+        if ($request->number) {
+            // Clean number: remove non-digits except leading +
+            $cleanNumber = preg_replace('/(?!^\+)\D/', '', $request->number);
+            $input['number'] = $cleanNumber;
         }
 
-        $input['dealershipName'] = $request->dealershipName ?? 'Private Seller';
-        $input['province'] = $request->province;
-        $input['city'] = $request->city;
+        $request->validate([
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
+            'dealershipName' => $request->seller_type === 'car_dealer' ? 'required' : 'nullable',
+        ], [
+            'image.image' => 'The file must be an image.',
+            'image.mimes' => 'Allowed image types are jpeg, png, jpg, and svg.',
+            'image.max' => 'The image must not be greater than 2MB.',
+            'dealershipName.required' => 'Dealership Name is required.',
+        ]);
 
-        $user->update($input);
-        $user->address = $request->address;
-        $user->save();
+        try {
+            $user = Auth::user();
 
-        return redirect()->back()->with('success', 'Profile updated successfully.');
-    } catch (\Exception $e) {
-        return redirect()->back()->with('error', 'Failed to update profile.');
+            if ($request->file('image')) {
+                $file = $request->file('image');
+                $filename = date('His') . '_' . $file->getClientOriginalName();
+
+                $file->move(public_path('web/profile'), $filename);
+
+                if ($user->image && file_exists(public_path('web/profile/' . $user->image))) {
+                    unlink(public_path('web/profile/' . $user->image));
+                }
+
+                $input['image'] = $filename;
+            }
+
+            $input['dealershipName'] = $request->dealershipName ?? 'Private Seller';
+            $input['province'] = $request->province;
+            $input['city'] = $request->city;
+
+            $user->update($input);
+            $user->address = $request->address;
+            $user->save();
+
+            return redirect()->back()->with('success', 'Profile updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to update profile.');
+        }
     }
-}
-
-
 }
