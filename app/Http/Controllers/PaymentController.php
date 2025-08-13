@@ -255,10 +255,14 @@ class PaymentController extends Controller
             'status' => 'active',
             'limit' => 100,
         ]);
+        
+        if ($activeSubs) {
 
-        foreach ($activeSubs->data as $sub) {
-            $sub->cancel();
+            foreach ($activeSubs->data as $sub) {
+                $sub->cancel();
+            }
         }
+
         $subscription = null;
         // CASE 1: Ads Subscription Trial
         if ($request->sub_type === 'ads' && $trialAllowed && $user->trial_availed == 0) {

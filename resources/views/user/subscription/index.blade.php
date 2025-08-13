@@ -135,10 +135,122 @@
         .textclrbluee {
             color: #271F41 !important;
         }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: scale(0.8);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+        }
     </style>
     <link rel="stylesheet" href="{{ asset('web/css/user_sub_plans.css') }}">
-    <div class="container-fluid backimg ">
 
+    <div id="ajaxLoader"
+        style="
+        display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+    z-index: 9999;
+    animation: fadeIn 0.3s ease-out;
+">
+        <div
+            style="
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    ">
+            <!-- Spinner -->
+            <div
+                style="
+            width: 60px;
+            height: 60px;
+            border: 4px solid #F40000;
+            border-top: 4px solid rgba(226, 112, 112, 0.33);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        ">
+            </div>
+
+            <!-- Loading Text -->
+            <div
+                style="
+            color: #e2e8f0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            opacity: 0.9;
+        ">
+                Processing...</div>
+
+            <!-- Progress Dots -->
+            <div style="margin-top: 15px;">
+                <span
+                    style="
+                display: inline-block;
+                width: 8px;
+                height: 8px;
+                background: rgba(226, 112, 112, 0.33);
+                border-radius: 50%;
+                margin: 0 4px;
+                animation: pulse 1.5s ease-in-out infinite;
+            "></span>
+                <span
+                    style="
+                display: inline-block;
+                width: 8px;
+                height: 8px;
+                background: rgba(226, 112, 112, 0.33);
+                border-radius: 50%;
+                margin: 0 4px;
+                animation: pulse 1.5s ease-in-out 0.3s infinite;
+            "></span>
+                <span
+                    style="
+                display: inline-block;
+                width: 8px;
+                height: 8px;
+                background: rgba(226, 112, 112, 0.33);
+                border-radius: 50%;
+                margin: 0 4px;
+                animation: pulse 1.5s ease-in-out 0.6s infinite;
+            "></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid backimg ">
 
         @auth
             <div class="row">
@@ -345,7 +457,7 @@
                                                     @else
                                                         <button class="btnsub" style="background-color: #F40000"
                                                             id="btn1-1"
-                                                            onclick="openModal('{{ $ads_plan->id }}', {{ $ads_plan->price }}, 'ads'); changeText(this);">Choose
+                                                            onclick="openModal('{{ $ads_plan->id }}', {{ $ads_plan->price }}, 'ads'); ">Choose
                                                             plan</button>
                                                     @endif
                                                 @else
@@ -355,7 +467,7 @@
                                                     @else
                                                         <button class="btnsub" style="background-color: #F40000"
                                                             id="btn1-1"
-                                                            onclick="window.location.href='signupwithfreeplan'">Choose
+                                                            onclick="window.location.href='signupwithfreeplan'; changeText(this);">Choose
                                                             plan</button>
                                                     @endif
                                                 @endif
@@ -440,7 +552,7 @@
                                                         @else
                                                             <button class="btnsub" style="background-color: #F40000"
                                                                 id="btn1-1"
-                                                                onclick="openModal('{{ $ads_plan->id }}', {{ $ads_plan->price }}, 'ads'); changeText(this);">Choose
+                                                                onclick="openModal('{{ $ads_plan->id }}', {{ $ads_plan->price }}, 'ads');">Choose
                                                                 plan</button>
                                                         @endif
                                                     @endif
@@ -514,7 +626,7 @@
                                                 </div>
 
                                                 {{-- Bottom Button --}}
-                                                
+
                                                 <div class="mt-auto">
                                                     @if ($plan->id == Auth::user()->shop_package)
                                                         <button class="btnsub" style="background-color: #f4000079"
@@ -532,11 +644,11 @@
                                                                     onclick="changeText(this);">Start Trial</button>
                                                             </form>
                                                         @else
-                                                        <button class="btnsub" style="background-color: #F40000"
-                                                            id="btn1-1"
-                                                            onclick="openModal('{{ $plan->id }}', {{ $plan->price }}, 'service'); changeText(this);">Choose
-                                                            plan</button>
-                                                    @endif
+                                                            <button class="btnsub" style="background-color: #F40000"
+                                                                id="btn1-1"
+                                                                onclick="openModal('{{ $plan->id }}', {{ $plan->price }}, 'service');">Choose
+                                                                plan</button>
+                                                        @endif
                                                     @endif
                                                 </div>
 
@@ -651,7 +763,7 @@
 
                                     <!-- Payment Button -->
                                     <div class="col-md-12 mt-2" id="payment-button-container">
-                                        <button class="w-100 btn-confirm-payment" type="submit"
+                                        <button class="w-100 btn-confirm-payment" type="submit" onclick="changeText(this);"
                                             id="payment-submit-button">Confirm Payment</button>
                                     </div>
 
@@ -1319,6 +1431,7 @@
         });
 
         function changeText(element) {
+            $('#ajaxLoader').css('display', 'block');
             document.querySelectorAll('.btn.custom-btn-2.w-100').forEach(anchor => {
                 anchor.innerText = "Choose plan";
             });
