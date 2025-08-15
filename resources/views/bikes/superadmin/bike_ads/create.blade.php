@@ -947,7 +947,7 @@
                                 <label for="streetAddress" class="form-label" style="color:white">
                                     Street Address <span style="color:#FD5631">*</span>
                                 </label>
-                                <input type="text" id="streetAddress" name="street_address"
+                                <input type="text" name="street_address"
                                     class="form-control formcontrol validate-field" style="color:#281F48 !important"
                                     placeholder="Enter Address" autocomplete="off" required />
                                 <div id="streetAddress-error" class="orange" style="display: none;">Street address is

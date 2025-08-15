@@ -184,7 +184,7 @@ public static function getTransmissionCounts()
         $response = Http::get("https://maps.googleapis.com/maps/api/distancematrix/json", [
             'origins' => "{$userLat},{$userLng}",
             'destinations' => "{$this->latitude},{$this->longitude}",
-            'key' => 'AIzaSyBHTfGE9bbvleasezO-T-j1u5UVm6aTnl0',
+            'key' => config('services.google_maps.key'),
             'units' => 'metric',
         ]);
 

@@ -1599,13 +1599,10 @@
 
                 // Map update
                 const address = document.getElementById('shop_address').value || 'Unknown Location';
+
                 document.getElementById('preview-map').src =
                     `https://www.google.com/maps?q=${encodeURIComponent(address)}&output=embed`;
                 document.getElementById('preview-map-address').textContent = address;
-
-                // Logo preview
-
-
 
                 // Days and hours
                 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];

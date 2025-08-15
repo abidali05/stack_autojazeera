@@ -221,7 +221,8 @@ class BikeController extends Controller
 
             DB::commit();
 
-            return redirect()->route('superadmin.bike-ads.index')->with('success', 'Bike ad created successfully.');
+            // return redirect()->route('superadmin.bike-ads.index')->with('success', 'Bike ad created successfully.');
+            return redirect()->route('superadmin.thankyou');
         } catch (\Exception $e) {
             DB::rollBack();
             Log::info($e->getMessage());
@@ -247,8 +248,6 @@ class BikeController extends Controller
 
     public function update(Request $request, $id)
     {
-        // dd($request->all());
-        // Log::info($request->all());
         $request->validate([
             'make' => 'required|integer|exists:bike_makes,id',
             'model' => 'required|integer|exists:bike_models,id',

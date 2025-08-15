@@ -196,6 +196,7 @@ class SuperadminUserController extends Controller
             $user->dealershipName = $request->dealershipName ?? '';
             $user->number = $request->number;
             $user->email = $request->email;
+            $user->status = $request->status;
 
             // Update password only if provided
             if ($request->filled('password')) {

@@ -197,8 +197,8 @@
                             <input type="email" class="form-control formcontrol" name="email" id="email"
                                 value="{{ $user->email ?? old('email') }}" {{ $user->email ? 'disabled' : '' }} required>
                             <!-- <button class="btn primary-color-custom" style="border-bottom: 2px solid white; border-radius: 0px;" type="button" id="edit-name">
-                                                                            <i class="bi bi-pencil-square"></i>
-                                                                        </button> -->
+                                                                                <i class="bi bi-pencil-square"></i>
+                                                                            </button> -->
                         </div>
                     </div>
                     <div class="mb-2">
@@ -229,7 +229,7 @@
                         <label for="address" class="form-label">
                             Street Address <span style="color:#FD5631">*</span>
                         </label>
-                        <input type="text" id="address" name="address"
+                        <input type="text" name="address"
                             class="form-control formcontrol validate-field" placeholder="Enter Address"
                             autocomplete="off" required value="{{ $user->address ?? old('address') }}" />
                         <div id="address-error" class="orange" style="display: none;">Street address is
@@ -239,7 +239,7 @@
 
 
                     <script
-                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHTfGE9bbvleasezO-T-j1u5UVm6aTnl0&libraries=places&callback=initAutocomplete"
+                        src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_maps.key') }}&libraries=places&callback=initAutocomplete"
                         async defer></script>
 
                     <script>
@@ -484,17 +484,13 @@
             }
         });
     </script>
-
-
-
-
-
-
+    
     <script>
+        const googleMapsApiKey = @json(config('services.google_maps.key'));
         async function getAddressFromCoordinates(lat, lng, callback) {
             try {
                 const response = await fetch(
-                    `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyBHTfGE9bbvleasezO-T-j1u5UVm6aTnl0`
+                    `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${googleMapsApiKey}`
                 );
                 const data = await response.json();
 

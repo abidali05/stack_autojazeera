@@ -288,7 +288,7 @@ class BikeAdsController extends Controller
 
             $user = Auth::user();
             $dealerId = $user->role == 2 ? $user->dealer_id : $user->id;
-$dealer = User::find($dealerId);
+            $dealer = User::find($dealerId);
             if ($user->role == 2) {
                 $post->employee_id = $user->id;
                 $post->dealer_id = $user->dealer_id;
