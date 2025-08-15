@@ -28,6 +28,7 @@ class User extends Authenticatable
         'password',
         'number',
         'otp',
+        'status',
         'dealer_logo',
         'role',
         'dealershipName',

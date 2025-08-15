@@ -248,8 +248,6 @@ class BikeController extends Controller
 
     public function update(Request $request, $id)
     {
-        // dd($request->all());
-        // Log::info($request->all());
         $request->validate([
             'make' => 'required|integer|exists:bike_makes,id',
             'model' => 'required|integer|exists:bike_models,id',
