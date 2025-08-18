@@ -1893,7 +1893,8 @@ class ApiPostController extends Controller
         $url = "https://api.stripe.com/v1/products";
         // key also in function subscription
         //  $apiKey = "sk_test_51P9UuSP2COuPjTaib6y4UhgtnfJk1uOLe1FJC7wNPu0dEwbpnlhRYtiMk0N1kqyj3PrCZhVq5jMxIbTSHv9XO28O00fcplIRdr";
-        $apiKey = "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";
+        // $apiKey = "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";
+        $apiKey = config('services.stripe.secret');
         $response = Http::withToken($apiKey)->get($url);
 
         if ($response->successful()) {

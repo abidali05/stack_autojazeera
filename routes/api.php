@@ -158,6 +158,8 @@ Route::post('change_employe_status', [DealerUserController::class, 'changeStatus
 
 Route::post('store-fcm-token', [NotificationController::class, 'store_fcm_token']);
 Route::post('make-payment', [PaymentController::class, 'processPayment']);
+Route::post('make-trial-payment', [PaymentController::class, 'processTrialPayment']);
+
 Route::post('signup-free-plan', [PaymentController::class, 'signupwithfreeplan']);
 Route::post('news-letter', [NotificationController::class, 'newsLetter']);
 Route::get('findCarById', [ApiPostController::class, 'findCarById']);
@@ -215,3 +217,9 @@ Route::delete('delete-service-user/{id}' ,[ShopController::class, 'delete_servic
 
 Route::get('get-price-alert-leads' ,[ShopController::class, 'get_price_alert_leads']);
 Route::get('clear-service-wishlist', [ShopWishlistController::class, 'clear_wishlist']);      // clear all wishlist
+
+
+
+
+
+
