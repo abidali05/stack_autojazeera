@@ -33,7 +33,6 @@ class ApiProfileController extends Controller
 {
     public function profile(Request $request)
     {
-        // Log::info($request->all());
         if (!auth('sanctum')->check()) {
             return response()->json(['status' => 422, 'message' => "You are not authorized to access this route"]);
         }
@@ -49,7 +48,6 @@ class ApiProfileController extends Controller
         $validationRules = [
             'email' => "nullable|unique:users,email,{$user->id}",
         ];
-
 
         $validator = Validator::make($request->all(), $validationRules);
 
@@ -114,9 +112,9 @@ class ApiProfileController extends Controller
             ], 402);
         }
     }
+
     public function getUserprofile()
     {
-
         if (!auth('sanctum')->check()) {
             return response()->json(['status' => 422, 'message' => "You are not authorized to access this route"]);
         }
@@ -128,16 +126,8 @@ class ApiProfileController extends Controller
                 "data" => $profile,
                 "token" => $token,
                 "message" => 'profile found',
-                // 'access_token' => $userToken
                 'status' => 200
             ], 200);
-            // return response()->json([
-            //     "data" => $profile,
-            //     "status" => 200,
-            //     "message" => "profile found"
-
-
-            // ], 200);
         } else {
             return response()->json([
                 "data" => [],
@@ -146,9 +136,9 @@ class ApiProfileController extends Controller
             ], 402);
         }
     }
+
     public function register(Request $request)
     {
-        // dd($request);
         if (!auth('sanctum')->check()) {
             return response()->json(['status' => 422, 'message' => "You are not authorized to access this route"]);
         }

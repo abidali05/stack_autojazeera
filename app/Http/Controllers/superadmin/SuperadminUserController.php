@@ -203,7 +203,7 @@ class SuperadminUserController extends Controller
                 $user->password = bcrypt($request->password);
             }
 
-            if (!$request->role_name) {
+            if (!$request->role_name && $request->filled('dealershipName')) {
                 $dealer = User::where('role', 1)->where('dealershipName', $request->dealershipName)->first();
                 if ($dealer) {
                     $user->province = $dealer->province;
@@ -233,10 +233,10 @@ class SuperadminUserController extends Controller
 
                 $user->image = $filename;
             }
-
+			
             $user->save();
 
-            return redirect()->route('superadmin.users.index')->with('success', 'User updated successfully');
+            return redirect()->route('superadmin.user.index')->with('success', 'User updated successfully');
         } catch (\Exception $e) {
             Log::error('User update failed: ' . $e->getMessage());
             return redirect()->back()->withErrors(['error' => 'Failed to update user: ' . $e->getMessage()])->withInput();

@@ -62,8 +62,6 @@ class StripeNotifySubscriptionStatus extends Command
 
                             SendFcmNotification::sendPriceAlertNotification($fcm_tokens, ['title' => 'Auto Jazera Notification', 'body' => 'Trial Expires in 15 Days for ' . $plan->name]);
 
-
-
                             Notifications::create([
                                 'user_id' => $user->id,
                                 'title' => 'Auto Jazera Notification',
@@ -85,8 +83,6 @@ class StripeNotifySubscriptionStatus extends Command
                         if ($fcm_tokens) {
 
                             SendFcmNotification::sendPriceAlertNotification($fcm_tokens, ['title' => 'Auto Jazera Notification', 'body' => 'Trial Expires in '. $hoursLeft.' Hours']);
-
-
 
                             Notifications::create([
                                 'user_id' => $user->id,
@@ -133,8 +129,6 @@ class StripeNotifySubscriptionStatus extends Command
 
                             SendFcmNotification::sendPriceAlertNotification($fcm_tokens, ['title' => 'Auto Jazera Notification', 'body' => 'Subscription Expires in 1 Week for ' . $plan->name]);
 
-
-
                             Notifications::create([
                                 'user_id' => $user->id,
                                 'title' => 'Auto Jazera Notification',
@@ -155,8 +149,6 @@ class StripeNotifySubscriptionStatus extends Command
                         if ($fcm_tokens) {
 
                             SendFcmNotification::sendPriceAlertNotification($fcm_tokens, ['title' => 'Auto Jazera Notification', 'body' => 'Subscription Expires in 1 Day for ' . $plan->name]);
-
-
 
                             Notifications::create([
                                 'user_id' => $user->id,
