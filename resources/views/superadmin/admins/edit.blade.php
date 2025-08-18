@@ -2,30 +2,80 @@
 
 @section('content')
     <style>
-        .form-control {
-            background-color: transparent !important;
-            color: #281F48 !important;
-            border: 1px solid #281F48 !important;
-            border-bottom: 2px solid #F5F5F5;
-            border-radius: 0;
-            padding: 0px 10px;
-            line-height: 2.5 !important;
-        }
-
         .form-select {
             max-width: 100%;
-            text-align: start;
-            background-color: transparent !important;
-            border: 1px solid #281F48 !important;
-            color: #281F48 !important;
         }
 
-        .formcontrol::placeholder {
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: white;
+            line-height: 24px;
+            max-width: 100% !important;
+        }
+
+        .select2-container--default .select2-selection--single {
+            padding: 10px 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            height: 45px;
+            background: #281F48;
+        }
+
+        .select2-container--default .select2-results__option {
+            padding: 10px 20px;
+            background: white;
+        }
+
+        .select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
+            background-color: #281F48;
+            color: white;
+        }
+
+        .select2-search--dropdown {
+            display: block;
+            padding: 4px;
+            background: #281F48;
+        }
+
+        .select2-container--default .select2-search--dropdown .select2-search__field {
+            padding: 10px 20px;
+            font-size: 14px;
+            background: #281F48;
+            color: white;
+        }
+
+        .select2-container--default .select2-search--dropdown .select2-search__field {
+            border: none;
+        }
+
+        .select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b {
+            border-color: transparent transparent white transparent;
+            border-width: 0 6px 7px 6px;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__arrow b {
+            border-color: #888 transparent transparent transparent;
+            border-style: solid;
+            border-width: 5px 4px 0 4px;
+            height: 0;
+            left: -118%;
+            margin-left: -4px;
+            margin-top: 10px;
+            position: absolute;
+            top: 50%;
+            width: 0;
+        }
+
+        .form-control {
+            background-color: #F0F3F6;
+            border: 1px solid #F0F3F6;
+            border-radius: 8px;
+            padding: 10px;
             color: #281F48;
         }
 
-        .formcontrol {
-            color: #281F48;
+        .form-control:focus {
+            border-color: #281F48;
+            box-shadow: none;
         }
 
         .form-label {
@@ -49,104 +99,61 @@
             padding: 10px 20px;
             border-radius: 8px;
         }
-
-        .alert-danger {
-            background-color: #FD5631;
-            color: white;
-            border-radius: 5px;
-            padding: 10px;
-            margin-top: 10px;
-        }
-
-        .alert-danger ul {
-            margin: 0;
-            padding-left: 20px;
-        }
-
-        .custom-btn-nav {
-            background-color: #281F48;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
-            border: none;
-        }
-
-        .custom-btn-nav:hover {
-            background-color: #FD5631;
-            color: white;
-        }
     </style>
 
-    <div class="container py-3 py-lg-3">
-        <div class="row">
-            <div class="col-md-12 mb-3 d-flex align-items-center">
-                <h2 class="sec mb-0 primary-color-custom">Create Admin</h2>
+    <div class="container mt-3">
+        <div class="row align-items-center mb-3">
+            <div class="col-md-12">
+                <h2 class="sec mb-0 primary-color-custom">Edit Admin</h2>
             </div>
         </div>
-        <div class="row">
-            <div class="p-3 col-md-8" style="border: 2px dotted #a9afb4; border-radius: 10px;">
-                <form method="POST" action="{{ route('superadmin.admins.store') }}" id="adminCreateForm">
-                    @csrf
 
-                    <div class="mb-2">
-                        <label for="name" class="form-label">Full Name *</label>
-                        <div class="input-groups" style="padding: 0px !important;">
-                            <input type="text" class="form-control formcontrol" name="name" id="name"
-                                value="{{ old('name') }}" placeholder="Enter full name" required>
-                        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <form action="{{ route('superadmin.admins.update', $user->id) }}" method="POST" id="adminEditForm">
+                    @csrf
+                    @method('PUT')
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name *</label>
+                        <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $user->name) }}" required>
                         @error('name')
                             <div class="text-danger mt-1">{{ $message }}</div>
                         @enderror
                     </div>
 
-                    <div class="mb-2">
+                    <div class="mb-3">
                         <label for="email" class="form-label">Email *</label>
-                        <div class="input-groups">
-                            <input type="email" class="form-control formcontrol" name="email" id="email"
-                                value="{{ old('email') }}" placeholder="Enter email" required>
-                        </div>
+                        <input type="email" class="form-control" id="email" name="email" value="{{ old('email', $user->email) }}" required>
                         @error('email')
                             <div class="text-danger mt-1">{{ $message }}</div>
                         @enderror
                     </div>
 
-                    <div class="mb-2">
-                        <label for="phone-number" class="form-label">Phone Number *</label>
-                        <div class="input-groups">
-                            <input type="tel" class="form-control formcontrol" name="number" id="phone-number"
-                                value="{{ old('number') }}" placeholder="+92 3XX XXXXXXX" maxlength="16" required>
-                        </div>
+                    <div class="mb-3">
+                        <label for="number" class="form-label">Phone Number *</label>
+                        <input type="text" class="form-control" id="number" name="number" value="{{ old('number', $user->number) }}" maxlength="16" placeholder="+92 3XX XXXXXXX" required>
                         @error('number')
                             <div class="text-danger mt-1">{{ $message }}</div>
                         @enderror
-                        <small id="phone-error" class="text-danger" style="display:none;"></small>
                     </div>
 
-                    <div class="mb-2">
-                        <label for="password" class="form-label">Password *</label>
-                        <div class="input-groups">
-                            <input type="password" class="form-control formcontrol" name="password" id="password"
-                                placeholder="Enter password" required>
-                        </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password (leave blank to keep unchanged)</label>
+                        <input type="password" class="form-control" id="password" name="password">
                         @error('password')
                             <div class="text-danger mt-1">{{ $message }}</div>
                         @enderror
                     </div>
 
-                    <div class="mb-2">
-                        <label for="password_confirmation" class="form-label">Confirm Password *</label>
-                        <div class="input-groups">
-                            <input type="password" class="form-control formcontrol" name="password_confirmation"
-                                id="password_confirmation" placeholder="Confirm password" required>
-                        </div>
-                        @error('password_confirmation')
-                            <div class="text-danger mt-1">{{ $message }}</div>
-                        @enderror
+                    <div class="mb-3">
+                        <label for="password_confirmation" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
                     </div>
 
                     <div class="d-flex justify-content-end gap-2">
                         <a href="{{ route('superadmin.admins.index') }}" class="btn btn-secondary">Cancel</a>
-                        <button type="submit" class="btn btn-primary custom-btn-nav">Save</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
                     </div>
                 </form>
             </div>
@@ -157,7 +164,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
     <script>
         $(document).ready(function() {
-            $("#adminCreateForm").validate({
+            $("#adminEditForm").validate({
                 rules: {
                     name: {
                         required: true,
@@ -173,11 +180,9 @@
                         pattern: /^\+92 3\d{2} \d{7}$/
                     },
                     password: {
-                        required: true,
                         minlength: 8
                     },
                     password_confirmation: {
-                        required: true,
                         equalTo: "#password"
                     }
                 },
@@ -196,18 +201,16 @@
                         pattern: "Please enter a valid phone number in format: +92 3XX XXXXXXX"
                     },
                     password: {
-                        required: "Please enter a password",
                         minlength: "Password must be at least 8 characters long"
                     },
                     password_confirmation: {
-                        required: "Please confirm the password",
                         equalTo: "Passwords do not match"
                     }
                 },
                 errorElement: 'div',
                 errorClass: 'text-danger',
                 errorPlacement: function(error, element) {
-                    error.insertAfter(element.closest('.input-groups'));
+                    error.insertAfter(element);
                 },
                 highlight: function(element) {
                     $(element).addClass('is-invalid');
@@ -223,7 +226,7 @@
             });
 
             // Phone number formatting
-            const numberInput = $('#phone-number');
+            const numberInput = $('#number');
             function formatPhoneNumber(input) {
                 let value = input.val().replace(/\D/g, '');
                 if (!value.startsWith('92')) {
@@ -250,10 +253,7 @@
                 }
             });
 
-            // Apply formatting on page load if there's an old value
-            if (numberInput.val()) {
-                formatPhoneNumber(numberInput);
-            }
+            formatPhoneNumber(numberInput);
         });
     </script>
 @endsection

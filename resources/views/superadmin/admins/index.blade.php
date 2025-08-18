@@ -1,6 +1,5 @@
 @extends('layout.superadmin_layout.main')
 
-
 @section('content')
     <style>
         .form-select {
@@ -85,7 +84,6 @@
             border: none;
             padding: 10px 20px;
             border-radius: 5px;
-
         }
 
         .nav-links.active {
@@ -96,16 +94,81 @@
         .nav-links:hover {
             color: white;
             background-color: #281F48;
+        }
 
+        .btn-action {
+            padding: 5px 10px;
+            font-size: 14px;
+            border-radius: 5px;
+        }
+
+        .btn-edit {
+            background-color: #281F48;
+            color: white;
+            border: none;
+        }
+
+        .btn-delete {
+            background-color: #d90600;
+            color: white;
+            border: none;
+        }
+
+        .custom-modal {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .custom-modal-header {
+            background-color: #FD5631;
+            color: white;
+            border-bottom: none;
+        }
+
+        .custom-modal-body {
+            background-color: #F0F3F6;
+            color: #281F48;
+        }
+
+        .custom-modal-footer {
+            background-color: #F0F3F6;
+            border-top: none;
+        }
+
+        .custom-close-btn {
+            font-weight: 600;
+            color: #FD5631;
+            background-color: white;
+            border-radius: 5px;
+            border: none;
+            padding: 8px 20px;
+        }
+
+        .custom-close-btn:hover {
+            background-color: #FD5631;
+            color: white;
+        }
+
+        .custom-delete-btn {
+            font-weight: 600;
+            color: #281F48;
+            background-color: white;
+            border-radius: 5px;
+            border: none;
+            padding: 8px 20px;
+        }
+
+        .custom-delete-btn:hover {
+            background-color: #d90600;
+            color: white;
         }
     </style>
+
     <div class="container mt-3">
         <div class="row align-items-center mb-2">
-
             <div class="col-md-12">
                 <h2 class="sec mb-0 primary-color-custom">Manage Admins</h2>
             </div>
-
             <div class="col-md-12 text-end d-flex justify-content-end align-items-center gap-2">
                 <a href="{{ route('superadmin.admins.create') }}" class="btn custom-btn-nav rounded">
                     Create an Admin
@@ -113,7 +176,6 @@
             </div>
         </div>
     </div>
-
 
     <div class="container">
         <div class="row align-items-center">
@@ -129,6 +191,7 @@
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Created At</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -139,6 +202,14 @@
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->number }}</td>
                             <td>{{ $user->created_at }}</td>
+                            <td>
+                                <a href="{{ route('superadmin.admins.edit', $user->id) }}"
+                                    class="btn btn-edit btn-action text-white">
+                                    Edit
+                                </a>
+                                <button type="button" class="btn btn-delete btn-action" data-bs-toggle="modal"
+                                    data-bs-target="#deleteModal{{ $user->id }}">Delete</button>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -146,6 +217,34 @@
         </div>
     </div>
 
+    @foreach ($users as $user)
+        <div class="modal fade custom-modal" id="deleteModal{{ $user->id }}" tabindex="-1"
+            aria-labelledby="deleteModalLabel{{ $user->id }}" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <form method="POST" action="{{ route('superadmin.admins.destroy', $user->id) }}">
+                        @csrf
+                        @method('DELETE')
+                        <div class="modal-header custom-modal-header">
+                            <h5 class="modal-title" id="deleteModalLabel{{ $user->id }}">Confirm Deletion</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body custom-modal-body">
+                            Are you sure you want to delete admin <strong>{{ $user->name }}</strong>?
+                        </div>
+                        <div class="modal-footer custom-modal-footer justify-content-center">
+                            <button type="button" class="btn custom-close-btn" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn custom-delete-btn">Yes, Delete</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         $(document).ready(function() {
             $('.admin-datatable').each(function() {
@@ -156,20 +255,17 @@
                     searching: true,
                     ordering: true,
                     scrollX: false,
-                    order: [
-                        [0, 'asc']
-                    ],
+                    order: [[0, 'asc']],
                     language: {
                         search: "Search: "
                     },
                     dom: `
-  <"search-wrapper mb-3"f>
-  <"pagination-wrapper d-flex justify-content-between align-items-center mb-3"i p>
-  rt
-  <"pagination-wrapper d-flex justify-content-between align-items-center mt-3"i p>
-  <"clear">
-`
-
+                        <"search-wrapper mb-3"f>
+                        <"pagination-wrapper d-flex justify-content-between align-items-center mb-3"i p>
+                        rt
+                        <"pagination-wrapper d-flex justify-content-between align-items-center mt-3"i p>
+                        <"clear">
+                    `
                 });
 
                 // Add search row
@@ -179,14 +275,7 @@
                     var title = $(this).text().trim();
                     var searchHtml = '';
 
-                    // Create select for Featured column
-                    if (title === 'Status') {
-                        searchHtml =
-                            '<select class="ads-column-search"><option value="">Any</option><option value="Active">Active</option><option value="InActive">InActive</option></select>';
-                    }
-                    // Create text inputs for other specified columns
-                    else if (['Name', 'Email','Phone']
-                        .includes(title)) {
+                    if (['Name', 'Email', 'Phone'].includes(title)) {
                         searchHtml = '<input type="text" placeholder="Search ' + title +
                             '" class="ads-column-search"/>';
                     }
