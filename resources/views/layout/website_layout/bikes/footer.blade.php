@@ -1,6 +1,7 @@
 <style>
     .ankere {
         text-decoration: none;
+        color:#B4B3B8
     }
 
     .divborder {
@@ -92,6 +93,12 @@
     .form-control::placeholder {
         color: #bfc7d5 !important;
     }
+    .nav_custom_form_btns {
+background-color: transparent;
+padding: unset;
+border: none;
+color: #B4B3B8;
+    }
 </style>
 <div class="container-fluid divborder" style="border: none !important;position: static; border-radius: 0px !important;">
     <div class="row justify-content-center footercontainer p-4">
@@ -104,22 +111,22 @@
                 <div class="col-xxl-2 col-lg-2 col-md-2 col-sm-4 col-6">
                     <h3 class="ab">Cars By Make</h3>
                     <ul class="footertag p-0">
-                        <li> <a href="{{ url('/search-data/53/make') }}" style="color:#B4B3B8" target="_blank"
+                        <li> <a href="{{ url('/search-data/53/make') }}"  target="_blank"
                                 class=" nav_custom_form_btns">Toyota</a>
                         </li>
-                        <li> <a href="{{ url('/search-data/68/make') }}" style="color:#B4B3B8" target="_blank"
+                        <li> <a href="{{ url('/search-data/68/make') }}"  target="_blank"
                                 class=" nav_custom_form_btns">Suzuki</a>
                         </li>
-                        <li><a href="{{ url('/search-data/67/make') }}" style="color:#B4B3B8" target="_blank"
+                        <li><a href="{{ url('/search-data/67/make') }}"  target="_blank"
                                 class=" nav_custom_form_btns">Honda</a>
                         </li>
-                        <li><a href="{{ url('/search-data/120/make') }}" style="color:#B4B3B8" target="_blank"
+                        <li><a href="{{ url('/search-data/120/make') }}"  target="_blank"
                                 class=" nav_custom_form_btns">BMW</a>
                         </li>
-                        <li><a href="{{ url('/search-data/60/make') }}" style="color:#B4B3B8" target="_blank"
+                        <li><a href="{{ url('/search-data/60/make') }}" target="_blank"
                                 class=" nav_custom_form_btns">Hyundi</a>
                         </li>
-                        <li><a href="{{ url('/search-data/110/make') }}" style="color:#B4B3B8" target="_blank"
+                        <li><a href="{{ url('/search-data/110/make') }}"  target="_blank"
                                 class=" nav_custom_form_btns">KIA</a>
                         </li>
                     </ul>
@@ -136,7 +143,7 @@
                                 <input type="hidden" name="province" value="5">
 
                                 <button class="nav_custom_form_btns" type="submit"
-                                    style="background: transparent;padding: unset;border: none;color: #B4B3B8;">Islamabad</button>
+                                    style="">Islamabad</button>
 
 
                             </form>
@@ -151,7 +158,7 @@
 
 
                                 <button class="nav_custom_form_btns" type="submit"
-                                    style="background: transparent;padding: unset;border: none;color: #B4B3B8;">Rawalpindi</button>
+                                    >Rawalpindi</button>
 
 
                             </form>
@@ -166,7 +173,7 @@
                                 <input type="hidden" name="province" value="3">
 
                                 <button class="nav_custom_form_btns" type="submit"
-                                    style="background: transparent;padding: unset;border: none;color: #B4B3B8;">Peshawar</button>
+                                  >Peshawar</button>
 
 
                             </form>
@@ -181,7 +188,7 @@
                                 <input type="hidden" name="province" value="2">
 
                                 <button class="nav_custom_form_btns" type="submit"
-                                    style="background: transparent;padding: unset;border: none;color: #B4B3B8;">Karachi</button>
+                                    >Karachi</button>
 
 
                             </form>
@@ -194,7 +201,7 @@
                                 <input type="hidden" name="province" value="3">
 
                                 <button class="nav_custom_form_btns" type="submit"
-                                    style="background: transparent;padding: unset;border: none;color: #B4B3B8;">Quetta</button>
+                                >Quetta</button>
                             </form>
                         </li>
                         <li>
@@ -207,7 +214,7 @@
 
 
                                 <button class="nav_custom_form_btns" type="submit"
-                                    style="background: transparent;padding: unset;border: none;color: #B4B3B8;">Multan</button>
+                                  >Multan</button>
 
 
                             </form>
@@ -217,22 +224,22 @@
                 <div class="col-xxl-2 col-lg-2 col-md-2 col-sm-4 col-6">
                     <h3 class="ab">Bike By Make</h3>
                     <ul class="footertag p-0">
-                        <li> <a href="{{ url('/search-bikes/17/make') }}" style="color:#B4B3B8" target="_blank"
+                        <li> <a href="{{ url('/search-bikes/17/make') }}"  target="_blank"
                                 class=" nav_custom_form_btns">Eagle</a>
                         </li>
-                        <li> <a href="{{ url('/search-bikes/7/make') }}" style="color:#B4B3B8" target="_blank"
+                        <li> <a href="{{ url('/search-bikes/7/make') }}"  target="_blank"
                                 class=" nav_custom_form_btns">Honda</a>
                         </li>
-                        <li><a href="{{ url('/search-bikes/8/make') }}" style="color:#B4B3B8" target="_blank"
+                        <li><a href="{{ url('/search-bikes/8/make') }}"  target="_blank"
                                 class=" nav_custom_form_btns">Benling</a>
                         </li>
-                        <li><a href="{{ url('/search-bikes/10/make') }}" style="color:#B4B3B8" target="_blank"
+                        <li><a href="{{ url('/search-bikes/10/make') }}"  target="_blank"
                                 class=" nav_custom_form_btns">Bml</a>
                         </li>
-                        <li><a href="{{ url('/search-bikes/13/make') }}" style="color:#B4B3B8" target="_blank"
+                        <li><a href="{{ url('/search-bikes/13/make') }}"  target="_blank"
                                 class=" nav_custom_form_btns">Crown</a>
                         </li>
-                        <li><a href="{{ url('/search-bikes/24/make') }}" style="color:#B4B3B8" target="_blank"
+                        <li><a href="{{ url('/search-bikes/24/make') }}"  target="_blank"
                                 class=" nav_custom_form_btns">Hero</a>
                         </li>
                     </ul>
@@ -249,7 +256,7 @@
 
                                 <input type="hidden" name="province" value="5">
                                 <button class="nav_custom_form_btns" type="submit"
-                                    style="background: transparent;padding: unset;border: none;color: #B4B3B8;">Islamabad</button>
+                       >Islamabad</button>
 
 
                             </form>
@@ -263,7 +270,7 @@
 
                                 <input type="hidden" name="province" value="1">
                                 <button class="nav_custom_form_btns" type="submit"
-                                    style="background: transparent;padding: unset;border: none;color: #B4B3B8;">Rawalpindi</button>
+                                   >Rawalpindi</button>
 
 
                             </form>
@@ -277,7 +284,7 @@
                                 <input type="hidden" name="province" value="3">
 
                                 <button class="nav_custom_form_btns" type="submit"
-                                    style="background: transparent;padding: unset;border: none;color: #B4B3B8;">Peshawar</button>
+                  >Peshawar</button>
 
 
                             </form>
@@ -291,7 +298,7 @@
 
                                 <input type="hidden" name="province" value="2">
                                 <button class="nav_custom_form_btns" type="submit"
-                                    style="background: transparent;padding: unset;border: none;color: #B4B3B8;">Karachi</button>
+                                  >Karachi</button>
 
 
                             </form>
@@ -303,7 +310,7 @@
                                 <input type="hidden" name="city" value="68">
                                 <input type="hidden" name="province" value="3">
                                 <button class="nav_custom_form_btns" type="submit"
-                                    style="background: transparent;padding: unset;border: none;color: #B4B3B8;">Quetta</button>
+    >Quetta</button>
                             </form>
                         </li>
                         <li>
@@ -315,7 +322,7 @@
                                 <input type="hidden" name="province" value="1">
 
                                 <button class="nav_custom_form_btns" type="submit"
-                                    style="background: transparent;padding: unset;border: none;color: #B4B3B8;">Multan</button>
+                                   >Multan</button>
 
 
                             </form>
@@ -373,7 +380,7 @@
 
 
                                 <button class="nav_custom_form_btns" type="submit"
-                                    style="background: transparent;padding: unset;border: none;color: #B4B3B8;">Islamabad</button>
+                                 >Islamabad</button>
 
 
                             </form>
@@ -386,7 +393,7 @@
 
 
                                 <button class="nav_custom_form_btns" type="submit"
-                                    style="background: transparent;padding: unset;border: none;color: #B4B3B8;">Rawalpindi</button>
+                >Rawalpindi</button>
 
 
                             </form>
@@ -399,7 +406,7 @@
 
 
                                 <button class="nav_custom_form_btns" type="submit"
-                                    style="background: transparent;padding: unset;border: none;color: #B4B3B8;">Peshawar</button>
+                                >Peshawar</button>
 
 
                             </form>
@@ -412,7 +419,7 @@
 
 
                                 <button class="nav_custom_form_btns" type="submit"
-                                    style="background: transparent;padding: unset;border: none;color: #B4B3B8;">Karachi</button>
+                     >Karachi</button>
 
 
                             </form>
@@ -422,7 +429,7 @@
                                 @csrf
                                 <input type="hidden" name="city" value="68">
                                 <button class="nav_custom_form_btns" type="submit"
-                                    style="background: transparent;padding: unset;border: none;color: #B4B3B8;">Quetta</button>
+                                   >Quetta</button>
                             </form>
                         </li>
                         <li>
@@ -433,7 +440,7 @@
 
 
                                 <button class="nav_custom_form_btns" type="submit"
-                                    style="background: transparent;padding: unset;border: none;color: #B4B3B8;">Multan</button>
+>Multan</button>
 
 
                             </form>
@@ -449,7 +456,7 @@
                                 @csrf
                                 <input type="hidden" name="bodytype" value="46">
                                 <button class="nav_custom_form_btns" type="submit"
-                                    style="background: transparent;padding: unset;border: none;color: #B4B3B8;">HatchBack</button>
+                                   >HatchBack</button>
                             </form>
                         </li>
                         <li class="me-3">
@@ -458,7 +465,7 @@
                                 @csrf
                                 <input type="hidden" name="bodytype" value="14">
                                 <button class="nav_custom_form_btns" type="submit"
-                                    style="background: transparent;padding: unset;border: none;color: #B4B3B8;">Sedan</button>
+  >Sedan</button>
                             </form>
                         </li>
                         <li class="me-3">
@@ -467,7 +474,7 @@
                                 @csrf
                                 <input type="hidden" name="bodytype" value="44">
                                 <button class="nav_custom_form_btns" type="submit"
-                                    style="background: transparent;padding: unset;border: none;color: #B4B3B8;">SUV</button>
+                                   >SUV</button>
                             </form>
                         </li>
                         <li class="me-3">
@@ -476,7 +483,7 @@
                                 @csrf
                                 <input type="hidden" name="bodytype" value="42">
                                 <button class="nav_custom_form_btns" type="submit"
-                                    style="background: transparent;padding: unset;border: none;color: #B4B3B8;">Crossover</button>
+                      >Crossover</button>
                             </form>
                         </li>
 
@@ -486,23 +493,23 @@
                     <h3 class="ab">Auto Jazeera Marketplace</h3>
                     <ul class="footertag p-0">
                         <li class="me-3"><a href="{{ route('aboutus') }}" target="_blank"
-                                class=" nav_custom_form_btns text-decoration-none" style="color:#B4B3B8">About Us</a>
+                                class=" nav_custom_form_btns text-decoration-none" >About Us</a>
                         </li>
                         <li class="me-3"><a href="{{ route('faq') }}" target="_blank"
-                                class=" nav_custom_form_btns text-decoration-none" style="color:#B4B3B8">FAQ</a></li>
+                                class=" nav_custom_form_btns text-decoration-none" >FAQ</a></li>
 
                         <li><a href="{{ route('contact') }}" target="_blank"
-                                class=" nav_custom_form_btns text-decoration-none" style="color:#B4B3B8">Contact
+                                class=" nav_custom_form_btns text-decoration-none" >Contact
                                 Us</a></li>
                         @auth
                             <li><a href="{{ url('subscription') }}" target="_blank"
-                                    class=" nav_custom_form_btns text-decoration-none" style="color:#B4B3B8">Advertise
+                                    class=" nav_custom_form_btns text-decoration-none" >Advertise
                                 </a></li>
                         @endauth
                         @guest
 
                             <li><a href="{{ url('subscription-plans') }}" target="_blank"
-                                    class=" nav_custom_form_btns text-decoration-none" style="color:#B4B3B8">Advertise
+                                    class=" nav_custom_form_btns text-decoration-none" >Advertise
                                 </a></li>
                         @endguest
 
@@ -515,12 +522,12 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6 copyright">
-                        <p class="ankere" style="color:#B4B3B8">© 2025 AutoJazeera, All Rights Reserved.</p>
+                        <p class="ankere" >© 2025 AutoJazeera, All Rights Reserved.</p>
                     </div>
                     <div class="col-md-6 ms-auto copyright text-center text-md-end" >
-                        <p><span class="me-3"><a class="ankere" style="color:#B4B3B8" target="_blank"
+                        <p><span class="me-3"><a class="ankere"  target="_blank"
                                     href="{{ route('term_condition') }}">Terms of use</a></span> <a class="ankere"
-                                style="color:#B4B3B8" target="_blank" href="{{ route('privacy_policy') }}">Privacy
+                            target="_blank" href="{{ route('privacy_policy') }}">Privacy
                                 policy</a> </p>
                     </div>
                 </div>

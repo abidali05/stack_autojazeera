@@ -108,8 +108,8 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-8">
+        <div class="row d-flex justify-content-center">
+           <div class="p-3 col-md-8 mt-3" style="border: 2px solid #281F48; border-radius: 10px;">
                 <form action="{{ route('superadmin.admins.update', $user->id) }}" method="POST" id="adminEditForm">
                     @csrf
                     @method('PUT')

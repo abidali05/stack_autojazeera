@@ -351,7 +351,24 @@
             top: 15%;
             left: 133px;
         }
-
+.newwwbtn {
+    background-color: #281F48;
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 30px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+.twelvenew {
+    font-size: 14px;
+    font-weight: 400;
+}
+.forteennew {
+    font-size: 16px;
+    font-weight: 600;
+}
         .milagedash {
             color: #BFBEC3;
             position: absolute;
@@ -992,16 +1009,17 @@
             <div id="no_results_message" class="pt-5 row d-none">
                 <div class="p-3 col-12" style="border:1px solid #281F48;border-radius:9px;">
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-3 d-flex justify-content-center align-items-center">
                             <img src="{{ asset('web/images/noinputs.svg') }}" alt="" class="img-fluid"
                                 srcset="">
                         </div>
                         <div class="col-9 text-start">
-                            <h1 style="color:#FD5631">Sorry</h1>
-                            <p>No matches found for your search. Try adjusting your filters or expanding your criteria
-                                to
-                                explore available cars!</p>
-
+                            <h1 style="color:#FD5631 !important"><strong>Sorry</strong></h1>
+                            <p class="forteennew m-0">No inventory found.</p>
+<p class="twelvenew">🚀 Calling all private sellers, dealers & auto service providers!
+We’re onboarding now — List your cars and services today and be seen first!</p>
+<button class="newwwbtn">Post  inventory Now</button> 
+<button class="newwwbtn ms-3">Post Auto Service Business Now</button>
                         </div>
                     </div>
                 </div>

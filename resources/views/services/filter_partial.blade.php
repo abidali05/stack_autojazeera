@@ -227,25 +227,22 @@
  {{-- @endif --}}
 
  @if (count($shops) == 0)
-                  <div class=col-md-12>
-		 <div class="row d-flex justify-content-center my-3">
-		       <div class="p-3 col-8" style="border:1px solid #281F48;border-radius:9px;">
+                <div class="p-3 col-12 my-3" style="border:1px solid #281F48;border-radius:9px;">
                     <div class="row">
-                        <div class="col-md-3 text-center text-md-start ">
+                        <div class="col-3 d-flex justify-content-center align-items-center">
                             <img src="{{ asset('web/images/noinputs.svg') }}" alt="" class="img-fluid"
                                 srcset="">
                         </div>
-                        <div class="col-md-9 text-start">
-                            <h1 style="color:#FD5631">Sorry</h1>
-                            <p>No matches found for your search. Try adjusting your filters or expanding your criteria
-                                to
-                                explore available Shop! <br> Note : Calling all private sellers, dealers and auto service providers! We’re now onboarding new inventory and businesses. Join early and boost your visibility.</p>
-
+                        <div class="col-9 text-start">
+                            <h1 style="color:#FD5631 !important"><strong>Sorry</strong></h1>
+                            <p class="forteennew m-0">No inventory found.</p>
+<p class="twelvenew">🚀 Calling all private sellers, dealers & auto service providers!
+We’re onboarding now — List your cars and services today and be seen first!</p>
+<button class="newwwbtn">Post  inventory Now</button> 
+<button class="newwwbtn ms-3">Post Auto Service Business Now</button>
                         </div>
                     </div>
                 </div>
-		 </div>
-</div>
  @endif
  <div class="shops-container" style="width:100%">
      <div id="loadingSpinner" class="loading-overlay d-none">
