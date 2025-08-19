@@ -22,7 +22,24 @@
             width: 100%;
             cursor: pointer;
         }
-
+.newwwbtn {
+    background-color: #281F48;
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 30px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+.twelvenew {
+    font-size: 14px;
+    font-weight: 400;
+}
+.forteennew {
+    font-size: 16px;
+    font-weight: 600;
+}
         .image-box {
             position: relative;
         }

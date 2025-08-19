@@ -12,6 +12,20 @@
     border: 0;
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
 }
+.forhund{
+    color:#281F48;
+     font-weight:400
+}
+.log {
+    width:100% !important;
+}
+.postb{
+       border: none;
+        padding: 5px 15px; 
+        color: white; 
+        background-color: #D90600;
+         border-radius: 20px;
+}
 </style>
 <nav class="navbar navbar-expand-lg ">
     <div class="container">
@@ -55,7 +69,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link " aria-current="page" href="{{ Request::is('superadmin/*') ? route('superadmin.advertise') : route('advertise')}}"><button
-                            style="border: none; padding: 5px 15px; color: white; background-color: #D90600; border-radius: 20px;">Post an ad</button></a>
+                       class="postb">Post an ad</button></a>
                 </li>
                 <li class="nav-item">
                    <div class="dropdown">
@@ -98,14 +112,14 @@
                         <li class="dropdown-item p-0 " >
                             <form action="{{route('logout')}}" method="post">
                                 @csrf
-                                <button type="submit" class="btn w-100  p-0 p-2 text-start" style="width=100%">Logout</button>
+                                <button type="submit" class="btn w-100  p-0 p-2 text-start log" >Logout</button>
 
                             </form>
                             @else
-							  <a class="nav-link " style="color:#FD5631" href="{{ route('login') }}"> <li class=" ab dropdown-item py-2 d-flex justify-content-center">
-						 <span class="" style=" color:#281F48; font-weight:400">Sign in</span></li></a>
-                           <a class="  text-center" style="" href="{{route('register')}}"> <li class=" ab dropdown-item py-2 d-flex justify-content-center">
-						 <span class="" style="color:#281F48 ; font-weight:400"> Sign Up</span></li>         
+							  <a class="nav-link "  href="{{ route('login') }}"> <li class=" ab dropdown-item py-2 d-flex justify-content-center">
+						 <span class="forhund" >Sign in</span></li></a>
+                           <a class="  text-center" href="{{route('register')}}"> <li class=" ab dropdown-item py-2 d-flex justify-content-center">
+						 <span class="forhund" > Sign Up</span></li>         
                             @endif
                         </li></a>
                     </ul>

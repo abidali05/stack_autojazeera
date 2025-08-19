@@ -83,8 +83,8 @@
                 <h2 class="sec mb-0 primary-color-custom">Create Admin</h2>
             </div>
         </div>
-        <div class="row">
-            <div class="p-3 col-md-8" style="border: 2px dotted #a9afb4; border-radius: 10px;">
+        <div class="row d-flex justify-content-center">
+            <div class="p-3 col-md-8 mt-3" style="border: 2px solid #281F48; border-radius: 10px;">
                 <form method="POST" action="{{ route('superadmin.admins.store') }}" id="adminCreateForm">
                     @csrf
 

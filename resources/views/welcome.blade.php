@@ -18,7 +18,66 @@
     .select2-container--default .select2-selection--single {
         width: 160px !important;
     }
-
+.quickfilter {
+  color:#281F48 !important;
+  font-weight: 500 !important;
+}
+.smalldiv {
+  background-color:#D6D6D6 !important;
+  border-radius: 10px !important;
+}
+.lastupdate {
+     font-size:14px !important;
+      color: #281F48 !important;
+}
+.neworange {
+color: #FD5631 !important;
+}
+.newborder{
+  border:1px solid #281F48 !important;
+     border-radius:9px !important;
+}
+.quickbfac{
+   background-color: #F0F3F6;
+    border-radius: 5px;
+}
+.imagslider {
+    height: 200px;
+     border-radius:25px 25px 0px 0px;
+}
+.onesix {
+    width:160px !important;
+}
+.onefour {
+    width:140px !important;
+}
+.onefive {
+    width:150px !important;
+}
+.redcolor{
+    background-color:#F40000 !important;
+}
+.point {
+    cursor: pointer
+}
+.bluecolor {
+    color:#281F48 !important;
+}
+.minmaxbtn {
+     background-color: #F40000 !important;
+     color: white !important;
+     font-size: 17px !important;
+}
+.featuredcar {
+    color:#281F48 !important ;
+    font-size:24px !important;
+}
+.viewcar {
+     font-size: 14px !important;
+      font-weight: 600 !important; 
+     text-decoration: none !important; 
+     color: #281F48 !important;
+}
     .carousel-control-prev,
     .carousel-control-next {
         width: 40px;
@@ -339,10 +398,10 @@
                                     <p class="crouserheading1">Looking for the perfect car to match your needs?</p>
 
                                     <div class="paddingthis">
-                                        <a style="color:white" href="#"
+                                        <a class="text-white" href="#"
                                             onclick="document.getElementById('searchBtn').click()">
                                             <div class="search-box">
-                                                <i style="color:white" class="fa fa-search me-3"></i>
+                                                <i  class="fa fa-search me-3 text-white"></i>
                                                 Search a Car
                                             </div>
                                         </a>
@@ -351,7 +410,7 @@
                             </div>
                         </div>
                         <div class="col-md-6 d-flex justify-content-end">
-                            <img src="{{ asset('web/bikes/images/image 51.svg') }}" class=" w-100  pt-0 pt-md-5"
+                            <img src="{{ asset('web/bikes/images/image 51.svg') }}" alt="Slide 1" class=" w-100  pt-0 pt-md-5"
                                 alt="Slide 2">
                         </div>
                     </div>
@@ -364,10 +423,10 @@
                                     <p class="crouserheading1">Looking for the perfect bike to match your needs?</p>
 
                                     <div class="paddingthis">
-                                        <a style="color:white" href="#"
+                                        <a class="text-white" href="#"
                                             onclick="document.getElementById('searchBtn').click()">
                                             <div class="search-box">
-                                                <i style="color:white" class="fa fa-search me-3"></i>
+                                                <i  class="fa fa-search me-3 text-white"></i>
                                                 Search a Bike
                                             </div>
                                         </a>
@@ -376,7 +435,7 @@
                             </div>
                         </div>
                         <div class="col-md-6 d-flex justify-content-end">
-                            <img src="{{ asset('web/bikes/images/Group 1171275384.svg') }}" class="d-block w-75 imgcrs"
+                            <img src="{{ asset('web/bikes/images/Group 1171275384.svg') }}" alt="Slide 2" class="d-block w-75 imgcrs"
                                 alt="Slide 3">
                         </div>
                     </div>
@@ -392,10 +451,10 @@
                                     </p>
 
                                     <div class="paddingthis">
-                                        <a style="color: white" href="#"
+                                        <a class="text-white" href="#"
                                             onclick="document.getElementById('searchBtn').click()">
                                             <div class="search-box">
-                                                <i style="color: white" class="fa fa-search me-3"></i>
+                                                <i  class="fa fa-search me-3 text-white"></i>
                                                 Search a Service
                                             </div>
                                         </a>
@@ -404,7 +463,7 @@
                             </div>
                         </div>
                         <div class="col-md-6 d-flex justify-content-end">
-                            <img src="{{ asset('web/services/images/Frame.svg') }}" class="d-block w-100 imgcrs"
+                            <img src="{{ asset('web/services/images/Frame.svg') }}" alt="Slide 3" class="d-block w-100 imgcrs"
                                 alt="Slide 2" />
                         </div>
                     </div>
@@ -526,19 +585,18 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <p class="twentyfourblack" style="color:#281F48 !important;font-weight: 500;"><strong>Quick filters</strong></p>
+                <p class="twentyfourblack quickfilter" ><strong>Quick filters</strong></p>
             </div>
             <div class="col-lg-12">
                 <form method="post"
                     @if (Request::is('superadmin/*')) action="{{ route('superadmin.search') }}" @else  action="{{ route('search') }}" @endif
-                    class="p-2" style="background-color: #F0F3F6; border-radius: 5px;">
+                    class="p-2 quickbfac" >
                     @csrf
-
                     <div class="d-flex flex-wrap align-items-center gap-2">
                         <div class="custom-select-icon flex-grow-1">
-                            <img src="{{ asset('web/bikes/images/Group12.svg') }}" class="me-2 img-fluid">
-                            <select id="condition" name="condition" style="width:160px !important;"
-                                class="form-select condition-select2">
+                            <img src="{{ asset('web/bikes/images/Group12.svg') }}" alt="bikefinder" class="me-2 img-fluid">
+                            <select id="condition" name="condition" 
+                                class="form-select condition-select2 onesix">
                                 <option value="">Condition</option>
                                 <option value="1e">Any</option>
                                 <option value="new">New Cars</option>
@@ -547,9 +605,9 @@
                         </div>
 
                         <div class="custom-select-icon flex-grow-1">
-                            <img src="{{ asset('web/bikes/images/Group12.svg') }}" class="me-2 img-fluid">
-                            <select id="bodyType" name="bodytype" style="width:140px !important;"
-                                class="form-select body-type-select2">
+                            <img src="{{ asset('web/bikes/images/Group12.svg') }}" alt="bodytype" class="me-2 img-fluid">
+                            <select id="bodyType" name="bodytype" 
+                                class="form-select body-type-select2 onefour">
                                 <option value="">Body Type</option>
                                 <option value="1e">Any</option>
                                 @foreach ($bodytypes as $bodytype)
@@ -559,9 +617,9 @@
                         </div>
 
                         <div class="custom-select-icon flex-grow-1">
-                            <img src="{{ asset('web/bikes/images/Frame 1000002928.svg') }}" class="me-2 img-fluid">
-                            <select id="makecompanydata" name="make" style="width:150px !important;"
-                                class="form-select make-select2">
+                            <img src="{{ asset('web/bikes/images/Frame 1000002928.svg') }}" alt="make" class="me-2 img-fluid">
+                            <select id="makecompanydata" name="make" 
+                                class="form-select make-select2 onefive">
                                 <option value="">Make</option>
                                 <option value="1e">Any</option>
                                 @foreach ($makes as $make)
@@ -571,18 +629,18 @@
                         </div>
 
                         <div class="custom-select-icon flex-grow-1">
-                            <img src="{{ asset('web/bikes/images/Frame 1000002929.svg') }}" class="me-2 img-fluid">
-                            <select id="model" name="model" style="width:150px !important;"
-                                class="form-select model-select2">
+                            <img src="{{ asset('web/bikes/images/Frame 1000002929.svg') }}" alt="model" class="me-2 img-fluid">
+                            <select id="model" name="model" 
+                                class="form-select model-select2 onefive">
                                 <option value="">Model</option>
                                 <option value="1e">Any</option>
                             </select>
                         </div>
 
                         <div class="custom-select-icon flex-grow-1">
-                            <img src="{{ asset('web/bikes/images/Group 2680.svg') }}" class="me-2 img-fluid">
-                            <select id="province" name="province" style="width:150px !important;"
-                                class="form-select province-select2">
+                            <img src="{{ asset('web/bikes/images/Group 2680.svg') }}" alt="province" class="me-2 img-fluid">
+                            <select id="province" name="province" 
+                                class="form-select province-select2 onefive">
                                 <option value="">Province</option>
                                 <option value="1e">Any</option>
                                 @foreach ($provinces as $province)
@@ -592,17 +650,17 @@
                         </div>
 
                         <div class="custom-select-icon flex-grow-1">
-                            <img src="{{ asset('web/bikes/images/Group 2680.svg') }}" class="me-2 img-fluid">
-                            <select id="city" name="city" style="width:150px !important;"
-                                class="form-select city-select2">
+                            <img src="{{ asset('web/bikes/images/Group 2680.svg') }}" alt="city" class="me-2 img-fluid">
+                            <select id="city" name="city" 
+                                class="form-select city-select2 onefive">
                                 <option value="">City</option>
                                 <option value="1e">Any</option>
                             </select>
                         </div>
 
                         <div class="text-end flex-grow-1" style="z-index: 1000000000000000;">
-                            <input type="submit" name="search" class="btn btn-danger w-100"
-                                style="background-color:#F40000 !important; " value="Search"id="searchBtn">
+                            <input type="submit" name="search" class="btn btn-danger w-100 redcolor"
+                                 value="Search"id="searchBtn">
                         </div>
                     </div>
                 </form>
@@ -614,10 +672,10 @@
             <div class="col-12 mt-3">
                 <div class="row">
                     <div class="col-md-3 col-6 p-3" data-aos="fade-down">
-                        <a href="{{ url('cars/new') }}" style="cursor: pointer">
+                        <a href="{{ url('cars/new') }}" class="point" >
                             <div class="row">
                                 <div class="col-12">
-                                    <img src="{{ asset('web/bikes/images/Frame 25 (30).svg') }}" class="img-fluid"
+                                    <img src="{{ asset('web/bikes/images/Frame 25 (30).svg') }}" alt="newcar" class="img-fluid"
                                         alt="...">
                                     <p class="mt-2 text-center eighteenorange">New Cars</p>
                                 </div>
@@ -625,10 +683,10 @@
                         </a>
                     </div>
                     <div class="col-md-3 col-6 p-3" data-aos="fade-right">
-                        <a href="{{ url('cars/used') }}" style="cursor: pointer">
+                        <a href="{{ url('cars/used') }}" class="point">
                             <div class="row">
                                 <div class="col-12">
-                                    <img src="{{ asset('web/bikes/images/Frame 25 (1).svg') }}" class="img-fluid"
+                                    <img src="{{ asset('web/bikes/images/Frame 25 (1).svg') }}" alt="usedcar" class="img-fluid"
                                         alt="...">
                                     <p class="mt-2 text-center eighteenorange">Used Cars</p>
                                 </div>
@@ -636,10 +694,10 @@
                         </a>
                     </div>
                     <div class="col-md-3 col-6 p-3" data-aos="fade-down">
-                        <a href="{{ url('bikes/new') }}" style="cursor: pointer">
+                        <a href="{{ url('bikes/new') }}" class="point">
                             <div class="row">
                                 <div class="col-12">
-                                    <img src="{{ asset('web/bikes/images/Frame 25 (2).svg') }}" class="img-fluid"
+                                    <img src="{{ asset('web/bikes/images/Frame 25 (2).svg') }}" alt="newbike" class="img-fluid"
                                         alt="...">
                                     <p class="mt-2 text-center eighteenorange">New Bikes</p>
                                 </div>
@@ -647,10 +705,10 @@
                         </a>
                     </div>
                     <div class="col-md-3 col-6 p-3" data-aos="fade-right">
-                        <a href="{{ url('bikes/used') }}" style="cursor: pointer">
+                        <a href="{{ url('bikes/used') }}" class="point">
                             <div class="row">
                                 <div class="col-12">
-                                    <img src="{{ asset('web/bikes/images/Frame 25 (3).svg') }}" class="img-fluid"
+                                    <img src="{{ asset('web/bikes/images/Frame 25 (3).svg') }}" alt="usedbike" class="img-fluid"
                                         alt="...">
                                     <p class="mt-2 text-center  eighteenorange">Used Bikes</p>
                                 </div>
@@ -666,10 +724,10 @@
     <div class="container">
         <div class="row">
             <div class="col-12 mt-4 d-flex align-items-center justify-content-between">
-                <p class="twentyfourblack m-0 p-0" style="color:#281F48 !important">Cars by Body Type</p>
+                <p class="twentyfourblack m-0 p-0 bluecolor" >Cars by Body Type</p>
                 <h6>
-                    <a href="javascript:void(0)" id="viewBodyToggle" style="color: #281F48;"
-                        class="view"><strong>View
+                    <a href="javascript:void(0)" id="viewBodyToggle" 
+                        class="view bluecolor"><strong>View
                             All</strong></a>
                 </h6>
             </div>
@@ -700,10 +758,10 @@
 
     <div class="container mt-4">
         <div class="d-flex  justify-content-between">
-            <p class="twentyfourblack m-0 mb-5 p-0" style="color:#281F48 !important">Search By Make</p>
+            <p class="twentyfourblack m-0 mb-5 p-0 bluecolor" >Search By Make</p>
             <h6>
-                <a href="javascript:void(0)" id="viewAllToggle" style="color: #281F48;"
-                    class="view mb-5"><strong>View
+                <a href="javascript:void(0)" id="viewAllToggle" 
+                    class="view mb-5 bluecolor"><strong>View
                         All</strong></a>
             </h6>
         </div>
@@ -730,7 +788,7 @@
 
 
     <div class="container mt-4 mb-2" data-aos="fade-down">
-        <p class="twentyfourblack" style="color:#281F48 !important">Search By Price</p>
+        <p class="twentyfourblack bluecolor" >Search By Price</p>
 
         <form method="post"
             @if (Request::is('superadmin/*')) action="{{ route('superadmin.check-price-range') }}" @else action="{{ route('check-price-range') }}" @endif>
@@ -765,8 +823,8 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-12">
-                    <button type="submit" class="py-2 rounded btn custom-btn w-100"
-                        style="background-color: #F40000;color: white;font-size: 17px;">Search</button>
+                    <button type="submit" class="py-2 rounded btn custom-btn w-100 minmaxbtn"
+                       >Search</button>
                 </div>
 
             </div>
@@ -776,11 +834,11 @@
     <div class="container ">
         <div class="row mb-3">
             <div class="col-12 d-flex justify-content-between align-items-center mb-3">
-                <span class="twentyfourblack" style="color:#281F48 !important ;font-size:24px !important;">Recent
+                <span class="twentyfourblack featuredcar" >Recent
                     featured new cars</span>
                 <span>
-                    <a href="{{ url('cars/new') }}"
-                        style="font-size: 14px; font-weight: 600; text-decoration: none; color: #281F48;">View all</a>
+                    <a href="{{ url('cars/new') }}" class="viewcar"
+                       >View all</a>
                 </span>
             </div>
 
@@ -790,7 +848,7 @@
                     @if (count($featured_new_posts) == 0)
                         <div class="col-md-12 mt-5 pt-5">
                             <div class="row d-flex mt-5 justify-content-center my-3">
-                                <div class="p-3 col-8" style="border:1px solid #281F48;border-radius:9px;">
+                                <div class="p-3 col-8 newborder">
                                     <div class="row d-flex align-items-center">
                                         <div class="col-3">
                                             <img src="{{ asset('web/images/noinputs.svg') }}" alt=""
@@ -810,40 +868,40 @@
                         <div class="carousel-item {{ $chunkIndex == 0 ? 'active' : '' }}" style="    height: 475px;">
                             <div class="row">
                                 @foreach ($chunk as $key => $post)
-                                    <div class="col-lg-4 mt-3 car"
+                                    <div class="col-lg-4 mt-3 car point"
                                         data-aos="{{ $key % 2 == 0 ? 'fade-right' : 'fade-up' }}"
                                         data-longitude="{{ $post->longitude }}"
-                                        data-latitude="{{ $post->latitude }}" style="cursor: pointer"
+                                        data-latitude="{{ $post->latitude }}" 
                                         onclick="location.href='{{ Request::is('superadmin/*') ? route('superadmin.cardetail', $post->id) : route('cardetail', $post->id) }}'">
                                         <div class="wishlist-card ddd rounded-5">
                                             <div class="img-bg-home" style="position: relative">
                                                 <?php $main = $post->document->first(); ?>
-                                                <img src="{{ url('posts/doc/' . $main->doc_name) }}"
-                                                    class="img-adj-card"
-                                                    style="height: 200px; border-radius:25px 25px 0px 0px">
+                                                <img src="{{ url('posts/doc/' . $main->doc_name) }}" alt="Car Image"
+                                                    class="img-adj-card imagslider"
+                                                    >
 
                                                 @if ($post->feature_ad == 1)
                                                     <span class="featureicn">
                                                         <img src="{{ asset('web/bikes/images/Star 7.svg') }}"
-                                                            class="img-fluid">
+                                                            class="img-fluid" alt="featured">
                                                         Featured</span>
                                                 @endif
                                             </div>
                                             <div class="py-lg-3 px-lg-4 p-3">
                                                 <div class="d-flex justify-content-between align-items-center">
-                                                    <h6 style="color: #281F48;">{{ $post->year ?? 'N/A' }}</h6>
+                                                    <h6 class="bluecolor">{{ $post->year ?? 'N/A' }}</h6>
                                                 </div>
-                                                <h4 style="color: #281F48;"><strong>{{ $post->modelname }}</strong>
+                                                <h4 class="bluecolor"><strong>{{ $post->modelname }}</strong>
                                                 </h4>
-                                                <h5 style="color: #FD5631;"><b>PKR
+                                                <h5 class="neworange"><b>PKR
                                                         {{ number_format($post->price, 2) }}</b></h5>
                                                 <div class="d-flex justify-content-between align-items-center">
-                                                    <h6 class="mb-0" style="color: #281F48;">
+                                                    <h6 class="mb-0 bluecolor">
                                                         <i class="bi bi-geo-alt"></i>
                                                         {{ $post->location->cityname ?? '' }} <span
                                                             class="distance">calculating...</span>
                                                     </h6>
-                                                    <span style="font-size:14px; color: #281F48;">
+                                                    <span class="lastupdate">
                                                         Last Updated:
                                                         {{ \Carbon\Carbon::parse($post->updated_at)->format('F d, Y') }}
                                                     </span>
@@ -851,10 +909,10 @@
                                                 <hr class="m-0 mt-2">
                                                 <div class="row">
                                                     <div class="col-4 my-3">
-                                                        <div class="text-center py-1"
-                                                            style="background-color:#D6D6D6; border-radius: 10px;">
-                                                            <i class="bi bi-speedometer2 fs-4"
-                                                                style="color: #281F48;"></i>
+                                                        <div class="text-center py-1 smalldiv"
+                                                            >
+                                                            <i class="bi bi-speedometer2 fs-4 bluecolor"
+                                                               ></i>
                                                             @php
                                                                 $mileage = (float) $post->milleage;
                                                                 if ($mileage >= 1000000) {
@@ -879,19 +937,19 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-4 my-3">
-                                                        <div class="text-center py-1"
-                                                            style="background-color:#D6D6D6; border-radius: 10px;">
-                                                            <i class="bi bi-car-front-fill fs-4"
-                                                                style="color: #281F48;"></i>
+                                                        <div class="text-center py-1 smalldiv" 
+                                                            >
+                                                            <i class="bi bi-car-front-fill fs-4 bluecolor"
+                                                               ></i>
                                                             <p class="cardp m-0">{{ $post->transmission ?? 'N/A' }}
                                                             </p>
                                                         </div>
                                                     </div>
                                                     <div class="col-4 my-3">
-                                                        <div class="text-center py-1"
-                                                            style="background-color:#D6D6D6; border-radius: 10px;">
-                                                            <i class="bi bi-fuel-pump-diesel fs-4"
-                                                                style="color: #281F48;"></i>
+                                                        <div class="text-center py-1 smalldiv"
+                                                           >
+                                                            <i class="bi bi-fuel-pump-diesel fs-4 bluecolor"
+                                                               ></i>
                                                             <p class="cardp m-0">{{ $post->fuel ?? 'N/A' }}</p>
                                                         </div>
                                                     </div>
@@ -920,11 +978,11 @@
 
         <div class="row mb-3">
             <div class="col-12 d-flex justify-content-between align-items-center mb-3">
-                <span class="twentyfourblack" style="color:#281F48 !important ; font-size:24px !important;">Recent
+                <span class="twentyfourblack featuredcar" >Recent
                     featured used cars</span>
                 <span>
-                    <a href="{{ url('cars/used') }}"
-                        style="font-size: 14px; font-weight: 600; text-decoration: none; color: #281F48; ">View all</a>
+                    <a href="{{ url('cars/used') }}" class="viewcar"
+                       >View all</a>
                 </span>
             </div>
 
@@ -934,10 +992,10 @@
                     @if (count($featured_used_posts) == 0)
                         <div class="col-md-12 mt-5 pt-5">
                             <div class="row mt-5 d-flex justify-content-center my-3">
-                                <div class="p-3 col-8" style="border:1px solid #281F48;border-radius:9px;">
+                                <div class="p-3 col-8 newborder" >
                                     <div class="row d-flex align-items-center">
                                         <div class="col-3">
-                                            <img src="{{ asset('web/images/noinputs.svg') }}" alt=""
+                                            <img src="{{ asset('web/images/noinputs.svg') }}" alt="sorry"
                                                 class="img-fluid" srcset="">
                                         </div>
                                         <div class="col-9 text-start">
@@ -963,30 +1021,30 @@
                                             <div class="img-bg-home" style="position: relative">
                                                 <?php $main = $post->document->first(); ?>
                                                 <img src="{{ url('posts/doc/' . $main->doc_name) }}"
-                                                    class="img-adj-card"
-                                                    style="height: 200px;border-radius:25px 25px 0px 0px">
+                                                    class="img-adj-card imagslider" alt="carimages"
+                                                  >
                                                 @if ($post->feature_ad == 1)
                                                     <span class="featureicn">
                                                         <img src="{{ asset('web/bikes/images/Star 7.svg') }}"
-                                                            class="img-fluid">
+                                                            class="img-fluid" alt="featured">
                                                         Featured</span>
                                                 @endif
                                             </div>
                                             <div class="py-lg-3 px-lg-4 p-3">
                                                 <div class="d-flex justify-content-between align-items-center">
-                                                    <h6 style="color: #281F48;">{{ $post->year ?? 'N/A' }}</h6>
+                                                    <h6 class="bluecolor">{{ $post->year ?? 'N/A' }}</h6>
                                                 </div>
-                                                <h4 style="color: #281F48;"><strong>{{ $post->modelname }} </strong>
+                                                <h4 class="bluecolor"><strong>{{ $post->modelname }} </strong>
                                                 </h4>
-                                                <h5 style="color: #FD5631;"><b>PKR
+                                                <h5 class="neworange"><b>PKR
                                                         {{ number_format($post->price, 2) }}</b></h5>
                                                 <div class="d-flex justify-content-between align-items-center">
-                                                    <h6 class="mb-0" style="color: #281F48;">
+                                                    <h6 class="mb-0" class="bluecolor">
                                                         <i class="bi bi-geo-alt"></i>
                                                         {{ $post->location->cityname ?? '' }} <span
                                                             class="distance">calculating...</span>
                                                     </h6>
-                                                    <span style="font-size:14px; color: #281F48;">
+                                                    <span class="lastupdate">
                                                         Last Updated:
                                                         {{ \Carbon\Carbon::parse($post->updated_at)->format('F d, Y') }}
                                                     </span>
@@ -994,10 +1052,10 @@
                                                 <hr class="m-0 mt-2">
                                                 <div class="row">
                                                     <div class="col-4 my-3">
-                                                        <div class="text-center py-1"
-                                                            style="background-color:#D6D6D6; border-radius: 10px;">
-                                                            <i class="bi bi-speedometer2 fs-4"
-                                                                style="color: #281F48;"></i>
+                                                        <div class="text-center py-1 smalldiv"
+                                                       >
+                                                            <i class="bi bi-speedometer2 fs-4 bluecolor"
+                                                                ></i>
                                                             <p class="cardp m-0">
                                                                 {{ (float) $post->milleage >= 1000
                                                                     ? rtrim(number_format((float) $post->milleage / 1000, 1), '.0') . 'KM'
@@ -1007,19 +1065,19 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-4 my-3">
-                                                        <div class="text-center py-1"
-                                                            style="background-color:#D6D6D6; border-radius: 10px;">
-                                                            <i class="bi bi-car-front-fill fs-4"
-                                                                style="color: #281F48;"></i>
+                                                        <div class="text-center py-1 smalldiv"
+                                                         >
+                                                            <i class="bi bi-car-front-fill fs-4 bluecolor"
+                                                            ></i>
                                                             <p class="cardp m-0">{{ $post->transmission ?? 'N/A' }}
                                                             </p>
                                                         </div>
                                                     </div>
                                                     <div class="col-4 my-3">
-                                                        <div class="text-center py-1"
-                                                            style="background-color:#D6D6D6; border-radius: 10px;">
-                                                            <i class="bi bi-fuel-pump-diesel fs-4"
-                                                                style="color: #281F48;"></i>
+                                                        <div class="text-center py-1 smalldiv"
+                                                         >
+                                                            <i class="bi bi-fuel-pump-diesel fs-4 bluecolor"
+                                                          ></i>
                                                             <p class="cardp m-0">{{ $post->fuel ?? 'N/A' }}</p>
                                                         </div>
                                                     </div>
@@ -1060,7 +1118,7 @@
                                 <div class="col-10 ">
                                     <div class="row ">
                                         <div class="col-md-12">
-                                            <h1 style="color: #281F48;" data-aos="fade-right"><strong>Download our
+                                            <h1 class="bluecolor" data-aos="fade-right"><strong>Download our
                                                     mobile
                                                     app.</strong>
                                             </h1>
@@ -1070,18 +1128,18 @@
                                         <div class="col-md-12 d-flex  align-items-center mt-4">
 
                                             <a class=" text-start"><img
-                                                    src="{{ asset('web/bikes/images/Group111.svg') }}" class="img-fluid " style="width:160px"
-                                                    alt="..."></a>
+                                                    src="{{ asset('web/bikes/images/Group111.svg') }}" class="img-fluid " alt="playstore" style="width:160px"
+                                                    ></a>
                                             <a class=" text-start ms-3"><img
                                                     src="{{ asset('web/bikes/images/Group1111.svg') }}" style="width:160px"
-                                                    class="img-fluid" alt="..."></a>
+                                                    class="img-fluid" alt="gmail"></a>
 
                                         </div>
 										       <div class="col-md-12 d-flex  align-items-center mt-4">
 
                                           <img
                                                     src="{{ asset('web/bikes/images/Coming_Soon.svg') }}" class="img-fluid " style="width:160px"
-                                                    alt="...">
+                                                    alt="comingsoon">
 												   </div>
                                     </div>
 
@@ -1090,7 +1148,7 @@
                         </div>
                         <div class="col-md-5 " data-aos="fade-right">
                             <img src="{{ asset('web/bikes/images/mobileauto.svg') }}" class="img-fluid"
-                                alt="...">
+                                alt="mobile">
                         </div>
                     </div>
                 </div>

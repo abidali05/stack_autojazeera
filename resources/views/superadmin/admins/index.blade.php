@@ -148,7 +148,9 @@
             background-color: #FD5631;
             color: white;
         }
-
+.nohover:hover {
+     color: #281F48 !important;
+}
         .custom-delete-btn {
             font-weight: 600;
             color: #281F48;
@@ -204,11 +206,11 @@
                             <td>{{ $user->created_at }}</td>
                             <td>
                                 <a href="{{ route('superadmin.admins.edit', $user->id) }}"
-                                    class="btn btn-edit btn-action text-white">
-                                    Edit
+                                   class="border-0 nohover" style="text-decoration: none;color:#281F48; background-color: transparent;">
+                                    <i class="bi bi-pencil-square"></i>
                                 </a>
-                                <button type="button" class="btn btn-delete btn-action" data-bs-toggle="modal"
-                                    data-bs-target="#deleteModal{{ $user->id }}">Delete</button>
+                                <button type="button" class="border-0 ms-2" data-bs-toggle="modal" style="text-decoration: none; background-color: transparent;"
+                                    data-bs-target="#deleteModal{{ $user->id }}"><i class="bi bi-trash3"></i></button>
                             </td>
                         </tr>
                     @endforeach
@@ -254,7 +256,7 @@
                     lengthChange: false,
                     searching: true,
                     ordering: true,
-                    scrollX: false,
+                    scrollX: true,
                     order: [[0, 'asc']],
                     language: {
                         search: "Search: "
