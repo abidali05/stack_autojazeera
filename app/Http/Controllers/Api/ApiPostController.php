@@ -44,24 +44,17 @@ use App\Models\FirebaseChatAttachments;
 use Illuminate\Support\Facades\Validator;
 use Kreait\Firebase\Messaging\CloudMessage;
 use Kreait\Firebase\Messaging\Notification;
-use App\Models\AutoServices\ServiceSubscriptions;
-
 
 class ApiPostController extends Controller
 {
     public function store(Request $request)
     {
         Log::info($request->all());
-        //dd($request->all());
         $validationRules = [];
 
-
         $validationRules = array_merge($validationRules, [
-            // 'dealer' => 'required',
-            // 'title' => 'required',
             'condition' => 'required',
             'assembly' => 'required',
-            // 'dealerType' => 'required',
             'price' => 'required',
             'makecompany' => 'required',
             'model' => 'required',
@@ -73,28 +66,12 @@ class ApiPostController extends Controller
             'seatingCapacity' => 'required',
             'engineCapacity' => 'required',
             'transmission' => 'required',
-            // 'driveType' => 'required',
             'exterior_color' => 'required',
-
-
             'Features' => 'required',
             'Features.*'   => 'integer|exists:main_features,id',
-
             'filedata' => 'nullable',
-            // 'filedata.*' => 'file|mimes:jpg,jpeg,png,gif,mp4,mov,avi',
-
-
-
-            // 'country' => 'required',
             'province' => 'required',
             'city' => 'required',
-            // 'street_address' => 'required',
-
-
-            // 'firstName' => 'required',
-            // 'secondName' => 'required',
-            // 'email' => 'required|email',
-            // 'area' => 'required',
             'number' => 'nullable|string',
         ]);
 
@@ -103,24 +80,17 @@ class ApiPostController extends Controller
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
+
         $post = new Post;
 
-        // dd($request->all());
-        // Log::info($request->all());
-        // Handle document_auction
         if ($request->document_auction) {
             $auctionData = $request->document_auction;
 
-
-
-            // Check if a new file is provided for upload
             if (isset($auctionData['path']) && $auctionData['path'] instanceof \Illuminate\Http\UploadedFile) {
                 $auctionFile = $auctionData['path'];
                 if ($auctionFile->isValid()) {
                     $auctionFilename = now()->format('His') . '_' . $auctionFile->getClientOriginalName();
                     $auctionFile->move(public_path('posts/auction/'), $auctionFilename);
-
-
 
                     $post->document_auction = $auctionFilename; // Save the new filename
                 }
@@ -131,7 +101,6 @@ class ApiPostController extends Controller
         if ($request->document_brochure) {
             $brochureData = $request->document_brochure;
 
-
             // Check if a new file is provided for upload
             if (isset($brochureData['path']) && $brochureData['path'] instanceof \Illuminate\Http\UploadedFile) {
                 $brochureFile = $brochureData['path'];
@@ -139,15 +108,12 @@ class ApiPostController extends Controller
                     $brochureFilename = now()->format('His') . '_' . $brochureFile->getClientOriginalName();
                     $brochureFile->move(public_path('posts/brochure/'), $brochureFilename);
 
-
                     $post->document_brochure = $brochureFilename; // Save the new filename
                 }
             }
         }
 
-
         $post->fill([
-
             'title' => 'none',
             'condition' => $request->condition,
             'assembly' => $request->assembly,
@@ -171,28 +137,16 @@ class ApiPostController extends Controller
             'submitedby' => 'dealer',
             'feature_ad' => $request->feature_ad,
             'street_address' => $request->street_address,
-            // 'document_brocuhre' => $request->document_brocuhre,
-            // 'document_auction' => $request->document_auction,
-            // 'first_name' => 'none',
-            // 'second_name' => 'none'
             'registered' => $request->registered,
-            'latitude' => $request->latitude,
-            'longitude' => $request->registered,
+            'latitude' => $request->latitude ?? '',
+            'longitude' => $request->longitude ?? '',
         ]);
 
         $user = User::find($request->dealer_id);
-        // $userId = $request->dealer_id;
 
         $userId = $user->role == 2 ? $user->dealer_id : $user->id;
 
         $dealer = User::find($userId);
-
-        Log::info($userId);
-        // $userId = $request->dealer_id;
-        // $subscription = AdsSubscriptions::where('user_id', $userId)->orderBy('id', 'desc')->first();
-
-        // // dd($subscription);
-        // $plan = AdsSubscriptionPlans::where('id', $subscription->plan_id)->first();
 
         // Check valid Stripe subscription
         Stripe::setApiKey(config('services.stripe.secret'));
@@ -233,20 +187,18 @@ class ApiPostController extends Controller
         if (!$hasValidAdSubscription || !$plan) {
             return response()->json(['message' => 'Your subscription is invalid or expired.', 'status' => 422], 422);
         }
-        // dd($plan);
+
         $posted_ads = Post::where('dealer_id', $userId)->where('feature_ad', '1')->count();
         $posted_ads2 = BikePost::where('dealer_id', $userId)->where('is_featured', '1')->count();
         $total_ads = $posted_ads + $posted_ads2;
 
         if ($plan->metadata->allowed_feature_ads !== 'unlimited') {
-            // dd($plan->allowed_ads);
             if ($total_ads >= (int)$plan->metadata->allowed_feature_ads) {
                 $post->feature_ad = 0;
             } else {
                 $post->feature_ad = $validatedData['feature_ad'] ?? 0;
             }
         }
-
 
         if ($user->role == 2) {
             $post->employee_id = $user->id;
@@ -257,15 +209,10 @@ class ApiPostController extends Controller
         }
         $post->save();
 
-
-
         if (isset($request->Features)) {
             $this->handleFeatures($post->id, $request->Features);
         }
 
-
-        // $this->validateStep($request, ['filedata' => 'required']);
-        // dd($request->filedata);
         if (is_array($request->filedata) && count($request->filedata) > 0) {
             $this->handleFileUpload($post->id, $request->filedata);
         } else {
@@ -273,17 +220,9 @@ class ApiPostController extends Controller
         }
 
 
-        // if ($request->file('document_brocuhre') || $request->file('document_auction')) {
-        //     $this->handleDocuments($post->id, $request);
-        // }
-
-
         $this->handleLocation($post->id, $request);
 
-
-
         $this->handleContactInfo($post->id, $request);
-        // $this->updatePostStatus();
 
         $p = Post::where(['submitedby' => 'dealer'])->with(['feature', 'document', 'location', 'contact'])->find($post->id);
         $check = Whishlist::where('post_id', $p->id)->where('status', 1)->first();
@@ -302,14 +241,10 @@ class ApiPostController extends Controller
         return response()->json(['message' => 'Post Added Successfully!', 'status' => 200, 'data' => $user1], 200);
     }
 
-    private function handleStepFour($post, $request) {}
-
     private function handleFeatures($postId, $features)
     {
         foreach ($features as $featureId) {
-            // dd($featureId);
             $data = MainFeature::find($featureId);
-            // dd($data);
             if ($data) {
                 Feature::updateOrCreate(
                     ['post_id' => $postId, 'feature_id' => $data->id],
@@ -1221,14 +1156,11 @@ class ApiPostController extends Controller
             $sendfcm = false;
         }
 
-        // Validate only non-null fields
         $validationRules = [
             'dealer_id' => 'required',
             'dealer' => 'nullable',
-            // 'title' => 'nullable',
             'condition' => 'nullable',
             'assembly' => 'nullable',
-            // 'dealerType' => 'nullable',
             'price' => 'nullable',
             'makecompany' => 'nullable',
             'model' => 'nullable',
@@ -1240,28 +1172,13 @@ class ApiPostController extends Controller
             'seatingCapacity' => 'nullable',
             'engineCapacity' => 'nullable',
             'transmission' => 'nullable',
-            // 'driveType' => 'nullable',
             'exterior_color' => 'nullable',
-
-
             'Features' => 'required',
             'Features.*'   => 'integer|exists:main_features,id',
-
             'filedata' => 'nullable',
-            // 'filedata.*' => 'file|mimes:jpg,jpeg,png,gif,mp4,mov,avi',
-
-
-
-            // 'country' => 'nullable',
             'province' => 'nullable',
             'city' => 'nullable',
-            // 'street_address' => 'nullable',
-
-
-            // 'firstName' => 'nullable',
-            // 'secondName' => 'nullable',
             'email' => 'nullable|email',
-            //  'area' => 'required',
             'number' => 'nullable|string',
         ];
 
@@ -1271,11 +1188,9 @@ class ApiPostController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        // Merge new non-null values with existing ones
         $data = array_filter($request->only(array_keys($validationRules)), function ($value) {
             return $value !== null;
         });
-        // dd($data);
 
         if ($request->document_auction) {
             $auctionData = $request->document_auction;
@@ -1350,15 +1265,14 @@ class ApiPostController extends Controller
 
 
         $oldprice = $post->price;
+
         $post->fill(
             [
-
                 'title' => 'none',
                 'condition' => $request->condition,
                 'assembly' => $request->assembly,
                 'company_conection' => $request->dealerType,
                 'currency' => $request->currency,
-                // 'price' => $request->price,
                 'negotiated_price' => $request->negotiatedPrice,
                 'make' => $request->makecompany,
                 'model' => $request->model,
@@ -1377,16 +1291,14 @@ class ApiPostController extends Controller
                 'feature_ad' => $request->feature_ad,
                 'street_address' => $request->street_address,
                 'registered' => $request->registered,
-                'latitude' => $request->latitude,
-                'longitude' => $request->registered,
+                'latitude' => $request->latitude ?? '',
+                'longitude' => $request->longitude ?? '',
             ]
         );
 
         if (isset($request->Features)) {
             $this->handleFeatures($post->id, $request->Features);
         }
-
-
 
         if ($request->filedata) {
 
@@ -1415,36 +1327,24 @@ class ApiPostController extends Controller
             }
         }
 
-
-
         $this->handleLocation($post->id, $request);
 
         $this->handleContactInfo($post->id, $request);
 
-
-
         if ($request->has('price') && $request->price != $post->price) {
-            // Store the previous price
             $post->previous_price = $oldprice;
 
-            // Update the current price
             $post->price = $request->price;
 
-            // Calculate the percentage difference if the previous price is not zero
-
-            $difference = $request->price - $oldprice; // Difference between new and previous price
-            $percentageChange = ($difference / $oldprice) * 100; // Calculate percentage change
-            $post->percentage_diff = round($percentageChange, 2); // Round to 2 decimal places
+            $difference = $request->price - $oldprice;
+            $percentageChange = ($difference / $oldprice) * 100;
+            $post->percentage_diff = round($percentageChange, 2);
 
         }
 
         $user = User::find($request->dealer_id);
         $userId = $user->role == 2 ? $user->dealer_id : $user->id;
-        // $subscription = AdsSubscriptions::where('user_id', $userId)->orderBy('id', 'desc')->first();
         $user = User::find($userId);
-
-        // dd($subscription);
-        // $plan = AdsSubscriptionPlans::where('id', $subscription->plan_id)->first();
 
         Stripe::setApiKey(config('services.stripe.secret'));
         $customer = $this->getOrCreateCustomer($user);
@@ -1484,13 +1384,12 @@ class ApiPostController extends Controller
         if (!$hasValidAdSubscription || !$plan) {
             return response()->json(['message' => 'Your subscription is invalid or expired.', 'status' => 422], 422);
         }
-        // dd($plan);
+
         $posted_ads = Post::where('dealer_id', $userId)->where('feature_ad', '1')->count();
         $posted_ads2 = BikePost::where('dealer_id', $userId)->where('is_featured', '1')->count();
         $total_ads = $posted_ads + $posted_ads2;
 
         if ($plan->metadata->allowed_feature_ads !== 'unlimited') {
-            // dd($plan->allowed_ads);
             if ($total_ads >= (int)$plan->metadata->allowed_feature_ads) {
                 $post->feature_ad = 0;
             } else {
@@ -1517,28 +1416,24 @@ class ApiPostController extends Controller
         if ($sendfcm == true) {
             $user_ids = PriceAlert::where('post_id', $request->id)->where('status', 1)->pluck('user_id')->toArray();
             if (count($user_ids) > 0) {
-                // dd($updatedPost->makecompany);
                 $fcm_tokens = User::wherein('id', $user_ids)->whereNotNull('fcm_token')->pluck('fcm_token')->toArray();
                 if ($fcm_tokens) {
-                    // dd('zaid');
                     $this->sendPriceAlertNotification($fcm_tokens, ['title' => 'Price Alert', 'body' => 'Vehicle ' . $updatedPost->makecompany->name . ' ' . $updatedPost->modelcompany->name . ' has been updated']);
                 }
                 $post = Post::with(['modelcompany', 'makecompany'])->where('id', $updatedPost->id)->first();
                 $url = url('/');
                 $url = $url . '/car-detail/' . $request->id;
                 $post->url = $url;
-                // $post->url = route('cardetail', $post->id);
                 $post->updated_at = Carbon::parse($post->updated_at)->format('d M Y');
                 foreach ($user_ids as $id) {
                     $user = User::find($id);
                     if ($user) {
-                        //$body = view('emails.price_alert', compact('post'));
-                        //sendMail($user->name, $user->email, 'Auto Jazeera', 'Auto Jazeera Price Alert', $body);
                         Mail::to($user->email)->send(new PriceAlertMail($post));
                     }
                 }
             }
         }
+
         $user = User::find($request->dealer_id);
         return response()->json(['message' => 'Post update successfully', 'status' => 200, 'data' => $user], 200);
     }

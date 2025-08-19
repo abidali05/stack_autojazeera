@@ -278,14 +278,12 @@ class BikePostController extends Controller
             ], 202);
         }
     }
+
     public function store(Request $request)
     {
-        //Log::info($request->all());
         if (!auth('sanctum')->check()) {
             return response()->json(['status' => 422, 'message' => "You are not authorized to access this route"]);
         }
-
-
 
         $validator = Validator::make($request->all(), [
             'make' => 'required|integer|exists:bike_makes,id',
@@ -318,18 +316,10 @@ class BikePostController extends Controller
             'images.*.thumbnail' => 'required|string',
         ]);
 
-
         if ($imageValidator->fails()) {
             return response()->json(['status' => 422, 'errors' => $imageValidator->errors()], 422);
         }
 
-        // $documentValidator = Validator::make($request->all(), [
-        //     'documents.*' => 'nullable|file|mimes:pdf|max:5120',
-        // ]);
-
-        // if ($documentValidator->fails()) {
-        //     return response()->json(['status' => 422, 'errors' => $documentValidator->errors()], 422);
-        // }
         $featuresValidator = Validator::make($request->all(), [
             'features' => 'required|array',
             'features.*' => 'integer|exists:bike_main_features,id',
@@ -361,7 +351,6 @@ class BikePostController extends Controller
             return response()->json(['status' => 422, 'errors' => $contactValidator->errors()], 422);
         }
 
-
         $validatedData = $validator->validated();
         $user = auth('sanctum')->user();
         if ($user->role == '2') {
@@ -372,15 +361,11 @@ class BikePostController extends Controller
             $id = $user->id;
             $validatedData['dealer_id'] = $id;
         }
-        $validatedData['latitude'] = $request->latitude;
-        $validatedData['longitude'] = $request->longitude;
-
-
+        // $validatedData['latitude'] = $request->latitude;
+        // $validatedData['longitude'] = $request->longitude;
 
         DB::beginTransaction();
         try {
-            // Create bike post
-
             if ($request->document_auction) {
                 $auctionData = $request->document_auction;
                 if (isset($auctionData['path']) && $auctionData['path'] instanceof \Illuminate\Http\UploadedFile) {
@@ -412,10 +397,6 @@ class BikePostController extends Controller
             $bikePost = BikePost::create($validatedData);
             $user = auth('sanctum')->user();
             $userId = $user->role == 2 ? $user->dealer_id : $user->id;
-            // $subscription = AdsSubscriptions::where('user_id', $userId)->orderBy('id', 'desc')->first();
-            
-            // dd($subscription);
-            // $plan = AdsSubscriptionPlans::where('id', $subscription->plan_id)->first();
             $user = User::find($userId);
             Stripe::setApiKey(config('services.stripe.secret'));
             $customer = $this->getOrCreateCustomer($user);
@@ -455,13 +436,12 @@ class BikePostController extends Controller
             if (!$hasValidAdSubscription || !$plan) {
                 return response()->json(['message' => 'Your subscription is invalid or expired.', 'status' => 422], 422);
             }
-            // dd($plan);
+
             $posted_ads = Post::where('dealer_id', auth('sanctum')->user()->role == 2 ? auth('sanctum')->user()->dealer_id : auth('sanctum')->user()->id)->where('feature_ad', '1')->count();
             $posted_ads2 = BikePost::where('dealer_id', auth('sanctum')->user()->role == 2 ? auth('sanctum')->user()->dealer_id : auth('sanctum')->user()->id)->where('is_featured', '1')->count();
             $total_ads = $posted_ads + $posted_ads2;
 
             if ($plan->metadata->allowed_feature_ads !== 'unlimited') {
-                // dd($plan->allowed_ads);
                 if ($total_ads >= (int)$plan->metadata->allowed_feature_ads) {
                     $bikePost->is_featured = 0;
                 } else {
@@ -477,19 +457,6 @@ class BikePostController extends Controller
                 ]);
             }
 
-            // if ($request->hasFile('images')) {
-            //     foreach ($request->file('images') as $image) {
-            //         $timestamp = microtime(true) * 10000;
-            //         $extension = $image->getClientOriginalExtension();
-            //         $filename = $timestamp . '.' . $extension;
-            //         $image->move(public_path('posts/doc/bikes/images/'), $filename);
-            //         BikeMedia::create([
-            //             'ad_id' => $bikePost->id,
-            //             'file_path' => 'posts/doc/bikes/images/' . $filename,
-            //             'file_type' => 'image',
-            //         ]);
-            //     }
-            // }
             if ($request->has('images')) {
                 foreach ($request->images as $fileEntry) {
                     if (
@@ -514,22 +481,6 @@ class BikePostController extends Controller
                     }
                 }
             }
-
-
-
-            // if ($request->hasFile('documents')) {
-            //     foreach ($request->file('documents') as $document) {
-            //         $timestamp = microtime(true) * 10000;
-            //         $extension = $document->getClientOriginalExtension();
-            //         $filename = $timestamp . '.' . $extension;
-            //         $document->move(public_path('posts/doc/bikes/docs/'), $filename);
-            //         BikeMedia::create([
-            //             'ad_id' => $bikePost->id,
-            //             'file_path' => 'posts/doc/bikes/docs/' . $filename,
-            //             'file_type' => 'document',
-            //         ]);
-            //     }
-            // }
 
             BikeLocation::create([
                 'ad_id' => $bikePost->id,
@@ -652,8 +603,8 @@ class BikePostController extends Controller
         } else {
             $validatedData['dealer_id'] = $user->id;
         }
-        $validatedData['latitude'] = $request->latitude;
-        $validatedData['longitude'] = $request->longitude;
+        // $validatedData['latitude'] = $request->latitude;
+        // $validatedData['longitude'] = $request->longitude;
 
         $oldprice = $bikePost->price;
         $newprice = $request->price;
@@ -681,11 +632,6 @@ class BikePostController extends Controller
             $bikePost->update($validatedData);
             $user = auth('sanctum')->user();
             $userId = $user->role == 2 ? $user->dealer_id : $user->id;
-            // $subscription = AdsSubscriptions::where('user_id', $userId)->orderBy('id', 'desc')->first();
-
-            // dd($subscription);
-            // $plan = AdsSubscriptionPlans::where('id', $subscription->plan_id)->first();
-            // dd($plan);
               $user = User::find($userId);
             Stripe::setApiKey(config('services.stripe.secret'));
             $customer = $this->getOrCreateCustomer($user);
@@ -819,8 +765,6 @@ class BikePostController extends Controller
                     'website' => $request->contact['website'] ?? null,
                 ]
             );
-
-
 
             DB::commit();
             $user = User::find($bikePost->dealer_id);
