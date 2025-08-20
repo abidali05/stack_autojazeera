@@ -34,7 +34,12 @@
             border-radius: 5px;
             z-index: 2;
         }
-
+        .si6{
+            font-size:16px !important;
+        }
+.bluee{
+    color:#281F48 !important;
+}
         .slider {
             position: absolute;
             width: 100%;
@@ -407,7 +412,37 @@
             border: 15px solid #514b82;
             animation: l18 2s infinite linear;
         }
-
+        .neworange{
+            color:#FD5631 !important;
+        }
+.clearfilter{
+    color:#281F48 !important;
+    font-weight:900 !important ;
+     border:1px solid #281F48 !important;
+      padding:5px !important;
+       border-radius:5px !important;
+}
+.cond{
+    display: flex !important;
+    gap: 10px !important; 
+    align-items: center !important;
+}
+.fs1 {
+font-size:16px !important;
+}
+.iconclr {
+    color: #BFBEC3 !important;
+}
+.relat{
+    position: relative !important;
+}
+.sixb {
+font-size:16px !important; 
+    color: #281F48 !important;
+}
+.widthh {
+    width:100% !important;
+}
         @keyframes l18 {
             0% {
                 clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0)
@@ -462,7 +497,7 @@
                     <!-- Condition Filter -->
                     <div class="d-flex justify-content-between">
 
-                        {{-- <span id="clearFilterbtn" style="color: #BFBEC3; cursor: pointer; font-size:12px ;text-decoration:underline ">Clear All Filter</span> --}}
+                        {{-- <span id="clearFilterbtn">Clear All Filter</span> --}}
                     </div>
                     <form method="post"
                         @if (Request::is('superadmin/*')) action="{{ route('superadmin.search') }}" @else  action="{{ route('search') }}" @endif>
@@ -473,35 +508,35 @@
                             <div class="d-none">
                                 <div class="col-lg-2 col-6 custom-select-icon">
                                     <img src="{{ asset('web/images/body-icon.png') }}" class="me-lg-3 img-fluid">
-                                    <select name="bodytype" style="color:black" class="form-select form-select-home">
+                                    <select name="bodytype" class="form-select form-select-home">
                                         <option value="" selected>
                                             Select Body Type</option>
                                     </select>
                                 </div>
                                 <div class="col-lg-2 col-6 custom-select-icon">
                                     <img src="{{ asset('web/images/make.png') }}" class="me-lg-3 img-fluid">
-                                    <select name="make" style="color:black" class="form-select form-select-home">
+                                    <select name="make"  class="form-select form-select-home">
                                         <option value="">Select Make</option>
 
                                     </select>
                                 </div>
                                 <div class="col-lg-2 col-6 custom-select-icon">
                                     <img src="{{ asset('web/images/model.png') }}" class="me-lg-3 img-fluid">
-                                    <select class="form-select form-select-home" style="color:black" name="model">
+                                    <select class="form-select form-select-home"  name="model">
                                         <option value="" selected>Select Model</option>
                                     </select>
                                 </div>
 
                                 <div class="col-lg-2 col-6 custom-select-icon">
                                     <img src="{{ asset('web/images/map.png') }}" class="me-lg-3 img-fluid">
-                                    <select name="province " style="color:black" class="form-select form-select-home ">
+                                    <select name="province "  class="form-select form-select-home ">
                                         <option value="">Select Province</option>
 
                                     </select>
                                 </div>
                                 <div class="col-lg-2 col-6 custom-select-icon">
                                     <img src="{{ asset('web/images/map.png') }}" class="me-lg-3 img-fluid">
-                                    <select name="city" style="color:black" class="form-select form-select-home">
+                                    <select name="city"  class="form-select form-select-home">
                                         <option value="">Select City</option>
 
                                     </select>
@@ -513,20 +548,20 @@
                             </div>
 
                             <button type="submit"
-                                style="color:#281F48;font-weight:900 !important ; border:1px solid #281F48; padding:5px; border-radius:5px">Clear
+                              class="clearfilter">Clear
                                 Filters</button>
                     </form>
-                    <h6 class="form-label m-0" style="color:#FD5631"><strong>Condition</strong></h6>
+                    <h6 class="form-label m-0 neworange" ><strong>Condition</strong></h6>
                 </div>
                 <div class="">
-                    <div class="my-3" style="display: flex; gap: 10px; align-items: center ;">
+                    <div class="my-3 cond" >
                         <div class="{{ request()->name == 'new' ? 'd-none' : '' }}">
                             <input type="checkbox" class="filter-checkbox condition_filter" name="condition"
                                 data-filter="condition" value="used" id="usedCars_check"
                                 {{ request()->name == 'used' ? 'checked' : '' }}
                                 {{ request()->condition == 'used' ? 'checked' : '' }}
                                 {{ request()->name == 'used' || request()->name == 'new' ? 'd-none' : '' }}>
-                            <label for="usedCars" style="font-size:16px">Used Cars</label>
+                            <label for="usedCars" class="fs1">Used Cars</label>
                         </div>
                         <div class="{{ request()->name == 'used' ? 'd-none' : '' }}">
                             <input type="checkbox" class="filter-checkbox condition_filter" name="condition"
@@ -534,7 +569,7 @@
                                 {{ request()->name == 'new' ? 'checked' : '' }}
                                 {{ request()->condition == 'new' ? 'checked' : '' }}
                                 {{ request()->name == 'used' || request()->name == 'new' ? 'd-none' : '' }}>
-                            <label for="newCars" style="font-size:16px">New Cars</label>
+                            <label for="newCars" class="fs1">New Cars</label>
                         </div>
                     </div>
                 </div>
@@ -553,7 +588,7 @@
         
                     </div> --}}
                     <div class="row p-1">
-                        <div style="position: relative;">
+                        <div class="relat">
                             <div class="col-12 ">
                                 <div class="row">
                                     <div class="col-6 p-0 pe-1 my-3">
@@ -565,7 +600,7 @@
                                                     <option value="{{ $year }}">{{ $year }}</option>
                                                 @endfor
                                             </select>
-                                            <i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
+                                            <i class="bi bi-chevron-down iconclr"></i>
                                         </div>
                                     </div>
                                     <div class="col-6 p-0 ps-1 my-3">
@@ -577,12 +612,12 @@
                                                     <option value="{{ $year }}">{{ $year }}</option>
                                                 @endfor
                                             </select>
-                                            <i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
+                                            <i class="bi bi-chevron-down iconclr" ></i>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <i class="bi bi-dash dash" style=" "></i>
+                            <i class="bi bi-dash dash" ></i>
                         </div>
                     </div>
                 </div>
@@ -591,8 +626,8 @@
                 <div class="my-2">
                     <label class="form-label"><strong>Make & Model</strong></label>
                     <div class="select-wrapper mt-2">
-                        <select id="make_filter" class="form-select select-search mb-2 make-filter filter-style"
-                            style="width:100% !important" name="make">
+                        <select id="make_filter" class="form-select select-search mb-2 make-filter filter-style widthh"
+                            name="make" style="width: 100% ! important">
                             <option value="">Make</option>
                             <option value="any">Any</option>
                             @foreach ($makes as $make)
@@ -601,24 +636,22 @@
                                     {{ $make->name }} ({{ $make->count }})
                                 </option>
                             @endforeach
-                        </select> <i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
+                        </select> <i class="bi bi-chevron-down iconclr" ></i>
                     </div>
 
                     {{-- <div class="select-wrapper mt-3">
                         <label class="form-label modellabel d-none"> Model</label>
                         <div id="model_filter_wrapper"
-                            style="max-height: 200px !important; overflow-y: scroll;
-                                        scrollbar-color: #FD5631 #1F1B2D;
-                                        scrollbar-width: thin;">
+                     >
                         </div>
                     </div> --}}
 
                     <div class="select-wrapper mt-2">
-                        <select class="form-select model-filter select-search-class filter-style"
-                            style="width:100% !important" name="model" id="model_filter">
+                        <select class="form-select model-filter select-search-class filter-style widthh"
+                            name="model" style="width: 100% ! important" id="model_filter">
                             <option value="" disabled selected>Any model</option>
                             <option value="any">Any</option>
-                        </select><i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
+                        </select><i class="bi bi-chevron-down iconclr" ></i>
                     </div>
                 </div>
 
@@ -626,8 +659,8 @@
                 <div class="my-2">
                     <label class="form-label mb-3"><strong>Province</strong></label>
                     <div class="select-wrapper mt-2">
-                        <select class="form-select mb-2  select-search filter-style " style="width:100% !important"
-                            id="province_filter">
+                        <select class="form-select mb-2  select-search filter-style widthh" 
+                            id="province_filter" style="width: 100% ! important">
                             <option value="" disabled selected>Select Province</option>
                             <option value="any">Any</option>
                             @foreach ($provinces as $province)
@@ -637,40 +670,38 @@
                                     ({{ $province->count }})
                                 </option>
                             @endforeach
-                        </select><i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
+                        </select><i class="bi bi-chevron-down iconclr" ></i>
                     </div>
                 </div>
                 {{-- <div class="my-3">
                     <label class="form-label mb-3">City</label>
                     <div class="select-wrapper">
-                        <select class="form-select select-search filter-style" style="width:100% !important"
+                        <select class="form-select select-search filter-style" 
                             id="city_filter">
                             <option value="" disabled selected>Select City</option>
                             @foreach ($cities as $city)
                                 <option value="{{ $city->id }}">{{ $city->name }} ({{ $city->count }})</option>
                             @endforeach
-                        </select><i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
+                        </select><i class="bi bi-chevron-down" ></i>
                     </div>
                 </div> --}}
 
                 {{-- <div class="my-2">
                     <label class="form-label mb-3 citylabel d-none"><strong>City</strong></label>
                     <div id="city_filter_wrapper"
-                        style="max-height: 200px !important; overflow-y: scroll;
-                                scrollbar-color: #1F1B2D transparent;
-                                scrollbar-width: thin;">
+                       >
                     </div>
                 </div> --}}
 
                 <div class="my-2">
                     <label class="form-label mb-3 mt-2 citylabel"><strong>City</strong></label>
                     <div class="select-wrapper">
-                        <select class="form-select select2 select-search city-filter filter-style"
-                            style="width:100% !important" id="city">
+                        <select class="form-select select2 select-search city-filter filter-style widthh"
+                             id="city" style="width: 100% ! important">
                             <option value="" disabled selected>Select Province First</option>
                             <option value="any">Any</option>
                         </select>
-                        <i class="bi bi-chevron-down" style="color: #BFBEC3;"></i>
+                        <i class="bi bi-chevron-down iconclr" ></i>
                     </div>
                 </div>
 
@@ -693,7 +724,7 @@
                     </div>
 
                     <div class="row pt-5">
-                        <div style="position: relative;">
+                        <div class="relat" >
                             <div class="col-12 px-2">
                                 <div class="row">
                                     <div class="col-6 p-0 pe-2">
@@ -706,7 +737,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <i class="bi bi-dash-lg pricedash" style=""></i>
+                            <i class="bi bi-dash-lg pricedash" ></i>
                         </div>
                     </div>
 
@@ -717,8 +748,8 @@
                     <label class="form-label mb-4 mt-2"><strong>Engine Capacity (CC)</strong></label>
                     <div class="select-wrapper my-2">
                         {{-- <input type="range" class="form-range engine-capacity-filter" min="1" max="10" step="0.1"> --}}
-                        <select class="form-select engine-capacity-filter select-search filter-style" style="width:100%"
-                            id="engine_capacity_filter">
+                        <select class="form-select engine-capacity-filter select-search filter-style widthh" 
+                            id="engine_capacity_filter" style="width: 100% ! important">
                             <option value="" disabled selected>Select Engine Capacity</option>
                             <option value="any">Any</option>
                             <option value="1.6L">1.6L</option>
@@ -729,7 +760,7 @@
                                         </option>
                                     @endfor --}}
                         </select>
-                        <i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
+                        <i class="bi bi-chevron-down iconclr" ></i>
                     </div>
 
 
@@ -737,9 +768,9 @@
                 <div class="my-3">
                     <label class="form-label mb-2 mt-2"><strong>Mileage</strong></label>
                     {{-- <input type="range" class="form-range mileage-filter" min="0" max="300000" step="5000"> --}}
-                    {{-- <input type="number" class="formcontrol form-control mileage-filter" style="background-color:#282435 !important;" id="" placeholder="Mileage"> --}}
+                    {{-- <input type="number" class="formcontrol form-control mileage-filter"  id="" placeholder="Mileage"> --}}
                     <div class="row mt-3">
-                        <div style="position: relative;">
+                        <div class="relat" >
                             <div class="col-12 px-2">
                                 <div class="row">
                                     <div class="col-6 p-0 pe-2">
@@ -750,7 +781,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <i class="bi bi-dash-lg milagedash" style=" "></i>
+                            <i class="bi bi-dash-lg milagedash"></i>
                         </div>
                     </div>
                 </div>
@@ -763,7 +794,7 @@
                                 value="{{ $bodytype->id }}" id="body_type_filter{{ $bodytype->id }}"
                                 {{ request()->bodytype == $bodytype->id || request()->segment(2) == $bodytype->id ? 'checked' : '' }}>
                             <label for="body_type_filter{{ $bodytype->id }}"
-                                style="font-size:16px; color: #281F48;">{{ $bodytype->name }}
+                                class="sixb">{{ $bodytype->name }}
                                 ({{ $bodytype->count }})
                             </label>
                         </div>
@@ -774,7 +805,9 @@
                     <label class="form-label mt-1"><strong>Body type</strong></label>
                     <div class="select-wrapper mt-1">
                         <select class="form-select select2 bodytype-filter select-search formcontrol"
-                            style="width:100% !important" style="background-color:#282435" placeholder="Seats"
+                           
+                        
+                        placeholder="Seats"
                             id="bodytype_filter">
                             <option value="" disabled selected>Body type</option>
                             <option value="">Any</option>
@@ -809,7 +842,7 @@
                             <div class="my-2">
                                 <input type="checkbox" class="filter-checkbox me-2 fuel_type_filter"
                                     id="{{ $fuelType }}fuelType" value="{{ $fuelType }}">
-                                <label for="{{ $fuelType }}fuelType" style="font-size:16px; color: #281F48;">
+                                <label for="{{ $fuelType }}fuelType" class="sixb" >
                                     {{ $fuelType }} ({{ $fuelCounts[$fuelType] ?? 0 }})
                                 </label>
                             </div>
@@ -832,7 +865,7 @@
                             <option value="2">2</option>
                             <option value="4">4</option>
                             <option value="5+">5+</option>
-                        </select> <i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
+                        </select> <i class="bi bi-chevron-down iconclr" ></i>
                     </div>
                     {{-- <input type="number" class="form-control seating-capacity-filter formcontrol" placeholder="Seats"> --}}
                 </div>
@@ -854,14 +887,14 @@
                 <div class="my-3">
                     <label class="form-label mb-4"><strong>Door Count</strong></label>
                     <div class="select-wrapper">
-                        <select class="form-select select-search door-count-filter formcontrol door_count_filter"
-                            style="width:100% !important" placeholder="Doors">
+                        <select class="form-select select-search door-count-filter formcontrol door_count_filter widthh"
+                             placeholder="Doors" style="width: 100% ! important">
                             <option value="" disabled selected>Door Count</option>
                             <option value="any">Any</option>
                             <option value="2">2</option>
                             <option value="4">4</option>
                             <option value="5+">5+</option>
-                        </select> <i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
+                        </select> <i class="bi bi-chevron-down iconclr" ></i>
                     </div>
                     {{--  <input type="number" class="form-control door-count-filter formcontrol" placeholder="Doors"> --}}
                 </div>
@@ -870,14 +903,14 @@
                 <div class="my-3">
                     <label class="form-label mb-4 mt-1"><strong>Assembly</strong></label>
                     <div class="select-wrapper">
-                        <select class="form-select select-search assembly-filter filter-style assembly_filter"
-                            style="width:100% !important">
+                        <select class="form-select select-search assembly-filter filter-style assembly_filter widthh"
+                      style="width: 100% ! important" >
                             <option value="" disabled selected>Select Assembly</option>
                             <option value="any">Any</option>
                             <option value="local">Local</option>
                             <option value="imported">Imported</option>
                         </select>
-                        <i class="bi bi-chevron-down" style="color: #BFBEC3; "></i>
+                        <i class="bi bi-chevron-down iconclr" ></i>
                     </div>
                 </div>
                 <!-- Body Type Filter -->
@@ -906,7 +939,7 @@
                             <select class="form-select color-filter filter-style" name="exteriorColor" id="" >
                                     <option value="" selected>Any</option>
                                         @foreach ($colors as $color)
-                                    <option value="{{$color->id}}" {{request()->exterior_color == $color->id?"selected":""}}><span style="background-color:{{$color->name}}" class=" p-0 m-0 px-4 me-3"></span>{{$color->name}} ({{$color->count}})</option>
+                                    <option value="{{$color->id}}" {{request()->exterior_color == $color->id?"selected":""}}><span class=" p-0 m-0 px-4 me-3"></span>{{$color->name}} ({{$color->count}})</option>
                                         @endforeach   
                                     </select>
                         </div> --}}
@@ -916,7 +949,7 @@
                                 <input type="checkbox" class="filter-checkbox me-2 exterior_color_filter"
                                     value="{{ $color->id }}" id="exterior_color_filter{{ $color->id }}">
                                 <label for="exterior_color_filter{{ $color->id }}"
-                                    style="font-size:16px; color: #281F48;"> <span
+                                    class="sixb"> <span
                                         style="background-color:{{ $color->color_id }}"
                                         class=" p-0 m-0 px-4 me-3"></span>{{ $color->name }}
                                     ({{ $color->count }})
@@ -944,12 +977,12 @@
                         <div class="d-flex align-items-center">
                             <input type="checkbox" class="filter-checkbox" name="userType" data-usertype="car_dealer"
                                 value="car_dealer" id="dealer_check">
-                            <label for="" class="ms-2" style="font-size:16px">Dealer</label>
+                            <label for="" class="ms-2 si6" >Dealer</label>
                         </div>
                         <div class="d-flex align-items-center ms-3">
                             <input type="checkbox" class="filter-checkbox" name="userType"
                                 data-usertype="private_dealer" value="private_dealer" id="private_seller_check">
-                            <label for="" class="ms-2" style="font-size:16px">Private Seller</label>
+                            <label for="" class="ms-2 si6" >Private Seller</label>
                         </div>
                     </div>
                 </div>
@@ -958,7 +991,7 @@
         <div class="col-lg-9 ps-md-4">
             <div class="row">
                 <div class="col-md-6 col-12">
-                    <h3 class="pb-md-2" style="color:#281F48"><strong>Available Cars <small> (<span
+                    <h3 class="pb-md-2 bluee" ><strong>Available Cars <small> (<span
                                     id="filter_available_results"></span>) </small></strong></h3>
 
                 </div>

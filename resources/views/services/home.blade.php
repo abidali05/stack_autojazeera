@@ -60,7 +60,9 @@
             margin-top: 10px;
             margin-left: 10px;
         }
-
+.openn{
+color: #2ab500 !important;
+}
         .crouserheading1 {
             color: #281f48;
             font-size: 36px;
@@ -247,6 +249,56 @@
     right: 1px;
     width: 20px;
 }
+.haha {
+        border-radius:5px 0px 0px 5px !important; 
+        border:0px !important;
+}
+.bord{
+    border-left: 1px solid black !important;
+}
+.norad{
+    border-radius:0px !important ;
+      border:0px !important;
+}
+.thisbtn{
+border-radius:0px 5px 5px 0px !important
+}
+.site {
+     background-color: #F9F9F9 !important;
+}
+.point{
+      cursor: pointer !important;
+}
+.border11{
+    border: none !important;
+}
+.divb{
+    background-color:#F4F4F4 !important;
+}
+.hund{
+    height:100px !important;
+     width:100% !important;
+}
+.bord9{
+border:1px solid #281F48 !important;
+    border-radius:9px !important;
+}
+.img2{
+        height: 200px !important;
+        position: relative !important;
+}
+.logo2{
+     height: 100% !important;
+}
+.closed{
+color: orangered !important;
+}
+.twoh{
+       height: 200px !important;
+}
+.one6{
+    width:160px !important;
+}
     </style>
 
     <div class="container-fluid">
@@ -257,12 +309,12 @@
                         <div class="input-group">
                             <form action="{{ route('services.search') }}" method="POST" class="col-12 d-flex">
                                 @csrf
-                                <input type="text" class="form-control"
-                                    style="border-radius:5px 0px 0px 5px !important; border:0px !important"
+                                <input type="text" class="form-control haha"
+                                
                                     placeholder="Search By Shop Name" aria-label="Search" name="search" />
-                                <div class=" py-3" style="border-left: 1px solid black"></div>
-                                <select class="form-select select2-city-search"
-                                    style="border-radius:0px !important ;border:0px !important" aria-label="Select City"
+                                <div class=" py-3 bord" ></div>
+                                <select class="form-select select2-city-search norad"
+                                   aria-label="Select City"
                                     name="city">
                                     <option value="" selected>Select City</option>
                                     <option value="1e">Any</option>
@@ -270,7 +322,7 @@
                                         <option value="{{ $city->id }}">{{ $city->name }}</option>
                                     @endforeach
                                 </select>
-                                <button class="btn btn-danger" style="border-radius:0px 5px 5px 0px !important"
+                                <button class="btn btn-danger thisbtn" 
                                     type="submit" id="serviceSearchBtn">
                                     <i class="fas fa-search"></i>
                                 </button>
@@ -295,10 +347,10 @@
                                         </p>
 
                                         <div class="paddingthis d-none d-md-block">
-                                            <a style="color: white" href="#"
+                                            <a class="text-white" href="#"
                                                 onclick="document.getElementById('serviceSearchBtn').click()">
                                                 <div class="search-box">
-                                                    <i style="color: white" class="fa fa-search me-3"></i>
+                                                    <i  class="fa fa-search me-3 text-white"></i>
                                                     Search a Service
                                                 </div>
                                             </a>
@@ -322,10 +374,10 @@
                                         </p>
 
                                         <div class="paddingthis d-none d-md-block">
-                                            <a style="color: white" href="#"
+                                            <a class="text-white" href="#"
                                                 onclick="document.getElementById('searchBtn').click()">
                                                 <div class="search-box">
-                                                    <i style="color: white" class="fa fa-search me-3"></i>
+                                                    <i  class="fa fa-search me-3 text-white"></i>
                                                     Search a car
                                                 </div>
                                             </a>
@@ -349,10 +401,10 @@
                                         </p>
 
                                         <div class="paddingthis d-none d-md-block">
-                                            <a style="color: white" href="#"
+                                            <a class="text-white" href="#"
                                                 onclick="document.getElementById('searchBtn').click()">
                                                 <div class="search-box">
-                                                    <i style="color: white" class="fa fa-search me-3"></i>
+                                                    <i  class="fa fa-search me-3 text-white"></i>
                                                     Search a Bike
                                                 </div>
                                             </a>
@@ -462,13 +514,13 @@
 <div class="col-md-12">
     <div class="row d-flex flex-wrap justify-content-start" id="serviceCategories">
     @foreach ($service_categories as $key => $service_category)
-    <div class="col-6 col-md-1-5 p-3 rounded-3 extra-service service-item {{ $key >= 10 ? 'd-none' : '' }}"
-         style="cursor: pointer;">
-        <div class="rounded-3 p-4" style="background-color:#F4F4F4">
+    <div class="col-6 point col-md-1-5 p-3 rounded-3 extra-service service-item {{ $key >= 10 ? 'd-none' : '' }}"
+       >
+        <div class="rounded-3 p-4 divb" >
             <a href="{{ route('services.categorysearch', $service_category->name) }}"
                class="text-decoration-none text-dark">
-                <img src="{{ $service_category->icon }}" class="img-fluid rounded"
-                     style="height:100px; width:100%;" alt="{{ $service_category->name }}" />
+                <img src="{{ $service_category->icon }}" class="img-fluid rounded hund"
+                      alt="{{ $service_category->name }}" />
             </a>
         </div>
         <p class="text-center m-0 sixteen my-1">{{ $service_category->name }}</p>
@@ -498,7 +550,7 @@
                             @if (count($top_rated_services) == 0)
                                 <div class="col-md-12 mt-5 pt-5">
                                     <div class="row d-flex justify-content-center my-3">
-                                        <div class="p-3 col-8" style="border:1px solid #281F48;border-radius:9px;">
+                                        <div class="p-3 col-8 bord9" >
                                             <div class="row d-flex align-items-center">
                                                 <div class="col-3">
                                                     <img src="{{ asset('web/images/noinputs.svg') }}" alt=""
@@ -523,10 +575,10 @@
                                                 <a href="{{ route('shopdetail', $service->id) }}"
                                                     class="text-decoration-none text-dark">
                                                     <div class="wishlist-card ddd rounded-4">
-                                                        <div class="img-bg-home-2 "
-                                                            style="height: 200px;position: relative">
-                                                            <img src="{{ $service->logo }}" style="height: 100%;"
-                                                                class=" w-100" />
+                                                        <div class="img-bg-home-2 img2"
+                                                        >
+                                                            <img src="{{ $service->logo }}"
+                                                                class=" w-100 logo2" />
                                                             <span class="featureicn">
                                                                 <img src="{{ asset('web/bikes/images/Star 7.svg') }}"
                                                                     class="img-fluid">
@@ -574,12 +626,12 @@
                                                                 @endphp
                                                                 <p class="fourteen">
                                                                     @if ($timings)
-                                                                        <span style="color: #2ab500">Open Now </span>
+                                                                        <span class="openn">Open Now </span>
                                                                         {{ date('h:i A', strtotime($timings->start_time)) }}
                                                                         -
                                                                         {{ date('h:i A', strtotime($timings->end_time)) }}
                                                                     @else
-                                                                        <span style="color: orangered;">Closed</span>
+                                                                        <span class="closed">Closed</span>
                                                                     @endif
                                                                 </p>
 
@@ -658,7 +710,7 @@
                                         <div class="modal-content">
                                             <form id="multiStepForm{{ $service->id }}" class="multiStepForm">
                                                 <input type="hidden" name="shop_id" value="{{ $service->id }}">
-                                                <div class="modal-header" style="border: none;">
+                                                <div class="modal-header border11" >
                                                     <!-- Optional Header -->
                                                 </div>
                                                 <div class="modal-body pt-0">
@@ -689,7 +741,7 @@
                                                                             <span>Car</span>
                                                                         </label>
                                                                     </div>
-                                                                    <div id="vehicle-error" class="reed mt-2"
+                                                                    <div id="vehicle-error" class="reed mt-2 thisdisplay"
                                                                         style="display:none;">Please select a
                                                                         vehicle type</div>
 
@@ -884,12 +936,12 @@
                                                                 <div class="scrollable-content">
                                                                     <p class="twentyeight mt-4">Describe your
                                                                         Needs </p>
-                                                                    <textarea class="form-controles" style="height: 200px;" placeholder="Type..." rows="3"
+                                                                    <textarea class="form-controles twoh"  placeholder="Type..." rows="3"
                                                                         name="needs_description" required></textarea>
 
                                                                     <div class="row mt-2">
-                                                                        <div class="col-9 p-3 rounded-3"
-                                                                            style="background-color: #F9F9F9;">
+                                                                        <div class="col-9 p-3 rounded-3 site"
+                                                                           >
                                                                             <div class="row">
                                                                                 <div class="g-recaptcha"
                                                                                     data-sitekey="{{ env('RECAPTCHA_KEY') }}">
@@ -1097,12 +1149,12 @@
                                                         @endphp
                                                         <p class="fourteen">
                                                             @if ($timings)
-                                                                <span style="color: #2ab500">Open Now </span>
+                                                                <span class="openn">Open Now </span>
                                                                 {{ date('h:i A', strtotime($timings->start_time)) }}
                                                                 -
                                                                 {{ date('h:i A', strtotime($timings->end_time)) }}
                                                             @else
-                                                                <span style="color: orangered;">Closed</span>
+                                                                <span class="closed">Closed</span>
                                                             @endif
                                                         </p>
 
@@ -1531,17 +1583,17 @@
                                            <div class="col-md-12 d-flex  align-items-center mt-4">
 
                                             <a class=" text-start"><img
-                                                    src="{{ asset('web/bikes/images/Group111.svg') }}" class="img-fluid " style="width:160px"
+                                                    src="{{ asset('web/bikes/images/Group111.svg') }}" class="img-fluid one6" 
                                                     alt="..."></a>
                                             <a class=" text-start ms-3"><img
-                                                    src="{{ asset('web/bikes/images/Group1111.svg') }}" style="width:160px"
-                                                    class="img-fluid" alt="..."></a>
+                                                    src="{{ asset('web/bikes/images/Group1111.svg') }}" 
+                                                    class="img-fluid one6" alt="..."></a>
 
                                         </div>
 										         <div class="col-md-12 d-flex  align-items-center mt-4">
 
                                           <img
-                                                    src="{{ asset('web/bikes/images/Coming_Soon.svg') }}" class="img-fluid " style="width:160px"
+                                                    src="{{ asset('web/bikes/images/Coming_Soon.svg') }}" class="img-fluid one6" 
                                                     alt="...">
 												   </div>
                                           </div>
