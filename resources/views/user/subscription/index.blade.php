@@ -538,7 +538,7 @@
                                                         <button class="btnsub" style="background-color: #f4000079"
                                                             id="btn1-1" disabled>Already Purchased</button>
                                                     @else
-                                                        @if ($loop->first && Auth::user()->trial_availed == 0)
+                                                        @if ($loop->first && Auth::user()->trial_availed == 0 && $ads_plan->metadata->is_free == 1)
                                                             <form action="{{ route('payment.start.trial') }}" method="POST"
                                                                 id="trial-form-{{ $ads_plan->id }}">
                                                                 @csrf
@@ -547,13 +547,20 @@
                                                                 <input type="hidden" name="sub_type" value="ads">
                                                                 <button type="submit" class="btnsub"
                                                                     style="background-color: #F40000" id="btn1-1"
-                                                                    onclick="changeText(this);">Start Trial</button>
+                                                                    onclick="changeText(this);">Choose plan</button>
                                                             </form>
                                                         @else
-                                                            <button class="btnsub" style="background-color: #F40000"
-                                                                id="btn1-1"
-                                                                onclick="openModal('{{ $ads_plan->id }}', {{ $ads_plan->price }}, 'ads');">Choose
-                                                                plan</button>
+                                                            @if (
+                                                                ($ads_plan->metadata->is_free == 1 || $ads_plan->metadata->is_free == '1') &&
+                                                                    (Auth::user()->trial_availed == 1 || Auth::user()->trial_availed == '1'))
+                                                                <button class="btnsub"
+                                                                    style="background-color: #F40000" disabled>Already Availed</button>
+                                                            @else
+                                                                <button class="btnsub" style="background-color: #F40000"
+                                                                    id="btn1-1"
+                                                                    onclick="openModal('{{ $ads_plan->id }}', {{ $ads_plan->price }}, 'ads');">Choose
+                                                                    plan</button>
+                                                            @endif
                                                         @endif
                                                     @endif
                                                 </div>
@@ -632,7 +639,7 @@
                                                         <button class="btnsub" style="background-color: #f4000079"
                                                             id="btn1-1" disabled>Already Purchased</button>
                                                     @else
-                                                        @if ($loop->first && Auth::user()->shop_trial_availed == 0)
+                                                        @if ($loop->first && Auth::user()->shop_trial_availed == 0 && $plan->metadata->is_free == 1)
                                                             <form action="{{ route('payment.start.trial') }}" method="POST"
                                                                 id="trial-form-{{ $plan->id }}">
                                                                 @csrf
@@ -641,13 +648,20 @@
                                                                 <input type="hidden" name="sub_type" value="service">
                                                                 <button type="submit" class="btnsub"
                                                                     style="background-color: #F40000" id="btn1-1"
-                                                                    onclick="changeText(this);">Start Trial</button>
+                                                                    onclick="changeText(this);">Choose plan</button>
                                                             </form>
                                                         @else
-                                                            <button class="btnsub" style="background-color: #F40000"
-                                                                id="btn1-1"
-                                                                onclick="openModal('{{ $plan->id }}', {{ $plan->price }}, 'service');">Choose
-                                                                plan</button>
+                                                            @if (
+                                                                ($plan->metadata->is_free == 1 || $plan->metadata->is_free == '1') &&
+                                                                    (Auth::user()->shop_trial_availed == 1 || Auth::user()->shop_trial_availed == '1'))
+                                                                <button class="btnsub"
+                                                                    style="background-color: #F40000" disabled>Already Availed</button>
+                                                            @else
+                                                                <button class="btnsub" style="background-color: #F40000"
+                                                                    id="btn1-1"
+                                                                    onclick="openModal('{{ $plan->id }}', {{ $plan->price }}, 'service');">Choose
+                                                                    plan</button>
+                                                            @endif
                                                         @endif
                                                     @endif
                                                 </div>

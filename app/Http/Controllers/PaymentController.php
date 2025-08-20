@@ -227,20 +227,20 @@ class PaymentController extends Controller
         $meta = $product->metadata ?? [];
 
         // Extract trial days from metadata
-        $trialDays = isset($meta->trial_days) ? (int) trim($meta->trial_days) : 0;
+        // $trialDays = isset($meta->trial_days) ? (int) trim($meta->trial_days) : 0;
         // $trialAllowed = $trialDays > 0;
 
-        $trialAllowed = ($meta->trial_allowed ?? '0') === '1';
-        $trialDays = null;
+        // $trialAllowed = ($meta->trial_allowed ?? '0') === '1';
+        // $trialDays = null;
 
-        $days = $meta->trial_days ?? $meta->{'trial_days '} ?? null;
+        // $days = $meta->trial_days ?? $meta->{'trial_days '} ?? null;
 
-        $isService = $request->sub_type === 'service';
-        $trialEligible = $isService ? $user->shop_trial_availed == 0 : $user->trial_availed == 0;
+        // $isService = $request->sub_type === 'service';
+        // $trialEligible = $isService ? $user->shop_trial_availed == 0 : $user->trial_availed == 0;
 
-        if ($trialEligible && $trialAllowed && is_numeric($days)) {
-            $trialDays = (int) $days;
-        }
+        // if ($trialEligible && $trialAllowed && is_numeric($days)) {
+        //     $trialDays = (int) $days;
+        // }
 
         // Get or create Stripe customer
         $customer = $this->getOrCreateCustomer($user);
@@ -251,27 +251,40 @@ class PaymentController extends Controller
             'status' => 'active',
             'limit' => 100,
         ]);
-        
-        if ($activeSubs) {
 
+        if ($activeSubs) {
             foreach ($activeSubs->data as $sub) {
-                $sub->cancel();
+                if (isset($sub->metadata['sub_type']) && $sub->metadata['sub_type'] === $request->sub_type) {
+                    $sub->cancel();
+                }
             }
+            
         }
 
         $subscription = null;
         // CASE 1: Ads Subscription Trial
-        if ($request->sub_type === 'ads' && $trialAllowed && $user->trial_availed == 0) {
+        // if ($request->sub_type === 'ads' && $trialAllowed && $user->trial_availed == 0) {
+        if ($request->sub_type === 'ads' && $user->trial_availed == 0) {
+
+            // $subscription = Subscription::create([
+            //     'customer' => $customer->id,
+            //     'items' => [['price' => $priceId]],
+            //     'trial_end' => now()->addDays($trialDays)->timestamp,
+            //     'metadata' => [
+            //         'user_id' => $user->id,
+            //         'sub_type' => 'ads',
+            //         'is_trial' => true,
+            //     ],
+            // ]);
 
             $subscription = Subscription::create([
                 'customer' => $customer->id,
-                'items' => [['price' => $priceId]],
-                'trial_end' => now()->addDays($trialDays)->timestamp,
+                'items' => [['price' => $priceId],],
                 'metadata' => [
                     'user_id' => $user->id,
                     'sub_type' => 'ads',
-                    'is_trial' => true,
-                ],
+                    'is_free_plan' => true,
+                ]
             ]);
 
             $user->package = $product->id;
@@ -288,18 +301,31 @@ class PaymentController extends Controller
         }
 
         // CASE 2: Service Subscription Trial
-        elseif ($request->sub_type === 'service' && $trialAllowed && $user->shop_trial_availed == 0) {
+        elseif ($request->sub_type === 'service' && $user->shop_trial_availed == 0) {
+
+            // $subscription = Subscription::create([
+            //     'customer' => $customer->id,
+            //     'items' => [['price' => $priceId]],
+            //     'trial_end' => now()->addDays($trialDays)->timestamp,
+            //     'metadata' => [
+            //         'user_id' => $user->id,
+            //         'sub_type' => 'service',
+            //         'is_trial' => true,
+            //     ],
+            // ]);
 
             $subscription = Subscription::create([
                 'customer' => $customer->id,
-                'items' => [['price' => $priceId]],
-                'trial_end' => now()->addDays($trialDays)->timestamp,
+                'items' => [
+                    ['price' => $priceId],
+                ],
                 'metadata' => [
                     'user_id' => $user->id,
                     'sub_type' => 'service',
-                    'is_trial' => true,
-                ],
+                    'is_free_plan' => true,
+                ]
             ]);
+
 
             $user->shop_package = $product->id;
             $user->shop_trial_availed = 1;
