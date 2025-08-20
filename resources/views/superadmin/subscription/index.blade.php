@@ -505,7 +505,7 @@
                 // Send an AJAX request to update the status
                 $.ajax({
                     url: '/superadmin/subscription-update/' + subscriptionId +
-                    '/update-status', // Adjust the URL as needed
+                        '/update-status', // Adjust the URL as needed
                     type: 'POST',
                     data: {
                         status: newStatus,
