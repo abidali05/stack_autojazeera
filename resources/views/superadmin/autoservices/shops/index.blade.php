@@ -139,8 +139,9 @@
                         <tr>
                             <td>{{ $key + 1 }}</td>
                             <td>
-                                <a class="primary-color-custom cancel" style="text-decoration: none" data-id="{{ $shop->id }}" title="View"
-                                    data-bs-toggle="modal" data-bs-target="#previewmodal{{ $shop->id }}">
+                                <a class="primary-color-custom cancel" style="text-decoration: none"
+                                    data-id="{{ $shop->id }}" title="View" data-bs-toggle="modal"
+                                    data-bs-target="#previewmodal{{ $shop->id }}">
                                     <i class="bi bi-eye"></i>
                                 </a>
                                 <a class="primary-color-custom cancel" style="text-decoration: none"
@@ -148,10 +149,12 @@
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
 
-                                <form action="{{ route('superadmin.shops.destroy', $shop->id) }}" method="POST" class="d-inline">
+                                <form action="{{ route('superadmin.shops.destroy', $shop->id) }}" method="POST"
+                                    class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" style="border: none" class="primary-color-custom cancel" title="Delete"
+                                    <button type="submit" style="border: none" class="primary-color-custom cancel"
+                                        title="Delete"
                                         onclick="return confirm('Are you sure you want to delete this shop?')">
                                         <i class="bi bi-trash"></i>
                                     </button>
@@ -482,110 +485,7 @@
                 });
             </script>
         @endif
-
     </div>
-
-    {{-- <div class="container my-2">
-        <div class="row d-flex justify-content-between">
-            <div class="col-md-4"> <span class="pt-md-3 pagination_count"
-                    style="font-size: 18px; color: #281F48; font-weight:700;">
-                    {{ ($shops->currentPage() - 1) * $shops->perPage() + 1 }}
-                    - {{ min($shops->currentPage() * $shops->perPage(), $shops->total()) }}
-                    of {{ $shops->total() }} Results
-                </span></div>
-            <div class="col-md-4">
-
-                <nav class="d-flex justify-content-end align-items-center">
-                    <ul class="pagination"
-                        style="display: flex; list-style: none; gap: 5px; justify-content: center; padding: 0; margin: 0;">
-                        @if ($shops->onFirstPage())
-                            <li style="display: inline-block;">
-                                <span
-                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</span>
-                            </li>
-                        @else
-                            @if (request()->isMethod('post'))
-                                <li style="display: inline-block;">
-                                    <form method="POST" action="{{ url()->current() }}">
-                                        @csrf
-                                        <input type="hidden" name="page" value="{{ $shops->currentPage() - 1 }}">
-                                        <button type="submit"
-                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&laquo;</button>
-                                    </form>
-                                </li>
-                            @else
-                                <li style="display: inline-block;">
-                                    <a href="{{ $shops->previousPageUrl() }}"
-                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&laquo;</a>
-                                </li>
-                            @endif
-                        @endif
-
-                        @foreach ($shops->links()->elements as $element)
-                            @if (is_string($element))
-                                <li style="display: inline-block;">
-                                    <span
-                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $element }}</span>
-                                </li>
-                            @endif
-
-                            @if (is_array($element))
-                                @foreach ($element as $page => $url)
-                                    @if ($page == $shops->currentPage())
-                                        <li style="display: inline-block;">
-                                            <span
-                                                style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #281F48; color: #fff;">{{ $page }}</span>
-                                        </li>
-                                    @else
-                                        @if (request()->isMethod('post'))
-                                            <li style="display: inline-block;">
-                                                <form method="POST" action="{{ url()->current() }}">
-                                                    @csrf
-                                                    <input type="hidden" name="page" value="{{ $page }}">
-                                                    <button type="submit"
-                                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">{{ $page }}</button>
-                                                </form>
-                                            </li>
-                                        @else
-                                            <li style="display: inline-block;">
-                                                <a href="{{ $url }}"
-                                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">{{ $page }}</a>
-                                            </li>
-                                        @endif
-                                    @endif
-                                @endforeach
-                            @endif
-                        @endforeach
-
-                        @if ($shops->hasMorePages())
-                            @if (request()->isMethod('post'))
-                                <li style="display: inline-block;">
-                                    <form method="POST" action="{{ url()->current() }}">
-                                        @csrf
-                                        <input type="hidden" name="page" value="{{ $shops->currentPage() + 1 }}">
-                                        <button type="submit"
-                                            style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; background-color: #F0F3F6; color: #000; border: none;">&raquo;</button>
-                                    </form>
-                                </li>
-                            @else
-                                <li style="display: inline-block;">
-                                    <a href="{{ $shops->nextPageUrl() }}"
-                                        style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</a>
-                                </li>
-                            @endif
-                        @else
-                            <li style="display: inline-block;">
-                                <span
-                                    style="display: inline-flex; justify-content: center; align-items: center; width: 30px; height: 30px; border-radius: 50%; text-decoration: none; background-color: #F0F3F6; color: #000;">&raquo;</span>
-                            </li>
-                        @endif
-                    </ul>
-
-                </nav>
-
-            </div>
-        </div>
-    </div> --}}
 
     <script>
         function handleServiceCategoryIconUpload(input, previewElementId) {
