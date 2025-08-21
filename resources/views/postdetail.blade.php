@@ -126,11 +126,105 @@
             background-color: #281F48 !important;
             border-radius: 5px;
         }
-
+.greynew {
+    color:#9691A4 !important;
+}
         .height {
             height: 400px !important;
         }
-
+.blueclr {
+    color:#281F48 !important;
+}
+.relat{
+    position: relative !important;
+     margin-bottom: 16px !important;
+}
+.fort{
+    font-size:14px !important;
+}
+.texx{
+text-align: center !important;
+}
+.oreo{
+    color: #FD5631 !important;
+}
+.divimg{
+    width:97% !important; 
+    height:400px !important;
+     overflow: hidden !important;
+}
+.imp{
+    background-color: #ffffff00 !important;
+}
+.imgs {
+    width: 100% !important;
+     height: 100% !important;
+      border-radius: 8px !important;
+      object-fit: contain !important;
+}
+.smalldiv{
+height:50px !important;
+    width:50px !important;
+}
+.modd{
+                  height:50px !important; 
+                  width:50px !important;
+}
+.feat {
+    border: 1px solid #454056 !important;
+    background-color:#F0F3F6 !important;
+}
+.clse{
+    height: 50px !important;
+    width: 60px !important;
+    cursor: pointer !important;
+    border-radius: 8px !important;
+    transition: opacity 0.3s ease !important;
+    border:2px solid white !important;
+}
+.spec{
+    color: #281F48 !important;
+    font-weight:500 !important;
+}
+.bnn{
+    background-color:#0EB617 !important;
+}
+.comm{
+    color: #281F48 !important;
+     word-wrap: break-word !important;
+      overflow-wrap: break-word !important; 
+    hyphens: auto !important;
+}
+.prr{
+    text-decoration: line-through !important;
+}
+.ank{
+    text-decoration: none !important;
+    color: inherit !important;
+}
+.mdiv{
+    background-color:#002D690F !important; 
+    border-radius: 10px !important;
+}
+.nnn{
+    border:1px solid #281F48 !important;
+    border-radius:9px !important;
+}
+.modimg {
+     height: 50px !important;
+      width: 60px !important;
+       cursor: pointer !important;
+        border-radius: 8px !important;
+         transition: opacity 0.3s ease !important; 
+     border:2px solid #281F48 !important;
+}
+.prre{
+    background-color:#281F48 !important;
+     border-radius:5px !important;
+}
+.ore{
+    color: #FD5631 !important;
+}
         .carousel-control-next-icon,
         .carousel-control-prev-icon {
             background-color: #281F48 !important;
@@ -151,23 +245,23 @@
     </style>
     <div class="container mt-4 ">
         <div class="breadcrumb-nav mb-3">
-            <a href="{{ url('/') }}" class="breadcrumb-item " style="color:#9691A4 !important">Home</a>
-            <span class="breadcrumb-separator" style="color:#9691A4 !important">></span>
-            <a href="{{ $post->condition == 'new' ? url('cars/new') : url('cars/used') }}" class="breadcrumb-item "
-                style="color:#9691A4 !important">{{ $post->condition == 'new' ? 'New Car' : 'Used Car' }}</a>
-            <span class="breadcrumb-separator" style="color:#281F48 !important">></span>
-            <span class="breadcrumb-item active"
-                style="color:#281F48 !important"><strong>{{ $post->modelname }}</strong></span>
+            <a href="{{ url('/') }}" class="breadcrumb-item greynew" >Home</a>
+            <span class="breadcrumb-separator greynew">></span>
+            <a href="{{ $post->condition == 'new' ? url('cars/new') : url('cars/used') }}" class="breadcrumb-item greynew "
+               >{{ $post->condition == 'new' ? 'New Car' : 'Used Car' }}</a>
+            <span class="breadcrumb-separator blueclr" >></span>
+            <span class="breadcrumb-item blueclr active"
+           ><strong>{{ $post->modelname }}</strong></span>
         </div>
         <div class="row d-flex justify-content-between">
             <div class="col-lg-8 ">
 
-                <h2 class="m-0" style="color:#281F48 !important"><strong>{{ $post->modelname }} {{ $post->year ?? '' }}
+                <h2 class="m-0 blueclr" ><strong>{{ $post->modelname }} {{ $post->year ?? '' }}
                     </strong></h2>
             </div>
             <div class="col-lg-2 text-end d-flex justify-content-end align-items-center">
                 {{--  <div class="action-buttons">
-                    <button class="action-btn-2 border-0" style="background-color: #ffffff00;" onclick="shareContent()">
+                    <button class="action-btn-2 border-0" onclick="shareContent()">
                         <i class="bi bi-share-fill text-white"></i>
                     </button>
 
@@ -176,9 +270,9 @@
                 <div class="newstyl">
                     <strong> <i class="bi bi-eye"></i> {{ $post->views }} </strong>
 
-                    <button class="action-btn-2 border-0 sharebtn" style="background-color: #ffffff00;"
+                    <button class="action-btn-2 border-0 sharebtn imp" 
                         data-url="{{ route('cardetail', ['id' => $post->id]) }}">
-                        <i class="bi bi-share-fill " style="color:#281F48"></i>
+                        <i class="bi bi-share-fill  blueclr" ></i>
                     </button>
                     <?php
                     
@@ -196,11 +290,11 @@
                         <a @if (!Request::is('superadmin/*')) href="{{ route('add-to-wishlist', ['post_id' => $post->id, 'dealer_id' => Auth::id()]) }}"  @else href="" @endif
                             class="action-btn-2 ">
                             <i
-                                @if (isset($wishlist)) class="bi bi-heart-fill  text-danger" style="" @else class="bi bi-heart-fill  " style="color:#281F48" @endif></i>
+                                @if (isset($wishlist)) class="bi bi-heart-fill  text-danger"  @else class="bi bi-heart-fill  blueclr" @endif></i>
                         </a>
                     @else
                         <a href="{{ route('login') }}" class="action-btn-2 ms-3">
-                            <i class="bi bi-heart-fill "style="color:#281F48"></i>
+                            <i class="bi bi-heart-fill  blueclr"></i>
                         </a>
                     @endauth
 
@@ -222,15 +316,15 @@
                     --}}
                 <div class="container mt-4 p-0">
                     <!-- Main Display with Slider -->
-                    <div id="photoCarousel" class="carousel slide  mb-4" data-bs-ride="carousel"
-                        style="position: relative; margin-bottom: 16px;">
-                        <div class="carousel-inner" style="text-align: center;">
+                    <div id="photoCarousel" class="carousel slide relat mb-4" data-bs-ride="carousel"
+                    >
+                        <div class="carousel-inner texx" >
                             @foreach ($mainimages as $index => $mainimage)
                                 <div class="carousel-item height {{ $index == 0 ? 'active' : '' }}">
-                                    <div style="width:97%; height:400px; overflow: hidden;">
+                                    <div class="divimg">
                                         <img src="{{ url('posts/doc/' . $mainimage->doc_name) }}"
-                                            style="width: 100%; height: 100%; border-radius: 8px; object-fit: contain;"
-                                            class="open-modal" data-img="{{ url('posts/doc/' . $mainimage->doc_name) }}"
+                                           
+                                            class="open-modal imgs" data-img="{{ url('posts/doc/' . $mainimage->doc_name) }}"
                                             alt="Image {{ $index }}">
                                     </div>
                                 </div>
@@ -251,13 +345,13 @@
                     <!-- Thumbnails -->
                     <div class="row ps-md-3 justify-content-center">
                         @foreach ($mainimages as $index => $mainimage)
-                            <div class="col-1 me-3 divimgl p-0" style="height:50px !important; width:50px !important;">
+                            <div class="col-1 me-3 divimgl p-0 smalldiv" >
                                 <a href="#" class="open-modal" data-bs-toggle="modal" data-bs-target="#photoModal"
                                     data-img="{{ url('posts/doc/' . $mainimage->doc_name) }}"
                                     data-index="{{ $index }}">
                                     <img src="{{ url('posts/doc/' . $mainimage->doc_name) }}"
-                                        style="height: 50px !important; width: 60px !important; cursor: pointer; border-radius: 8px; transition: opacity 0.3s ease; border:2px solid #281F48"
-                                        class="rounded thumbnail-photo imgstyl" alt="Thumbnail {{ $index }}">
+                                       
+                                        class="rounded thumbnail-photo imgstyl modimg" alt="Thumbnail {{ $index }}">
                                 </a>
                             </div>
                         @endforeach
@@ -297,14 +391,14 @@
                                     <div class="row ps-md-3 mt-3 justify-content-center">
 
                                         @foreach ($mainimages as $index => $mainimage)
-                                            <div class="col-1 me-3 divimgl p-0"
-                                                style="height:50px !important; width:50px !important;">
+                                            <div class="col-1 me-3 divimgl p-0 modd"
+                                  >
                                                 <a href="#" class="open-modal"
                                                     data-img="{{ url('posts/doc/' . $mainimage->doc_name) }}"
                                                     data-index="{{ $index }}">
                                                     <img src="{{ url('posts/doc/' . $mainimage->doc_name) }}"
-                                                        style="height: 50px !important; width: 60px !important; cursor: pointer; border-radius: 8px; 										transition: opacity 0.3s ease; border:2px solid white"
-                                                        class="rounded thumbnail-photo imgstyl"
+                                                      
+                                                        class="rounded thumbnail-photo imgstyl clse"
                                                         alt="Thumbnail {{ $index }}">
                                                 </a>
                                             </div>
@@ -375,63 +469,63 @@
                         A Friend</button>
                 </div>
                 <div class="container my-5">
-                    <h3 style="color: #281F48; font-weight:500"><strong>Specifications</strong></h3>
+                    <h3 class="spec"><strong>Specifications</strong></h3>
 
                     <!-- Row 1 -->
                     <div class="row">
                         <div class="col-md-6 d-flex justify-content-between">
-                            <span style="color: #281F48;"><strong>Manufacturing Year</strong></span>
-                            <span style="color:#9691A4">{{ $post->year }}</span>
+                            <span class="blueclr" ><strong>Manufacturing Year</strong></span>
+                            <span class="greynew">{{ $post->year }}</span>
                         </div>
                         <div class="col-md-6 d-flex justify-content-between">
-                            <span style="color: #281F48;"><strong>Registered?</strong></span>
-                            <span style="color:#9691A4">Yes</span>
+                            <span class="blueclr"><strong>Registered?</strong></span>
+                            <span class="greynew">Yes</span>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6 d-flex justify-content-between">
-                            <span style="color: #281F48;"><strong>Make</strong></span>
-                            <span style="color:#9691A4">{{ $post->makename }}</span>
+                            <span class="blueclr"><strong>Make</strong></span>
+                            <span class="greynew">{{ $post->makename }}</span>
                         </div>
                         <div class="col-md-6 d-flex justify-content-between">
-                            <span style="color: #281F48;"><strong>Model</strong></span>
-                            <span style="color:#9691A4">{{ $post->modelname }}</span>
+                            <span class="blueclr"><strong>Model</strong></span>
+                            <span class="greynew">{{ $post->modelname }}</span>
                         </div>
                     </div>
 
                     <!-- Row 2 -->
                     <div class="row">
                         <div class="col-md-6 d-flex justify-content-between">
-                            <span style="color: #281F48;"><strong>Transmission</strong></span>
-                            <span style="color:#9691A4">{{ $post->transmission }}</span>
+                            <span class="blueclr"><strong>Transmission</strong></span>
+                            <span class="greynew">{{ $post->transmission }}</span>
                         </div>
                         <div class="col-md-6 d-flex justify-content-between">
-                            <span style="color: #281F48;"><strong>Assembly</strong></span>
-                            <span style="color:#9691A4" class="text-capitalize">{{ $post->assembly }}</span>
+                            <span class="blueclr"><strong>Assembly</strong></span>
+                            <span class="text-capitalize greynew">{{ $post->assembly }}</span>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6 d-flex justify-content-between">
-                            <span style="color: #281F48;"> <strong>Door Count</strong></span>
-                            <span style="color:#9691A4">{{ $post->doors }}</span>
+                            <span class="blueclr"> <strong>Door Count</strong></span>
+                            <span class="greynew">{{ $post->doors }}</span>
                         </div>
                         <div class="col-md-6 d-flex justify-content-between">
-                            <span style="color: #281F48;"><strong>Fuel Type</strong></span>
-                            <span style="color:#9691A4">{{ $post->fuel }}</span>
+                            <span class="blueclr"><strong>Fuel Type</strong></span>
+                            <span class="greynew">{{ $post->fuel }}</span>
                         </div>
                     </div>
 
                     <!-- Row 3 -->
                     <div class="row">
                         <div class="col-md-6 d-flex justify-content-between">
-                            <span style="color: #281F48;"><strong>Engine Capacity</strong></span>
-                            <span style="color:#9691A4">{{ $post->engine_capacity }}</span>
+                            <span class="blueclr"><strong>Engine Capacity</strong></span>
+                            <span class="greynew">{{ $post->engine_capacity }}</span>
                         </div>
                         <div class="col-md-6 d-flex justify-content-between">
-                            <span style="color: #281F48;"><strong>Mileage</strong></span>
-                            <span style="color:#9691A4">
+                            <span class="blueclr"><strong>Mileage</strong></span>
+                            <span class="greynew">
                                 @php
                                     $mileage = (float) $post->milleage;
                                     if ($mileage >= 1000000) {
@@ -452,26 +546,26 @@
 
                     <div class="row">
                         <div class="col-md-6 d-flex justify-content-between">
-                            <span style="color: #281F48;"><strong>Body Type</strong></span>
-                            <span style="color:#9691A4">{{ $post->bodytypename }}</span>
+                            <span class="blueclr"><strong>Body Type</strong></span>
+                            <span class="greynew">{{ $post->bodytypename }}</span>
                         </div>
                         <div class="col-md-6 d-flex justify-content-between">
-                            <span style="color: #281F48;"><strong>Exterior Color</strong></span>
-                            <span style="color:#9691A4">{{ $post->excolorname }}</span>
+                            <span class="blueclr"><strong>Exterior Color</strong></span>
+                            <span class="greynew">{{ $post->excolorname }}</span>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6 d-flex justify-content-between">
-                            <span style="color: #281F48;"><strong>Seating Capacity</strong></span>
-                            <span style="color:#9691A4">{{ $post->seating_capacity }}</span>
+                            <span class="blueclr"><strong>Seating Capacity</strong></span>
+                            <span class="greynew">{{ $post->seating_capacity }}</span>
                         </div>
                     </div>
 
                     <!-- Features Section -->
                     <div class="features mt-4 col-12">
-                        <h3 style="color: #281F48; font-weight:500"><strong>Features</strong></h3>
-                        <div class="row mt-3 rounded p-3" style="border: 1px solid #454056; background-color:#F0F3F6">
+                        <h3 class="spec"><strong>Features</strong></h3>
+                        <div class="row mt-3 rounded p-3 feat" >
 
                             @foreach ($post->feature as $feature)
                                 <div class="col-md-4 feature-item my-2">
@@ -537,8 +631,8 @@
                     </div>
                     <!-- Seller's Description Section -->
                     <div class="description mt-4">
-                        <h3 style="color: #281F48; font-weight:500"><strong>Seller's Description</strong></h3>
-                        <p style="color: #281F48; word-wrap: break-word; overflow-wrap: break-word; hyphens: auto;">
+                        <h3 class="spec"><strong>Seller's Description</strong></h3>
+                        <p class="comm">
                             {{ $post->dealer_comment }}.
                         </p>
 
@@ -566,24 +660,24 @@
                     <div class="info-section mt-4">
                         <div class="row text-start py-2 border-top border-bottom">
                             <div class="col-md-3">
-                                <div class="info-item" style="color: #281F48;">Published:</div>
-                                <div class="info-value" style="color: #281F48;">
+                                <div class="info-item blueclr">Published:</div>
+                                <div class="info-value blueclr" >
                                     {{ \Carbon\Carbon::parse($post->created_at)->format('F j, Y') }}
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="info-item" style="color: #281F48;">Last Updated:</div>
-                                <div class="info-value " style="color: #281F48;">
+                                <div class="info-item blueclr" >Last Updated:</div>
+                                <div class="info-value blueclr" >
                                     {{ \Carbon\Carbon::parse($post->updated_at)->format('F j, Y') }}
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="info-item" style="color: #281F48;">Ad Id:</div>
-                                <div class="info-value" style="color: #281F48;">{{ $post->id }}</div>
+                                <div class="info-item blueclr" >Ad Id:</div>
+                                <div class="info-value blueclr" >{{ $post->id }}</div>
                             </div>
                             <div class="col-md-3">
-                                <div class="info-item" style="color: #281F48;">Member Since:</div>
-                                <div class="info-value" style="color: #281F48;">
+                                <div class="info-item blueclr" >Member Since:</div>
+                                <div class="info-value blueclr" >
                                     {{ \Carbon\Carbon::parse($post->dealer->created_at)->format('F j, Y') }}</div>
                             </div>
                         </div>
@@ -597,8 +691,8 @@
 
                     <!-- Left Side Buttons -->
                     <div class="col-6 d-flex align-items-center">
-                        <button class="btn custom-btn-3 px-4"
-                            style="background-color:#0EB617 !important">{{ $post->condition }}</button>
+                        <button class="btn custom-btn-3 bnn px-4"
+                            >{{ $post->condition }}</button>
                         @if ($post->feature_ad == 1)
                             <span class="featureicn">
                                 <img src="{{ asset('web/bikes/images/Star 7.svg') }}" class="img-fluid">
@@ -608,7 +702,7 @@
                     </div>
 
                     <!-- Right Side Toggle Switch -->
-                    <div class="col-4   text-end align-items-center" style="background-color:#281F48 ; border-radius:5px">
+                    <div class="col-4   text-end align-items-center prre" >
                         <div class="toggle-container d-flex align-items-center justify-content-center">
                             <span class="me-2 text-white">Price Alert</span>
 
@@ -629,10 +723,10 @@
                 <div class="row align-items-center mb-3">
                     <!-- First Column -->
                     <div class="col-md-8">
-                        <h4 class="mb-1"><span style="color: #FD5631;">PKR {{ number_format($post->price) }}</span>
+                        <h4 class="mb-1"><span class="ore">PKR {{ number_format($post->price) }}</span>
                             @if ($post->price < $post->previous_price)
                                 <span
-                                    style="text-decoration: line-through;">{{ number_format($post->previous_price) }}</span>
+                                    class="prr">{{ number_format($post->previous_price) }}</span>
                             @endif
 
                         </h4>
@@ -692,8 +786,8 @@
 
                             <!-- Top-Right Text -->
                             <div>
-                                <a style="color:#281F48" href="{{ route('dealer.posts.all', $post->dealer->id) }}"
-                                    class="ads">Other Ads by
+                                <a  href="{{ route('dealer.posts.all', $post->dealer->id) }}"
+                                    class="ads blueclr">Other Ads by
                                     this dealer</a>
 
                             </div>
@@ -701,7 +795,7 @@
 
                         <div class="my-3">
                             <p class="mb-1  {{ isset($post->dealer->number) ? '' : 'd-none' }}"><i
-                                    class="bi bi-telephone me-2 " style="color:#281F48"></i>
+                                    class="bi bi-telephone me-2 blueclr" ></i>
                                 @php
                                     $formattedNumber = isset($post->dealer->number)
                                         ? preg_replace('/^\+92(\d{3})(\d{7})$/', '+92 $1 $2', $post->dealer->number)
@@ -709,14 +803,14 @@
                                 @endphp
                                 {{ $formattedNumber }}
                             </p>
-                            <p style="color:#281F48" class="mb-1 "><i class="bi bi-envelope me-2 "
-                                    style="color:#281F48"></i> <a href="mailto:saima@gmail.com" class=""
-                                    style="color:#281F48">{{ $post->dealer->email }}</a></p>
-                            <p style="color:#281F48" class="mb-1 {{ isset($post->dealer->address) ? '' : 'd-none' }}"><i
-                                    class="bi bi-geo-alt me-2 " style="color:#281F48"></i>
+                            <p  class="mb-1 blueclr"><i class="bi bi-envelope me-2 blueclr"
+                                    ></i> <a href="mailto:saima@gmail.com" class="blueclr"
+                                   >{{ $post->dealer->email }}</a></p>
+                            <p  class="mb-1 blueclr {{ isset($post->dealer->address) ? '' : 'd-none' }}"><i
+                                    class="bi bi-geo-alt me-2 blueclr" ></i>
                                 {{ $post->dealer->address }}</p>
-                            <p class="mb-1 " style="color:#281F48"><i class="bi bi-calendar me-2 "
-                                    style="color:#281F48"></i> Member
+                            <p class="mb-1 blueclr" ><i class="bi bi-calendar me-2 blueclr"
+                                   ></i> Member
                                 Since {{ \Carbon\Carbon::parse($post->dealer->created_at)->format('F j, Y') }}</p>
                         </div>
                         <div class="row">
@@ -759,7 +853,7 @@
                 </div>
 
                 <div class="col-12 mt-3">
-                    <h5 class="mb-4 " style="color:#281F48">Request More Information</h5>
+                    <h5 class="mb-4 blueclr" >Request More Information</h5>
                     <div class="p-3" style="border: 1px solid #454056; border-radius: 10px;">
                         <!-- Modal -->
                         <div class="modal fade" id="responseModal" tabindex="-1" aria-labelledby="modalTitle"
@@ -772,7 +866,7 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body text-center">
-                                        <p style="color:#281F48" id="modalMessage"></p>
+                                        <p class="blueclr" id="modalMessage"></p>
                                     </div>
                                     <div class="modal-footer  border-0  p-0 pb-2">
                                         <button type="button" class="btn btn-secondary"
@@ -826,14 +920,14 @@
         </div>
 
         <div class="row">
-            <h3 class="mb-5 mt-3" style="color: #281F48"><strong>Similar Ads</strong></h3>
+            <h3 class="mb-5 mt-3 blueclr"><strong>Similar Ads</strong></h3>
             <div class="container mt-2">
                 <div id="adsCarousel" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                            @if (count($posts) == 0)
                         <div class="col-md-12">
                             <div class="row d-flex mt-5 justify-content-center my-3">
-                                <div class="p-3 col-8" style="border:1px solid #281F48;border-radius:9px;">
+                                <div class="p-3 col-8 nnn" >
                                     <div class="row d-flex align-items-center">
                                         <div class="col-3">
                                             <img src="{{ asset('web/images/noinputs.svg') }}" alt=""
@@ -855,7 +949,7 @@
                                     @foreach ($chunk as $p)
                                         <div class="col-lg-4">
                                             <div class="wishlist-card">
-                                                <a style="  text-decoration: none;color: inherit;"
+                                                <a class="ank"
                                                     @if (Request::is('superadmin/*')) href="{{ route('superadmin.cardetail', $p->id) }}" 
                                             @else 
                                                 href="{{ route('cardetail', $p->id) }}" @endif>
@@ -878,23 +972,23 @@
                                                             </span>
 
                                                         </div>
-                                                        <h4 style="color: #281F48">{{ $p->modelname }}</h4>
-                                                        <h5 style="color: #FD5631;"><b>PKR
+                                                        <h4  class="blueclr">{{ $p->modelname }}</h4>
+                                                        <h5 class="oreo"><b>PKR
                                                                 {{ number_format($p->price) }}</b></h5>
                                                         <div class="d-flex justify-content-between align-items-center">
                                                             <h6 class="mb-0">
                                                                 <i class="bi bi-geo-alt"></i>
                                                                 {{ $p->location->cityname ?? '' }}
                                                             </h6>
-                                                            <span style="font-size:14px;">Last Updated:
+                                                            <span class="fort">Last Updated:
                                                                 {{ $p->dealer ? \Carbon\Carbon::parse($p->dealer->updated_at)->format('F j, Y') : '' }}
                                                             </span>
                                                         </div>
                                                         <hr>
                                                         <div class="row">
                                                             <div class="col-4">
-                                                                <div class="text-center py-2"
-                                                                    style="background-color:#002D690F; border-radius: 10px;">
+                                                                <div class="text-center py-2 mdiv"
+                                                                  >
                                                                     <i class="bi bi-speedometer2"></i>
                                                                     @php
                                                                         $mileage = (float) $p->milleage;
@@ -925,15 +1019,15 @@
                                                             </div>
 
                                                             <div class="col-4">
-                                                                <div class="text-center py-2"
-                                                                    style="background-color:#002D690F; border-radius: 10px;">
+                                                                <div class="text-center py-2 mdiv"
+                                                                  >
                                                                     <i class="bi bi-car-front-fill"></i>
                                                                     <h6>{{ $p->transmission }}</h6>
                                                                 </div>
                                                             </div>
                                                             <div class="col-4">
-                                                                <div class="text-center py-2"
-                                                                    style="background-color:#002D690F; border-radius: 10px;">
+                                                                <div class="text-center py-2 mdiv"
+                                                                   >
                                                                     <i class="bi bi-fuel-pump-diesel"></i>
                                                                     <h6>{{ $p->fuel }}</h6>
                                                                 </div>
@@ -1015,7 +1109,7 @@
                     </div>
                     <div class="modal-body text-center " style="background-color: #F0F3F6; color: #FD5631;"
                         id="wishlistresponseBody">
-                        <p style="color:#281F48"> {{ session('wishlistresponse') }}</p>
+                        <p class="blueclr" > {{ session('wishlistresponse') }}</p>
                     </div>
                     <div class="modal-footer justify-content-center border-0 p-0 pb-3">
                         <button type="button" class="btn btn-light px-4 py-2 "
