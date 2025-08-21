@@ -68,7 +68,7 @@
             </div>
             {{-- <div class="col-md-6 d-flex justify-content-end">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
-					@if(Auth::user()->package)
+					@if (Auth::user()->package)
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="tab1-tab" data-bs-toggle="tab" data-bs-target="#tab1"
                             type="button" role="tab" style="background-color: #281F48; color: white;">
@@ -76,7 +76,7 @@
                         </button>
                     </li>
 					@endif
-					@if(Auth::user()->shop_package)
+					@if (Auth::user()->shop_package)
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="tab2-tab" data-bs-toggle="tab" data-bs-target="#tab2" type="button"
                             role="tab" style="background-color: white; color: #281F48;">
@@ -95,7 +95,7 @@
 
                 <div class="tab-content" id="myTabContent">
 
-                   
+
 
                     {{-- Services Tab --}}
                     <div class="tab-pane fade show active" id="tab2" role="tabpanel">
@@ -124,7 +124,8 @@
                                         @endphp
                                         <tr>
                                             <td>{{ $i + 1 }}</td>
-                                          <td>{{ $products[$productId]->name ?? 'Plan' }}  {{  $invoice->amount_paid == 0 ? '( Trial)' : ''}}</td>
+                                            <td>{{ $products[$productId]->name ?? 'Plan' }}
+                                                {{ $invoice->amount_paid == 0 &&  $products[$productId]->metadata['trial_allowed'] == '1' ? '( Trial)' : '' }}</td>
                                             <td>{{ \Carbon\Carbon::createFromTimestamp($invoice->created)->format('d M Y') }}
                                             </td>
                                             <td>
@@ -161,7 +162,7 @@
                                                 @endif
                                             </td>
                                         </tr>
-                                   @endforeach
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
