@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Models\AutoServices\Services;
 use App\Models\AutoServices\Amenities;
-use App\Models\Autoservices\ShopImages;
+use App\Models\AutoServices\ShopImages;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Autoservices\ShopTimings;
+use App\Models\AutoServices\ShopTimings;
 use App\Models\AutoServices\ShopServices;
 use App\Models\AutoServices\ShopAmenities;
 
@@ -313,11 +313,11 @@ class ShopController extends Controller
 
             DB::commit();
 
-            return redirect()->route('superadmin.shops.index')->with('response', 'Shop updated successfully.');
+            return redirect()->route('superadmin.shops.index')->with('success', 'Shop updated successfully.');
         } catch (\Exception $e) {
             DB::rollBack();
             // dd($e->getMessage());
-            return redirect()->back()->with('response', 'Something went wrong: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong: ' . $e->getMessage());
         }
     }
 

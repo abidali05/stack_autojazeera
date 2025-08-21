@@ -732,7 +732,6 @@
                         <div class="col-md-3  mt-3">
                             <label for="dealer_id" class="form-label twentyfourlabel">Select Dealer*</label>
                             <select class="form-select" aria-label="Default select example" name="dealer_id"
-
                                 style="background-color:#F0F3F6 !important ; color:#000000 ; max-width:100% !important;text-align:start !important"
                                 id="dealer_id"required>
                                 <option value="">Select Dealer </option>
@@ -783,7 +782,6 @@
             <div class="col-md-4  mt-3">
                 <label for="province" class="form-label twentyfourlabel">Province*</label>
                 <select class="form-select" aria-label="Default select example" name="province"
-
                     style="background-color:#F0F3F6 !important ; color:#000000 ; max-width:100% !important;text-align:start !important"
                     id="province"required>
 
@@ -800,8 +798,8 @@
             <div class="col-md-4 mt-3">
                 <label for="city" class="form-label twentyfourlabel">city*</label>
                 <select class="form-select" aria-label="Default select example" name="city"
-                    style="background-color:#F0F3F6 !important ; color:#000000 ;  max-width:100% !important;text-align:start !important" id="city"
-                    required>
+                    style="background-color:#F0F3F6 !important ; color:#000000 ;  max-width:100% !important;text-align:start !important"
+                    id="city" required>
                     <option selected>Select Province first</option>
                     {{-- @foreach ($cities as $city)
                         <option value="{{ $city->id }}" {{old('city') == $city->id ? 'selected' : ''}}>{{ $city->name }}</option>
@@ -870,7 +868,8 @@
             <div class="col-md-12 px-5 py-3 backcolor rounded mt-3">
                 <h4 style="color:#281F48">Photos</h4>
                 <p class="alert alert-dark p-2 rounded p-3" style="background-color:#281F48; color:#9D9D9D !important">
-                    You can upload a minimum of 1 and a maximum of <span id="maxImagesAllowed" class="ms-0 text-white">20</span> photos.
+                    You can upload a minimum of 1 and a maximum of <span id="maxImagesAllowed"
+                        class="ms-0 text-white">20</span> photos.
                     Max file size: 8 MB. Allowed formats: JPEG, JPG, PNG.
                 </p>
 
@@ -1368,25 +1367,50 @@
 
             form.addEventListener('submit', function(e) {
                 let valid = true;
+                console.log('rules', rules)
                 Object.keys(rules).forEach(name => {
-                    const field = document.getElementById(name) || form.querySelector(
-                        `[name="${name}"]`);
+                    let field = null;
+
+                    // special cases
+                    if (name === "services") {
+                        field = form.querySelector('input[name="services[]"]');
+                    } else if (name === "days") {
+                        field = form.querySelector('input[name^="days["][type="checkbox"]');
+                    } else {
+                        // normal fields
+                        field = document.getElementById(name) || form.querySelector(
+                            `[name="${name}"]`);
+                    }
+                    console.log('field', name, field)
                     if (field && !validateField(name, field)) {
                         valid = false;
                     }
                 });
+
                 if (!valid) e.preventDefault();
             });
 
 
+
+
             // Live validation
             Object.keys(rules).forEach(name => {
-                const field = document.getElementById(name) || form.querySelector(`[name="${name}"]`);
+                let field = null;
+
+                if (name === "services") {
+                    field = form.querySelector('input[name="services[]"]');
+                } else if (name === "days") {
+                    field = form.querySelector('input[name^="days["][type="checkbox"]');
+                } else {
+                    field = document.getElementById(name) || form.querySelector(`[name="${name}"]`);
+                }
+
                 if (field) {
                     field.addEventListener('input', () => validateField(name, field));
                     field.addEventListener('change', () => validateField(name, field));
                 }
             });
+
         });
     </script>
 
