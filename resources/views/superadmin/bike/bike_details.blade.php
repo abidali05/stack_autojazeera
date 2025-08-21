@@ -170,11 +170,11 @@ input:checked + .slider:before {
                         </div>
                         <div class="col-md-6 d-flex justify-content-between">
                             <span><strong>City Combustion </strong></span>
-                            <span> 11.2 L/100km</span>
+                            <span>11.2 L/100km</span>
                         </div>
                     </div>   <div class="row">
                         <div class="col-md-6 d-flex justify-content-between">
-                            <span><strong> Body Type</strong></span>
+                            <span><strong>Body Type</strong></span>
                             <span>SUV / Crossover</span>
                         </div>
                         <div class="col-md-6 d-flex justify-content-between">

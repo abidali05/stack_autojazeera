@@ -214,13 +214,39 @@
             padding: 5px 10px;
             margin-left: 10px
         }
+        .blueclr{
+color: #281F48 !important;
+        }
+        .bah{
+        width:97% !important;
+         height:400px !important; 
+            overflow: hidden !important;
+        }
+        .bahimg {
+        width: 100% !important;
+         height: 100% !important;
+          border-radius: 8px !important;
+           object-fit: contain !important; 
+        cursor: pointer !important;
+        }
+        .thum{
+            height:50px !important; 
+            width:50px !important; 
+        }
+        .thumimg{
+                   height: 50px !important; 
+                   width: 60px !important;
+                    cursor: pointer !important;
+                     border-radius: 8px !important;
+                    border:2px solid #281F48 !important;
+        }
     </style>
     <div class="container  pt-4">
-        <div class="breadcrumb-nav mb-3 " style="color: #281F48;">
-            <a href="{{ url('/') }}" class="breadcrumb-item " style="color: #281F48;">Home</a>
-            <span class="breadcrumb-separator" style="color: #281F48;">></span>
-            <a href="{{ url('/bikes') }}" class="breadcrumb-item " style="color: #281F48;">Bikes</a>
-            <span class="breadcrumb-separator" style="color: #281F48;">></span>
+        <div class="breadcrumb-nav mb-3 blueclr">
+            <a href="{{ url('/') }}" class="breadcrumb-item blueclr">Home</a>
+            <span class="breadcrumb-separator blueclr" >></span>
+            <a href="{{ url('/bikes') }}" class="breadcrumb-item blueclr" >Bikes</a>
+            <span class="breadcrumb-separator blueclr" >></span>
             <span class="breadcrumb-item active"><strong>{{ $post->makename . ' ' . $post->modelname }}</strong></span>
         </div>
         <div class="row">
@@ -230,7 +256,7 @@
             <div class="col-lg-4 text-end">
                 <div class="action-buttons">
                     (<strong> <i class="bi bi-eye"></i> {{ $post->views }} </strong>)
-                    <i class="bi bi-share-fill me-3" style="color: #281F48;"></i>
+                    <i class="bi bi-share-fill me-3 blueclr" ></i>
 
                     @auth
                         @php
@@ -245,9 +271,9 @@
                                 style="color: {{ $check && $check->status == '1' ? '#D90600;' : '#281F48;' }}"></i></a>
                     @endauth
                     @guest
-                        <a href="{{ url('/login') }}"> <i class="bi bi-heart-fill" style="color: #281F48;"></i></a>
+                        <a href="{{ url('/login') }}"> <i class="bi bi-heart-fill blueclr" ></i></a>
                     @endguest
-                    {{-- <i class="bi bi-heart-fill" style="color: #FD5631;"></i> --}}
+                    {{-- <i class="bi bi-heart-fill" ></i> --}}
 
                 </div>
             </div>
@@ -263,10 +289,10 @@
                         <div class="carousel-inner text-center">
                             @foreach ($post->media as $i => $media)
                                 <div class="carousel-item height {{ $i == 0 ? 'active' : '' }}">
-                                    <div style="width:97%; height:400px; overflow: hidden;">
+                                    <div class="bah">
                                         <img src="{{ $media->file_path }}"
-                                            style="width: 100%; height: 100%; border-radius: 8px; object-fit: contain; cursor: pointer;"
-                                            class="open-modal" data-bs-toggle="modal" data-bs-target="#photoModal"
+                      
+                                            class="open-modal bahimg" data-bs-toggle="modal" data-bs-target="#photoModal"
                                             data-img="{{ $media->file_path }}" data-index="{{ $i }}"
                                             alt="Image {{ $i + 1 }}">
                                     </div>
@@ -286,11 +312,11 @@
                     <!-- Thumbnail Preview -->
                     <div class="row ps-md-3 justify-content-center">
                         @foreach ($post->media as $i => $media)
-                            <div class="col-1 me-3 divimgl p-0" style="height:50px !important; width:50px !important; ">
+                            <div class="col-1 me-3 divimgl p-0 thum" >
                                 <a href="#" class="open-modal" data-img="{{ $media->file_path }}"
                                     data-index="{{ $i }}">
-                                    <img src="{{ $media->file_path }}" class="thumbnail-photo rounded imgstyl"
-                                        style="height: 50px !important; width: 60px !important; cursor: pointer; border-radius: 8px; border:2px solid #281F48;"
+                                    <img src="{{ $media->file_path }}" class="thumbnail-photo rounded imgstyl thumimg"
+                                 
                                         alt="Thumbnail {{ $i + 1 }}">
                                 </a>
                             </div>
@@ -343,31 +369,31 @@
                                      <div class="row mt-3">
                             <div class="col-12">
                                 <!-- Call Button -->
-                                <a href="tel:{{ $post->dealer->number }}" style="color: white"
-                                    class="btn custom-btn-nav me-1 py-2 {{ $post->dealer->number ? '' : 'd-none' }}">
+                                <a href="tel:{{ $post->dealer->number }}" 
+                                    class="btn custom-btn-nav me-1 py-2 text-white {{ $post->dealer->number ? '' : 'd-none' }}">
                                     <i class="bi bi-telephone me-1"></i> Call
                                 </a>
                                 <!-- WhatsApp Button -->
-                                <a href="https://wa.me/{{ $post->dealer->number }}" style="color: white"
-                                    class="btn custom-btn-nav me-1 py-2 {{ $post->dealer->number ? '' : 'd-none' }}"
+                                <a href="https://wa.me/{{ $post->dealer->number }}" 
+                                    class="btn custom-btn-nav me-1 py-2 text-white {{ $post->dealer->number ? '' : 'd-none' }}"
                                     target="_blank">
                                     <i class="bi bi-whatsapp me-1"></i> WhatsApp
                                 </a>
                                 <!-- Share Button -->
-                                <button class="btn custom-btn-nav me-1 py-2" style="color: white" onclick="shareLink()">
+                                <button class="btn custom-btn-nav me-1 py-2 text-white"  onclick="shareLink()"> 
                                     <i class="bi bi-share me-1"></i> Share
                                 </button>
                                 <!-- SMS Button -->
                                 @auth
-                                    <button style="color: white" onclick="createOrOpenChat({{ $post->id }}, {{ $post->dealer_id }})"
-                                        class="btn custom-btn-nav py-2 {{ $post->dealer->number ? '' : 'd-none' }}">
+                                    <button  onclick="createOrOpenChat({{ $post->id }}, {{ $post->dealer_id }})"
+                                        class="btn custom-btn-nav text-white py-2 {{ $post->dealer->number ? '' : 'd-none' }}">
                                         <i class="bi bi-chat-dots me-1"></i> Chat
                                     </button>
                                 @endauth
 
                                 @guest
-                                    <a href="{{ url('login') }}" style="color: white"
-                                        class="btn custom-btn-nav py-2 {{ $post->dealer->number ? '' : 'd-none' }}">
+                                    <a href="{{ url('login') }}" 
+                                        class="btn custom-btn-nav py-2 text-white {{ $post->dealer->number ? '' : 'd-none' }}">
                                         <i class="bi bi-chat-dots me-1"></i> Chat
                                     </a>
 
@@ -459,7 +485,7 @@
                                         </div>
 
                                         <div class="text-end"> <button type="submit"
-                                                class="btn custom-btn-nav rounded px-5" style="color:white">Send
+                                                class="btn custom-btn-nav rounded px-5 text-white" >Send
                                                 Message</button></div>
                                     </form>
 
@@ -471,7 +497,7 @@
 
                 </div>
                 <div class="container my-4">
-                    <h3 style="color: #281F48;"><strong>Specifications</strong></h3>
+                    <h3 class="blueclr"><strong>Specifications</strong></h3>
 
                     <!-- Row 1 -->
                     <div class="row">
@@ -541,7 +567,7 @@
 
                     <!-- Features Section -->
                     <div class="mt-4">
-                        <h3 style="color: #281F48;"><strong>Features</strong></h3>
+                        <h3 class="blueclr"><strong>Features</strong></h3>
                         <div class="row mt-3 p-3 rounded" style="background-color:#F0F3F6; border:1px solid #281F48">
                             @foreach ($features as $category => $featureGroup)
                                 @foreach ($featureGroup as $feature)
@@ -559,8 +585,8 @@
 
                     <!-- Seller's Description Section -->
                     <div class="description mt-4">
-                        <h3 style="color: #281F48;"><strong>Seller's Description</strong></h3>
-                        <p style="color: #281F48;">{{ $post->description }}</p>
+                        <h3 class="blueclr"><strong>Seller's Description</strong></h3>
+                        <p class="blueclr">{{ $post->description }}</p>
                         <div class="mt-3">
                             <a href="{{ $post->document_brouchure }}" target="_blank" class=" custom-btn-nav ">Download
                                 Brochure</a>
@@ -678,7 +704,7 @@
                             </div>
                             <!-- Dealer Name and Designation -->
                             <div class="col-4 p-0">
-                                <h5 class="card-title" style="color: #281F48;">{{ $post->dealer->name }}</h5>
+                                <h5 class="card-title blueclr" >{{ $post->dealer->name }}</h5>
                                 <p class="card-text">
                                     {{ $post->dealer->userType == 'car_dealer' ? 'Car Dealer' : 'Private Seller' }}</p>
                             </div>
@@ -694,7 +720,7 @@
                         <div>
                             <p class="{{ $post->dealer->number ? '' : 'd-none' }}"><i class="bi bi-telephone me-2"></i>
                                 {{ $post->dealer->number }}</p>
-                            <p><i class="bi bi-envelope me-2"></i> <a style="color: #281F48;"
+                            <p><i class="bi bi-envelope me-2"></i> <a class="blueclr"
                                     href="mailto:{{ $post->dealer->email }}">{{ $post->dealer->email }}</a></p>
                             <p><i class="bi bi-geo-alt me-2"></i>
                                 {{ $post->dealer->address . ', ' . $post->dealer->city }}</p>
@@ -740,7 +766,7 @@
 
                 </div>
                 <div class="col-12 mt-3">
-                    <h5 class="mb-4 primary-color-custom" style="color:#281F48 !important">Request More
+                    <h5 class="mb-4 primary-color-custom blueclr" >Request More
                         Information</h5>
                     <div class="p-3" style="border: 1px solid #454056; border-radius: 10px;">
                         <form id="bike_request_more_info_form" method="post"
@@ -750,8 +776,8 @@
                             <div class="row mb-3">
                                 <div class="col-md-12 mb-3">
                                     <input type="hidden" name="type" value="Request more Information">
-                                    <label for="firstName" class="form-label"
-                                        style="color:#281F48 !important"><strong>Full
+                                    <label for="firstName" class="form-label blueclr"
+                                        ><strong>Full
                                             Name*</strong></label>
                                     <input type="text" name="name" class="form-control formcontrol" id="fullName"
                                         required>
@@ -760,14 +786,14 @@
 
 
                                 <div class="col-md-12 mb-3">
-                                    <label for="email" class="form-label"
-                                        style="color:#281F48 !important"><strong>Email*</strong></label>
+                                    <label for="email" class="form-label blueclr"
+                                     ><strong>Email*</strong></label>
                                     <input type="email" name="email" class="form-control formcontrol" id="email"
                                         required>
                                 </div>
                                 <div class="col-md-12 mb-3">
-                                    <label for="phoneNo" class="form-label"
-                                        style="color:#281F48 !important"><strong>Phone
+                                    <label for="phoneNo" class="form-label blueclr"
+                                     ><strong>Phone
                                             Number</strong></label>
                                     <input type="text" id="phoneNum" name="number" class="form-control formcontrol"
                                         placeholder="+92 3XX XXXXXXXX" maxlength="15" required>
@@ -778,8 +804,8 @@
 
                             </div>
                             <div class="mb-3">
-                                <label for="phoneNfv" class="form-label"
-                                    style="color:#281F48 !important"><strong>Message</strong></label>
+                                <label for="phoneNfv" class="form-label blueclr"
+                                  ><strong>Message</strong></label>
                                 <textarea class="form-control formcontrol" style="    line-height: 1.2 !important;" id="message" name="message"
                                     rows="4" placeholder="" maxlength="1000" required></textarea>
                             </div>
@@ -889,8 +915,8 @@
                                                             <div class="col-4">
                                                                 <div class="text-center py-2"
                                                                     style="background-color:#002D690F; border-radius: 10px;">
-                                                                    <i class="fa fa-motorcycle fs-5" aria-hidden="true"
-                                                                        style="color: #281F48;"></i>
+                                                                    <i class="fa fa-motorcycle fs-5 blueclr" aria-hidden="true"
+                                                                      ></i>
                                                                     <h6>{{ $p->transmission }}</h6>
                                                                 </div>
                                                             </div>
@@ -1025,7 +1051,7 @@
                         </div>
                         <div class="modal-body text-center " id="book_appointment_responseBody"
                             style="background-color: #F0F3F6; color: #FD5631;">
-                            <p style="color: #281F48"> {{ session('book_appointment_response') }}</p>
+                            <p class="blueclr"> {{ session('book_appointment_response') }}</p>
                         </div>
                         <div class="modal-footer justify-content-center border-0 p-0 pb-3">
                             <button type="button" class="btn btn-light px-4 py-2 "
