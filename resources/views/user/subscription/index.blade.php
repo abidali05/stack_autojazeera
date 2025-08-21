@@ -554,7 +554,7 @@
                                                                 ($ads_plan->metadata->is_free == 1 || $ads_plan->metadata->is_free == '1') &&
                                                                     (Auth::user()->trial_availed == 1 || Auth::user()->trial_availed == '1'))
                                                                 <button class="btnsub"
-                                                                    style="background-color: #F40000" disabled>Already Availed</button>
+                                                                    style="background-color: #F40000" disabled>Already Purchased</button>
                                                             @else
                                                                 <button class="btnsub" style="background-color: #F40000"
                                                                     id="btn1-1"
@@ -655,7 +655,7 @@
                                                                 ($plan->metadata->is_free == 1 || $plan->metadata->is_free == '1') &&
                                                                     (Auth::user()->shop_trial_availed == 1 || Auth::user()->shop_trial_availed == '1'))
                                                                 <button class="btnsub"
-                                                                    style="background-color: #F40000" disabled>Already Availed</button>
+                                                                    style="background-color: #F40000" disabled>Already Purchased</button>
                                                             @else
                                                                 <button class="btnsub" style="background-color: #F40000"
                                                                     id="btn1-1"
