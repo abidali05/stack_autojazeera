@@ -1051,8 +1051,17 @@ font-size:16px !important;
                             <p class="forteennew m-0">No inventory found.</p>
 <p class="twelvenew">🚀 Calling all private sellers, dealers & auto service providers!
 We’re onboarding now — List your cars and services today and be seen first!</p>
-<button class="newwwbtn">Post  inventory Now</button> 
-<button class="newwwbtn ms-3">Post Auto Service Business Now</button>
+@if(Auth::check())
+ <a href="{{ url('subscription') }}" class="newwwbtn">Post Inventory Now</a>
+@else
+    <a href="{{ route('subscription_plans') }}" class="newwwbtn">Post Inventory Now</a>
+@endif
+@if(Auth::check())
+ <a href="{{ url('subscription') }}" class="newwwbtn ms-3">Post Auto Service Business Now</a>
+@else
+    <a href="{{ route('subscription_plans') }}" class="newwwbtn ms-3">Post Auto Service Business Now</a>
+@endif
+
                         </div>
                     </div>
                 </div>

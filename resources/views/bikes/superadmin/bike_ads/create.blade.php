@@ -449,8 +449,8 @@
     </div>
     <div id="dealerSelect-error" class="orange"></div>
 </div>
-                        <div class="col-md-12">
-                            <div class="row">
+                        <div class="col-md-12  p-4">
+                            <div class="row rounded-4 p-2"  style="background-color:#white; border:1px solid #0000001F">
                                 <h4 class="step-header">Vehicle information</h4>
                                 <input type="hidden" name="step4" value="step4">
                                 <div class="row mb-3">
