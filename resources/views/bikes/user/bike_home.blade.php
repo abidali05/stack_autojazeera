@@ -863,7 +863,7 @@
                     @if (count($featured_new_posts) == 0)
                         <div class="col-md-12 mt-5 pt-5">
                             <div class="row d-flex justify-content-center my-3 mt-5">
-                                <div class="p-3 col-8 divborder" >
+                                <div class="p-3 col-8 divborder" style="background-color:white !important">
                                     <div class="row d-flex align-items-center">
                                         <div class="col-3">
                                             <img src="{{ asset('web/images/noinputs.svg') }}" alt=""
@@ -982,7 +982,7 @@
                         @if (count($featured_used_posts) == 0)
                             <div class="col-md-12 mt-5 pt-5">
                                 <div class="row d-flex justify-content-center my-3 mt-5">
-                                    <div class="p-3 col-8 divborder" >
+                                    <div class="p-3 col-8 divborder" style="background-color:white !important">
                                         <div class="row d-flex align-items-center">
                                             <div class="col-3">
                                                 <img src="{{ asset('web/images/noinputs.svg') }}" alt=""

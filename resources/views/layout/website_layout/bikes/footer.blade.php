@@ -357,6 +357,7 @@ color: #B4B3B8;
                 <div class="col-xxl-2 col-md-2 col-sm-4 col-6">
                     <h3 class="ab">Auto Services</h3>
                     <ul class="footertag p-0">
+             
                         @if ($service_categories->count() > 0)
 
 
@@ -366,7 +367,7 @@ color: #B4B3B8;
                                 <li>
                             @endfor
                         @endif
-
+    
                     </ul>
                 </div>
                 <div class="col-xxl-2 col-md-2 col-sm-4 col-6">

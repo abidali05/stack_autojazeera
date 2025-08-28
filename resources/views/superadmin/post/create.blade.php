@@ -625,7 +625,7 @@
                     </div>
                     <!-- Step 2: Basic Info -->
                     {{-- <input type="hidden" value="{{ Auth::user()->id }}" name="dealer"> --}}
-                    <div class=" p-3 rounded" >
+                    <div class=" p-3 rounded" style="background-color:#white; border:1px solid #0000001F">
                         <h4 class="step-header">Basic Info</h4>
                         <div class="mb-3 d-none">
                             <label for="adTitle" class="form-label">Title <span style="color:#FD5631">*</span></label>
@@ -698,7 +698,7 @@
                     </div>
 
                     <!-- Step 3: Currency & Price -->
-                    <div class=" p-3 rounded" >
+                    <div class=" p-3 rounded mt-2" style="background-color:#white; border:1px solid #0000001F">
                         <h4 class="step-header">Price</h4>
                         <div class="row align-items-center mb-3">
                             <div class="col-4">
@@ -736,7 +736,7 @@
                         </div> --}}
                     </div>
                     <!-- Step 4: Vehicle Information -->
-                    <div class=" p-3 rounded">
+                    <div class=" p-3 rounded mt-2" style="background-color:#white; border:1px solid #0000001F">
                         <h4 class="step-header">Vehicle information</h4>
                         <input type="hidden" name="step4" value="step4">
                         <div class="row mb-3">
@@ -999,7 +999,7 @@
                     </div>
                     <!-- Step 5: Vehicle Features -->
 
-                    <div class=" p-3 rounded">
+                    <div class=" p-3 rounded mt-2" style="background-color:#white; border:1px solid #0000001F">
                         <h4 class="step-header">Features <span class="text-danger">*</span></h4>
 
                         <div class="feature-section">
@@ -1185,7 +1185,7 @@
 
                     </div>
                     <!-- Step 8: Location -->
-                    <div class="p-3 rounded" >
+                    <div class="p-3 rounded mt-2" style="background-color:#white; border:1px solid #0000001F">
                         <h4 class="mb-4 step-header">Location</h4>
 
                         <div class="row mb-3">
@@ -1276,8 +1276,7 @@
                         </div>
                     </div>
                     <!-- Step 9: Contacts -->
-
-                    <div class="mb-3 p-3" >
+                    <div class="mb-3 p-3 rounded-4 mt-2" style="background-color:#white; border:1px solid #0000001F">
                         <h4 class="step-header">Contacts</h4>
                         <div class="row mb-3">
                             <div class="col-md-6">
