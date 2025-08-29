@@ -45,6 +45,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Bike\BikeMainFeatures;
+use App\Services\FacebookPageService;
 use Illuminate\Support\Facades\Validator;
 use App\Mail\bikes\New_lead as BikeNewLead;
 use App\Mail\bikes\Ad_accepted as BikeAdAccepted;
@@ -58,6 +59,14 @@ use App\Mail\bikes\InactiveAdsNotification as BikeInactiveAdsNotification;
 
 class SuperadminAddsController extends Controller
 {
+    protected $facebook;
+
+    public function __construct(FacebookPageService $facebook)
+    {
+        $this->facebook = $facebook;
+    }
+
+    
     /**
      * Display a listing of the resource.
      */
@@ -149,7 +158,7 @@ class SuperadminAddsController extends Controller
                 session('facebook_redirect_url', url('superadmin/ads/create'));
                 return redirect()->route('superadmin.facebook.login');
             } else {
-          
+
                 // check if token is expired or not
                 $check = FacebookToken::where('type', 'admin')->first();
                 if ($check) {
@@ -313,7 +322,7 @@ class SuperadminAddsController extends Controller
             $this->handleContactInfo($post->id, $request);
 
             $this->updatePostStatus();
-
+            $this->facebook->publishAdminPost($post, $request->all(), auth()->user());
             DB::commit();
             return redirect()->route('superadmin.thankyou');
         } catch (Exception $e) {
@@ -738,7 +747,7 @@ class SuperadminAddsController extends Controller
             ]);
 
             $user = User::findOrFail($post->dealer_id);
-            
+
             $dealerId = $user->role == 2 ? $user->dealer_id : $user->id;
 
             Stripe::setApiKey(config('services.stripe.secret'));
@@ -1145,7 +1154,7 @@ class SuperadminAddsController extends Controller
             return redirect()->back()->with('price_alert', 'Price Alert removed successfully');
         }
     }
-    
+
     public function search_data($id, $type)
     {
         $users = User::where('role', 1)->get();
