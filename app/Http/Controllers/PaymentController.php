@@ -235,12 +235,12 @@ class PaymentController extends Controller
 
         // $days = $meta->trial_days ?? $meta->{'trial_days '} ?? null;
 
-        // $isService = $request->sub_type === 'service';
-        // $trialEligible = $isService ? $user->shop_trial_availed == 0 : $user->trial_availed == 0;
+        $isService = $request->sub_type === 'service';
+        $trialEligible = $isService ? $user->shop_trial_availed == 0 : $user->trial_availed == 0;
 
-        // if ($trialEligible && $trialAllowed && is_numeric($days)) {
-        //     $trialDays = (int) $days;
-        // }
+        if (!$trialEligible) {
+            return back()->with('paymenterror', 'You are not eligible for this subscription.');
+        }
 
         // Get or create Stripe customer
         $customer = $this->getOrCreateCustomer($user);
