@@ -135,27 +135,27 @@ class AddsController extends Controller
         $userId = $user->role == 2 ? $user->dealer_id : $user->id;
 
         $user = User::find($userId);
-        if ($user->role == '1' || $user->role == 1) {
-            // check if facebook token exists or not 
-            $check = FacebookToken::where('dealer_id', $user->id)->where('type', 'dealer')->first();
-            if (!$check) {
-                session('facebook_redirect_url', route('ads.create'));
-                return redirect()->route('facebook.login');
-            } else {
+        // if ($user->role == '1' || $user->role == 1) {
+        //     // check if facebook token exists or not 
+        //     $check = FacebookToken::where('dealer_id', $user->id)->where('type', 'dealer')->first();
+        //     if (!$check) {
+        //         session('facebook_redirect_url', route('ads.create'));
+        //         return redirect()->route('facebook.login');
+        //     } else {
           
-                // check if token is expired or not
-                $check = FacebookToken::where('dealer_id', $user->id)->where('type', 'dealer')->first();
-                if ($check) {
-                    $tokenCreatedDate = Carbon::parse($check->created_at);
-                    $daysSinceCreated = $tokenCreatedDate->diffInDays(Carbon::now());
+        //         // check if token is expired or not
+        //         $check = FacebookToken::where('dealer_id', $user->id)->where('type', 'dealer')->first();
+        //         if ($check) {
+        //             $tokenCreatedDate = Carbon::parse($check->created_at);
+        //             $daysSinceCreated = $tokenCreatedDate->diffInDays(Carbon::now());
 
-                    if ($daysSinceCreated >= 60) {
-                        session(['facebook_redirect_url' => route('ads.create')]);
-                        return redirect()->route('facebook.login');
-                    }
-                }
-            }
-        }
+        //             if ($daysSinceCreated >= 60) {
+        //                 session(['facebook_redirect_url' => route('ads.create')]);
+        //                 return redirect()->route('facebook.login');
+        //             }
+        //         }
+        //     }
+        // }
 
         if (empty($user->package)) {
             return redirect()->route('dashboard')->with('error', 'Please upgrade your plan to post an ad.');
@@ -399,7 +399,7 @@ class AddsController extends Controller
 
 
 
-        $this->facebook->publishPost($post, $request->all(), auth()->user());
+        // $this->facebook->publishPost($post, $request->all(), auth()->user());
         $this->facebook->publishAdminPost($post, $request->all(), auth()->user());
 
         return redirect()->route('thankyou');
