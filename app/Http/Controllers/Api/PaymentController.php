@@ -378,21 +378,18 @@ class PaymentController extends Controller
         $meta = $product->metadata ?? [];
 
         // Extract trial days from metadata
-        $trialDays = isset($meta->trial_days) ? (int) trim($meta->trial_days) : 0;
+        // $trialDays = isset($meta->trial_days) ? (int) trim($meta->trial_days) : 0;
         // $trialAllowed = $trialDays > 0;
 
-        $trialAllowed = ($meta->trial_allowed ?? '0') === '1';
-        $trialDays = null;
+        // $trialAllowed = ($meta->trial_allowed ?? '0') === '1';
+        // $trialDays = null;
 
-        $days = $meta->trial_days ?? $meta->{'trial_days '} ?? null;
+        // $days = $meta->trial_days ?? $meta->{'trial_days '} ?? null;
 
         $isService = $request->sub_type === 'service';
         $trialEligible = $isService ? $user->shop_trial_availed == 0 : $user->trial_availed == 0;
 
-        if ($trialEligible && $trialAllowed && is_numeric($days)) {
-            $trialDays = (int) $days;
-        }
-        else{
+        if (! $trialEligible) {
             return response()->json([
                 'status' => 400,
                 'message' => "You are not eligible for a trial for this plan.",
@@ -405,17 +402,32 @@ class PaymentController extends Controller
 
         $subscription = null;
         // CASE 1: Ads Subscription Trial
-        if ($request->sub_type === 'ads' && $trialAllowed && $user->trial_availed == 0) {
+
+        $activeSubs = Subscription::all([
+            'customer' => $customer->id,
+            'status' => 'active',
+            'limit' => 100,
+        ]);
+
+        if ($activeSubs) {
+            foreach ($activeSubs->data as $sub) {
+                if (isset($sub->metadata['sub_type']) && $sub->metadata['sub_type'] === $request->sub_type) {
+                    $sub->cancel();
+                }
+            }
+        }
+
+
+        if ($request->sub_type === 'ads' && $user->trial_availed == 0) {
 
             $subscription = Subscription::create([
                 'customer' => $customer->id,
-                'items' => [['price' => $priceId]],
-                'trial_end' => now()->addDays($trialDays)->timestamp,
+                'items' => [['price' => $priceId],],
                 'metadata' => [
                     'user_id' => $user->id,
                     'sub_type' => 'ads',
-                    'is_trial' => true,
-                ],
+                    'is_free_plan' => true,
+                ]
             ]);
 
             $user->package = $product->id;
@@ -432,17 +444,18 @@ class PaymentController extends Controller
         }
 
         // CASE 2: Service Subscription Trial
-        elseif ($request->sub_type === 'service' && $trialAllowed && $user->shop_trial_availed == 0) {
+        elseif ($request->sub_type === 'service' && $user->shop_trial_availed == 0) {
 
             $subscription = Subscription::create([
                 'customer' => $customer->id,
-                'items' => [['price' => $priceId]],
-                'trial_end' => now()->addDays($trialDays)->timestamp,
+                'items' => [
+                    ['price' => $priceId],
+                ],
                 'metadata' => [
                     'user_id' => $user->id,
                     'sub_type' => 'service',
-                    'is_trial' => true,
-                ],
+                    'is_free_plan' => true,
+                ]
             ]);
 
             $user->shop_package = $product->id;
@@ -455,21 +468,141 @@ class PaymentController extends Controller
 
 
         if ($subscription) {
-            Mail::to($user->email)->send(new TrialStarted($product));
+            Mail::to($user->email)->send(new SubscriptionBuy($product));
+
             return response()->json([
                 'status' => 200,
                 'message' => "You have successfully availed the trial for " . $product->name,
                 'data' => $user
             ], 200);
         } else {
-            Mail::to($user->email)->send(new \App\Mail\Billing_failure());
+            // Mail::to($user->email)->send(new \App\Mail\Billing_failure());
             return response()->json([
                 'status' => 400,
-                'message' => "You are not eligible for a trial for this plan.",
+                'message' => "You are not eligible to subscribe this plan.",
                 'data' => $user
             ], 400);
         }
     }
+    // public function processTrialPayment(Request $request)
+    // {
+    //     Log::info('API Start Trial Request Data: ', $request->all());
+
+    //     $validator = Validator::make($request->all(), [
+    //         'plan_id' => 'required|string',
+    //         'sub_type' => 'required|in:ads,service',
+    //     ]);
+
+    //     if ($validator->fails()) {
+    //         return response()->json(['errors' => $validator->errors()], 422);
+    //     }
+
+
+    //     if (!auth('sanctum')->check()) {
+    //         return response()->json(['status' => 422, 'message' => "You are not authorized to access this route"]);
+    //     }
+
+    //     $user = auth('sanctum')->user();
+
+    //     Stripe::setApiKey(config('services.stripe.secret'));
+
+    //     $product = Product::retrieve($request->plan_id);
+    //     $priceId = $product->default_price;
+    //     $meta = $product->metadata ?? [];
+
+    //     // Extract trial days from metadata
+    //     $trialDays = isset($meta->trial_days) ? (int) trim($meta->trial_days) : 0;
+    //     // $trialAllowed = $trialDays > 0;
+
+    //     $trialAllowed = ($meta->trial_allowed ?? '0') === '1';
+    //     $trialDays = null;
+
+    //     $days = $meta->trial_days ?? $meta->{'trial_days '} ?? null;
+
+    //     $isService = $request->sub_type === 'service';
+    //     $trialEligible = $isService ? $user->shop_trial_availed == 0 : $user->trial_availed == 0;
+
+    //     if ($trialEligible && $trialAllowed && is_numeric($days)) {
+    //         $trialDays = (int) $days;
+    //     }
+    //     else{
+    //         return response()->json([
+    //             'status' => 400,
+    //             'message' => "You are not eligible for a trial for this plan.",
+    //         ], 400);
+    //     }
+
+    //     // Get or create Stripe customer
+    //     $customer = $this->getOrCreateCustomer($user);
+
+
+    //     $subscription = null;
+    //     // CASE 1: Ads Subscription Trial
+    //     if ($request->sub_type === 'ads' && $trialAllowed && $user->trial_availed == 0) {
+
+    //         $subscription = Subscription::create([
+    //             'customer' => $customer->id,
+    //             'items' => [['price' => $priceId]],
+    //             'trial_end' => now()->addDays($trialDays)->timestamp,
+    //             'metadata' => [
+    //                 'user_id' => $user->id,
+    //                 'sub_type' => 'ads',
+    //                 'is_trial' => true,
+    //             ],
+    //         ]);
+
+    //         $user->package = $product->id;
+    //         $user->trial_availed = 1;
+    //         $user->role = 1;
+
+    //         if (($meta->type ?? '') === 'private_seller') {
+    //             $user->userType = 'private_seller';
+    //             $user->dealershipName = 'Private Seller';
+    //         } else {
+    //             $user->userType = 'car_dealer';
+    //             $user->dealershipName = '';
+    //         }
+    //     }
+
+    //     // CASE 2: Service Subscription Trial
+    //     elseif ($request->sub_type === 'service' && $trialAllowed && $user->shop_trial_availed == 0) {
+
+    //         $subscription = Subscription::create([
+    //             'customer' => $customer->id,
+    //             'items' => [['price' => $priceId]],
+    //             'trial_end' => now()->addDays($trialDays)->timestamp,
+    //             'metadata' => [
+    //                 'user_id' => $user->id,
+    //                 'sub_type' => 'service',
+    //                 'is_trial' => true,
+    //             ],
+    //         ]);
+
+    //         $user->shop_package = $product->id;
+    //         $user->shop_trial_availed = 1;
+    //     }
+
+    //     // Save updated user info
+    //     $user->save();
+
+
+
+    //     if ($subscription) {
+    //         Mail::to($user->email)->send(new TrialStarted($product));
+    //         return response()->json([
+    //             'status' => 200,
+    //             'message' => "You have successfully availed the trial for " . $product->name,
+    //             'data' => $user
+    //         ], 200);
+    //     } else {
+    //         Mail::to($user->email)->send(new \App\Mail\Billing_failure());
+    //         return response()->json([
+    //             'status' => 400,
+    //             'message' => "You are not eligible for a trial for this plan.",
+    //             'data' => $user
+    //         ], 400);
+    //     }
+    // }
 
 
     public function signupwithfreeplan(Request $request)
