@@ -26,11 +26,14 @@ use App\Models\PriceAlert;
 use App\Models\ContactInfo;
 use App\Models\MainFeature;
 use App\Models\MakeCompany;
+use App\Exports\PostsExport;
+use App\Imports\PostsImport;
 use App\Mail\PriceAlertMail;
 use App\Models\ModelCompany;
 use Illuminate\Http\Request;
 use App\Models\Bike\BikeMake;
 use App\Models\Bike\BikePost;
+use App\Models\FacebookToken;
 use App\Models\Notifications;
 use App\Models\Bike\BikeModels;
 use App\Jobs\SendFcmNotification;
@@ -40,11 +43,9 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Bike\BikeMainFeatures;
 use Illuminate\Support\Facades\Validator;
-use App\Exports\PostsExport;
-use App\Imports\PostsImport;
-use Maatwebsite\Excel\Facades\Excel;
 use App\Mail\bikes\New_lead as BikeNewLead;
 use App\Mail\bikes\Ad_accepted as BikeAdAccepted;
 use App\Mail\bikes\Ad_inactive as BikeAdInactive;
@@ -140,6 +141,31 @@ class SuperadminAddsController extends Controller
      */
     public function create()
     {
+        $user = auth()->user();
+        if ($user->role == Null || $user->role == '') {
+            // check if facebook token exists or not 
+            $check = FacebookToken::where('type', 'admin')->first();
+            if (!$check) {
+                session('facebook_redirect_url', url('superadmin/ads/create'));
+                return redirect()->route('superadmin.facebook.login');
+            } else {
+          
+                // check if token is expired or not
+                $check = FacebookToken::where('type', 'admin')->first();
+                if ($check) {
+                    $tokenCreatedDate = Carbon::parse($check->created_at);
+                    $daysSinceCreated = $tokenCreatedDate->diffInDays(Carbon::now());
+
+                    if ($daysSinceCreated >= 60) {
+                        session(['facebook_redirect_url' => url('superadmin/ads/create')]);
+                        return redirect()->route('superadmin.facebook.login');
+                    }
+                }
+            }
+        }
+
+
+
         $users = User::where('role', 1)->get();
         $makes = MakeCompany::where('status', 1)->get();
         $models = ModelCompany::where('status', 1)->get();

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Post;
 use App\Models\User;
 use App\Models\Document;
 use App\Models\Province;
@@ -11,6 +12,7 @@ use GPBMetadata\Google\Api\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OTPController;
+use Illuminate\Support\Facades\Artisan;
 use Kreait\Firebase\Auth as FirebaseAuth;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\GoogleController;
@@ -24,6 +26,7 @@ use App\Http\Controllers\User\LeadController;
 use App\Http\Controllers\User\PostController;
 use App\Http\Controllers\User\ShopController;
 use App\Http\Controllers\SuperadminController;
+use App\Http\Controllers\ManageAdminsController;
 use App\Http\Controllers\Bikes\User\BikeController;
 use App\Http\Controllers\User\ShopReviewController;
 use App\Http\Controllers\ForgetPasswordControllerWeb;
@@ -34,6 +37,7 @@ use App\Http\Controllers\superadmin\AdsPlansController;
 use App\Http\Controllers\User\UserdealeruserController;
 use App\Http\Controllers\superadmin\WhishlistController;
 use App\Http\Controllers\superadmin\PriceAlertController;
+use App\Http\Controllers\superadmin\FacebookAuthController;
 use App\Http\Controllers\Autoservices\ServiceChatController;
 use App\Http\Controllers\Autoservices\ServiceUserController;
 use App\Http\Controllers\superadmin\SubmittedFormController;
@@ -42,9 +46,9 @@ use App\Http\Controllers\Bikes\superadmin\BikeMakeController;
 use App\Http\Controllers\Bikes\User\BikePricealertController;
 use App\Http\Controllers\superadmin\SuperadminAddsController;
 use App\Http\Controllers\superadmin\SuperadminMakeController;
-use App\Http\Controllers\superadmin\SuperadminModelController;
 use App\Http\Controllers\superadmin\SuperadminUserController;
 use App\Http\Controllers\superadmin\SuperadminColorController;
+use App\Http\Controllers\superadmin\SuperadminModelController;
 use App\Http\Controllers\Bikes\superadmin\BikeModelsController;
 use App\Http\Controllers\superadmin\SuperadminDealerController;
 use App\Http\Controllers\superadmin\SuperadminFeatureController;
@@ -59,9 +63,6 @@ use App\Http\Controllers\superadmin\SuperadminSubscriptionController;
 use App\Http\Controllers\Bikes\superadmin\BikeController as SuperadminBikeController;
 use App\Http\Controllers\Autoservices\ServicesController as AutoservicesServicesController;
 use App\Http\Controllers\Autoservices\superadmin\ShopController as SuperadminShopController;
-use App\Http\Controllers\ManageAdminsController;
-use App\Models\Post;
-use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,6 +82,13 @@ use Illuminate\Support\Facades\Artisan;
 Route::get('subscription-plans', [SubscriptionController::class, 'subscription_plans'])->name('subscription_plans');
 
 Route::middleware('auth')->group(function () {
+
+    Route::get('/facebook/login', [FacebookAuthController::class, 'redirect'])->name('facebook.login');
+    Route::get('/facebook/callback', [FacebookAuthController::class, 'callback'])->name('facebook.callback');
+    Route::post('/facebook/save-page', [FacebookAuthController::class, 'savePage'])->name('facebook.savePage');
+
+
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -334,6 +342,10 @@ Route::group(['prefix' => 'superadmin', 'as' => 'superadmin.'], function () {
         // =================================================Subscription Module end=====================================================
 
 
+
+        Route::get('/facebook/login', [FacebookAuthController::class, 'redirect'])->name('facebook.login');
+        Route::get('/facebook/callback', [FacebookAuthController::class, 'callback'])->name('facebook.callback');
+        Route::post('/facebook/save-page', [FacebookAuthController::class, 'savePage'])->name('facebook.savePage');
     });
 });
 

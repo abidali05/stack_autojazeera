@@ -9,13 +9,19 @@ class location extends Model
 {
     use HasFactory;
     protected $guarded=[];
-    protected $appends=['cityname'];
+    protected $appends=['cityname','provincename'];
   
     public function getcitynameAttribute()
     {
           $city=City::find($this->city);
       return $city->name??"";
     }   
+
+    public function getprovincenameAttribute()
+    {
+          $province=Province::find($this->province);
+      return $province->name??"";
+    }
 
     public function province()
 {

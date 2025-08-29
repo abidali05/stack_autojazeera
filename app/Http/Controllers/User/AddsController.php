@@ -28,6 +28,7 @@ use App\Mail\PriceAlertMail;
 use App\Models\ModelCompany;
 use Illuminate\Http\Request;
 use App\Models\Bike\BikePost;
+use App\Models\FacebookToken;
 use App\Models\AdsSubscriptions;
 use App\Jobs\SendFcmNotification;
 use Illuminate\Support\Facades\Log;
@@ -35,10 +36,19 @@ use App\Http\Controllers\Controller;
 use App\Models\AdsSubscriptionPlans;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use App\Services\FacebookPageService;
 use Illuminate\Support\Facades\Validator;
 
 class AddsController extends Controller
 {
+    protected $facebook;
+
+    public function __construct(FacebookPageService $facebook)
+    {
+        $this->facebook = $facebook;
+    }
+
+
     /**
      * Display a listing of the resource.
      */
@@ -114,11 +124,38 @@ class AddsController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
+    {   
+        // $post = Post::find(136);
+        
+        //  $this->facebook->publishPost($post, null , auth()->user());
+        //  dd('posted');
+         
+         
         $user = Auth::user();
         $userId = $user->role == 2 ? $user->dealer_id : $user->id;
 
         $user = User::find($userId);
+        if ($user->role == '1' || $user->role == 1) {
+            // check if facebook token exists or not 
+            $check = FacebookToken::where('dealer_id', $user->id)->where('type', 'dealer')->first();
+            if (!$check) {
+                session('facebook_redirect_url', route('ads.create'));
+                return redirect()->route('facebook.login');
+            } else {
+          
+                // check if token is expired or not
+                $check = FacebookToken::where('dealer_id', $user->id)->where('type', 'dealer')->first();
+                if ($check) {
+                    $tokenCreatedDate = Carbon::parse($check->created_at);
+                    $daysSinceCreated = $tokenCreatedDate->diffInDays(Carbon::now());
+
+                    if ($daysSinceCreated >= 60) {
+                        session(['facebook_redirect_url' => route('ads.create')]);
+                        return redirect()->route('facebook.login');
+                    }
+                }
+            }
+        }
 
         if (empty($user->package)) {
             return redirect()->route('dashboard')->with('error', 'Please upgrade your plan to post an ad.');
@@ -359,6 +396,11 @@ class AddsController extends Controller
         $user = User::find($post->dealer_id);
         $user->ads_count += 1;
         $user->save();
+
+
+
+        $this->facebook->publishPost($post, $request->all(), auth()->user());
+        $this->facebook->publishAdminPost($post, $request->all(), auth()->user());
 
         return redirect()->route('thankyou');
         // return response()->json(['success' => true, 'redirect' => url('thankyou')]);
