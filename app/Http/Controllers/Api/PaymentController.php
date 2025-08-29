@@ -324,6 +324,10 @@ class PaymentController extends Controller
             if (isset($user)) {
                 Mail::to($user->email)->send(new Billing_failure());
 
+
+                
+
+
                 if ($user->fcm_token) {
                     $fcm_tokens = [$user->fcm_token];
                     if ($fcm_tokens) {
