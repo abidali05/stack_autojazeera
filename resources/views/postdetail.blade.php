@@ -118,7 +118,7 @@
         }
 
         .carousel-control-next {
-            right: -20px !important;
+            right: 0px !important;
         }
 
         .carousel-control-next-icon,
@@ -268,9 +268,9 @@ height:50px !important;
 
                 </div> --}}
                 <div class="newstyl">
-                    <strong> <i class="bi bi-eye"></i> {{ $post->views }} </strong>
+                    <strong class="me-2"> <i class="bi bi-eye"></i> {{ $post->views }} </strong>
 
-                    <button class="action-btn-2 border-0 sharebtn imp" 
+                    <button class="action-btn-2 border-0 me-2 sharebtn imp" 
                         data-url="{{ route('cardetail', ['id' => $post->id]) }}">
                         <i class="bi bi-share-fill  blueclr" ></i>
                     </button>
@@ -445,29 +445,7 @@ height:50px !important;
                     </div>
                 </div>
 
-                <div class="d-flex flex-wrap gap-2 my-3">
-                    @if (Auth::check())
-                        <button class="btn custom-btn-3 rounded" data-bs-toggle="modal" data-bs-target="#appoinment">
-                            Book An Appointment
-                        </button>
-                    @else
-                        <a href="{{ route('login') }}" class="btn custom-btn-3 rounded">
-                            Book An Appointment
-                        </a>
-                    @endif
-
-                    @if ($post->dealer->offer_test_drive == 'Yes')
-                        <button class="btn custom-btn-3 rounded d-none"
-                            @if (isset(Auth::user()->id)) data-bs-toggle="modal" data-bs-target="#testdrive" @endif>Schedule
-                            Test Drive</button>
-                    @endif
-                    <button class="btn custom-btn-3 rounded d-none"
-                        @if (isset(Auth::user()->id)) data-bs-toggle="modal" data-bs-target="#inquiry" @endif>General
-                        Inquiry</button>
-                    <button class="btn custom-btn-3 rounded d-none"
-                        @if (isset(Auth::user()->id)) data-bs-toggle="modal" data-bs-target="#emailFriend" @endif>Email
-                        A Friend</button>
-                </div>
+              
                 <div class="container my-5">
                     <h3 class="spec"><strong>Specifications</strong></h3>
 
@@ -636,7 +614,8 @@ height:50px !important;
                             {{ $post->dealer_comment }}.
                         </p>
 
-                        <div class="mt-3 d-flex justify-content-center">
+                        <div class="mt-3 d-flex ">
+                            
                             @if ($post->document_brochure)
                                 <a class="btn custom-btn-3 p-2 me-3"
                                     href="{{ asset('posts/brocuhre/' . $post->document_brochure) }}" target="_blank"
@@ -651,11 +630,34 @@ height:50px !important;
                                     frameborder="0">Download
                                     Auction Sheet</a>
                             @endif
+                
+                    @if (Auth::check())
+                        <button class="btn custom-btn-3 ms-2 rounded" data-bs-toggle="modal" data-bs-target="#appoinment">
+                            Book An Appointment
+                        </button>
+                    @else
+                        <a href="{{ route('login') }}" class="btn custom-btn-3 ms-2 rounded">
+                            Book An Appointment
+                        </a>
+                    @endif
 
+                    @if ($post->dealer->offer_test_drive == 'Yes')
+                        <button class="btn custom-btn-3 rounded d-none"
+                            @if (isset(Auth::user()->id)) data-bs-toggle="modal" data-bs-target="#testdrive" @endif>Schedule
+                            Test Drive</button>
+                    @endif
+                    <button class="btn custom-btn-3 rounded d-none"
+                        @if (isset(Auth::user()->id)) data-bs-toggle="modal" data-bs-target="#inquiry" @endif>General
+                        Inquiry</button>
+                    <button class="btn custom-btn-3 rounded d-none"
+                        @if (isset(Auth::user()->id)) data-bs-toggle="modal" data-bs-target="#emailFriend" @endif>Email
+                        A Friend</button>
+                
                             <!-- <button class="btn custom-btn-3 p-3">Download Brochure</button>
                                                                     <button class="btn custom-btn-3 p-3">Download Auction Sheet</button> -->
                         </div>
                     </div>
+  
                     <!-- Information Section -->
                     <div class="info-section mt-4">
                         <div class="row text-start py-2 border-top border-bottom">
