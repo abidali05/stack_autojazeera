@@ -255,8 +255,8 @@ color: #281F48 !important;
             </div>
             <div class="col-lg-4 text-end">
                 <div class="action-buttons">
-                    (<strong> <i class="bi bi-eye"></i> {{ $post->views }} </strong>)
-                    <i class="bi bi-share-fill me-3 blueclr" ></i>
+                    <strong class="me-2"> <i class="bi bi-eye"></i> {{ $post->views }} </strong>
+                    <i class="bi bi-share-fill me-2 blueclr" ></i>
 
                     @auth
                         @php
@@ -409,10 +409,7 @@ color: #281F48 !important;
                 </div>
 
                 <div class="d-flex flex-wrap gap-2 my-3">
-                    <button type="button" class="btn custom-btn-nav rounded text-white" data-bs-toggle="modal"
-                        data-bs-target="#staticBackdrop">
-                        Book An Appointment
-                    </button>
+                 
 
                     <!-- Modal -->
                     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
@@ -592,6 +589,10 @@ color: #281F48 !important;
                                 Brochure</a>
                             <a href="{{ $post->document_auction }}" target="_blank" class=" custom-btn-nav ">Download
                                 Auction Sheet</a>
+                                   <button type="button" class="btn custom-btn-nav rounded text-white" data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop">
+                        Book An Appointment
+                    </button>
                         </div>
                     </div>
                     <!-- Information Section -->
