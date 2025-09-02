@@ -124,13 +124,13 @@ class AddsController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {   
+    {
         // $post = Post::find(136);
-        
+
         //  $this->facebook->publishPost($post, null , auth()->user());
         //  dd('posted');
-         
-         
+
+
         $user = Auth::user();
         $userId = $user->role == 2 ? $user->dealer_id : $user->id;
 
@@ -142,7 +142,7 @@ class AddsController extends Controller
         //         session('facebook_redirect_url', route('ads.create'));
         //         return redirect()->route('facebook.login');
         //     } else {
-          
+
         //         // check if token is expired or not
         //         $check = FacebookToken::where('dealer_id', $user->id)->where('type', 'dealer')->first();
         //         if ($check) {
@@ -399,8 +399,8 @@ class AddsController extends Controller
 
 
 
-        // $this->facebook->publishPost($post, $request->all(), auth()->user());
-        $this->facebook->publishAdminPost($post, $request->all(), auth()->user());
+        $this->facebook->publishPost($post, $request->all(), $user);
+        $this->facebook->publishAdminPost($post, null, null);
 
         return redirect()->route('thankyou');
         // return response()->json(['success' => true, 'redirect' => url('thankyou')]);

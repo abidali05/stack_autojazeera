@@ -6,6 +6,7 @@ use App\Models\Document;
 use App\Models\Province;
 use App\Mail\PriceAlertMail;
 use Illuminate\Http\Request;
+use App\Models\Bike\BikePost;
 use App\Mail\MonthlyPostEmail;
 use App\Mail\InactivePostEmail;
 use GPBMetadata\Google\Api\Auth;
@@ -132,6 +133,8 @@ Route::middleware('auth')->group(function () {
     Route::post('complete-registration', [SettingController::class, 'dealer_store'])->name('complete_registration_store');
     Route::get('cancel-plan', [SubscriptionController::class, 'cancel_plan'])->name('cancel_plan');
     Route::get('cancel-service-plan', [SubscriptionController::class, 'cancel_service_plan'])->name('cancel_service_plan');
+
+    Route::get('social-links', [SettingController::class, 'social_links'])->name('social_links');
 
     Route::get('signupwithfreeplan', [SubscriptionController::class, 'signupwithfreeplan'])->name('signupwithfreeplan');
 
@@ -558,3 +561,6 @@ Route::get('/storage-link', function () {
 
     return '✅ Storage Link fixed';
 });
+
+
+

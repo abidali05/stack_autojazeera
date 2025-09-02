@@ -40,6 +40,7 @@ use App\Models\AdsSubscriptionPlans;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Lcobucci\JWT\Validation\ValidAt;
+use App\Services\FacebookPageService;
 use App\Models\FirebaseChatAttachments;
 use Illuminate\Support\Facades\Validator;
 use Kreait\Firebase\Messaging\CloudMessage;
@@ -47,6 +48,13 @@ use Kreait\Firebase\Messaging\Notification;
 
 class ApiPostController extends Controller
 {
+    protected $facebook;
+
+    public function __construct(FacebookPageService $facebook)
+    {
+        $this->facebook = $facebook;
+    }
+    
     public function store(Request $request)
     {
         Log::info($request->all());
@@ -237,6 +245,9 @@ class ApiPostController extends Controller
         $user->save();
         $user1 = User::find($request->dealer_id);
         $user1->free_package_availed = (int)$user1->free_package_availed;
+
+        $this->facebook->publishPost($p, $request->all(), $user);
+        $this->facebook->publishAdminPost($p, null, null);
 
         return response()->json(['message' => 'Post Added Successfully!', 'status' => 200, 'data' => $user1], 200);
     }

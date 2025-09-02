@@ -449,7 +449,7 @@
                     style="height:20px !important ; width:20px !important; " class="img-fluid me-2" alt="...">
                 <span class="m-0" style="font-size: 12px;">Wishlist</span>
             </span>
-           <i class="bi bi-chevron-down"></i>
+            <i class="bi bi-chevron-down"></i>
         </a>
 
         <!-- Collapsed Menu -->
@@ -527,7 +527,7 @@
                         style="height:20px !important ; width:20px !important; " class="me-2" alt="...">
                     Subscription
                 </span>
-               <i class="bi bi-chevron-down"></i>
+                <i class="bi bi-chevron-down"></i>
             </a>
 
             <!-- Subscription Items -->
@@ -853,7 +853,7 @@
                         style="height:20px !important ; width:20px !important; " class="me-2" alt="...">
                     <span class="m-0" style="font-size: 12px;">Submitted Leads</span>
                 </span>
-               <i class="bi bi-chevron-down"></i>
+                <i class="bi bi-chevron-down"></i>
             </a>
             <div class="collapse ps-4 {{ $isSubmittedLeadsActive ? 'show' : '' }}" id="Submitted">
                 <a class="nav-link {{ request()->is('submitted-forms') ? 'active' : '' }}"
@@ -893,7 +893,7 @@
                         style="height:20px !important ; width:20px !important; " alt="...">
                     <span class="m-0" style="font-size: 12px;">Price alert</span>
                 </span>
-               <i class="bi bi-chevron-down"></i>
+                <i class="bi bi-chevron-down"></i>
             </a>
             <div class="collapse ps-4 {{ $isPriceAlertActive ? 'show' : '' }}" id="price">
                 <a class="nav-link {{ request()->is(['price-alert', 'price-alert/*']) ? 'active' : '' }}"
@@ -945,7 +945,7 @@
                         alt="...">
                     <span class="m-0" style="font-size: 12px;">Wishlist</span>
                 </span>
-               <i class="bi bi-chevron-down"></i>
+                <i class="bi bi-chevron-down"></i>
             </a>
             <div class="collapse ps-4 {{ $isWishlistActive ? 'show' : '' }}" id="Wishlist">
                 <a class="nav-link {{ request()->is('whishlist') ? 'active' : '' }}"
@@ -1019,7 +1019,7 @@
                         style="height:20px !important ; width:20px !important; " class="me-2" alt="...">
                     Subscription
                 </span>
-               <i class="bi bi-chevron-down"></i>
+                <i class="bi bi-chevron-down"></i>
             </a>
             <div class="collapse ps-4 {{ $isSubscriptionActive ? 'show' : '' }}" id="ShopSubscription">
                 <a class="nav-link {{ request()->is(['subscription', 'subscription/*']) ? 'active' : '' }}"
@@ -1105,6 +1105,14 @@
             <span class="icon d-flex align-items-baseline"><img src="{{ asset('web/images/Icon (Stroke).svg') }}"
                     style="height:20px !important ; width:20px !important; " class="" alt="..."></span>
             <span class="text m-0 ms-2" style="font-size: 12px;">User Profile</span>
+        </a>
+
+        {{-- social link  --}}
+
+        <a href="{{ url('social-links') }}" class="{{ request()->is('social-links') ? 'active' : '' }}">
+            <span class="icon d-flex align-items-baseline"><img src="{{ asset('web/images/customer.svg') }}"
+                    style="height:20px !important ; width:20px !important; " class="" alt="..."></span>
+            <span class="text m-0 ms-2" style="font-size: 12px;">Social Links</span>
         </a>
 
         <!-- Logout -->
@@ -1221,7 +1229,7 @@
                 <img src="{{ asset('web/images/customer.svg') }}"
                     style="height:20px !important ; width:20px !important; " class="me-2" alt="..."> Leads
             </span>
-           <i class="bi bi-chevron-down"></i>
+            <i class="bi bi-chevron-down"></i>
         </a>
         <div class="collapse ps-4 {{ in_array('view_leads', $userPermissions) ? '' : 'd-none' }} {{ $isLeadsActive ? 'show' : '' }}
             "

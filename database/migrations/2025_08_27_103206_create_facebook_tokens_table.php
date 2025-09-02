@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('dealer_id');
             $table->string('page_id');
             $table->longText('page_access_token');
+            $table->longText('instagram_business_id');
             $table->string('type')->comment('dealer or admin')->default('dealer');
             $table->timestamps();
         });
