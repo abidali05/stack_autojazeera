@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SubscriptionBuy;
+use App\Models\FacebookToken;
 
 class SettingController extends Controller
 {
@@ -313,5 +314,16 @@ class SettingController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Failed to update profile.');
         }
+    }
+
+    public function social_links()
+    {
+        if (Auth::user()->role == '0' || Auth::user()->role == '2' || Auth::user()->role == '3') {
+            return redirect('unauthorized');
+        }
+        $facebookToken = FacebookToken::where('dealer_id', Auth::user()->id)
+            ->where('type', 'dealer')
+            ->first();
+        return view('setting.social_links', compact('facebookToken'));
     }
 }

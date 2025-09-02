@@ -15,7 +15,7 @@
                         Please select the Facebook Page (and linked Instagram, if available) you want to connect with your dealer account.
                     </p>
 
-                    <form action="{{ route('facebook.savePage') }}" method="POST">
+                    <form action="{{ route('superadmin.facebook.savePage') }}" method="POST">
                         @csrf
 
                         <div class="list-group">

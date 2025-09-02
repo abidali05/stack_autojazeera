@@ -5,9 +5,11 @@ namespace App\Http\Controllers\superadmin;
 use Illuminate\Http\Request;
 use App\Models\FacebookToken;
 use App\Http\Controllers\Controller;
+use App\Models\Bike\BikePost;
 use Illuminate\Support\Facades\Auth;
 use JoelButcher\Facebook\Facades\Facebook;
 use Illuminate\Support\Facades\Http;
+use App\Services\FacebookPageService;
 
 class FacebookAuthController extends Controller
 
@@ -20,16 +22,23 @@ class FacebookAuthController extends Controller
 
     public function redirect()
     {
-        $permissions = 'pages_manage_posts,pages_read_engagement,pages_show_list,pages_manage_metadata';
+        if (!session()->has('facebook_redirect_url') || empty(session('facebook_redirect_url'))) {
+            session(['facebook_redirect_url' => url()->previous()]);
+        }
+
+        $permissions = 'pages_manage_posts,pages_read_engagement,pages_show_list,pages_manage_metadata,instagram_basic,instagram_content_publish,business_management';
+
         $clientId = config('facebook.app_id');
         $type = auth()->user()->role == null ? 'admin' : 'dealer';
-        $type == 'admin' ? $redirectUri = urlencode(config('facebook.admin_redirect_uri')) : $redirectUri = urlencode(config('facebook.redirect_uri_dealer'));
-        // $redirectUri = urlencode(config('facebook.redirect_uri'));
+        $redirectUri = $type == 'admin'
+            ? config('facebook.admin_redirect_uri')
+            : config('facebook.redirect_uri');
 
         $loginUrl = "https://www.facebook.com/v19.0/dialog/oauth?client_id={$clientId}&redirect_uri={$redirectUri}&scope={$permissions}";
 
         return redirect()->away($loginUrl);
     }
+
 
 
 
@@ -40,12 +49,17 @@ class FacebookAuthController extends Controller
             return redirect()->route($this->getDashboardRoute())->with('error', 'No code returned from Facebook.');
         }
 
+        $type = auth()->user()->role == null ? 'admin' : 'dealer';
+        $redirectUri = $type == 'admin'
+            ? config('facebook.admin_redirect_uri')
+            : config('facebook.redirect_uri');
+
         // Step 1: Exchange code for short-lived token
         $tokenResponse = Http::get('https://graph.facebook.com/v19.0/oauth/access_token', [
-            'client_id' => config('facebook.app_id'),
-            'redirect_uri' => config('facebook.redirect_uri'),
+            'client_id'     => config('facebook.app_id'),
+            'redirect_uri'  => $redirectUri, // ✅ matches what was used in redirect()
             'client_secret' => config('facebook.app_secret'),
-            'code' => $request->get('code'),
+            'code'          => $request->get('code'),
         ]);
 
         if (!$tokenResponse->successful()) {
@@ -56,9 +70,9 @@ class FacebookAuthController extends Controller
 
         // Step 2: Exchange short-lived for long-lived token
         $longResponse = Http::get('https://graph.facebook.com/v19.0/oauth/access_token', [
-            'grant_type' => 'fb_exchange_token',
-            'client_id' => config('facebook.app_id'),
-            'client_secret' => config('facebook.app_secret'),
+            'grant_type'        => 'fb_exchange_token',
+            'client_id'         => config('facebook.app_id'),
+            'client_secret'     => config('facebook.app_secret'),
             'fb_exchange_token' => $accessToken,
         ]);
 
@@ -74,11 +88,33 @@ class FacebookAuthController extends Controller
         }
 
         $pages = $pagesResponse->json()['data'];
+        // dd($pages);
+
+        // ✅ Step 4: For each page, also fetch IG Business Account (if connected)
+        foreach ($pages as &$page) {
+            // Use the page access token instead of the user long-lived token
+            $igResponse = Http::get("https://graph.facebook.com/v19.0/{$page['id']}", [
+                'fields'       => 'instagram_business_account',
+                'access_token' => $page['access_token'], // ✅ page token, not user token
+            ]);
+            //dd($igResponse);
+
+            if ($igResponse->successful()) {
+                $page['instagram_business_account'] =
+                    $igResponse->json()['instagram_business_account']['id'] ?? null;
+            } else {
+                $page['instagram_business_account'] = null;
+            }
+        }
 
         // Save long-lived token in session
         session(['fb_long_lived_token' => $longLivedToken]);
 
-        return view('facebook.select_page', compact('pages'));
+        if ($type == 'admin') {
+            return view('facebook.adminselect_page', compact('pages'));
+        } else {
+            return view('facebook.select_page', compact('pages'));
+        }
     }
 
 
@@ -87,21 +123,36 @@ class FacebookAuthController extends Controller
         $type = auth()->user()->role == null ? 'admin' : 'dealer';
         $request->validate(['page_id' => 'required']);
 
-        [$pageId, $pageToken] = explode('|', $request->page_id);
+        // Now it comes in as "pageId|pageToken|igBusinessId"
+        $parts = explode('|', $request->page_id);
+        $pageId     = $parts[0] ?? null;
+        $pageToken  = $parts[1] ?? null;
+        $igBusiness = $parts[2] ?? null;
 
         FacebookToken::updateOrCreate(
             [
                 'dealer_id' => Auth::id(),
-                'type' => $type,
+                'type'      => $type,
             ],
             [
-                'page_id' => $pageId,
-                'page_access_token' => $pageToken,
+                'page_id'              => $pageId,
+                'page_access_token'    => $pageToken,
+                'instagram_business_id' => $igBusiness,
             ]
         );
 
-
         return redirect(session('facebook_redirect_url', route($this->getDashboardRoute())))
-            ->with('success', 'Facebook Page connected successfully!');
+            ->with('success', 'Facebook Page and Instagram connected successfully!');
+    }
+
+
+
+    public function bike()
+    {
+        $post = BikePost::with('media', 'location', 'features')->withTrashed()->first();
+        //dd($post);
+        $fb = new FacebookPageService();
+        $fb->publishAdminBikePost($post, null, null);
+        dd('posyed');
     }
 }

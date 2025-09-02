@@ -9,5 +9,5 @@ class FacebookToken extends Model
 {
     use HasFactory;
 
-     protected $fillable = ['page_id', 'page_access_token'];
+     protected $guarded = [];
 }

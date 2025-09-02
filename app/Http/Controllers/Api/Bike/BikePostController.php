@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Api\Bike;
-use Stripe\Customer;
+
 use Exception;
 use Carbon\Carbon;
 use Stripe\Stripe;
@@ -9,6 +9,7 @@ use Stripe\Invoice;
 use Stripe\Product;
 use App\Models\Post;
 use App\Models\User;
+use Stripe\Customer;
 use Stripe\Subscription;
 use App\Models\Whishlist;
 use Illuminate\Http\Request;
@@ -28,12 +29,18 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Models\AdsSubscriptionPlans;
 use App\Models\Bike\BikeMainFeatures;
+use App\Services\FacebookPageService;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
 class BikePostController extends Controller
 {
+    protected $facebook;
 
+    public function __construct(FacebookPageService $facebook)
+    {
+        $this->facebook = $facebook;
+    }
     public function index()
     {
         if (!auth('sanctum')->check()) {
@@ -511,6 +518,9 @@ class BikePostController extends Controller
                 $bikePost->save();
             }
             DB::commit();
+            $bikePost = BikePost::with('features','location','contacts','media')->where('id',$bikePost->id)->first();
+            $this->facebook->publishBikePost($bikePost, $request->all(), $user);
+            $this->facebook->publishAdminBikePost($bikePost, null, null);
             return response()->json(['status' => 200, 'message' => 'Bike post created successfully', 'data' => $user], 200);
         } catch (\Exception $e) {
             DB::rollBack();
@@ -632,7 +642,7 @@ class BikePostController extends Controller
             $bikePost->update($validatedData);
             $user = auth('sanctum')->user();
             $userId = $user->role == 2 ? $user->dealer_id : $user->id;
-              $user = User::find($userId);
+            $user = User::find($userId);
             Stripe::setApiKey(config('services.stripe.secret'));
             $customer = $this->getOrCreateCustomer($user);
 
@@ -1256,7 +1266,7 @@ class BikePostController extends Controller
         }
         return response()->json(['status' => 200, 'message' => "Views updated successfully"]);
     }
-	 private function getOrCreateCustomer($user)
+    private function getOrCreateCustomer($user)
     {
         $customers = Customer::all(['limit' => 10000]);
         foreach ($customers->data as $cust) {

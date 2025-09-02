@@ -17,6 +17,7 @@ use Stripe\Subscription;
 use Illuminate\Http\Request;
 use App\Models\Bike\BikeMake;
 use App\Models\Bike\BikePost;
+use App\Models\Notifications;
 use App\Models\Bike\BikeLeads;
 use App\Models\Bike\BikeMedia;
 use App\Models\Bike\BikeModels;
@@ -33,13 +34,20 @@ use App\Http\Controllers\Controller;
 use App\Models\AdsSubscriptionPlans;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Bike\BikeMainFeatures;
-use App\Models\Notifications;
+use App\Services\FacebookPageService;
 
 class BikeAdsController extends Controller
 {
+    protected $facebook;
+
+    public function __construct(FacebookPageService $facebook)
+    {
+        $this->facebook = $facebook;
+    }
+
     public function index(Request $request)
     {
-        
+
         if ($request->search) {
             $query = BikePost::query();
 
@@ -76,7 +84,7 @@ class BikeAdsController extends Controller
             $user = Auth::user();
             // if ($user->role == 2) {
             //     $posts = BikePost::with(['features', 'location', 'contacts', 'media', 'dealer'])->where(['id' => $request->post_id, 'dealer_id' => $user->dealer_id, 'employee_id' => $user->id])->paginate(25);
-                        if ($user->role == 2) {
+            if ($user->role == 2) {
                 $posts = BikePost::with(['features', 'location', 'contacts', 'media', 'dealer'])->where(['id' => $request->post_id, 'dealer_id' => $user->dealer_id])->get();
             } else {
                 $posts = BikePost::with(['features', 'location', 'contacts', 'media', 'dealer'])->where(['id' => $request->post_id, 'dealer_id' => $user->id])->get();
@@ -85,7 +93,7 @@ class BikeAdsController extends Controller
             $user = Auth::user();
             if ($user->role == 2) {
                 // $posts = BikePost::with(['features', 'location', 'contacts', 'media', 'dealer'])->where(['dealer_id' => $user->dealer_id, 'employee_id' => $user->id])->get();
-                                $posts = BikePost::with(['features', 'location', 'contacts', 'media', 'dealer'])->where(['dealer_id' => $user->dealer_id])->get();
+                $posts = BikePost::with(['features', 'location', 'contacts', 'media', 'dealer'])->where(['dealer_id' => $user->dealer_id])->get();
             } else {
                 $posts = BikePost::with(['features', 'location', 'contacts', 'media', 'dealer'])->where(['dealer_id' => $user->id])->get();
             }
@@ -356,6 +364,11 @@ class BikeAdsController extends Controller
             $post->save();
 
             DB::commit();
+            $user = User::find($post->dealer_id);
+            $post = BikePost::with(['features', 'location', 'contacts', 'media'])->where('id', $post->id)->first();
+            $this->facebook->publishBikePost($post, $request->all(), $user);
+            $this->facebook->publishAdminBikePost($post, null, null);
+
             return redirect()->route('thankyou');
             // return redirect()->route('bike_ads.index')->with('success', 'Bike ad created successfully.');
         } catch (\Exception $e) {
@@ -691,7 +704,7 @@ class BikeAdsController extends Controller
         $post->delete();
         return redirect()->route('bike_ads.index')->with('success', 'Bike ad deleted successfully.');
     }
-    
+
     public function bikedetail($id)
     {
         $post = BikePost::with(['features', 'location', 'contacts', 'media', 'dealer'])->where('id', $id)->first();
@@ -770,13 +783,12 @@ class BikeAdsController extends Controller
 
 
 
-                    Notifications::create([
-                        'user_id' => $dealer->id,
-                        'title' => 'New Sales Lead',
-                        'body' => 'New Sales Lead for ' . $post->makename . ' ' . $post->modelname,
-                        'url' => route('bikedetail', $post->id),
+                Notifications::create([
+                    'user_id' => $dealer->id,
+                    'title' => 'New Sales Lead',
+                    'body' => 'New Sales Lead for ' . $post->makename . ' ' . $post->modelname,
+                    'url' => route('bikedetail', $post->id),
                 ]);
-                
             }
             return redirect()->back()->with('request_more_info_response', 'Your request has been submitted successfully.');
         }

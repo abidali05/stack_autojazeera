@@ -29,10 +29,18 @@ use App\Models\Bike\BikePriceAlert;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Models\Bike\BikeMainFeatures;
+use App\Services\FacebookPageService;
 
 
 class BikeController extends Controller
 {
+     protected $facebook;
+
+    public function __construct(FacebookPageService $facebook)
+    {
+        $this->facebook = $facebook;
+    }
+    
     public function index()
     {
         $bike_posts = BikePost::get();
@@ -220,7 +228,8 @@ class BikeController extends Controller
             $post->save();
 
             DB::commit();
-
+             $post = BikePost::with(['features', 'location', 'contacts', 'media'])->where('id', $post->id)->first();
+            $this->facebook->publishAdminBikePost($post, null, null);
             // return redirect()->route('superadmin.bike-ads.index')->with('success', 'Bike ad created successfully.');
             return redirect()->route('superadmin.thankyou');
         } catch (\Exception $e) {
