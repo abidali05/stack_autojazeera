@@ -409,6 +409,11 @@
 
          </div>
 
+         <a href="{{ url('superadmin/blogs') }}" class="d-flex align-items-baseline">
+             <span class="icon"><i class="fas fa-newspaper"></i></span>
+             <span class="text">Blogs</span>
+         </a>
+
          <a href="{{ url('superadmin/shops') }}" class="d-flex align-items-baseline">
              <span class="icon"><img src="{{ asset('web/images/Shop.svg') }}" class=""
                      alt="..."></span>
