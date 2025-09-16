@@ -64,6 +64,7 @@ use App\Http\Controllers\superadmin\SuperadminSubscriptionController;
 use App\Http\Controllers\Bikes\superadmin\BikeController as SuperadminBikeController;
 use App\Http\Controllers\Autoservices\ServicesController as AutoservicesServicesController;
 use App\Http\Controllers\Autoservices\superadmin\ShopController as SuperadminShopController;
+use App\Http\Controllers\SuperAdmin\BlogsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -260,6 +261,7 @@ Route::group(['prefix' => 'superadmin', 'as' => 'superadmin.'], function () {
         Route::get('deletepostold_image/{post_id}/{image_id}', [SuperadminAddsController::class, 'deletepostold_image'])->name('deletepostold_image');
         Route::get('change-post-status/{id}', [SuperadminAddsController::class, 'change_status'])->name('change_post_status');
         Route::post('change-post-status', [SuperadminAddsController::class, 'change_post_status'])->name('change_posts_status');
+        Route::resource('blogs', BlogsController::class);
         Route::resource('subscription', SuperadminSubscriptionController::class);
         Route::resource('feature', SuperadminFeatureController::class);
         Route::resource('color', SuperadminColorController::class);
