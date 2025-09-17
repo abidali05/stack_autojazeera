@@ -715,7 +715,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <p class="m-0 fourtyeight">Shop</p>
+                <p class="m-0 fourtyeight">Edit Blog</p>
             </div>
         </div>
         <div class="row">
@@ -738,8 +738,10 @@
                         <input type="file" name="image" class="form-control" accept="image/*">
                         @if ($blog->image)
                             <div class="mt-2">
-                                <img src="{{ asset($blog->image) }}" alt="Blog Image" width="150"
-                                    class="rounded">
+                                <a href="{{ asset($blog->image) }}" target="_blank">
+                                    <img src="{{ asset($blog->image) }}" alt="Blog Image" width="50"
+                                        style="height: 50px;" class="rounded">
+                                </a>
                             </div>
                         @endif
                     </div>

@@ -65,6 +65,7 @@ use App\Http\Controllers\Bikes\superadmin\BikeController as SuperadminBikeContro
 use App\Http\Controllers\Autoservices\ServicesController as AutoservicesServicesController;
 use App\Http\Controllers\Autoservices\superadmin\ShopController as SuperadminShopController;
 use App\Http\Controllers\SuperAdmin\BlogsController;
+use App\Http\Controllers\ForumController;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,8 +89,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/facebook/login', [FacebookAuthController::class, 'redirect'])->name('facebook.login');
     Route::get('/facebook/callback', [FacebookAuthController::class, 'callback'])->name('facebook.callback');
     Route::post('/facebook/save-page', [FacebookAuthController::class, 'savePage'])->name('facebook.savePage');
-
-
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -224,6 +223,20 @@ Route::get('/', [SuperadminAddsController::class, 'welcome'])->name('home');
 Route::get('car-detail/{id}', [SuperadminAddsController::class, 'cardetail'])->name('cardetail');
 Route::get('contact-us', [GeneralController::class, 'contact'])->name('contact');
 Route::post('contact-us', [GeneralController::class, 'contactUs'])->name('contactUs');
+Route::get('all-blogs', [GeneralController::class, 'allBlogs'])->name('all-blogs');
+Route::get('blog-detail/{id}', [GeneralController::class, 'blogDetail'])->name('blog-detail');
+
+// Forum Routes
+Route::get('forum', [ForumController::class, 'index'])->name('forum.index');
+Route::get('forum/category/{id}', [ForumController::class, 'category'])->name('forum.category');
+Route::get('forum/thread/{id}', [ForumController::class, 'thread'])->name('forum.thread');
+
+Route::middleware('auth')->group(function () {
+    Route::get('forum/category/{id}/create-thread', [ForumController::class, 'createThread'])->name('forum.create-thread');
+    Route::post('forum/category/{id}/store-thread', [ForumController::class, 'storeThread'])->name('forum.store-thread');
+    Route::post('forum/thread/{id}/reply', [ForumController::class, 'storeReply'])->name('forum.store-reply');
+    Route::delete('forum/post/{id}', [ForumController::class, 'deletePost'])->name('forum.delete-post');
+});
 
 Route::get('bike-details/{id}', [BikeAdsController::class, 'bikedetail'])->name('bikedetail');
 Route::post('bikes/search', [BikeController::class, 'search'])->name('bikes.search');
@@ -262,6 +275,7 @@ Route::group(['prefix' => 'superadmin', 'as' => 'superadmin.'], function () {
         Route::get('change-post-status/{id}', [SuperadminAddsController::class, 'change_status'])->name('change_post_status');
         Route::post('change-post-status', [SuperadminAddsController::class, 'change_post_status'])->name('change_posts_status');
         Route::resource('blogs', BlogsController::class);
+        Route::resource('forum-categories', \App\Http\Controllers\SuperAdmin\ForumCategoryController::class);
         Route::resource('subscription', SuperadminSubscriptionController::class);
         Route::resource('feature', SuperadminFeatureController::class);
         Route::resource('color', SuperadminColorController::class);

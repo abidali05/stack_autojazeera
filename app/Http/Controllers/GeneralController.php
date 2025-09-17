@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use App\Models\City;
+use App\Mail\Contact;
 use App\Models\ContactUs;
+use App\Models\NewsLetter;
 use App\Models\ModelCompany;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\Contact;
-use App\Models\NewsLetter;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class GeneralController extends Controller
 {
@@ -166,6 +167,18 @@ class GeneralController extends Controller
         Mail::to('contactus@autojazeera.pk')->send(new Contact($contact));
 
         return redirect()->back()->with('success', 'Your request is submitted successfully, our team will be in contact with you soon');
+    }
+
+    public function allBlogs()
+    {
+        $blogs = Blog::latest()->paginate(6);
+        return view('blogs', compact('blogs'));
+    }
+
+    public function blogDetail($id)
+    {
+        $blog = Blog::findOrFail($id);
+        return view('blog_detail', compact('blog'));
     }
 
 
