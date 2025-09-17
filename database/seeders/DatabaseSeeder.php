@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(StatesTableSeeder::class);
         $this->call(CitiesTableSeeder::class);
         $this->call(ProvinceTableSeeder::class);
+        $this->call(ForumDataSeeder::class);
         // $this->call(PermissionsTableSeeder::class);
     }
 }

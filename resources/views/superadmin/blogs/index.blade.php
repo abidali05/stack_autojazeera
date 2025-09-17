@@ -108,7 +108,7 @@
         <div class="row align-items-center mb-2">
 
             <div class="col-md-12">
-                <h2 class="sec mb-0 primary-color-custom">Manage Color</h2>
+                <h2 class="sec mb-0 primary-color-custom">Manage Blogs</h2>
             </div>
         </div>
         <div class="row align-items-center mb-2">
@@ -156,11 +156,15 @@
                                     <td>{{ $blog->title }}</td>
                                     <td>
                                         @if ($blog->image)
-                                            <img src="{{ asset($blog->image) }}" width="50">
+                                            <a href="{{ asset($blog->image) }}" target="_blank">
+                                                <img src="{{ asset($blog->image) }}" width="50"
+                                                    style="height: 40px; object-fit: cover;">
+                                            </a>
                                         @else
                                             N/A
                                         @endif
                                     </td>
+
                                     <td>{!! Str::limit($blog->description, 50) !!}</td>
                                     <td>{{ $blog->tags }}</td>
                                 </tr>

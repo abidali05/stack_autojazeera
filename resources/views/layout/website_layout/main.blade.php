@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Auto Jazeera</title>
+    <title>Auto Jazeera </title>
     <link href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -25,6 +25,78 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="icon" href="{{ asset('web/images/Jazeera App logo.png') }}" type="image/x-icon" sizes="512x512">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Auto Jazeera",
+  "url": "https://www.autojazeera.pk/",
+  "logo": "https://www.autojazeera.pk/web/bikes/images/logo.svg",
+  "description": "AutoJazeera is Pakistan's trusted online automobile marketplace for buying and selling new and used cars.",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+92 51 8950690",
+    "contactType": "Customer Service",
+    "areaServed": "PK",
+    "availableLanguage": ["English", "Urdu"]
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Kickstat 189 Korang Road I 10/3, , Pakistan",
+    "addressLocality": "Islamabad",
+    "addressRegion": "Islamabad",
+    "postalCode": "4600",
+    "addressCountry": "PK"
+  },
+  "sameAs": [
+    "https://www.facebook.com/autojazeeraofficial",
+    "https://www.instagram.com/autojazeera.official",
+    "https://www.linkedin.com/company/autojazeera",
+	"https://www.tiktok.com/@autojazeerapakistan",
+	"https://www.pinterest.com/autojazeerapakistan"
+  ],
+  "hasPart": [
+    {
+      "@type": "WebPage",
+      "name": "About Us",
+      "url": "https://www.autojazeera.pk/about-us"
+    },
+    {
+      "@type": "WebPage",
+      "name": "Contact Us",
+      "url": "https://www.autojazeera.pk/contact-us"
+    },
+    {
+      "@type": "WebPage",
+      "name": "Car Listings",
+      "url": "https://www.autojazeera.pk/cars"
+    },
+    {
+      "@type": "WebPage",
+      "name": "Bikes Listings",
+      "url": "https://www.autojazeera.pk/bikes"
+    },
+    {
+      "@type": "WebPage",
+      "name": "Subcriptions Plans",
+      "url": "https://www.autojazeera.pk/subscription-plans"
+    },
+	 {
+      "@type": "WebPage",
+      "name": "Terms & Conditions",
+      "url": "https://www.autojazeera.pk/term_condition"
+    },
+	 {
+      "@type": "WebPage",
+      "name": "Privacy Policy",
+      "url": "https://www.autojazeera.pk/privacy_policy"
+    }
+	
+  ]
+}
+</script>
+
 
 </head>
 <style>

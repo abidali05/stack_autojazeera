@@ -715,7 +715,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <p class="m-0 fourtyeight">Shop</p>
+                <p class="m-0 fourtyeight">Add Blog</p>
             </div>
         </div>
         <div class="row">
@@ -752,7 +752,7 @@
                     </div>
 
                     <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary">Save Blog</button>
+                        <button type="submit" class="btn custom-btn-nav rounded">Save Blog</button>
                     </div>
                 </form>
             </div>
