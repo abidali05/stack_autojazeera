@@ -141,7 +141,7 @@
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td>
-                                        <a href="{{ route('superadmin.blogs.edit', $blog->id) }}" class="me-2"
+                                        <a style="text-decoration: none" href="{{ route('superadmin.blogs.edit', $blog->id) }}" class="me-2"
                                             title="Edit">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
@@ -168,6 +168,8 @@
                                     <td>{!! Str::limit($blog->description, 50) !!}</td>
                                     <td>{{ $blog->tags }}</td>
                                 </tr>
+
+                                
                             @endforeach
                         </tbody>
                     </table>

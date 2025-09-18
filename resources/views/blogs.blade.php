@@ -485,7 +485,16 @@
                                 $tags = $blog->tags ? json_decode($blog->tags, true) : [];
                             @endphp
                             <div class="col-md-12 mt-3 d-flex justify-content-between align-items-baseline">
-                                <button class="spanclas">{{ $tags[0] ?? 'General' }}</button>
+                               <div>
+                                @php
+    $allTags = explode(',', $blog->tags ?? 'General');
+@endphp
+
+@foreach($allTags as $tag)
+    <button class="spanclas">{{ trim($tag) }}</button>
+@endforeach
+
+                               </div>
                                 <p class="m-0 fouteen">{{ $blog->created_at->format('d/m/Y h:i A') }}</p>
                             </div>
                             <div class="col-md-12 mt-3">
@@ -512,54 +521,7 @@
         </div>
     </div>
 </div>
-<div class="container-fluid imgbak mt-3">
-    <div class="row">
-        <div class="container">
-            <div class="row d-flex justify-content-center">
-                <div class="col-md-11 py-5">
-                    <div class="row">
-                        <div class="col-md-7 d-flex align-items-center justify-content-center">
-                            <div class="row  d-flex align-items-center justify-content-center">
-                                <div class="col-10 ">
-                                    <div class="row ">
-                                        <div class="col-md-12">
-                                            <h1 class="bluecolor" data-aos="fade-right"><strong>Download our
-                                                    mobile
-                                                    app.</strong>
-                                            </h1>
-                                            <p class="eighteenorange mt-3" data-aos="fade-right">From Auto to Auto
-                                                Service — Pakistan’s Smart Platform.
-                                            </p>
-                                        </div>
-                                        <div class="col-md-12 d-flex  align-items-center mt-4">
 
-                                            <a class=" text-start"><img
-                                                    src="{{ asset('web/bikes/images/Group111.svg') }}"
-                                                    class="img-fluid " alt="playstore" style="width:160px"></a>
-                                            <a class=" text-start ms-3"><img
-                                                    src="{{ asset('web/bikes/images/Group1111.svg') }}"
-                                                    style="width:160px" class="img-fluid" alt="gmail"></a>
-
-                                        </div>
-                                        <div class="col-md-12 d-flex  align-items-center mt-4">
-
-                                            <img src="{{ asset('web/bikes/images/Coming_Soon.svg') }}"
-                                                class="img-fluid " style="width:160px" alt="comingsoon">
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-5 " data-aos="fade-right">
-                            <img src="{{ asset('web/bikes/images/mobileauto.svg') }}" class="img-fluid" alt="mobile">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {

@@ -410,7 +410,8 @@
          </div>
 
          <a href="{{ url('superadmin/blogs') }}" class="d-flex align-items-baseline">
-             <span class="icon"><i class="fas fa-newspaper"></i></span>
+             <span class="icon"><img src="{{ asset('web/images/blog.svg') }}" class=""
+                     alt="..."></span>
              <span class="text">Blogs</span>
          </a>
 
