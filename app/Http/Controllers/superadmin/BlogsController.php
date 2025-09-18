@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\SuperAdmin;
+namespace App\Http\Controllers\superadmin;
 
 use App\Models\Blog;
 use Illuminate\Http\Request;

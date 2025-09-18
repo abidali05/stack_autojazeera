@@ -64,7 +64,7 @@ use App\Http\Controllers\superadmin\SuperadminSubscriptionController;
 use App\Http\Controllers\Bikes\superadmin\BikeController as SuperadminBikeController;
 use App\Http\Controllers\Autoservices\ServicesController as AutoservicesServicesController;
 use App\Http\Controllers\Autoservices\superadmin\ShopController as SuperadminShopController;
-use App\Http\Controllers\SuperAdmin\BlogsController;
+use App\Http\Controllers\superadmin\BlogsController;
 use App\Http\Controllers\ForumController;
 
 /*
