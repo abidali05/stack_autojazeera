@@ -543,7 +543,7 @@ color: #281F48 !important;
 
                     <div class="row">
                         <div class="col-md-6 d-flex justify-content-between">
-                            <span><strong> Body Type</strong></span>
+                            <span><strong>Body Type</strong></span>
                             <span>{{ $post->bodytypename }}</span>
                         </div>
 

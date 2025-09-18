@@ -32,7 +32,8 @@ class BlogsController extends Controller
         $data = [
             'title'       => $request->title,
             'description' => $request->description,
-            'tags'        => $request->tags ? json_encode(explode(',', $request->tags)) : null,
+          'tags' => $request->tags ? implode(', ', explode(',', $request->tags)) : null,
+
         ];
 
         if ($request->hasFile('image')) {
@@ -69,7 +70,8 @@ class BlogsController extends Controller
         $data = [
             'title'       => $request->title,
             'description' => $request->description,
-            'tags'        => $request->tags ? json_encode(explode(',', $request->tags)) : null,
+      'tags' => $request->tags ? implode(', ', explode(',', $request->tags)) : null,
+
         ];
 
         if ($request->hasFile('image')) {

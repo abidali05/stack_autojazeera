@@ -10,6 +10,14 @@
         background-color: #FBFBFB !important;
     }
 
+    .spanclas {
+        background-color: #281F48;
+        padding: 5px;
+        color: white;
+        font-size: 12px;
+        font-weight: 400;
+        border-radius: 5px;
+    }
     .blog-container {
         max-width: 800px;
         margin: 0 auto;
@@ -53,6 +61,42 @@
     .blog-tags {
         margin-top: 30px;
     }
+  #goToTop,
+        #goToBottom {
+            position: fixed;
+            right: 20px;
+            padding: 10px 15px;
+            font-size: 20px;
+            background-color: #F40000 !important;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        #goToTop {
+            bottom: 80px;
+        }
+
+        #goToBottom {
+            bottom: 20px;
+        }
+
+        #goToTop.show,
+        #goToBottom.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #goToTop:hover,
+        #goToBottom:hover {
+            background-color: #F40000 !important;
+        }
 
     .tag {
         display: inline-block;
@@ -86,34 +130,46 @@
 
 <div class="container mt-5">
     <div class="row">
-    <div class="col-md-12">
-          <a href="{{ route('all-blogs') }}" class="back-btn">
+        <div class="col-md-12">
+                 <a href="{{ route('all-blogs') }}" class="back-btn">
             <i class="fas fa-arrow-left"></i> Back to Blogs
         </a>
 
+        </div>
+    <div class="col-md-12">
+     
         <div class="blog-header">
             <h1 class="blog-title">{{ $blog->title }}</h1>
             <div class="blog-meta">
                 <i class="fas fa-calendar"></i> Published on {{ $blog->created_at->format('F d, Y') }}
             </div>
         </div>
-
+        <div  style="background-color:white;">
         @if ($blog->image)
             <img src="{{ asset($blog->image) }}" alt="{{ $blog->title }}" class="blog-image">
         @endif
 
-        <div class="blog-content">
+
+       <div class="px-3">
+             <div class="blog-content">
             {!! $blog->description !!}
         </div>
 
         @if ($blog->tags)
-            <div class="blog-tags">
+            <div class="blog-tags mb-3">
                 <h5 style="color: #281F48; margin-bottom: 15px;">Tags:</h5>
-                @foreach (json_decode($blog->tags) as $tag)
-                    <span class="tag">{{ trim($tag) }}</span>
-                @endforeach
+         @php
+    $allTags = explode(',', $blog->tags ?? 'General');
+@endphp
+
+@foreach($allTags as $tag)
+    <span class="spanclas">{{ trim($tag) }}</span>
+@endforeach
+
             </div>
         @endif
+       </div>
+        </div>
     </div>
     </div>
 </div>

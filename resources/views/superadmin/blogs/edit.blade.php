@@ -10,7 +10,15 @@
             padding: 0;
             margin: 0;
         }
-
+    /* ✅ Headings ka default color black set */
+    .ck-content h1,
+    .ck-content h2,
+    .ck-content h3,
+    .ck-content h4,
+    .ck-content h5,
+    .ck-content h6 {
+      color: #000 !important;
+    }
         .time-picker-wrapper {
             position: relative;
             display: inline-block;
@@ -760,11 +768,12 @@
 
                         <!-- hidden field for saving tags as CSV -->
                         <input type="hidden" name="tags" id="tagsHidden"
-                            value="{{ old('tags', $blog->tags ? implode(',', json_decode($blog->tags, true)) : '') }}">
+                           value="{{ old('tags', $blog->tags ?? '') }}
+">
                     </div>
 
-                    <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary">Update Blog</button>
+                    <div class="d-flex justify-content-end mb-3">
+                        <button type="submit" class="btn custom-btn-nav rounded">Update Blog</button>
                     </div>
                 </form>
             </div>
