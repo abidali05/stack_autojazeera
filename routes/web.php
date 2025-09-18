@@ -31,6 +31,7 @@ use App\Http\Controllers\ManageAdminsController;
 use App\Http\Controllers\Bikes\User\BikeController;
 use App\Http\Controllers\User\ShopReviewController;
 use App\Http\Controllers\ForgetPasswordControllerWeb;
+use App\Http\Controllers\superadmin\TikTokController;
 use App\Http\Controllers\User\SubscriptionController;
 use App\Http\Controllers\Bikes\User\BikeAdsController;
 use App\Http\Controllers\Bikes\User\WishlistController;
@@ -135,6 +136,10 @@ Route::middleware('auth')->group(function () {
     Route::get('cancel-service-plan', [SubscriptionController::class, 'cancel_service_plan'])->name('cancel_service_plan');
 
     Route::get('social-links', [SettingController::class, 'social_links'])->name('social_links');
+    Route::get('social-posts', [SettingController::class, 'social_posts'])->name('social_posts');
+    Route::delete('/social/posts/{id}', [SettingController::class, 'deletePost'])
+        ->name('social.delete');
+
 
     Route::get('signupwithfreeplan', [SubscriptionController::class, 'signupwithfreeplan'])->name('signupwithfreeplan');
 
@@ -360,11 +365,15 @@ Route::group(['prefix' => 'superadmin', 'as' => 'superadmin.'], function () {
 
         // =================================================Subscription Module end=====================================================
 
+        Route::get('social-links', [SettingController::class, 'superadmin_social_links'])->name('social_links');
 
 
         Route::get('/facebook/login', [FacebookAuthController::class, 'redirect'])->name('facebook.login');
         Route::get('/facebook/callback', [FacebookAuthController::class, 'callback'])->name('facebook.callback');
         Route::post('/facebook/save-page', [FacebookAuthController::class, 'savePage'])->name('facebook.savePage');
+
+        Route::get('/tiktok/connect', [TikTokController::class, 'redirectToTikTok']);
+        Route::get('/tiktok/callback', [TikTokController::class, 'handleCallback']);
     });
 });
 
@@ -577,6 +586,3 @@ Route::get('/storage-link', function () {
 
     return '✅ Storage Link fixed';
 });
-
-
-

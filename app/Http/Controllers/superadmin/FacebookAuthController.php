@@ -26,7 +26,7 @@ class FacebookAuthController extends Controller
             session(['facebook_redirect_url' => url()->previous()]);
         }
 
-        $permissions = 'pages_manage_posts,pages_read_engagement,pages_show_list,pages_manage_metadata,instagram_basic,instagram_content_publish,business_management';
+        $permissions = 'pages_manage_posts,pages_read_engagement,pages_show_list,instagram_basic,instagram_content_publish';
 
         $clientId = config('facebook.app_id');
         $type = auth()->user()->role == null ? 'admin' : 'dealer';

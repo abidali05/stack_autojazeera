@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Superadmin;
 use App\Models\User;
 use App\Models\Province;
+use App\Models\Superadmin;
+use App\Models\TiktokTokens;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rules\Password;
-use Illuminate\Support\Facades\Mail;
 use App\Mail\SubscriptionBuy;
 use App\Models\FacebookToken;
+use App\Models\FacebookInstaPost;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Services\FacebookPageService;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Password;
 
 class SettingController extends Controller
 {
@@ -325,5 +328,69 @@ class SettingController extends Controller
             ->where('type', 'dealer')
             ->first();
         return view('setting.social_links', compact('facebookToken'));
+    }
+
+    public function social_posts()
+    {
+        if (in_array(Auth::user()->role, ['0', '2', '3'])) {
+            return redirect('unauthorized');
+        }
+
+        $facebookToken = FacebookToken::where('dealer_id', Auth::user()->id)
+            ->where('type', 'dealer')
+            ->first();
+
+        if (!$facebookToken) {
+            return redirect()->route('social_links')->with('error', 'Please connect your Facebook account first.');
+        }
+
+        $fb = new FacebookPageService;
+        $posts = $fb->getPosts($facebookToken);
+
+        return view('setting.social_posts', compact('posts'));
+    }
+
+    public function deletePost($id)
+    {
+        $post = FacebookInstaPost::findOrFail($id);
+        $facebookToken = FacebookToken::where('dealer_id', Auth::user()->id)
+            ->where('type', 'dealer')
+            ->first();
+        // make sure only owner can delete
+        if ($post->user_id !== Auth::id()) {
+            return redirect()->back()->with('error', 'Unauthorized action.');
+        }
+
+        $fb = new FacebookPageService();
+
+        try {
+            if ($post->platform === 'facebook' && $post->post_fbid) {
+                $fb->deleteFacebookPost($facebookToken, $post->post_fbid);
+            }
+
+            if ($post->platform === 'instagram' && $post->ig_media_id) {
+                $fb->deleteInstagramPost($facebookToken, $post->ig_media_id);
+            }
+
+            // delete from local DB
+            $post->delete();
+
+            return redirect()->back()->with('success', 'Post deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to delete post: ' . $e->getMessage());
+        }
+    }
+
+
+    public function superadmin_social_links()
+    {
+
+        $facebookToken = FacebookToken::where('type', 'admin')
+            ->first();
+        // dd($facebookToken);
+        $tiktokToken = TiktokTokens::where('user_id', Auth::user()->id)
+            ->where('type', 'admin')
+            ->first();
+        return view('setting.superadmin_social_links', compact('facebookToken', 'tiktokToken'));
     }
 }

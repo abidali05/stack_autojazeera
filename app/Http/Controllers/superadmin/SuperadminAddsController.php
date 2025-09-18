@@ -156,7 +156,8 @@ class SuperadminAddsController extends Controller
             $check = FacebookToken::where('type', 'admin')->first();
             if (!$check) {
                 session('facebook_redirect_url', url('superadmin/ads/create'));
-                return redirect()->route('superadmin.facebook.login');
+                // return redirect()->route('superadmin.facebook.login');
+                return redirect(url('superadmin/social-links'))->with('error', 'Please connect your Facebook account to proceed.');
             } else {
 
                 // check if token is expired or not
@@ -167,7 +168,8 @@ class SuperadminAddsController extends Controller
 
                     if ($daysSinceCreated >= 60) {
                         session(['facebook_redirect_url' => url('superadmin/ads/create')]);
-                        return redirect()->route('superadmin.facebook.login');
+                        // return redirect()->route('superadmin.facebook.login');
+                        return redirect(url('superadmin/social-links'))->with('error', 'Please connect your Facebook account to proceed.');
                     }
                 }
             }

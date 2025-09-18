@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eb86e25d1ca842c6eaa13389fc5d8b61",
+    "content-hash": "7eebaeb9614057230cac39567f4aca8f",
     "packages": [
         {
             "name": "beste/clock",
@@ -5649,6 +5649,62 @@
                 }
             ],
             "time": "2024-11-27T12:13:42+00:00"
+        },
+        {
+            "name": "shotstack/shotstack-sdk-php",
+            "version": "0.2.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/shotstack/shotstack-sdk-php.git",
+                "reference": "1a46e52efb8941e596e39b3c76354e0e2c01f21c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/shotstack/shotstack-sdk-php/zipball/1a46e52efb8941e596e39b3c76354e0e2c01f21c",
+                "reference": "1a46e52efb8941e596e39b3c76354e0e2c01f21c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "guzzlehttp/guzzle": "^7.3",
+                "guzzlehttp/psr7": "^1.7 || ^2.0",
+                "php": "^7.4 || ^8.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.5",
+                "phpunit/phpunit": "^8.0 || ^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Shotstack\\Client\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Shotstack",
+                    "homepage": "https://shotstack.io"
+                }
+            ],
+            "description": "Official PHP SDK for the Shotstack Cloud Video Editing API",
+            "homepage": "https://shotstack.io",
+            "keywords": [
+                "api",
+                "shotstack",
+                "video",
+                "video editing"
+            ],
+            "support": {
+                "issues": "https://github.com/shotstack/shotstack-sdk-php/issues",
+                "source": "https://github.com/shotstack/shotstack-sdk-php/tree/v0.2.6"
+            },
+            "time": "2024-05-20T05:58:10+00:00"
         },
         {
             "name": "stripe/stripe-php",

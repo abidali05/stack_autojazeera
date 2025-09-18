@@ -1109,11 +1109,33 @@
 
         {{-- social link  --}}
 
-        <a href="{{ url('social-links') }}" class="{{ request()->is('social-links') ? 'active' : '' }}">
-            <span class="icon d-flex align-items-baseline"><img src="{{ asset('web/images/customer.svg') }}"
-                    style="height:20px !important ; width:20px !important; " class="" alt="..."></span>
-            <span class="text m-0 ms-2" style="font-size: 12px;">Social Links</span>
-        </a>
+        
+         <a class="nav-link d-flex align-items-center" data-bs-toggle="collapse" href="#socialMenu" role="button"
+             aria-expanded="false" aria-controls="socialMenu">
+             <span class="text-nowrap"><img src="{{ asset('web/images/customer.svg') }}"
+                     style="height:20px !important; width:20px !important;" class="" alt="..."></span>
+             <span>Social</span>
+             <i class="bi bi-chevron-down ms-auto"></i>
+         </a>
+
+         <div class="collapse ps-3" id="socialMenu">
+             <a class="nav-link" href="{{ url('social-links') }}"
+                 class="{{ request()->is('social-links') ? 'active' : '' }}">
+                 <span class="d-flex align-items-center">
+                     <img src="{{ asset('web/images/customer.svg') }}"
+                         style="height:20px !important; width:20px !important;" class="me-2" alt="...">
+                     Social Links
+                 </span>
+             </a>
+             <a class="nav-link" href="{{ url('social-posts') }}">
+                 <span class="d-flex align-items-center">
+                    <img src="{{ asset('web/images/Mask group.svg') }}"
+                    style="height:20px !important ; width:20px !important; " class="me-2" alt="...">
+                     Social Posts
+                 </span>
+             </a>
+         </div>
+
 
         <!-- Logout -->
         <form action="{{ route('logout') }}" method="post">

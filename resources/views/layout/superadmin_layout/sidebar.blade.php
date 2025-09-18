@@ -12,7 +12,7 @@
          height: 100vh;
          background-color: #f8f9fa;
          transition: all 0.3s ease;
-         box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+         box-shadow: 2px 0 5px rgba(105, 69, 69, 0.1);
          overflow-x: hidden;
          overflow-y: scroll;
      }
@@ -490,6 +490,15 @@
              <span class="text">Manage Admins</span>
          </a>
 
+           {{-- social link  --}}
+
+        <a href="{{ url('superadmin/social-links') }}" class="{{ request()->is('superadmin/social-links') ? 'active' : '' }}">
+            <span class="icon d-flex align-items-baseline"><img src="{{ asset('web/images/customer.svg') }}"
+                    style="height:20px !important ; width:20px !important; " class="" alt="..."></span>
+            <span class="text m-0 ms-2" style="font-size: 12px;">Social Links</span>
+        </a>
+
+
 
          <form action="{{ route('superadmin.logout') }}" method="post">
              @csrf
@@ -542,6 +551,7 @@
                      alt="..."></span>
              <span class="text">Shops</span>
          </a>
+
 
 
          <form action="{{ route('superadmin.logout') }}" method="post">
