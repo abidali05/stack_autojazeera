@@ -14,6 +14,7 @@
         "laravel/socialite": "^5.16",
         "laravel/tinker": "^2.8",
         "maatwebsite/excel": "^3.1",
+        "shotstack/shotstack-sdk-php": "^0.2.6",
         "stripe/stripe-php": "^16.2",
         "twilio/sdk": "^8.3"
     },
