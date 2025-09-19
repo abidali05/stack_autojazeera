@@ -359,7 +359,10 @@
                                         @if ($post->posted_on_social_handles == 1)
                                             <span class="badge text-bg-success">Yes</span>
                                         @else
-                                            <a href="#" class="badge text-bg-danger text-decoration-none">Post Now</a>
+                                            <a href="{{ route('superadmin.post_on_social_media', ['id' => $post->id, 'type' => 'car']) }}"
+                                                class="badge text-bg-danger text-decoration-none">
+                                                Post Now
+                                            </a>
                                         @endif
                                     </td>
 
