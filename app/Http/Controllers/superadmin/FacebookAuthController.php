@@ -187,8 +187,8 @@ class FacebookAuthController extends Controller
             }
 
             if ($type === 'car') {
-                $results[] = $fb->publishBikePost($post, null, null);
-                $results[] = $fb->publishAdminBikePost($post, null, null);
+                $results[] = $fb->publishPost($post, null, null);
+                $results[] = $fb->publishAdminPost($post, null, null);
             }
 
             if (collect($results)->filter()->isNotEmpty()) {

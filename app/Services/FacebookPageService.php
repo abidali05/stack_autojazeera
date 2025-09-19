@@ -16,11 +16,11 @@ class FacebookPageService
     public function publishPost($post, $request, $user)
     {
         try {
-            $user_id = ($user->role == '2' || $user->role == 2) ? $user->dealer_id : $user->id;
+            // $user_id = ($user->role == '2' || $user->role == 2) ? $user->dealer_id : $user->id;
 
-            $fbToken = FacebookToken::where('dealer_id', $user_id)->where('type', 'dealer')->first();
+            $fbToken = FacebookToken::where('dealer_id', $post->dealer_id)->where('type', 'dealer')->first();
             if (!$fbToken || empty($fbToken->page_access_token)) {
-                Log::warning("❌ No valid Facebook Page token for dealer_id {$user_id}");
+                Log::warning("❌ No valid Facebook Page token for dealer_id {$post->dealer_id}");
                 return false;
             }
 
@@ -86,7 +86,7 @@ class FacebookPageService
                 if ($postResponse->successful() && !empty($json['id'])) {
                     $fbPostId = $json['id'];
                     FacebookInstaPost::updateOrCreate(
-                        ['post_id' => $post->id, 'user_id' => $user_id, 'platform' => 'facebook'],
+                        ['post_id' => $post->id, 'user_id' => $post->dealer_id, 'platform' => 'facebook'],
                         [
                             'type'        => 'car',
                             'page_id'     => $fbToken->page_id,
@@ -155,7 +155,7 @@ class FacebookPageService
                                 }
 
                                 FacebookInstaPost::updateOrCreate(
-                                    ['post_id' => $post->id, 'user_id' => $user_id, 'platform' => 'instagram'],
+                                    ['post_id' => $post->id, 'user_id' => $post->dealer_id, 'platform' => 'instagram'],
                                     [
                                         'type'        => 'car',
                                         'page_id'     => $fbToken->page_id,
@@ -333,11 +333,11 @@ class FacebookPageService
     public function publishBikePost($post, $request, $user)
     {
         try {
-            $user_id = ($user->role == '2' || $user->role == 2) ? $user->dealer_id : $user->id;
+            // $user_id = ($user->role == '2' || $user->role == 2) ? $user->dealer_id : $user->id;
 
-            $fbToken = FacebookToken::where('dealer_id', $user_id)->where('type', 'dealer')->first();
+            $fbToken = FacebookToken::where('dealer_id', $post->dealer_id)->where('type', 'dealer')->first();
             if (!$fbToken || empty($fbToken->page_access_token)) {
-                Log::warning("❌ No valid Facebook Page token for dealer_id {$user_id}");
+                Log::warning("❌ No valid Facebook Page token for dealer_id {$post->dealer_id}");
                 return false;
             }
 
@@ -402,7 +402,7 @@ class FacebookPageService
                     $fbPostId = $json['id'];
 
                     FacebookInstaPost::updateOrCreate(
-                        ['post_id' => $post->id, 'user_id' => $user_id, 'platform' => 'facebook'],
+                        ['post_id' => $post->id, 'user_id' => $post->dealer_id, 'platform' => 'facebook'],
                         [
                             'type'        => 'bike',
                             'page_id'     => $fbToken->page_id,
@@ -472,7 +472,7 @@ class FacebookPageService
                                 }
 
                                 FacebookInstaPost::updateOrCreate(
-                                    ['post_id' => $post->id, 'user_id' => $user_id, 'platform' => 'instagram'],
+                                    ['post_id' => $post->id, 'user_id' => $post->dealer_id, 'platform' => 'instagram'],
                                     [
                                         'type'        => 'bike',
                                         'page_id'     => $fbToken->page_id,
