@@ -366,8 +366,8 @@ class BikeAdsController extends Controller
             DB::commit();
             $user = User::find($post->dealer_id);
             $post = BikePost::with(['features', 'location', 'contacts', 'media'])->where('id', $post->id)->first();
-            $this->facebook->publishBikePost($post, $request->all(), $user);
-            $this->facebook->publishAdminBikePost($post, null, null);
+            // $this->facebook->publishBikePost($post, $request->all(), $user);
+            // $this->facebook->publishAdminBikePost($post, null, null);
 
             return redirect()->route('thankyou');
             // return redirect()->route('bike_ads.index')->with('success', 'Bike ad created successfully.');

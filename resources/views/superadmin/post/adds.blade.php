@@ -455,6 +455,7 @@
                             <tr>
                                 <th>Sr#</th>
                                 <th>Action</th>
+                                <th>Posted On Soical Handles</th>
                                 <th>Image</th>
                                 <th>Status</th>
                                 <th>Featured</th>
@@ -482,6 +483,17 @@
                                             title="Delete" data-bs-toggle="modal" data-bs-target="#deleteModal">
                                             <i class="bi bi-trash"></i>
                                         </a>
+                                    </td>
+
+                                    <td class="text-center">
+                                        @if ($post->posted_on_social_handles == 1)
+                                            <span class="badge text-bg-success">Yes</span>
+                                        @else
+                                            <a href="{{ route('superadmin.post_on_social_media', ['id' => $post->id, 'type' => 'car']) }}"
+                                                class="badge text-bg-danger text-decoration-none">
+                                                Post Now
+                                            </a>
+                                        @endif
                                     </td>
 
                                     <?php
