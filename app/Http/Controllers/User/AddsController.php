@@ -399,8 +399,8 @@ class AddsController extends Controller
 
 
 
-        $this->facebook->publishPost($post, $request->all(), $user);
-        $this->facebook->publishAdminPost($post, null, null);
+        // $this->facebook->publishPost($post, $request->all(), $user);
+        // $this->facebook->publishAdminPost($post, null, null);
 
         return redirect()->route('thankyou');
         // return response()->json(['success' => true, 'redirect' => url('thankyou')]);

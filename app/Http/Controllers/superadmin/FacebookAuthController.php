@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\superadmin;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
-use App\Models\FacebookToken;
-use App\Http\Controllers\Controller;
 use App\Models\Bike\BikePost;
+use App\Models\FacebookToken;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use JoelButcher\Facebook\Facades\Facebook;
 use Illuminate\Support\Facades\Http;
 use App\Services\FacebookPageService;
+use JoelButcher\Facebook\Facades\Facebook;
 
 class FacebookAuthController extends Controller
 
@@ -140,9 +142,13 @@ class FacebookAuthController extends Controller
                 'instagram_business_id' => $igBusiness,
             ]
         );
-
-        return redirect(session('facebook_redirect_url', route($this->getDashboardRoute())))
-            ->with('success', 'Facebook Page and Instagram connected successfully!');
+        if (!empty($igBusiness)) {
+            return redirect(session('facebook_redirect_url', route($this->getDashboardRoute())))
+                ->with('success', 'Facebook Page and Instagram connected successfully!');
+        } else {
+            return redirect(session('facebook_redirect_url', route($this->getDashboardRoute())))
+                ->with('success', 'Facebook Page connected successfully!');
+        }
     }
 
 
@@ -154,5 +160,47 @@ class FacebookAuthController extends Controller
         $fb = new FacebookPageService();
         $fb->publishAdminBikePost($post, null, null);
         dd('posyed');
+    }
+
+
+    public function post_on_social_media($id, $type)
+    {
+        try {
+            if (!in_array($type, ['bike', 'car'])) {
+                return redirect()->back()->with('error', 'Invalid post type.');
+            }
+
+            $post = $type === 'bike'
+                ? BikePost::with(['media', 'location', 'features'])->find($id)
+                : Post::with(['document', 'feature', 'location', 'contact'])->find($id);
+
+            if (!$post) {
+                return redirect()->back()->with('error', ucfirst($type) . ' post not found.');
+            }
+
+            $fb = new FacebookPageService();
+            $results = [];
+
+            if ($type === 'bike') {
+                $results[] = $fb->publishPost($post, null, null);
+                $results[] = $fb->publishAdminBikePost($post, null, null);
+            }
+
+            if ($type === 'car') {
+                $results[] = $fb->publishBikePost($post, null, null);
+                $results[] = $fb->publishAdminBikePost($post, null, null);
+            }
+
+            if (collect($results)->filter()->isNotEmpty()) {
+                $post->posted_on_social_handles = 1;
+                $post->save();
+                return redirect()->back()->with('success', 'Post published successfully on social media.');
+            }
+
+            return redirect()->back()->with('error', 'Failed to publish post.');
+        } catch (\Throwable $e) {
+
+            return redirect()->back()->with('error', 'An unexpected error occurred while publishing the post.');
+        }
     }
 }

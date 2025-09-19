@@ -321,6 +321,7 @@
                             <tr>
                                 <th>Sr#</th>
                                 <th>Action</th>
+                                <th>Posted On Soical Handles</th>
                                 <th>Image</th>
                                 <th>Status</th>
                                 <th>Featured</th>
@@ -352,6 +353,17 @@
                                         </a>
 
 
+                                    </td>
+
+                                    <td class="text-center">
+                                        @if ($post->posted_on_social_handles == 1)
+                                            <span class="badge text-bg-success">Yes</span>
+                                        @else
+                                            <a href="{{ route('superadmin.post_on_social_media', ['id' => $post->id, 'type' => 'car']) }}"
+                                                class="badge text-bg-danger text-decoration-none">
+                                                Post Now
+                                            </a>
+                                        @endif
                                     </td>
 
                                     <td>
@@ -413,7 +425,8 @@
                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body" style="background-color: #F0F3F6; color: #FD5631;">
-                                                <form method="post" action="{{ route('superadmin.change_posts_status') }}"
+                                                <form method="post"
+                                                    action="{{ route('superadmin.change_posts_status') }}"
                                                     enctype="multipart/form-data">
                                                     @csrf
                                                     <input type="hidden" name="post_id" value="{{ $post->id }}">

@@ -325,7 +325,12 @@ Route::group(['prefix' => 'superadmin', 'as' => 'superadmin.'], function () {
 
         Route::resource('bike-ads', SuperadminBikeController::class);
         Route::get('advertise', [SuperadminBikeController::class, 'advertise'])->name('advertise');
+        
 
+        
+        Route::get('post-on-social-media/{id}/{type}', [FacebookAuthController::class, 'post_on_social_media'])->name('post_on_social_media');
+        
+        
         // ====================superadmin bike module ends===================================
 
 
