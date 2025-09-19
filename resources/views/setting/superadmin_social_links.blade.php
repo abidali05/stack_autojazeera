@@ -56,43 +56,7 @@
                 </div>
             </div>
 
-            <!-- Twitter (X) -->
-            <div class="col-md-3 col-6">
-                <div class="card border-0 shadow-sm text-center p-4 h-100">
-                    <div class="d-flex justify-content-center mb-3">
-                        <i class="bi bi-twitter text-info" style="font-size: 60px;"></i>
-                        {{-- For the new X logo, replace with FontAwesome:
-                        <i class="fa-brands fa-x-twitter" style="font-size:60px;"></i> --}}
-                    </div>
-                    <h6 class="fw-bold">Twitter</h6>
-
-                    @if (isset($twitterToken) ?? false)
-                        <p class="small">✅ Connected</p>
-                        <span class="badge bg-success px-3 py-2">Connected</span>
-                    @else
-                        <p class="small text-muted mb-1">No account connected</p>
-                        <a href="{{ '' }}" class="btn btn-info btn-sm mt-2 text-white">Connect</a>
-                    @endif
-                </div>
-            </div>
-
-            <!-- LinkedIn -->
-            <div class="col-md-3 col-6">
-                <div class="card border-0 shadow-sm text-center p-4 h-100">
-                    <div class="d-flex justify-content-center mb-3">
-                        <i class="bi bi-linkedin text-primary" style="font-size: 60px;"></i>
-                    </div>
-                    <h6 class="fw-bold">LinkedIn</h6>
-
-                    @if (isset($linkedinToken) ?? false)
-                        <p class="small">✅ Connected</p>
-                        <span class="badge bg-success px-3 py-2">Connected</span>
-                    @else
-                        <p class="small text-muted mb-1">No account connected</p>
-                        <a href="{{ '' }}" class="btn btn-primary btn-sm mt-2">Connect</a>
-                    @endif
-                </div>
-            </div>
+           
 
             <!-- TikTok -->
             <div class="col-md-3 col-6">
@@ -104,14 +68,14 @@
                     </div>
                     <h6 class="fw-bold">TikTok</h6>
 
-                    @if (isset($tiktokToken) ?? false)
+                    {{-- @if (isset($tiktokToken) ?? false)
                         <p class="small">✅ Connected</p>
                         <span class="badge bg-success px-3 py-2">Connected</span>
                     @else
-                        <p class="small text-muted mb-1">No account connected</p>
-                        <a href="{{ url('superadmin/tiktok/connect') }}"
-                            class="btn btn-dark btn-sm mt-2 text-white">Connect</a>
-                    @endif
+                        <p class="small text-muted mb-1">No account connected</p> --}}
+                        <a href="#"
+                            class="btn btn-dark btn-sm mt-2 text-white">Comming Soon</a>
+                    {{-- @endif --}}
                 </div>
             </div>
 
