@@ -171,7 +171,7 @@ class GeneralController extends Controller
 
     public function allBlogs()
     {
-        $blogs = Blog::latest()->paginate(6);
+        $blogs = Blog::latest()->paginate(9);
         return view('blogs', compact('blogs'));
     }
 

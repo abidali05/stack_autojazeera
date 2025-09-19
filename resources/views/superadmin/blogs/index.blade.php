@@ -145,13 +145,37 @@
                                             title="Edit">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
-                                        <form action="{{ route('superadmin.blogs.destroy', $blog->id) }}" method="POST"
-                                            style="display:inline;">
-                                            @csrf @method('DELETE')
-                                            <button type="submit" class="btn btn-link p-0 m-0 text-danger" title="Delete">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        </form>
+                                   <!-- Delete Button (opens modal instead of submitting directly) -->
+<button type="button" class="btn btn-link p-0 m-0 text-danger" title="Delete"
+        data-bs-toggle="modal" data-bs-target="#deleteModal{{ $blog->id }}">
+    <i class="bi bi-trash"></i>
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal{{ $blog->id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ $blog->id }}" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel{{ $blog->id }}">Confirm Delete</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        Are you sure you want to delete this blog?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn custom-btn-nav rounded" data-bs-dismiss="modal">No</button>
+
+        <!-- Real delete form -->
+        <form action="{{ route('superadmin.blogs.destroy', $blog->id) }}" method="POST" style="display:inline;">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn custom-btn-nav rounded"> Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
                                     </td>
                                     <td>{{ $blog->title }}</td>
                                     <td>

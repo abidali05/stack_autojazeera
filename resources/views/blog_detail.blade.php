@@ -1,6 +1,6 @@
 @extends('layout.website_layout.bikes.car_main')
 @section('content')
-@section('title', '{{ $blog->title }} - Auto Jazeera')
+@section('title', $blog->title . ' - Auto Jazeera')
 <link rel="stylesheet" href="{{ asset('web/bikes/css/bike_home.css') }}">
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
@@ -9,15 +9,18 @@
         font-family: 'poppins', sans-serif !important;
         background-color: #FBFBFB !important;
     }
+.spanclas {
+    display: inline-block;          /* inline-block se wrap + margin dono kaam karega */
+    background-color: #281F48;
+    padding: 5px 10px;
+    color: white;
+    font-size: 12px;
+    font-weight: 400;
+    border-radius: 5px;
+    margin: 4px 6px 0 0;           /* gap between tags, top/bottom/left/right */
+    white-space: normal;           /* wrap allow */
+}
 
-    .spanclas {
-        background-color: #281F48;
-        padding: 5px;
-        color: white;
-        font-size: 12px;
-        font-weight: 400;
-        border-radius: 5px;
-    }
     .blog-container {
         max-width: 800px;
         margin: 0 auto;
@@ -157,13 +160,13 @@
 
         @if ($blog->tags)
             <div class="blog-tags mb-3">
-                <h5 style="color: #281F48; margin-bottom: 15px;">Tags:</h5>
+                <h5 style="color: #281F48;">Tags:</h5>
          @php
     $allTags = explode(',', $blog->tags ?? 'General');
 @endphp
 
 @foreach($allTags as $tag)
-    <span class="spanclas">{{ trim($tag) }}</span>
+    <span class="spanclas ">{{ trim($tag) }}</span>
 @endforeach
 
             </div>

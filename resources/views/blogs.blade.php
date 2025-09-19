@@ -402,6 +402,36 @@
         font-weight: 500;
     }
 
+    /* Pagination container spacing */
+    .pagination {
+        gap: 6px;
+        /* little space between buttons */
+    }
+
+    /* Active page */
+    .page-item.active .page-link {
+        background-color: #281F48 !important;
+        color: #fff !important;
+        border-color: #281F48 !important;
+    }
+
+    /* Normal page */
+    .page-link {
+        background-color: #fff;
+        color: #281F48;
+        border: 1px solid #281F48;
+        border-radius: 6px;
+        /* little rounded */
+        padding: 6px 12px;
+        transition: all 0.2s ease-in-out;
+    }
+
+    /* Hover effect */
+    .page-link:hover {
+        background-color: #281F48;
+        color: #fff;
+    }
+
     .twelb {
         font-size: 12px;
         color: #281F48;
@@ -473,43 +503,61 @@
             <div class="row">
                 @forelse ($blogs as $blog)
                     <div class="col-md-4 p-4">
-                        <div class="row rounded" style="background-color: #F4F4F4;">
-                            <div class="col-md-12 p-0">
-                                <img class="img-fluid w-100"
-                                    src="{{ $blog->image ? asset($blog->image) : asset('web/images/blog-img.svg') }}"
-                                    alt="{{ $blog->title }}"
-                                    style="height: 200px; object-fit: cover; border-radius:10px 10px 0px 0px;">
-
-                            </div>
-                            @php
-                                $tags = $blog->tags ? json_decode($blog->tags, true) : [];
-                            @endphp
-                            <div class="col-md-12 mt-3 d-flex justify-content-between align-items-baseline">
-                               <div>
+                        <a href="{{ route('blog-detail', $blog->id) }}">
+                            <div class="row rounded" style="background-color: #F4F4F4;">
+                                <div class="col-md-12 p-0">
+                                    <img class="img-fluid w-100"
+                                        src="{{ $blog->image ? asset($blog->image) : asset('web/images/blog-img.svg') }}"
+                                        alt="{{ $blog->title }}"
+                                        style="height: 200px; object-fit: cover; border-radius:10px 10px 0px 0px;">
+                                </div>
                                 @php
-    $allTags = explode(',', $blog->tags ?? 'General');
-@endphp
+                                    $tags = $blog->tags ? json_decode($blog->tags, true) : [];
+                                @endphp
+                                <div class="col-md-12 mt-3 d-flex justify-content-between align-items-baseline">
+                                    <div>
+                                        @php
+                                            $allTags = explode(',', $blog->tags ?? 'General');
+                                            $maxTags = 3; // sirf 3 tags dikhane hain
+                                        @endphp
 
-@foreach($allTags as $tag)
-    <button class="spanclas">{{ trim($tag) }}</button>
-@endforeach
+                                        @foreach ($allTags as $index => $tag)
+                                            @if ($index < $maxTags)
+                                                @php
+                                                    // Tag ke words limit karna
+                                                    $words = explode(' ', trim($tag));
+                                                    $limited = implode(' ', array_slice($words, 0, 3));
+                                                @endphp
 
-                               </div>
-                                <p class="m-0 fouteen">{{ $blog->created_at->format('d/m/Y h:i A') }}</p>
+                                                <button class="spanclas mt-1">
+                                                    {{ $limited }}{{ count($words) > 3 ? '...' : '' }}
+                                                </button>
+                                            @endif
+                                        @endforeach
+
+
+                                    </div>
+
+
+                                    <p class="m-0 fouteen">{{ $blog->created_at->format('d/m/Y h:i A') }}</p>
+                                </div>
+                                <div class="col-md-12 mt-3">
+                                    <p class="labell ">
+                                        {!! Str::limit(strip_tags($blog->title), 40, '...') !!}
+                                    </p>
+                                    <p class="fouteen">
+                                        {!! Str::limit(strip_tags($blog->description), 120, '...') !!}
+
+                                    </p>
+                                </div>
+                                <div class="col-12 mt-4 mb-3">
+                                    <a href="{{ route('blog-detail', $blog->id) }}"
+                                        class="spanclas d-flex justify-content-center align-items-center">
+                                        Learn More <i class="bi bi-arrow-right ms-3 fs-4"></i>
+                                    </a>
+                                </div>
                             </div>
-                            <div class="col-md-12 mt-3">
-                                <p class="labell ">{{ $blog->title }}</p>
-                                <p class="fouteen">
-                                    {!! \Illuminate\Support\Str::limit($blog->description, 120, '...') !!}
-                                </p>
-                            </div>
-                            <div class="col-12 mt-4 mb-3">
-                                <a href="{{ route('blog-detail', $blog->id) }}"
-                                    class="spanclas d-flex justify-content-center align-items-center">
-                                    Learn More <i class="bi bi-arrow-right ms-3 fs-4"></i>
-                                </a>
-                            </div>
-                        </div>
+                        </a>
                     </div>
                 @empty
                     <p class="text-center">No blogs available.</p>
