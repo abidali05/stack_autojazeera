@@ -514,8 +514,8 @@
                                 @php
                                     $tags = $blog->tags ? json_decode($blog->tags, true) : [];
                                 @endphp
-                                <div class="col-md-12 mt-3 d-flex justify-content-between align-items-baseline">
-                                    <div>
+                                <div class="col-md-12 mt-3 d-flex justify-content-end align-items-baseline">
+                                    {{-- <div>
                                         @php
                                             $allTags = explode(',', $blog->tags ?? 'General');
                                             $maxTags = 3; // sirf 3 tags dikhane hain
@@ -536,7 +536,7 @@
                                         @endforeach
 
 
-                                    </div>
+                                    </div> --}}
 
 
                                     <p class="m-0 fouteen">{{ $blog->created_at->format('d/m/Y h:i A') }}</p>

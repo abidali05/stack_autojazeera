@@ -65,7 +65,15 @@
             top: 50%;
             width: 0;
         }
-
+.custom-btn-nave {
+    background-color:transparent !important;
+    border: 1px solid #281F48;
+    border-radius: 50px;
+    padding: 13px 20px !important;
+    color: #281F48;
+    line-height: 15px !important;
+    font-size: 15px !important;
+}
         .table-responsive {
             scrollbar-width: thin;
             scrollbar-color: #281F48 #f1f1f1;
@@ -163,7 +171,7 @@
         Are you sure you want to delete this blog?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn custom-btn-nav rounded" data-bs-dismiss="modal">No</button>
+        <button type="button" class="btn custom-btn-nave rounded" data-bs-dismiss="modal">No</button>
 
         <!-- Real delete form -->
         <form action="{{ route('superadmin.blogs.destroy', $blog->id) }}" method="POST" style="display:inline;">
