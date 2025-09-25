@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OTPController;
 use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\ForumController;
 use Kreait\Firebase\Auth as FirebaseAuth;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\GoogleController;
@@ -30,6 +31,7 @@ use App\Http\Controllers\SuperadminController;
 use App\Http\Controllers\ManageAdminsController;
 use App\Http\Controllers\Bikes\User\BikeController;
 use App\Http\Controllers\User\ShopReviewController;
+use App\Http\Controllers\superadmin\BlogsController;
 use App\Http\Controllers\ForgetPasswordControllerWeb;
 use App\Http\Controllers\superadmin\TikTokController;
 use App\Http\Controllers\User\SubscriptionController;
@@ -42,6 +44,7 @@ use App\Http\Controllers\superadmin\PriceAlertController;
 use App\Http\Controllers\superadmin\FacebookAuthController;
 use App\Http\Controllers\Autoservices\ServiceChatController;
 use App\Http\Controllers\Autoservices\ServiceUserController;
+use App\Http\Controllers\SuperAdmin\ForumCategoryController;
 use App\Http\Controllers\superadmin\SubmittedFormController;
 use App\Http\Controllers\Autoservices\ShopWishlistController;
 use App\Http\Controllers\Bikes\superadmin\BikeMakeController;
@@ -65,8 +68,6 @@ use App\Http\Controllers\superadmin\SuperadminSubscriptionController;
 use App\Http\Controllers\Bikes\superadmin\BikeController as SuperadminBikeController;
 use App\Http\Controllers\Autoservices\ServicesController as AutoservicesServicesController;
 use App\Http\Controllers\Autoservices\superadmin\ShopController as SuperadminShopController;
-use App\Http\Controllers\superadmin\BlogsController;
-use App\Http\Controllers\ForumController;
 
 /*
 |--------------------------------------------------------------------------
@@ -232,15 +233,18 @@ Route::get('all-blogs', [GeneralController::class, 'allBlogs'])->name('all-blogs
 Route::get('blog-detail/{id}', [GeneralController::class, 'blogDetail'])->name('blog-detail');
 
 // Forum Routes
-Route::get('forum', [ForumController::class, 'index'])->name('forum.index');
+Route::get('forums', [ForumController::class, 'index'])->name('forum.index');
 Route::get('forum/category/{id}', [ForumController::class, 'category'])->name('forum.category');
 Route::get('forum/thread/{id}', [ForumController::class, 'thread'])->name('forum.thread');
 
 Route::middleware('auth')->group(function () {
-    Route::get('forum/category/{id}/create-thread', [ForumController::class, 'createThread'])->name('forum.create-thread');
     Route::post('forum/category/{id}/store-thread', [ForumController::class, 'storeThread'])->name('forum.store-thread');
     Route::post('forum/thread/{id}/reply', [ForumController::class, 'storeReply'])->name('forum.store-reply');
     Route::delete('forum/post/{id}', [ForumController::class, 'deletePost'])->name('forum.delete-post');
+    Route::post('forum/toggle-like', [ForumController::class, 'toggleLike'])->name('forum.toggle-like');
+    Route::post('forum/toggle-favorite', [ForumController::class, 'toggleFavorite'])->name('forum.toggle-favorite');
+    Route::get('forum/favorites', [ForumController::class, 'favorites'])->name('forum.favorites');
+    Route::post('forum/upload-image', [ForumController::class, 'uploadImage'])->name('forum.upload-image');
 });
 
 Route::get('bike-details/{id}', [BikeAdsController::class, 'bikedetail'])->name('bikedetail');
@@ -280,7 +284,7 @@ Route::group(['prefix' => 'superadmin', 'as' => 'superadmin.'], function () {
         Route::get('change-post-status/{id}', [SuperadminAddsController::class, 'change_status'])->name('change_post_status');
         Route::post('change-post-status', [SuperadminAddsController::class, 'change_post_status'])->name('change_posts_status');
         Route::resource('blogs', BlogsController::class);
-        Route::resource('forum-categories', \App\Http\Controllers\SuperAdmin\ForumCategoryController::class);
+        Route::resource('forum-categories', ForumCategoryController::class);
         Route::resource('subscription', SuperadminSubscriptionController::class);
         Route::resource('feature', SuperadminFeatureController::class);
         Route::resource('color', SuperadminColorController::class);

@@ -290,4 +290,24 @@ class User extends Authenticatable
     public function shop() {
         return $this->hasOne(Shops::class, 'dealer_id');
     }
+
+    public function forumThreads()
+    {
+        return $this->hasMany(ForumThread::class);
+    }
+
+    public function forumPosts()
+    {
+        return $this->hasMany(ForumPost::class);
+    }
+
+    public function forumLikes()
+    {
+        return $this->hasMany(ForumLike::class);
+    }
+
+    public function forumFavorites()
+    {
+        return $this->hasMany(ForumFavorite::class);
+    }
 }

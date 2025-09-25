@@ -68,12 +68,12 @@
                     </a>
                 </li>
 
-                {{-- <li class="nav-item m-0 {{ Request::is('forum') ? 'active' : '' }}">
+                <li class="nav-item m-0 {{ Request::is('forum') ? 'active' : '' }}">
                     <a href="{{ route('forum.index') }}" class="nav-link"
                         style="{{ Request::is('forum') ? 'color: #F40000; font-weight: bold;' : '' }}">
                         Forums
                     </a>
-                </li> --}}
+                </li>
 
                 <li class="nav-item m-0 {{ Request::is('dashboard') ? 'active' : '' }}">
                     @if (Route::has('login'))
