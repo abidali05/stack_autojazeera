@@ -144,13 +144,13 @@
                             <td>{{ $category->created_at->format('M d, Y') }}</td>
                             <td>
                                 <a href="{{ route('superadmin.forum-categories.edit', $category->id) }}"
-                                    class="btn btn-sm btn-warning">Edit</a>
+                                    class=""><i class="bi bi-pencil-square"></i></a>
                                 <form action="{{ route('superadmin.forum-categories.destroy', $category->id) }}"
                                     method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger"
-                                        onclick="return confirm('Are you sure?')">Delete</button>
+                                    <button type="submit" class="" style="border: none"
+                                        onclick="return confirm('Are you sure?')"><i class="bi bi-trash3-fill"></i></button>
                                 </form>
                             </td>
                         </tr>

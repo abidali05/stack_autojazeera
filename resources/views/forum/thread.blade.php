@@ -1,24 +1,90 @@
 @extends('layout.website_layout.bikes.car_main')
 @section('title', $thread->title . ' - Forum')
 @section('content')
+<style>
+    .btnb{
+color: #281F48;
+background-color:white;
+border: 1px solid #281F48;
+padding: 10px 20px;
+border-radius: 5px;
+font-size: 14px;
+font-weight: 500;
+    }
+    .redd{
+        color: #D90600;
+    }
+    .blu{
+        color: #281F48;
+    }
+       #goToTop,
+    #goToBottom {
+        position: fixed;
+        right: 20px;
+        padding: 10px;
+        padding-left: 15px;
+        padding-right: 15px;
+        font-size: 20px;
+        background-color: #F40000 !important;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+        opacity: 0;
+        /* Start hidden */
+        visibility: hidden;
+        /* Prevent interaction when hidden */
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        /* Smooth transition */
+    }
 
+    #goToTop {
+        bottom: 80px;
+    }
+
+    #goToBottom {
+        bottom: 20px;
+    }
+
+    #goToTop:hover,
+    #goToBottom:hover {
+        background-color: #F40000 !important;
+    }
+
+    /* Show buttons with fade-in effect */
+    #goToTop.show,
+    #goToBottom.show {
+        opacity: 1;
+        visibility: visible;
+    }
+</style>
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-12">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('forum.index') }}">Forum</a></li>
-                        <li class="breadcrumb-item"><a
+                        <li class="breadcrumb-item"><a href="{{ route('forum.index') }}" class="blu">Forum</a></li>
+                        <li class="breadcrumb-item"><a class="blu"
                                 href="{{ route('forum.category', $thread->category->id) }}">{{ $thread->category->name }}</a>
                         </li>
-                        <li class="breadcrumb-item active">{{ Str::limit($thread->title, 50) }}</li>
+                        <li class="breadcrumb-item active" style="color: #F40000">{{ Str::limit($thread->title, 50) }}</li>
                     </ol>
                 </nav>
 
                 <div class="card mb-4">
                     <div class="card-header" style="background-color: #281F48; color: white;">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">{{ $thread->title }}</h5>
+                       <div>
+                             <h5 class="mb-0">{{ $thread->title }}</h5>
+                                 <small class="d-block mt-2">
+                            <i class="fas fa-eye"></i> {{ $thread->views_count }} views •
+                            <i class="fas fa-comments"></i> {{ $thread->posts()->count() }} posts •
+                            <i class="fas fa-users"></i> {{ $thread->posts()->select('user_id')->distinct()->count() + 1 }}
+                            participants
+                        </small>
+                       </div>
                             @auth
                                 <div class="d-flex gap-2">
                                     <button class="btn btn-sm btn-outline-light like-btn" data-type="thread"
@@ -39,17 +105,12 @@
                                 </div>
                             @endauth
                         </div>
-                        <small class="d-block mt-2">
-                            <i class="fas fa-eye"></i> {{ $thread->views_count }} views •
-                            <i class="fas fa-comments"></i> {{ $thread->posts()->count() }} posts •
-                            <i class="fas fa-users"></i> {{ $thread->posts()->select('user_id')->distinct()->count() + 1 }}
-                            participants
-                        </small>
+                   
                     </div>
                 </div>
 
                 @foreach ($posts as $post)
-                    <div class="card mb-3" id="post-{{ $post->id }}">
+                    <div class=" mb-3 rounded" style="border: 1px solid #281F48" id="post-{{ $post->id }}">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-2 text-center border-end">
@@ -58,11 +119,11 @@
                                             class="rounded-circle" width="50" height="50" alt="User">
                                     </div>
                                     <strong>{{ $post->user->name }}</strong><br>
-                                    <small class="text-muted">{{ $post->created_at->format('M d, Y') }}</small><br>
-                                    <small class="text-muted">Posts: {{ $post->user->forumPosts()->count() }}</small>
+                                    <small class="blu">{{ $post->created_at->format('M d, Y') }}</small><br>
+                                    <small class="blu">Posts: {{ $post->user->forumPosts()->count() }}</small>
                                 </div>
                                 <div class="col-md-10">
-                                    <div class="mb-3">{!! $post->body !!}</div>
+                                    <div class="mb-3 blu">{!! $post->body !!}</div>
 
                                     <div class="d-flex justify-content-between align-items-center mt-2">
                                         <div class="d-flex gap-2">
@@ -147,8 +208,8 @@
                 @auth
                     @if (!$thread->is_locked)
                         <div class="text-center mt-4">
-                            <button type="button" class="btn btn-lg main-reply-btn"
-                                style="background-color: #F40000; color: white;">
+                            <button type="button" class="btn btn-lg main-reply-btn btnb mb-2"
+                            >
                                 <i class="fas fa-comment"></i> Post Reply
                             </button>
                         </div>
@@ -183,7 +244,7 @@
                                 <textarea name="body" class="form-control rounded-1 mb-4 " id="main-editor" rows="6"
                                     placeholder="Description"></textarea>
                             </div>
-                            <button type="submit" class="btn" style="background-color: #F40000; color: white;">Post
+                            <button type="submit" class="btn btnb" >Post
                                 Reply</button>
                         </div>
                     </form>
@@ -208,7 +269,7 @@
                             <textarea name="body" class="form-control rounded-1 mb-4 " id="editor" rows="6"
                                 placeholder="Description"></textarea>
                         </div>
-                        <button type="submit" class="btn" style="background-color: #F40000; color: white;">Post
+                        <button type="submit" class="btn btnb" >Post
                             Reply</button>
                     </div>
                 </form>

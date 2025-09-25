@@ -1,21 +1,79 @@
 @extends('layout.website_layout.bikes.car_main')
 @section('title', $category->name . ' - Forum')
 @section('content')
+<style>
+    .btnb{
+color: #281F48;
+background-color:white;
+border: 1px solid #281F48;
+padding: 10px 20px;
+border-radius: 5px;
+font-size: 14px;
+font-weight: 500;
+    }
+    .redd{
+        color: #D90600;
+    }
+    .blu{
+        color: #281F48;
+    }
+       #goToTop,
+    #goToBottom {
+        position: fixed;
+        right: 20px;
+        padding: 10px;
+        padding-left: 15px;
+        padding-right: 15px;
+        font-size: 20px;
+        background-color: #F40000 !important;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+        opacity: 0;
+        /* Start hidden */
+        visibility: hidden;
+        /* Prevent interaction when hidden */
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        /* Smooth transition */
+    }
 
+    #goToTop {
+        bottom: 80px;
+    }
+
+    #goToBottom {
+        bottom: 20px;
+    }
+
+    #goToTop:hover,
+    #goToBottom:hover {
+        background-color: #F40000 !important;
+    }
+
+    /* Show buttons with fade-in effect */
+    #goToTop.show,
+    #goToBottom.show {
+        opacity: 1;
+        visibility: visible;
+    }
+</style>
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-12">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('forum.index') }}">Forum</a></li>
-                        <li class="breadcrumb-item active">{{ $category->name }}</li>
+                        <li class="breadcrumb-item "><a href="{{ route('forum.index') }}" class="blu">Forum</a></li>
+                        <li class="breadcrumb-item active redd" style="color: #F40000">{{ $category->name }}</li>
                     </ol>
                 </nav>
 
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h2 style="color: #281F48; font-weight: 700;">{{ $category->name }}</h2>
                     @auth
-                        <button type="button" class="btn new-thread-btn" style="background-color: #F40000; color: white;">
+                        <button type="button" class="btn btnb new-thread-btn" >
                             New Thread
                         </button>
                     @endauth
@@ -37,7 +95,7 @@
                                             <div>
                                                 <h6 class="mb-1">
                                                     <a href="{{ route('forum.thread', $thread->id) }}"
-                                                        style="color: #281F48; text-decoration: none;">
+                                                        style="color: #281F48; text-decoration: none; font-weight: 600;">
                                                         {{ $thread->title }}
                                                     </a>
                                                 </h6>
