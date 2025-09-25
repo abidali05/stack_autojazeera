@@ -207,6 +207,8 @@ class ForumDataSeeder extends Seeder
                 'title' => $threadData['title'],
                 'is_pinned' => $threadData['is_pinned'] ?? false,
                 'is_locked' => $threadData['is_locked'] ?? false,
+                'likes_count' => rand(0, 25),
+                'views_count' => rand(10, 150),
             ]);
 
             foreach ($threadData['posts'] as $postData) {
@@ -216,6 +218,7 @@ class ForumDataSeeder extends Seeder
                     'thread_id' => $thread->id,
                     'user_id' => $postUser->id,
                     'body' => $postData['body'],
+                    'likes_count' => rand(0, 15),
                 ]);
 
                 // Create replies if they exist
@@ -228,6 +231,7 @@ class ForumDataSeeder extends Seeder
                             'user_id' => $replyUser->id,
                             'parent_id' => $post->id,
                             'body' => $replyData['body'],
+                            'likes_count' => rand(0, 8),
                         ]);
                     }
                 }

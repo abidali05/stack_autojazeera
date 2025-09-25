@@ -16,8 +16,10 @@ class ForumCategory extends Model
         return $this->hasMany(ForumThread::class, 'category_id');
     }
 
-    public function latestThread()
+    public function latestThreads()
     {
-        return $this->hasOne(ForumThread::class, 'category_id')->latest();
+        return $this->hasMany(ForumThread::class, 'category_id')    
+                ->latest()
+                ->take(4);
     }
 }

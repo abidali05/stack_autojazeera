@@ -10,14 +10,17 @@
             padding: 0;
             margin: 0;
         }
-.ck-content h1,
-.ck-content h2,
-.ck-content h3,
-.ck-content h4,
-.ck-content h5,
-.ck-content h6 {
-    color: #000 !important; /* Default black */
-}
+
+        .ck-content h1,
+        .ck-content h2,
+        .ck-content h3,
+        .ck-content h4,
+        .ck-content h5,
+        .ck-content h6 {
+            color: #000 !important;
+            /* Default black */
+        }
+
         .time-picker-wrapper {
             position: relative;
             display: inline-block;
@@ -1003,30 +1006,30 @@
         <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 
         <script>
-   ClassicEditor
-      .create(document.querySelector('#ckeditor'), {
-        toolbar: [
-          'heading', '|',
-          'bold', 'italic', 'underline', 'strikethrough', '|',
-          'fontColor', 'fontBackgroundColor', '|',
-          'bulletedList', 'numberedList', '|',
-          'link', 'blockQuote', '|',
-          'undo', 'redo'
-        ],
-        removePlugins: [
-          'Image',
-          'ImageToolbar',
-          'ImageCaption',
-          'ImageStyle',
-          'ImageUpload',
-          'MediaEmbed',
-          'EasyImage',
-          'CKFinder'
-        ]
-      })
-      .catch(error => {
-        console.error(error);
-      });
+            ClassicEditor
+                .create(document.querySelector('#ckeditor'), {
+                    toolbar: [
+                        'heading', '|',
+                        'bold', 'italic', 'underline', 'strikethrough', '|',
+                        'fontColor', 'fontBackgroundColor', '|',
+                        'bulletedList', 'numberedList', '|',
+                        'link', 'blockQuote', '|',
+                        'undo', 'redo'
+                    ],
+                    removePlugins: [
+                        'Image',
+                        'ImageToolbar',
+                        'ImageCaption',
+                        'ImageStyle',
+                        'ImageUpload',
+                        'MediaEmbed',
+                        'EasyImage',
+                        'CKFinder'
+                    ]
+                })
+                .catch(error => {
+                    console.error(error);
+                });
 
             const tagInput = document.getElementById("tagInput");
             const tagsContainer = document.getElementById("tagsContainer");

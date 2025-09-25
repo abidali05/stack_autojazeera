@@ -415,6 +415,12 @@
              <span class="text">Blogs</span>
          </a>
 
+         <a href="{{ url('superadmin/forum-categories') }}" class="d-flex align-items-baseline">
+             <span class="icon"><img src="{{ asset('web/images/blog.svg') }}" class=""
+                     alt="..."></span>
+             <span class="text">Forum Categories</span>
+         </a>
+
          <a href="{{ url('superadmin/shops') }}" class="d-flex align-items-baseline">
              <span class="icon"><img src="{{ asset('web/images/Shop.svg') }}" class=""
                      alt="..."></span>
