@@ -21,7 +21,6 @@ class ApiNumbereController extends Controller
     public function __construct()
     {
         $this->twilio = new Client(env('TWILIO_ACCOUNT_SID'), env('TWILIO_AUTH_TOKEN'));
-        // $this->twilio = new Client('ACf7b88a5f46cf4a5f8215d0018c55f355', '342711440a4f95845b398ebad6f9f7a1');
     }
 
     public function requestOTP(Request $request)
@@ -41,7 +40,7 @@ class ApiNumbereController extends Controller
             ], 401);
             exit;
         }
-        if($user->status == 'inactive'){
+        if ($user->status == 'inactive') {
             return response()->json([
                 'message' => 'Your account is not active, please contact to admin.',
                 'status' => 401
@@ -58,10 +57,10 @@ class ApiNumbereController extends Controller
 
         try {
             // Send OTP via SMS
-         //    $data = $this->twilio->messages->create($phoneNumber, [
-           //      'from' => '+13655361575',
-             //    'body' => "Your OTP For login to AutoJazeera is: $otp"
-           //  ]);
+            //    $data = $this->twilio->messages->create($phoneNumber, [
+            //      'from' => '+13655361575',
+            //    'body' => "Your OTP For login to AutoJazeera is: $otp"
+            //  ]);
 
             return  response()->json([
                 'otp' => $otp,
@@ -69,13 +68,25 @@ class ApiNumbereController extends Controller
                 'status' => 200
             ], 200);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Failed to send OTP.', 'status' => 500], 500);
+            // return response()->json(['error' => 'Failed to send OTP.', 'status' => 500], 500);
+            $hardcodedOtp = env('FALLBACK_OTP', 123456);
+
+            Otp::updateOrCreate(
+                ['phone_number' => $phoneNumber],
+                ['otp' => $hardcodedOtp, 'created_at' => now()]
+            );
+
+            return response()->json([
+                'otp' => $hardcodedOtp,
+                'message' => 'Twilio failed, but using fallback OTP.',
+                'status' => 200
+            ], 200);
         }
     }
 
     public function verifyOTP(Request $request)
     {
-       
+
         $request->validate([
             'number' => 'required|string',
             'otp' => 'required|string',
@@ -86,7 +97,7 @@ class ApiNumbereController extends Controller
         $record = Otp::where('phone_number', $phoneNumber)->first();
         $user = User::where('number', $phoneNumber)->first();
         if ($record && $record->otp === $otp) {
-    
+
             if (!$user) {
                 return response()->json([
                     'data' => null,
@@ -129,16 +140,17 @@ class ApiNumbereController extends Controller
         ], 422);
     }
 
-    public function send_number_otp($number, $otp){
-        
-        
+    public function send_number_otp($number, $otp)
+    {
+
+
 
         try {
             // Send OTP via SMS
-          //   $data = $this->twilio->messages->create($number, [
+            //   $data = $this->twilio->messages->create($number, [
             //     'from' => '+13655361575',
-             //    'body' => "Your OTP for login to AutoJazeera is: $otp"
-           //  ]);
+            //    'body' => "Your OTP for login to AutoJazeera is: $otp"
+            //  ]);
 
 
             return  response()->json([
@@ -149,6 +161,5 @@ class ApiNumbereController extends Controller
         } catch (\Exception $e) {
             return response()->json(['error' => 'Failed to send OTP.', 'status' => 500], 500);
         }
-
     }
 }

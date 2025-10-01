@@ -65,7 +65,7 @@ class RegisterationController extends Controller
             elseif ($request->input('provider') === 'google') {
                 // Define the validation rules for Google provider
                 $rules['identifier'] = 'required|email';
-                $rules['name'] = 'required|string|max:255';
+                $rules['name'] = 'nullable|string|max:255';
                 $rules['is_email_verified'] = 'required|boolean';
                 $rules['fcm_token'] = 'nullable|string';
 
@@ -101,20 +101,24 @@ class RegisterationController extends Controller
                 ->first();
             // Create new user for google
             if ($request->input('provider') === 'google') {
-                User::upsert(
-                    [
-                        [
-                            'name' => $request->name,
-                            'email' => $request->identifier,
-                            'fcm_token' => $request->fcm_token,
-                            'password' => Hash::make('password'),
-                            'is_email_verified' => $request->is_email_verified ?? false,
-                        ]
-                    ],
-                    ['email'], // Unique column
-                    ['name', 'fcm_token', 'is_email_verified'] // Columns to update
-                );
-
+				
+                $user = User::where('email', $request->identifier)->first();
+                if (!$user) {
+    // Create new user
+    $user = User::create([
+        'name' => $request->name,
+        'email' => $request->identifier,
+        'fcm_token' => $request->fcm_token,
+        'password' => Hash::make('password'),
+        'is_email_verified' => $request->is_email_verified ?? false,
+    ]);
+} else {
+    // Update only selective fields
+    $user->update([
+        'fcm_token' => $request->fcm_token,
+        'is_email_verified' => $request->is_email_verified ?? $user->is_email_verified,
+    ]);
+}
                 $user = User::where('email', $request->identifier)->first();
 
                 if ($user->status !== 'active') {
