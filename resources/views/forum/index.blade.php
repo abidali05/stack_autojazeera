@@ -60,7 +60,7 @@ font-weight: 500;
         visibility: visible;
     }
 </style>
-    <div class="container mt-5">
+    <div class="container my-5">
         <div class="row">
             <div class="col-md-12">
                 <div class="d-flex justify-content-between align-items-center mb-4">

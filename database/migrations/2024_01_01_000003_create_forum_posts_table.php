@@ -6,7 +6,14 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up()
+/*************  ✨ Windsurf Command ⭐  *************/
+/**
+ * Run the migrations to create the forum posts table.
+ *
+ * @return void
+ */
+ 
+/*******  e7b8018a-0718-49fc-828a-5f8fff326c3a  *******/    public function up()
     {
         Schema::create('forum_posts', function (Blueprint $table) {
             $table->id();

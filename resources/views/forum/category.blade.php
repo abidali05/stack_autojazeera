@@ -60,7 +60,7 @@ font-weight: 500;
         visibility: visible;
     }
 </style>
-    <div class="container mt-5">
+    <div class="container my-5">
         <div class="row">
             <div class="col-md-12">
                 <nav aria-label="breadcrumb">
@@ -262,149 +262,180 @@ font-weight: 500;
 
     {{-- <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/upload/upload.js"></script> --}}
-    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Favorite functionality
-            document.querySelectorAll('.favorite-btn').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const threadId = this.dataset.threadId;
-                    const button = this;
+<script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // ---------------- IMAGE BUTTON OVERRIDE ----------------
+        CKEDITOR.on('dialogDefinition', function (ev) {
+            if (ev.data.name === 'image') {
+                ev.data.definition.onShow = function () {
+                    this.hide(); // CKEditor ka default modal hide karo
 
-                    fetch('{{ route('forum.toggle-favorite') }}', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                            },
-                            body: JSON.stringify({
-                                thread_id: threadId
-                            })
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.favorited) {
-                                button.className = 'btn btn-sm btn-warning favorite-btn';
-                                button.dataset.favorited = 'true';
-                            } else {
-                                button.className =
-                                    'btn btn-sm btn-outline-secondary favorite-btn';
-                                button.dataset.favorited = 'false';
+                    let input = document.createElement('input');
+                    input.type = 'file';
+                    input.accept = 'image/png, image/jpeg'; // ✅ sirf jpg + jpeg + png
+
+                    input.onchange = function (e) {
+                        let file = e.target.files[0];
+                        if (file) {
+                            // ✅ allowed mime types
+                            const allowedTypes = ['image/jpeg', 'image/png'];
+
+                            if (!allowedTypes.includes(file.type)) {
+                                alert("Only JPG, JPEG, and PNG images are allowed.");
+                                return;
                             }
+
+                            // ✅ max size check (10MB)
+                            const maxSize = 10 * 1024 * 1024;
+                            if (file.size > maxSize) {
+                                alert("Image size must be less than 10MB.");
+                                return;
+                            }
+
+                            // ✅ insert image if valid
+                            let reader = new FileReader();
+                            reader.onload = function (evt) {
+                                let editor = ev.editor;
+                                editor.insertHtml(
+                                    '<img src="' + evt.target.result + '" style="max-width:100px; height:100px;"/>'
+                                );
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                    };
+
+                    input.click();
+                };
+            }
+        });
+
+        // ---------------- FAVORITE FUNCTIONALITY ----------------
+        document.querySelectorAll('.favorite-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const threadId = this.dataset.threadId;
+                const button = this;
+
+                fetch('{{ route('forum.toggle-favorite') }}', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: JSON.stringify({
+                            thread_id: threadId
                         })
-                        .catch(error => {
-                            console.error('Error:', error);
-                            alert('Please login to add favorites.');
-                        });
-                });
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.favorited) {
+                            button.className = 'btn btn-sm btn-warning favorite-btn';
+                            button.dataset.favorited = 'true';
+                        } else {
+                            button.className = 'btn btn-sm btn-outline-secondary favorite-btn';
+                            button.dataset.favorited = 'false';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Please login to add favorites.');
+                    });
             });
+        });
 
-            // Copy link functionality
-            document.querySelectorAll('.copy-link').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const url = this.dataset.url;
-                    const button = this;
+        // ---------------- COPY LINK FUNCTIONALITY ----------------
+        document.querySelectorAll('.copy-link').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const url = this.dataset.url;
+                const button = this;
 
-                    if (navigator.clipboard && window.isSecureContext) {
-                        navigator.clipboard.writeText(url).then(() => {
-                            showCopySuccess(button);
-                        }).catch(() => {
-                            fallbackCopyTextToClipboard(url, button);
-                        });
-                    } else {
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(url).then(() => {
+                        showCopySuccess(button);
+                    }).catch(() => {
                         fallbackCopyTextToClipboard(url, button);
-                    }
-                });
-            });
-
-            function showCopySuccess(button) {
-                const originalText = button.innerHTML;
-                button.innerHTML = '<i class="fas fa-check"></i>';
-                setTimeout(() => {
-                    button.innerHTML = originalText;
-                }, 1000);
-            }
-
-            function fallbackCopyTextToClipboard(text, button) {
-                const textArea = document.createElement('textarea');
-                textArea.value = text;
-                textArea.style.position = 'fixed';
-                textArea.style.left = '-999999px';
-                textArea.style.top = '-999999px';
-                document.body.appendChild(textArea);
-                textArea.focus();
-                textArea.select();
-
-                try {
-                    document.execCommand('copy');
-                    showCopySuccess(button);
-                } catch (err) {
-                    console.error('Fallback: Oops, unable to copy', err);
-                    alert('Copy failed. Please copy manually: ' + text);
-                }
-
-                document.body.removeChild(textArea);
-            }
-
-            // Thread modal functionality
-            let editor;
-            const threadModal = document.getElementById('threadModalContainer');
-            const newThreadBtn = document.querySelector('.new-thread-btn');
-            const closeModalBtns = document.querySelectorAll('.close-modal-btn');
-
-            newThreadBtn.addEventListener('click', function() {
-                threadModal.style.display = 'block';
-                setTimeout(() => {
-                    threadModal.classList.add('show');
-                }, 10);
-
-                CKEDITOR.replace('editor', {
-                    filebrowserUploadUrl: "{{ route('forum.upload-image', ['_token' => csrf_token()]) }}",
-                    filebrowserUploadMethod: 'form',
-                    toolbar: [{
-                            name: 'basicstyles',
-                            items: ['Bold', 'Italic']
-                        },
-                        {
-                            name: 'paragraph',
-                            items: ['NumberedList', 'BulletedList']
-                        }, // comma = lists
-                        {
-                            name: 'insert',
-                            items: ['Image']
-                        },
-                        {
-                            name: 'styles',
-                            items: ['Format']
-                        }
-                    ],
-                    removeButtons: '' // ensures only above remain
-                });
-
-            });
-
-            closeModalBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    threadModal.classList.remove('show');
-                    setTimeout(() => {
-                        threadModal.style.display = 'none';
-                        if (editor) {
-                            editor.destroy();
-                            editor = null;
-                        }
-                    }, 300);
-                });
-            });
-
-            // Handle form submission
-            threadModal.querySelector('form').addEventListener('submit', function(e) {
-                if (editor) {
-                    document.getElementById('body').value = editor.getData();
+                    });
+                } else {
+                    fallbackCopyTextToClipboard(url, button);
                 }
             });
         });
-    </script>
+
+        function showCopySuccess(button) {
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check"></i>';
+            setTimeout(() => {
+                button.innerHTML = originalText;
+            }, 1000);
+        }
+
+        function fallbackCopyTextToClipboard(text, button) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+
+            try {
+                document.execCommand('copy');
+                showCopySuccess(button);
+            } catch (err) {
+                console.error('Fallback: Oops, unable to copy', err);
+                alert('Copy failed. Please copy manually: ' + text);
+            }
+
+            document.body.removeChild(textArea);
+        }
+
+        // ---------------- THREAD MODAL FUNCTIONALITY ----------------
+        let editor;
+        const threadModal = document.getElementById('threadModalContainer');
+        const newThreadBtn = document.querySelector('.new-thread-btn');
+        const closeModalBtns = document.querySelectorAll('.close-modal-btn');
+
+        newThreadBtn.addEventListener('click', function() {
+            threadModal.style.display = 'block';
+            setTimeout(() => {
+                threadModal.classList.add('show');
+            }, 10);
+
+            editor = CKEDITOR.replace('editor', {
+                toolbar: [
+                    { name: 'basicstyles', items: ['Bold', 'Italic'] },
+                    { name: 'paragraph', items: ['NumberedList', 'BulletedList'] },
+                    { name: 'insert', items: ['Image'] },
+                    { name: 'styles', items: ['Format'] }
+                ],
+                removeButtons: '' // ensures only above remain
+            });
+        });
+
+        closeModalBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                threadModal.classList.remove('show');
+                setTimeout(() => {
+                    threadModal.style.display = 'none';
+                    if (editor) {
+                        editor.destroy();
+                        editor = null;
+                    }
+                }, 300);
+            });
+        });
+
+        // ---------------- FORM SUBMISSION ----------------
+        threadModal.querySelector('form').addEventListener('submit', function(e) {
+            if (editor) {
+                document.getElementById('body').value = editor.getData();
+            }
+        });
+    });
+</script>
+
 
 @endsection

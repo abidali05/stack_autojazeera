@@ -1,3 +1,4 @@
+
 @extends('layout.website_layout.bikes.car_main')
 @section('title', $thread->title . ' - Forum')
 @section('content')
@@ -59,6 +60,13 @@ font-weight: 500;
         opacity: 1;
         visibility: visible;
     }
+    .blu img {
+    width: 100px !important;
+    height: 100px !important;
+    object-fit: cover;
+    border-radius: 6px; /* optional */
+    margin-right: 10px;
+}
 </style>
     <div class="container mt-5">
         <div class="row">
@@ -112,7 +120,7 @@ font-weight: 500;
                 @foreach ($posts as $post)
                     <div class=" mb-3 rounded" style="border: 1px solid #281F48" id="post-{{ $post->id }}">
                         <div class="card-body">
-                            <div class="row">
+                            <div class="row d-flex align-items-center">
                                 <div class="col-md-2 text-center border-end">
                                     <div class="mb-2">
                                         <img src="{{ $post->user->image ? asset('web/profile/' . $post->user->image) : asset('web/images/avatar.png') }}"
@@ -122,7 +130,7 @@ font-weight: 500;
                                     <small class="blu">{{ $post->created_at->format('M d, Y') }}</small><br>
                                     <small class="blu">Posts: {{ $post->user->forumPosts()->count() }}</small>
                                 </div>
-                                <div class="col-md-10">
+                                <div class="col-md-10 p-3">
                                     <div class="mb-3 blu">{!! $post->body !!}</div>
 
                                     <div class="d-flex justify-content-between align-items-center mt-2">
@@ -164,7 +172,7 @@ font-weight: 500;
 
                                     <!-- Nested Replies -->
                                     @foreach ($post->replies as $reply)
-                                        <div class="ms-4 mt-3 border-start ps-3" id="post-{{ $reply->id }}">
+                                        <div class="ms-4 mt-3 px-3" id="post-{{ $reply->id }}">
                                             <div class="d-flex justify-content-between">
                                                 <div>
                                                     <strong>{{ $reply->user->name }}</strong>
@@ -174,7 +182,7 @@ font-weight: 500;
                                                 </div>
                                                 <small class="text-muted">{{ $reply->created_at->diffForHumans() }}</small>
                                             </div>
-                                            <div class="mt-2">{!! $reply->body !!}</div>
+                                            <div class="mt-2 blu">{!! $reply->body !!}</div>
                                             @auth
                                                 <div class="d-flex gap-2 mt-2">
                                                     <button class="btn btn-sm btn-outline-primary like-btn" data-type="post"
@@ -220,7 +228,7 @@ font-weight: 500;
                     @endif
                 @else
                     <div class="alert alert-info">
-                        Please <a href="{{ route('login') }}">login</a> to post a reply.
+                       <p> Please <a href="{{ route('login') }}" style="color: #F40000">login</a> to post a reply.</p>
                     </div>
                 @endauth
             </div>
@@ -347,291 +355,317 @@ font-weight: 500;
         }
     </style>
 
-    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Reply modal functionality
-            let mainEditor, nestedEditor;
-            const mainReplyContainer = document.getElementById('mainReplyContainer');
-            const nestedReplyContainer = document.getElementById('nestedReplyContainer');
-            const mainReplyBtn = document.querySelector('.main-reply-btn');
-            const replyBtns = document.querySelectorAll('.reply-btn');
+   <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let mainEditor, nestedEditor;
+        const mainReplyContainer = document.getElementById('mainReplyContainer');
+        const nestedReplyContainer = document.getElementById('nestedReplyContainer');
+        const mainReplyBtn = document.querySelector('.main-reply-btn');
+        const replyBtns = document.querySelectorAll('.reply-btn');
 
-            // Main reply modal
-            if (mainReplyBtn) {
-                mainReplyBtn.addEventListener('click', function() {
-                    mainReplyContainer.style.display = 'block';
-                    setTimeout(() => {
-                        mainReplyContainer.classList.add('show');
-                    }, 10);
+        // ---------- Image Button Override ----------
+      // ---------- Image Button Override ----------
+CKEDITOR.on('dialogDefinition', function (ev) {
+    if (ev.data.name === 'image') {
+        ev.data.definition.onShow = function () {
+            this.hide(); // CKEditor ka default modal hide karo
 
-                    CKEDITOR.replace('main-editor', {
-                        filebrowserUploadUrl: "{{ route('forum.upload-image', ['_token' => csrf_token()]) }}",
-                        filebrowserUploadMethod: 'form',
-                        toolbar: [{
-                                name: 'basicstyles',
-                                items: ['Bold', 'Italic']
-                            },
-                            {
-                                name: 'paragraph',
-                                items: ['NumberedList', 'BulletedList']
-                            }, // comma = lists
-                            {
-                                name: 'insert',
-                                items: ['Image']
-                            },
-                            {
-                                name: 'styles',
-                                items: ['Format']
-                            }
-                        ],
-                        removeButtons: '' // ensures only above remain
-                    });
-                });
-            }
+            let input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/png, image/jpeg'; // ✅ sirf jpg + jpeg + png
 
-            // Nested reply modal
-            replyBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const postId = this.dataset.postId;
-                    const postAuthor = this.dataset.postAuthor;
+            input.onchange = function (e) {
+                let file = e.target.files[0];
+                if (file) {
+                    // ✅ allowed mime types
+                    const allowedTypes = ['image/jpeg', 'image/png'];
 
-                    document.getElementById('reply-parent-id').value = postId;
-                    document.getElementById('reply-author').textContent = postAuthor;
-
-                    nestedReplyContainer.style.display = 'block';
-                    setTimeout(() => {
-                        nestedReplyContainer.classList.add('show');
-                    }, 10);
-
-                    CKEDITOR.replace('editor', {
-                        filebrowserUploadUrl: "{{ route('forum.upload-image', ['_token' => csrf_token()]) }}",
-                        filebrowserUploadMethod: 'form',
-                        toolbar: [{
-                                name: 'basicstyles',
-                                items: ['Bold', 'Italic']
-                            },
-                            {
-                                name: 'paragraph',
-                                items: ['NumberedList', 'BulletedList']
-                            }, // comma = lists
-                            {
-                                name: 'insert',
-                                items: ['Image']
-                            },
-                            {
-                                name: 'styles',
-                                items: ['Format']
-                            }
-                        ],
-                        removeButtons: '' // ensures only above remain
-                    });
-
-                });
-            });
-
-            // Close main reply
-            document.querySelectorAll('.close-reply-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    mainReplyContainer.classList.remove('show');
-                    setTimeout(() => {
-                        mainReplyContainer.style.display = 'none';
-                        if (mainEditor) {
-                            mainEditor.destroy();
-                            mainEditor = null;
-                        }
-                    }, 300);
-                });
-            });
-
-            // Close nested reply
-            document.querySelectorAll('.close-nested-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    nestedReplyContainer.classList.remove('show');
-                    setTimeout(() => {
-                        nestedReplyContainer.style.display = 'none';
-                        if (nestedEditor) {
-                            nestedEditor.destroy();
-                            nestedEditor = null;
-                        }
-                    }, 300);
-                });
-            });
-
-            // Handle form submissions with AJAX
-            if (mainReplyContainer) {
-                mainReplyContainer.querySelector('form').addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    const formData = new FormData(this);
-                    if (mainEditor) {
-                        formData.set('body', mainEditor.getData());
+                    if (!allowedTypes.includes(file.type)) {
+                        alert("Only JPG, JPEG, and PNG images are allowed.");
+                        return;
                     }
 
-                    fetch(this.action, {
-                            method: 'POST',
-                            body: formData,
-                            headers: {
-                                'X-Requested-With': 'XMLHttpRequest'
-                            }
-                        })
-                        .then(response => {
-                            if (response.ok) {
-                                location.reload();
-                            }
-                        })
-                        .catch(() => location.reload());
-                });
-            }
+                    // ✅ max size check (2MB = 2 * 1024 * 1024 bytes)
+                    const maxSize = 10 * 1024 * 1024;
+                    if (file.size > maxSize) {
+                        alert("Image size must be less than 2MB.");
+                        return;
+                    }
 
-            nestedReplyContainer.querySelector('form').addEventListener('submit', function(e) {
+                    // ✅ insert image if valid
+                    let reader = new FileReader();
+                    reader.onload = function (evt) {
+                        let editor = ev.editor;
+                        editor.insertHtml(
+                            '<img src="' + evt.target.result + '" style="max-width:200px; height:auto;"/>'
+                        );
+                    };
+                    reader.readAsDataURL(file);
+                }
+            };
+
+            input.click();
+        };
+    }
+});
+
+        // --------------------------------------------
+
+        // Main reply modal
+        if (mainReplyBtn) {
+            mainReplyBtn.addEventListener('click', function() {
+                mainReplyContainer.style.display = 'block';
+                setTimeout(() => {
+                    mainReplyContainer.classList.add('show');
+                }, 10);
+
+                mainEditor = CKEDITOR.replace('main-editor', {
+                    contentsCss: 'body { max-width: 100%; } img { width:100px !important; height:100px !important; object-fit:cover; }',
+                    toolbar: [
+                        { name: 'basicstyles', items: ['Bold', 'Italic'] },
+                        { name: 'paragraph', items: ['NumberedList', 'BulletedList'] },
+                        { name: 'insert', items: ['Image'] },
+                        { name: 'styles', items: ['Format'] }
+                    ]
+                });
+            });
+        }
+
+        // Nested reply modal
+        replyBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const postId = this.dataset.postId;
+                const postAuthor = this.dataset.postAuthor;
+
+                document.getElementById('reply-parent-id').value = postId;
+                document.getElementById('reply-author').textContent = postAuthor;
+
+                nestedReplyContainer.style.display = 'block';
+                setTimeout(() => {
+                    nestedReplyContainer.classList.add('show');
+                }, 10);
+
+                nestedEditor = CKEDITOR.replace('editor', {
+                    toolbar: [
+                        { name: 'basicstyles', items: ['Bold', 'Italic'] },
+                        { name: 'paragraph', items: ['NumberedList', 'BulletedList'] },
+                        { name: 'insert', items: ['Image'] },
+                        { name: 'styles', items: ['Format'] }
+                    ]
+                });
+            });
+        });
+
+        // Close main reply
+        document.querySelectorAll('.close-reply-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                mainReplyContainer.classList.remove('show');
+                setTimeout(() => {
+                    mainReplyContainer.style.display = 'none';
+                    if (mainEditor) {
+                        mainEditor.destroy();
+                        mainEditor = null;
+                    }
+                }, 300);
+            });
+        });
+
+        // Close nested reply
+        document.querySelectorAll('.close-nested-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                nestedReplyContainer.classList.remove('show');
+                setTimeout(() => {
+                    nestedReplyContainer.style.display = 'none';
+                    if (nestedEditor) {
+                        nestedEditor.destroy();
+                        nestedEditor = null;
+                    }
+                }, 300);
+            });
+        });
+
+        // ---------------- Form Submissions ----------------
+
+        // Main Reply form
+        if (mainReplyContainer) {
+            const mainForm = mainReplyContainer.querySelector('form');
+            const mainBtn = mainForm.querySelector('button[type=submit]');
+
+            mainForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 const formData = new FormData(this);
+                if (mainEditor) {
+                    formData.set('body', mainEditor.getData());
+                }
+
+                // Loader show
+                const oldHtml = mainBtn.innerHTML;
+                mainBtn.disabled = true;
+                mainBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Posting...';
 
                 fetch(this.action, {
-                        method: 'POST',
-                        body: formData,
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest'
-                        }
-                    })
-                    .then(response => {
-                        if (response.ok) {
-                            location.reload();
-                        }
-                    })
-                    .catch(() => location.reload());
-            });
-
-            // Like functionality with event delegation
-            document.addEventListener('click', function(e) {
-                if (e.target.closest('.like-btn')) {
-                    e.preventDefault();
-                    const button = e.target.closest('.like-btn');
-                    const type = button.dataset.type;
-                    const id = button.dataset.id;
-
-                    fetch('{{ route('forum.toggle-like') }}', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                            },
-                            body: JSON.stringify({
-                                type,
-                                id
-                            })
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            const icon = button.querySelector('svg.fa-heart');
-                            const count = button.querySelector('.likes-count');
-
-                            if (icon && count) {
-                                if (data.liked) {
-                                    icon.classList.add('text-danger');
-                                    button.dataset.liked = 'true';
-                                } else {
-                                    icon.classList.remove('text-danger');
-                                    button.dataset.liked = 'false';
-                                }
-                                count.textContent = data.likes_count;
-                            }
-
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                            alert('Please login to like posts.');
-                        });
-                }
-            });
-
-            // Favorite functionality with event delegation
-            document.addEventListener('click', function(e) {
-                if (e.target.closest('.favorite-btn')) {
-                    e.preventDefault();
-                    const button = e.target.closest('.favorite-btn');
-                    const threadId = button.dataset.threadId;
-
-                    fetch('{{ route('forum.toggle-favorite') }}', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                            },
-                            body: JSON.stringify({
-                                thread_id: threadId
-                            })
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            const icon = button.querySelector('svg.fa-star');
-
-                            if (icon) {
-                                if (data.favorited) {
-                                    icon.classList.add('text-warning');
-                                    button.dataset.favorited = 'true';
-                                } else {
-                                    icon.classList.remove('text-warning');
-                                    button.dataset.favorited = 'false';
-                                }
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                            alert('Please login to add favorites.');
-                        });
-                }
-            });
-
-            // Copy link functionality with fallback
-            document.querySelectorAll('.copy-link').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const url = this.dataset.url;
-                    const button = this;
-
-                    // Modern clipboard API with fallback
-                    if (navigator.clipboard && window.isSecureContext) {
-                        navigator.clipboard.writeText(url).then(() => {
-                            showCopySuccess(button);
-                        }).catch(() => {
-                            fallbackCopyTextToClipboard(url, button);
-                        });
-                    } else {
-                        fallbackCopyTextToClipboard(url, button);
-                    }
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                })
+                .then(response => {
+                    if (response.ok) location.reload();
+                })
+                .catch(() => location.reload())
+                .finally(() => {
+                    mainBtn.disabled = false;
+                    mainBtn.innerHTML = oldHtml;
                 });
             });
+        }
 
-            function showCopySuccess(button) {
-                const originalText = button.innerHTML;
-                button.innerHTML = '<i class="fas fa-check"></i>';
-                setTimeout(() => {
-                    button.innerHTML = originalText;
-                }, 1000);
+        // Nested Reply form
+        const nestedForm = nestedReplyContainer.querySelector('form');
+        const nestedBtn = nestedForm.querySelector('button[type=submit]');
+
+        nestedForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            if (nestedEditor) {
+                formData.set('body', nestedEditor.getData());
             }
 
-            function fallbackCopyTextToClipboard(text, button) {
-                const textArea = document.createElement('textarea');
-                textArea.value = text;
-                textArea.style.position = 'fixed';
-                textArea.style.left = '-999999px';
-                textArea.style.top = '-999999px';
-                document.body.appendChild(textArea);
-                textArea.focus();
-                textArea.select();
+            // Loader show
+            const oldHtml = nestedBtn.innerHTML;
+            nestedBtn.disabled = true;
+            nestedBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Posting...';
 
-                try {
-                    document.execCommand('copy');
-                    showCopySuccess(button);
-                } catch (err) {
-                    console.error('Fallback: Oops, unable to copy', err);
-                    alert('Copy failed. Please copy manually: ' + text);
-                }
+            fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: { 'X-Requested-With': 'XMLHttpRequest' }
+            })
+            .then(response => {
+                if (response.ok) location.reload();
+            })
+            .catch(() => location.reload())
+            .finally(() => {
+                nestedBtn.disabled = false;
+                nestedBtn.innerHTML = oldHtml;
+            });
+        });
 
-                document.body.removeChild(textArea);
+        // ---------------- Like functionality ----------------
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.like-btn')) {
+                e.preventDefault();
+                const button = e.target.closest('.like-btn');
+                const type = button.dataset.type;
+                const id = button.dataset.id;
+
+                fetch('{{ route('forum.toggle-like') }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({ type, id })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const icon = button.querySelector('svg.fa-heart, i.fa-heart');
+                    const count = button.querySelector('.likes-count');
+
+                    if (icon && count) {
+                        if (data.liked) {
+                            icon.classList.add('text-danger');
+                            button.dataset.liked = 'true';
+                        } else {
+                            icon.classList.remove('text-danger');
+                            button.dataset.liked = 'false';
+                        }
+                        count.textContent = data.likes_count;
+                    }
+                })
+                .catch(() => alert('Please login to like posts.'));
             }
         });
-    </script>
+
+        // ---------------- Favorite functionality ----------------
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.favorite-btn')) {
+                e.preventDefault();
+                const button = e.target.closest('.favorite-btn');
+                const threadId = button.dataset.threadId;
+
+                fetch('{{ route('forum.toggle-favorite') }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({ thread_id: threadId })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const icon = button.querySelector('svg.fa-star, i.fa-star');
+                    if (icon) {
+                        if (data.favorited) {
+                            icon.classList.add('text-warning');
+                            button.dataset.favorited = 'true';
+                        } else {
+                            icon.classList.remove('text-warning');
+                            button.dataset.favorited = 'false';
+                        }
+                    }
+                })
+                .catch(() => alert('Please login to add favorites.'));
+            }
+        });
+
+        // ---------------- Copy link functionality ----------------
+        document.querySelectorAll('.copy-link').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const url = this.dataset.url;
+                const button = this;
+
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(url).then(() => {
+                        showCopySuccess(button);
+                    }).catch(() => {
+                        fallbackCopyTextToClipboard(url, button);
+                    });
+                } else {
+                    fallbackCopyTextToClipboard(url, button);
+                }
+            });
+        });
+
+        function showCopySuccess(button) {
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check"></i>';
+            setTimeout(() => {
+                button.innerHTML = originalText;
+            }, 1000);
+        }
+
+        function fallbackCopyTextToClipboard(text, button) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+
+            try {
+                document.execCommand('copy');
+                showCopySuccess(button);
+            } catch (err) {
+                alert('Copy failed. Please copy manually: ' + text);
+            }
+
+            document.body.removeChild(textArea);
+        }
+    });
+</script>
 
 @endsection
