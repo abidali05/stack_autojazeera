@@ -48,21 +48,6 @@ class ApiNumbereController extends Controller
             exit;
         }
 
-        if (str_starts_with($phoneNumber, '+93011122334')) {
-            $otp = '000000';
-
-            $d = Otp::updateOrCreate(
-                ['phone_number' => $phoneNumber],
-                ['otp' => $otp, 'created_at' => now()]
-            );
-
-            return response()->json([
-                'otp' => $otp,
-                'message' => 'OTP Send successfully.',
-                'status' => 200
-            ], 200);
-        }
-
 
         $otp = mt_rand(100000, 999999);
 
